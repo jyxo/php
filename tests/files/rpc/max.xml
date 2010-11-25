@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<methodCall>
+<methodName>TestMath::max</methodName>
+<params>
+ <param>
+  <value>
+   <int>1</int>
+  </value>
+ </param>
+ <param>
+  <value>
+   <int>100</int>
+  </value>
+ </param>
+ <param>
+  <value>
+   <int>10</int>
+  </value>
+ </param>
+</params>
+</methodCall>

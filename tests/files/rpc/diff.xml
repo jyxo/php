@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<methodCall>
+<methodName>TestMathWithCallStatic::diff</methodName>
+<params>
+ <param>
+  <value>
+   <int>20</int>
+  </value>
+ </param>
+ <param>
+  <value>
+   <int>10</int>
+  </value>
+ </param>
+</params>
+</methodCall>

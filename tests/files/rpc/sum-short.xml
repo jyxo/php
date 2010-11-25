@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<methodCall>
+<methodName>sum</methodName>
+<params>
+ <param>
+  <value>
+   <int>1</int>
+  </value>
+ </param>
+ <param>
+  <value>
+   <int>2</int>
+  </value>
+ </param>
+</params>
+</methodCall>
