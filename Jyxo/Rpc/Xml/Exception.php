@@ -14,7 +14,7 @@
 namespace Jyxo\Rpc\Xml;
 
 /**
- * Výchozí výjimka pro chyby s XML-RPC.
+ * Exception for errors in XML-RPC.
  *
  * @category Jyxo
  * @package Jyxo\Rpc

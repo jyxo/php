@@ -32,14 +32,14 @@ namespace Jyxo\Spl;
 class ObjectCache
 {
 	/**
-	 * Object storage
+	 * Object storage.
 	 *
 	 * @var array
 	 */
 	private $storage = array();
 
 	/**
-	 * Returns default storage for static access
+	 * Returns default storage for static access.
 	 *
 	 * @return \Jyxo\Spl\ObjectCache
 	 */
@@ -50,21 +50,21 @@ class ObjectCache
 			$instance = new self();
 		}
 		return $instance;
-	} // getInstance();
+	}
 
 	/**
-	 * Returns object from default storage
+	 * Returns an object from the default storage.
 	 *
-	 * @param string $key
+	 * @param string $key Object key
 	 * @return object
 	 */
 	public static function get($key)
 	{
 		return self::getInstance()->$key;
-	} // get();
+	}
 
 	/**
-	 * Clear whole storage
+	 * Clear the whole storage.
 	 *
 	 * @return \Jyxo\Spl\ObjectCache
 	 */
@@ -72,51 +72,51 @@ class ObjectCache
 	{
 		$this->storage = array();
 		return $this;
-	} // clear();
+	}
 
 	/**
-	 * Saves object do default storage
+	 * Saves an object into the default storage.
 	 *
-	 * @param string $key
-	 * @param object $value
+	 * @param string $key Object key
+	 * @param object $value Object
 	 * @return object saved object
 	 */
 	public static function set($key, $value)
 	{
 		self::getInstance()->$key = $value;
 		return $value;
-	} // set();
+	}
 
 	/**
-	 * Returns object from own storage
+	 * Returns an object from an own storage.
 	 *
-	 * @param string $key
+	 * @param string $key Object key
 	 * @return object
 	 */
 	public function __get($key)
 	{
 		return isset($this->storage[$key]) ? $this->storage[$key] : null;
-	} // __get();
+	}
 
 	/**
-	 * Saves object to own storage
+	 * Saves an object into an own storage.
 	 *
-	 * @param string $key
-	 * @param object $value
+	 * @param string $key Object key
+	 * @param object $value Object
 	 */
 	public function __set($key, $value)
 	{
 		$this->storage[$key] = $value;
-	} // __set();
+	}
 
 	/**
-	 * Returns if there's object with key $key in storage
+	 * Returns if there's an object with key $key in the storage.
 	 *
-	 * @param string $key
+	 * @param string $key Object key
 	 * @return boolean
 	 */
 	public function __isset($key)
 	{
 		return isset($this->storage[$key]);
-	} // __isset();
+	}
 }

@@ -14,7 +14,7 @@
 namespace Jyxo\Rpc;
 
 /**
- * Výchozí výjimka pro chyby s RPC.
+ * Base exception for RPC errors.
  *
  * @category Jyxo
  * @package Jyxo\Rpc

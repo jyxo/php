@@ -14,8 +14,8 @@
 namespace Jyxo\Rpc\Xml;
 
 /**
- * Třída pro odesílání požadavků přes XML-RPC.
- * Vyžaduje rozšíření xmlrpc a curl.
+ * Class for sending requests using XML-RPC.
+ * Requires xmlrpc and curl PHP extensions.
  *
  * @category Jyxo
  * @package Jyxo\Rpc
@@ -27,10 +27,10 @@ namespace Jyxo\Rpc\Xml;
 class Client extends \Jyxo\Rpc\Client
 {
 	/**
-	 * Vytvoří instanci klienta a případně nastaví adresu serveru.
-	 * Také nastaví výchozí nastavení klienta.
+	 * Creates a client instance and eventually sets server address.
+	 * Also defines default client settings.
 	 *
-	 * @param string $url
+	 * @param string $url Server address
 	 */
 	public function __construct($url = '')
 	{
@@ -46,37 +46,37 @@ class Client extends \Jyxo\Rpc\Client
 	}
 
 	/**
-	 * Odešle požadavek a získá ze serveru odpověď.
+	 * Sends request and fetches server's response.
 	 *
-	 * @param string $method
-	 * @param array $params
+	 * @param string $method Method name
+	 * @param array $params Method parameters
 	 * @return mixed
-	 * @throws \BadMethodCallException Pokud nebyla zadána url serveru
-	 * @throws \Jyxo\Rpc\Xml\Exception Při chybě
+	 * @throws \BadMethodCallException If no server address was provided
+	 * @throws \Jyxo\Rpc\Xml\Exception On error
 	 */
 	public function send($method, array $params)
 	{
-		// Začátek profilování
+		// Start profiling
 		$this->profileStart();
 
 		try {
-			// Získání odpovědi
+			// Fetch response
 			$response = $this->process('text/xml', xmlrpc_encode_request($method, $params, $this->options));
 
-			// Zpracování odpovědi
+			// Process response
 			$response = xmlrpc_decode($response, 'utf-8');
 
 		} catch (\Jyxo\Rpc\Exception $e) {
-			// Konec profilování
+			// Finish profiling
 			$this->profileEnd('XML', $method, $params, $e->getMessage());
 
 			throw new \Jyxo\Rpc\Xml\Exception($e->getMessage(), 0, $e);
 		}
 
-		// Konec profilování
+		// Finish profiling
 		$this->profileEnd('XML', $method, $params, $response);
 
-		// Chyba v odpovědi
+		// Error in response
 		if ((is_array($response)) && (isset($response['faultString']))) {
 			throw new \Jyxo\Rpc\Xml\Exception(preg_replace('~\s+~', ' ', $response['faultString']));
 		}

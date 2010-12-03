@@ -14,7 +14,7 @@
 namespace Jyxo;
 
 /**
- * Třída na odesílání informací do FirePHP.
+ * Class for sending information to FirePHP.
  *
  * @category Jyxo
  * @package Jyxo
@@ -25,69 +25,69 @@ namespace Jyxo;
 class FirePhp
 {
 	/**
-	 * Typ informační zpráva.
+	 * Type information.
 	 *
 	 * @var string
 	 */
 	const INFO = 'INFO';
 
 	/**
-	 * Typ varování.
+	 * Type warning.
 	 *
 	 * @var string
 	 */
 	const WARNING = 'WARN';
 
 	/**
-	 * Typ chyba.
+	 * Type error.
 	 *
 	 * @var string
 	 */
 	const ERROR = 'ERROR';
 
 	/**
-	 * Typ log.
+	 * Type log.
 	 *
 	 * @var string
 	 */
 	const LOG = 'LOG';
 
 	/**
-	 * Typ trasování.
+	 * Type trace.
 	 *
 	 * @var string
 	 */
 	const TRACE = 'TRACE';
 
 	/**
-	 * Typ tabulka.
+	 * Type table.
 	 *
 	 * @var string
 	 */
 	const TABLE = 'TABLE';
 
 	/**
-	 * Zda je logování povoleno.
+	 * Is logging enabled.
 	 *
 	 * @var bool
 	 */
 	private static $enabled = true;
 
 	/**
-	 * Nastavuje, zda je logování povoleno.
+	 * Sets if logging id enabled.
 	 *
-	 * @param bool $flag
+	 * @param bool $flag Is logging enabled
 	 */
 	public static function setEnabled($flag = true)
 	{
 		self::$enabled = (bool) $flag;
-	} // setEnabled();
+	}
 
 	/**
-	 * Odešle informační zprávu.
+	 * Sends an information message.
 	 *
-	 * @param mixed $message
-	 * @param string $label
+	 * @param mixed $message Message text
+	 * @param string $label Message label
 	 * @return boolean
 	 */
 	public static function info($message, $label = '')
@@ -96,10 +96,10 @@ class FirePhp
 	}
 
 	/**
-	 * Odešle varování.
+	 * Sends a warning.
 	 *
-	 * @param mixed $message
-	 * @param string $label
+	 * @param mixed $message Message text
+	 * @param string $label Message label
 	 * @return boolean
 	 */
 	public static function warning($message, $label = '')
@@ -108,10 +108,10 @@ class FirePhp
 	}
 
 	/**
-	 * Odešle chybu.
+	 * Sends an error.
 	 *
-	 * @param mixed $message
-	 * @param string $label
+	 * @param mixed $message Message text
+	 * @param string $label Message label
 	 * @return boolean
 	 */
 	public static function error($message, $label = '')
@@ -120,11 +120,11 @@ class FirePhp
 	}
 
 	/**
-	 * Odešle log.
+	 * Sends a log message.
 	 *
-	 * @param mixed $message
-	 * @param string $label
-	 * @param string $type
+	 * @param mixed $message Message text
+	 * @param string $label Message label
+	 * @param string $type Message type
 	 * @return boolean
 	 */
 	public static function log($message, $label = '', $type = self::LOG)
@@ -141,12 +141,12 @@ class FirePhp
 	}
 
 	/**
-	 * Odešle trasování.
+	 * Sends a trace.
 	 *
-	 * @param string $message Zpráva
-	 * @param string $file Soubor
-	 * @param integer $line Řádka
-	 * @param array $trace Trasování
+	 * @param string $message Message text
+	 * @param string $file File name
+	 * @param integer $line File line
+	 * @param array $trace Trace
 	 * @return boolean
 	 */
 	public static function trace($message, $file, $line, array $trace)
@@ -168,12 +168,12 @@ class FirePhp
 	}
 
 	/**
-	 * Odešle tabulku.
+	 * Sends a table.
 	 *
-	 * @param string $label Popisek
-	 * @param array $header Hlavička
-	 * @param array $data Data
-	 * @param string $ident Jedinečný identifikátor
+	 * @param string $label Message label
+	 * @param array $header Table header
+	 * @param array $data Table data
+	 * @param string $ident Unique identifier
 	 * @return boolean
 	 */
 	public static function table($label, array $header, array $data, $ident = '')
@@ -190,10 +190,10 @@ class FirePhp
 	}
 
 	/**
-	 * Loguje výjimku.
+	 * Logs an exception.
 	 *
-	 * @param \Exception $e
-	 * @return boolean výsledek odeslání první výjimky
+	 * @param \Exception $e Exception to log
+	 * @return boolean First exception sending result
 	 */
 	public static function exception(\Exception $e)
 	{
@@ -212,77 +212,77 @@ class FirePhp
 			);
 		}
 		return $result;
-	} // exception();
+	}
 
 	/**
-	 * Odešle výstup.
+	 * Sends output.
 	 *
-	 * @param array $output
-	 * @param string $ident
+	 * @param array $output Output
+	 * @param string $ident Message identifier
 	 * @return boolean
 	 */
 	private static function send(array $output, $ident = '')
 	{
-		// Hlavičky byly odeslány, nelze poslat
+		// Headers were already sent, can not proceed
 		if (headers_sent()) {
 			return false;
 		}
 
-		// Logování je zakázáno v aplikaci
+		// Logging is disabled
 		if (!self::$enabled) {
 			return false;
 		}
 
-		// Posíláme, pouze pokud je FirePHP povoleno
+		// Sending only if FirePHP is enabled
 		if (!isset($_SERVER['HTTP_USER_AGENT']) || false === strpos($_SERVER['HTTP_USER_AGENT'], 'FirePHP/')) {
 			return false;
 		}
 
-		// Čítač poslaných hlaviček
+		// Sent headers count
 		static $no = 0;
 
-		// Doplnění souboru a řádku, odkud se loguje
+		// Adding filename and line where logging was called
 		$first = reset($output);
 		if (empty($first['File'])) {
-			// Ukradneme si informace o zprávě
+			// Cut message information
 			$first = array_shift($output);
 
-			// Najdeme soubor
+			// Find file
 			$backtrace = debug_backtrace();
 			$hop = array_shift($backtrace);
 
-			// Odstraníme volání \Jyxo\FirePhp
+			// Remove \Jyxo\FirePhp call
 			while (__FILE__ === $hop['file']) {
 				$hop = array_shift($backtrace);
 			}
 
-			// Doplníme info o souboru
+			// Add file information
 			$first['File'] = $hop['file'];
 			$first['Line'] = $hop['line'];
 
-			// A vracíme doplněné informace zpět
+			// And return altered information back
 			array_unshift($output, $first);
 		}
 
-		// Rozdělení výstupu
+		// Spliting result
 		$parts = str_split(json_encode($output), 5000);
 
-		// Pokud je zadán identifikátor, smažeme předchozí odeslání stejného výstupu
+		// If an identifier was provided, delete previous messages with that identifier
 		if (!empty($ident)) {
 			static $idents = array();
 
-			// Promazání předchozího odeslání
+			// Delete previous send
 			if (isset($idents[$ident])) {
 				for ($i = $idents[$ident][0]; $i <= $idents[$ident][1]; $i++) {
 					header('X-Wf-Jyxo-1-1-Jyxo' . $i . ':');
 				}
 			}
 
-			// Uložíme si čísla hlaviček, která budou použita
+			// Save identifiers of headers that will be actually used
 			$idents[$ident] = array($no + 1, $no + count($parts));
 		}
 
-		// Odeslání
+		// Sending
 		header('X-Wf-Protocol-Jyxo: http://meta.wildfirehq.org/Protocol/JsonStream/0.2');
 		header('X-Wf-Jyxo-Structure-1: http://meta.firephp.org/Wildfire/Structure/FirePHP/FirebugConsole/0.1');
 		header('X-Wf-Jyxo-Plugin-1: http://meta.firephp.org/Wildfire/Plugin/FirePHP/Library-FirePHPCore/0.3');
@@ -290,18 +290,18 @@ class FirePhp
 			$no++;
 			header(sprintf('X-Wf-Jyxo-1-1-Jyxo%s: |%s|\\', $no, $part));
 		}
-		// Poslední se pošle znovu, ale bez \
+		// Last one is sent again but without \
 		header(sprintf('X-Wf-Jyxo-1-1-Jyxo%s: |%s|', $no, $part));
 
 		return true;
 	}
 
 	/**
-	 * Nahrazuje v trasování objekty za jejich názvy.
-	 * Řeší problém rekurze v json_encode.
-	 * Převzato z Nette.
+	 * Replaces objects with approriate names in traces.
+	 * Solves recursion problem in json_encode.
+	 * Taken from Nette.
 	 *
-	 * @param mixed $value
+	 * @param mixed $value Variable to be replaced
 	 * @return mixed
 	 */
 	private static function replaceObjects($value)

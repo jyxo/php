@@ -25,7 +25,7 @@ namespace Jyxo\Spl;
 class Object implements \Jyxo\Spl\ArrayCopy
 {
 	/**
-	 * Returns instances class name.
+	 * Returns instance class name.
 	 *
 	 * @return string
 	 */
@@ -35,9 +35,9 @@ class Object implements \Jyxo\Spl\ArrayCopy
 	}
 
 	/**
-	 * Returns property if it has defined getter.
+	 * Returns a property value if it has a getter defined.
 	 *
-	 * @param string $name
+	 * @param string $name Property name
 	 * @return mixed
 	 */
 	public function &__get($name)
@@ -45,7 +45,7 @@ class Object implements \Jyxo\Spl\ArrayCopy
 		$class = get_class($this);
 		$name = ucfirst($name);
 
-		// If getter doesn't exist, return null
+		// Return null if no getter is found
 		$value = null;
 
 		// Tests for possible getters
@@ -53,7 +53,7 @@ class Object implements \Jyxo\Spl\ArrayCopy
 		foreach ($types as $type) {
 			$getter = $type . $name;
 			if (self::hasMethod($class, $getter)) {
-				// It's necessary to save it to variable first because of &
+				// It's necessary to save the value to a variable first because of using &
 				$value = $this->$getter();
 				break;
 			}
@@ -63,10 +63,10 @@ class Object implements \Jyxo\Spl\ArrayCopy
 	}
 
 	/**
-	 * Sets property if it has defined setter.
+	 * Sets property value if it has a setter defined.
 	 *
-	 * @param string $name
-	 * @param mixed $value
+	 * @param string $name Propety name
+	 * @param mixed $value Property value
 	 */
 	public function __set($name, $value)
 	{
@@ -100,10 +100,10 @@ class Object implements \Jyxo\Spl\ArrayCopy
 	}
 
 	/**
-	 * Returns if class has defined method.
+	 * Returns if a class has the given method defined.
 	 *
-	 * @param string $class
-	 * @param string $method
+	 * @param string $class Class name
+	 * @param string $method Method name
 	 * @return boolean
 	 */
 	private static function hasMethod($class, $method)
@@ -116,7 +116,7 @@ class Object implements \Jyxo\Spl\ArrayCopy
 	}
 
 	/**
-	 * Converts object to array
+	 * Converts an object to an array
 	 *
 	 * @return array
 	 */
@@ -129,5 +129,6 @@ class Object implements \Jyxo\Spl\ArrayCopy
 			$values[$key] = $value;
 		}
 		return $values;
-	} // toArray();
+	}
+
 }

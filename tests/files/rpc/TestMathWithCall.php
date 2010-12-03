@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Testovací třída pro RPC.
+ * Testing class for RPC.
  */
 class TestMathWithCall
 {
 	/**
-	 * Volání přes magickou metodu.
+	 * Calls using the magic method.
 	 *
-	 * @param string $method
-	 * @param array $args
+	 * @param string $method Method name
+	 * @param array $args Method parameters
 	 * @return mixed
 	 */
 	public function __call($method, $args)
@@ -18,9 +18,9 @@ class TestMathWithCall
 	}
 
 	/**
-	 * Absolutní hodnota čísla
+	 * Calculates absolute value.
 	 *
-	 * @param integer $a
+	 * @param integer $a Input number
 	 * @return integer
 	 */
 	private function absolute($a)

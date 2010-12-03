@@ -16,7 +16,7 @@ namespace Jyxo\Spl;
 require_once __DIR__ . '/../../bootstrap.php';
 
 /**
- * Test pro třídu \Jyxo\Spl\CountableLimitIterator.
+ * Test for class \Jyxo\Spl\CountableLimitIterator.
  *
  * @see \Jyxo\Spl\Object
  * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
@@ -26,7 +26,7 @@ require_once __DIR__ . '/../../bootstrap.php';
 class CountableLimitIteratorTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * Test fungování limitu
+	 * Tests use of limit.
 	 */
 	public function testLimit()
 	{
@@ -40,7 +40,7 @@ class CountableLimitIteratorTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test vracení počtu - propagace
+	 * Tests return count.
 	 */
 	public function testPassCount()
 	{
@@ -49,10 +49,10 @@ class CountableLimitIteratorTest extends \PHPUnit_Framework_TestCase
 
 		$iterator = new \Jyxo\Spl\CountableLimitIterator(new \ArrayIterator($data), 2, 3);
 		$this->assertEquals(count($data), count($iterator));
-	} // testPassCount();
+	}
 
 	/**
-	 * Test vracení počtu - reálná hodnota
+	 * Tests return count - real value.
 	 */
 	public function testLimitCount()
 	{
@@ -64,14 +64,14 @@ class CountableLimitIteratorTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(3, count($iterator));
 		$result = iterator_to_array($iterator);
 		$this->assertEquals(3, count($result));
-	} // testLimitCount();
+	}
 
 	/**
-	 * Test vytvoření instance s neplatným iterátorem
+	 * Tests creating an instance with an invalid Iterator.
 	 */
 	public function testInvalidIterator()
 	{
 		$this->setExpectedException('InvalidArgumentException');
 		$iterator = new \Jyxo\Spl\CountableLimitIterator(new \EmptyIterator());
-	} // testInvalidIterator();
+	}
 }

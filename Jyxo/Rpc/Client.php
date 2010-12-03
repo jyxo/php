@@ -14,7 +14,7 @@
 namespace Jyxo\Rpc;
 
 /**
- * Abstraktní třída pro odesílání požadavků přes RPC.
+ * Abstract class for sending RPC requests.
  *
  * @category Jyxo
  * @package Jyxo\Rpc
@@ -25,44 +25,44 @@ namespace Jyxo\Rpc;
 abstract class Client
 {
 	/**
-	 * Url serveru.
+	 * Server address.
 	 *
 	 * @var string
 	 */
 	protected $url = '';
 
 	/**
-	 * Časový limit na komunikaci s RPC serverem.
+	 * Time limit for communication with RPC server (seconds).
 	 *
 	 * @var integer
 	 */
 	protected $timeout = 5;
 
 	/**
-	 * Parametry pro vytvoření RPC požadavku.
+	 * Parameters for creating RPC requests.
 	 *
 	 * @var array
 	 */
 	protected $options = array();
 
 	/**
-	 * Čas začátku požadavku.
+	 * Request start time.
 	 *
 	 * @var float
 	 */
 	private $time = 0;
 
 	/**
-	 * Zda profilovat požadavky.
+	 * Whether to use request profiler.
 	 *
 	 * @var boolean
 	 */
 	private $profiler = false;
 
 	/**
-	 * Vytvoří instanci klienta a případně nastaví adresu serveru.
+	 * Creates client instance and eventually sets server address.
 	 *
-	 * @param string $url
+	 * @param string $url Server address
 	 */
 	public function __construct($url = '')
 	{
@@ -72,9 +72,9 @@ abstract class Client
 	}
 
 	/**
-	 * Nastaví url.
+	 * Sets server address.
 	 *
-	 * @param string $url
+	 * @param string $url Server address
 	 * @return \Jyxo\Rpc\Client
 	 */
 	public function setUrl($url)
@@ -85,9 +85,9 @@ abstract class Client
 	}
 
 	/**
-	 * Nastaví časový limit.
+	 * Sets timeout.
 	 *
-	 * @param integer $timeout
+	 * @param integer $timeout Call timeout
 	 * @return \Jyxo\Rpc\Client
 	 */
 	public function setTimeout($timeout)
@@ -98,10 +98,10 @@ abstract class Client
 	}
 
 	/**
-	 * Změní nastavení klienta.
+	 * Changes client settings.
 	 *
-	 * @param string $key
-	 * @param mixed $value
+	 * @param string $key Parameter name
+	 * @param mixed $value Parameter value
 	 * @return \Jyxo\Rpc\Client
 	 */
 	public function setOption($key, $value)
@@ -113,9 +113,9 @@ abstract class Client
 	}
 
 	/**
-	 * Vrátí určitý parametr nastavení, nebo celé pole, pokud není parametr zadán.
+	 * Returns certain parameter or whole array of parameters if no parameter name is provided.
 	 *
-	 * @param string $key
+	 * @param string $key Parameter name
 	 * @return mixed
 	 */
 	public function getOption($key = '')
@@ -127,7 +127,7 @@ abstract class Client
 	}
 
 	/**
-	 * Zapne profilování.
+	 * Turns request profiler on.
 	 *
 	 * @return \Jyxo\Rpc\Client
 	 */
@@ -138,7 +138,7 @@ abstract class Client
 	}
 
 	/**
-	 * Vypne profilování.
+	 * Turns request profiler off.
 	 *
 	 * @return \Jyxo\Rpc\Client
 	 */
@@ -149,39 +149,39 @@ abstract class Client
 	}
 
 	/**
-	 * Odešle požadavek a získá ze serveru odpověď.
+	 * Sends a request and fetches a response from the server.
 	 *
-	 * @param string $method
-	 * @param array $params
+	 * @param string $method Method name
+	 * @param array $params Method parameters
 	 * @return mixed
-	 * @throws \BadMethodCallException Pokud nebyla zadána url serveru
-	 * @throws \Jyxo\Rpc\Exception Při chybě
+	 * @throws \BadMethodCallException If no server address was provided
+	 * @throws \Jyxo\Rpc\Exception On error
 	 */
 	abstract public function send($method, array $params);
 
 	/**
-	 * Zpracuje data požadavku a získá odpověď.
+	 * Processes request data and fetches response.
 	 *
-	 * @param string $contentType
-	 * @param string $data
+	 * @param string $contentType Request content-type
+	 * @param string $data Request data
 	 * @return string
-	 * @throws \BadMethodCallException Pokud nebyla zadána url serveru
-	 * @throws \Jyxo\Rpc\Exception Při chybě
+	 * @throws \BadMethodCallException If no server address was provided
+	 * @throws \Jyxo\Rpc\Exception On error
 	 */
 	protected function process($contentType, $data)
 	{
-		// Url musí být zadaná
+		// Server address must be defined
 		if (empty($this->url)) {
-			throw new \BadMethodCallException('Nebyla zadána url serveru.');
+			throw new \BadMethodCallException('No server address was provided.');
 		}
 
-		// Hlavičky
+		// Headers
 		$headers = array(
 			'Content-Type: ' . $contentType,
 			'Content-Length: ' . strlen($data)
 		);
 
-		// Otevřeme HTTP kanál
+		// Open a HTTP channel
 		$channel = curl_init();
 		curl_setopt($channel, CURLOPT_URL, $this->url);
 		curl_setopt($channel, CURLOPT_RETURNTRANSFER, true);
@@ -190,10 +190,10 @@ abstract class Client
 		curl_setopt($channel, CURLOPT_HTTPHEADER, $headers);
 		curl_setopt($channel, CURLOPT_POSTFIELDS, $data);
 
-		// Pošleme požadavek
+		// Send a request
 		$response = curl_exec($channel);
 
-		// Chyba v kanálu
+		// Error sending the request
 		if (0 !== curl_errno($channel)) {
 			$error = curl_error($channel);
 			curl_close($channel);
@@ -201,58 +201,58 @@ abstract class Client
 			throw new \Jyxo\Rpc\Exception($error);
 		}
 
-		// Nesprávný kód
+		// Wrong code
 		$code = curl_getinfo($channel, CURLINFO_HTTP_CODE);
 		if ($code >= 300) {
-			$error = sprintf('Chyba odpovědi z %s, kód %d.', $this->url, $code);
+			$error = sprintf('Response error from %s, code %d.', $this->url, $code);
 			curl_close($channel);
 
 			throw new \Jyxo\Rpc\Exception($error);
 		}
 
-		// Zavřeme kanál
+		// Close the channel
 		curl_close($channel);
 
-		// Vrátíme získanou odpověď
+		// Return the response
 		return $response;
 	}
 
 	/**
-	 * Provede se na začátku profilování.
+	 * Starts profiling.
 	 *
 	 * @return \Jyxo\Rpc\Client
 	 */
 	protected function profileStart()
 	{
-		// Změříme dobu trvání požadavku
+		// Set start time
 		$this->time = microtime(true);
 
 		return $this;
 	}
 
 	/**
-	 * Provede se na konci profilování.
+	 * Finishes profiling.
 	 *
-	 * @param string $type
-	 * @param string $method
-	 * @param array $params
-	 * @param mixed $response
+	 * @param string $type Request type
+	 * @param string $method Method name
+	 * @param array $params Method parameters
+	 * @param mixed $response Server response
 	 * @return \Jyxo\Rpc\Client
 	 */
 	protected function profileEnd($type, $method, array $params, $response)
 	{
-		// Profilování musí být zapnuté
+		// Profiling has to be turned on
 		if ($this->profiler) {
 			static $totalTime = 0;
 			static $requests = array();
 
-			// Čas požadavku
+			// Get elapsed time
 			$time = microtime(true) - $this->time;
 
 			$totalTime += $time;
 			$requests[] = array(strtoupper($type), (string) $method, $params, $response, sprintf('%0.3f', $time * 1000));
 
-			// Přidá do FirePHP
+			// Send to FirePHP
 			\Jyxo\FirePhp::table(
 				sprintf('Jyxo RPC Profiler (%d requests took %0.3f ms)', count($requests), sprintf('%0.3f', $totalTime * 1000)),
 				array('Type', 'Method', 'Request', 'Response', 'Time'),

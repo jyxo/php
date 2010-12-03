@@ -16,7 +16,7 @@ namespace Jyxo\Spl;
 require_once __DIR__ . '/../../bootstrap.php';
 
 /**
- * Sada všech testů \Jyxo\Spl
+ * All tests suite for \Jyxo\Spl
  *
  * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
@@ -25,7 +25,7 @@ require_once __DIR__ . '/../../bootstrap.php';
 class AllTests
 {
 	/**
-	 * Spustí testování.
+	 * Runs testing.
 	 */
 	public static function main()
 	{
@@ -33,7 +33,7 @@ class AllTests
 	}
 
 	/**
-	 * Vytvoří sadu testů.
+	 * Creates the test suite.
 	 *
 	 * @return \PHPUnit_Framework_TestSuite
 	 */

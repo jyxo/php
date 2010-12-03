@@ -1,26 +1,26 @@
 <?php
 
 /**
- * Testovací objekt.
+ * Testing object.
  */
 class Foo extends \Jyxo\Spl\Object
 {
 	/**
-	 * Testovací proměnná.
+	 * First variable.
 	 *
 	 * @var integer
 	 */
 	private $x;
 
 	/**
-	 * Druhá testovací proměnná.
+	 * Second variable.
 	 *
 	 * @var boolean
 	 */
 	private $y;
 
 	/**
-	 * Vrátí proměnnou.
+	 * Returns the first variable value.
 	 *
 	 * @return integer
 	 */
@@ -30,9 +30,9 @@ class Foo extends \Jyxo\Spl\Object
 	}
 
 	/**
-	 * Nastaví proměnnou.
+	 * Sets the firstvariable value.
 	 *
-	 * @param int $x
+	 * @param int $x New value
 	 */
 	public function setX($x)
 	{
@@ -40,7 +40,7 @@ class Foo extends \Jyxo\Spl\Object
 	}
 
 	/**
-	 * Vrátí druhou proměnnou.
+	 * Returns the second variable value.
 	 *
 	 * @return integer
 	 */
@@ -50,9 +50,9 @@ class Foo extends \Jyxo\Spl\Object
 	}
 
 	/**
-	 * Nastaví druhou proměnnou.
+	 * Sets the second variable value.
 	 *
-	 * @param bool $y
+	 * @param bool $y New value
 	 */
 	public function setY($y)
 	{

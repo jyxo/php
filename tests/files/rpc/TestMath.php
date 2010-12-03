@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Testovací třída pro RPC.
+ * Testing class for RPC.
  */
 class TestMath
 {
 	/**
-	 * Sečte dvě čísla.
+	 * Adds two numbers.
 	 *
-	 * @param integer $a
-	 * @param integer $b
+	 * @param integer $a First number
+	 * @param integer $b Second number
 	 * @return integer
 	 */
 	public function sum($a, $b)
@@ -18,11 +18,11 @@ class TestMath
 	}
 
 	/**
-	 * Vrátí maximum ze tří čísel.
+	 * Returns highest of three numbers.
 	 *
-	 * @param integer $a
-	 * @param integer $b
-	 * @param integer $c
+	 * @param integer $a First number
+	 * @param integer $b Second number
+	 * @param integer $c Third number
 	 * @return integer
 	 */
 	public static function max($a, $b, $c)
@@ -31,10 +31,10 @@ class TestMath
 	}
 
 	/**
-	 * Odečte dvě čísla.
+	 * Substracts two numbers.
 	 *
-	 * @param integer $a
-	 * @param integer $b
+	 * @param integer $a First number
+	 * @param integer $b Second number
 	 * @return integer
 	 */
 	private function diff($a, $b)

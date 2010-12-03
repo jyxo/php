@@ -14,7 +14,7 @@
 namespace Jyxo;
 
 /**
- * Obecná třída pro nejčastější funkce používané prakticky ve všech aplikacích.
+ * Base class for common string operations.
  *
  * @category Jyxo
  * @package Jyxo
@@ -27,13 +27,13 @@ namespace Jyxo;
 class String
 {
 	/**
-	 * Ořeže všechna slova v řetězci delší než požadovaná délka.
-	 * Odděluje podle bílých znaků.
-	 * Pokud dojde k ořezání, přidá "tři tečky" na konec slova. Ty jsou nad rámec požadované dělky.
+	 * Trims all words in a string longer than given length.
+	 * String is delimited by whitespaces.
+	 * If a word is trimmed, an "etc" is added at the end. Its length is also considered.
 	 *
-	 * @param string $string
-	 * @param integer $length
-	 * @param string $etc
+	 * @param string $string Processed string
+	 * @param integer $length Maximum word length
+	 * @param string $etc "etc" definition
 	 * @return string
 	 */
 	public static function cutWords($string, $length = 25, $etc = '...')
@@ -46,26 +46,26 @@ class String
 	}
 
 	/**
-	 * Ořeže řetězec na požadovanou délku.
-	 * Řeže podle celých slov (oddělovače jsou cokoliv, co není písmeno nebo číslo).
-	 * Pokud dojde k ořezání, přidá "tři tečky" na konec. I s těmi se v limitu počítá.
+	 * Trims a string to given length.
+	 * Trims at word boundaries (all non-alphanumeric characters are considered delimiters).
+	 * If the given string is trimmed, an "etc" is added at the end. Its length is also considered.
 	 *
-	 * @param string $string
-	 * @param integer $max
-	 * @param string $etc
+	 * @param string $string Trimmed string
+	 * @param integer $max Maximum length
+	 * @param string $etc "etc" definition
 	 * @return string
 	 */
 	public static function cut($string, $max = 50, $etc = '...')
 	{
-		// Ořízneme mezery
+		// Trim whitespace
 		$string = trim($string);
 
-		// Není třeba zkracovat
+		// No trimming is needed
 		if (mb_strlen($string) <= $max) {
 			return $string;
 		}
 
-		// Zjistí délku "tří teček"
+		// Find out "etc" length
 		switch ($etc) {
 			case '&hellip;':
 				$etcLength = 1;
@@ -75,54 +75,54 @@ class String
 				break;
 		}
 
-		// Hledáme hranici slov
+		// Look for word boundaries
 		$search = mb_substr($string, 0, ($max - $etcLength) + 1);
 		if (preg_match('~[^\w\pL\pN]~u', $search)) {
-			// Nalezena hranice slova
+			// Boundary found
 			$string = preg_replace('~[^\w\pL\pN]*[\w\pL\pN]*$~uU', '', $search);
 		} else {
-			// Žádná hranice slova, je nutné oříznout natvrdo
+			// No word boundary found, will trim in the middle of a word
 			$string = mb_substr($string, 0, $max - $etcLength);
 		}
 
-		// Přidáme "tři tečky"
+		// Add "etc" at the end
 		$string .= $etc;
 
 		return $string;
 	}
 
 	/**
-	 * Převede řetězec z UTF-8 do ISO-8859-2.
+	 * Converts a string from UTF-8 to ISO-8859-2.
 	 *
-	 * @param string $text
+	 * @param string $string String to convert
 	 * @return string
 	 */
-	public static function utf2iso($text)
+	public static function utf2iso($string)
 	{
-		return iconv('UTF-8', 'ISO-8859-2//TRANSLIT', $text);
+		return iconv('UTF-8', 'ISO-8859-2//TRANSLIT', $string);
 	}
 
 	/**
-	 * Převede řetězec z UTF-8 do identové podoby.
+	 * Converts a string from UTF-8 to an identifier form.
 	 *
-	 * @param string $text
+	 * @param string $string String to convert
 	 * @return string
 	 */
-	public static function utf2ident($text)
+	public static function utf2ident($string)
 	{
-		// Převede nejprve na lower ascii, a pak vše mimo a-z a 0-9 na pomlčky
-		$ident = preg_replace('~[^a-z0-9]~', '-', strtolower(self::utf2ascii($text)));
-		// Odstraní násobné pomlčky a pomlčky z okrajů
+		// Convert to lowercase ASCII and than all non-alphanumeric characters to dashes
+		$ident = preg_replace('~[^a-z0-9]~', '-', strtolower(self::utf2ascii($string)));
+		// Remove multiple dashes and dashes on boundaries
 		return trim(preg_replace('~-+~', '-', $ident), '-');
 	}
 
 	/**
-	 * Převede řetězec z UTF-8 do ASCII.
+	 * Converts a string from UTF-8 to ASCII.
 	 *
-	 * @param string $text
+	 * @param string $string String to convert
 	 * @return string
 	 */
-	public static function utf2ascii($text)
+	public static function utf2ascii($string)
 	{
 		static $replace = array(
 			'á' => 'a', 'Á' => 'A', 'ä' => 'a', 'Ä' => 'A', 'â' => 'a', 'Â' => 'A', 'ă' => 'a', 'Ă' => 'A', 'ą' => 'a', 'Ą' => 'A',
@@ -135,13 +135,13 @@ class String
 			'ü' => 'u', 'Ü' => 'U', 'ű' => 'u', 'Ű' => 'U', 'ý' => 'y', 'Ý' => 'Y', 'ž' => 'z', 'Ž' => 'Z', 'ź' => 'z', 'Ź' => 'Z',
 			'ż' => 'z', 'Ż' => 'Z', 'ß' => 'ss', 'å' => 'a', 'Å' => 'A'
 		);
-		return strtr($text, $replace);
+		return strtr($string, $replace);
 	}
 
 	/**
-	 * Fonetický přepis z azbuky do ASCII.
+	 * Phonetical transcription of a cyrillic string into ASCII.
 	 *
-	 * @param string $string
+	 * @param string $string String to convert
 	 * @return string
 	 */
 	public static function russian2ascii($string)
@@ -160,14 +160,14 @@ class String
 	}
 
 	/**
-	 * Převede text z CP-1250 do ASCII
+	 * Converts a string from CP-1250 to ASCII.
 	 *
-	 * @param string $s
+	 * @param string $string String to convert
 	 * @return string
 	 */
-	public static function win2ascii($s)
+	public static function win2ascii($string)
 	{
-		return strtr($s,
+		return strtr($string,
 			"\xe1\xe4\xe8\xef\xe9\xec\xed\xbe\xe5\xf2\xf3\xf6\xf5\xf4\xf8\xe0\x9a\x9d\xfa\xf9\xfc\xfb\xfd\x9e"
 			. "\xc1\xc4\xc8\xcf\xc9\xcc\xcd\xbc\xc5\xd2\xd3\xd6\xd5\xd4\xd8\xc0\x8a\x8d\xda\xd9\xdc\xdb\xdd\x8e",
 			'aacdeeillnoooorrstuuuuyzAACDEEILLNOOOORRSTUUUUYZ'
@@ -176,14 +176,14 @@ class String
 
 
 	/**
-	 * Převede text z ISO-8859-2 do ASCII
+	 * Converts a string from ISO-8859-2 to ASCII.
 	 *
-	 * @param string $s
+	 * @param string $string String to convert
 	 * @return string
 	 */
-	public static function iso2ascii($s)
+	public static function iso2ascii($string)
 	{
-		return strtr($s,
+		return strtr($string,
 			"\xe1\xe4\xe8\xef\xe9\xec\xed\xb5\xe5\xf2\xf3\xf6\xf5\xf4\xf8\xe0\xb9\xbb\xfa\xf9\xfc\xfb\xfd\xbe"
 			. "\xc1\xc4\xc8\xcf\xc9\xcc\xcd\xa5\xc5\xd2\xd3\xd6\xd5\xd4\xd8\xc0\xa9\xab\xda\xd9\xdc\xdb\xdd\xae",
 			'aacdeeillnoooorrstuuuuyzAACDEEILLNOOOORRSTUUUUYZ'
@@ -191,9 +191,9 @@ class String
 	}
 
 	/**
-	 * Vygeneruje crc shodné na 32 i 64 bitech.
+	 * Generates a crc checksum same on 32 and 64-bit platforms.
 	 *
-	 * @param string $string
+	 * @param string $string Input string
 	 * @return integer
 	 */
 	public static function crc($string)
@@ -208,9 +208,9 @@ class String
 	}
 
 	/**
-	 * Vygeneruje nahodný řetězec o zadané délce.
+	 * Generates a random string of given length.
 	 *
-	 * @param integer $length
+	 * @param integer $length String length
 	 * @return string
 	 */
 	public static function random($length)
@@ -224,9 +224,9 @@ class String
 	}
 
 	/**
-	 * Zkontroluje řetězec jestli je validní UTF-8.
+	 * Checks if the given string is valid UTF-8.
 	 *
-	 * @param string $string
+	 * @param string $string String to check
 	 * @return boolean
 	 */
 	public static function checkUtf($string)
@@ -235,9 +235,9 @@ class String
 	}
 
 	/**
-	 * Přeloží, či odstraní UTF-8 neznámé znaky.
+	 * Transliterates or removes unknown UTF-8 characters from a string.
 	 *
-	 * @param string $string
+	 * @param string $string String to fix
 	 * @return string
 	 */
 	public static function fixUtf($string)
@@ -246,10 +246,10 @@ class String
 	}
 
 	/**
-	 * Opraví a sjednotí konce řádků v řetězci.
+	 * Fixes and unifies line endings in a string.
 	 *
-	 * @param string $string
-	 * @param string $lineEnd
+	 * @param string $string String to fix
+	 * @param string $lineEnd Desired line ending
 	 * @return string
 	 */
 	public static function fixLineEnding($string, $lineEnd = "\n")
@@ -262,10 +262,10 @@ class String
 	}
 
 	/**
-	 * Zakryje lehce e-mailovou adresu před roboty.
+	 * Obfuscates an email address.
 	 *
-	 * @param string $email
-	 * @param string $comment
+	 * @param string $email Email address
+	 * @param string $comment Put a comment into the address
 	 * @return string
 	 */
 	public static function obfuscateEmail($email, $comment = false)
@@ -278,10 +278,10 @@ class String
 	}
 
 	/**
-	 * Převede první písmeno řetězce na malé.
-	 * Správně funguje i pro české znaky.
+	 * Converts first character of a string to lowercase.
+	 * Works correctly with multibyte encodings.
 	 *
-	 * @param string $string
+	 * @param string $string Input string
 	 * @return string
 	 */
 	public static function lcfirst($string)
@@ -290,11 +290,11 @@ class String
 	}
 
 	/**
-	 * Alias k funkci htmlspecialchars, do které automaticky vyplňuje některé parametry.
+	 * Htmlspecialchars function alias with some parameters automatically set.
 	 *
-	 * @param string $string
-	 * @param integer $quoteStyle
-	 * @param boolean $doubleEncode
+	 * @param string $string Input string
+	 * @param integer $quoteStyle Quote style
+	 * @param boolean $doubleEncode Prevent from double encoding
 	 * @return string
 	 */
 	public static function escape($string, $quoteStyle = ENT_QUOTES, $doubleEncode = false)
@@ -303,15 +303,15 @@ class String
 	}
 
 	/**
-	 * Převádí velikost zadanou v bytech na kB, MB, GB, TB či PB,
-	 * zároveň přiřadí jednotky.
+	 * Converts given size in bytes to kB, MB, GB, TB or PB
+	 * and appends the apprioriate unit.
 	 *
-	 * @param float $size
-	 * @param string $decimalPoint
-	 * @param string $thousandSeparator
+	 * @param float $size Input size
+	 * @param string $decimalPoint Decimal point
+	 * @param string $thousandsSeparator Thousands separator
 	 * @return string
 	 */
-	public static function formatBytes($size, $decimalPoint = ',', $thousandSeparator = ' ')
+	public static function formatBytes($size, $decimalPoint = ',', $thousandsSeparator = ' ')
 	{
 		static $units = array('B', 'kB', 'MB', 'GB', 'TB', 'PB');
 		foreach ($units as $unit) {
@@ -322,6 +322,6 @@ class String
 		}
 
 		$decimals = ('B' === $unit) || ('kB' === $unit) ? 0 : 1;
-		return number_format($size, $decimals, $decimalPoint, $thousandSeparator) . ' ' . $unit;
+		return number_format($size, $decimals, $decimalPoint, $thousandsSeparator) . ' ' . $unit;
 	}
 }

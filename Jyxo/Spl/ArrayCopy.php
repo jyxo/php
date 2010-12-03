@@ -14,7 +14,7 @@
 namespace Jyxo\Spl;
 
 /**
- * Object which can be converted to an array
+ * Object which can be converted to an array.
  *
  * @category Jyxo
  * @package Jyxo\Spl
@@ -25,7 +25,7 @@ namespace Jyxo\Spl;
 interface ArrayCopy
 {
 	/**
-	 * Converts object to an array
+	 * Converts an object to an array.
 	 *
 	 * @return array
 	 */

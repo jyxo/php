@@ -14,7 +14,7 @@
 namespace Jyxo\Rpc\Json;
 
 /**
- * Výchozí výjimka pro chyby s JSON-RPC.
+ * Exception for errors in JSON-RPC.
  *
  * @category Jyxo
  * @package Jyxo\Rpc

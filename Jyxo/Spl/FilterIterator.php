@@ -14,7 +14,7 @@
 namespace Jyxo\Spl;
 
 /**
- * Iterator which uses callback or closure for filtering data
+ * Iterator which uses a callback or closure for filtering data.
  *
  * @category Jyxo
  * @package Jyxo\Spl
@@ -25,18 +25,18 @@ namespace Jyxo\Spl;
 class FilterIterator extends \FilterIterator implements \Jyxo\Spl\ArrayCopy
 {
 	/**
-	 * Callback which decides if item is valid. Returns boolean, has one requied parameter.
+	 * Callback which decides if an item is valid. Returns boolean, has one required parameter.
 	 *
 	 * @var \Closure|callback
 	 */
 	private $callback;
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 *
-	 * @param \Iterator $iterator
-	 * @param \Closure|callback $callback
-	 * @throws \InvalidArgumentException Supplies callback is not callable.
+	 * @param \Iterator $iterator Source data
+	 * @param \Closure|callback $callback Filter callback
+	 * @throws \InvalidArgumentException Supplied callback is not callable
 	 */
 	public function __construct(\Iterator $iterator, $callback)
 	{
@@ -46,10 +46,10 @@ class FilterIterator extends \FilterIterator implements \Jyxo\Spl\ArrayCopy
 
 		parent::__construct($iterator);
 		$this->callback = $callback;
-	} // __construct();
+	}
 
 	/**
-	 * Decides if item is valid by calling callback.
+	 * Decides if an item is valid by calling a callback.
 	 *
 	 * @return boolean
 	 */
@@ -57,7 +57,7 @@ class FilterIterator extends \FilterIterator implements \Jyxo\Spl\ArrayCopy
 	{
 		$callback = $this->callback;
 		return $callback($this->current());
-	} // accept();
+	}
 
 	/**
 	 * Returns all filtered data as an array.
@@ -67,5 +67,5 @@ class FilterIterator extends \FilterIterator implements \Jyxo\Spl\ArrayCopy
 	public function toArray()
 	{
 		return iterator_to_array($this);
-	} // toArray();
+	}
 }

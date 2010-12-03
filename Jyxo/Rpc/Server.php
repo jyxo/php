@@ -14,7 +14,7 @@
 namespace Jyxo\Rpc;
 
 /**
- * Třída pro vytvoření RPC serveru.
+ * Class for creating a RPC server.
  *
  * @category Jyxo
  * @package Jyxo\Rpc
@@ -25,51 +25,51 @@ namespace Jyxo\Rpc;
 abstract class Server
 {
 	/**
-	 * Aliasy skutečných funkcí.
+	 * Aliases of real functions.
 	 *
 	 * @var array
 	 */
 	private $aliases = array();
 
 	/**
-	 * Soubor, do kterého se loguje provoz.
+	 * Log file name.
 	 *
 	 * @var string
 	 */
 	private $logFile;
 
 	/**
-	 * Funkce, která se zavolá před logováním.
-	 * Lze s ní zajistit, aby se některá data (např. hesla) nezalogovala.
+	 * Function that is called prior to saving a message into logfile.
+	 * Can be used e. g. for wiping out private data (passwords) from log messages.
 	 *
 	 * @var callback
 	 */
 	private $logCallback;
 
 	/**
-	 * Vytvoří instanci třídy.
+	 * Creates a class instance.
 	 */
 	protected function __construct()
 	{}
 
 	/**
-	 * Zruší instanci třídy.
+	 * Destroys a class instance.
 	 */
 	public function __destruct()
 	{}
 
 	/**
-	 * Zakáže klonování u singletonu.
+	 * Prevents from singleton cloning.
 	 *
-	 * @throws \LogicException Při pokusu o klonování
+	 * @throws \LogicException When trying to clone instance
 	 */
 	public final function __clone()
 	{
-		throw new \LogicException(sprintf('Objekt třídy %s může mít pouze jednu instanci.', get_class($this)));
+		throw new \LogicException(sprintf('Class %s can have only one instance.', get_class($this)));
 	}
 
 	/**
-	 * Vrátí instanci serveru.
+	 * Returns class instance.
 	 *
 	 * @return \Jyxo\Rpc\Server
 	 */
@@ -84,28 +84,28 @@ abstract class Server
 	}
 
 	/**
-	 * Zapne logování provozu.
+	 * Turns on logging.
 	 *
-	 * @param string $filename Cesta k souboru.
-	 * @param callback $callback Funkce, která se zavolá před logováním.
+	 * @param string $filename Log file path.
+	 * @param callback $callback Function to be called prior to logging a message.
 	 * @return \Jyxo\Rpc\Server
-	 * @throws \InvalidArgumentException Pokud nebyl soubor zadán nebo byla zadána nevolatelná funkce.
+	 * @throws \InvalidArgumentException If no file or an invalid callback was provided.
 	 */
 	public function enableLogging($filename, $callback = null)
 	{
 		$filename = (string) $filename;
 		$filename = trim($filename);
 
-		// Kontrola souboru
+		// A log file has to be provided
 		if (empty($filename)) {
-			throw new \InvalidArgumentException('Nebyl zadán soubor pro logování.');
+			throw new \InvalidArgumentException('No log file was provided.');
 		}
 
 		$this->logFile = $filename;
 
-		// Funkce musí být volatelná
+		// Function must be callable
 		if ((!empty($callback)) && (!is_callable($callback))) {
-			throw new \InvalidArgumentException('Funkce není volatelná.');
+			throw new \InvalidArgumentException('Invalid callback was provided.');
 		}
 
 		$this->logCallback = $callback;
@@ -114,26 +114,26 @@ abstract class Server
 	}
 
 	/**
-	 * Zaregistruje veřejné metody zadané třídy.
+	 * Registers class public methods.
 	 *
-	 * @param string $class
-	 * @param boolean $useFullName Zda zaregistrovat plné jméno i s názvem třídy
+	 * @param string $class Class name
+	 * @param boolean $useFullName Register with class name
 	 * @return \Jyxo\Rpc\Server
-	 * @throws \InvalidArgumentException Pokud třída neexistuje
+	 * @throws \InvalidArgumentException If no such class exists
 	 */
 	public function registerClass($class, $useFullName = true)
 	{
 		if (!class_exists($class)) {
-			throw new \InvalidArgumentException(sprintf('Třída %s neexistuje.', $class));
+			throw new \InvalidArgumentException(sprintf('Class %s does not exist.', $class));
 		}
 
 		$reflection = new \ReflectionClass($class);
 		foreach ($reflection->getMethods() as $method) {
-			// Pouze veřejné metody
+			// Only public methods
 			if ($method->isPublic()) {
 				$func = $class . '::' . $method->getName();
 
-				// Uloží zkrácené jméno jako alias
+				// Save short name as an alias
 				if (!$useFullName) {
 					$this->aliases[$method->getName()] = $func;
 					$func = $method->getName();
@@ -147,14 +147,14 @@ abstract class Server
 	}
 
 	/**
-	 * Zaregistruje zadanou metodu zadané třídy.
-	 * Metoda nemusí nutně existovat, stačí pokud existuje jedna z metod __call a __callStatic.
+	 * Registers given method of given class.
+	 * Method does not necessarily have to exist if __call or __callStatic method is defined.
 	 *
-	 * @param string $class
-	 * @param string $method
-	 * @param boolean $useFullName Zda zaregistrovat plné jméno i s názvem třídy
+	 * @param string $class Class name
+	 * @param string $method Function name
+	 * @param boolean $useFullName Register with class name
 	 * @return \Jyxo\Rpc\Server
-	 * @throws \InvalidArgumentException Pokud třída nebo metoda neexistuje, nebo metoda není veřejná.
+	 * @throws \InvalidArgumentException If no such class exists or method is not public
 	 */
 	public function registerMethod($class, $method, $useFullName = true)
 	{
@@ -162,23 +162,23 @@ abstract class Server
 			throw new \InvalidArgumentException(sprintf('Třída %s neexistuje.', $class));
 		}
 
-		// Pokud existují magické metody, tak registrujeme vždy
+		// If magic methods exist, always register
 		if ((!method_exists($class, '__call')) && (!method_exists($class, '__callStatic'))) {
 			try {
 				$reflection = new \ReflectionMethod($class, $method);
 			} catch (\ReflectionException $e) {
-				throw new \InvalidArgumentException(sprintf('Metoda %s::%s neexistuje.', $class, $method));
+				throw new \InvalidArgumentException(sprintf('Method %s::%s does not exist.', $class, $method));
 			}
 
-			// Pouze veřejné metody
+			// Only public methods
 			if (!$reflection->isPublic()) {
-				throw new \InvalidArgumentException(sprintf('Metoda %s::%s není veřejná.', $class, $method));
+				throw new \InvalidArgumentException(sprintf('Method %s::%s is not public.', $class, $method));
 			}
 		}
 
 		$func = $class . '::' . $method;
 
-		// Uloží zkrácené jméno jako alias
+		// Save short name as an alias
 		if (!$useFullName) {
 			$this->aliases[$method] = $func;
 			$func = $method;
@@ -190,16 +190,16 @@ abstract class Server
 	}
 
 	/**
-	 * Zaregistruje zadanou funkci.
+	 * Registers given function.
 	 *
-	 * @param string $func
+	 * @param string $func Function name
 	 * @return \Jyxo\Rpc\Server
-	 * @throws \InvalidArgumentException Pokud funkce neexistuje
+	 * @throws \InvalidArgumentException If no such function exists
 	 */
 	public function registerFunc($func)
 	{
 		if (!function_exists($func)) {
-			throw new \InvalidArgumentException(sprintf('Funkce %s neexistuje.', $func));
+			throw new \InvalidArgumentException(sprintf('Function %s does not exist.', $func));
 		}
 
 		$this->register($func);
@@ -208,101 +208,101 @@ abstract class Server
 	}
 
 	/**
-	 * Skutečně zaregistruje funkci.
+	 * Actually registers a function to a server method.
 	 *
-	 * @param string $func
+	 * @param string $func Function name
 	 */
 	abstract protected function register($func);
 
 	/**
-	 * Zpracuje požadavek a odešle RPC odpověď.
+	 * Processes a request and sends a RPC response.
 	 */
 	abstract public function process();
 
 	/**
-	 * Zajistí zavolání zaregistrované metody s danými parametry.
+	 * Calls a server method with given parameters.
 	 *
-	 * @param string $method
-	 * @param array $params
+	 * @param string $method Method name
+	 * @param array $params Method parameters
 	 * @return mixed
 	 */
 	protected function call($method, $params)
 	{
 		$func = $method;
-		// Pokud je funkce pouze alias ke skutečné metodě, tak se použije skutečná metoda
+		// If an alias was given, use the actual method
 		if (isset($this->aliases[$method])) {
 			$func = $this->aliases[$method];
 		}
 
-		// Metoda třídy
+		// Class method
 		if (false !== strpos($func, '::')) {
 			list($className, $methodName) = explode('::', $func);
 
 			try {
-				// Metoda existuje
+				// Method exists
 				$reflection = new \ReflectionMethod($className, $methodName);
 				if ($reflection->isStatic()) {
-					// Metoda je statická
+					// Method is static
 					$callback = array($className, $methodName);
 				} else {
-					// Metoda není statická
+					// Method is not static
 					$callback = array(new $className(), $methodName);
 				}
 			} catch (\ReflectionException $e) {
-				// Metoda neexistuje
+				// Method does not exist
 				if (method_exists($className, '__call')) {
-					// Je dostupné __call
+					// Is __call available
 					$callback = array(new $className(), $methodName);
 				} else {
-					// Je dostupné __callStatic
+					// Is __callStatic available
 					$callback = array($className, $methodName);
 				}
 			}
 		} else {
-			// Jednoduchá funkce
+			// Simple function
 			$callback = $func;
 		}
 
 		$result = call_user_func_array($callback, $params);
 
-		// Logování
+		// Logging
 		$this->log($method, $params, $result);
 
 		return $result;
 	}
 
 	/**
-	 * Zaloguje požadavek.
+	 * Logs a request.
 	 *
-	 * @param string $method Metoda
-	 * @param array $params Parametry
-	 * @param mixed $result Výsledek
+	 * @param string $method Method name
+	 * @param array $params Method parameters
+	 * @param mixed $result Function result
 	 */
 	private function log($method, $params, $result)
 	{
-		// Logujeme, pokud je zadán soubor
+		// Log only if a filename is set
 		if (!empty($this->logFile)) {
-			// Pokud je zadaná funkce, pročistí se data
+			// If a callback function is defined, call it
 			if (!empty($this->logCallback)) {
 				list($method, $params, $result) = call_user_func($this->logCallback, $method, $params, $result);
 			}
 
-			// Metoda
+			// Method
 			$text = sprintf("Method: %s\n", $method);
-			// Parametry
+			// Parameters
 			foreach ($params as $paramName => $param) {
 				$text .= sprintf("Param %s: %s\n", $paramName, trim(print_r($param, true)));
 			}
-			// Výsledek
+			// Result
 			$text .= sprintf("Result: %s\n", trim(print_r($result, true)));
 
-			// Pro přehlednost odsadíme
+			// Indent following lines
 			$text = strtr(trim($text), array("\n" => "\n\t"));
 
-			// Čas, ip, host a uri
+			// Time, ip address, hostname, uri
 			$text = sprintf("[%s] %s %s %s\n\t%s\n", date('Y-m-d H:i:s'), $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_HOST'], $_SERVER['REQUEST_URI'], $text);
 
-			// Uložení
+			// Save into logfile
 			file_put_contents($this->logFile, $text, FILE_APPEND);
 		}
 	}

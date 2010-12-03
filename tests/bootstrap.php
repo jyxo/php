@@ -11,13 +11,13 @@
  * https://github.com/jyxo/php/blob/master/license.txt
  */
 
-// Kvůli SessionTestu
+// Because of SessionTest
 session_start();
 
-// Cesta pro hledání tříd
+// Class search path
 set_include_path(
-	realpath(__DIR__ . '/..') . PATH_SEPARATOR .   // Knihovny
-	__DIR__ . PATH_SEPARATOR .   // Testy knihoven
+	realpath(__DIR__ . '/..') . PATH_SEPARATOR .   // Libraries
+	__DIR__ . PATH_SEPARATOR .   // Library tests
 	get_include_path()
 );
 
@@ -25,7 +25,7 @@ set_include_path(
 spl_autoload_register(function($className) {
 	$file = str_replace('\\', '/', $className) . '.php';
 	$file = str_replace('_', '/', $className) . '.php';
-	// Kvůli testům načítání neexistujících tříd v \Jyxo\Input
+	// Because of non-existent class tests in \Jyxo\Input
 	if (false !== stream_resolve_include_path($file)) {
 		require_once $file;
 	}
@@ -34,5 +34,5 @@ spl_autoload_register(function($className) {
 // UTF-8
 mb_internal_encoding('UTF-8');
 
-// Cesta k souborům
+// File path
 define('DIR_FILES', __DIR__ . '/files');

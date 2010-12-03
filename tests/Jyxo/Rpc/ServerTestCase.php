@@ -16,7 +16,7 @@ namespace Jyxo\Rpc;
 require_once __DIR__ . '/../../bootstrap.php';
 
 /**
- * Test pro potomky třídy \Jyxo\Rpc\Server.
+ * Test for all \Jyxo\Rpc\Server child classes.
  *
  * @see \Jyxo\Rpc\Json\Server
  * @see \Jyxo\Rpc\Xml\Server
@@ -35,7 +35,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	private $rpc = null;
 
 	/**
-	 * Nastaví prostředí pro testy.
+	 * Sets the testing environment.
 	 */
 	protected function setUp()
 	{
@@ -44,7 +44,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Vyčistí prostředí po testech.
+	 * Cleans up the environment after testing.
 	 */
 	protected function tearDown()
 	{
@@ -52,7 +52,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Otestuje volání metody dlouhým jménem.
+	 * Tests method call using the full name.
 	 */
 	public function testProcessMethodWithFullName()
 	{
@@ -63,7 +63,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Otestuje volání metody krátkým jménem.
+	 * Tests method call using the short name.
 	 */
 	public function testProcessMethodWithShortName()
 	{
@@ -74,7 +74,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Otestuje volání statické metody.
+	 * Tests method call using a static method.
 	 */
 	public function testProcessStaticMethod()
 	{
@@ -85,7 +85,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Otestuje volání přes __call.
+	 * Tests method call using a __call magic function.
 	 */
 	public function testProcessMethodByCall()
 	{
@@ -96,11 +96,11 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Otestuje volání přes __callStatic.
+	 * Tests method call using a __callStatic magic function.
 	 */
 	public function testProcessMethodByCallStatic()
 	{
-		// Přeskočí test, pokud není k dispozici PHP 5.3+
+		// Skips this test if not running PHP 5.3+
 		if (version_compare(PHP_VERSION, '5.3.0', '<')) {
 			$this->markTestSkipped('Incompatible PHP version');
 		}
@@ -112,7 +112,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Otestuje volání metody zaregistrované přes celou třídu.
+	 * Tests calling a method registered using the whole class.
 	 */
 	public function testProcessMethodRegisteredByClass()
 	{
@@ -124,7 +124,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Otestuje volání neexistující metody.
+	 * Tests calling a non-existent method.
 	 */
 	public function testProcessNonExistingMethod()
 	{
@@ -135,7 +135,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Otestuje volání funkce.
+	 * Tests calling a function registered as a method.
 	 */
 	public function testProcessFunction()
 	{
@@ -146,11 +146,11 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Otestuje logování.
+	 * Tests logging.
 	 */
 	public function testLog()
 	{
-		// Přeskočí test, pokud není nastaven tmp adresář
+		// Skips this test if no temporary directory is defined
 		if (empty($GLOBALS['tmp'])) {
 			$this->markTestSkipped('Temp dir not set');
 		}
@@ -161,19 +161,19 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 		$this->rpc->registerMethod('TestMath', 'sum');
 		$this->rpc->enableLogging($logFile, array(__CLASS__, 'logCallback'));
 
-		// Kontrola výstupu ze serveru
+		// Server output check
 		$this->checkServerOutput('sum');
 
-		// Kontrola logu - je třeba nahradit dynamicky generované datum
+		// Log check - it is necessary to replace the dynamically generated date
 		$log = preg_replace('~^\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\]~', '[2009-11-15 19:09:24]', file_get_contents($logFile));
 		$this->assertStringEqualsFile($this->getFilePath('expected.log'), $log);
 
-		// Vyčištění logu
+		// Log cleanup
 		unlink($logFile);
 	}
 
 	/**
-	 * Nelze klonovat.
+	 * Tests clone-preventing.
 	 */
 	public function testClone()
 	{
@@ -182,7 +182,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Nelze nastavit prázdný soubor pro logování.
+	 * Tests setting an empty log file.
 	 */
 	public function testEmptyLogFile()
 	{
@@ -191,7 +191,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Nelze nastavit funkci, kterou nelze zavolat.
+	 * Tests registering a not callable function.
 	 */
 	public function testInvalidLogCallback()
 	{
@@ -200,7 +200,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Nelze zaregistrovat neexistující funkci.
+	 * Tests registering a non-existent function.
 	 */
 	public function testRegisterNonExistingFunction()
 	{
@@ -209,7 +209,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Nelze zaregistrovat neexistující metodu.
+	 * Tests registering a non-existent method.
 	 */
 	public function testRegisterNonExistingMethod()
 	{
@@ -219,7 +219,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Nelze zaregistrovat neveřejnou metodu.
+	 * Tests registering a non-public method.
 	 */
 	public function testRegisterNonPublicMethod()
 	{
@@ -229,7 +229,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Nelze zaregistrovat metodu neexistující třídy.
+	 * Tests registering a method of a non-existent class.
 	 */
 	public function testRegisterMethodInNonExistingClass()
 	{
@@ -238,7 +238,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Nelze zaregistrovat neexistující třídu.
+	 * Tests registering of a non-existent class.
 	 */
 	public function testRegisterNonExistingClass()
 	{
@@ -247,11 +247,11 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Funkce pro úpravu data před logováním.
+	 * Callback function to alter log messages.
 	 *
-	 * @param string $method
-	 * @param array $params
-	 * @param mixed $result
+	 * @param string $method Log method
+	 * @param array $params Log parameters
+	 * @param mixed $result Function result
 	 * @return array
 	 */
 	public static function logCallback($method, array $params, $result)
@@ -260,33 +260,33 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Zkontroluje výstup serveru.
+	 * Checks server response.
 	 *
 	 * @param string $test
 	 */
 	private function checkServerOutput($test)
 	{
-		// Připraví server
+		// Prepares the server
 		require_once $this->getFilePath('TestPhpInputStream.php');
 		\TestPhpInputStream::register();
 		\TestPhpInputStream::setContent(file_get_contents($this->getFilePath($test . '.' . $this->getFileExtension())));
 
-		// Je třeba odchytit výstup
+		// We need to capture the output
 		ob_start();
-		// Schválně @ kvůli chybě ohledně odeslaných hlaviček
+		// On purpose @ because of the "headers already sent" warning
 		@$this->rpc->process();
 		$output = ob_get_clean();
 
 		$this->assertStringEqualsFile($this->getFilePath($test . '-expected.' . $this->getFileExtension()), $output);
 
-		// Vyčistí server
+		// Server cleanup
 		\TestPhpInputStream::unregister();
 	}
 
 	/**
-	 * Vrátí cestu k souboru.
+	 * Returns file path.
 	 *
-	 * @param string $file
+	 * @param string $file Filename
 	 * @return string
 	 */
 	private function getFilePath($file)
@@ -295,14 +295,14 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Vrací instanci daného serveru
+	 * Returns server instance.
 	 *
 	 * @return \Jyxo\Rpc\Server
 	 */
 	abstract protected function getServerInstance();
 
 	/**
-	 * Vrací příponu testovaných souborů
+	 * Returns test files extension.
 	 *
 	 * @return string
 	 */

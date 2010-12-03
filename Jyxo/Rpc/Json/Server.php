@@ -14,7 +14,7 @@
 namespace Jyxo\Rpc\Json;
 
 /**
- * Třída pro vytvoření JSON-RPC serveru.
+ * Class for creating a JSON-RPC server.
  *
  * @category Jyxo
  * @package Jyxo\Rpc
@@ -26,7 +26,7 @@ namespace Jyxo\Rpc\Json;
 class Server extends \Jyxo\Rpc\Server
 {
 	/**
-	 * Převod kódů chyb na textové vyjádření
+	 * Definition of error codes and appropriate error messages.
 	 *
 	 * @var array
 	 */
@@ -37,16 +37,16 @@ class Server extends \Jyxo\Rpc\Server
 	);
 
 	/**
-	 * Seznam zaregistrovaných metod.
+	 * List of registered methods.
 	 *
 	 * @var array
 	 */
 	private $methods = array();
 
 	/**
-	 * Skutečně zaregistruje funkci.
+	 * Actually registers a function to a server method.
 	 *
-	 * @param string $func
+	 * @param string $func Function definition
 	 */
 	protected function register($func)
 	{
@@ -54,7 +54,7 @@ class Server extends \Jyxo\Rpc\Server
 	}
 
 	/**
-	 * Zpracuje požadavek a odešle JSON-RPC odpověď.
+	 * Processes a request and sends a JSON-RPC response.
 	 */
 	public function process()
 	{
@@ -66,22 +66,22 @@ class Server extends \Jyxo\Rpc\Server
 			}
 			$data = json_decode($data, true);
 
-			// Chyba při dekódování požadavku
+			// Request decoding error
 			if ($data === null && ($faultCode = json_last_error()) != JSON_ERROR_NONE) {
 				throw new \Jyxo\Rpc\Json\Exception(self::$jsonErrors[$faultCode], $faultCode);
 			}
 
-			// Chyba při parsování dat
+			// Parsing request data error
 			if (empty($data['request']['method'])) {
 				throw new \Jyxo\Rpc\Json\Exception('Parse error.', 10);
 			}
 
-			// Neexistující metoda
+			// Non-existent method call
 			if (!in_array($data['request']['method'], $this->methods)) {
 				throw new \Jyxo\Rpc\Json\Exception('Server error. Method not found.', -32601);
 			}
 
-			// Zpracování požadavku
+			// Request processing
 			$params = !empty($data['request']['params']) ? $data['request']['params'] : array();
 			$response = $this->call($data['request']['method'], $params);
 			$response = array('response' => $response);

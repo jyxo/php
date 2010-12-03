@@ -16,7 +16,7 @@ namespace Jyxo;
 require_once __DIR__ . '/../bootstrap.php';
 
 /**
- * Test práce s řetězci.
+ * String processing test.
  *
  * @author Jakub Tománek <libs@jyxo.com>
  * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
@@ -26,19 +26,19 @@ require_once __DIR__ . '/../bootstrap.php';
 class StringTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * Test ořezání.
+	 * Tests string trimming.
 	 */
 	public function testCut()
 	{
-		// Zkrácení na mezeře
+		// Trim on spacee
 		$this->assertEquals('žluťoučký kůň...', $this->checkString('žluťoučký kůň příšerně úpěl ďábelské ódy'));
-		// Zkrácení na tečce
+		// Trim on period
 		$this->assertEquals('žluťoučký kůň...', $this->checkString('žluťoučký kůň.Příšerně úpěl ďábelské ódy'));
-		// Zkrácení na tečce s mezerou
+		// Trim on peroid and space
 		$this->assertEquals('žluťoučký kůň...', $this->checkString('žluťoučký kůň. Příšerně úpěl ďábelské ódy'));
-		// Zkrácení na čárce
+		// Trim on comma
 		$this->assertEquals('žluťoučký kůň...', $this->checkString('žluťoučký kůň,příšerně úpěl ďábelské ódy'));
-		// Zkrácení na středníku
+		// Trim on semicolon
 		$this->assertEquals('žluťoučký kůň...', $this->checkString('žluťoučký kůň;příšerně úpěl ďábelské ódy'));
 
 		// Hranice slova těsně na konci
@@ -46,31 +46,31 @@ class StringTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('abcdefghijklm...', $this->checkString('abcdefghijklmn opqrst'));
 		$this->assertEquals('abcdefghijklm...', $this->checkString('abcdefghijklm nopqrst'));
 
-		// Bez hranic slov
+		// No word boundaries
 		$this->assertEquals('abcdefghijklm...', $this->checkString('abcdefghijklmnopqrstuvwxyz'));
 
-		// Tři tečky jako HTML entita
+		// Etc as HTML entity
 		$this->assertEquals('žluťoučký kůň&hellip;', $this->checkString('žluťoučký kůň příšerně úpěl ďábelské ódy', 14, '&hellip;'));
 
-		// Krátké
+		// Short
 		$shorty = '1234567890';
 		$this->assertEquals($shorty, $this->checkString($shorty));
 		$this->assertEquals('12...', $this->checkString($shorty, 5));
 
-	} // testCut();
+	}
 
 	/**
-	 * Kontroluje jeden řetězec.
+	 * Checks one string.
 	 *
-	 * @param string $string
-	 * @param int $max
-	 * @param string $etc
+	 * @param string $string Input string
+	 * @param integer $max Max length
+	 * @param string $etc "Etc" definition
 	 * @return string
 	 */
 	private function checkString($string, $max = 16, $etc = '...')
 	{
 		$cut = \Jyxo\String::cut($string, $max, $etc);
-		// &hellip; má délku 1
+		// &hellip; has length of 1
 		$cutLength = mb_strlen(strtr(html_entity_decode($cut), array('&hellip;' => '.')));
 		$this->assertLessThanOrEqual($max, $cutLength, 'String is longer');
 
@@ -80,10 +80,10 @@ class StringTest extends \PHPUnit_Framework_TestCase
 			$this->assertRegExp('~' . preg_quote($etc) . '$~', $cut, 'String does not end with ' . $etc);
 		}
 		return $cut;
-	} // checkString();
+	}
 
 	/**
-	 * Test konverzních metod.
+	 * Tests conversion functions.
 	 */
 	public function testConvert()
 	{
@@ -97,10 +97,10 @@ class StringTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('zlutoucky-kun-priserne-upel-dabelske-ody', \Jyxo\String::utf2ident('?žluťoučký  +  kůň příšerně úpěl ďábelské ódy...'));
 		$this->assertEquals('Rossija', \Jyxo\String::russian2ascii('Россия'));
 		$this->assertEquals('Gosudarstvennyj gimn Rossijskoj Federacii', \Jyxo\String::russian2ascii('Государственный гимн Российской Федерации'));
-	} // testConvert();
+	}
 
 	/**
-	 * Test crc.
+	 * Test the crc generator.
 	 */
 	public function testCrc()
 	{
@@ -109,7 +109,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test generátoru náhodných řetězců.
+	 * Tests the random string generator.
 	 */
 	public function testRandom()
 	{
@@ -121,7 +121,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test kontroly UTF-8.
+	 * Tests UTF-8 checking.
 	 */
 	public function testCheckUtf()
 	{
@@ -132,7 +132,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test opravy UTF-8.
+	 * Tests UTF-8 fixing.
 	 */
 	public function testFixUtf()
 	{
@@ -145,7 +145,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test převodu konců řádků.
+	 * Tests line ending conversions.
 	 */
 	public function testFixLineEnding()
 	{
@@ -157,14 +157,14 @@ class StringTest extends \PHPUnit_Framework_TestCase
 			"test\nžlutý\r\n"
 		);
 
-		// Nezadaný konec řádků
+		// No line ending given
 		foreach ($tests as $test) {
 			$this->assertEquals("test\nžlutý\n", \Jyxo\String::fixLineEnding($test));
 			$this->assertNotEquals($test, \Jyxo\String::fixLineEnding($test));
 		}
 		$this->assertEquals("test\nžlutý\n", \Jyxo\String::fixLineEnding("test\nžlutý\n"));
 
-		// Zadaný konec řádků
+		// Line ending given
 		foreach ($tests as $test) {
 			foreach (array("\n", "\r", "\r\n") as $ending) {
 				$this->assertEquals(sprintf('test%1$sžlutý%1$s', $ending), \Jyxo\String::fixLineEnding($test, $ending));
@@ -174,7 +174,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test obfuscování e-mailu
+	 * Tests email address obfuscation.
 	 */
 	public function testObfuscateEmail()
 	{
@@ -185,7 +185,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test převodu prvního písmene na malé písmeno.
+	 * Tests first letter lowercase.
 	 */
 	public function testLcfirst()
 	{
@@ -194,7 +194,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test k escapování speciálních HTML znaků.
+	 * Tests special HTML characters escaping.
 	 */
 	public function testEscape()
 	{
@@ -207,7 +207,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test převodu velikosti zadané v bytech na kB, MB, GB, TB či PB.
+	 * Tests byte size conversion.
 	 */
 	public function testFormatBytes()
 	{

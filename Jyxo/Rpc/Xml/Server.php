@@ -14,7 +14,7 @@
 namespace Jyxo\Rpc\Xml;
 
 /**
- * Třída pro vytvoření XML-RPC serveru.
+ * Class for creating a XML-RPC server.
  *
  * @category Jyxo
  * @package Jyxo\Rpc
@@ -26,14 +26,14 @@ namespace Jyxo\Rpc\Xml;
 class Server extends \Jyxo\Rpc\Server
 {
 	/**
-	 * Instance serveru.
+	 * Server instance.
 	 *
 	 * @var resource
 	 */
 	private $server = null;
 
 	/**
-	 * Vytvoří instanci třídy.
+	 * Creates a class instance.
 	 */
 	protected function __construct()
 	{
@@ -42,7 +42,7 @@ class Server extends \Jyxo\Rpc\Server
 	}
 
 	/**
-	 * Zruší instanci třídy.
+	 * Destroys a class instance.
 	 */
 	public function __destruct()
 	{
@@ -53,9 +53,9 @@ class Server extends \Jyxo\Rpc\Server
 	}
 
 	/**
-	 * Skutečně zaregistruje funkci.
+	 * Actually registers a function to a server method.
 	 *
-	 * @param string $func
+	 * @param string $func Function definition
 	 */
 	protected function register($func)
 	{
@@ -63,7 +63,7 @@ class Server extends \Jyxo\Rpc\Server
 	}
 
 	/**
-	 * Zpracuje požadavek a odešle XML-RPC odpověď.
+	 * Processes a request and sends a XML-RPC response.
 	 */
 	public function process()
 	{

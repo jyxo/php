@@ -14,7 +14,7 @@
 namespace Jyxo\Spl;
 
 /**
- * \LimitIterator which supports \Countable for transparent wrapping
+ * \LimitIterator which supports \Countable for transparent wrapping.
  *
  * @category Jyxo
  * @package Jyxo\Spl
@@ -25,9 +25,9 @@ namespace Jyxo\Spl;
 class CountableLimitIterator extends \LimitIterator implements \Countable
 {
 	/**
-	 * Result counting mode - returns all inner iterator data count
+	 * Result counting mode - returns all inner iterator data count.
 	 *
-	 * @var int
+	 * @var integer
 	 */
 	const MODE_PASS = 1;
 
@@ -35,38 +35,38 @@ class CountableLimitIterator extends \LimitIterator implements \Countable
 	 * Result counting mode - returns number of data after applying limit
 	 * For proper function inner iterator must return exact number of its items.
 	 *
-	 * @var int
+	 * @var integer
 	 */
 	const MODE_LIMIT = 2;
 
 	/**
-	 * Defined offset
+	 * Defined offset.
 	 *
-	 * @var int
+	 * @var integer
 	 */
 	private $offset;
 
 	/**
-	 * Defined maximum item count
+	 * Defined maximum item count.
 	 *
-	 * @var int
+	 * @var integer
 	 */
 	private $count;
 
 	/**
-	 * Result counting mode - see self::MODE_* constants
+	 * Result counting mode - see self::MODE_* constants.
 	 *
-	 * @var int
+	 * @var integer
 	 */
 	private $mode = self::MODE_PASS;
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 *
-	 * @param \Iterator $iterator
-	 * @param integer $offset optional
-	 * @param integer $count optional
-	 * @param integer $mode result counting mode
+	 * @param \Iterator $iterator Source data
+	 * @param integer $offset Offset (Optional)
+	 * @param integer $count Maximum item count (Optional)
+	 * @param integer $mode Result counting mode
 	 * @throws \InvalidArgumentException Inner iterator is not countable
 	 */
 	public function __construct (\Iterator $iterator, $offset = 0, $count = -1, $mode = self::MODE_PASS)
@@ -82,7 +82,7 @@ class CountableLimitIterator extends \LimitIterator implements \Countable
 	}
 
 	/**
-	 * Returns number of items based on result counting mode (all inner or final count after applying limit)
+	 * Returns number of items based on result counting mode (all inner or final count after applying limit).
 	 *
 	 * @return integer
 	 */
@@ -106,5 +106,5 @@ class CountableLimitIterator extends \LimitIterator implements \Countable
 			}
 		}
 		return $count;
-	} // count();
+	}
 }

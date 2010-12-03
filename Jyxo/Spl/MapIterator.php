@@ -14,7 +14,7 @@
 namespace Jyxo\Spl;
 
 /**
- * Iterator which applies callback over results (lazy-loaded calls).
+ * Iterator which applies a callback over results (lazy-loaded calls).
  * Supports iteration over both Traversable and array.
  *
  * @category Jyxo
@@ -26,24 +26,24 @@ namespace Jyxo\Spl;
 class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \SeekableIterator
 {
 	/**
-	 * Source data we iterate over
+	 * Source data we iterate over.
 	 *
 	 * @var \Iterator
 	 */
 	private $iterator;
 
 	/**
-	 * Mapping callback applied to each item
+	 * Mapping callback applied to each item.
 	 *
 	 * @var callback|Closure
 	 */
 	private $map;
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 *
-	 * @param array|Iterator|IteratorAggregate $data source data
-	 * @param callback|Closure $map applied callback or closure
+	 * @param array|Iterator|IteratorAggregate $data Source data
+	 * @param callback|Closure $map Applied callback or closure
 	 * @throws \InvalidArgumentException Invalid source data or callback is not callable
 	 */
 	public function __construct($data, $map)
@@ -62,10 +62,10 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 		}
 
 		$this->map = $map;
-	} // __construct();
+	}
 
 	/**
-	 * Returns count of source data
+	 * Returns count of source data.
 	 *
 	 * @return integer
 	 */
@@ -78,11 +78,10 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 			$count = iterator_count($this->iterator);
 		}
 		return $count;
-	} // count();
-
+	}
 
 	/**
-	 * Rewinds iterator to the beginning
+	 * Rewinds the iterator to the beginning.
 	 */
 	public function rewind()
 	{
@@ -90,7 +89,7 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 	}
 
 	/**
-	 * Advances pointer
+	 * Advances the internal pointer.
 	 */
 	public function next()
 	{
@@ -98,7 +97,7 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 	}
 
 	/**
-	 * Return if current pointer position is valid
+	 * Returns if current pointer position is valid.
 	 *
 	 * @return boolean
 	 */
@@ -108,7 +107,7 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 	}
 
 	/**
-	 * Returns current data
+	 * Returns current data.
 	 *
 	 * @return mixed
 	 */
@@ -118,7 +117,7 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 	}
 
 	/**
-	 * Returns current key
+	 * Returns current key.
 	 *
 	 * @return integer
 	 */
@@ -128,15 +127,15 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 	}
 
 	/**
-	 * Converts source data to result using callback function
+	 * Converts source data to result using a callback function.
 	 *
-	 * @param mixed $item
+	 * @param mixed $item Source data
 	 * @return mixed
 	 */
 	private function map($item)
 	{
 		return call_user_func($this->map, $item);
-	} // map();
+	}
 
 	/**
 	 * Returns all data as an array.
@@ -156,12 +155,12 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 	public function getInnerIterator()
 	{
 		return $this->iterator;
-	} // getInnerIterator();
+	}
 
 	/**
 	 * Seeks to defined position. Does NOT throw OutOfBoundsException.
 	 *
-	 * @param int $position
+	 * @param integer $position New position
 	 */
 	public function seek($position)
 	{
@@ -170,7 +169,7 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 				$this->iterator->seek($position);
 			} catch (\OutOfBoundsException $e) {
 				// skipped on purpose, I don't think it's necessary
-				// if you'd like to have this exception throw, remove this try-cache and add to 'else' block
+				// if you'd like to have this exception throw, remove this try-catch and add to 'else' block
 				// if (!$this->valid()) { throw new OutOfBoundException('Invalid seek position'); };
 			}
 		} else {
@@ -179,5 +178,5 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 				$this->next();
 			}
 		}
-	} // seek();
+	}
 }

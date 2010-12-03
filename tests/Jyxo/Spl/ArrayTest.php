@@ -16,7 +16,7 @@ namespace Jyxo\Spl;
 require_once __DIR__ . '/../../bootstrap.php';
 
 /**
- * Test pro třídu \Jyxo\Spl\ArrayUtil.
+ * Test for class \Jyxo\Spl\ArrayUtil.
  *
  * @see \Jyxo\Spl\ArrayUtil
  * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
@@ -26,7 +26,7 @@ require_once __DIR__ . '/../../bootstrap.php';
 class ArrayTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * Testy jednoduché int range
+	 * Tests a simple integer range.
 	 */
 	public function testRangeInt()
 	{
@@ -35,10 +35,10 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
 		});
 
 		$this->assertEquals(range(1, 6), $range);
-	} // testRangeInt();
+	}
 
 	/**
-	 * Test volání vlastní ověřovací funkce v range
+	 * Tests use of custom closures.
 	 */
 	public function testRangeCompare()
 	{
@@ -52,10 +52,10 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals(range(1, 6), $range);
 		$this->assertEquals(count($range), $called);
-	} // testRangeCompare();
+	}
 
 	/**
-	 * Test generování data range
+	 * Tests data range generation.
 	 */
 	public function testRangeDate()
 	{
@@ -72,5 +72,5 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
 		);
 
 		$this->assertEquals($expect, $range);
-	} // testRangeDate();
+	}
 }

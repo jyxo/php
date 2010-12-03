@@ -14,8 +14,8 @@
 namespace Jyxo\Rpc\Json;
 
 /**
- * Třída pro odesílání požadavků přes JSON-RPC.
- * Vyžaduje rozšíření json a curl.
+ * Class for sending requests using JSON-RPC.
+ * Requires json and curl PHP extensions.
  *
  * @category Jyxo
  * @package Jyxo\Rpc
@@ -27,21 +27,21 @@ namespace Jyxo\Rpc\Json;
 class Client extends \Jyxo\Rpc\Client
 {
 	/**
-	 * Odešle požadavek a získá ze serveru odpověď.
+	 * Sends a request and fetches server's response.
 	 *
-	 * @param string $method
-	 * @param array $params
+	 * @param string $method Method name
+	 * @param array $params Method parameters
 	 * @return mixed
-	 * @throws \BadMethodCallException Pokud nebyla zadána url serveru
-	 * @throws \Jyxo\Rpc\Json\Exception Při chybě
+	 * @throws \BadMethodCallException If no server address was provided
+	 * @throws \Jyxo\Rpc\Json\Exception On error
 	 */
 	public function send($method, array $params)
 	{
-		// Začátek profilování
+		// Start profiling
 		$this->profileStart();
 
 		try {
-			// Připravíme si JSON-RPC požadavek
+			// Prepare JSON-RPC request
 			$data = json_encode(
 				array(
 					'request' => array(
@@ -51,23 +51,23 @@ class Client extends \Jyxo\Rpc\Client
 				)
 			);
 
-			// Získání odpovědi
+			// Fetch response
 			$response = $this->process('application/json', $data);
 
-			// Zpracování odpovědi
+			// Process response
 			$response = json_decode($response, true);
 
 		} catch (\Jyxo\Rpc\Exception $e) {
-			// Konec profilování
+			// Finish profiling
 			$this->profileEnd('JSON', $method, $params, $e->getMessage());
 
 			throw new \Jyxo\Rpc\Json\Exception($e->getMessage(), 0, $e);
 		}
 
-		// Konec profilování
+		// Finish profiling
 		$this->profileEnd('JSON', $method, $params, $response);
 
-		// Chyba v odpovědi
+		// Error in response
 		if (!is_array($response) || !isset($response['response'])) {
 			throw new \Jyxo\Rpc\Json\Exception('Nebyl navrácen požadovaný formát dat.');
 		}

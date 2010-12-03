@@ -6,10 +6,10 @@
 class TestMathWithCallStatic
 {
 	/**
-	 * Volání přes magickou metodu.
+	 * Calls using the magic method.
 	 *
-	 * @param string $method
-	 * @param array $args
+	 * @param string $method Method name
+	 * @param array $args Method parameters
 	 * @return mixed
 	 */
 	public static function __callStatic($method, $args)
@@ -18,10 +18,10 @@ class TestMathWithCallStatic
 	}
 
 	/**
-	 * Odečte dvě čísla.
+	 * Substracts two numbers.
 	 *
-	 * @param integer $a
-	 * @param integer $b
+	 * @param integer $a First number
+	 * @param integer $b Second number
 	 * @return integer
 	 */
 	private static function difference($a, $b)

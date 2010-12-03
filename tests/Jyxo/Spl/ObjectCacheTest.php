@@ -16,7 +16,7 @@ namespace Jyxo\Spl;
 require_once __DIR__ . '/../../bootstrap.php';
 
 /**
- * Test pro třídu \Jyxo\Spl\ObjectCache.
+ * Test for class \Jyxo\Spl\ObjectCache.
  *
  * @see \Jyxo\Spl\ObjectCache
  * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
@@ -27,14 +27,14 @@ class ObjectCacheTest extends \PHPUnit_Framework_TestCase
 {
 
 	/**
-	 * Klíč nacachovaného objektu
+	 * Cached object key.
 	 *
 	 * @var string
 	 */
 	const CACHE_KEY = 'myobject';
 
 	/**
-	 * Instance cache.
+	 * Cache instance.
 	 *
 	 * @var \Jyxo\Spl\ObjectCache
 	 */
@@ -42,7 +42,7 @@ class ObjectCacheTest extends \PHPUnit_Framework_TestCase
 
 
 	/**
-	 * Nastaví prostředí pro testy.
+	 * Prepares testing environment.
 	 */
 	protected function setUp()
 	{
@@ -50,7 +50,7 @@ class ObjectCacheTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Vyčistí prostředí po testech.
+	 * Cleans up the environment after testing.
 	 */
 	protected function tearDown()
 	{
@@ -58,7 +58,7 @@ class ObjectCacheTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Načtení objektu, když tam nic není
+	 * Tests loading an object that is not stored actually.
 	 */
 	public function testGetNull()
 	{
@@ -67,7 +67,7 @@ class ObjectCacheTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Načtení dat
+	 * Tests loading data.
 	 */
 	public function testGetData()
 	{
@@ -80,18 +80,18 @@ class ObjectCacheTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Ukládání
+	 * Tests saving data.
 	 */
 	public function testSaveData()
 	{
 		$object = $this->saveObject();
 		$this->assertSame($object, $this->cache->get(self::CACHE_KEY));
 
-		// Nastavení téhož jedním způsobem
+		// Saving using one way
 		\Jyxo\Spl\ObjectCache::set(self::CACHE_KEY, $object);
 		$this->assertSame($object, $this->cache->get(self::CACHE_KEY));
 
-		// Nastavení téhož druhým způsobem
+		// Saving using the other way
 		$this->cache->{self::CACHE_KEY} = $object;
 		$this->assertSame($object, $this->cache->get(self::CACHE_KEY));
 
@@ -99,20 +99,20 @@ class ObjectCacheTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test Issetu
+	 * Tests isset().
 	 */
 	public function testIsset()
 	{
-		// Nic není uloženo
+		// Nothing is saved
 		$this->assertFalse(isset($this->cache->{self::CACHE_KEY}));
 
-		// Uložíme a zkontroluje
+		// Save and check
 		$this->saveObject();
 		$this->assertTrue(isset($this->cache->{self::CACHE_KEY}));
 	}
 
 	/**
-	 * Uloží objekt do cache
+	 * Saves an object into cache.
 	 *
 	 * @return \stdClass
 	 */

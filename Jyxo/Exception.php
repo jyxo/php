@@ -14,7 +14,7 @@
 namespace Jyxo;
 
 /**
- * Výchozí výjimka Jyxo knihoven.
+ * Base exception class used throughout Jyxo libraries.
  *
  * @category Jyxo
  * @package Jyxo
@@ -25,7 +25,7 @@ namespace Jyxo;
 class Exception extends \Exception
 {
 	/**
-	 * Vrací všechny předchozí výjimky zřetězené do pole.
+	 * Returns all previous exceptions in an array.
 	 *
 	 * @return array
 	 */

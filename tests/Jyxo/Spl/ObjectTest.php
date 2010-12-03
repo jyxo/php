@@ -16,7 +16,7 @@ namespace Jyxo\Spl;
 require_once __DIR__ . '/../../bootstrap.php';
 
 /**
- * Test pro třídu \Jyxo\Spl\Object.
+ * Test for class \Jyxo\Spl\Object.
  *
  * @see \Jyxo\Spl\Object
  * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
@@ -26,7 +26,7 @@ require_once __DIR__ . '/../../bootstrap.php';
 class ObjectTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * Kompletní test.
+	 * Runs the whole test.
 	 */
 	public function test()
 	{
@@ -34,24 +34,24 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
 		$foo = new \Foo();
 
-		// Správné jméno třídy
+		// Right class name
 		$this->assertEquals('Foo', $foo->getClass());
 
-		// Nastavení hodnot
+		// Setting parameter values
 		$foo->x = 1;
 		$foo->y = true;
 
-		// Nastavení neexistující proměnné
+		// Setting a non-existent parameter value
 		$foo->z = 'test';
 
-		// Získání hodnot
+		// Fetching parameter values
 		$this->assertSame(1, $foo->x);
 		$this->assertTrue($foo->y);
 
-		// Získání hodnoty neexistující proměnné
+		// Fetching value of a non-existent parameter
 		$this->assertNull($foo->z);
 
-		// Testování existence proměnných
+		// Testing parameter existence
 		$this->assertTrue(isset($foo->x));
 		$this->assertTrue(isset($foo->y));
 		$this->assertFalse(isset($foo->z));

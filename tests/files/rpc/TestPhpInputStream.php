@@ -1,28 +1,28 @@
 <?php
 
 /**
- * Třída zajišťující testování práce s PHP input streamem.
+ * Class prroviding tests of work with PHP input stream.
  *
  * @author Jaroslav Hanslík <libs@jyxo.com>
  */
 class TestPhpInputStream
 {
 	/**
-	 * Obsah.
+	 * Content.
 	 *
 	 * @var string
 	 */
 	private static $content = '';
 
 	/**
-	 * Kolik bylo přečteno.
+	 * How much was already read.
 	 *
 	 * @var integer
 	 */
 	private $read = 0;
 
 	/**
-	 * Zaregistruje protokol.
+	 * Registers protocol.
 	 *
 	 * @return boolean
 	 */
@@ -33,7 +33,7 @@ class TestPhpInputStream
 	}
 
 	/**
-	 * Odregistruje protokol.
+	 * Unregisters protocol.
 	 *
 	 * @return boolean
 	 */
@@ -43,9 +43,9 @@ class TestPhpInputStream
 	}
 
 	/**
-	 * Nastaví obsah.
+	 * Sets content.
 	 *
-	 * @param string $content
+	 * @param string $content Content
 	 */
 	public static function setContent($content)
 	{
@@ -53,12 +53,12 @@ class TestPhpInputStream
 	}
 
 	/**
-	 * Otevře soubor.
+	 * Opens file.
 	 *
-	 * @param string $path
-	 * @param string $mode
-	 * @param integer $options
-	 * @param string $openedPath
+	 * @param string $path File path
+	 * @param string $mode File mode
+	 * @param integer $options Options
+	 * @param string $openedPath Opened path
 	 * @return boolean
 	 */
 	public function stream_open($path, $mode, $options, &$openedPath)
@@ -75,7 +75,7 @@ class TestPhpInputStream
 	}
 
 	/**
-	 * Uzavře soubor.
+	 * Closes file.
 	 *
 	 * @return boolean
 	 */
@@ -85,9 +85,9 @@ class TestPhpInputStream
 	}
 
 	/**
-	 * Čte ze souboru.
+	 * Reads from file.
 	 *
-	 * @param integer $length
+	 * @param integer $length Read length
 	 * @return string
 	 */
 	public function stream_read($length)
@@ -100,7 +100,7 @@ class TestPhpInputStream
 	}
 
 	/**
-	 * Zjistí, zda nejsme na konci souboru.
+	 * Determines if we have reached the end of the file.
 	 *
 	 * @return boolean
 	 */
@@ -110,7 +110,7 @@ class TestPhpInputStream
 	}
 
 	/**
-	 * Zjistí informace o souboru.
+	 * Returns information about the file.
 	 *
 	 * @return array
 	 */

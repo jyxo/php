@@ -16,7 +16,7 @@ namespace Jyxo\Rpc\Xml;
 require_once __DIR__ . '/../../../bootstrap.php';
 
 /**
- * Test pro třídu \Jyxo\Rpc\Xml\Server.
+ * Test for class \Jyxo\Rpc\Xml\Server.
  *
  * @see \Jyxo\Rpc\Xml\Server
  * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
@@ -27,7 +27,7 @@ require_once __DIR__ . '/../../../bootstrap.php';
 class ServerTest extends \Jyxo\Rpc\ServerTestCase
 {
 	/**
-	 * Vrací instanci daného serveru
+	 * Returns server instance.
 	 *
 	 * @return \Jyxo\Rpc\Server
 	 */
@@ -37,7 +37,7 @@ class ServerTest extends \Jyxo\Rpc\ServerTestCase
 	}
 
 	/**
-	 * Vrací příponu testovaných souborů
+	 * Returns test files extension.
 	 *
 	 * @return string
 	 */

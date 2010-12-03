@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Vypočte druhou mocninu.
+ * Calculates the square of a number.
  *
- * @param integer $base
+ * @param integer $base Base
  * @return integer
  */
 function testPow2($base)
