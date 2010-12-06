@@ -30,18 +30,18 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCut()
 	{
-		// Trim on spacee
+		// Trim on space
 		$this->assertEquals('žluťoučký kůň...', $this->checkString('žluťoučký kůň příšerně úpěl ďábelské ódy'));
 		// Trim on period
 		$this->assertEquals('žluťoučký kůň...', $this->checkString('žluťoučký kůň.Příšerně úpěl ďábelské ódy'));
-		// Trim on peroid and space
+		// Trim on period and space
 		$this->assertEquals('žluťoučký kůň...', $this->checkString('žluťoučký kůň. Příšerně úpěl ďábelské ódy'));
 		// Trim on comma
 		$this->assertEquals('žluťoučký kůň...', $this->checkString('žluťoučký kůň,příšerně úpěl ďábelské ódy'));
 		// Trim on semicolon
 		$this->assertEquals('žluťoučký kůň...', $this->checkString('žluťoučký kůň;příšerně úpěl ďábelské ódy'));
 
-		// Hranice slova těsně na konci
+		// Word boundary just at the end
 		$this->assertEquals('abcdefghijklm...', $this->checkString('abcdefghijklmno pqrst'));
 		$this->assertEquals('abcdefghijklm...', $this->checkString('abcdefghijklmn opqrst'));
 		$this->assertEquals('abcdefghijklm...', $this->checkString('abcdefghijklm nopqrst'));

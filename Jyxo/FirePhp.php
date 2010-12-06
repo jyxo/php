@@ -264,7 +264,7 @@ class FirePhp
 			array_unshift($output, $first);
 		}
 
-		// Spliting result
+		// Splitting result
 		$parts = str_split(json_encode($output), 5000);
 
 		// If an identifier was provided, delete previous messages with that identifier
@@ -297,7 +297,7 @@ class FirePhp
 	}
 
 	/**
-	 * Replaces objects with approriate names in traces.
+	 * Replaces objects with appropriate names in traces.
 	 * Solves recursion problem in json_encode.
 	 * Taken from Nette.
 	 *

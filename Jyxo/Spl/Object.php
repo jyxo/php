@@ -87,7 +87,7 @@ class Object implements \Jyxo\Spl\ArrayCopy
 		$class = get_class($this);
 		$name = ucfirst($name);
 
-		// Otestuje možné gettery
+		// Tests for possible getters
 		static $types = array('get', 'is');
 		foreach ($types as $type) {
 			$getter = $type . $name;
