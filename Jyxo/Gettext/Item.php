@@ -11,13 +11,13 @@
  * https://github.com/jyxo/php/blob/master/license.txt
  */
 
-namespace Jyxo\GettextParser;
+namespace Jyxo\Gettext\Parser;
 
 /**
  * Container class for translation properties.
  *
  * @category Jyxo
- * @package Jyxo\GettextParser
+ * @package Jyxo\Gettext\Parser
  * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Matěj Humpál <libs@jyxo.com>
@@ -76,7 +76,7 @@ class Item
 	 * Retrieves a fragment of the PO file and parses it.
 	 *
 	 * @param string $chunk Translation fragment
-	 * @throws \Jyxo\GettextParser\Exception If msgid empty
+	 * @throws \Jyxo\Gettext\Parser\Exception If msgid empty
 	 */
 	public function __construct($chunk)
 	{
@@ -84,7 +84,7 @@ class Item
 		$this->parse($array);
 
 		if (empty($this->msgid)) {
-			throw new \Jyxo\GettextParser\Exception('Msgid is empty which is not acceptable');
+			throw new \Jyxo\Gettext\Parser\Exception('Msgid is empty which is not acceptable');
 		}
 	}
 
