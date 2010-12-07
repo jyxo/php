@@ -139,7 +139,7 @@ class String
 	}
 
 	/**
-	 * Phonetical transcription of a cyrillic string into ASCII.
+	 * Phonetical transcription of a Cyrillic string into ASCII.
 	 *
 	 * @param string $string String to convert
 	 * @return string
@@ -304,7 +304,7 @@ class String
 
 	/**
 	 * Converts given size in bytes to kB, MB, GB, TB or PB
-	 * and appends the apprioriate unit.
+	 * and appends the appropriate unit.
 	 *
 	 * @param float $size Input size
 	 * @param string $decimalPoint Decimal point

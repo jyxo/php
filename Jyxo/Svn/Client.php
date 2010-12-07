@@ -295,7 +295,7 @@ class Client
 	 * Adds an additional parameter.
 	 *
 	 * @param string $param Parameter name
-	 * @param string $value Paramter value
+	 * @param string $value Parameter value
 	 * @return \Jyxo\Svn\Client
 	 */
 	public function addAdditionalParam($param, $value = '')

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Testovací třída pro RPC.
+ * Testing class for RPC.
  */
 class TestMathWithCallStatic
 {
