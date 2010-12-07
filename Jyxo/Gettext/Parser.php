@@ -11,13 +11,13 @@
  * https://github.com/jyxo/php/blob/master/license.txt
  */
 
-namespace Jyxo\GettextParser;
+namespace Jyxo\Gettext;
 
 /**
  * Parses Gettext PO files.
  *
  * @category Jyxo
- * @package Jyxo\GettextParser
+ * @package Jyxo\Gettext\Parser
  * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Matěj Humpál <libs@jyxo.com>
@@ -42,7 +42,7 @@ class Parser implements \Iterator, \Countable
 	/**
 	 * Fragments parsed from the PO file.
 	 *
-	 * @var array of \Jyxo\GettextParser\Item
+	 * @var array of \Jyxo\Gettext\Parser\Item
 	 */
 	protected $items = array();
 
@@ -60,7 +60,7 @@ class Parser implements \Iterator, \Countable
 	 *
 	 * @var string
 	 */
-	protected $itemClass = '\Jyxo\GettextParser\Item';
+	protected $itemClass = '\Jyxo\Gettext\Parser\Item';
 
 	/**
 	 * Header parser class name.
@@ -69,7 +69,7 @@ class Parser implements \Iterator, \Countable
 	 *
 	 * @var string
 	 */
-	protected $headerClass = '\Jyxo\GettextParser\Header';
+	protected $headerClass = '\Jyxo\Gettext\Parser\Header';
 
 	/**
 	 * Constructor.
@@ -87,13 +87,13 @@ class Parser implements \Iterator, \Countable
 	 * The actual parser.
 	 *
 	 * Walks through the file, splits it on empty lines and tries to parse each
-	 * fragment using the defined parser class (\Jyxo\GettextParser\Item by default).
+	 * fragment using the defined parser class (\Jyxo\Gettext\Parser\Item by default).
 	 *
 	 * Does not work with the file header.
 	 *
 	 * @param string $file Path to the PO file
-	 * @see \Jyxo\GettextParser\Parser::$items
-	 * @see \Jyxo\GettextParser\Item
+	 * @see \Jyxo\Gettext\Parser::$items
+	 * @see \Jyxo\Gettext\Parser\Item
 	 */
 	protected function parse($file)
 	{
@@ -118,7 +118,7 @@ class Parser implements \Iterator, \Countable
 		foreach ($chunks as $chunk) {
 			try {
 				$this->items[] = new $this->itemClass($chunk);
-			} catch (\Jyxo\GettextParser\Exception $e) {
+			} catch (\Jyxo\Gettext\Parser\Exception $e) {
 				// Do nothing, msgid is empty
 			}
 		}
@@ -195,21 +195,21 @@ class Parser implements \Iterator, \Countable
 	 *
 	 * @param string $name Method name
 	 * @param array $args Method parameters
-	 * @return mixed Value of variable or \Jyxo\GettextParser\Parser
-	 * @throws \Jyxo\GettextParser\Exception Non-existing method
+	 * @return mixed Value of variable or \Jyxo\Gettext\Parser
+	 * @throws \Jyxo\Gettext\Parser\Exception Non-existing method
 	 */
 	public function __call($name, $args)
 	{
 		if (substr($name, 0, 3) == 'get' && $var = substr($name, 3)) {
 			$var = strtolower(substr($var, 0, 1)) . substr($var, 1);
 			if (!isset($this->$var)) {
-				throw new \Jyxo\GettextParser\Exception(sprintf('Non-existing method %s::%s() called in %s, line %s', __CLASS__, $name, __FILE__, __LINE__));
+				throw new \Jyxo\Gettext\Parser\Exception(sprintf('Non-existing method %s::%s() called in %s, line %s', __CLASS__, $name, __FILE__, __LINE__));
 			}
 			return $this->$var;
 		} elseif (substr($name, 0, 3) == 'set' && $var = substr($name, 3)) {
 			$var = strtolower(substr($var, 0, 1)) . substr($var, 1);
 			if (!isset($this->$var)) {
-				throw new \Jyxo\GettextParser\Exception(sprintf('Non-existing method %s::%s() called in %s, line %s', __CLASS__, $name, __FILE__, __LINE__));
+				throw new \Jyxo\Gettext\Parser\Exception(sprintf('Non-existing method %s::%s() called in %s, line %s', __CLASS__, $name, __FILE__, __LINE__));
 			}
 
 			$this->$var = $args[0];

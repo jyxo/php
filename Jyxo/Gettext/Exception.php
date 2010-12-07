@@ -11,13 +11,13 @@
  * https://github.com/jyxo/php/blob/master/license.txt
  */
 
-namespace Jyxo\GettextParser;
+namespace Jyxo\Gettext\Parser;
 
 /**
  * Exception thrown on Gettext parse errors.
  *
  * @category Jyxo
- * @package Jyxo\GettextParser
+ * @package Jyxo\Gettext\Parser
  * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Matěj Humpál <libs@jyxo.com>
