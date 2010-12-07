@@ -64,14 +64,13 @@ class Client
 	 * Constructor.
 	 *
 	 * @param string $cwd Working directory
-	 * @param string|array $envName Environment property name
-	 * @param mixed $envValue Environment property value
+	 * @param array $env Array of environment properties
 	 */
-	public function __construct($cwd = '', $envName = null, $envValue = null)
+	public function __construct($cwd = '', array $env = array())
 	{
 		$this->setCwd($cwd);
 		$this->env = $_ENV;
-		$this->setEnv($envName, $envValue);
+		$this->setEnv($env);
 	}
 
 	/**
@@ -142,28 +141,14 @@ class Client
 	}
 
 	/**
-	 * Adds an environment variable.
+	 * Adds one or more environment properties.
 	 *
-	 * It is possible to provide two parameters - property name and value -
-	 * or an array of name => value pairs as the first parameter.
-	 *
-	 * Reloads default environment properties when called with empty parameters.
-	 *
-	 * @param string|array $name Property name|Array of properties and values
-	 * @param mixed $value Property value
+	 * @param array $env Array of properties
 	 * @return \Jyxo\Shell\Client
 	 */
-	public function setEnv($name = null, $value = null)
+	public function setEnv(array $env)
 	{
-		if (!empty($name)) {
-			if (is_array($name)) {
-				$this->env = array_merge($this->env, $name);
-			} else {
-				$this->env[$name] = $value;
-			}
-		} else {
-			$this->env = $_ENV;
-		}
+		$this->env = array_merge($this->env, $env);
 
 		return $this;
 	}
