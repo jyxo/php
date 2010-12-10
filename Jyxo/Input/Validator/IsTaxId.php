@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * Jyxo Library
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file license.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://github.com/jyxo/php/blob/master/license.txt
+ */
+
+namespace Jyxo\Input\Validator;
+
+/**
+ * Validates (Czech) Tax ID.
+ *
+ * @category Jyxo
+ * @package Jyxo\Input
+ * @subpackage Validator
+ * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
+ * @license https://github.com/jyxo/php/blob/master/license.txt
+ * @author Jaroslav Hanslík <libs@jyxo.com>
+ */
+class IsTaxId extends \Jyxo\Input\Validator\AbstractValidator
+{
+	/**
+	 * Strict check.
+	 *
+	 * If turned on, validity of IČ/birth number is also performed. If not, only length is checked.
+	 *
+	 * @var booleans
+	 */
+	private $strict = true;
+
+	/**
+	 * Constructor.
+	 *
+	 * @param boolean $strict Turns strict checking on or off.
+	 */
+	public function __construct($strict = true)
+	{
+		$this->strict = (bool) $strict;
+	}
+
+	/**
+	 * Validates a value.
+	 *
+	 * @param mixed $value Input value
+	 * @return boolean
+	 */
+	public function isValid($value)
+	{
+		// Removes spaces
+		$taxId = preg_replace('~\s+~', '', (string) $value);
+
+		$sub = '';
+		// New Tax ID format since 1st May 2004
+		if (preg_match('~^CZ(\d{8,10})$~', $taxId, $matches)) {
+			$sub = $matches[1];
+			// But to be sure we try the old one as well
+		} elseif (preg_match('~^\d{3}-(\d{8,10})$~', $taxId, $matches)) {
+			$sub = $matches[1];
+		}
+		if (!empty($sub)) {
+			// Strict checking off - allows the so called "own numbers"
+			if (!$this->strict) {
+				return true;
+			}
+
+			// Checks if it is a valid IČ
+			if (\Jyxo\Input\Validator\IsCompanyId::validate($sub)) {
+				return true;
+			}
+
+			// Checks if it is a valid birth number
+			if (\Jyxo\Input\Validator\IsBirthNumber::validate($sub)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+}
