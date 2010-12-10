@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class prroviding tests of work with PHP input stream.
+ * Class providing tests of work with PHP input stream.
  *
  * @author Jaroslav Hanslík <libs@jyxo.com>
  */
