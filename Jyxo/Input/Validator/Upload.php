@@ -28,7 +28,7 @@ class Upload extends \Jyxo\Input\Validator\AbstractValidator implements \Jyxo\In
 	/**
 	 * Return an error if no file was uploaded at all.
 	 *
-	 * @var bool
+	 * @var boolean
 	 */
 	private $requireUpload = true;
 
@@ -49,14 +49,14 @@ class Upload extends \Jyxo\Input\Validator\AbstractValidator implements \Jyxo\In
 	/**
 	 * Upload failed, because no file was uploaded; but no file is required.
 	 *
-	 * @var bool
+	 * @var boolean
 	 */
 	private $failedEmpty = false;
 
 	/**
 	 * Sets if a file is required to be uploaded.
 	 *
-	 * @param bool $flag Does the file have to be uploaded
+	 * @param boolean $flag Does the file have to be uploaded
 	 * @return \Jyxo\Input\Validator\Upload
 	 */
 	public function requireUpload($flag = true)
@@ -102,7 +102,7 @@ class Upload extends \Jyxo\Input\Validator\AbstractValidator implements \Jyxo\In
 	/**
 	 * Sets upload errors.
 	 *
-	 * @param int $error Error code
+	 * @param integer $error Error code
 	 */
 	private function setError($error)
 	{

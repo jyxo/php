@@ -34,7 +34,7 @@ class Upload
 	/**
 	 * The file was successfully uploaded.
 	 *
-	 * @var bool
+	 * @var boolean
 	 */
 	private $success = false;
 

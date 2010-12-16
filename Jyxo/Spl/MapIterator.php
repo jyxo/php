@@ -168,8 +168,8 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 			try {
 				$this->iterator->seek($position);
 			} catch (\OutOfBoundsException $e) {
-				// skipped on purpose, I don't think it's necessary
-				// if you'd like to have this exception throw, remove this try-catch and add to 'else' block
+				// Skipped on purpose, I don't think it's necessary
+				// If you'd like to have this exception throw, remove this try-catch and add to 'else' block
 				// if (!$this->valid()) { throw new OutOfBoundException('Invalid seek position'); };
 			}
 		} else {

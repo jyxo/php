@@ -362,7 +362,7 @@ class Result implements \Countable, \SeekableIterator
 	 * Moves the internal pointer to the given position.
 	 *
 	 * @param integer $position New pointer position
-	 * @return \Jyxo\Svn\Return
+	 * @return \Jyxo\Svn\Result
 	 * @throws \Jyxo\Svn\Exception On invalid position
 	 */
 	public function seek($position)
@@ -403,7 +403,7 @@ class Result implements \Countable, \SeekableIterator
 	/**
 	 * Moves the internal pointer to the beginning.
 	 *
-	 * @return \Jyxo\Svn\Return
+	 * @return \Jyxo\Svn\Result
 	 */
 	public function rewind()
 	{

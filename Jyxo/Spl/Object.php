@@ -124,7 +124,7 @@ class Object implements \Jyxo\Spl\ArrayCopy
 	{
 		$values = array();
 		foreach ((array) $this as $key => $value) {
-			// private and protected properties have ugly array key prefixes which we remove
+			// Private and protected properties have ugly array key prefixes which we remove
 			$key = preg_replace('~^.+\0~', '', $key);
 			$values[$key] = $value;
 		}

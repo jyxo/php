@@ -70,7 +70,7 @@ class ErrorMail
 	 * Sends the error email.
 	 *
 	 * @param \Exception $e Caught exception
-	 * @param bool $forceTimer Ignore timer (Always send)
+	 * @param boolean $forceTimer Ignore timer (Always send)
 	 */
 	public function send(\Exception $e, $forceTimer = false)
 	{

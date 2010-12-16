@@ -76,7 +76,7 @@ class FirePhp
 	/**
 	 * Sets if logging id enabled.
 	 *
-	 * @param bool $flag Is logging enabled
+	 * @param boolean $flag Is logging enabled
 	 */
 	public static function setEnabled($flag = true)
 	{

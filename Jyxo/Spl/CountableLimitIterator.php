@@ -90,18 +90,18 @@ class CountableLimitIterator extends \LimitIterator implements \Countable
 	{
 		$count = count($this->getInnerIterator());
 		if (self::MODE_LIMIT === $this->mode) {
-			// we want real number of results - after applying limit
+			// We want real number of results - after applying limit
 
 			if (0 !== $this->offset) {
-				// offset from beginning
+				// Offset from beginning
 				$count -= $this->offset;
 			}
 			if (-1 !== $this->count && $count > $this->count) {
-				// maximum number of items
+				// Maximum number of items
 				$count = $this->count;
 			}
 			if ($count < 0) {
-				// we moved after end of inner iterator - offset is higher than count($this->getInnerIterator())
+				// We moved after end of inner iterator - offset is higher than count($this->getInnerIterator())
 				$count = 0;
 			}
 		}

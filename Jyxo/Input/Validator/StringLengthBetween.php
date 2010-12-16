@@ -78,7 +78,7 @@ class StringLengthBetween extends \Jyxo\Input\Validator\AbstractValidator
 	/**
 	 * Return the minimal string length.
 	 *
-	 * @return integers
+	 * @return integer
 	 */
 	public function getMin()
 	{

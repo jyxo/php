@@ -80,7 +80,7 @@ class Client
 	 * @param mixed $params Additional parameters
 	 * @param string $user SVN username
 	 * @param string $password SVN user password
-	 * @return  \Jyxo\Svn\Result
+	 * @return \Jyxo\Svn\Result
 	 */
 	public function checkout($url, $path, $params = null, $user = '', $password = '')
 	{
@@ -95,7 +95,7 @@ class Client
 	 * @param mixed $params Additional parameters
 	 * @param string $user SVN username
 	 * @param string $password SVN user password
-	 * @return  \Jyxo\Svn\Result
+	 * @return \Jyxo\Svn\Result
 	 */
 	public function co($url, $path, $params = null, $user = '', $password = '')
 	{
@@ -109,7 +109,7 @@ class Client
 	 * @param mixed $params Additional parameters
 	 * @param string $user SVN username
 	 * @param string $password SVN user password
-	 * @return  \Jyxo\Svn\Result
+	 * @return \Jyxo\Svn\Result
 	 */
 	public function update($path, $params = null, $user = '', $password = '')
 	{
@@ -123,7 +123,7 @@ class Client
 	 * @param mixed $params Additional parameters
 	 * @param string $user SVN username
 	 * @param string $password SVN user password
-	 * @return  \Jyxo\Svn\Result
+	 * @return \Jyxo\Svn\Result
 	 */
 	public function up($path, $params = null, $user = '', $password = '')
 	{
@@ -138,7 +138,7 @@ class Client
 	 * @param mixed $params Additional parameters
 	 * @param string $user SVN username
 	 * @param string $password SVN user password
-	 * @return  \Jyxo\Svn\Result
+	 * @return \Jyxo\Svn\Result
 	 */
 	public function commit($path, $message, $params = null, $user = '', $password = '')
 	{
@@ -153,7 +153,7 @@ class Client
 	 * @param mixed $params Additional parameters
 	 * @param string $user SVN username
 	 * @param string $password SVN user password
-	 * @return  \Jyxo\Svn\Result
+	 * @return \Jyxo\Svn\Result
 	 */
 	public function ci($path, $message, $params = null, $user = '', $password = '')
 	{
@@ -164,7 +164,7 @@ class Client
 	 * Runs SVN add on the given path.
 	 *
 	 * @param array $path Path to be added to SVN
-	 * @return \Jyxo\Svn\Status
+	 * @return \Jyxo\Svn\Result
 	 */
 	public function add(array $path)
 	{
@@ -186,7 +186,7 @@ class Client
 	 * Retrieves SVN status information of the given path.
 	 *
 	 * @param array $path Checked path
-	 * @return \Jyxo\Svn\Status
+	 * @return \Jyxo\Svn\Result
 	 */
 	public function status(array $path)
 	{
@@ -200,7 +200,7 @@ class Client
 	 * @param string $user Username
 	 * @param string $password User password
 	 * @param string $params Additional parameters
-	 * @return  \Jyxo\Svn\Result
+	 * @return \Jyxo\Svn\Result
 	 * @throws \Jyxo\Svn\Exception On execute error
 	 */
 	protected function callSvn($action, $user, $password, $params)
@@ -227,7 +227,7 @@ class Client
 				$shell = new \Jyxo\Shell\Client();
 				$shell->exec($command, $status);
 
-				return new  \Jyxo\Svn\Result($action, $shell->getOut(), $status);
+				return new \Jyxo\Svn\Result($action, $shell->getOut(), $status);
 
 			} catch (\Jyxo\Shell\Exception $e) {
 				throw $e;

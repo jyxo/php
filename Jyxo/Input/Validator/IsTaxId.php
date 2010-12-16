@@ -30,7 +30,7 @@ class IsTaxId extends \Jyxo\Input\Validator\AbstractValidator
 	 *
 	 * If turned on, validity of IČ/birth number is also performed. If not, only length is checked.
 	 *
-	 * @var booleans
+	 * @var boolean
 	 */
 	private $strict = true;
 
