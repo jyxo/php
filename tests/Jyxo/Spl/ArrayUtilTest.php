@@ -23,7 +23,7 @@ require_once __DIR__ . '/../../bootstrap.php';
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek <libs@jyxo.com>
  */
-class ArrayTest extends \PHPUnit_Framework_TestCase
+class ArrayUtilTest extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * Tests a simple integer range.

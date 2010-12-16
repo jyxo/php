@@ -41,7 +41,7 @@ class AllTests
 	{
 		$suite = new \PHPUnit_Framework_TestSuite('Jyxo SPL');
 
-		$suite->addTestSuite('\Jyxo\Spl\ArrayTest');
+		$suite->addTestSuite('\Jyxo\Spl\ArrayUtilTest');
 		$suite->addTestSuite('\Jyxo\Spl\CountableLimitIteratorTest');
 		$suite->addTestSuite('\Jyxo\Spl\ObjectTest');
 		$suite->addTestSuite('\Jyxo\Spl\ObjectCacheTest');
