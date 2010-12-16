@@ -23,7 +23,7 @@ namespace Jyxo\Input\Chain;
  * @subpackage Chain
  * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
- * @author Roman Řáha <libs@jyxo.com>
+ * @author Roman Řáha
  */
 class Conditional extends \Jyxo\Input\Chain
 {

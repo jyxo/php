@@ -20,8 +20,8 @@ namespace Jyxo\Shell;
  * @package Jyxo\Shell
  * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
- * @author Ondřej Procházka <libs@jyxo.com>
- * @author Matěj Humpál <libs@jyxo.com>
+ * @author Ondřej Procházka
+ * @author Matěj Humpál
  */
 class Client
 {

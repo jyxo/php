@@ -21,7 +21,7 @@ namespace Jyxo\Input\Filter;
  * @subpackage Filter
  * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
- * @author Jan Pěček <libs@jyxo.com>
+ * @author Jan Pěček
  */
 class Exception extends \Jyxo\Input\Exception
 {}

@@ -20,7 +20,7 @@ require_once __DIR__ . '/../../bootstrap.php';
  *
  * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
- * @author Jakub Tománek <libs@jyxo.com>
+ * @author Jakub Tománek
  */
 class AllTests
 {

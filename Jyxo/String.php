@@ -20,9 +20,9 @@ namespace Jyxo;
  * @package Jyxo
  * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
- * @author Jan Tichý <libs@jyxo.com>
- * @author Jakub Tománek <libs@jyxo.com>
- * @author Jaroslav Hanslík <libs@jyxo.com>
+ * @author Jan Tichý
+ * @author Jakub Tománek
+ * @author Jaroslav Hanslík
  */
 class String
 {

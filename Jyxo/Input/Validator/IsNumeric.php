@@ -21,7 +21,7 @@ namespace Jyxo\Input\Validator;
  * @subpackage Validator
  * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
- * @author Martin Šamšula <libs@jyxo.com>
+ * @author Martin Šamšula
  */
 class IsNumeric extends \Jyxo\Input\Validator\AbstractValidator
 {

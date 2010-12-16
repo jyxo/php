@@ -23,7 +23,7 @@ namespace Jyxo\Input\Validator;
  * @subpackage Validator
  * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
- * @author Jaroslav Hanslík <libs@jyxo.com>
+ * @author Jaroslav Hanslík
  */
 class IsCompanyId extends \Jyxo\Input\Validator\AbstractValidator
 {

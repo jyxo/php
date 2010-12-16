@@ -21,7 +21,7 @@ namespace Jyxo\Input;
  * @subpackage Chain
  * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
- * @author Jakub Tománek <libs@jyxo.com>
+ * @author Jakub Tománek
  */
 class Chain implements \Jyxo\Input\ValidatorInterface
 {

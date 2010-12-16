@@ -3,7 +3,7 @@
 /**
  * Class providing tests of work with PHP input stream.
  *
- * @author Jaroslav Hanslík <libs@jyxo.com>
+ * @author Jaroslav Hanslík
  */
 class TestPhpInputStream
 {

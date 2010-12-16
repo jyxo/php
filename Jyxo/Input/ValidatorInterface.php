@@ -21,8 +21,8 @@ namespace Jyxo\Input;
  * @subpackage Validator
  * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
- * @author Jan Pěček <libs@jyxo.com>
- * @author Jaroslav Hanslík <libs@jyxo.com>
+ * @author Jan Pěček
+ * @author Jaroslav Hanslík
  */
 interface ValidatorInterface
 {
