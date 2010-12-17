@@ -32,7 +32,7 @@ class Foo extends \Jyxo\Spl\Object
 	/**
 	 * Sets the firstvariable value.
 	 *
-	 * @param int $x New value
+	 * @param integer $x New value
 	 */
 	public function setX($x)
 	{
@@ -52,7 +52,7 @@ class Foo extends \Jyxo\Spl\Object
 	/**
 	 * Sets the second variable value.
 	 *
-	 * @param bool $y New value
+	 * @param boolean $y New value
 	 */
 	public function setY($y)
 	{

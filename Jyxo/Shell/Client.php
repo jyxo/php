@@ -172,7 +172,7 @@ class Client
 	 * Throws an exception on status code != 0.
 	 *
 	 * @param string $cmd Command to execute
-	 * @param int $status Status code
+	 * @param integer $status Status code
 	 * @return \Jyxo\Shell\Client
 	 * @throws \Jyxo\Shell\Exception On execution error
 	 */
