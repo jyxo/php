@@ -40,14 +40,16 @@ class Client extends \Jyxo\Rpc\Client
 		// Start profiling
 		$this->profileStart();
 
+		// Generates ID
+		$id = rand();
+
 		try {
 			// Prepare JSON-RPC request
 			$data = json_encode(
 				array(
-					'request' => array(
-						'method' => $method,
-						'params' => $params
-					)
+					'method' => $method,
+					'params' => $params,
+					'id' => $id
 				)
 			);
 
@@ -68,12 +70,20 @@ class Client extends \Jyxo\Rpc\Client
 		$this->profileEnd('JSON', $method, $params, $response);
 
 		// Error in response
-		if (!is_array($response) || !isset($response['response'])) {
-			throw new \Jyxo\Rpc\Json\Exception('Nebyl navrácen požadovaný formát dat.');
+		if (!is_array($response) || !isset($response['id'])) {
+			throw new \Jyxo\Rpc\Json\Exception('Invalid response data.');
 		}
-		$response = $response['response'];
-		if ((is_array($response)) && (isset($response['fault']))) {
-			throw new \Jyxo\Rpc\Json\Exception(preg_replace('~\s+~', ' ', $response['fault']['faultString']));
+
+		if ($response['id'] != $id) {
+			throw new \Jyxo\Rpc\Json\Exception('Response ID does not correspond to request ID.');
+		}
+
+		if (isset($response['error'])) {
+			throw new \Jyxo\Rpc\Json\Exception(preg_replace('~\s+~', ' ', $response['error']['message']), $response['error']['code']);
+		}
+
+		if (!isset($response['result'])) {
+			throw new \Jyxo\Rpc\Json\Exception('No response data.');
 		}
 
 		return $response;
