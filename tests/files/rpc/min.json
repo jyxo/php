@@ -1,1 +1,1 @@
-{"request":{"method":"TestMath::min","params":[1,100,10]}}
+{"method":"TestMath::min","params":[1,100,10],"id":"jyxolibs"}

@@ -1,1 +1,1 @@
-{"request":{"method":"TestMath::max","params":[1,100,10]}}
+{"method":"TestMath::max","params":[1,100,10],"id":"typewriter"}

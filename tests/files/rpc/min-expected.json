@@ -1,1 +1,1 @@
-{"response":{"fault":{"faultString":"Server error. Method not found.","faultCode":-32601}}}
+{"error":{"message":"Server error. Method not found.","code":-32601},"id":"jyxolibs"}

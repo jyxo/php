@@ -1,1 +1,1 @@
-{"request":{"method":"TestMathWithCall::abs","params":[-10]}}
+{"method":"TestMathWithCall::abs","params":[-10],"id":42}
