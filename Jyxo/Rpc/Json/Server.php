@@ -58,6 +58,7 @@ class Server extends \Jyxo\Rpc\Server
 	 */
 	public function process()
 	{
+		$data = array('id' => '');
 		try {
 			$data = file_get_contents('php://input');
 			$data = trim($data);
@@ -72,28 +73,27 @@ class Server extends \Jyxo\Rpc\Server
 			}
 
 			// Parsing request data error
-			if (empty($data['request']['method'])) {
+			if (empty($data['method']) || !isset($data['id'])) {
 				throw new \Jyxo\Rpc\Json\Exception('Parse error.', 10);
 			}
 
 			// Non-existent method call
-			if (!in_array($data['request']['method'], $this->methods)) {
+			if (!in_array($data['method'], $this->methods)) {
 				throw new \Jyxo\Rpc\Json\Exception('Server error. Method not found.', -32601);
 			}
 
 			// Request processing
-			$params = !empty($data['request']['params']) ? $data['request']['params'] : array();
-			$response = $this->call($data['request']['method'], $params);
-			$response = array('response' => $response);
+			$params = !empty($data['params']) ? (array) $data['params'] : array();
+			$response = $this->call($data['method'], $params);
+			$response = array('result' => $response, 'id' => $data['id']);
 
 		} catch (\Jyxo\Rpc\Json\Exception $e) {
 			$response = array(
-				'response' => array(
-					'fault' => array(
-						'faultString' => $e->getMessage(),
-						'faultCode' => $e->getCode()
-					)
-				)
+				'error' => array(
+					'message' => $e->getMessage(),
+					'code' => $e->getCode()
+				),
+				'id' => $data['id']
 			);
 		}
 
