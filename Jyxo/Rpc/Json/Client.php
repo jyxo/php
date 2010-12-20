@@ -41,7 +41,7 @@ class Client extends \Jyxo\Rpc\Client
 		$this->profileStart();
 
 		// Generates ID
-		$id = rand();
+		$id = md5(uniqid(rand(), true));
 
 		try {
 			// Prepare JSON-RPC request
