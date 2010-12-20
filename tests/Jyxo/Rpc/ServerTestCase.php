@@ -135,6 +135,18 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Tests bad request (parse error)
+	 */
+	public function testParseError()
+	{
+/*		require_once $this->getFilePath('TestMath.php');
+		$this->rpc->registerClass('TestMath');
+*/
+		$this->checkServerOutput('parse-error');
+	}
+
+
+	/**
 	 * Tests calling a function registered as a method.
 	 */
 	public function testProcessFunction()
