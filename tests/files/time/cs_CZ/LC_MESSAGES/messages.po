@@ -1,0 +1,370 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n>=2 && n<=4 ? 1 : 2;\n"
+
+#:
+msgid "Apr"
+msgstr "Dub"
+
+#:
+msgid "April"
+msgstr "Duben"
+
+#:
+msgid "April#~Genitive"
+msgstr "Dubna"
+
+#:
+msgid "at"
+msgstr "v"
+
+#:
+msgid "Aug"
+msgstr "Srp"
+
+#:
+msgid "August"
+msgstr "Srpen"
+
+#:
+msgid "August#~Genitive"
+msgstr "Srpna"
+
+#:
+msgid "Day"
+msgid_plural "%s days"
+msgstr[0] "Den"
+msgstr[1] "%s dny"
+msgstr[2] "%s dní"
+
+#:
+msgid "Day ago"
+msgid_plural "%s days ago"
+msgstr[0] "Před dnem"
+msgstr[1] "Před %s dny"
+msgstr[2] "Před %s dny"
+
+#:
+msgid "Dec"
+msgstr "Pro"
+
+#:
+msgid "December"
+msgstr "Prosinec"
+
+#:
+msgid "December#~Genitive"
+msgstr "Prosince"
+
+#:
+msgid "Feb"
+msgstr "Úno"
+
+#:
+msgid "February"
+msgstr "Únor"
+
+#:
+msgid "February#~Genitive"
+msgstr "Února"
+
+
+#:
+msgid "Fri"
+msgstr "Pá"
+
+#:
+msgid "Friday"
+msgstr "Pátek"
+
+#:
+msgid "Hour"
+msgid_plural "%s hours"
+msgstr[0] "Hodina"
+msgstr[1] "%s hodiny"
+msgstr[2] "%s hodin"
+
+#:
+msgid "Hour ago"
+msgid_plural "%s hours ago"
+msgstr[0] "Před hodinou"
+msgstr[1] "Před %s hodinami"
+msgstr[2] "Před %s hodinami"
+
+#:
+msgid "In day"
+msgid_plural "In %s days"
+msgstr[0] "Za den"
+msgstr[1] "Za %s dny"
+msgstr[2] "Za %s dní"
+
+#:
+msgid "In hour"
+msgid_plural "In %s hours"
+msgstr[0] "Za hodinu"
+msgstr[1] "Za %s hodiny"
+msgstr[2] "Za %s hodin"
+
+#:
+msgid "In minute"
+msgid_plural "In %s minutes"
+msgstr[0] "Za minutu"
+msgstr[1] "Za %s minuty"
+msgstr[2] "Za %s minut"
+
+#:
+msgid "In month"
+msgid_plural "In %s months"
+msgstr[0] "Za měsíc"
+msgstr[1] "Za %s měsíce"
+msgstr[2] "Za %s měsíců"
+
+#:
+msgid "In second"
+msgid_plural "In %s seconds"
+msgstr[0] "Za sekundu"
+msgstr[1] "Za %s sekundy"
+msgstr[2] "Za %s sekund"
+
+#:
+msgid "In week"
+msgid_plural "In %s weeks"
+msgstr[0] "Za týden"
+msgstr[1] "Za %s týdny"
+msgstr[2] "Za %s týdnů"
+
+#:
+msgid "In year"
+msgid_plural "In %s years"
+msgstr[0] "Za rok"
+msgstr[1] "Za %s roky"
+msgstr[2] "Za %s let"
+
+#:
+msgid "Jan"
+msgstr "Led"
+
+#:
+msgid "January"
+msgstr "Leden"
+
+#:
+msgid "January#~Genitive"
+msgstr "Ledna"
+
+#:
+msgid "Jul"
+msgstr "Čec"
+
+#:
+msgid "July#~Genitive"
+msgstr "Července"
+
+#:
+msgid "July"
+msgstr "Červenec"
+
+#:
+msgid "Jun"
+msgstr "Čer"
+
+#:
+msgid "June#~Genitive"
+msgstr "Června"
+
+#:
+msgid "June"
+msgstr "Červen"
+
+#:
+msgid "Mar"
+msgstr "Bře"
+
+#:
+msgid "March"
+msgstr "Březen"
+
+#:
+msgid "March#~Genitive"
+msgstr "Března"
+
+#:
+msgid "May#~Genitive"
+msgstr "Května"
+
+#:
+msgid "May"
+msgstr "Květen"
+
+#:
+msgid "May#~Shortcut"
+msgstr "Kvě"
+
+#:
+msgid "Minute"
+msgid_plural "%s minutes"
+msgstr[0] "Minuta"
+msgstr[1] "%s minuty"
+msgstr[2] "%s minut"
+
+#:
+msgid "Minute ago"
+msgid_plural "%s minutes ago"
+msgstr[0] "Před minutou"
+msgstr[1] "Před %s minutami"
+msgstr[2] "Před %s minutami"
+
+#:
+msgid "Mon"
+msgstr "Po"
+
+#:
+msgid "Monday"
+msgstr "Pondělí"
+
+#:
+msgid "Month"
+msgid_plural "%s months"
+msgstr[0] "Měsíc"
+msgstr[1] "%s měsíce"
+msgstr[2] "%s měsíců"
+
+#:
+msgid "Month ago"
+msgid_plural "%s months ago"
+msgstr[0] "Před měsícem"
+msgstr[1] "Před %s měsíci"
+msgstr[2] "Před %s měsíci"
+
+#:
+msgid "Nov"
+msgstr "Lis"
+
+#:
+msgid "November"
+msgstr "Listopad"
+
+#:
+msgid "November#~Genitive"
+msgstr "Listopadu"
+
+#:
+msgid "Now"
+msgstr "Teď"
+
+#:
+msgid "Oct"
+msgstr "Říj"
+
+#:
+msgid "October#~Genitive"
+msgstr "Října"
+
+#:
+msgid "October"
+msgstr "Říjen"
+
+#:
+msgid "Sat"
+msgstr "So"
+
+#:
+msgid "Saturday"
+msgstr "Sobota"
+
+#:
+msgid "Second"
+msgid_plural "%s seconds"
+msgstr[0] "Sekunda"
+msgstr[1] "%s sekundy"
+msgstr[2] "%s sekund"
+
+#:
+msgid "Second ago"
+msgid_plural "%s seconds ago"
+msgstr[0] "Před sekundou"
+msgstr[1] "Před %s sekundami"
+msgstr[2] "Před %s sekundami"
+
+#:
+msgid "Sep"
+msgstr "Zář"
+
+#:
+msgid "September"
+msgstr "Září"
+
+#:
+msgid "September#~Genitive"
+msgstr "Září"
+
+#:
+msgid "Sun"
+msgstr "Ne"
+
+#:
+msgid "Sunday"
+msgstr "Neděle"
+
+#:
+msgid "Thu"
+msgstr "Čt"
+
+#:
+msgid "Thursday"
+msgstr "Čtvrtek"
+
+#:
+msgid "Today"
+msgstr "Dnes"
+
+#:
+msgid "Tue"
+msgstr "Út"
+
+#:
+msgid "Tuesday"
+msgstr "Úterý"
+
+#:
+msgid "Wed"
+msgstr "St"
+
+#:
+msgid "Wednesday"
+msgstr "Středa"
+
+#:
+msgid "Week"
+msgid_plural "%s weeks"
+msgstr[0] "Týden"
+msgstr[1] "%s týdny"
+msgstr[2] "%s týdnů"
+
+#:
+msgid "Week ago"
+msgid_plural "%s weeks ago"
+msgstr[0] "Před týdnem"
+msgstr[1] "Před %s týdny"
+msgstr[2] "Před %s týdny"
+
+#:
+msgid "Year"
+msgid_plural "%s years"
+msgstr[0] "Rok"
+msgstr[1] "%s roky"
+msgstr[2] "%s let"
+
+#:
+msgid "Year ago"
+msgid_plural "%s years ago"
+msgstr[0] "Před rokem"
+msgstr[1] "Před %s roky"
+msgstr[2] "Před %s lety"
+
+#:
+msgid "Yesterday"
+msgstr "Včera"
