@@ -1,7 +1,7 @@
-Jyxo PHP library
+Jyxo PHP Library
 ================
 
-Welcome to Jyxo PHP library.
+Welcome to Jyxo PHP Library.
 
 A long time ago, in a galaxy far far away... there has been an IT company
 called Jyxo s.r.o. It has existed for several years and created and contributed
@@ -9,7 +9,7 @@ to numerous projects.
 
 To share fruits of work of individual project teams and to not re-invent
 the wheel over and over again, a collection of libraries has been created.
-It has been given the name "Jyxo library" and it has happily grown throughout
+It has been given the name "Jyxo PHP Library" and it has happily grown throughout
 the years.
 
 One day, a couple of company developers came with the idea to make it open
@@ -31,7 +31,7 @@ first.
 Original library authors
 ------------------------
 
-Many developers have contributed to the Library throughout the years. Here are
+Many developers have contributed to the library throughout the years. Here are
 those who were daring enough to put their names into docblocks… or those whose
 names were put there by others :)
 

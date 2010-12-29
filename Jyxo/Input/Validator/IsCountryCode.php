@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Jyxo Library
+ * Jyxo PHP Library
  *
  * LICENSE
  *
