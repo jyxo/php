@@ -20,7 +20,7 @@ require_once __DIR__ . '/../../bootstrap.php';
  *
  * @see \Jyxo\Rpc\Json\Server
  * @see \Jyxo\Rpc\Xml\Server
- * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
+ * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Pěček
  * @author Jaroslav Hanslík

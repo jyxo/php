@@ -21,7 +21,7 @@ namespace Jyxo\Input\Chain;
  * @category Jyxo
  * @package Jyxo\Input
  * @subpackage Chain
- * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
+ * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Roman Řáha
  */

@@ -1,4 +1,4 @@
-Copyright (c) 2005-2010, Jyxo, s.r.o.
+Copyright (c) 2005-2011, Jyxo, s.r.o.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
