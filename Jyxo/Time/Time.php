@@ -741,7 +741,7 @@ class Time implements \Serializable
 	 */
 	public function serialize()
 	{
-		return $this->dateTime->format('Y-m-d H:i:s e');
+		return $this->dateTime->format('Y-m-d H:i:s ') . $this->dateTime->getTimezone()->getName();
 	}
 
 	/**
@@ -758,7 +758,20 @@ class Time implements \Serializable
 				throw new \Exception('Serialized data have to be in the "Y-m-d H:i:s TimeZone" format');
 			}
 
-			$this->dateTime = new \DateTime($data[0] . ' ' . $data[1], $this->createTimeZone($data[2]));
+			if (preg_match('~([+-]\d{2}):?([\d]{2})~', $data[2], $matches)) {
+				// Timezone defined by an UTC offset
+
+				if ($matches[2] < 0 || $matches[2] > 59 || intval($matches[1] . $matches[2]) < -1200 || intval($matches[1] . $matches[2]) > 1200) {
+					// Invalid offset - minutes part is invalid or the whole offset is not <= 12:00 and >= -12:00
+					throw new \Exception(sprintf('Invalid time zone UTC offset definition: %s', $matches[0]));
+				}
+
+				$data[1] .= ' ' . $matches[1] . $matches[2];
+				$this->dateTime = new \DateTime($data[0] . ' ' . $data[1]);
+			} else {
+				$this->dateTime = new \DateTime($data[0] . ' ' . $data[1], $this->createTimeZone($data[2]));
+			}
+
 		} catch (\Exception $e) {
 			throw new \InvalidArgumentException('Deserialization error', 0, $e);
 		}

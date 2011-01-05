@@ -680,6 +680,46 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);
 		}
+
+		// Offset time zone definition
+		$serialized = 'C:14:"Jyxo\Time\Time":26:{' . date('Y-m-d H:i:s', $time) . ' +05:30}';
+		$unserialized = @unserialize($serialized);
+		$this->assertEquals('+05:30', $unserialized->getTimeZone()->getName());
+
+		$serialized = 'C:14:"Jyxo\Time\Time":26:{' . date('Y-m-d H:i:s', $time) . ' -12:00}';
+		$unserialized = @unserialize($serialized);
+		$this->assertEquals('-12:00', $unserialized->getTimeZone()->getName());
+
+		// PHP bug http://bugs.php.net/bug.php?id=45528 test
+		try {
+			$tz = new \DateTimeZone($unserialized->getTimeZone()->getName());
+			$this->fail('\Exception expected');
+		} catch (\Exception $e) {
+			// Correctly thrown exception
+			$this->assertInstanceOf('\Exception', $e);
+		}
+
+		// Invalid time zone offset
+		$serialized = 'C:14:"Jyxo\Time\Time":26:{' . date('Y-m-d H:i:s', $time) . ' +05:60}';
+		try {
+			$unserialized = @unserialize($serialized);
+			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\Exception $e) {
+			// Correctly thrown exception
+			$this->assertInstanceOf('\InvalidArgumentException', $e);
+		}
+
+		// Invalid time zone offset
+		$serialized = 'C:14:"Jyxo\Time\Time":26:{' . date('Y-m-d H:i:s', $time) . ' -13:00}';
+		try {
+			$unserialized = @unserialize($serialized);
+			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\Exception $e) {
+			// Correctly thrown exception
+			$this->assertInstanceOf('\InvalidArgumentException', $e);
+		}
+
+
 	}
 
 }
