@@ -17,7 +17,7 @@ namespace Jyxo;
  * Error and exception handler.
  *
  * @category Jyxo
- * @package Jyxo
+ * @package Jyxo\ErrorHandling
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
@@ -203,7 +203,7 @@ class ErrorHandler
 				)
 			);
 			if (self::$errorMail) {
-				$ex = new ErrorException($error['message'], 0, $error['type'], $error['file'], $error['line']);
+				$ex = new \ErrorException($error['message'], 0, $error['type'], $error['file'], $error['line']);
 				self::$errorMail->send($ex);
 			}
 		}
@@ -317,7 +317,7 @@ class ErrorHandler
 		);
 
 		// Adds to FirePHP
-		return \Jyxo\FirePhp::trace(
+		return FirePhp::trace(
 			sprintf('%s: %s', $labels[$message['type']], $message['text']),
 			$message['file'],
 			$message['line'],

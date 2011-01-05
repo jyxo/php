@@ -17,7 +17,8 @@ namespace Jyxo\Gettext;
  * Parses Gettext PO files.
  *
  * @category Jyxo
- * @package Jyxo\Gettext\Parser
+ * @package Jyxo\Gettext
+ * @subpackage Parser
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Matěj Humpál
@@ -203,13 +204,13 @@ class Parser implements \Iterator, \Countable
 		if (substr($name, 0, 3) == 'get' && $var = substr($name, 3)) {
 			$var = strtolower(substr($var, 0, 1)) . substr($var, 1);
 			if (!isset($this->$var)) {
-				throw new \Jyxo\Gettext\Parser\Exception(sprintf('Non-existing method %s::%s() called in %s, line %s', __CLASS__, $name, __FILE__, __LINE__));
+				throw new Parser\Exception(sprintf('Non-existing method %s::%s() called in %s, line %s', __CLASS__, $name, __FILE__, __LINE__));
 			}
 			return $this->$var;
 		} elseif (substr($name, 0, 3) == 'set' && $var = substr($name, 3)) {
 			$var = strtolower(substr($var, 0, 1)) . substr($var, 1);
 			if (!isset($this->$var)) {
-				throw new \Jyxo\Gettext\Parser\Exception(sprintf('Non-existing method %s::%s() called in %s, line %s', __CLASS__, $name, __FILE__, __LINE__));
+				throw new Parser\Exception(sprintf('Non-existing method %s::%s() called in %s, line %s', __CLASS__, $name, __FILE__, __LINE__));
 			}
 
 			$this->$var = $args[0];

@@ -60,7 +60,7 @@ class Factory
 
 		$className = $this->findClass($name, self::$validatorPrefix);
 		if (!$className) {
-			throw new \Jyxo\Input\Exception(sprintf('Could not found "%s" validator', $name));
+			throw new Exception(sprintf('Could not found "%s" validator', $name));
 		}
 
 		return $this->getClass($className, $params);
@@ -84,7 +84,7 @@ class Factory
 
 		$className = $this->findClass($name, self::$filterPrefix);
 		if (!$className) {
-			throw new \Jyxo\Input\Exception(sprintf('Could not found "%s" filter', $name));
+			throw new Exception(sprintf('Could not found "%s" filter', $name));
 		}
 
 		return $this->getClass($className, $params);
@@ -145,7 +145,7 @@ class Factory
 	/**
 	 * Registers a new validator prefix.
 	 *
-	 * The underscore at the end is required; e.g. for class "\Api\IsInt" the prefix would be "\Api\" and validator name "IsInt".
+	 * The backslash at the end is required; e.g. for class "\Api\IsInt" the prefix would be "\Api\" and validator name "IsInt".
 	 *
 	 * @param string $prefix Validator class prefix
 	 */
@@ -157,7 +157,7 @@ class Factory
 	/**
 	 * Registers a new filter prefix.
 	 *
-	 * The underscore at the end is required; e.g. for class "\Api\ToInt" the prefix would be "\Api\" a filter name "ToInt".
+	 * The backslash at the end is required; e.g. for class "\Api\ToInt" the prefix would be "\Api\" a filter name "ToInt".
 	 *
 	 * @param string $prefix
 	 */

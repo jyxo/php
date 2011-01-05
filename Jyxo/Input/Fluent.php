@@ -94,7 +94,7 @@ class Fluent
 	 */
 	public function __construct()
 	{
-		$this->factory = new \Jyxo\Input\Factory();
+		$this->factory = new Factory();
 		$this->all();
 	}
 
@@ -107,7 +107,7 @@ class Fluent
 	 */
 	public function check($var, $name)
 	{
-		$this->chain = new \Jyxo\Input\Chain();
+		$this->chain = new Chain();
 		$this->chains[$name] = $this->chain;
 		$this->values[$name] = $var;
 		$this->default[$name] = null;
@@ -122,7 +122,7 @@ class Fluent
 	 */
 	public function all()
 	{
-		$this->chain = new \Jyxo\Input\Chain();
+		$this->chain = new Chain();
 		$this->chains[uniqid('fluent:')] = $this->chain;
 		$this->currentName = null;
 		return $this;
@@ -202,7 +202,7 @@ class Fluent
 	 */
 	public function condition($name, $param = null)
 	{
-		$condChain = new \Jyxo\Input\Chain\Conditional($this->factory->getValidatorByName($name, $param));
+		$condChain = new Chain\Conditional($this->factory->getValidatorByName($name, $param));
 		if (true === $this->chain->isEmpty()) {
 			// The actual chain is empty, can be replaced by the condition
 			$this->chain = $condChain;
@@ -267,7 +267,7 @@ class Fluent
 	public function validateAll()
 	{
 		if (!$this->isValid()) {
-			throw new \Jyxo\Input\Validator\Exception(reset($this->errors));
+			throw new Validator\Exception(reset($this->errors));
 		}
 	}
 
@@ -316,7 +316,7 @@ class Fluent
 	public function getValue($name)
 	{
 		if (!array_key_exists($name, $this->values)) {
-			throw new \Jyxo\Input\Exception('Value is not present');
+			throw new Exception('Value is not present');
 		}
 
 		return $this->values[$name];
@@ -382,8 +382,8 @@ class Fluent
 	 */
 	public function file($index)
 	{
-		$validator = new \Jyxo\Input\Validator\Upload();
-		$file = new \Jyxo\Input\Upload($index);
+		$validator = new Validator\Upload();
+		$file = new Upload($index);
 		$this
 			->check($file, $index)
 				->validate($validator)

@@ -54,7 +54,7 @@ class Regex extends \Jyxo\Input\Validator\AbstractValidator
 	public function setPattern($pattern)
 	{
 		if (empty($pattern)) {
-			throw new \Jyxo\Input\Validator\Exception('Pattern could not be empty');
+			throw new Exception('Pattern could not be empty');
 		}
 		$this->pattern = (string) $pattern;
 

@@ -175,7 +175,7 @@ class Client
 	 * Runs SVN delete on the given path.
 	 *
 	 * @param array $path Path to be deleted from SVN
-	 * @return \Jyxo\Svn\Status
+	 * @return \Jyxo\Svn\Result
 	 */
 	public function delete(array $path)
 	{
@@ -227,14 +227,14 @@ class Client
 				$shell = new \Jyxo\Shell\Client();
 				$shell->exec($command, $status);
 
-				return new \Jyxo\Svn\Result($action, $shell->getOut(), $status);
+				return new Result($action, $shell->getOut(), $status);
 
 			} catch (\Jyxo\Shell\Exception $e) {
 				throw $e;
 			}
 
 		} catch (\Exception $e) {
-			throw new \Jyxo\Svn\Exception(sprintf('SVN %s failed: %s', $action, $e->getMessage()), 0, $e);
+			throw new Exception(sprintf('SVN %s failed: %s', $action, $e->getMessage()), 0, $e);
 		}
 	}
 

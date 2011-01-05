@@ -70,12 +70,12 @@ class IsTaxId extends \Jyxo\Input\Validator\AbstractValidator
 			}
 
 			// Checks if it is a valid IČ
-			if (\Jyxo\Input\Validator\IsCompanyId::validate($sub)) {
+			if (IsCompanyId::validate($sub)) {
 				return true;
 			}
 
 			// Checks if it is a valid birth number
-			if (\Jyxo\Input\Validator\IsBirthNumber::validate($sub)) {
+			if (IsBirthNumber::validate($sub)) {
 				return true;
 			}
 		}

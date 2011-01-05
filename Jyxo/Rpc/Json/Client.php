@@ -63,7 +63,7 @@ class Client extends \Jyxo\Rpc\Client
 			// Finish profiling
 			$this->profileEnd('JSON', $method, $params, $e->getMessage());
 
-			throw new \Jyxo\Rpc\Json\Exception($e->getMessage(), 0, $e);
+			throw new Exception($e->getMessage(), 0, $e);
 		}
 
 		// Finish profiling
@@ -71,19 +71,19 @@ class Client extends \Jyxo\Rpc\Client
 
 		// Error in response
 		if (!is_array($response) || !isset($response['id'])) {
-			throw new \Jyxo\Rpc\Json\Exception('Invalid response data.');
+			throw new Exception('Invalid response data.');
 		}
 
 		if ($response['id'] != $id) {
-			throw new \Jyxo\Rpc\Json\Exception('Response ID does not correspond to request ID.');
+			throw new Exception('Response ID does not correspond to request ID.');
 		}
 
 		if (isset($response['error'])) {
-			throw new \Jyxo\Rpc\Json\Exception(preg_replace('~\s+~', ' ', $response['error']['message']), $response['error']['code']);
+			throw new Exception(preg_replace('~\s+~', ' ', $response['error']['message']), $response['error']['code']);
 		}
 
 		if (!isset($response['result'])) {
-			throw new \Jyxo\Rpc\Json\Exception('No response data.');
+			throw new Exception('No response data.');
 		}
 
 		return $response;

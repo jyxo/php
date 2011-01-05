@@ -17,7 +17,7 @@ namespace Jyxo;
  * Base class for common string operations.
  *
  * @category Jyxo
- * @package Jyxo
+ * @package Jyxo\String
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Tichý
@@ -41,7 +41,7 @@ class String
 		$length = (int) $length;
 
 		return preg_replace_callback('~[^\s]{' . $length . ',}~', function($matches) use ($length, $etc) {
-			return \Jyxo\String::cut($matches[0], $length, $etc);
+			return String::cut($matches[0], $length, $etc);
 		}, $string);
 	}
 

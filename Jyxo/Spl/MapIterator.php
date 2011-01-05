@@ -35,15 +35,15 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 	/**
 	 * Mapping callback applied to each item.
 	 *
-	 * @var callback|Closure
+	 * @var callback|\Closure
 	 */
 	private $map;
 
 	/**
 	 * Constructor.
 	 *
-	 * @param array|Iterator|IteratorAggregate $data Source data
-	 * @param callback|Closure $map Applied callback or closure
+	 * @param array|\Iterator|\IteratorAggregate $data Source data
+	 * @param callback|\Closure $map Applied callback or closure
 	 * @throws \InvalidArgumentException Invalid source data or callback is not callable
 	 */
 	public function __construct($data, $map)
@@ -158,7 +158,7 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 	}
 
 	/**
-	 * Seeks to defined position. Does NOT throw OutOfBoundsException.
+	 * Seeks to defined position. Does NOT throw \OutOfBoundsException.
 	 *
 	 * @param integer $position New position
 	 */
@@ -170,7 +170,7 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 			} catch (\OutOfBoundsException $e) {
 				// Skipped on purpose, I don't think it's necessary
 				// If you'd like to have this exception throw, remove this try-catch and add to 'else' block
-				// if (!$this->valid()) { throw new OutOfBoundException('Invalid seek position'); };
+				// If (!$this->valid()) { throw new \OutOfBoundException('Invalid seek position'); };
 			}
 		} else {
 			$this->rewind();

@@ -17,7 +17,8 @@ namespace Jyxo\Gettext\Parser;
  * Container for PO file headers.
  *
  * @category Jyxo
- * @package Jyxo\Gettext\Parser
+ * @package Jyxo\Gettext
+ * @subpackage Parser
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Matěj Humpál

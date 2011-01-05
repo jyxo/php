@@ -63,23 +63,23 @@ class Server extends \Jyxo\Rpc\Server
 			$data = file_get_contents('php://input');
 			$data = trim($data);
 			if (empty($data)) {
-				throw new \Jyxo\Rpc\Json\Exception('No data received.', -32700);
+				throw new Exception('No data received.', -32700);
 			}
 			$data = json_decode($data, true);
 
 			// Request decoding error
 			if ($data === null && ($faultCode = json_last_error()) != JSON_ERROR_NONE) {
-				throw new \Jyxo\Rpc\Json\Exception(self::$jsonErrors[$faultCode], $faultCode);
+				throw new Exception(self::$jsonErrors[$faultCode], $faultCode);
 			}
 
 			// Parsing request data error
 			if (empty($data['method']) || !isset($data['id'])) {
-				throw new \Jyxo\Rpc\Json\Exception('Parse error.', 10);
+				throw new Exception('Parse error.', 10);
 			}
 
 			// Non-existent method call
 			if (!in_array($data['method'], $this->methods)) {
-				throw new \Jyxo\Rpc\Json\Exception('Server error. Method not found.', -32601);
+				throw new Exception('Server error. Method not found.', -32601);
 			}
 
 			// Request processing
@@ -87,7 +87,7 @@ class Server extends \Jyxo\Rpc\Server
 			$response = $this->call($data['method'], $params);
 			$response = array('result' => $response, 'id' => $data['id']);
 
-		} catch (\Jyxo\Rpc\Json\Exception $e) {
+		} catch (Exception $e) {
 			$response = array(
 				'error' => array(
 					'message' => $e->getMessage(),

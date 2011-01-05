@@ -70,7 +70,7 @@ class Client extends \Jyxo\Rpc\Client
 			// Finish profiling
 			$this->profileEnd('XML', $method, $params, $e->getMessage());
 
-			throw new \Jyxo\Rpc\Xml\Exception($e->getMessage(), 0, $e);
+			throw new Exception($e->getMessage(), 0, $e);
 		}
 
 		// Finish profiling
@@ -78,7 +78,7 @@ class Client extends \Jyxo\Rpc\Client
 
 		// Error in response
 		if ((is_array($response)) && (isset($response['faultString']))) {
-			throw new \Jyxo\Rpc\Xml\Exception(preg_replace('~\s+~', ' ', $response['faultString']));
+			throw new Exception(preg_replace('~\s+~', ' ', $response['faultString']));
 		}
 
 		return $response;

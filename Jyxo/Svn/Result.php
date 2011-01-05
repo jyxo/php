@@ -369,7 +369,7 @@ class Result implements \Countable, \SeekableIterator
 	{
 		$position = (int) $position;
 		if ($position < 0 || $position > count($this->items)) {
-			throw new \Jyxo\Svn\Exception(sprintf('Illegal index %d', $position));
+			throw new Exception(sprintf('Illegal index %d', $position));
 		}
 		$this->pointer = $position;
 

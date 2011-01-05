@@ -755,7 +755,7 @@ class Time implements \Serializable
 		try {
 			$data = explode(' ', $serialized);
 			if (count($data) != 3) {
-				throw new \Exception('Serialized data have to be in the "Y-m-d H:i:s e" format');
+				throw new \Exception('Serialized data have to be in the "Y-m-d H:i:s TimeZone" format');
 			}
 
 			$this->dateTime = new \DateTime($data[0] . ' ' . $data[1], $this->createTimeZone($data[2]));

@@ -63,7 +63,7 @@ class Util
 
 		// Create the date
 		$date = mktime(date('H', $now), date('i', $now), date('s', $now), $nextMonth, $day, $thisYear);
-		return new \Jyxo\Time\Time($date);
+		return new Time($date);
 	}
 
 	/**

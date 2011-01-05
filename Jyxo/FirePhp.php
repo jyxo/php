@@ -17,7 +17,7 @@ namespace Jyxo;
  * Class for sending information to FirePHP.
  *
  * @category Jyxo
- * @package Jyxo
+ * @package Jyxo\FirePhp
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
@@ -69,7 +69,7 @@ class FirePhp
 	/**
 	 * Is logging enabled.
 	 *
-	 * @var bool
+	 * @var boolean
 	 */
 	private static $enabled = true;
 

@@ -17,7 +17,7 @@ namespace Jyxo;
  * Base exception class used throughout Jyxo libraries.
  *
  * @category Jyxo
- * @package Jyxo
+ * @package Jyxo\ErrorHandling
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík

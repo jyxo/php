@@ -215,7 +215,7 @@ class Client
 		$process = proc_open($cmd, $descriptorSpec, $pipes, !empty($this->cwd) ? $this->cwd : null, !empty($env) ? $env : null);
 
 		if (!is_resource($process)) {
-			throw new \Jyxo\Shell\Exception('Unable to start shell process.');
+			throw new Exception('Unable to start shell process.');
 		}
 
 		$this->out = stream_get_contents($pipes[1]);
@@ -227,7 +227,7 @@ class Client
 		$status = proc_close($process);
 
 		if ($status !== 0) {
-			throw new \Jyxo\Shell\Exception(
+			throw new Exception(
 				'Command ' . $cmd . ' returned code ' . $status
 					. '. Output: ' . $this->error
 			);

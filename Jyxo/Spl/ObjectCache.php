@@ -20,7 +20,7 @@ namespace Jyxo\Spl;
  * // Example code
  * <code>
  * 	$key = 'User_Friends/' . $user->username();
- * 	return \Jyxo\Spl\ObjectCache::get($key) ?: \Jyxo\Spl\ObjectCache::set($key, new User_Friends($this->context, $user));
+ * 	return \Jyxo\Spl\ObjectCache::get($key) ?: \Jyxo\Spl\ObjectCache::set($key, new \User\Friends($this->context, $user));
  * </code>
  *
  * @category Jyxo

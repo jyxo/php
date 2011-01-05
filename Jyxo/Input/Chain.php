@@ -84,7 +84,7 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	/**
 	 * Validation errors.
 	 *
-	 * @var array(string)
+	 * @var array
 	 */
 	private $errors = array();
 

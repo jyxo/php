@@ -198,7 +198,7 @@ abstract class Client
 			$error = curl_error($channel);
 			curl_close($channel);
 
-			throw new \Jyxo\Rpc\Exception($error);
+			throw new Exception($error);
 		}
 
 		// Wrong code
@@ -207,7 +207,7 @@ abstract class Client
 			$error = sprintf('Response error from %s, code %d.', $this->url, $code);
 			curl_close($channel);
 
-			throw new \Jyxo\Rpc\Exception($error);
+			throw new Exception($error);
 		}
 
 		// Close the channel
