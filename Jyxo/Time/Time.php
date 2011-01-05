@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Jyxo Library
+ * Jyxo PHP Library
  *
  * LICENSE
  *
@@ -22,7 +22,7 @@ namespace Jyxo\Time;
  *
  * @category Jyxo
  * @package Jyxo\Time
- * @copyright Copyright (c) 2005-2010 Jyxo, s.r.o.
+ * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  * @author Jan Kolibač
