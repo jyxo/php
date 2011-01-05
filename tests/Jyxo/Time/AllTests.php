@@ -16,7 +16,7 @@ namespace Jyxo\Time;
 require_once __DIR__ . '/../../bootstrap.php';
 
 /**
- * All tests suite for \Jyxo\Time\Time.
+ * All tests suite for \Jyxo\Time.
  *
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
@@ -29,7 +29,7 @@ class AllTests
 	 */
 	public static function main()
 	{
-		PHPUnit_TextUI_TestRunner::run(self::suite());
+		\PHPUnit_TextUI_TestRunner::run(self::suite());
 	}
 
 	/**

@@ -186,7 +186,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	 */
 	public function testClone()
 	{
-		$this->setExpectedException('LogicException');
+		$this->setExpectedException('\LogicException');
 		$clone = clone $this->rpc;
 	}
 
@@ -195,7 +195,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	 */
 	public function testEmptyLogFile()
 	{
-		$this->setExpectedException('InvalidArgumentException');
+		$this->setExpectedException('\InvalidArgumentException');
 		$this->rpc->enableLogging('');
 	}
 
@@ -204,7 +204,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalidLogCallback()
 	{
-		$this->setExpectedException('InvalidArgumentException');
+		$this->setExpectedException('\InvalidArgumentException');
 		$this->rpc->enableLogging('file.log', 'dummy');
 	}
 
@@ -213,7 +213,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	 */
 	public function testRegisterNonExistingFunction()
 	{
-		$this->setExpectedException('InvalidArgumentException');
+		$this->setExpectedException('\InvalidArgumentException');
 		$this->rpc->registerFunc('dummy');
 	}
 
@@ -223,7 +223,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	public function testRegisterNonExistingMethod()
 	{
 		require_once $this->getFilePath('TestMath.php');
-		$this->setExpectedException('InvalidArgumentException');
+		$this->setExpectedException('\InvalidArgumentException');
 		$this->rpc->registerMethod('TestMath', 'dummy');
 	}
 
@@ -233,7 +233,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	public function testRegisterNonPublicMethod()
 	{
 		require_once $this->getFilePath('TestMath.php');
-		$this->setExpectedException('InvalidArgumentException');
+		$this->setExpectedException('\InvalidArgumentException');
 		$this->rpc->registerMethod('TestMath', 'diff');
 	}
 
@@ -242,7 +242,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	 */
 	public function testRegisterMethodInNonExistingClass()
 	{
-		$this->setExpectedException('InvalidArgumentException');
+		$this->setExpectedException('\InvalidArgumentException');
 		$this->rpc->registerMethod('Dummy', 'dummy');
 	}
 
@@ -251,7 +251,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	 */
 	public function testRegisterNonExistingClass()
 	{
-		$this->setExpectedException('InvalidArgumentException');
+		$this->setExpectedException('\InvalidArgumentException');
 		$this->rpc->registerClass('Dummy');
 	}
 

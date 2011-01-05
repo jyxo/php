@@ -16,7 +16,7 @@ namespace Jyxo\Time;
 require_once __DIR__ . '/../../bootstrap.php';
 
 /**
- * Test for the Jyxo_Time_ComposerException class.
+ * Test for the \Jyxo\Time\ComposerException class.
  *
  * @see \Jyxo\Time\ComposerException
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
@@ -33,12 +33,12 @@ class ComposerExceptionTest extends \PHPUnit_Framework_TestCase
 		// All possible codes.
 		$reflection = new \ReflectionClass('\Jyxo\Time\ComposerException');
 		foreach ($reflection->getConstants() as $code) {
-			$exception = new \Jyxo\Time\ComposerException('Test', $code);
+			$exception = new ComposerException('Test', $code);
 			$this->assertEquals($code, $exception->getCode());
 		}
 
 		// Non-existent code
-		$exception = new \Jyxo\Time\ComposerException('Test', 'dummy-code');
-		$this->assertEquals(\Jyxo\Time\ComposerException::UNKNOWN, $exception->getCode());
+		$exception = new ComposerException('Test', 'dummy-code');
+		$this->assertEquals(ComposerException::UNKNOWN, $exception->getCode());
 	}
 }

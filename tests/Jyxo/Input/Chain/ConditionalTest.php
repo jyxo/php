@@ -30,7 +30,7 @@ class ConditionalTest extends \PHPUnit_Framework_TestCase
 	public function testNullCondition()
 	{
 		// No validator -> true for any value
-		$validator = new \Jyxo\Input\Chain\Conditional();
+		$validator = new Conditional();
 		foreach (array('example', 42, array(), new \stdClass(), 1.23, true, false) as $value) {
 			$this->assertTrue($validator->isValid($value));
 		}
@@ -42,7 +42,7 @@ class ConditionalTest extends \PHPUnit_Framework_TestCase
 	public function testCondition()
 	{
 		static $value = 42;
-		$validator = new \Jyxo\Input\Chain\Conditional(new \Jyxo\Input\Validator\IsInt());
+		$validator = new Conditional(new \Jyxo\Input\Validator\IsInt());
 		$validator->addValidator(new \Jyxo\Input\Validator\LessThan($value));
 		$good = array(
 			$value - 1,

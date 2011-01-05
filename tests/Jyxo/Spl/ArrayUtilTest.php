@@ -30,7 +30,7 @@ class ArrayUtilTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testRangeInt()
 	{
-		$range = \Jyxo\Spl\ArrayUtil::range(1, 6, function($current) {
+		$range = ArrayUtil::range(1, 6, function($current) {
 			return $current + 1;
 		});
 
@@ -43,7 +43,7 @@ class ArrayUtilTest extends \PHPUnit_Framework_TestCase
 	public function testRangeCompare()
 	{
 		$called = 0;
-		$range = \Jyxo\Spl\ArrayUtil::range(1, 6, function($current) {
+		$range = ArrayUtil::range(1, 6, function($current) {
 			return $current + 1;
 		}, function ($a, $b) use (&$called) {
 			++$called;
@@ -59,7 +59,7 @@ class ArrayUtilTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testRangeDate()
 	{
-		$range = \Jyxo\Spl\ArrayUtil::range('2010-03-01', '2009-11-01', function($current) {
+		$range = ArrayUtil::range('2010-03-01', '2009-11-01', function($current) {
 			return date('Y-m-d', strtotime('first day of last month', strtotime($current)));
 		});
 

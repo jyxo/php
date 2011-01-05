@@ -33,7 +33,7 @@ class ServerTest extends \Jyxo\Rpc\ServerTestCase
 	 */
 	protected function getServerInstance()
 	{
-		return \Jyxo\Rpc\Xml\Server::getInstance();
+		return Server::getInstance();
 	}
 
 	/**

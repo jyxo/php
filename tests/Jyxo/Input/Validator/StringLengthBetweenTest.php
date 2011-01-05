@@ -45,7 +45,7 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 		foreach ($testcases as $testcase) {
 			list($str, $min, $max) = $testcase;
 
-			$validator = new \Jyxo\Input\Validator\StringLengthBetween($min, $max);
+			$validator = new StringLengthBetween($min, $max);
 			$message = sprintf('Failed validation of "%s" in range(%d, %d)', $str, $min, $max);
 			$this->assertTrue($validator->isValid($str), $message);
 		}
@@ -71,7 +71,7 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 		foreach ($testcases as $testcase) {
 			list($str, $min, $max) = $testcase;
 
-			$validator = new \Jyxo\Input\Validator\StringLengthBetween($min, $max);
+			$validator = new StringLengthBetween($min, $max);
 			$message = sprintf('Passed validation of "%s" in range(%d, %d)', $str, $min, $max);
 			$this->assertFalse($validator->isValid($str), $message);
 		}
@@ -82,8 +82,8 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalidMin()
 	{
-		$this->setExpectedException('InvalidArgumentException');
-		$validator = new \Jyxo\Input\Validator\StringLengthBetween(-1, 5);
+		$this->setExpectedException('\InvalidArgumentException');
+		$validator = new StringLengthBetween(-1, 5);
 	}
 
 	/**
@@ -91,8 +91,8 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalidMax()
 	{
-		$this->setExpectedException('InvalidArgumentException');
-		$validator = new \Jyxo\Input\Validator\StringLengthBetween(0, -6);
+		$this->setExpectedException('\InvalidArgumentException');
+		$validator = new StringLengthBetween(0, -6);
 	}
 
 	/**
@@ -100,8 +100,8 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalidMinMax()
 	{
-		$this->setExpectedException('InvalidArgumentException');
-		$validator = new \Jyxo\Input\Validator\StringLengthBetween(12, 6);
+		$this->setExpectedException('\InvalidArgumentException');
+		$validator = new StringLengthBetween(12, 6);
 	}
 
 	/**
@@ -117,7 +117,7 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 
 		foreach ($testcases as $testcase) {
 			list ($min, $max, $newMin, $newMax) = $testcase;
-			$validator = new \Jyxo\Input\Validator\StringLengthBetween($min, $max);
+			$validator = new StringLengthBetween($min, $max);
 
 			$this->assertEquals($min, $validator->getMin(), 'minimum not set');
 			$this->assertEquals($max, $validator->getMax(), 'maximum not set');
@@ -133,8 +133,8 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalidSetMin()
 	{
-		$this->setExpectedException('InvalidArgumentException');
-		$validator = new \Jyxo\Input\Validator\StringLengthBetween(2, 6);
+		$this->setExpectedException('\InvalidArgumentException');
+		$validator = new StringLengthBetween(2, 6);
 		$validator->setMin(12);
 	}
 
@@ -143,8 +143,8 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalidSetMax()
 	{
-		$this->setExpectedException('InvalidArgumentException');
-		$validator = new \Jyxo\Input\Validator\StringLengthBetween(12, 60);
+		$this->setExpectedException('\InvalidArgumentException');
+		$validator = new StringLengthBetween(12, 60);
 		$validator->setMax(4);
 	}
 }

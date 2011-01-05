@@ -29,7 +29,7 @@ class AllTests
 	 */
 	public static function main()
 	{
-		PHPUnit_TextUI_TestRunner::run(self::suite());
+		\PHPUnit_TextUI_TestRunner::run(self::suite());
 	}
 
 	/**

@@ -33,7 +33,7 @@ class CountableLimitIteratorTest extends \PHPUnit_Framework_TestCase
 		$data = range(0, 10);
 		$expected = range(2, 4);
 
-		$iterator = new \Jyxo\Spl\CountableLimitIterator(new \ArrayIterator($data), 2, 3);
+		$iterator = new CountableLimitIterator(new \ArrayIterator($data), 2, 3);
 		$result = iterator_to_array($iterator);
 
 		$this->assertEquals(array_values($expected), array_values($result));
@@ -47,7 +47,7 @@ class CountableLimitIteratorTest extends \PHPUnit_Framework_TestCase
 		$data = range(0, 10);
 		$expected = range(2, 4);
 
-		$iterator = new \Jyxo\Spl\CountableLimitIterator(new \ArrayIterator($data), 2, 3);
+		$iterator = new CountableLimitIterator(new \ArrayIterator($data), 2, 3);
 		$this->assertEquals(count($data), count($iterator));
 	}
 
@@ -59,7 +59,7 @@ class CountableLimitIteratorTest extends \PHPUnit_Framework_TestCase
 		$data = range(0, 10);
 		$expected = range(2, 4);
 
-		$iterator = new \Jyxo\Spl\CountableLimitIterator(new \ArrayIterator($data), 2, 3, \Jyxo\Spl\CountableLimitIterator::MODE_LIMIT);
+		$iterator = new CountableLimitIterator(new \ArrayIterator($data), 2, 3, CountableLimitIterator::MODE_LIMIT);
 
 		$this->assertEquals(3, count($iterator));
 		$result = iterator_to_array($iterator);
@@ -71,7 +71,7 @@ class CountableLimitIteratorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalidIterator()
 	{
-		$this->setExpectedException('InvalidArgumentException');
-		$iterator = new \Jyxo\Spl\CountableLimitIterator(new \EmptyIterator());
+		$this->setExpectedException('\InvalidArgumentException');
+		$iterator = new CountableLimitIterator(new \EmptyIterator());
 	}
 }

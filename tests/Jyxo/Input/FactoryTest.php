@@ -36,7 +36,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->factory = new \Jyxo\Input\Factory();
+		$this->factory = new Factory();
 	}
 
 	/**
@@ -52,8 +52,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testNoParam()
 	{
-		$validator = new \Jyxo\Input\Validator\IsInt();
-		$filter = new \Jyxo\Input\Filter\Trim();
+		$validator = new Validator\IsInt();
+		$filter = new Filter\Trim();
 
 		$this->assertEquals($validator, $this->factory->getValidatorByName('isInt'));
 		$this->assertEquals($filter, $this->factory->getFilterByName('trim'));
@@ -64,7 +64,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testSingleParam()
 	{
-		$validator = new \Jyxo\Input\Validator\StringLengthGreaterThan(42);
+		$validator = new Validator\StringLengthGreaterThan(42);
 		$this->assertEquals($validator, $this->factory->getValidatorByName('stringLengthGreaterThan', 42));
 	}
 
@@ -73,7 +73,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testDoubleParam()
 	{
-		$validator = new \Jyxo\Input\Validator\StringLengthBetween(24, 42);
+		$validator = new Validator\StringLengthBetween(24, 42);
 		$this->assertEquals($validator, $this->factory->getValidatorByName('stringLengthBetween', array(24, 42)));
 	}
 

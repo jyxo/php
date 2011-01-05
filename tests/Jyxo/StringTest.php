@@ -18,10 +18,11 @@ require_once __DIR__ . '/../bootstrap.php';
 /**
  * String processing test.
  *
- * @author Jakub Tománek
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
+ * @author Jakub Tománek
  * @author Jaroslav Hanslík
+ * @author Ondřej Nešpor
  */
 class StringTest extends \PHPUnit_Framework_TestCase
 {
@@ -31,32 +32,55 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	public function testCut()
 	{
 		// Trim on space
-		$this->assertEquals('žluťoučký kůň...', $this->checkString('žluťoučký kůň příšerně úpěl ďábelské ódy'));
+		$this->assertEquals('žluťoučký kůň...', $this->checkStringCut('žluťoučký kůň příšerně úpěl ďábelské ódy'));
 		// Trim on period
-		$this->assertEquals('žluťoučký kůň...', $this->checkString('žluťoučký kůň.Příšerně úpěl ďábelské ódy'));
+		$this->assertEquals('žluťoučký kůň...', $this->checkStringCut('žluťoučký kůň.Příšerně úpěl ďábelské ódy'));
 		// Trim on period and space
-		$this->assertEquals('žluťoučký kůň...', $this->checkString('žluťoučký kůň. Příšerně úpěl ďábelské ódy'));
+		$this->assertEquals('žluťoučký kůň...', $this->checkStringCut('žluťoučký kůň. Příšerně úpěl ďábelské ódy'));
 		// Trim on comma
-		$this->assertEquals('žluťoučký kůň...', $this->checkString('žluťoučký kůň,příšerně úpěl ďábelské ódy'));
+		$this->assertEquals('žluťoučký kůň...', $this->checkStringCut('žluťoučký kůň,příšerně úpěl ďábelské ódy'));
 		// Trim on semicolon
-		$this->assertEquals('žluťoučký kůň...', $this->checkString('žluťoučký kůň;příšerně úpěl ďábelské ódy'));
+		$this->assertEquals('žluťoučký kůň...', $this->checkStringCut('žluťoučký kůň;příšerně úpěl ďábelské ódy'));
 
 		// Word boundary just at the end
-		$this->assertEquals('abcdefghijklm...', $this->checkString('abcdefghijklmno pqrst'));
-		$this->assertEquals('abcdefghijklm...', $this->checkString('abcdefghijklmn opqrst'));
-		$this->assertEquals('abcdefghijklm...', $this->checkString('abcdefghijklm nopqrst'));
+		$this->assertEquals('abcdefghijklm...', $this->checkStringCut('abcdefghijklmno pqrst'));
+		$this->assertEquals('abcdefghijklm...', $this->checkStringCut('abcdefghijklmn opqrst'));
+		$this->assertEquals('abcdefghijklm...', $this->checkStringCut('abcdefghijklm nopqrst'));
 
 		// No word boundaries
-		$this->assertEquals('abcdefghijklm...', $this->checkString('abcdefghijklmnopqrstuvwxyz'));
+		$this->assertEquals('abcdefghijklm...', $this->checkStringCut('abcdefghijklmnopqrstuvwxyz'));
 
 		// Etc as HTML entity
-		$this->assertEquals('žluťoučký kůň&hellip;', $this->checkString('žluťoučký kůň příšerně úpěl ďábelské ódy', 14, '&hellip;'));
+		$this->assertEquals('žluťoučký kůň&hellip;', $this->checkStringCut('žluťoučký kůň příšerně úpěl ďábelské ódy', 14, '&hellip;'));
 
 		// Short
 		$shorty = '1234567890';
-		$this->assertEquals($shorty, $this->checkString($shorty));
-		$this->assertEquals('12...', $this->checkString($shorty, 5));
+		$this->assertEquals($shorty, $this->checkStringCut($shorty));
+		$this->assertEquals('12...', $this->checkStringCut($shorty, 5));
 
+	}
+
+	/**
+	 * Tests word trimming.
+	 */
+	public function testCutWords()
+	{
+		$this->assertEquals('žluťoučký kůň příšerně úpěl ďábelské ódy', $this->checkStringWordCut('žluťoučký kůň příšerně úpěl ďábelské ódy', 10));
+		$this->assertEquals('žluťo... kůň příšerně úpěl ďábelské ódy', $this->checkStringWordCut('žluťoučký kůň příšerně úpěl ďábelské ódy', 8));
+		$this->assertEquals('žl... kůň př... úpěl ďá... ódy', $this->checkStringWordCut('žluťoučký kůň příšerně úpěl ďábelské ódy', 5));
+
+		// Word boundary just at the end
+		$this->assertEquals('abcdefghijk... pqrst', $this->checkStringWordCut('abcdefghijklmno pqrst', 14));
+		$this->assertEquals('abcdefghijklmn opqrst', $this->checkStringWordCut('abcdefghijklmn opqrst', 14));
+		$this->assertEquals('abcdefghijklm nopqrst', $this->checkStringWordCut('abcdefghijklm nopqrst', 14));
+
+		// Etc as HTML entity
+		$this->assertEquals('žluťouč&hellip; kůň příšerně úpěl ďábelské ódy', $this->checkStringWordCut('žluťoučký kůň příšerně úpěl ďábelské ódy', 8, '&hellip;'));
+
+		// Short
+		$shorty = '12345678';
+		$this->assertEquals($shorty, $this->checkStringWordCut($shorty));
+		$this->assertEquals('12...', $this->checkStringWordCut($shorty, 5));
 	}
 
 	/**
@@ -67,15 +91,47 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	 * @param string $etc "Etc" definition
 	 * @return string
 	 */
-	private function checkString($string, $max = 16, $etc = '...')
+	private function checkStringWordCut($string, $max = 8, $etc = '...')
 	{
-		$cut = \Jyxo\String::cut($string, $max, $etc);
+		$cut = String::cutWords($string, $max, $etc);
+
+		// &hellip; has length of 1
+		$cut2 = strtr(html_entity_decode($cut), array('&hellip;' => '.'));
+
+		$words = preg_split('~\s+~', $string);
+		$trimmedWords = preg_split('~\s+~', $cut2);
+
+		$this->assertEquals(count($trimmedWords), count($words));
+
+		foreach ($words as $i => $word) {
+			if (mb_strlen($word) <= $max) {
+				$this->assertEquals($word, $trimmedWords[$i], 'Word trimmed even though it was short enough');
+			} else {
+				$this->assertLessThanOrEqual($max, mb_strlen($trimmedWords[$i]));
+				$this->assertRegExp('~' . preg_quote($etc == '&hellip;' ? '.' : $etc) . '$~', $trimmedWords[$i], 'String does not end with ' . $etc);
+			}
+		}
+
+		return $cut;
+	}
+
+	/**
+	 * Checks one string.
+	 *
+	 * @param string $string Input string
+	 * @param integer $max Max length
+	 * @param string $etc "Etc" definition
+	 * @return string
+	 */
+	private function checkStringCut($string, $max = 16, $etc = '...')
+	{
+		$cut = String::cut($string, $max, $etc);
 		// &hellip; has length of 1
 		$cutLength = mb_strlen(strtr(html_entity_decode($cut), array('&hellip;' => '.')));
 		$this->assertLessThanOrEqual($max, $cutLength, 'String is longer');
 
 		if (mb_strlen($string) <= $max) {
-			$this->assertEquals($string, $cut, 'String cutted even though it was shorter than enough');
+			$this->assertEquals($string, $cut, 'String trimmed even though it was short enough');
 		} else {
 			$this->assertRegExp('~' . preg_quote($etc) . '$~', $cut, 'String does not end with ' . $etc);
 		}
@@ -87,16 +143,16 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testConvert()
 	{
-		$this->assertEquals('abc', \Jyxo\String::utf2iso('abc'));
-		$this->assertNotEquals('žluťoučký kůň příšerně úpěl ďábelské ódy', \Jyxo\String::utf2iso('žluťoučký kůň příšerně úpěl ďábelské ódy'));
-		$this->assertRegExp('~^[a-z0-9]([a-z0-9\-]*[a-z0-9])?$~', \Jyxo\String::utf2ident('žluťoučký kůň příšerně úpěl ďábelské ódy'));
-		$this->assertEquals('zlutoucky kun priserne upel dabelske ody', \Jyxo\String::utf2ascii('žluťoučký kůň příšerně úpěl ďábelské ódy'));
-		$this->assertEquals('zlutoucky kun priserne upel dabelske ody', \Jyxo\String::win2ascii(file_get_contents(DIR_FILES . '/string/cp1250.txt')));
-		$this->assertEquals('zlutoucky kun priserne upel dabelske ody', \Jyxo\String::iso2ascii(file_get_contents(DIR_FILES . '/string/iso-8859-2.txt')));
-		$this->assertEquals(file_get_contents(DIR_FILES . '/string/iso-8859-2.txt'), \Jyxo\String::utf2iso('žluťoučký kůň příšerně úpěl ďábelské ódy'));
-		$this->assertEquals('zlutoucky-kun-priserne-upel-dabelske-ody', \Jyxo\String::utf2ident('?žluťoučký  +  kůň příšerně úpěl ďábelské ódy...'));
-		$this->assertEquals('Rossija', \Jyxo\String::russian2ascii('Россия'));
-		$this->assertEquals('Gosudarstvennyj gimn Rossijskoj Federacii', \Jyxo\String::russian2ascii('Государственный гимн Российской Федерации'));
+		$this->assertEquals('abc', String::utf2iso('abc'));
+		$this->assertNotEquals('žluťoučký kůň příšerně úpěl ďábelské ódy', String::utf2iso('žluťoučký kůň příšerně úpěl ďábelské ódy'));
+		$this->assertRegExp('~^[a-z0-9]([a-z0-9\-]*[a-z0-9])?$~', String::utf2ident('žluťoučký kůň příšerně úpěl ďábelské ódy'));
+		$this->assertEquals('zlutoucky kun priserne upel dabelske ody', String::utf2ascii('žluťoučký kůň příšerně úpěl ďábelské ódy'));
+		$this->assertEquals('zlutoucky kun priserne upel dabelske ody', String::win2ascii(file_get_contents(DIR_FILES . '/string/cp1250.txt')));
+		$this->assertEquals('zlutoucky kun priserne upel dabelske ody', String::iso2ascii(file_get_contents(DIR_FILES . '/string/iso-8859-2.txt')));
+		$this->assertEquals(file_get_contents(DIR_FILES . '/string/iso-8859-2.txt'), String::utf2iso('žluťoučký kůň příšerně úpěl ďábelské ódy'));
+		$this->assertEquals('zlutoucky-kun-priserne-upel-dabelske-ody', String::utf2ident('?žluťoučký  +  kůň příšerně úpěl ďábelské ódy...'));
+		$this->assertEquals('Rossija', String::russian2ascii('Россия'));
+		$this->assertEquals('Gosudarstvennyj gimn Rossijskoj Federacii', String::russian2ascii('Государственный гимн Российской Федерации'));
 	}
 
 	/**
@@ -104,8 +160,8 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCrc()
 	{
-		$this->assertSame(-662733300, \Jyxo\String::crc('test'));
-		$this->assertSame(-33591962, \Jyxo\String::crc('žluťoučký kůň příšerně úpěl ďábelské ódy'));
+		$this->assertSame(-662733300, String::crc('test'));
+		$this->assertSame(-33591962, String::crc('žluťoučký kůň příšerně úpěl ďábelské ódy'));
 	}
 
 	/**
@@ -114,7 +170,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	public function testRandom()
 	{
 		for ($i = 1; $i <= 32; $i++) {
-			$random = \Jyxo\String::random($i);
+			$random = String::random($i);
 			$this->assertEquals($i, strlen($random));
 			$this->assertRegExp('~^[a-z0-9]+$~i', $random);
 		}
@@ -125,10 +181,10 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCheckUtf()
 	{
-		$this->assertTrue(\Jyxo\String::checkUtf('žluťoučký kůň pěl ďábelské ódy'));
-		$this->assertTrue(\Jyxo\String::checkUtf('Государственный гимн Российской Федерации'));
-		$this->assertFalse(\Jyxo\String::checkUtf(file_get_contents(DIR_FILES . '/string/cp1250.txt')));
-		$this->assertFalse(\Jyxo\String::checkUtf(file_get_contents(DIR_FILES . '/string/iso-8859-2.txt')));
+		$this->assertTrue(String::checkUtf('žluťoučký kůň pěl ďábelské ódy'));
+		$this->assertTrue(String::checkUtf('Государственный гимн Российской Федерации'));
+		$this->assertFalse(String::checkUtf(file_get_contents(DIR_FILES . '/string/cp1250.txt')));
+		$this->assertFalse(String::checkUtf(file_get_contents(DIR_FILES . '/string/iso-8859-2.txt')));
 	}
 
 	/**
@@ -136,12 +192,12 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testFixUtf()
 	{
-		$this->assertEquals('žluťoučký kůň pěl ďábelské ódy', \Jyxo\String::fixUtf('žluťoučký kůň pěl ďábelské ódy'));
-		$this->assertEquals('Государственный гимн Российской Федерации', \Jyxo\String::fixUtf('Государственный гимн Российской Федерации'));
+		$this->assertEquals('žluťoučký kůň pěl ďábelské ódy', String::fixUtf('žluťoučký kůň pěl ďábelské ódy'));
+		$this->assertEquals('Государственный гимн Российской Федерации', String::fixUtf('Государственный гимн Российской Федерации'));
 
 		$expected = 'glibc' === ICONV_IMPL ? '' : 'luouk k pern pl belsk ';
-		$this->assertEquals($expected, \Jyxo\String::fixUtf(file_get_contents(DIR_FILES . '/string/cp1250.txt')));
-		$this->assertEquals($expected, \Jyxo\String::fixUtf(file_get_contents(DIR_FILES . '/string/iso-8859-2.txt')));
+		$this->assertEquals($expected, String::fixUtf(file_get_contents(DIR_FILES . '/string/cp1250.txt')));
+		$this->assertEquals($expected, String::fixUtf(file_get_contents(DIR_FILES . '/string/iso-8859-2.txt')));
 	}
 
 	/**
@@ -159,16 +215,16 @@ class StringTest extends \PHPUnit_Framework_TestCase
 
 		// No line ending given
 		foreach ($tests as $test) {
-			$this->assertEquals("test\nžlutý\n", \Jyxo\String::fixLineEnding($test));
-			$this->assertNotEquals($test, \Jyxo\String::fixLineEnding($test));
+			$this->assertEquals("test\nžlutý\n", String::fixLineEnding($test));
+			$this->assertNotEquals($test, String::fixLineEnding($test));
 		}
-		$this->assertEquals("test\nžlutý\n", \Jyxo\String::fixLineEnding("test\nžlutý\n"));
+		$this->assertEquals("test\nžlutý\n", String::fixLineEnding("test\nžlutý\n"));
 
 		// Line ending given
 		foreach ($tests as $test) {
 			foreach (array("\n", "\r", "\r\n") as $ending) {
-				$this->assertEquals(sprintf('test%1$sžlutý%1$s', $ending), \Jyxo\String::fixLineEnding($test, $ending));
-				$this->assertNotEquals("test\nžlutý\r\n", \Jyxo\String::fixLineEnding($test, $ending));
+				$this->assertEquals(sprintf('test%1$sžlutý%1$s', $ending), String::fixLineEnding($test, $ending));
+				$this->assertNotEquals("test\nžlutý\r\n", String::fixLineEnding($test, $ending));
 			}
 		}
 	}
@@ -180,8 +236,8 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	{
 		$email = 'example@example.com';
 
-		$this->assertEquals('example&#64;example.com', \Jyxo\String::obfuscateEmail($email));
-		$this->assertEquals('example&#64;<!---->example.com', \Jyxo\String::obfuscateEmail($email, true));
+		$this->assertEquals('example&#64;example.com', String::obfuscateEmail($email));
+		$this->assertEquals('example&#64;<!---->example.com', String::obfuscateEmail($email, true));
 	}
 
 	/**
@@ -189,8 +245,8 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testLcfirst()
 	{
-		$this->assertEquals('žlutý kůň', \Jyxo\String::lcfirst('Žlutý kůň'));
-		$this->assertEquals('žlutý kůň', \Jyxo\String::lcfirst('žlutý kůň'));
+		$this->assertEquals('žlutý kůň', String::lcfirst('Žlutý kůň'));
+		$this->assertEquals('žlutý kůň', String::lcfirst('žlutý kůň'));
 	}
 
 	/**
@@ -198,12 +254,12 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testEscape()
 	{
-		$this->assertEquals('test &amp; test', \Jyxo\String::escape('test & test'));
-		$this->assertEquals('&quot;test&quot; &amp; &#039;test&#039;', \Jyxo\String::escape('"test" & \'test\''));
-		$this->assertEquals('&quot;test&quot; &amp; \'test\'', \Jyxo\String::escape('"test" & \'test\'', ENT_COMPAT));
-		$this->assertEquals('"test" &amp; \'test\'', \Jyxo\String::escape('"test" & \'test\'', ENT_NOQUOTES));
-		$this->assertEquals('test &amp; test', \Jyxo\String::escape('test &amp; test'));
-		$this->assertEquals('test &amp;amp; test', \Jyxo\String::escape('test &amp; test', ENT_QUOTES, true));
+		$this->assertEquals('test &amp; test', String::escape('test & test'));
+		$this->assertEquals('&quot;test&quot; &amp; &#039;test&#039;', String::escape('"test" & \'test\''));
+		$this->assertEquals('&quot;test&quot; &amp; \'test\'', String::escape('"test" & \'test\'', ENT_COMPAT));
+		$this->assertEquals('"test" &amp; \'test\'', String::escape('"test" & \'test\'', ENT_NOQUOTES));
+		$this->assertEquals('test &amp; test', String::escape('test &amp; test'));
+		$this->assertEquals('test &amp;amp; test', String::escape('test &amp; test', ENT_QUOTES, true));
 	}
 
 	/**
@@ -211,12 +267,12 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testFormatBytes()
 	{
-		$this->assertEquals('11 B', \Jyxo\String::formatBytes(10.5));
-		$this->assertEquals('11 B', \Jyxo\String::formatBytes(10.5, '.'));
-		$this->assertEquals('11 B', \Jyxo\String::formatBytes(10.5, '.', ','));
+		$this->assertEquals('11 B', String::formatBytes(10.5));
+		$this->assertEquals('11 B', String::formatBytes(10.5, '.'));
+		$this->assertEquals('11 B', String::formatBytes(10.5, '.', ','));
 
-		$this->assertEquals('1,0 GB', \Jyxo\String::formatBytes(1073741824));
-		$this->assertEquals('1.0 GB', \Jyxo\String::formatBytes(1073741824, '.'));
-		$this->assertEquals('10,240.0 PB', \Jyxo\String::formatBytes(11805916207174113034240, '.', ','));
+		$this->assertEquals('1,0 GB', String::formatBytes(1073741824));
+		$this->assertEquals('1.0 GB', String::formatBytes(1073741824, '.'));
+		$this->assertEquals('10,240.0 PB', String::formatBytes(11805916207174113034240, '.', ','));
 	}
 }

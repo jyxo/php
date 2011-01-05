@@ -54,7 +54,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			true
 		);
 
-		$this->executeTests(new \Jyxo\Input\Validator\IsArray(), $good, $wrong);
+		$this->executeTests(new Validator\IsArray(), $good, $wrong);
 	}
 
 	/**
@@ -77,7 +77,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			10
 		);
 
-		$this->executeTests(new \Jyxo\Input\Validator\IsBankAccountNumber(), $good, $wrong);
+		$this->executeTests(new Validator\IsBankAccountNumber(), $good, $wrong);
 	}
 
 	/**
@@ -106,7 +106,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			10
 		);
 
-		$this->executeTests(new \Jyxo\Input\Validator\IsBirthNumber(), $good, $wrong);
+		$this->executeTests(new Validator\IsBirthNumber(), $good, $wrong);
 	}
 
 	/**
@@ -128,7 +128,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			10
 		);
 
-		$this->executeTests(new \Jyxo\Input\Validator\IsCompanyId(), $good, $wrong);
+		$this->executeTests(new Validator\IsCompanyId(), $good, $wrong);
 	}
 
 	/**
@@ -136,7 +136,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testIsCountryCode()
 	{
-		$good = $this->getGoodValues(\Jyxo\Input\Validator\IsCountryCode::getCountries());
+		$good = $this->getGoodValues(Validator\IsCountryCode::getCountries());
 		$wrong = array(
 			'A',
 			'B',
@@ -144,7 +144,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			0
 		);
 
-		$this->executeTests(new \Jyxo\Input\Validator\IsCountryCode(), $good, $wrong);
+		$this->executeTests(new Validator\IsCountryCode(), $good, $wrong);
 	}
 
 	/**
@@ -162,7 +162,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'2009-02-29'
 		);
 
-		$this->executeTests(new \Jyxo\Input\Validator\IsDate(), $good, $wrong);
+		$this->executeTests(new Validator\IsDate(), $good, $wrong);
 	}
 
 
@@ -184,7 +184,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'2009-02-28 23:59:60'
 		);
 
-		$this->executeTests(new \Jyxo\Input\Validator\IsDateTime(), $good, $wrong);
+		$this->executeTests(new Validator\IsDateTime(), $good, $wrong);
 	}
 
 	/**
@@ -208,7 +208,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'test..test@jyxo.com'
 		);
 
-		$this->executeTests(new \Jyxo\Input\Validator\IsEmail(), $good, $wrong);
+		$this->executeTests(new Validator\IsEmail(), $good, $wrong);
 	}
 
 	/**
@@ -234,7 +234,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'SK3208000000000000007894'
 		);
 
-		$this->executeTests(new \Jyxo\Input\Validator\IsIban(), $good, $wrong);
+		$this->executeTests(new Validator\IsIban(), $good, $wrong);
 	}
 
 	/**
@@ -245,7 +245,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 		$good = array('1', 1, '0', 0, '12345');
 		$wrong = array('0xFF', '+0123.45e6');
 
-		$this->executeTests(new \Jyxo\Input\Validator\IsInt(), $good, $wrong);
+		$this->executeTests(new Validator\IsInt(), $good, $wrong);
 	}
 
 	/**
@@ -264,7 +264,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 		);
 		$wrong = array('999.999.999.999');
 
-		$this->executeTests(new \Jyxo\Input\Validator\IsIpV4(), $good, $wrong);
+		$this->executeTests(new Validator\IsIpV4(), $good, $wrong);
 	}
 
 	/**
@@ -290,7 +290,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'2001:0xx8:0:0:0:0:1428:57yy'
 		);
 
-		$this->executeTests(new \Jyxo\Input\Validator\IsIpV6(), $good, $wrong);
+		$this->executeTests(new Validator\IsIpV6(), $good, $wrong);
 	}
 
 	/**
@@ -301,7 +301,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 		$good = array('1', 1, '0', 0, '42', '1e4', 9.1, '9.1', '+0123.45e6', '-12.2e-6', '0xFF', 0xFF);
 		$wrong = array('not numeric', array(), '123a4', '9,1', '0xBW');
 
-		$this->executeTests(new \Jyxo\Input\Validator\IsNumeric(), $good, $wrong);
+		$this->executeTests(new Validator\IsNumeric(), $good, $wrong);
 	}
 
 	/**
@@ -329,7 +329,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'0420123456789'
 		);
 
-		$this->executeTests(new \Jyxo\Input\Validator\IsPhone(), $good, $wrong);
+		$this->executeTests(new Validator\IsPhone(), $good, $wrong);
 	}
 
 	/**
@@ -347,7 +347,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'CZ 8405011328'
 		);
 
-		$this->executeTests(new \Jyxo\Input\Validator\IsTaxId(), $good, $wrong);
+		$this->executeTests(new Validator\IsTaxId(), $good, $wrong);
 	}
 
 	/**
@@ -388,7 +388,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'http://domain._abc.com'
 		);
 
-		$this->executeTests(new \Jyxo\Input\Validator\IsUrl(), $good, $wrong);
+		$this->executeTests(new Validator\IsUrl(), $good, $wrong);
 	}
 
 	/**
@@ -405,8 +405,9 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'1400'
 		);
 
-		$this->executeTests(new \Jyxo\Input\Validator\IsZipCode(), $good, $wrong);
+		$this->executeTests(new Validator\IsZipCode(), $good, $wrong);
 	}
+
 
 	/**
 	 * Tests LessThan validator.
@@ -424,7 +425,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'102'
 		);
 
-		$validator = new \Jyxo\Input\Validator\LessThan(100);
+		$validator = new Validator\LessThan(100);
 		$this->executeTests($validator, $good, $wrong);
 		$this->assertEquals(100, $validator->getMax());
 	}
@@ -446,7 +447,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			null
 		);
 
-		$this->executeTests(new \Jyxo\Input\Validator\NotEmpty(), $good, $wrong);
+		$this->executeTests(new Validator\NotEmpty(), $good, $wrong);
 	}
 
 	/**
@@ -467,7 +468,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 		);
 		$pattern = '~^\w+$~i';
 
-		$validator = new \Jyxo\Input\Validator\Regex($pattern);
+		$validator = new Validator\Regex($pattern);
 		$this->executeTests($validator, $good, $wrong);
 		$this->assertEquals($pattern, $validator->getPattern());
 
@@ -490,15 +491,16 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 		);
 		$length = 10;
 
-		$validator = new \Jyxo\Input\Validator\StringLengthGreaterThan($length);
+		$validator = new Validator\StringLengthGreaterThan($length);
 		$this->executeTests($validator, $good, $wrong);
 		$this->assertEquals($length, $validator->getMin());
 
 		try {
 			$validator->setMin(-10);
 			$this->fail('Expected exception \Jyxo\Input\Validator\Exception.');
-		} catch (\InvalidArgumentException $e) {
-			// An expected exception - length must not be zero or negative
+		} catch (\Exception $e) {
+			// Correctly thrown exception
+			$this->assertInstanceOf('\InvalidArgumentException', $e);
 		}
 	}
 
@@ -517,15 +519,16 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 		);
 		$length = 10;
 
-		$validator = new \Jyxo\Input\Validator\StringLengthLessThan($length);
+		$validator = new Validator\StringLengthLessThan($length);
 		$this->executeTests($validator, $good, $wrong);
 		$this->assertEquals($length, $validator->getMax());
 
 		try {
 			$validator->setMax(-10);
 			$this->fail('Expected exception \Jyxo\Input\Validator\Exception.');
-		} catch (\InvalidArgumentException $e) {
-			// An expected exception - length must not be zero or negative
+		} catch (\Exception $e) {
+			// Correctly thrown exception
+			$this->assertInstanceOf('\InvalidArgumentException', $e);
 		}
 	}
 
@@ -535,8 +538,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	public function testCallStatic()
 	{
 		static $value = 42;
-		$this->assertTrue(\Jyxo\Input\Validator::isInt($value));
-		$this->assertTrue(\Jyxo\Input\Validator::lessThan($value, $value * 2));
+		$this->assertTrue(Validator::isInt($value));
+		$this->assertTrue(Validator::lessThan($value, $value * 2));
 
 		// Tests storing in cache - the first on in cached, the second one isn't
 		// because it had additional parameters that had been added to the cache ID
@@ -576,7 +579,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	private function getGoodValues($good)
 	{
-		$this->assertType('array', $good, 'Variable is not an array.');
+		$this->assertInternalType('array', $good, 'Variable is not an array.');
 		// Adds values again - in reversed order
 		$good = array_merge($good, array_reverse($good));
 		$count = count($good);

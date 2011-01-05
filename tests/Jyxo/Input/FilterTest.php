@@ -46,7 +46,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testTrim()
 	{
-		$filter = new \Jyxo\Input\Filter\Trim();
+		$filter = new Filter\Trim();
 
 		$this->filterTest($filter, '  test  ', 'test');
 
@@ -65,7 +65,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testLowerCase()
 	{
-		$filter = new \Jyxo\Input\Filter\LowerCase();
+		$filter = new Filter\LowerCase();
 
 		$this->filterTest($filter, 'tESt', 'test');
 
@@ -100,7 +100,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 			)
 		);
 
-		$filter = new \Jyxo\Input\Filter\SanitizeUrl();
+		$filter = new Filter\SanitizeUrl();
 		foreach ($tests as $test) {
 			$result = $filter->filter($test[1]);
 			$this->assertEquals(
@@ -110,7 +110,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$actual = 'www.jyxo.cz';
-		$result = \Jyxo\Input\Filter\SanitizeUrl::filtrate($actual);
+		$result = Filter\SanitizeUrl::filtrate($actual);
 		$this->assertEquals('http://www.jyxo.cz', $result);
 	}
 

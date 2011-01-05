@@ -16,7 +16,7 @@ namespace Jyxo\Time;
 require_once __DIR__ . '/../../bootstrap.php';
 
 /**
- * Tests for the Jyxo_Time_Composer class.
+ * Tests for the \Jyxo\Time\Composer class.
  *
  * @see \Jyxo\Time\Composer
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
@@ -30,7 +30,7 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalidDates()
 	{
-		$composer = new \Jyxo\Time\Composer();
+		$composer = new Composer();
 
 		// Invalid date/time parts
 		$units = array(
@@ -45,7 +45,8 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 			foreach ($tests as $test) {
 				try {
 					$composer->{'set' . ucfirst($unit)}($test);
-				} catch (\Jyxo\Time\ComposerException $e) {
+				} catch (\Exception $e) {
+					$this->assertInstanceOf('\Jyxo\Time\ComposerException', $e);
 					$this->assertSame(
 						constant('\Jyxo\Time\ComposerException::' . strtoupper($unit)),
 						$e->getCode(),
@@ -58,8 +59,9 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 		// Incomplete date
 		try {
 			$date = $composer->getTime();
-		} catch (\Jyxo\Time\ComposerException $e) {
-			$this->assertSame(\Jyxo\Time\ComposerException::NOT_COMPLETE, $e->getCode());
+		} catch (\Exception $e) {
+			$this->assertInstanceOf('\Jyxo\Time\ComposerException', $e);
+			$this->assertSame(ComposerException::NOT_COMPLETE, $e->getCode());
 		}
 
 		// Invalid dates
@@ -78,9 +80,10 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 					->setMonth($month)
 					->setYear($year);
 				$time = $composer->getTime();
-			} catch (\Jyxo\Time\ComposerException $e) {
+			} catch (\Exception $e) {
+				$this->assertInstanceOf('\Jyxo\Time\ComposerException', $e);
 				$this->assertSame(
-					\Jyxo\Time\ComposerException::INVALID,
+					ComposerException::INVALID,
 					$e->getCode(),
 					sprintf('Failed test for %s.', $test)
 				);
@@ -93,7 +96,7 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testValidDates()
 	{
-		$composer = new \Jyxo\Time\Composer();
+		$composer = new Composer();
 
 		$tests = array(
 			'2002-04-30 00:00:00',
@@ -113,7 +116,7 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 				->setSecond($matches[6]);
 			$time = $composer->getTime();
 			$this->assertEquals(
-				new \Jyxo\Time\Time($test),
+				new Time($test),
 				$time,
 				sprintf('Failed test for %s.', $test)
 			);

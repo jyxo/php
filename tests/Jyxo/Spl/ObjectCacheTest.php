@@ -46,7 +46,7 @@ class ObjectCacheTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->cache = \Jyxo\Spl\ObjectCache::getInstance();
+		$this->cache = ObjectCache::getInstance();
 	}
 
 	/**
@@ -63,7 +63,7 @@ class ObjectCacheTest extends \PHPUnit_Framework_TestCase
 	public function testGetNull()
 	{
 		$this->assertNull($this->cache->{self::CACHE_KEY});
-		$this->assertNull(\Jyxo\Spl\ObjectCache::get(self::CACHE_KEY));
+		$this->assertNull(ObjectCache::get(self::CACHE_KEY));
 	}
 
 	/**
@@ -88,7 +88,7 @@ class ObjectCacheTest extends \PHPUnit_Framework_TestCase
 		$this->assertSame($object, $this->cache->get(self::CACHE_KEY));
 
 		// Saving using one way
-		\Jyxo\Spl\ObjectCache::set(self::CACHE_KEY, $object);
+		ObjectCache::set(self::CACHE_KEY, $object);
 		$this->assertSame($object, $this->cache->get(self::CACHE_KEY));
 
 		// Saving using the other way

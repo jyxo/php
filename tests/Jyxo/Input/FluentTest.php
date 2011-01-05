@@ -29,7 +29,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testBasicFluent()
 	{
-		$input = new \Jyxo\Input\Fluent();
+		$input = new Fluent();
 
 		$input
 			->check(' 42 ', 'answer')
@@ -45,7 +45,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testDefaultValue()
 	{
-		$input = new \Jyxo\Input\Fluent();
+		$input = new Fluent();
 
 		$input
 			->check('', 'message')
@@ -55,8 +55,8 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue($input->isValid());
 		$this->assertEquals('default', $input->message);
 
-		$this->setExpectedException('BadMethodCallException');
-		$input = new \Jyxo\Input\Fluent();
+		$this->setExpectedException('\BadMethodCallException');
+		$input = new Fluent();
 		$input->defaultValue('default');
 	}
 
@@ -76,12 +76,12 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 			'žluťoučký kůň pěl ďábelské ódy'
 		);
 
-		$input1 = new \Jyxo\Input\Fluent();
+		$input1 = new Fluent();
 		$input1
 			->check($current, 'data')
 				->filter('lowerCase')
 				->validate('isArray');
-		$input2 = new \Jyxo\Input\Fluent();
+		$input2 = new Fluent();
 		$input2
 			->check($current, 'data')
 				->walk()
@@ -102,7 +102,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 		$_REQUEST['data'] = $_POST['data'] = 'string';
 		$_REQUEST['jyxo'] = $_GET['jyxo'] = '1';
 
-		$input = new \Jyxo\Input\Fluent();
+		$input = new Fluent();
 		$input
 			->post('data')
 				->validate('stringLengthGreaterThan', 'short', 5)
@@ -120,7 +120,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalid()
 	{
-		$input = new \Jyxo\Input\Fluent();
+		$input = new Fluent();
 
 		$input
 			->check('foo', 'foo')
@@ -129,7 +129,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 		$this->assertFalse($input->isValid());
 		$this->assertEquals(array('not int'), $input->getErrors());
 
-		$input = new \Jyxo\Input\Fluent();
+		$input = new Fluent();
 		$input
 			->check('bar', 'bar')
 				->validate('isInt', 'not int');
@@ -137,7 +137,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 		$this->assertFalse($input->isValid(true));
 		$this->assertEquals(array('bar' => array('not int')), $input->getErrors());
 
-		$input = new \Jyxo\Input\Fluent();
+		$input = new Fluent();
 		$input
 			->check('foo', 'foo')
 			->all()
@@ -160,7 +160,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 			'nulák'
 		);
 
-		$input = new \Jyxo\Input\Fluent();
+		$input = new Fluent();
 		$input
 			->check($current, 'data')
 				->walk(false)
@@ -193,7 +193,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 		// Complex value test
 		foreach (array(true => $good, false => $bad) as $result => $values) {
 			foreach ($values as $lessThan => $value) {
-				$input = new \Jyxo\Input\Fluent();
+				$input = new Fluent();
 				$input
 					->check($value, 'answer')
 						->condition('isInt')
@@ -207,7 +207,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 		}
 
 		// Deep chain test
-		$input = new \Jyxo\Input\Fluent();
+		$input = new Fluent();
 		$input
 			->check(42, 'answer')
 				->validate('notEmpty', 'error')
@@ -216,8 +216,8 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue($input->isValid());
 
 		// Not an active variable
-		$this->setExpectedException('BadMethodCallException');
-		$input = new \Jyxo\Input\Fluent();
+		$this->setExpectedException('\BadMethodCallException');
+		$input = new Fluent();
 		$input->condition('isInt');
 	}
 
@@ -226,7 +226,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testClose()
 	{
-		$input = new \Jyxo\Input\Fluent();
+		$input = new Fluent();
 		$input
 			->check(42, 'anwer')
 				->validate('notEmpty', 'error')
@@ -236,8 +236,8 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 				->validate('isInt');
 		$this->assertTrue($input->isValid());
 
-		// But it's not a url...
-		$input->validate('isUrl');
+		// But it's not a day...
+		$input->validate('isDay');
 		$this->assertFalse($input->isValid());
 	}
 
@@ -247,7 +247,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 	public function testAddInvalidFilter()
 	{
 		$this->setExpectedException('\Jyxo\Input\Exception');
-		$input = new \Jyxo\Input\Fluent();
+		$input = new Fluent();
 		$input->filter('foo');
 	}
 
@@ -257,7 +257,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 	public function testAddInvalidCondition()
 	{
 		$this->setExpectedException('\Jyxo\Input\Exception');
-		$input = new \Jyxo\Input\Fluent();
+		$input = new Fluent();
 		$input->condition('foo');
 	}
 
@@ -267,7 +267,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 	public function testAddInvalidValidator()
 	{
 		$this->setExpectedException('\Jyxo\Input\Exception');
-		$input = new \Jyxo\Input\Fluent();
+		$input = new Fluent();
 		$input->validate('foo');
 	}
 }
