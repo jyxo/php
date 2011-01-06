@@ -1,0 +1,71 @@
+pre
+pre
+
+H1...
+
+H2
+
+h3
+
+h4
+
+h5
+
+h6
+
+div
+div
+
+paragraph
+paragraph
+
+STRONG
+
+--------------------------------------------------
+
+HEAD1	HEAD2
+body1	body2
+
+"quotes"
+"quotes"
+
+'apostrophe'
+
+2 > 1
+1 < 2
+2 > 1
+1 < 2
+
+ampersand & ampersand & ampersand
+
+(c) Copyright
+(c) Copyright
+
+(tm) Trade mark
+
+(R) Registration
+
+hi-fi
+hi-fi
+
+span
+em
+
+<jyxo.cz><jyxo.cz><jyxo.cz>
+jyxo.cz <http://jyxo.cz>
+Jyxo <jyxo.cz>
+Jyxo <http://jyxo.cz>
+Jyxo
+Jyxo
+Jyxo
+Jyxo
+Jyxo
+džykso.cz
+
+	tabulátor
+	tabulátor
+
+odsazení
+odsazení
+
+Text Text Text

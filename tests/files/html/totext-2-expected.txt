@@ -1,0 +1,37 @@
+	* item 1
+	* item 2
+
+		1. one
+		2. two
+
+			o item 1
+			o item 2
+
+				1. one
+				2. two
+
+					+ item 1
+					+ item 2
+
+						# item 1
+						# item 2
+
+							* item 1
+							* item 2
+							* item 3
+
+						# item 3
+
+					+ item 3
+
+				3. three
+
+			o item 3
+
+		3. three
+
+	* item 3
+
+	1. one
+	2. two
+	3. three
