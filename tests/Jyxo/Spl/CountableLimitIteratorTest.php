@@ -22,6 +22,7 @@ require_once __DIR__ . '/../../bootstrap.php';
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
+ * @author Ondřej Nešpor
  */
 class CountableLimitIteratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -67,7 +68,20 @@ class CountableLimitIteratorTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Tests creating an instance with an invalid Iterator.
+	 * Tests the count() method when the limit is out of the inner \Iterator.
+	 *
+	 */
+	public function testOutOfBounds()
+	{
+		$data = range(1, 2);
+
+		$iterator = new CountableLimitIterator(new \ArrayIterator($data), 5, 2, CountableLimitIterator::MODE_LIMIT);
+
+		$this->assertSame(0, count($iterator));
+	}
+
+	/**
+	 * Tests creating an instance with an invalid \Iterator.
 	 */
 	public function testInvalidIterator()
 	{

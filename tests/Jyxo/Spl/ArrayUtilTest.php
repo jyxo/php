@@ -22,6 +22,7 @@ require_once __DIR__ . '/../../bootstrap.php';
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
+ * @author Ondřej Nešpor
  */
 class ArrayUtilTest extends \PHPUnit_Framework_TestCase
 {
@@ -72,5 +73,27 @@ class ArrayUtilTest extends \PHPUnit_Framework_TestCase
 		);
 
 		$this->assertEquals($expect, $range);
+	}
+
+	/**
+	 * Tests the keymap() method.
+	 */
+	public function testKeymap()
+	{
+		$source = array();
+		foreach (range(ord('a'), ord('z')) as $value) {
+			$source[] = chr($value);
+		}
+		$traversable = new \ArrayIterator($source);
+
+		$closure = function($value) {
+			return chr(ord('z') + ord('a') - ord($value));
+		};
+
+		$mapped = ArrayUtil::keymap($traversable, $closure);
+		$this->assertSame(array_combine(array_reverse($source), $source), $mapped);
+
+		$mapped = ArrayUtil::keymap($traversable, $closure, $closure);
+		$this->assertSame(array_reverse(array_combine($source, $source)), $mapped);
 	}
 }

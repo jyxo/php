@@ -21,6 +21,8 @@ require_once __DIR__ . '/../../bootstrap.php';
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
+ * @author Jaroslav Hanslík
+ * @author Ondřej Nešpor
  */
 class AllTests
 {
@@ -43,6 +45,8 @@ class AllTests
 
 		$suite->addTestSuite('\Jyxo\Spl\ArrayUtilTest');
 		$suite->addTestSuite('\Jyxo\Spl\CountableLimitIteratorTest');
+		$suite->addTestSuite('\Jyxo\Spl\FilterIteratorTest');
+		$suite->addTestSuite('\Jyxo\Spl\MapIteratorTest');
 		$suite->addTestSuite('\Jyxo\Spl\ObjectTest');
 		$suite->addTestSuite('\Jyxo\Spl\ObjectCacheTest');
 

@@ -22,6 +22,7 @@ require_once __DIR__ . '/../../bootstrap.php';
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
+ * @author Ondřej Nešpor
  */
 class ObjectTest extends \PHPUnit_Framework_TestCase
 {
@@ -55,5 +56,9 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue(isset($foo->x));
 		$this->assertTrue(isset($foo->y));
 		$this->assertFalse(isset($foo->z));
+
+		// Testing toArray conversion
+		$array = array('x' => 1, 'y' => true);
+		$this->assertEquals($array, $foo->toArray());
 	}
 }

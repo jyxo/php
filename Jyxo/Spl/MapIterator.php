@@ -15,7 +15,7 @@ namespace Jyxo\Spl;
 
 /**
  * Iterator which applies a callback over results (lazy-loaded calls).
- * Supports iteration over both Traversable and array.
+ * Supports iteration over both \Traversable and array.
  *
  * @category Jyxo
  * @package Jyxo\Spl
