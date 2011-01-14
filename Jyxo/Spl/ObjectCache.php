@@ -29,7 +29,7 @@ namespace Jyxo\Spl;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
  */
-class ObjectCache
+class ObjectCache implements \IteratorAggregate
 {
 	/**
 	 * Object storage.
@@ -118,5 +118,25 @@ class ObjectCache
 	public function __isset($key)
 	{
 		return isset($this->storage[$key]);
+	}
+
+	/**
+	 * Deletes an object with key $key from the storage.
+	 *
+	 * @param mixed $key Object key
+	 */
+	public function __unset($key)
+	{
+		unset ($this->storage[$key]);
+	}
+
+	/**
+	 * Returns an iterator.
+	 *
+	 * @return \ArrayIterator
+	 */
+	public function getIterator()
+	{
+		return new \ArrayIterator($this->storage);
 	}
 }

@@ -109,6 +109,54 @@ class ObjectCacheTest extends \PHPUnit_Framework_TestCase
 		// Save and check
 		$this->saveObject();
 		$this->assertTrue(isset($this->cache->{self::CACHE_KEY}));
+
+		$this->cache->clear();
+	}
+
+	/**
+	 * Tests unset().
+	 */
+	public function testUnset()
+	{
+		// Nothing is saved
+		$this->assertFalse(isset($this->cache->{self::CACHE_KEY}));
+
+		// Save and check
+		$this->saveObject();
+		$this->assertTrue(isset($this->cache->{self::CACHE_KEY}));
+
+		// Unset the object and check
+		unset($this->cache->{self::CACHE_KEY});
+		$this->assertFalse(isset($this->cache->{self::CACHE_KEY}));
+
+		// Save and check again
+		$this->saveObject();
+		$this->assertTrue(isset($this->cache->{self::CACHE_KEY}));
+
+		$this->cache->clear();
+	}
+
+	/**
+	 * Tests cache iterator interface.
+	 */
+	public function testIterator()
+	{
+		$objects = array(
+			'key1' => new \stdClass(),
+			'key2' => new \stdClass(),
+			'key3' => new \stdClass()
+		);
+
+		// Put items into cache
+		foreach ($objects as $key => $object) {
+			$this->cache->$key = $object;
+		}
+
+		// Iterate over items
+		foreach ($this->cache as $key => $item) {
+			$this->assertArrayHasKey($key, $objects);
+			$this->assertSame($objects[$key], $item);
+		}
 	}
 
 	/**
