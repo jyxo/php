@@ -58,7 +58,7 @@ class Server extends \Jyxo\Rpc\Server
 	 */
 	public function process()
 	{
-		$data = array('id' => '');
+		$requestId = '';
 		try {
 			$data = file_get_contents('php://input');
 			$data = trim($data);
@@ -71,6 +71,8 @@ class Server extends \Jyxo\Rpc\Server
 			if ($data === null && ($faultCode = json_last_error()) != JSON_ERROR_NONE) {
 				throw new Exception(self::$jsonErrors[$faultCode], $faultCode);
 			}
+
+			$requestId = isset($data['id']) ? $data['id'] : '';
 
 			// Parsing request data error
 			if (empty($data['method']) || !isset($data['id'])) {
@@ -93,7 +95,7 @@ class Server extends \Jyxo\Rpc\Server
 					'message' => $e->getMessage(),
 					'code' => $e->getCode()
 				),
-				'id' => $data['id']
+				'id' => $requestId
 			);
 		}
 
