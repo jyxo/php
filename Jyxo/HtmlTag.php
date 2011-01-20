@@ -14,23 +14,23 @@
 namespace Jyxo;
 
 /**
- * Třída pro generování (x)HTML.
- * Umožňuje vytvářet html tagy podle $tags s atributy podle $attrs.
+ * Class for generating (x)HTML source code.
+ * Allows creating HTML tags and its attributes.
  *
- * např.
+ * example:
  * <code>
  * $p = \Jyxo\HtmlTag::create('p')->setClass('buttons');
  * </code>
- * Metoda __call() se stará o nastavování atributů.
+ * The magic __call() method ensures attributes settings.
  *
  * <code>
  * $p->render();
  * </code>
- * Metoda render() vytváří html výstup.
+ * The render() method creates the HTML output.
  *
  *
  * @category Jyxo
- * @package Jyxo
+ * @package Jyxo\Html
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Roman Řáha
@@ -39,56 +39,56 @@ namespace Jyxo;
 final class HtmlTag
 {
 	/**
-	 * Přepínač pro uzavírací závorku elementu.
+	 * Is XHTML output turned on?
 	 *
 	 * @var boolean
 	 */
 	private $xhtml = true;
 
 	/**
-	 * Název (x)html elementu.
+	 * Element name.
 	 *
 	 * @var string
 	 */
 	private $tag = '';
 
 	/**
-	 * Určuje zda je element párový, nebo prázdný.
+	 * Is the element self closing?
 	 *
 	 * @var boolean
 	 */
 	private $isEmptyElement = false;
 
 	/**
-	 * Atributy (x)html elementu.
+	 * Element attributes.
 	 *
 	 * @var array
 	 */
 	private $attributes = array();
 
 	/**
-	 * Pole potomků elementu.
+	 * Array of child elements.
 	 *
 	 * @var array
 	 */
 	private $children = array();
 
 	/**
-	 * Pole atributů, které se nebudou při vykreslování kódovat.
+	 * Array of elements whose value will not be escaped.
 	 *
 	 * @var array
 	 */
 	private $noEncode = array();
 
 	/**
-	 * Renderuje se pouze obsah, bez obalení tagem.
+	 * Renders only the contents, not the opening and closing tag.
 	 *
 	 * @var boolean
 	 */
 	private $contentOnly = FALSE;
 
 	/**
-	 * Seznam atributů elementů.
+	 * List of element attributes.
 	 *
 	 * @var array
 	 */
@@ -101,7 +101,7 @@ final class HtmlTag
 	);
 
 	/**
-	 * Seznam nepárových elementů.
+	 * List of self closing elements.
 	 *
 	 * @var array
 	 */
@@ -110,7 +110,7 @@ final class HtmlTag
 	);
 
 	/**
-	 * Seznam povinných atributů, které se vykreslí vždy, i když jsou empty
+	 * List of mandatory attributes that will be rendered even if empty.
 	 *
 	 * @var array
 	 */
@@ -120,7 +120,9 @@ final class HtmlTag
 	);
 
 	/**
-	 * Konstruktor nastavuje, o jaký tag se jedná.
+	 * Constructor.
+	 *
+	 * Sets the element name.
 	 *
 	 * @param string $tag
 	 */
@@ -130,9 +132,9 @@ final class HtmlTag
 	}
 
 	/**
-	 * Vyrobí html element.
+	 * Creates an element instance.
 	 *
-	 * @param string $tag
+	 * @param string $tag HTML element name
 	 * @return \Jyxo\HtmlTag
 	 */
 	public static function create($tag)
@@ -141,20 +143,20 @@ final class HtmlTag
 	}
 
 	/**
-	 * Vrátí novou instanci html objektu, která je vytvořená parsováním předaného html.
-	 * Z textu se vezme první tag a jako jeho ukončení se bere poslední zavírací tag.
-	 * Obsah mezy tagy je nastaven jen jako text tagu.
+	 * Returns an element instance from the given source.
+	 * The first and last tag will be used as the opening and closing tag respectively.
+	 * Anything between those tags will be used as contents.
 	 *
-	 * @param string $html
+	 * @param string $html HTML source code
 	 * @return \Jyxo\HtmlTag
-	 * @throws \InvalidArgumentException Pokud nebylo zadáno validní html
+	 * @throws \InvalidArgumentException If an invalid HTML source was given
 	 */
 	public static function createFromSource($html)
 	{
 		if (preg_match('~<(\w+)(\s[^>]*)+>(.*)((<[^>]+>)?[^>]*)$~', $html, $matches)) {
 			$tag = new self($matches[1]);
 			if ('' !== $matches[3]) {
-				// @todo Možná dodělat rekurzi pro sestavení potomků.
+				// @todo Maybe some kind of recursion to create a tree of elements
 				$tag->setText($matches[3]);
 			}
 			if (preg_match_all('/(\w+)\s*=\s*"([^"]+)"/', $matches[2], $submatches, PREG_PATTERN_ORDER)) {
@@ -167,7 +169,7 @@ final class HtmlTag
 	}
 
 	/**
-	 * Vytvoří a vrátí otevírací tag.
+	 * Creates and returns the opening tag.
 	 *
 	 * @return string
 	 */
@@ -185,7 +187,7 @@ final class HtmlTag
 				}
 				$notEmpty = $value !== null && $value !== '' && $value !== false;
 				if ($this->isRequiredAttr($this->tag, $name) || $notEmpty) {
-					// Pro neprázdné atributy a atribut value u tagu option
+					// For not empty attributes and the value attribute by the <option> tag
 					if (!isset($this->noEncode[$name])) {
 						$value = String::escape($value);
 					}
@@ -207,7 +209,7 @@ final class HtmlTag
 	}
 
 	/**
-	 * Vytvoří a vrátí obsah html elementu.
+	 * Creates and returns element's contents.
 	 *
 	 * @return string
 	 */
@@ -221,7 +223,7 @@ final class HtmlTag
 			if ($hasValue || $hasText) {
 				$text = $hasText ? $this->attributes['text'] : $this->attributes['value'];
 				$noEncode = isset($this->noEncode['value']) || isset($this->noEncode['text']);
-				// Text v tagu script se neescapuje.
+				// <script> contents are not escaped
 				$noEncode = 'script' === $this->tag ? true : $noEncode;
 				$buff .= $noEncode ? $text : String::escape($text);
 			}
@@ -235,7 +237,7 @@ final class HtmlTag
 	}
 
 	/**
-	 * Vytvoří a vrátí uzavírací tag.
+	 * Creates and returns the closing tag.
 	 *
 	 * @return string
 	 */
@@ -255,7 +257,7 @@ final class HtmlTag
 	}
 
 	/**
-	 * Vyrenderuje element.
+	 * Renders the element.
 	 *
 	 * @return string
 	 */
@@ -265,9 +267,9 @@ final class HtmlTag
 	}
 
 	/**
-	 * Přidá potomka.
+	 * Adds a child element.
 	 *
-	 * @param \Jyxo\HtmlTag $element
+	 * @param \Jyxo\HtmlTag $element Child element to be added
 	 * @return \Jyxo\HtmlTag
 	 */
 	public function addChild(\Jyxo\HtmlTag $element)
@@ -277,9 +279,9 @@ final class HtmlTag
 	}
 
 	/**
-	 *  Přidá potomky.
+	 * Adds multiple child elements.
 	 *
-	 * @param array $elements
+	 * @param array $elements Array of child elements
 	 * @return \Jyxo\HtmlTag
 	 */
 	public function addChildren(array $elements)
@@ -291,9 +293,9 @@ final class HtmlTag
 	}
 
 	/**
-	 * Importuje atributy z klíčovaného pole.
+	 * Imports attributes from the given array.
 	 *
-	 * @param array $attributes
+	 * @param array $attributes Associative array of attributes and their values
 	 * @return \Jyxo\HtmlTag
 	 */
 	public function setAttributes(array $attributes)
@@ -305,9 +307,9 @@ final class HtmlTag
 	}
 
 	/**
-	 * Přidá atribut do pole nekódovaných atributů.
+	 * Sets an attribute to not be espaced on output.
 	 *
-	 * @param string $attribute
+	 * @param string $attribute Attribute name
 	 * @return \Jyxo\HtmlTag
 	 */
 	public function setNoEncode($attribute)
@@ -318,9 +320,9 @@ final class HtmlTag
 	}
 
 	/**
-	 * Nastaví, zda renderovat pouze obsah.
+	 * Sets if only the contents should be rendered.
 	 *
-	 * @param boolean $contentOnly
+	 * @param boolean $contentOnly Should only the contents be rendered
 	 * @return \Jyxo\HtmlTag
 	 */
 	public function setContentOnly($contentOnly)
@@ -330,7 +332,7 @@ final class HtmlTag
 	}
 
 	/**
-	 * Renderuje html element.
+	 * Renders the HTML element.
 	 *
 	 * @return string
 	 */
@@ -340,11 +342,11 @@ final class HtmlTag
 	}
 
 	/**
-	 * Nastaví nebo vrátí atribut.
+	 * Sets or returns the attribute.
 	 *
-	 * @param string $method
-	 * @param array $args
-	 * @return mixed string|\Jyxo\HtmlTag
+	 * @param string $method Method name
+	 * @param array $args Method attributes
+	 * @return mixed string|Jyxo_HtmlTag
 	 */
 	public function __call($method, $args)
 	{
@@ -361,22 +363,23 @@ final class HtmlTag
 	}
 
 	/**
-	 * Vrací atribut.
+	 * Returns an attribute value.
 	 *
-	 * @param string $name
+	 * @param string $name Attribute name
 	 * @return mixed string|null
 	 */
 	public function __get($name)
 	{
-		// Prazdný atribut je vždy null
+		// An empty attribute is always null
 		return isset($this->attributes[$name]) ? $this->attributes[$name] : null;
 	}
 
 	/**
-	 * Vrací, zda je atribut povinný
+	 * Returns if the given attribute is mandatory.
 	 *
-	 * @param string $tag
-	 * @param string $attr
+	 * @param string $tag HTML tag name
+	 * @param string $attr Attribute name
+	 * @return boolean
 	 */
 	private function isRequiredAttr($tag, $attr)
 	{

@@ -16,7 +16,7 @@ namespace Jyxo;
 require_once __DIR__ . '/../bootstrap.php';
 
 /**
- * Test pro třídu \Jyxo\Html.
+ * Class \Jyxo\Html test.
  *
  * @see \Jyxo\Html
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
@@ -26,14 +26,14 @@ require_once __DIR__ . '/../bootstrap.php';
 class HtmlTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * Cesta k souborům.
+	 * Path to testing files.
 	 *
 	 * @var string
 	 */
 	private $filePath;
 
 	/**
-	 * Nastaví prostředí pro testy.
+	 * Prepares the testing environment.
 	 */
 	protected function setUp()
 	{
@@ -41,7 +41,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test pro metodu __construct().
+	 * Tests the __construct() method.
 	 *
 	 * @see \Jyxo\Html::__construct()
 	 */
@@ -52,7 +52,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test pro metodu is().
+	 * Tests the is() method.
 	 *
 	 * @see \Jyxo\Html::is()
 	 */
@@ -67,7 +67,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test pro metodu repair().
+	 * Tests the repair() method.
 	 *
 	 * @see \Jyxo\Html::repair()
 	 */
@@ -80,7 +80,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test pro metodu removeTags().
+	 * Tests the removeTags() method.
 	 *
 	 * @see \Jyxo\Html::removeTags()
 	 */
@@ -98,7 +98,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test pro metodu removeInnerTags().
+	 * Tests the removeInnerTags() method.
 	 *
 	 * @see \Jyxo\Html::removeInnerTags()
 	 */
@@ -123,7 +123,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test pro metodu removeAttributes().
+	 * Tests the removeAttributes() method.
 	 *
 	 * @see \Jyxo\Html::removeAttributes()
 	 */
@@ -141,7 +141,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test pro metodu removeJavascriptEvents().
+	 * Tests the removeJavascriptEvents() method.
 	 *
 	 * @see \Jyxo\Html::removeJavascriptEvents()
 	 */
@@ -154,13 +154,13 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test pro metodu removeRemoteImages().
+	 * Tests the removeRemoteImages() method.
 	 *
 	 * @see \Jyxo\Html::removeRemoteImages()
 	 */
 	public function testRemoveRemoteImages()
 	{
-		// Ve formátu: očekávaná hodnota, zadaná hodnota
+		// In format (expected value, input value)
 		$tests = array(
 			array(
 				'<img  width="10"    SRC="about:blank"    />',
@@ -201,7 +201,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test pro metodu removeDangerous().
+	 * Tests the removeDangerous() method.
 	 *
 	 * @see \Jyxo\Html::removeDangerous()
 	 */
@@ -214,7 +214,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test pro metodu getBody().
+	 * Tests the getBody() method.
 	 *
 	 * @see \Jyxo\Html::getBody()
 	 */
@@ -232,7 +232,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test pro metodu fromText().
+	 * Tests the fromText() method.
 	 *
 	 * @see \Jyxo\Html::fromText()
 	 */
@@ -250,7 +250,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test pro metodu linkFromText().
+	 * Tests the linkFromText() method.
 	 *
 	 * @see \Jyxo\Html::linkFromText()
 	 */
@@ -263,7 +263,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test pro metodu toText().
+	 * Tests the toText() method.
 	 *
 	 * @see \Jyxo\Html::toText()
 	 */
