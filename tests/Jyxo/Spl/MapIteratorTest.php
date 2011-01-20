@@ -48,7 +48,7 @@ class MapIteratorTest extends \PHPUnit_Framework_TestCase
 	 * Runs a test on the input
 	 *
 	 * @param array $originalData Original data for Iterators
-	 * @param array|Traversable $subject \Iterator input
+	 * @param array|\Traversable $subject \Iterator input
 	 * @param \Closure $callback Mapping callback
 	 */
 	private function runMapTest(array $originalData, $subject, \Closure $callback)

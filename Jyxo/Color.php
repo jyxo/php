@@ -17,7 +17,7 @@ namespace Jyxo;
  * Class representing a RGB color.
  *
  * @category Jyxo
- * @package \Jyxo\Color
+ * @package Jyxo\Color
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Roman Řáha
