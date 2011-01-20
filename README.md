@@ -1,5 +1,4 @@
-Jyxo PHP Library
-================
+# Jyxo PHP Library
 
 Welcome to Jyxo PHP Library.
 
@@ -28,8 +27,7 @@ The code you find here is in actual use in various projects and to the best
 of our knowledge, it can be considered stable. But as always, read the License
 first.
 
-Original library authors
-------------------------
+##Original library authors
 
 Many developers have contributed to the library throughout the years. Here are
 those who were daring enough to put their names into docblocks… or those whose
@@ -40,9 +38,12 @@ Marvan, Jan Matoušek, Ondřej Nešpor, Jan Pěček, Ondřej Procházka, Roman �
 Vojtěch Semecký, Štěpán Svoboda, Martin Šamšula, Jakub Škrha, Martin Švihla,
 Jan Tichý, Jakub Tománek, Ladislav Vacek, Martin Voldřich
 
-Repository maintainers and contributors
----------------------------------------
+## Repository maintainers and contributors
 * [Jaroslav Hanslík](https://github.com/kukulich) - repository leader
-* [Matěj Humpál](https://github.com/finwe) - contributor
 * [Ondřej Nešpor](https://github.com/Andrewsville) - contributor, documentation translator
 * [Jakub Tománek](https://github.com/thezero) - contributor, documentation translator
+
+### Individual contributors
+
+* [Matěj Humpál](https://github.com/finwe) - contributor ([\Jyxo\Gettext](https://github.com/jyxo/php/tree/master/Jyxo/Gettext))
+* [Jan Pěček](https://github.com/honzap) - contributor ([\Jyxo\Rpc](https://github.com/jyxo/php/tree/master/Jyxo/Rpc))
