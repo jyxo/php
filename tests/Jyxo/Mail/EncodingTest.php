@@ -93,6 +93,8 @@ class EncodingTest extends \PHPUnit_Framework_TestCase
 		try {
 			Encoding::encode('data', 'dummy-encoding', 75, "\n");
 			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);

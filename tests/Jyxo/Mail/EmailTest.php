@@ -104,6 +104,8 @@ class EmailTest extends \PHPUnit_Framework_TestCase
 		try {
 			$email->setPriority('dummy-priority');
 			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);

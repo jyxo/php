@@ -90,6 +90,8 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 		try {
 			$sender->send('dummy-mode');
 			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);
@@ -99,6 +101,8 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 		try {
 			$sender->send(Sender::MODE_NONE);
 			$this->fail('Expected exception \Jyxo\Mail\Sender\CreateException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\Jyxo\Mail\Sender\CreateException', $e);
@@ -110,6 +114,8 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 		try {
 			$sender->send(Sender::MODE_NONE);
 			$this->fail('Expected exception \Jyxo\Mail\Sender\CreateException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\Jyxo\Mail\Sender\CreateException', $e);
@@ -121,6 +127,8 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 		try {
 			$sender->send(Sender::MODE_NONE);
 			$this->fail('Expected exception \Jyxo\Mail\Sender\CreateException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\Jyxo\Mail\Sender\CreateException', $e);
@@ -172,6 +180,8 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 		try {
 			$sender->setEncoding('dummy-encoding');
 			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);

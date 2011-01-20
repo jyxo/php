@@ -497,7 +497,9 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
 		try {
 			$validator->setMin(-10);
-			$this->fail('Expected exception \Jyxo\Input\Validator\Exception.');
+			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);
@@ -525,7 +527,9 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
 		try {
 			$validator->setMax(-10);
-			$this->fail('Expected exception \Jyxo\Input\Validator\Exception.');
+			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);

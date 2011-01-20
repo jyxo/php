@@ -55,6 +55,8 @@ class InlineStringTest extends \PHPUnit_Framework_TestCase
 		try {
 			$attachment->setEncoding('dummy-encoding');
 			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);

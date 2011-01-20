@@ -59,6 +59,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		try {
 			$time = new Time('abcde');
 			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);
@@ -84,6 +86,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		try {
 			$time = new Time(array());
 			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);
@@ -92,6 +96,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		try {
 			$time = new Time(new \stdClass());
 			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);
@@ -100,6 +106,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		try {
 			$tmp = new Time($time, new \stdClass());
 			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);
@@ -108,6 +116,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		try {
 			$tmp = new Time($dateTime, (object)array('foo' => 'bar'));
 			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);
@@ -193,6 +203,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		try {
 			$this->assertEquals('', $time->unknown);
 			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);
@@ -333,6 +345,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		try {
 			$this->assertSame(null, $time->format('Y-m-d', 'Foo/Bar'));
 			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);
@@ -342,6 +356,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		try {
 			$this->assertSame(null, $time->format('Y-m-d', new \stdClass()));
 			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);
@@ -557,6 +573,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		try {
 			$time = Time::now()->truncate('unknown');
 			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);
@@ -614,6 +632,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		try {
 			$time->setTimeZone('Foo/Bar');
 			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);
@@ -656,6 +676,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		try {
 			$unserialized = @unserialize($serialized);
 			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);
@@ -666,6 +688,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		try {
 			$unserialized = @unserialize($serialized);
 			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);
@@ -676,6 +700,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		try {
 			$unserialized = @unserialize($serialized);
 			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);
@@ -694,6 +720,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		try {
 			$tz = new \DateTimeZone($unserialized->getTimeZone()->getName());
 			$this->fail('\Exception expected');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\Exception', $e);
@@ -704,6 +732,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		try {
 			$unserialized = @unserialize($serialized);
 			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);
@@ -714,6 +744,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		try {
 			$unserialized = @unserialize($serialized);
 			$this->fail('Expected exception \InvalidArgumentException.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
 			$this->assertInstanceOf('\InvalidArgumentException', $e);
