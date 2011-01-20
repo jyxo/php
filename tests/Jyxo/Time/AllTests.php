@@ -44,6 +44,7 @@ class AllTests
 		$suite->addTestSuite('\Jyxo\Time\TimeTest');
 		$suite->addTestSuite('\Jyxo\Time\ComposerTest');
 		$suite->addTestSuite('\Jyxo\Time\ComposerExceptionTest');
+		$suite->addTestSuite('\Jyxo\Time\UtilTest');
 
 		return $suite;
 	}
