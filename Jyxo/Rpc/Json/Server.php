@@ -89,7 +89,7 @@ class Server extends \Jyxo\Rpc\Server
 			$response = $this->call($data['method'], $params);
 			$response = array('result' => $response, 'id' => $data['id']);
 
-		} catch (Exception $e) {
+		} catch (\Jyxo\Rpc\Json\Exception $e) {
 			$response = array(
 				'error' => array(
 					'message' => $e->getMessage(),
