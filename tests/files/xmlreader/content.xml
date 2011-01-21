@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<test>
+	<one>word</one>
+	<second>two <tag>words</tag></second>
+	<third>three<empty/><tag>simple</tag> words</third>
+	<forth>
+		four<tag>words</tag>on<empty/>several<empty/>lines
+	</forth>
+	<fifth>fifth test without tags</fifth>
+	<sixth><![CDATA[cdata in sixth test]]></sixth>
+	<seventh><![CDATA[cdata with <empty/><tag>tags</tag> in seventh test]]></seventh>
+	<eighth>eigth test with <tag attribute="value">tags and attributes</tag></eighth>
+	<ninth>ninth test with <tag attribute="value">tags and attributes and <inner>inner tags</inner></tag></ninth>
+</test>

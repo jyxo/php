@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<test>
+	<one>word</one>
+	<second>two words</second>
+	<third>three simple words</third>
+	<forth>
+		four words on several lines
+	</forth>
+	<fifth>fifth test <empty/>with <tag>tags</tag></fifth>
+	<sixth>sixth test <empty/>with <tag>tags and <inner>inner tags</inner></tag></sixth>
+</test>
