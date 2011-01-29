@@ -74,7 +74,7 @@ class Client extends \Jyxo\Rpc\Client
 			throw new Exception('Invalid response data.');
 		}
 
-		if ($response['id'] != $id) {
+		if ($id !== $response['id']) {
 			throw new Exception('Response ID does not correspond to request ID.');
 		}
 
@@ -86,6 +86,6 @@ class Client extends \Jyxo\Rpc\Client
 			throw new Exception('No response data.');
 		}
 
-		return $response;
+		return $response['result'];
 	}
 }
