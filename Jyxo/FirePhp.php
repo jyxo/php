@@ -84,39 +84,51 @@ class FirePhp
 	}
 
 	/**
+	 * Dumps a variable.
+	 *
+	 * @param mixed $variable Variable
+	 * @param string $label Variable label
+	 * @return boolean
+	 */
+	public static function dump($variable, $label = '')
+	{
+		return self::log($variable, (string) $label);
+	}
+
+	/**
 	 * Sends an information message.
 	 *
-	 * @param mixed $message Message text
+	 * @param string $message Message text
 	 * @param string $label Message label
 	 * @return boolean
 	 */
 	public static function info($message, $label = '')
 	{
-		return self::log($message, $label, self::INFO);
+		return self::log((string) $message, (string) $label, self::INFO);
 	}
 
 	/**
 	 * Sends a warning.
 	 *
-	 * @param mixed $message Message text
+	 * @param string $message Message text
 	 * @param string $label Message label
 	 * @return boolean
 	 */
 	public static function warning($message, $label = '')
 	{
-		return self::log($message, $label, self::WARNING);
+		return self::log((string) $message, (string) $label, self::WARNING);
 	}
 
 	/**
 	 * Sends an error.
 	 *
-	 * @param mixed $message Message text
+	 * @param string $message Message text
 	 * @param string $label Message label
 	 * @return boolean
 	 */
 	public static function error($message, $label = '')
 	{
-		return self::log($message, $label, self::ERROR);
+		return self::log((string) $message, (string) $label, self::ERROR);
 	}
 
 	/**
@@ -134,7 +146,7 @@ class FirePhp
 				'Type' => $type,
 				'Label' => $label
 			),
-			self::replaceObjects($message)
+			self::encodeVariable($message)
 		);
 
 		return self::send($output);
@@ -157,10 +169,10 @@ class FirePhp
 				'Label' => null
 			),
 			array(
-				'Message' => @iconv('utf-8', 'utf-8//IGNORE', $message),
+				'Message' => String::fixUtf($message),
 				'File' => $file,
 				'Line' => $line,
-				'Trace' => self::replaceObjects($trace)
+				'Trace' => self::encodeVariable($trace)
 			)
 		);
 
@@ -274,7 +286,7 @@ class FirePhp
 			// Delete previous send
 			if (isset($idents[$ident])) {
 				for ($i = $idents[$ident][0]; $i <= $idents[$ident][1]; $i++) {
-					header('X-Wf-Jyxo-1-1-Jyxo' . $i . ':');
+					header_remove('X-Wf-Jyxo-1-1-Jyxo' . $i);
 				}
 			}
 
@@ -297,26 +309,106 @@ class FirePhp
 	}
 
 	/**
-	 * Replaces objects with appropriate names in traces.
-	 * Solves recursion problem in json_encode.
-	 * Taken from Nette.
+	 * Encodes a variable.
 	 *
-	 * @param mixed $value Variable to be replaced
-	 * @return mixed
+	 * @param mixed $variable Variable to be encoded
+	 * @param integer $objectDepth Current object traversal depth
+	 * @param integer $arrayDepth Current array traversal depth
+	 * @param integer $totalDepth Current total traversal depth
+	 * @return array
 	 */
-	private static function replaceObjects($value)
+	private static function encodeVariable($variable, $objectDepth = 1, $arrayDepth = 1, $totalDepth = 1)
 	{
-		if (is_object($value)) {
-			return 'object ' . get_class($value);
-		} elseif (is_resource($value)) {
-			return (string) $value;
-		} elseif (is_array($value)) {
-			foreach ($value as $k => $v) {
-				unset($value[$k]);
-				$value[$k] = self::replaceObjects($v);
-			}
+		static $maxObjectDepth = 5;
+		static $maxArrayDepth = 5;
+		static $maxTotalDepth = 10;
+		static $stack = array();
+
+		if ($totalDepth > $maxTotalDepth) {
+			return sprintf('** Max Depth (%s) **', $maxTotalDepth);
 		}
 
-		return $value;
+		if (is_resource($variable)) {
+			return sprintf('** %s **', (string) $variable);
+		} elseif (is_object($variable)) {
+			if ($objectDepth > $maxObjectDepth) {
+				return sprintf('** Max Object Depth (%s) **', $maxObjectDepth);
+			}
+
+			$class = get_class($variable);
+
+			// Check recursion
+			foreach ($stack as $item) {
+				if ($item === $variable) {
+					return sprintf('** Recursion (%s) **', $class);
+				}
+			}
+			array_push($stack, $variable);
+
+			// Add class name
+			$return = array('__className' => $class);
+
+			// Add properties
+			$reflectionClass = new \ReflectionClass($class);
+			foreach($reflectionClass->getProperties() as $property) {
+				$name = $property->getName();
+				$rawName = $name;
+
+				if ($property->isStatic()) {
+					$name = 'static:' . $name;
+				}
+
+				if ($property->isPublic()) {
+					$name = 'public:' . $name;
+				} elseif ($property->isProtected()) {
+					$name = 'protected:' . $name;
+					$rawName = "\0" . '*' . "\0" . $rawName;
+				} elseif ($property->isPrivate()) {
+					$name = 'private:' . $name;
+					$rawName = "\0" . $class . "\0" . $rawName;
+				}
+
+				if (!$property->isPublic()) {
+					$property->setAccessible(true);
+				}
+				$return[$name] = self::encodeVariable($property->getValue($variable), $objectDepth + 1, 1, $totalDepth + 1);
+			}
+
+			// Add members that are not defined in the class but exist in the object
+			$members = (array) $variable;
+			foreach ($members as $rawName => $member) {
+				$name = $rawName;
+				if ("\0" === $name[0]) {
+					$parts = explode("\0", $name);
+					$name = $parts[2];
+				}
+				if (!$reflectionClass->hasProperty($name)) {
+					$name = 'undeclared:' . $name;
+					$return[$name] = self::encodeVariable($member, $objectDepth + 1, 1, $totalDepth + 1);
+				}
+			}
+			unset($members);
+
+			array_pop($stack);
+
+			return $return;
+		} elseif (is_array($variable)) {
+			if ($arrayDepth > $maxArrayDepth) {
+				return sprintf('** Max Array Depth (%s) **', $maxArrayDepth);
+			}
+
+			$return = array();
+			foreach ($variable as $k => $v) {
+				// Encoding the $GLOBALS PHP array causes an infinite loop as it contains a reference to itself
+				if ('GLOBALS' === $k && is_array($v) && array_key_exists('GLOBALS', $v)) {
+					$v['GLOBALS'] = '** Recursion (GLOBALS) **';
+				}
+				$return[$k] = self::encodeVariable($v, 1, $arrayDepth + 1, $totalDepth + 1);
+			}
+
+			return $return;
+		} else {
+			return $variable;
+		}
 	}
 }
