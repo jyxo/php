@@ -1144,7 +1144,7 @@ class Parser
 		}
 
 		// Detection sometimes fails or the message may be in wrong format, so we remove invalid UTF-8 letters
-		$string = Charset::fixUtf($string);
+		$string = @iconv($charset, 'UTF-8//TRANSLIT//IGNORE', $string);
 
 		return $string;
 	}
