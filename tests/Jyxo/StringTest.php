@@ -143,16 +143,13 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testConvert()
 	{
-		$this->assertEquals('abc', String::utf2iso('abc'));
-		$this->assertNotEquals('žluťoučký kůň příšerně úpěl ďábelské ódy', String::utf2iso('žluťoučký kůň příšerně úpěl ďábelské ódy'));
-		$this->assertRegExp('~^[a-z0-9]([a-z0-9\-]*[a-z0-9])?$~', String::utf2ident('žluťoučký kůň příšerně úpěl ďábelské ódy'));
-		$this->assertEquals('zlutoucky kun priserne upel dabelske ody', String::utf2ascii('žluťoučký kůň příšerně úpěl ďábelské ódy'));
-		$this->assertEquals('zlutoucky kun priserne upel dabelske ody', String::win2ascii(file_get_contents(DIR_FILES . '/string/cp1250.txt')));
-		$this->assertEquals('zlutoucky kun priserne upel dabelske ody', String::iso2ascii(file_get_contents(DIR_FILES . '/string/iso-8859-2.txt')));
-		$this->assertEquals(file_get_contents(DIR_FILES . '/string/iso-8859-2.txt'), String::utf2iso('žluťoučký kůň příšerně úpěl ďábelské ódy'));
-		$this->assertEquals('zlutoucky-kun-priserne-upel-dabelske-ody', String::utf2ident('?žluťoučký  +  kůň příšerně úpěl ďábelské ódy...'));
-		$this->assertEquals('Rossija', String::russian2ascii('Россия'));
-		$this->assertEquals('Gosudarstvennyj gimn Rossijskoj Federacii', String::russian2ascii('Государственный гимн Российской Федерации'));
+		$this->assertRegExp('~^[a-z0-9]([a-z0-9\-]*[a-z0-9])?$~', Jyxo_String::utf2ident('žluťoučký kůň příšerně úpěl ďábelské ódy'));
+		$this->assertEquals('zlutoucky kun priserne upel dabelske ody', Jyxo_String::utf2ascii('žluťoučký kůň příšerně úpěl ďábelské ódy'));
+		$this->assertEquals('zlutoucky kun priserne upel dabelske ody', Jyxo_String::win2ascii(file_get_contents(DIR_FILES . '/string/cp1250.txt')));
+		$this->assertEquals('zlutoucky kun priserne upel dabelske ody', Jyxo_String::iso2ascii(file_get_contents(DIR_FILES . '/string/iso-8859-2.txt')));
+		$this->assertEquals('zlutoucky-kun-priserne-upel-dabelske-ody', Jyxo_String::utf2ident('?žluťoučký  +  kůň příšerně úpěl ďábelské ódy...'));
+		$this->assertEquals('Rossija', Jyxo_String::russian2ascii('Россия'));
+		$this->assertEquals('Gosudarstvennyj gimn Rossijskoj Federacii', Jyxo_String::russian2ascii('Государственный гимн Российской Федерации'));
 	}
 
 	/**

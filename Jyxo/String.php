@@ -92,17 +92,6 @@ class String
 	}
 
 	/**
-	 * Converts a string from UTF-8 to ISO-8859-2.
-	 *
-	 * @param string $string String to convert
-	 * @return string
-	 */
-	public static function utf2iso($string)
-	{
-		return iconv('UTF-8', 'ISO-8859-2//TRANSLIT', $string);
-	}
-
-	/**
 	 * Converts a string from UTF-8 to an identifier form.
 	 *
 	 * @param string $string String to convert
