@@ -169,7 +169,7 @@ class FirePhp
 				'Label' => null
 			),
 			array(
-				'Message' => String::fixUtf($message),
+				'Message' => Charset::fixUtf($message),
 				'File' => $file,
 				'Line' => $line,
 				'Trace' => self::encodeVariable($trace)

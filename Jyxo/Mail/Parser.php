@@ -1144,7 +1144,7 @@ class Parser
 		}
 
 		// Detection sometimes fails or the message may be in wrong format, so we remove invalid UTF-8 letters
-		$string = \Jyxo\String::fixUtf($string);
+		$string = Charset::fixUtf($string);
 
 		return $string;
 	}
