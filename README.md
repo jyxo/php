@@ -41,9 +41,9 @@ Jan Tichý, Jakub Tománek, Ladislav Vacek, Martin Voldřich
 ## Repository maintainers and contributors
 * [Jaroslav Hanslík](https://github.com/kukulich) - repository leader
 * [Ondřej Nešpor](https://github.com/Andrewsville) - contributor, documentation translator
-* [Jakub Tománek](https://github.com/thezero) - contributor, documentation translator
 
 ### Individual contributors
 
 * [Matěj Humpál](https://github.com/finwe) - contributor ([\Jyxo\Gettext](https://github.com/jyxo/php/tree/master/Jyxo/Gettext))
-* [Jan Pěček](https://github.com/honzap) - contributor ([\Jyxo\Rpc](https://github.com/jyxo/php/tree/master/Jyxo/Rpc))
+* [Jan Pěček](https://github.com/honzap) - contributor ([\Jyxo\Rpc](https://github.com/jyxo/php/tree/master/Jyxo/Rpc), [\Jyxo\Beholder](https://github.com/jyxo/php/tree/master/Jyxo/Beholder))
+* [Jakub Tománek](https://github.com/thezero) - contributor ([\Jyxo\Spl](https://github.com/jyxo/php/tree/master/Jyxo/Spl))
