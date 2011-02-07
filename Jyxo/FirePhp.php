@@ -172,7 +172,7 @@ class FirePhp
 				'Message' => Charset::fixUtf($message),
 				'File' => $file,
 				'Line' => $line,
-				'Trace' => self::encodeVariable($trace)
+				'Trace' => self::replaceVariable($trace)
 			)
 		);
 
@@ -306,6 +306,28 @@ class FirePhp
 		header(sprintf('X-Wf-Jyxo-1-1-Jyxo%s: |%s|', $no, $part));
 
 		return true;
+	}
+
+	/**
+	 * Replaces objects with appropriate names in variable.
+	 *
+	 * @param mixed $varible Variable where to replace objects
+	 * @return mixed
+	 */
+	private static function replaceVariable($variable)
+	{
+		if (is_object($variable)) {
+			return 'object ' . get_class($variable);
+		} elseif (is_resource($variable)) {
+			return (string) $variable;
+		} elseif (is_array($variable)) {
+			foreach ($variable as $k => $v) {
+				unset($variable[$k]);
+				$variable[$k] = self::replaceVariable($v);
+			}
+		} else {
+			return $variable;
+		}
 	}
 
 	/**
