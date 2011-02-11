@@ -1,0 +1,1161 @@
+/* obecné */
+html, body {overflow: hidden; height: 100%; width: 100%;}
+body, body * {-moz-box-sizing: border-box; -khtml-box-sizing: border-box; box-sizing: border-box;}
+body, input, textarea, select, table, pre {font-size: small; text-align: left;}
+.IE body, .IE input, .IE textarea, .IE select, .IE table, .OP body, .OP input, .OP textarea, .OP select, .OP table {font-size: x-small;}
+body, h1, h2, h3, h4, h5, h6, p, pre, ul, ol, li, form, fieldset, table, tr, th, td {margin: 0; padding: 0;}
+h1, h2, h3, h4, h5, h6, strong, th {font-weight: bold;}
+em {font-style: italic;}
+img {border: none;}
+
+/* obecně použitelné třídy */
+.cleaner {
+	display: block;
+	clear: both;
+	visibility: hidden;
+	overflow: hidden;
+	height: 1px;
+	margin-top: -1px;
+}
+.hidden {display: none;}
+.bold {font-weight: bold;}
+.loading {height: 16px; margin-top: 2em;}
+.active {}
+.hover {}
+.highlight {}
+.left {}
+.middle {}
+.right {}
+.text {}
+.open {}
+.close {}
+.float {}
+
+/* input, textarea, select */
+input.text, textarea, select {border-style: solid; border-width: 1px;}
+
+/* tlačítka a ikony */
+.icon {
+	display: block;
+	float: left;
+	width: 16px;
+	height: 16px;
+}
+.iconImage {display: inline; float: none;}
+.iconSize11 {width: 11px; height: 11px;}
+.iconSize12 {width: 12px; height: 12px;}
+.button {
+	display: block;
+	float: left;
+	padding: 2px 4px;
+	text-decoration: none;
+	cursor: pointer;
+}
+input.button {
+	display: inline;
+	float: none;
+	padding: 1px 15px;
+	min-width: 70px;
+	font-weight: bold;
+	text-align: center;
+}
+.IE input.button {padding: 0 15px;}
+.buttonIcon {text-decoration: none; cursor: pointer;}
+.button .icon {margin-right: 4px;}
+
+/* horní panel */
+#top {
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	height: 2.5em;
+	width: 100%;
+	z-index: 10;
+}
+
+/* volitelné menu */
+#menu {}
+
+/* uživatel a odhlášení */
+#user {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 5px;
+	list-style: none;
+	width: 50%;
+}
+#user li {display: block; float: right; padding: 0 4px;}
+#user li a .icon {display: block; float: left; margin: 2px 4px 0 0;}
+
+/* vyhledávání */
+#searchWrapper {text-align: center;}	/* IE */
+#search {
+	position: relative;
+	z-index: 10;
+	margin: 5px auto;
+	width: 311px; 	/* IE6 vyžaduje pixel navíc */
+}
+#search .icon {display: block; float: left; margin: 4px 4px 0 0;}
+#searchText {width: 200px;}
+#searchButton {width: 80px; text-align: center;}
+.IE #searchText, .IE #searchButton {height: 24px;}
+.GK #searchText {padding: 2px 0;}
+
+/* hlavní obsah */
+#main {overflow: hidden; height: 100%;}
+.footerEnable #main {padding-bottom: 1.6em;}	/* výška #footer */
+
+/* levý panel služeb */
+#modulebar {
+	float: left;
+	margin-top: 2.5em;
+	width: 6.7em;
+	padding: 0 2px;
+	text-align: center;
+	list-style: none;
+}
+#modulebar li {cursor: pointer;}
+#modulebar li a {
+	display: block;
+	margin: 0 auto;
+	width: 6.2em;
+	padding: 0.2em;
+	text-decoration: none;
+	text-align: center;
+}
+#modulebar li a .moduleIcon {
+	display: block;
+	margin: 0 auto;
+	width: 48px;
+	height: 48px;
+}
+#modulebar li a .text {
+	display: block;
+	width: 100%;
+	text-align: center;
+	cursor: pointer;
+}
+
+/* blok pro záložky a jejich obsahy */
+#tabWrapper {
+	position: relative;
+	height: 100%;
+	margin-left: 6.7em;
+	padding-top: 2.5em;
+}
+.IE #tabWrapper {float: left; overflow: hidden; margin: 0;}
+.modulebarDisable #tabWrapper {margin-left: 0;}
+
+/* záložky */
+#tabBarWrapper {
+	position: absolute;
+	top: 2.5em;
+	left: 0;
+	z-index: 10;
+}
+#tabBar {position: relative; top: 1px; list-style: none;}  /* kvůli #tabCleaner */
+#tabBar li {
+	display: block;
+	float: left;
+	position: relative;
+	top: 0.4em;
+	height: 2.3em;
+}
+#tabBar li a {text-decoration: none;}
+#tabBar li a .icon {display: block; float: left; margin: 0.1em 4px -0.1em 0;}
+#tabBar li span.left, #tabBar li span.right {
+	display: block;
+	float: left;
+	padding: 0.3em 6px 0.4em 6px;
+	height: 1.9em;
+	white-space: nowrap;
+}
+#tabBar li span.left {}
+#tabBar li span.right {padding-left: 0;}
+#tabBar li.active {top: 1px;}
+#tabBar li.active span.left, #tabBar li.active span.right {height: 2.3em;}
+#tabBar a.tabClose {font-weight: bold;}
+
+#tabCleaner {display: none;}
+.IE #tabCleaner {display: block;}
+
+/* blok pro obsahy záložek */
+#tabContents {
+	position: relative;
+	border-style: solid;
+	border-width: 1px;
+	height: 100%;
+	width: 100%;
+}
+
+/* obsah jednotlivých záložek */
+.tabContent {height: 100%;}
+.content {height: 100%; padding: 8px 2px 2px 2px;}
+
+/* neklikatelnost tabů */
+.tabDisable {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	display: none;
+	z-index: 500;
+	opacity: 0.25;
+}
+.IE .tabDisable {filter: alpha(opacity=25);}
+
+/* notifikátory */
+.notificator {
+	position: absolute;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	display: none;
+	min-height: 50px;
+	width: 400px;
+	padding: 5px 10px;
+	border-style: solid;
+	border-width: 2px;
+}
+.GK .notificator {overflow: auto;}	/* cursor bug */
+.notificator label {display: block; width: 100%; padding-bottom: 2px; font-weight: bold;}
+.notificator input {width: 100%;}
+.notificator .notificatorButtons {padding: 20px 0 5px 0; text-align: center;}
+.notificatorButtons .button {
+	display: inline;
+	float: none;
+	margin: 0 2px;
+	padding: 2px 15px;
+	font-weight: bold;
+}
+
+/* patička */
+#footer {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 1.6em;
+	padding: 1px 5px;
+	width: 100%;
+	border-style: solid;
+	border-width: 1px 0 0 0;
+}
+
+/* prostor pro rámy */
+#framesContainer {display: none;}
+.GK #framesContainer {visibility: hidden; display: block; position: fixed; bottom: -2000px;}
+.debug #framesContainer {display: block; visibility: visible; position: absolute; bottom: 0; right: 0; z-index: 1000;}
+.debug #framesContainer iframe {width: 150px; height: 100px; background-color: #ffffff;}
+
+/* info o nahrávání */
+#loading {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	padding: 2px 2px 2px 20px;
+	font-weight: bold;
+}
+
+/* výsuvné menu */
+.dropdownmenu {height: 2em; z-index: 100;}
+.dropdownmenu ul {list-style: none;}
+.dropdownmenu li {
+	position: relative;
+	display: block;
+	float: left;
+	margin-right: 2px;
+}
+.dropdownmenu li:hover > ul {display: block;}
+.dropdownmenu li a {
+	display: block;
+	padding: 2px 4px;
+	text-decoration: none;
+	cursor: pointer;
+}
+.dropdownmenu li img {margin-left: 2px;}
+.dropdownmenu li ul {
+	display: none;
+	position: absolute;
+	z-index: 200;
+	margin-left: -1px;
+	width: 122px;
+}
+.dropdownmenu li ul li {margin-right: 0; width: 100%; border: none;}
+.dropdownmenu li ul li ul {top: -1px; left: 121px;}
+.dropdownmenu li ul li a {padding-left: 4px; width: 120px;}
+.dropdownmenu li ul li.dropdownseparator {border-style: solid; border-width: 0 0 1px 0; font-size: 0;}
+.dropdownmenu li a .icon {display: block; float: left; margin: 2px 4px 0 0;}
+.dropdownmenu li a .icon.right {display: inline; float: none; margin: 2px 0 0 4px;}
+.dropdownmenu li a .icon.right.float {display: block; float: right;}
+
+/* nastavení */
+#settingsLeft {
+	position: relative;
+	float: left;
+	width: 160px;
+	height: 100%;
+	border-style: solid;
+	border-width: 1px;
+}
+#settingsLeft h3 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 1.7em;
+	width: 100%;
+	padding: 0.2em 5px 0 5px;
+	border-style: solid;
+	border-width: 0 0 1px 0;
+	font-size: 110%;
+	text-align: left;
+}
+.IE #settingsLeft h3 {font-size: 105%;}
+#settingsCategoryWrapper {height: 100%; padding-top: 2.1em;}
+#settingsLeft ul {
+	list-style: none;
+	overflow: auto;
+	overflow-x: hidden;
+	height: 100%;
+}
+#settingsLeft li {display: block; padding: 1px 5px;}
+#settingsLeft li a {display: block;}
+#settingsLeft li a img {display: block; float: left; margin-right: 5px;}
+
+#settingsRight {margin-left: 162px; height: 100%;}
+.IE #settingsRight {margin-left: 159px;} /* 3px bug */
+#settingsRight h2 {margin: 0 0 10px 5px; font-size: 120%;}
+#settingsRight .settingsBlock {margin-left: 5px;}
+#settingsRight select {width: 150px; border-style: solid; border-width: 1px;}
+#settingsRight hr {margin: 10px 0; border-style: solid; border-width: 1px 0 0 0;}
+#settingsButton {margin: 20px 0 0 5px;}
+
+#settingsGlobal {overflow: auto; overflow-x: hidden; height: 100%; padding: 4px;}
+
+/* stránkovač */
+.paginator {}
+.paginator .icon {
+	display: block;
+	float: left;
+	margin: 0 2px;
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+}
+.paginatorCounter {float: left; padding: 0 2px;}
+.paginatorCounter a {padding: 0 2px;}
+
+
+
+/******************
+****** BARVY ******
+******************/
+
+/* obecné */
+body {background: url( 'img/body.png' ) #dedede;}
+body, input, textarea, select, table, pre {font-family: "Trebuchet MS", "Geneva CE", lucida, sans-serif;}
+a {color: #000000;}
+
+/* input, textarea, select */
+input.text, textarea {border-color: #a4a2a3; background: url('img/input.png') #fdfdfd top left no-repeat;}
+select {border-color: #a4a2a3; background: #fdfdfd;}
+
+/* tlačítka */
+.button {border: solid 1px #cc9900; background: url('img/button.png') #ebc023 top left repeat-x; color: #000000;}
+input.button {background-color: #ebc023;}
+.button:hover {background: #ffcc22;}
+input.button:hover {background-color: #ffcc22;}
+
+/* ikony */
+.icon {background: url('img/icons.png') 1000px 0 no-repeat transparent;}	/* ve výchozím stavu nezobrazujeme žádnou ikonu */
+.iconActive {background-position: 0 0;}
+.iconInactive {background-position: -16px 0;}
+.iconArrowDown {background-position: -32px 0;}
+.iconArrowUp {background-position: -48px 0;}
+.iconArrowRight {background-position: -64px 0;}
+.iconAdd {background-position: -80px 0;}
+.iconEdit {background-position: -96px 0;}
+.iconRemove {background-position: -112px 0;}
+.iconUnchecked {background-position: -128px 0;}
+.iconChecked {background-position: -144px 0;}
+.iconTabNew {background-position: -160px 0;}
+.iconClose {background-position: -176px 0;}
+.iconDownload {background-position: -192px 0;}
+.iconPrint {background-position: -208px 0;}
+.iconSelect {background-position: -224px 0;}
+.iconPaginatorFirst {background-position: -240px 0;}
+.iconPaginatorPrevious {background-position: -256px 0;}
+.iconPaginatorNext {background-position: -272px 0;}
+.iconPaginatorLast {background-position: -288px 0;}
+
+.topIcon {background: url('img/top-icons.png') 1000px 0 no-repeat transparent;} /* ve výchozím stavu nezobrazujeme žádnou ikonu */
+.topIconLogout {background-position: 0 0;}
+.topIconSearch {background-position: -16px 0;}
+.topIconSettings {background-position: -32px 0;}
+.topIconMail {background-position: -48px 0;}
+.topIconContacts {background-position: -64px 0;}
+
+.moduleIcon {background: none;} /* ve výchozím stavu nezobrazujeme žádnou ikonu */
+.moduleIconMail {background-position: 0 0;}
+.moduleIconContacts {background-position: -48px 0;}
+
+.tabIcon {background: url('img/tab-icons.png') 1000px 0 no-repeat transparent;} /* ve výchozím stavu nezobrazujeme žádnou ikonu */
+.IE6 .tabIcon {background-image: url('img/tab-icons-ie6.png');} /* IE6 neumí poloprůhlednost */
+.tabIconSettings {background-position: -32px 0;}
+.tabIconSearch {background-position: -48px 0;}
+
+.settingsIcon {background: url('img/settings-icons.png') 1000px 0 no-repeat transparent;} /* ve výchozím stavu nezobrazujeme žádnou ikonu */
+.IE6 .settingsIcon {background-image: url('img/settings-icons-ie6.png');} /* IE6 neumí poloprůhlednost */
+.settingsIconGlobal {background-position: 0 0;}
+
+/* uživatel a odhlášení */
+#user li a, #user li span {color: #000000;}
+
+/* levý panel služeb */
+#modulebar li a {color: #ffffff;}
+#modulebar li a:hover {background-color: #ffffff;}
+#modulebar li a:hover .moduleIconMail {background-position: 0 -48px;}
+#modulebar li a:hover .moduleIconContacts {background-position: -48px -48px;}
+#modulebar li a:hover .text {color: #ffffff;}
+
+/* záložky */
+#tabBar li a {color: #444444;}
+#tabBar li.active a {color: #000000;}
+#tabBar li.highlight a {color: #cc0000;}
+#tabBar li span.left, #tabBar li span.right {background-repeat: no-repeat;}
+#tabBar li span.left {background-position: top left; background-image: url('img/tab-inactive-left.png');}
+#tabBar li span.right {background-position: top right; background-image: url('img/tab-inactive-right.png');}
+#tabBar li.active span.left {background-image: url('img/tab-active-left.png');}
+#tabBar li.active span.right {background-image: url('img/tab-active-right.png');}
+#tabBar li a.tabClose {color: #cc0000;}
+#tabBar li a.tabClose:hover {color: #ff0000;}
+
+/* blok pro obsahy záložek */
+#tabContents {border-color: #a4a2a3; background: url('img/main.png') #e7e7e7 top left repeat-x;}
+
+/* neklikatelnost tabů */
+.tabDisable {background-color: #000000;}
+.KQ .tabDisable {background-color: transparent;}   /* Konqueror opacity neumí */
+
+/* notifikátory */
+.notificator {border-color: #a4a2a3; background-color: #eeeeee;}
+
+/* patička */
+#footer {background-color: #cfcfcf;}
+
+/* info o nahrávání */
+#loading {background: url('img/loading.gif') 2px center no-repeat #ffffff;}
+
+/* výsuvné menu */
+.dropdownmenu li {border: solid 1px #cc9900; background: url('img/button.png') #ebc023 top left repeat-x;}
+.dropdownmenu li li {background: inherit;}
+.dropdownmenu li a {color: #000000;}
+.dropdownmenu li a:hover {background-color: #ffcc22;}
+.dropdownmenu li ul {border: solid 1px #cc9900; background-color: #ebc023;}
+.dropdownmenu li ul li.dropdownseparator {border-color: #cc9900;}
+
+/* nastavení */
+#settingsLeft {border-color: #808080;}
+#settingsLeft h3 {border-color: #a4a2a3; background: url('img/header-dark.png') #1c1f26 top left repeat-x; color: #ebc023;}
+#settingsLeft li:hover, #settingsLeft li.hover {background-color: #eeeeee;}
+#settingsLeft li.active {background-color: #cccccc !important;}
+#settingsCategoryWrapper {background-color: #fdfdfd;}
+#settingsRight hr {border-color: #a4a2a3;}
+
+/*******************
+**** SPECIALITY ****
+*******************/
+
+/* uživatel a odhlášení */
+#user {padding: 0;}
+#username {display: none !important;}
+
+/* vyhledávání */
+#searchWrapper {text-align: left;}		/* IE */
+#search {margin: 0; padding: 5px 0 0 5px;}
+/* vyhledávání nemá ikonu */
+#search .icon {display: none;}
+
+/* ikony */
+.mailIcon {width: 16px; height: 16px; cursor: pointer;}
+.button .mailIcon {display: block; float: left; margin-right: 4px;}
+
+/* levý panel */
+#mailLeft {
+	position: relative;
+	height: 100%;
+	width: 180px;
+	float: left;
+}
+
+/* levý horní panel */
+#mailLeftTop {position: absolute; height: 2.5em; width: 100%;}
+#mailLeftTop a {display: block; width: 100%; text-align: center;}
+
+/* obsah levého panelu */
+#mailLeftContentWrapper {height: 100%; padding-top: 2.5em;}
+#mailLeftContent {
+	position: relative;
+	height: 100%;
+	padding-top: 12.6em;
+	border-style: solid;
+	border-width: 1px;
+}
+#mailLeftContent h3 {
+	position: relative;
+	height: 1.7em;
+	padding: 0.2em 5px 0 5px;
+	border-style: solid;
+	border-width: 1px 0;
+	font-size: 110%;
+}
+.IE #mailLeftContent h3 {font-size: 105%;}
+#mailLeftContent h3#mailFolderListHeading {border-top-width: 0;}
+#mailLeftContent h3 a {position: absolute; top: 0.2em; right: 5px;}
+
+#mailLeftContent ul {list-style: none; width: 100%; padding: 0.5em 0;}
+#mailLeftContent li {display: block; width: 100%; padding: 1px 5px;}
+#mailLeftContent li a {display: block; min-height: 18px;}
+#mailLeftContent li a img {display: block; float: left; margin-right: 4px;}
+
+#mailLeftContentTop {
+	position: absolute;
+	top: 0;
+	height: 12.6em;
+	width: 100%;
+}
+
+#mailLabelList {
+	overflow: auto;
+	overflow-x: hidden;
+	height: 100%;
+	width: 100%;
+}
+#mailLabelList li a {float: left;}
+#mailLabelList li .buttonIcon {visibility: hidden; float: right;}
+#mailLabelList li:hover .buttonIcon, #mailLabelList li.hover .buttonIcon {visibility: visible;}
+#mailLabelList li.active .buttonIcon {visibility: visible;}
+
+/* pravý panel */
+#mailRight {position: relative; margin-left: 182px; height: 100%;}
+.IE #mailRight {margin-left: 179px;}	/* 3px bug */
+#mailRightTop {
+	position: absolute;
+	z-index: 10;
+	height: 2.5em;
+	width: 100%;
+}
+
+/* obsah pravého panelu */
+#mailRightContent {height: 100%; padding-top: 2.5em;}
+
+/* seznam e-mailů */
+#mailListHeaderWrapper {
+	position: relative;
+	height: 100%;
+	border-style: solid;
+	border-width: 1px;
+}
+#mailListHeaderWrapper form {
+	height: 100%;
+	width: 100%;
+	padding-top: 2.1em;
+	padding-bottom: 0.1em;
+}
+#mailListWrapper {
+	overflow: auto;	 /* kvůli Opeře */
+	overflow-x: hidden;
+	overflow-y: scroll;
+	height: 100%;
+}
+
+/* hlavička seznamu e-mailů */
+#mailListHeader {
+	position: absolute;
+	table-layout: fixed;
+	width: 100%;
+	height: 1.7em;
+	border-collapse: collapse;
+	border-style: solid;
+	border-width: 0 0 1px 0;
+	cursor: pointer;
+}
+#mailListHeader th {padding: 0 2px; text-align: left; white-space: nowrap;}
+#mailListHeader th span {
+	display: block;
+	padding: 0.2em 13px 0 0;
+	font-weight: bold;
+	font-size: 110%;
+	position: relative;
+}
+.IE #mailListHeader th span {font-size: 105%;}
+#mailListHeader th span.empty {padding-right: 0;}
+#mailListHeader th span.icon {position: absolute; top: 5px; right: 2px; padding: 0; display: block;}
+
+.mailCol20 {width: 24px;}
+.mailCol16 {width: 20px;}
+.OP95L .mailCol20, .FF3L .mailCol20 {width: 20px;}
+.OP95L .mailCol16, .FF3L .mailCol16 {width: 16px;}
+.mailColName {width: 10em;}
+.mailColDate {width: 8.5em;}
+.mailColSize {width: 7em;}
+
+#mailListHeader th#mailColScroll {padding: 0; width: 20px;}
+
+.mailStatusRead {font-weight: normal;}
+.mailStatusUnread {font-weight: bold;}
+
+/* samotný seznam e-mailů */
+#mailList {table-layout: fixed; width: 100%; border-collapse: collapse;}
+#mailList td {
+	overflow: hidden;
+	padding: 0 2px;
+	line-height: 140%;
+	white-space: nowrap;
+	cursor: pointer;
+}
+#mailList td div {overflow: hidden; width: 100%; white-space: nowrap;}
+#mailList .mailColSize {text-align: right;}
+#mailList .mailLabels {font-size: 0.9em;}
+.IE #mailList .mailLabels {zoom: 1;}  /* IE bug */
+
+/* zobrazení emailu */
+#mailViewWrapper {
+	display: none;
+	position: relative;
+	overflow: hidden;
+	padding-top: 3px;
+}
+
+/* posouvací blok */
+#mailViewMover {
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	width: 100%;
+	height: 3px;
+	cursor: n-resize;
+}
+#mailViewMoverContour {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 10000;
+	height: 1px;
+	border-style: dashed;
+	border-width: 1px 0 0 0;
+}
+
+/* zobrazení e-mailu */
+#mailView, .mailViewTab {overflow: hidden; height: 100%;}
+#mailView {border-style: solid; border-width: 1px;}
+
+#mailViewHead, .mailViewHead {width: 100%;}
+#mailViewHead {padding: 5px; border-style: solid; border-width: 0 0 1px 0;}
+#mailViewControls, .mailViewControls {width: 100%;}
+#mailViewControls {height: 2.1em;}
+#mailViewControls .button, .mailViewControls .button {margin-right: 2px;}
+#mailViewHeader, .mailViewHeader {position: relative; width: 100%;}
+.IE #mailViewHeader, .IE .mailViewHeader {width: 99.9%;}
+#mailViewHeader {padding: 8px 0 0 14px;}
+.mailViewHeader {padding: 8px 5px 5px 5px;}
+
+#mailViewHeaderShort {height: 1.8em; width: 100%;}
+.IE #mailViewHeaderShort {padding-right: 14px;}
+#mailViewHeaderShort div {overflow: hidden; padding: 1px 0; white-space: nowrap;}
+#mailViewHeaderShort div.left {float: left; width: 50%;}
+#mailViewHeaderShort div.middle {float: left; width: 25%;}
+#mailViewHeaderShort div.middle strong {margin-left: 5px;}
+#mailViewHeaderShort div.right {float: left; width: 25%; text-align: right;}
+#mailViewHeaderShort div.right .mailIcon {display: block; float: right; margin-left: 2px;}
+#mailViewHeaderShortAttach {
+	position: absolute;
+	top: 26px;
+	right: 0;
+	border-style: solid;
+	border-width: 1px;
+	padding: 5px;
+	z-index: 100;
+}
+#mailViewHeaderShortAttach img {margin-right: 4px; vertical-align: bottom;}
+
+#mailViewHeaderFull, .mailViewHeaderFull {width: 100%;}
+#mailViewHeaderFull th, .mailViewHeaderFull th,
+#mailViewHeader table td, .mailViewHeaderFull td {padding: 1px 0; text-align: left; vertical-align: top;}
+#mailViewHeaderFull th.left, .mailViewHeaderFull th.left {width: 6em;}
+
+#mailViewHeaderFullAttach a {white-space: nowrap;}
+.OP #mailViewHeaderFullAttach a {white-space: normal;}
+#mailViewHeaderFullAttach img, .mailViewHeaderFullAttach img {margin-right: 4px; vertical-align: bottom;}
+
+#mailViewControls .iconClose, #mailViewControls .iconTabNew {float: right; margin-right: 2px;}
+.mailViewChangeHeader {position: absolute; top: 10px; left: 0; width: 11px; height: 11px;}
+
+.mailContactAdd {margin-left: 2px; vertical-align: bottom; cursor: pointer;}
+
+#mailRemoteImages, .mailRemoteImages {padding: 0.5em; border-style: solid; font-weight: bold;}
+#mailRemoteImages {border-width: 0 0 1px 0;}
+.mailRemoteImages {border-width: 1px 1px 0 1px; width: 99.8%; /* stejná šířka jako #mailViewScroll */}
+
+#mailViewScroll, .mailViewScroll {
+	overflow: auto;
+	width: 99.8%;	/* asi kvůli IE */
+	height: 0;
+	padding: 0.5em;
+}
+.mailViewScroll {border-style: solid; border-width: 1px;}
+
+.mailContent * {-moz-box-sizing: content-box; -khtml-box-sizing: content-box; box-sizing: content-box;}
+.mailContent hr {margin: 15px 0;}
+.mailContent .mailRfcHeader {margin-bottom: 15px; width: 100%; border-collapse: collapse;}
+.mailContentText p {margin-bottom: 1em;}
+
+.mailContent ul, .mailContent ol {margin: 1.33em 0 1.33em 40px;}
+.mailContent ul ol, .mailContent ol ul, .mailContent ul ul, .mailContent ol ol {margin: 0 0 0 40px;}
+.mailContent blockquote {
+	margin: 10px 0;
+	padding: 0 10px 2px 10px;
+	border-style: solid;
+	border-width: 0 2px;
+}
+.IE .mailContent blockquote {width: 90%;}
+.IE .mailContent blockquote blockquote {margin-top: 0; width: auto;}
+
+.mailImages a {text-decoration: none;}
+.mailImages img {border-style: solid; border-width: 1px;}
+
+/* typy příloh */
+.mimetype {margin-right: 2px; width: 16px; height: 16px;}
+
+/* psaní zprávy */
+.mailComposeWrapper {
+	float: left;
+	overflow: hidden;
+	width: 80%;
+	height: 100%;
+	padding-right: 5px;
+}
+.mailCompose {
+	position: relative;
+	overflow: auto;
+	overflow-x: hidden;
+	height: 100%;
+	width: 100%;
+	padding: 5px;
+	border-style: solid;
+	border-width: 0 1px 0 0;
+}
+.mailCompose .mailComposeHeader {padding: 2px 0; width: 100%;}
+.mailComposeHeader label {
+	float: left;
+	display: block;
+	padding-top: 2px;
+	width: 20%;
+	font-weight: bold;
+}
+.mailComposeHeader .mailComposeInput {float: left; display: block; width: 80%;}
+.mailComposeHeader .mailComposeInput input,
+.mailComposeHeader .mailComposeInput textarea {height: 1.8em; width: 100%; padding: 2px;}
+.mailComposeHeader .mailComposeInput textarea {overflow: auto; overflow-x: hidden;}
+.mailComposeHeader .mailComposeInput div {margin-bottom: 2px;}
+.mailComposeHeader .mailComposeInput img {margin-left: 2px; cursor: pointer;}
+
+.mailComposeContent {
+	width: 100%;
+	height: 350px;
+	padding: 10px;
+	border-style: solid;
+	border-width: 1px;
+}
+
+/* TinyMCE */
+.mailCompose .mceEditor * {-moz-box-sizing: content-box; -khtml-box-sizing: content-box; box-sizing: content-box;}
+.mailCompose .mceEditor table.mceLayout {width: 100% !important; border-style: solid; border-width: 1px;}
+.mailCompose .mceEditor table.mceLayout tr.mceFirst td {border: none;}
+.mailCompose .mceEditor table.mceLayout tr.mceLast td.mceIframeContainer {border-bottom: none;}
+.mailCompose .mceEditor .mceListBox .mceText {width: 90px;}
+
+.mailCompose .mceEditor.defaultSkin .mceToolbar {padding-top: 0; height: 24px;}
+
+.mailComposeButtons input {width: 100px; text-align: center;}
+
+/* kontrola pravopisu */
+.mailSpellcheck {
+	position: relative;
+	display: none;
+	overflow: auto;
+	overflow-x: hidden;
+	padding: 10px;
+	width: 100%;
+	height: 350px;
+	border-style: solid;
+	border-width: 1px;
+}
+.mailSpellcheck p, .mailSpellcheck pre {margin: 0; padding: 0;}
+.mailSpellcheck blockquote {margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0;}
+.mailSpellcheck .spell {text-decoration: underline; cursor: pointer;}
+.mailSpellcheck blockquote.mailRe {
+	margin: 10px 0;
+	padding: 0 10px;
+	border-style: solid;
+	border-width: 0 2px;
+}
+
+.mailSpellcheckButtons {
+	display: none;
+	padding: 5px 10px 4px;
+	width: 100%;
+	border-style: solid;
+	border-width: 1px 1px 0 1px;
+}
+.mailSpellcheckButtons .button {margin-right: 4px; width: 80px; text-align: center;}
+
+.mailSpellcheckSuggest {
+	position: absolute;
+	z-index: 100;
+	display: none;
+	overflow: hidden;
+	width: 150px;
+	border-style: solid;
+	border-width: 1px;
+}
+.mailSpellcheckSuggest ul {list-style: none;}
+.mailSpellcheckSuggest li {display: block; padding: 1px 4px; cursor: pointer;}
+.mailSpellcheckSuggest li.first {font-weight: bold;}
+
+/* sloupec kontaktů při psaní zprávy */
+.mailComposeContactsWrapper {
+	float: right;
+	height: 100%;
+	width: 20%;
+	border-style: solid;
+	border-width: 1px;
+}
+.mailComposeContacts {position: relative; height: 100%; padding-top: 2.1em;}
+.mailComposeContacts h3 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 1.8em;
+	width: 100%;
+	padding: 3px 4px 1px 4px;
+	border-style: solid;
+	border-width: 0 0 1px 0;
+	font-size: 110%;
+	text-align: left;
+}
+.IE .mailComposeContacts h3 {font-size: 105%;}
+.mailComposeContacts ul {
+	list-style: none;
+	overflow: auto;
+	overflow-x: hidden;
+	height: 100%;
+	padding: 5px 0;
+}
+.mailComposeContacts li {display: block; padding: 1px 5px;}
+
+/* graf nahrávání */
+.mailProgress p span {float: right;}
+.mailProgressbar {display: block; margin-top: 5px; width: 100%; height: 20px; border-style: solid; border-width: 1px;}
+.mailProgressbar span {position: relative; display: block; height: 100%; width: 0;}
+
+/* automatické dokončování */
+.mailAutocomplete {
+	position: absolute;
+	z-index: 100;
+	margin-left: 3px;
+	left: 20%;
+	display: none;
+	border-style: solid;
+	border-width: 1px;
+}
+.mailAutocomplete ul {list-style: none;}
+.mailAutocomplete li {
+	display: block;
+	padding: 1px 2px;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+/* vyhledávání */
+#mailSearch {position: relative; height: 100%;}
+#mailSearchTop {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 2em;
+}
+#mailSearchMessage {float: left; margin-bottom: 5px; padding-left: 5px;}
+#mailSearchPaginator {float: right; margin-bottom: 5px; padding-right: 5px;}
+#mailSearchResultsWrapper {height: 100%; padding-top: 2em;}
+#mailSearchResults {
+	overflow: auto;
+	overflow-x: hidden;
+	height: 100%;
+	border-style: solid;
+	border-width: 1px;
+}
+.mailSearchResult {margin: 10px 5px;}
+.mailSearchResult h3 {font-weight: normal; font-size: 120%;}
+.mailSearchResult h3 a {color: #0000ff;}
+.mailSearchResult table {margin: 2px 0;}
+.mailSearchResult table th {width: 6em; text-align: left; font-weight: bold;}
+.mailSearchResultInfo {margin-top: 5px;}
+
+/* tisk */
+#mailPrint, #mailPrint body {overflow: auto; width: auto; height: auto;}
+#mailPrint body {margin: 0; padding: 15px;}
+
+#mailPrint h1 {margin-bottom: 20px;}
+#mailPrint hr {margin: 15px 0;}
+
+#mailPrintHeader td {padding: 1px 0; text-align: left; vertical-align: top;}
+#mailPrintHeader th {padding-right: 10px;}
+
+#mailPrint .mailRemoteImages {margin-bottom: 10px; border-style: solid; border-width: 1px;}
+#mailPrint .mailContent {padding: 0;}
+#mailPrint .mailContent blockquote {width: 100%;}
+
+@media print {
+	#mailPrint .mailRemoteImages {display: none !important;}
+}
+
+/* nastavení */
+#mailSettings {overflow: auto; overflow-x: hidden; height: 100%; padding: 4px;}
+#mailSettings select#mailSettingsPerpage {width: auto;}
+#mailSettingsAutosaveInterval {width: 3ex; padding: 0 2px; text-align: right;}
+#mailSettingsSendcopyto {width: 200px;}
+
+/* filtry */
+#mailFilterListTop {position: absolute; height: 2.5em;}
+#mailFilterListTop .button {width: 80px; font-weight: bold; text-align: center;}
+#mailFilterListWrapper {height: 100%; padding-top: 2.5em;}
+#mailFilterList {
+	overflow: auto;
+	overflow-x: hidden;
+	height: 100%;
+	border-style: solid;
+	border-width: 1px;
+}
+#mailFilterList table {
+	table-layout: fixed;
+	margin: 0;
+	width: 100%;
+	border-collapse: collapse;
+}
+#mailFilterList th {
+	padding: 0.2em 2px 0.1em 2px;
+	border-style: solid;
+	border-width: 0 0 1px 0;
+	text-align: left;
+	white-space: nowrap;
+}
+.mailFilterListOrder {width: 4em;}
+.mailFilterListState {width: 3em;}
+.mailFilterListAction {width: 40%;}
+.mailFilterListControls {width: 70px;}
+
+#mailFilterList td {overflow: hidden; padding: 2px; white-space: nowrap;}
+#mailFilterList td div {overflow: hidden; margin: 0; width: 100%; white-space: nowrap;}
+#mailFilterList td img {cursor: pointer;}
+td.mailFilterListOrder, td.mailFilterListState {text-align: center;}
+td.mailFilterListControls {text-align: right;}
+
+#mailFilterEdit {overflow: auto; overflow-x: hidden; height: 100%; padding: 4px;}
+#mailFilterEdit div, #mailFilterEdit table {margin: 0;}
+#mailFilterEdit .mailFilterEditPart {margin: 0 0 20px 5px;}
+#mailFilterEdit h2 {margin-bottom: 10px; font-size: 120%;}
+#mailFilterEdit .mailFilterCond {margin-bottom: 5px;}
+#mailFilterAction td {padding: 2px;}
+#mailFilterEdit .mailFilterCondType {width: 15em;}
+#mailFilterEdit .mailFilterCondComp {width: 10em;}
+#mailFilterEdit .mailFilterCondRelation {margin-top: 5px; width: 7em;}
+#mailFilterEdit #mailFilterOrder {width: 3.5em;}
+.mailFilterCond select {margin-right: 5px;}
+
+#mailPaginator {position: absolute; top: 0; right: 0;}
+
+
+
+/******************
+****** BARVY ******
+******************/
+
+/* ikony */
+.mailIcon {background: url('img/mail-icons.png') 1000px 0 no-repeat transparent;}	/* ve výchozím stavu nezobrazujeme žádnou ikonu */
+.mailIconInbox {background-position: 0 0;}
+.mailIconDrafts {background-position: -16px 0;}
+.mailIconSent {background-position: -32px 0;}
+.mailIconJunk {background-position: -48px 0;}
+.mailIconTrash {background-position: -64px 0;}
+.mailIconWrite {background-position: -80px 0;}
+.mailIconRecent {background-image: url('img/mail-recent.gif'); background-position: 0 0;}
+.mailIconReply {background-position: -128px 0;}
+.mailIconReplyAll {background-position: -160px 0;}
+.mailIconForward {background-position: -176px 0;}
+.mailIconTrashEmpty {background-position: -224px 0;}
+.mailIconTrashRestore {background-position: -240px 0;}
+.mailIconNotJunk {background-position: -256px 0;}
+.mailIconLabel {background-position: -272px 0;}
+.mailIconAttachment {background-position: -288px 0;}
+.mailIconSource {background-position: -304px 0;}
+/* musí být definováno v tomto pořadí */
+.mailIconRead {background-position: -112px 0;}
+.mailIconReplied {background-position: -144px 0;}
+.mailIconForwarded {background-position: -192px 0;}
+.mailIconRepliedForwarded {background-position: -208px 0;}
+.mailIconUnread {background-position: -96px 0;}
+
+.tabIconMail {background-position: 0 0;}
+.tabIconMailWrite {background-position: -64px 0;}
+.tabIconMailRead {background-position: -80px 0;}
+
+.settingsIconMail {background-position: -16px 0;}
+.settingsIconMailFilter {background-position: -32px 0;}
+
+/* obsah levého panelu */
+#mailLeft h3 {border-color: #a4a2a3; background: url('img/header-dark.png') #1c1f26 top left repeat-x; color: #ebc023;}
+#mailLeftContent {border-color: #a4a2a3; background-color: #fdfdfd;}
+#mailFolderList, #mailLabelList {background-color: #fdfdfd;}
+#mailFolderList li:hover, #mailLabelList li:hover {background-color: #eeeeee;}
+.IE #mailFolderList li.hover, .IE #mailLabelList li.hover {background-color: #eeeeee;}
+#mailFolderList li.active, #mailLabelList li.active {background-color: #cccccc !important;}
+
+/* seznam e-mailů */
+#mailListHeaderWrapper {border-color: #a4a2a3;}
+#mailListHeaderWrapper form {background-color: #fdfdfd;}
+
+/* hlavička seznamu e-mailů */
+#mailListHeader {border-color: #a4a2a3;}
+#mailListHeader th {background: url('img/header-dark.png') #1c1f26 top left repeat-x; color: #ebc023;}
+#mailListHeader th.sorted {background: url('img/header-light.png') #60636b top left repeat-x;}
+
+/* samotný seznam e-mailů */
+#mailListWrapper {background-color: #fdfdfd;}
+#mailList tr:hover td, .IE #mailList tr.hover td {background-color: #eeeeee;}
+#mailList tr.active td {background-color: #cccccc !important;}
+#mailList .mailLabels {background: url('img/button.png') #ebc023 top left repeat-x; color: #555555;}
+#mailList tr.active .mailLabels {color: #ffffff;}
+.mailPreview {color: #555555;}
+#mailList tr.active .mailPreview {color: #ffffff;}
+
+/* posouvací blok */
+#mailViewMover {background-color: #e7e7e7;}
+#mailViewMoverContour {border-color: #000000;}
+
+/* zobrazení e-mailu */
+#mailView {border-color: #a4a2a3; background-color: #fdfdfd;}
+#mailViewHead {border-color: #a4a2a3; background: url('img/header-dark.png') #1c1f26 top left repeat-x;}
+#mailViewHeaderFull, #mailViewHeaderShort {color: #ebc023;}
+#mailViewHeaderFull a {color: #cccccc;}
+#mailViewHeaderShortAttach {border-color: #cc9900; background-color: #ebc023;}
+
+.mailViewChangeHeader.open {background-position: -64px 0;}
+.mailViewChangeHeader.close {background-position: -32px 0;}
+
+#mailRemoteImages, .mailRemoteImages {border-color: #a4a2a3; background-color: #ffffe1;}
+#mailViewScroll {background-color: #fdfdfd;}
+.mailViewScroll {border-color: #a4a2a3; background-color: #fdfdfd;}
+
+.mailContent .mailRfcHeader {background-color: #efefef;}
+.mailContent b.highlight {background-color: #cccccc;}
+
+.mailContent a {color: #444444;}
+.mailContent blockquote {border-color: #0000ff;}
+.mailContent blockquote blockquote {border-color: #800000;}
+.mailContent blockquote blockquote blockquote {border-color: #008080;}
+.mailContent blockquote blockquote blockquote blockquote {border-color: #800080;}
+.mailContent blockquote blockquote blockquote blockquote blockquote {border-color: #008000;}
+
+.mailImages img {border-color: #000000;}
+
+/* typy příloh */
+.mimetype {background: url('img/mime.png') top left no-repeat transparent;}
+.mimeAudio {background-position: 0 0;}
+.mimeCompressed {background-position: -16px 0;}
+.mimeExcel {background-position: -32px 0;}
+.mimeFlash {background-position: -48px 0;}
+.mimeImage {background-position: -64px 0;}
+.mimeMessage {background-position: -80px 0;}
+.mimeOther {background-position: -96px 0;}
+.mimePdf {background-position: -112px 0;}
+.mimePowerpoint {background-position: -128px 0;}
+.mimeText {background-position: -144px 0;}
+.mimeVideo {background-position: -160px 0;}
+.mimeWord {background-position: -176px 0;}
+
+/* psaní zprávy */
+.mailCompose {border-color: #a4a2a3;}
+.mailComposeContent {border-color: #808080;}
+
+/* TinyMCE */
+.mailCompose .mceEditor table.mceLayout {border-color: #a4a2a3;}
+
+/* kontrola pravopisu */
+.mailSpellcheck {border-color: #a4a2a3; background-color: #fdfdfd;}
+.mailSpellcheck .spell {color: #ff0000;}
+.mailSpellcheck blockquote.mailRe {border-color: #0000ff;}
+.mailSpellcheck blockquote.mailRe blockquote.mailRe {border-color: #800000;}
+.mailSpellcheck blockquote.mailRe blockquote.mailRe blockquote.mailRe {border-color: #008080;}
+.mailSpellcheck blockquote.mailRe blockquote.mailRe blockquote.mailRe blockquote.mailRe {border-color: #800080;}
+.mailSpellcheck blockquote.mailRe blockquote.mailRe blockquote.mailRe blockquote.mailRe blockquote.mailRe {border-color: #008000;}
+.mailSpellcheckButtons {border-color: #a4a2a3; background-color: #a4a2a3;}
+.mailSpellcheckSuggest {border-color: #a4a2a3; background-color: #fdfdfd;}
+
+/* sloupec kontaktů při psaní zprávy */
+.mailComposeContactsWrapper {border-color: #a4a2a3; background-color: #fdfdfd;}
+.mailComposeContacts h3 {border-color: #a4a2a3; background: url('img/header-dark.png') #1c1f26 top left repeat-x; color: #ebc023;}
+.mailComposeContacts li:hover, .mailComposeContacts li.hover {background-color: #eeeeee;}
+
+/* graf nahrávání */
+.mailProgressbar {border-color: #000000; background: #fdfdfd;}
+.mailProgressbar span {background-color: #cccccc;}
+
+/* automatické dokončování */
+.mailAutocomplete {border-color: #a4a2a3; background-color: #fdfdfd;}
+.mailAutocomplete li.active {background-color: #cccccc;}
+
+/* vyhledávání */
+#mailSearchResults {border-color: #a4a2a3; background-color: #fdfdfd;}
+.mailSearchResult h3 a {color: #ebc023;}
+.mailSearchResultInfo {color: #000000;}
+
+/* tisk */
+#mailPrint body {background: #ffffff;}
+#mailPrint .mailRemoteImages {border-color: #808080;}
+
+/* filtry */
+#mailFilterList {border-color: #a4a2a3; background-color: #fdfdfd;}
+#mailFilterList th {border-color: #a4a2a3; background: url('img/header-dark.png') #1c1f26 top left repeat-x; color: #ebc023;}
+
+/*******************
+**** SPECIALITY ****
+*******************/
+
+/* zúžení levého sloupce */
+#mailLeft {width: 160px;}
+#mailRight {margin-left: 162px;}
+.IE #mailRight {margin-left: 159px;}	/* 3px bug */
+
+/* štítky v seznam e-mailů */
+#mailList .mailLabels em:first-child {padding-left: 5px;}
+#mailList .mailLabels em:last-child {padding-right: 5px;}
+.IE #mailList .mailLabels em, .OP95L #mailList .mailLabels em {padding: 0 5px;}
+
+/* u hlavičce seznamu e-mailů je třeba použít žluté šipky */
+#mailListHeader .iconArrowDown, #mailListHeader .iconArrowUp {background-image: url('img/arrow-yellow.png');}
+#mailListHeader .iconArrowDown {background-position: 0 0;}
+#mailListHeader .iconArrowUp {background-position: -16px 0;}
+
+/* u hlavičce e-mailu je třeba použít žluté šipky */
+.mailViewChangeHeader.close, .mailViewChangeHeader.open {background-image: url('img/arrow-yellow.png');}
+.mailViewChangeHeader.close {background-position: 0 0;}
+.mailViewChangeHeader.open {background-position: -32px 0;}

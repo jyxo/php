@@ -1,0 +1,35 @@
+<html>
+<head>
+	<style type="text/css">
+		a {color: green;}
+		p > a {color: yellow;}
+		#header {border: solid 1px black;}
+	</style>
+	<style type="text/css">
+		<![CDATA[
+			.icon {display: block;}
+			h1#header {font-size: 200%;}
+			a.icon.small {width: 16px; height: 16px;}
+		]]>
+	</style>
+	<style type="text/css">
+		/* <![CDATA[ */
+			a#remove.icon.small {background-image: url("remove.png");}
+			a img {text-decoration: none;}
+			h1, h2 {font-weight: bold;}
+			a:link {color: orange}
+		/* ]]> */
+	</style>
+</head>
+<body>
+	<h1 id="header" style="background-color: #ffffff; color: #000000;">H1</h1>
+	<p>
+		<a href="http://domain.tld" title="Link">Link</a>
+		<a><img src="image.gif" /></a>
+		<a class="icon small"></a>
+		<a id="remove" class="icon small"></a>
+	</p>
+	<h2>H2</h2>
+	<p>Text text text</p>
+</body>
+</html>
