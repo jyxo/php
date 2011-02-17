@@ -27,6 +27,40 @@ namespace Jyxo;
 class Charset
 {
 	/**
+	 * Detects charset of a given string.
+	 *
+	 * @param string $string String to detect
+	 * @return string
+	 */
+	public static function detect($string)
+	{
+		$charset = mb_detect_encoding($string, 'UTF-8, ISO-8859-2, ASCII, UTF-7, EUC-JP, SJIS, eucJP-win, SJIS-win, JIS, ISO-2022-JP');
+
+		// The previous function can not handle WINDOWS-1250 and returns ISO-8859-2 instead
+		if ('ISO-8859-2' === $charset && preg_match('~[\x7F-\x9F\xBC]~', $string)) {
+			$charset = 'WINDOWS-1250';
+		}
+
+		return $charset;
+	}
+
+	/**
+	 * Converts a string from various charsets to UTF-8.
+	 *
+	 * The charset is automatically detected if not given.
+	 *
+	 * @param string $string String to convert
+	 * @param string $charset Actual charset
+	 * @return string
+	 */
+	public static function convert2utf($string, $charset = '')
+	{
+		$charset = $charset ?: self::detect($string);
+		// Detection sometimes fails or the string may be in wrong format, so we remove invalid UTF-8 letters
+		return @iconv($charset, 'UTF-8//TRANSLIT//IGNORE', $string);
+	}
+
+	/**
 	 * Converts a string from UTF-8 to an identifier form.
 	 *
 	 * @param string $string String to convert
