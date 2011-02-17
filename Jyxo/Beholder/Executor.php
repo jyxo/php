@@ -231,7 +231,7 @@ class Executor
 	private function runTest($ident)
 	{
 		// Runs the test
-		$start = microtime(true);
+		$timer = \Jyxo\Timer::start();
 		$result = $this->tests[$ident]->run();
 		if (!($result instanceof \Jyxo\Beholder\Result)) {
 			throw new \UnexpectedValueException(sprintf('Result %s of the test %s is not a \Jyxo\Beholder\Result instance.', $result, $ident));
@@ -242,7 +242,7 @@ class Executor
 			'ident' => $ident,
 			'test' => $this->tests[$ident],
 			'result' => $result,
-			'duration' => microtime(true) - $start
+			'duration' => \Jyxo\Timer::stop($timer)
 		);
 	}
 
