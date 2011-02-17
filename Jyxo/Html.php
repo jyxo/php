@@ -343,7 +343,7 @@ class Html
 		$html = '';
 		$offset = 0;
 		for ($i = 0; $i < count($matches[0]); $i++) {
-			$currentOffset = mb_substr_count($matches[1][$i], '&gt;');
+			$currentOffset = substr_count($matches[1][$i], '&gt;');
 			if ($currentOffset > 0) {
 				if ($currentOffset > $offset) {
 					$html .= str_repeat('<blockquote type="cite">', $currentOffset - $offset) . '<p>';
@@ -427,7 +427,7 @@ class Html
 				if (preg_match('~(([.,:;?!>)\]}]|(&gt;))+)$~i', $url, $matches2)) {
 					$punctuation = $matches2[1];
 					// strlen is necessary because of &gt;
-					$url = mb_substr($url, 0, -strlen($matches2[1]));
+					$url = mb_substr($url, 0, -strlen($matches2[1]), 'utf-8');
 				} else {
 					$punctuation = '';
 				}
@@ -443,7 +443,7 @@ class Html
 			if (isset($matches[2])) {
 				$email = $matches[2];
 				if (false !== stripos($email, 'mailto:')) {
-					$email = mb_substr($matches[2], 7);
+					$email = substr($matches[2], 7);
 					$protocol = 'mailto:';
 				} else {
 					$protocol = '';
@@ -668,10 +668,10 @@ class Html
 			$text = '';
 			$offset = 0;
 			foreach ($matches[0] as $textPart) {
-				if (($currentOffset = mb_substr_count(strtolower($textPart), '<blockquote')) > 0) {
+				if (($currentOffset = substr_count(strtolower($textPart), '<blockquote')) > 0) {
 					$offset += $currentOffset;
 					$textPart = ($offset == 1 ? "\n" : '');	// Adds a line to the beginning
-				} elseif (($currentOffset = mb_substr_count(strtolower($textPart), '</blockquote>')) > 0) {
+				} elseif (($currentOffset = substr_count(strtolower($textPart), '</blockquote>')) > 0) {
 					$offset -= $currentOffset;
 					$textPart = '';
 				} elseif ($offset > 0) {

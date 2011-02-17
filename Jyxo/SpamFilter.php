@@ -144,7 +144,7 @@ class SpamFilter
 		$numberOfWords = 0;
 		// Walk through the text a count word appearances
 		foreach (preg_split('~[\pZ\s]+~u', $text) as $word) {
-			$word = mb_strtolower(trim($word));
+			$word = mb_strtolower(trim($word), 'utf-8');
 			// Check if the word is supposed to be ignored
 			if (!isset($this->ignoreWords[$word])) {
 				if (isset($words[$word])) {

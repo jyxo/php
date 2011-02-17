@@ -427,7 +427,7 @@ class Time implements \Serializable
 			$month = $this->dateTime->format('n') - 1;
 
 			// If the month is not at the beginning, the genitive case and lowercase will be used
-			$monthName = 0 !== strpos($format, '<--->') ? mb_strtolower($monthsGen[$month]) : $months[$month];
+			$monthName = 0 !== strpos($format, '<--->') ? mb_strtolower($monthsGen[$month], 'utf-8') : $months[$month];
 
 			// Add translated days and months into the result
 			$result = strtr(

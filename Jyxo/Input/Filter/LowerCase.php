@@ -34,6 +34,6 @@ class LowerCase extends \Jyxo\Input\Filter\AbstractFilter
 	 */
 	protected function filterValue($in)
 	{
-		return mb_strtolower($in);
+		return mb_strtolower($in, 'utf-8');
 	}
 }

@@ -125,7 +125,7 @@ class StringLengthBetween extends \Jyxo\Input\Validator\AbstractValidator
 	 */
 	public function isValid($value)
 	{
-		$length = mb_strlen((string) $value);
+		$length = mb_strlen((string) $value, 'utf-8');
 		return ($length >= $this->getMin()) && ($length <= $this->getMax());
 	}
 }

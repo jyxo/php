@@ -80,7 +80,7 @@ class StringLengthGreaterThan extends \Jyxo\Input\Validator\AbstractValidator
 	 */
 	public function isValid($value)
 	{
-		return mb_strlen((string) $value) > $this->getMin();
+		return mb_strlen((string) $value, 'utf-8') > $this->getMin();
 	}
 
 }
