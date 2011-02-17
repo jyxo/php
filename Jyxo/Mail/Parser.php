@@ -481,7 +481,7 @@ class Parser
 				if (in_array($key, $mimeHeaders)) {
 					$headers[$key] = $this->decodeMimeHeader($value);
 				} else {
-					$headers[$key] = $this->recodeToUtf8($value);
+					$headers[$key] = $this->convertToUtf8($value);
 				}
 			}
 		}
@@ -509,7 +509,7 @@ class Parser
 						if (!empty($attributeValue)) {
 							$newHeader[$attributeName] = ('personal' === $attributeName)
 								? $this->decodeMimeHeader($attributeValue)
-								: $this->recodeToUtf8($attributeValue);
+								: $this->convertToUtf8($attributeValue);
 						}
 					}
 
@@ -938,9 +938,9 @@ class Parser
 		if (self::BODY_LITERAL_DECODE === $mode) {
 			$output['content'] = self::decodeBody(imap_fetchbody($this->connection, $this->uid, $pid, FT_UID), $output['encoding']);
 
-			// Textual types are recoded to UTF-8
+			// Textual types are converted to UTF-8
 			if ((0 === strpos($output['type'], 'text/')) || (0 === strpos($output['type'], 'message/'))) {
-				$output['content'] = $this->recodeToUtf8($output['content'], isset($output['charset']) ? $output['charset'] : '');
+				$output['content'] = $this->convertToUtf8($output['content'], isset($output['charset']) ? $output['charset'] : '');
 			}
 
 			return $output;
@@ -991,9 +991,9 @@ class Parser
 
 		$output['content']  = self::decodeBody(imap_fetchbody($this->connection, $this->uid, $pid, FT_UID), $output['encoding']);
 
-		// Textual types are recoded to UTF-8
+		// Textual types are converted to UTF-8
 		if ((0 === strpos($output['type'], 'text/')) || (0 === strpos($output['type'], 'message/'))) {
-			$output['content'] = $this->recodeToUtf8($output['content'], isset($output['charset']) ? $output['charset'] : '');
+			$output['content'] = $this->convertToUtf8($output['content'], isset($output['charset']) ? $output['charset'] : '');
 		}
 
 		return $output;
@@ -1103,7 +1103,7 @@ class Parser
 
 		$header = '';
 		for ($i = 0; $i < count($headerDecoded); $i++) {
-			$header .= $this->recodeToUtf8($headerDecoded[$i]->text, $headerDecoded[$i]->charset);
+			$header .= $this->convertToUtf8($headerDecoded[$i]->text, $headerDecoded[$i]->charset);
 		}
 		return trim($header);
 	}
@@ -1117,7 +1117,7 @@ class Parser
 	private function decodeFilename($filename)
 	{
 		if (preg_match('~(?P<charset>[^\']+)\'(?P<lang>[^\']*)\'(?P<filename>.+)~i', $filename, $parts)) {
-			$filename = $this->recodeToUtf8(rawurldecode($parts['filename']), $parts['charset']);
+			$filename = $this->convertToUtf8(rawurldecode($parts['filename']), $parts['charset']);
 		} elseif (0 === strpos($filename, '=?')) {
 			$filename = $this->decodeMimeHeader($filename);
 		}
@@ -1131,21 +1131,13 @@ class Parser
 	 * @param string $charset String charset
 	 * @return string
 	 */
-	private function recodeToUtf8($string, $charset = '')
+	private function convertToUtf8($string, $charset = '')
 	{
 		// Imap_mime_header_decode returns "default" in case of ASCII, but we make a detection for sure
-		if (('default' == $charset) || ('us-ascii' == $charset) || (empty($charset))) {
-			$charset = mb_detect_encoding($string, 'UTF-8, ISO-8859-2, ASCII, UTF-7, EUC-JP, SJIS, eucJP-win, SJIS-win, JIS, ISO-2022-JP');
-
-			// The previous function can not handle WINDOWS-1250 and returns ISO-8859-2 instead
-			if (('ISO-8859-2' == $charset) && (preg_match('~[\x7F-\x9F]~', $string))) {
-				$charset = 'WINDOWS-1250';
-			}
+		if ('default' === $charset || 'us-ascii' === $charset || empty($charset)) {
+			$charset = \Jyxo\Charset::detect($string);
 		}
 
-		// Detection sometimes fails or the message may be in wrong format, so we remove invalid UTF-8 letters
-		$string = @iconv($charset, 'UTF-8//TRANSLIT//IGNORE', $string);
-
-		return $string;
+		return \Jyxo\Charset::convert2utf($string, $charset);
 	}
 }
