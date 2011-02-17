@@ -46,11 +46,11 @@ abstract class Client
 	protected $options = array();
 
 	/**
-	 * Request start time.
+	 * Timer name.
 	 *
-	 * @var float
+	 * @var string
 	 */
-	private $time = 0;
+	private $timer = '';
 
 	/**
 	 * Whether to use request profiler.
@@ -225,7 +225,9 @@ abstract class Client
 	protected function profileStart()
 	{
 		// Set start time
-		$this->time = microtime(true);
+		if ($this->profiler) {
+			$this->timer = \Jyxo\Timer::start();
+		}
 
 		return $this;
 	}
@@ -247,7 +249,7 @@ abstract class Client
 			static $requests = array();
 
 			// Get elapsed time
-			$time = microtime(true) - $this->time;
+			$time = \Jyxo\Timer::stop($this->timer);
 
 			$totalTime += $time;
 			$requests[] = array(strtoupper($type), (string) $method, $params, $response, sprintf('%0.3f', $time * 1000));
