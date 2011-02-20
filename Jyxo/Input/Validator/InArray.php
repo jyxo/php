@@ -50,6 +50,6 @@ class InArray extends \Jyxo\Input\Validator\AbstractValidator
 	 */
 	public function isValid($value)
 	{
-		return in_array($value, $this->allowed, true);
+		return in_array($value, $this->allowed);
 	}
 }

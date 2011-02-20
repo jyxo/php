@@ -40,6 +40,31 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	const ERROR_MESSAGE = 'Error!';
 
 	/**
+	 * Tests Tests InArray validator.
+	 */
+	public function testInArray()
+	{
+		$values = array(1, 2, '3', null, 'foo');
+
+		$good = array(
+			1,
+			null,
+			true,
+			false,
+			'',
+			'2',
+			'foo'
+		);
+		$wrong = array(
+			'bah',
+			4,
+			1.5
+		);
+
+		$this->executeTests(new Validator\InArray($values), $good, $wrong);
+	}
+
+	/**
 	 * Tests Tests IsArray validator.
 	 */
 	public function testIsArray()
