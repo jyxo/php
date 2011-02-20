@@ -461,6 +461,30 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Tests Equals validator.
+	 *
+	 */
+	public function testEquals()
+	{
+		$expected = 123;
+		$good = array(
+			123,
+			'123',
+			true
+		);
+		$bad = array(
+			12,
+			'A123',
+			false,
+		);
+
+		$validator = new Validator\Equals($expected);
+
+		$this->executeTests($validator, $good, $bad);
+		$this->assertSame($expected, $validator->getExpected());
+	}
+
+	/**
 	 * Tests NotEmpty validator.
 	 */
 	public function testNotEmpty()
