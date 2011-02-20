@@ -113,6 +113,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 				->validate('lessThan', 'big', 100);
 
 		$this->assertTrue($input->isValid());
+		$this->assertNull($input->validateAll());
 	}
 
 	/**
@@ -167,6 +168,17 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 					->validate('isInt');
 
 		$this->assertFalse($input->isValid());
+
+		try {
+			$input->validateAll();
+			$this->fail('Expected exception \Jyxo\Input\Validator\Exception.');
+		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			throw $e;
+		} catch (\Exception $e) {
+			// Correctly thrown exception
+			$this->assertInstanceOf('\Jyxo\Input\Validator\Exception', $e);
+		}
+
 	}
 
 	/**

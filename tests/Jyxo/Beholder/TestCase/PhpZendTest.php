@@ -32,7 +32,7 @@ class PhpZendTest extends \Jyxo\Beholder\TestCase\DefaultTest
 	{
 		// Skip if the \Zend_Version class is already loaded
 		if (class_exists('\Zend_Version', false)) {
-			$this->markTestSkipped('Zend_Version already loaded');
+			$this->markTestSkipped('\Zend_Version already loaded');
 		}
 
 		$test = new PhpZend('Zend');

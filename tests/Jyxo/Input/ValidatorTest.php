@@ -22,6 +22,7 @@ require_once __DIR__ . '/../../bootstrap.php';
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Pěček
  * @author Jaroslav Hanslík
+ * @author Ondřej Nešpor
  */
 class ValidatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -373,6 +374,10 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 		);
 
 		$this->executeTests(new Validator\IsTaxId(), $good, $wrong);
+
+		// Try the so called "own numbers"
+		$taxId = 'CZ12345678';
+		$this->executeTests(new Validator\IsTaxId(false), array($taxId), array());
 	}
 
 	/**
