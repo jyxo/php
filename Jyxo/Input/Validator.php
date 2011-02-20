@@ -37,7 +37,7 @@ class Validator
 		try {
 			$factory = \Jyxo\Spl\ObjectCache::get('\Jyxo\Input\Factory') ?: \Jyxo\Spl\ObjectCache::set('\Jyxo\Input\Factory', new Factory());
 			$value = array_shift($params);
-			$key = 'Jyxo_Input_Validator_' . ucfirst($method) . ($params ? '/' . serialize($params) : '');
+			$key = '\Jyxo\Input\Validator\\' . ucfirst($method) . ($params ? '/' . serialize($params) : '');
 			$validator = \Jyxo\Spl\ObjectCache::get($key) ?: \Jyxo\Spl\ObjectCache::set($key, $factory->getValidatorByName($method, $params));
 		} catch (\Exception $e) {
 			$validator = $factory->getValidatorByName($method, $params);
