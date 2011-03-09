@@ -62,7 +62,7 @@ class ErrorMail
 	public function __construct($timerFile, $recipients, $sender)
 	{
 		$this->timerFile = $timerFile;
-		$this->email = (array)$recipients;
+		$this->email = (array) $recipients;
 		$this->headers[] = 'From: ' . $sender;
 	}
 

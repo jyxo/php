@@ -337,7 +337,7 @@ class FirePhp
 	/**
 	 * Replaces objects with appropriate names in variable.
 	 *
-	 * @param mixed $varible Variable where to replace objects
+	 * @param mixed $variable Variable where to replace objects
 	 * @return mixed
 	 */
 	private static function replaceVariable($variable)
@@ -399,7 +399,7 @@ class FirePhp
 
 			// Add properties
 			$reflectionClass = new \ReflectionClass($class);
-			foreach($reflectionClass->getProperties() as $property) {
+			foreach ($reflectionClass->getProperties() as $property) {
 				$name = $property->getName();
 				$rawName = $name;
 

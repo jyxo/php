@@ -74,7 +74,7 @@ class TimerTest extends \PHPUnit_Framework_TestCase
 	public function testTimer()
 	{
 		Timer::timer();
-		for($i = 100; $i < 1000000; $i *= 10) {
+		for ($i = 100; $i < 1000000; $i *= 10) {
 			usleep($i * 1.1);
 			$delta = Timer::timer();
 

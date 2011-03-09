@@ -463,7 +463,6 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * Tests Equals validator.
-	 *
 	 */
 	public function testEquals()
 	{
@@ -476,7 +475,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 		$bad = array(
 			12,
 			'A123',
-			false,
+			false
 		);
 
 		$validator = new Validator\Equals($expected);
@@ -608,7 +607,9 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			create_function('$a', 'return is_numeric($a);'),
 			'\SomeOtherPrefix\Some\Validator::isNumeric',
 			array('\SomeOtherPrefix\Some\Validator', 'isNumeric'),
-			function($a) { return is_numeric($a); }
+			function($a) {
+				return is_numeric($a);
+			}
 		);
 
 		foreach ($callbacks as $callback) {
@@ -627,7 +628,9 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 		// Test additional parameters
 		$good = array(3, 9, 33);
 		$wrong = array(2, 100, true, new \stdClass(), 'OHAI');
-		$callback = function($value, $divisor) { return is_numeric($value) && (0 === $value % $divisor); };
+		$callback = function($value, $divisor) {
+			return is_numeric($value) && (0 === $value % $divisor);
+		};
 
 		$validator = new Validator\Callback($callback, 3);
 		$this->assertSame(array(3), $validator->getAdditionalParams());
@@ -676,7 +679,9 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue(Validator::lessThan($value, $value * 2));
 		$this->assertTrue(Validator::callback(
 				$value,
-				function ($value, $lowerBound) { return is_numeric($value) && $value > $lowerBound; },
+				function ($value, $lowerBound) {
+					return is_numeric($value) && $value > $lowerBound;
+				},
 				41
 		));
 

@@ -63,7 +63,7 @@ class Callback extends \Jyxo\Input\Validator\AbstractValidator
 	 */
 	public function setCallback($callback)
 	{
-		if (is_string($callback) || is_array($callback))  {
+		if (is_string($callback) || is_array($callback)) {
 			if (!is_callable($callback)) {
 				throw new Exception('Invalid callback definition');
 			}

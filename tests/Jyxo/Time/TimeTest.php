@@ -114,7 +114,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		}
 
 		try {
-			$tmp = new Time($dateTime, (object)array('foo' => 'bar'));
+			$tmp = new Time($dateTime, (object) array('foo' => 'bar'));
 			$this->fail('Expected exception \InvalidArgumentException.');
 		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
 			throw $e;

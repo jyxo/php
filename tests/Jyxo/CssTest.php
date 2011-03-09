@@ -66,7 +66,7 @@ class CssTest extends \PHPUnit_Framework_TestCase
 		$tests[] = array('margin: 10px 20px 10px; color: black;', 'MARGIN: 10px 20px 10px; COLOR: black;');
 
 		// Converts rgb() and url() to lowercase
-		$tests[] = array('background: url (\'background.png\') #ffffff;' , 'background: URL (\'background.png\') RGB (255, 255, 255);');
+		$tests[] = array('background: url (\'background.png\') #ffffff;', 'background: URL (\'background.png\') RGB (255, 255, 255);');
 
 		// Remove properties without definitions
 		$tests[] = array('border: solid 1px black;', 'border: solid 1px black; color:; color:; color:');
