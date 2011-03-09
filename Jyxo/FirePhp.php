@@ -245,8 +245,8 @@ class FirePhp
 			return false;
 		}
 
-		// Sending only if FirePHP is enabled
-		if (!isset($_SERVER['HTTP_USER_AGENT']) || false === strpos($_SERVER['HTTP_USER_AGENT'], 'FirePHP/')) {
+		// Sending only if FirePHP is installed
+		if (!self::isInstalled()) {
 			return false;
 		}
 
@@ -306,6 +306,32 @@ class FirePhp
 		header(sprintf('X-Wf-Jyxo-1-1-Jyxo%s: |%s|', $no, $part));
 
 		return true;
+	}
+
+	/**
+	 * Checks if FirePHP extension is installed.
+	 *
+	 * @return boolean
+	 */
+	private static function isInstalled()
+	{
+		// Header X-FirePHP-Version
+		if (isset($_SERVER['HTTP_X_FIREPHP_VERSION'])) {
+			return true;
+		}
+
+		// Header x-insight
+		if (isset($_SERVER['HTTP_X_INSIGHT']) && 'activate' === $_SERVER['HTTP_X_INSIGHT']) {
+			return true;
+		}
+
+		// Modified user-agent
+		if (isset($_SERVER['HTTP_USER_AGENT']) && false !== strpos($_SERVER['HTTP_USER_AGENT'], 'FirePHP/')) {
+			return true;
+		}
+
+		// Not installed
+		return false;
 	}
 
 	/**
