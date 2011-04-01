@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Nette Framework Apigen" />
+	<title>Jyxo PHP Library | Class Jyxo\Rpc\Client</title>
+
+	<script type="text/javascript" src="media/combined.js"></script>
+	<script type="text/javascript" src="allclasses.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="media/style.css?v=2011040113" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<div id="main">
+<div id="leftWrapper">
+	<div id="left">
+		<a href="allclasses.html">All Classes</a>
+
+		<h3>Packages</h3>
+		<ul>
+			<li class="all"><a href="overview.html#packages">All</a></li>
+			<li><a href="package-Jyxo.Rpc.html" class="active">Jyxo\Rpc</a></li>
+		</ul>
+
+		<h3>Namespaces</h3>
+		<ul>
+			<li class="all"><a href="overview.html#namespaces">All</a></li>
+			<li><a href="namespace-Jyxo.html" >Jyxo</a></li>
+			<li><a href="namespace-Jyxo.Rpc.html" class="active">Jyxo\Rpc</a></li>
+			<li><a href="namespace-Jyxo.Rpc.Json.html" >Jyxo\Rpc\Json</a></li>
+			<li><a href="namespace-Jyxo.Rpc.Xml.html" >Jyxo\Rpc\Xml</a></li>
+		</ul>
+
+		<h3>Classes</h3>
+
+		<ul>
+			<li class="all"><a href="allclasses.html#classes">All</a></li>
+				<li class="all"><a href="package-Jyxo.Rpc.html#classes">All in package Jyxo\Rpc</a></li>
+				<li class="all"><a href="namespace-Jyxo.Rpc.html#classes">All in namespace Jyxo\Rpc</a></li>
+			<li><a href="Jyxo.Rpc.Client.html" class="active">Client</a></li>
+		</ul>
+
+	</div>
+</div>
+<div id="rightWrapper">
+	<div id="right">
+		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+			<input type="hidden" name="cx" value="011549293477758430224:vxofa9ufnhc" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		</form>
+
+<div id="navigation">
+	<ul>
+		<li><a href="overview.html" title="Summary of all namespaces">Overview</a></li>		<li><a href="namespace-Jyxo.Rpc.html" title="Summary of Jyxo\Rpc">Namespace</a></li>
+		<li class="active">Class</li>
+		<li><a href="elements.html">Elements</a></li>
+	</ul>
+</div>
+
+<div id="content">
+	<div id="classSummary">		<p>namespace <a href="namespace-Jyxo.Rpc.html">Jyxo\Rpc</a></p>
+
+		<h1>Class Client</h1>
+		<div class="classDescription">
+
+		
+<p>Abstract class for sending RPC requests.</p>
+
+		</div>
+		<div>
+
+			<h4>Direct Known Subclasses</h4>
+			<a href="Jyxo.Rpc.Json.Client.html">Jyxo\Rpc\Json\Client</a>, <a href="Jyxo.Rpc.Xml.Client.html">Jyxo\Rpc\Xml\Client</a>
+		</div>
+
+		<div class="classInfo">
+			<b>Abstract Class</b><br />
+					<b>Category:</b>
+						Jyxo<br />
+					<b>Package:</b>
+						<a href="package-Jyxo.Rpc.html">Jyxo\Rpc</a><br />
+					<b>Copyright:</b>
+						Copyright © 2005–2011 Jyxo, s.r.o.<br />
+					<b>License:</b>
+						<a
+href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/…/license.txt</a><br />
+					<b>Author:</b>
+						Jaroslav Hanslík<br />
+			<b>Located at</b> <a href="source-Rpc.Client.php.html#16">/Rpc/Client.php</a><br />
+		</div>
+	</div>
+
+	<div id="methodSummary">
+
+		<table class="summary">
+		<caption>Method Summary</caption>
+		<tr data-order="1 __construct" id="___construct">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#___construct">#</a>
+			<code class="nowrap">
+				<a href="source-Rpc.Client.php.html#62" title="go to source code"><b>__construct</b></a>(
+					string
+					<var>$url</var> = <span class="php-quote">''</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Creates client instance and eventually sets server address.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Creates client instance and eventually sets server address.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$url</code> string $url Server address<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 setUrl" id="_setUrl">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Rpc.Client.html">Client</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setUrl">#</a>
+			<code class="nowrap">
+				<a href="source-Rpc.Client.php.html#74" title="go to source code"><b>setUrl</b></a>(
+					string
+					<var>$url</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets server address.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets server address.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$url</code> string $url Server address<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Rpc.Client.html">Client</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 setTimeout" id="_setTimeout">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Rpc.Client.html">Client</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setTimeout">#</a>
+			<code class="nowrap">
+				<a href="source-Rpc.Client.php.html#87" title="go to source code"><b>setTimeout</b></a>(
+					integer
+					<var>$timeout</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets timeout.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets timeout.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$timeout</code> integer $timeout Call timeout<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Rpc.Client.html">Client</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 setOption" id="_setOption">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Rpc.Client.html">Client</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setOption">#</a>
+			<code class="nowrap">
+				<a href="source-Rpc.Client.php.html#100" title="go to source code"><b>setOption</b></a>(
+					string
+					<var>$key</var>, 
+					mixed
+					<var>$value</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Changes client settings.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Changes client settings.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$key</code> string $key Parameter name<br />
+						<code>$value</code> mixed $value Parameter value<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Rpc.Client.html">Client</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getOption" id="_getOption">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				mixed
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getOption">#</a>
+			<code class="nowrap">
+				<a href="source-Rpc.Client.php.html#115" title="go to source code"><b>getOption</b></a>(
+					string
+					<var>$key</var> = <span class="php-quote">''</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Returns certain parameter or whole array of parameters if no parameter name
+is provided.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns certain parameter or whole array of parameters if no parameter name
+is provided.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$key</code> string $key Parameter name<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">mixed </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 enableProfiler" id="_enableProfiler">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Rpc.Client.html">Client</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_enableProfiler">#</a>
+			<code class="nowrap">
+				<a href="source-Rpc.Client.php.html#129" title="go to source code"><b>enableProfiler</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Turns request profiler on.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Turns request profiler on.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Rpc.Client.html">Client</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 disableProfiler" id="_disableProfiler">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Rpc.Client.html">Client</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_disableProfiler">#</a>
+			<code class="nowrap">
+				<a href="source-Rpc.Client.php.html#140" title="go to source code"><b>disableProfiler</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Turns request profiler off.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Turns request profiler off.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Rpc.Client.html">Client</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 send" id="_send">
+			<td align="right" width="1%"><code class="nowrap">
+				abstract public 
+				mixed
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_send">#</a>
+			<code class="nowrap">
+				<a href="source-Rpc.Client.php.html#151" title="go to source code"><b>send</b></a>(
+					string
+					<var>$method</var>, 
+					array
+					
+					<var>$params</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sends a request and fetches a response from the server.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sends a request and fetches a response from the server.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$method</code> string $method Method name<br />
+						<code>$params</code> array $params Method parameters<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">mixed </div>
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="BadMethodCallException.html">BadMethodCallException</a> If no server address was provided<br />
+						<a href="Jyxo.Rpc.Exception.html">Exception</a> On error<br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 process" id="_process">
+			<td align="right" width="1%"><code class="nowrap">
+				 protected 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_process">#</a>
+			<code class="nowrap">
+				<a href="source-Rpc.Client.php.html#162" title="go to source code"><b>process</b></a>(
+					string
+					<var>$contentType</var>, 
+					string
+					<var>$data</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Processes request data and fetches response.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Processes request data and fetches response.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$contentType</code> string $contentType Request content-type<br />
+						<code>$data</code> string $data Request data<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">string </div>
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="BadMethodCallException.html">BadMethodCallException</a> If no server address was provided<br />
+						<a href="Jyxo.Rpc.Exception.html">Exception</a> On error<br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 profileStart" id="_profileStart">
+			<td align="right" width="1%"><code class="nowrap">
+				 protected 
+				<a href="Jyxo.Rpc.Client.html">Client</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_profileStart">#</a>
+			<code class="nowrap">
+				<a href="source-Rpc.Client.php.html#220" title="go to source code"><b>profileStart</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Starts profiling.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Starts profiling.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Rpc.Client.html">Client</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 profileEnd" id="_profileEnd">
+			<td align="right" width="1%"><code class="nowrap">
+				 protected 
+				<a href="Jyxo.Rpc.Client.html">Client</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_profileEnd">#</a>
+			<code class="nowrap">
+				<a href="source-Rpc.Client.php.html#235" title="go to source code"><b>profileEnd</b></a>(
+					string
+					<var>$type</var>, 
+					string
+					<var>$method</var>, 
+					array
+					
+					<var>$params</var>, 
+					mixed
+					<var>$response</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Finishes profiling.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Finishes profiling.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$type</code> string $type Request type<br />
+						<code>$method</code> string $method Method name<br />
+						<code>$params</code> array $params Method parameters<br />
+						<code>$response</code> mixed $response Server response<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Rpc.Client.html">Client</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		</table>
+	</div>
+
+
+
+
+
+	<div id="propertySummary">
+
+		<table class="summary">
+		<caption>Property Summary</caption>
+		<tr data-order="url" id="$url">
+			<td align="right" width="1%"><code class="nowrap">
+				protected 
+				string
+			</code></td>
+
+			<td width="1%"><var>$url</var></td>
+			<td><pre><span class="php-quote">''</span></pre></td>
+			<td>Server address. <a href="#$url" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="timeout" id="$timeout">
+			<td align="right" width="1%"><code class="nowrap">
+				protected 
+				integer
+			</code></td>
+
+			<td width="1%"><var>$timeout</var></td>
+			<td><pre><span class="php-num">5</span></pre></td>
+			<td>Time limit for communication with RPC server (seconds). <a href="#$timeout" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="options" id="$options">
+			<td align="right" width="1%"><code class="nowrap">
+				protected 
+				array
+			</code></td>
+
+			<td width="1%"><var>$options</var></td>
+			<td><pre><span class="php-keyword1">array</span> (
+)</pre></td>
+			<td>Parameters for creating RPC requests. <a href="#$options" class="anchor">#</a></td>
+		</tr>
+		</table>
+	</div>
+
+
+</div>
+
+		<div id="footer">
+			Jyxo PHP Library generated by <a href="http://github.com/nette/apigen">Apigen</a>
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>

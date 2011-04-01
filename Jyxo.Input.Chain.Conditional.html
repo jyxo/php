@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Nette Framework Apigen" />
+	<title>Jyxo PHP Library | Class Jyxo\Input\Chain\Conditional</title>
+
+	<script type="text/javascript" src="media/combined.js"></script>
+	<script type="text/javascript" src="allclasses.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="media/style.css?v=2011040113" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<div id="main">
+<div id="leftWrapper">
+	<div id="left">
+		<a href="allclasses.html">All Classes</a>
+
+		<h3>Packages</h3>
+		<ul>
+			<li class="all"><a href="overview.html#packages">All</a></li>
+			<li><a href="package-Jyxo.Input.html" class="active">Jyxo\Input</a></li>
+		</ul>
+
+		<h3>Namespaces</h3>
+		<ul>
+			<li class="all"><a href="overview.html#namespaces">All</a></li>
+			<li><a href="namespace-Jyxo.html" >Jyxo</a></li>
+			<li><a href="namespace-Jyxo.Input.html" >Jyxo\Input</a></li>
+			<li><a href="namespace-Jyxo.Input.Chain.html" class="active">Jyxo\Input\Chain</a></li>
+		</ul>
+
+		<h3>Classes</h3>
+
+		<ul>
+			<li class="all"><a href="allclasses.html#classes">All</a></li>
+				<li class="all"><a href="package-Jyxo.Input.html#classes">All in package Jyxo\Input</a></li>
+				<li class="all"><a href="namespace-Jyxo.Input.Chain.html#classes">All in namespace Jyxo\Input\Chain</a></li>
+			<li><a href="Jyxo.Input.Chain.Conditional.html" class="active">Conditional</a></li>
+		</ul>
+
+	</div>
+</div>
+<div id="rightWrapper">
+	<div id="right">
+		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+			<input type="hidden" name="cx" value="011549293477758430224:vxofa9ufnhc" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		</form>
+
+<div id="navigation">
+	<ul>
+		<li><a href="overview.html" title="Summary of all namespaces">Overview</a></li>		<li><a href="namespace-Jyxo.Input.Chain.html" title="Summary of Jyxo\Input\Chain">Namespace</a></li>
+		<li class="active">Class</li>
+		<li><a href="elements.html">Elements</a></li>
+	</ul>
+</div>
+
+<div id="content">
+	<div id="classSummary">		<p>namespace <a href="namespace-Jyxo.Input.Chain.html">Jyxo\Input\Chain</a></p>
+
+		<h1>Class Conditional</h1>
+		<div class="classDescription">
+
+		
+<p>Chain of filters and validators for a single variable.<br>
+The validation itself is performed after fulfilling the condition.<br>
+The condition is checked by a defined validator.</p>
+
+		</div>
+		<dl class="tree">
+
+			<dd style="padding-left:0px">				<a href="Jyxo.Input.Chain.html">Jyxo\Input\Chain</a>
+				 implements <a href="Jyxo.Input.ValidatorInterface.html">Jyxo\Input\ValidatorInterface</a>
+			</dd>
+			<dd style="padding-left:30px">				<img src="media/inherit.gif" alt="extended by" />
+<b>Jyxo\Input\Chain\Conditional</b>				
+			</dd>
+		</dl>
+
+		<div class="classInfo">
+			
+					<b>Category:</b>
+						Jyxo<br />
+					<b>Package:</b>
+						<a href="package-Jyxo.Input.html">Jyxo\Input</a><br />
+					<b>Subpackage:</b>
+						Chain<br />
+					<b>Copyright:</b>
+						Copyright © 2005–2011 Jyxo, s.r.o.<br />
+					<b>License:</b>
+						<a
+href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/…/license.txt</a><br />
+					<b>Author:</b>
+						Roman Řáha<br />
+			<b>Located at</b> <a href="source-Input.Chain.Conditional.php.html#16">/Input/Chain/Conditional.php</a><br />
+		</div>
+	</div>
+
+	<div id="methodSummary">
+
+		<table class="summary">
+		<caption>Method Summary</caption>
+		<tr data-order="1 __construct" id="___construct">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#___construct">#</a>
+			<code class="nowrap">
+				<a href="source-Input.Chain.Conditional.php.html#37" title="go to source code"><b>__construct</b></a>(
+					<a href="Jyxo.Input.ValidatorInterface.html">Jyxo\Input\ValidatorInterface</a>
+					
+					<var>$validator</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets the condition validator.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets the condition validator.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$validator</code> <a href="Jyxo.Input.ValidatorInterface.html">Jyxo\Input\ValidatorInterface</a> $validator<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 isValid" id="_isValid">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_isValid">#</a>
+			<code class="nowrap">
+				<a href="source-Input.Chain.Conditional.php.html#49" title="go to source code"><b>isValid</b></a>(
+					mixed
+					<var>$value</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Validates a value.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Validates a value.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$value</code> mixed $value Input value<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">boolean </div>
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="Jyxo.Input.ValidatorInterface.html#_isValid">Jyxo\Input\ValidatorInterface::isValid</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 setCondValidator" id="_setCondValidator">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Input.Chain.Conditional.html">Conditional</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setCondValidator">#</a>
+			<code class="nowrap">
+				<a href="source-Input.Chain.Conditional.php.html#81" title="go to source code"><b>setCondValidator</b></a>(
+					<a href="Jyxo.Input.ValidatorInterface.html">Jyxo\Input\ValidatorInterface</a>
+					
+					<var>$validator</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets the condition validator.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets the condition validator.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$validator</code> <a href="Jyxo.Input.ValidatorInterface.html">Jyxo\Input\ValidatorInterface</a> $validator Condition validator<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Input.Chain.Conditional.html">Conditional</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		</table>
+	</div>
+
+
+	<h2>Methods Inherited From <a href="Jyxo.Input.Chain.html#methodSummary">Jyxo\Input\Chain</a></h2>
+	<div class="box"><code>
+		<a href="Jyxo.Input.Chain.html#_addValidator">addValidator()</a>, <a href="Jyxo.Input.Chain.html#_addFilter">addFilter()</a>, <a href="Jyxo.Input.Chain.html#_addWalk">addWalk()</a>, <a href="Jyxo.Input.Chain.html#_addCondition">addCondition()</a>, <a href="Jyxo.Input.Chain.html#_close">close()</a>, <a href="Jyxo.Input.Chain.html#_isEmpty">isEmpty()</a>, <a href="Jyxo.Input.Chain.html#_isValid">isValid()</a>, <a href="Jyxo.Input.Chain.html#_getValue">getValue()</a>, <a href="Jyxo.Input.Chain.html#_getErrors">getErrors()</a>, <a href="Jyxo.Input.Chain.html#_getParent">getParent()</a>, <a href="Jyxo.Input.Chain.html#_setParent">setParent()</a>
+	</code></div>
+
+
+	<h2>Constants Inherited From <a href="Jyxo.Input.Chain.html#constantSummary">Jyxo\Input\Chain</a></h2>
+	<div class="box"><code>FILTER, VALIDATOR, WALK, CONDITION, CLOSE</code></div>
+
+
+	<h2>Properties Inherited From <a href="Jyxo.Input.Chain.html#propertySummary">Jyxo\Input\Chain</a></h2>
+	<div class="box"><code><var>$value</var></code></div>
+
+</div>
+
+		<div id="footer">
+			Jyxo PHP Library generated by <a href="http://github.com/nette/apigen">Apigen</a>
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>

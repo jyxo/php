@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Nette Framework Apigen" />
+	<title>Jyxo PHP Library | Class Jyxo\Input\Chain</title>
+
+	<script type="text/javascript" src="media/combined.js"></script>
+	<script type="text/javascript" src="allclasses.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="media/style.css?v=2011040113" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<div id="main">
+<div id="leftWrapper">
+	<div id="left">
+		<a href="allclasses.html">All Classes</a>
+
+		<h3>Packages</h3>
+		<ul>
+			<li class="all"><a href="overview.html#packages">All</a></li>
+			<li><a href="package-Jyxo.Input.html" class="active">Jyxo\Input</a></li>
+		</ul>
+
+		<h3>Namespaces</h3>
+		<ul>
+			<li class="all"><a href="overview.html#namespaces">All</a></li>
+			<li><a href="namespace-Jyxo.html" >Jyxo</a></li>
+			<li><a href="namespace-Jyxo.Input.html" class="active">Jyxo\Input</a></li>
+			<li><a href="namespace-Jyxo.Input.Chain.html" >Jyxo\Input\Chain</a></li>
+			<li><a href="namespace-Jyxo.Input.Filter.html" >Jyxo\Input\Filter</a></li>
+			<li><a href="namespace-Jyxo.Input.Validator.html" >Jyxo\Input\Validator</a></li>
+		</ul>
+
+		<h3>Classes</h3>
+
+		<ul>
+			<li class="all"><a href="allclasses.html#classes">All</a></li>
+				<li class="all"><a href="package-Jyxo.Input.html#classes">All in package Jyxo\Input</a></li>
+				<li class="all"><a href="namespace-Jyxo.Input.html#classes">All in namespace Jyxo\Input</a></li>
+			<li><a href="Jyxo.Input.Chain.html" class="active">Chain</a></li>
+		</ul>
+
+	</div>
+</div>
+<div id="rightWrapper">
+	<div id="right">
+		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+			<input type="hidden" name="cx" value="011549293477758430224:vxofa9ufnhc" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		</form>
+
+<div id="navigation">
+	<ul>
+		<li><a href="overview.html" title="Summary of all namespaces">Overview</a></li>		<li><a href="namespace-Jyxo.Input.html" title="Summary of Jyxo\Input">Namespace</a></li>
+		<li class="active">Class</li>
+		<li><a href="elements.html">Elements</a></li>
+	</ul>
+</div>
+
+<div id="content">
+	<div id="classSummary">		<p>namespace <a href="namespace-Jyxo.Input.html">Jyxo\Input</a></p>
+
+		<h1>Class Chain</h1>
+		<div class="classDescription">
+
+		
+<p>Chain of filters a validators for a single variable.</p>
+
+		</div>
+		<dl class="tree">
+
+			<dd style="padding-left:0px"><b>Jyxo\Input\Chain</b>				 implements <a href="Jyxo.Input.ValidatorInterface.html">ValidatorInterface</a>
+			</dd>
+		</dl>
+		<div>
+
+			<h4>Direct Known Subclasses</h4>
+			<a href="Jyxo.Input.Chain.Conditional.html">Jyxo\Input\Chain\Conditional</a>
+		</div>
+
+		<div class="classInfo">
+			
+					<b>Category:</b>
+						Jyxo<br />
+					<b>Package:</b>
+						<a href="package-Jyxo.Input.html">Jyxo\Input</a><br />
+					<b>Subpackage:</b>
+						Chain<br />
+					<b>Copyright:</b>
+						Copyright © 2005–2011 Jyxo, s.r.o.<br />
+					<b>License:</b>
+						<a
+href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/…/license.txt</a><br />
+					<b>Author:</b>
+						Jakub Tománek<br />
+			<b>Located at</b> <a href="source-Input.Chain.php.html#16">/Input/Chain.php</a><br />
+		</div>
+	</div>
+
+	<div id="methodSummary">
+
+		<table class="summary">
+		<caption>Method Summary</caption>
+		<tr data-order="1 addValidator" id="_addValidator">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Input.Chain.html">Chain</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_addValidator">#</a>
+			<code class="nowrap">
+				<a href="source-Input.Chain.php.html#91" title="go to source code"><b>addValidator</b></a>(
+					<a href="Jyxo.Input.ValidatorInterface.html">ValidatorInterface</a>
+					
+					<var>$validator</var>, 
+					string
+					<var>$errorMessage</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Adds a validator to the chain.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Adds a validator to the chain.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$validator</code> <a href="Jyxo.Input.ValidatorInterface.html">ValidatorInterface</a> $validator Validator<br />
+						<code>$errorMessage</code> string $errorMessage Validation error message<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Input.Chain.html">Chain</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 addFilter" id="_addFilter">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Input.Chain.html">Chain</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_addFilter">#</a>
+			<code class="nowrap">
+				<a href="source-Input.Chain.php.html#104" title="go to source code"><b>addFilter</b></a>(
+					<a href="Jyxo.Input.FilterInterface.html">FilterInterface</a>
+					
+					<var>$filter</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Adds a filter to the chain.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Adds a filter to the chain.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$filter</code> <a href="Jyxo.Input.FilterInterface.html">FilterInterface</a> $filter Filter<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Input.Chain.html">Chain</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 addWalk" id="_addWalk">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Input.Chain.html">Chain</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_addWalk">#</a>
+			<code class="nowrap">
+				<a href="source-Input.Chain.php.html#116" title="go to source code"><b>addWalk</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Adds a new subchain and returns its instance.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Adds a new subchain and returns its instance.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Input.Chain.html">Chain</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 addCondition" id="_addCondition">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Input.Chain.Conditional.html">Jyxo\Input\Chain\Conditional</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_addCondition">#</a>
+			<code class="nowrap">
+				<a href="source-Input.Chain.php.html#129" title="go to source code"><b>addCondition</b></a>(
+					<a href="Jyxo.Input.Chain.Conditional.html">Jyxo\Input\Chain\Conditional</a>
+					
+					<var>$chain</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Adds a new conditional subchain and returns its instance.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Adds a new conditional subchain and returns its instance.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$chain</code> <a href="Jyxo.Input.Chain.Conditional.html">Jyxo\Input\Chain\Conditional</a> $chain<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Input.Chain.Conditional.html">Jyxo\Input\Chain\Conditional</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 close" id="_close">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Input.Chain.html">Chain</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_close">#</a>
+			<code class="nowrap">
+				<a href="source-Input.Chain.php.html#142" title="go to source code"><b>close</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>In case of a subchain returns its parent, the chain itself otherwise.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>In case of a subchain returns its parent, the chain itself otherwise.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Input.Chain.html">Chain</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 isEmpty" id="_isEmpty">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_isEmpty">#</a>
+			<code class="nowrap">
+				<a href="source-Input.Chain.php.html#205" title="go to source code"><b>isEmpty</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns if the chain contains any rules.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns if the chain contains any rules.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">boolean </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 isValid" id="_isValid">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_isValid">#</a>
+			<code class="nowrap">
+				<a href="source-Input.Chain.php.html#215" title="go to source code"><b>isValid</b></a>(
+					mixed
+					<var>$value</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Returns if the value is valid.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns if the value is valid.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$value</code> mixed $value Input value<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">boolean </div>
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="Jyxo.Input.ValidatorInterface.html#_isValid">ValidatorInterface::isValid</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getValue" id="_getValue">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				mixed
+				&amp;
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getValue">#</a>
+			<code class="nowrap">
+				<a href="source-Input.Chain.php.html#229" title="go to source code"><b>getValue</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns a filtered variable value.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns a filtered variable value.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">mixed </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getErrors" id="_getErrors">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getErrors">#</a>
+			<code class="nowrap">
+				<a href="source-Input.Chain.php.html#239" title="go to source code"><b>getErrors</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns a list of validation errors.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns a list of validation errors.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">array </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getParent" id="_getParent">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Input.Chain.html">Chain</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getParent">#</a>
+			<code class="nowrap">
+				<a href="source-Input.Chain.php.html#249" title="go to source code"><b>getParent</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns the parent chain.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns the parent chain.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Input.Chain.html">Chain</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 setParent" id="_setParent">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Input.Chain.html">Chain</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setParent">#</a>
+			<code class="nowrap">
+				<a href="source-Input.Chain.php.html#259" title="go to source code"><b>setParent</b></a>(
+					<a href="Jyxo.Input.Chain.html">Chain</a>
+					
+					<var>$parent</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets the parent chain.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets the parent chain.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$parent</code> <a href="Jyxo.Input.Chain.html">Chain</a> $parent Parent chain<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Input.Chain.html">Chain</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		</table>
+	</div>
+
+
+
+	<div id="constantSummary">
+
+		<table class="summary">
+		<caption>Constant Summary</caption>
+		<tr data-order="FILTER" id="FILTER">
+			<td align="right" width="1%"><code><b>FILTER</b></code></td>
+			<td><code><span class="php-quote">'filter'</span></code> <a href="#FILTER" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="VALIDATOR" id="VALIDATOR">
+			<td align="right" width="1%"><code><b>VALIDATOR</b></code></td>
+			<td><code><span class="php-quote">'validator'</span></code> <a href="#VALIDATOR" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="WALK" id="WALK">
+			<td align="right" width="1%"><code><b>WALK</b></code></td>
+			<td><code><span class="php-quote">'walk'</span></code> <a href="#WALK" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="CONDITION" id="CONDITION">
+			<td align="right" width="1%"><code><b>CONDITION</b></code></td>
+			<td><code><span class="php-quote">'condition'</span></code> <a href="#CONDITION" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="CLOSE" id="CLOSE">
+			<td align="right" width="1%"><code><b>CLOSE</b></code></td>
+			<td><code><span class="php-quote">'close'</span></code> <a href="#CLOSE" class="anchor">#</a></td>
+		</tr>
+		</table>
+	</div>
+
+
+	<div id="propertySummary">
+
+		<table class="summary">
+		<caption>Property Summary</caption>
+		<tr data-order="value" id="$value">
+			<td align="right" width="1%"><code class="nowrap">
+				protected 
+				mixed
+			</code></td>
+
+			<td width="1%"><var>$value</var></td>
+			<td><pre><span class="php-keyword1">NULL</span></pre></td>
+			<td>Actual variable value. <a href="#$value" class="anchor">#</a></td>
+		</tr>
+		</table>
+	</div>
+
+
+</div>
+
+		<div id="footer">
+			Jyxo PHP Library generated by <a href="http://github.com/nette/apigen">Apigen</a>
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>

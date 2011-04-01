@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Nette Framework Apigen" />
+	<title>Jyxo PHP Library | Class Jyxo\Spl\ArrayUtil</title>
+
+	<script type="text/javascript" src="media/combined.js"></script>
+	<script type="text/javascript" src="allclasses.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="media/style.css?v=2011040113" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<div id="main">
+<div id="leftWrapper">
+	<div id="left">
+		<a href="allclasses.html">All Classes</a>
+
+		<h3>Packages</h3>
+		<ul>
+			<li class="all"><a href="overview.html#packages">All</a></li>
+			<li><a href="package-Jyxo.Spl.html" class="active">Jyxo\Spl</a></li>
+		</ul>
+
+		<h3>Namespaces</h3>
+		<ul>
+			<li class="all"><a href="overview.html#namespaces">All</a></li>
+			<li><a href="namespace-Jyxo.html" >Jyxo</a></li>
+			<li><a href="namespace-Jyxo.Spl.html" class="active">Jyxo\Spl</a></li>
+		</ul>
+
+		<h3>Classes</h3>
+
+		<ul>
+			<li class="all"><a href="allclasses.html#classes">All</a></li>
+				<li class="all"><a href="package-Jyxo.Spl.html#classes">All in package Jyxo\Spl</a></li>
+				<li class="all"><a href="namespace-Jyxo.Spl.html#classes">All in namespace Jyxo\Spl</a></li>
+			<li><a href="Jyxo.Spl.ArrayUtil.html" class="active">ArrayUtil</a></li>
+		</ul>
+
+	</div>
+</div>
+<div id="rightWrapper">
+	<div id="right">
+		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+			<input type="hidden" name="cx" value="011549293477758430224:vxofa9ufnhc" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		</form>
+
+<div id="navigation">
+	<ul>
+		<li><a href="overview.html" title="Summary of all namespaces">Overview</a></li>		<li><a href="namespace-Jyxo.Spl.html" title="Summary of Jyxo\Spl">Namespace</a></li>
+		<li class="active">Class</li>
+		<li><a href="elements.html">Elements</a></li>
+	</ul>
+</div>
+
+<div id="content">
+	<div id="classSummary">		<p>namespace <a href="namespace-Jyxo.Spl.html">Jyxo\Spl</a></p>
+
+		<h1>Class ArrayUtil</h1>
+		<div class="classDescription">
+
+		
+<p>Utilities for working with arrays.</p>
+
+		</div>
+
+		<div class="classInfo">
+			
+					<b>Category:</b>
+						Jyxo<br />
+					<b>Package:</b>
+						<a href="package-Jyxo.Spl.html">Jyxo\Spl</a><br />
+					<b>Copyright:</b>
+						Copyright © 2005–2011 Jyxo, s.r.o.<br />
+					<b>License:</b>
+						<a
+href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/…/license.txt</a><br />
+					<b>Author:</b>
+						Jakub Tománek<br />
+			<b>Located at</b> <a href="source-Spl.ArrayUtil.php.html#16">/Spl/ArrayUtil.php</a><br />
+		</div>
+	</div>
+
+	<div id="methodSummary">
+
+		<table class="summary">
+		<caption>Method Summary</caption>
+		<tr data-order="0 range" id="_range">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_range">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.ArrayUtil.php.html#27" title="go to source code"><b>range</b></a>(
+					mixed
+					<var>$low</var>, 
+					mixed
+					<var>$high</var>, 
+					<a href="Closure.html">Closure</a>
+					
+					<var>$step</var>, 
+					<a href="Closure.html">Closure</a>
+					
+					<var>$compare</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Creates an array containing item range. Similar to range() but with
+closures.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Creates an array containing item range. Similar to range() but with
+closures.<br>
+Params $low and $high are inclusive. If $low &gt; $high, resulting array will be
+in descending order.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$low</code> mixed $low Minimal value<br />
+						<code>$high</code> mixed $high Maximal value<br />
+						<code>$step</code> <a href="Closure.html">Closure</a> $step Closure which creates next value from current<br />
+						<code>$compare</code> <a href="Closure.html">Closure</a> $compare comparing closure for detecting if we&#039;re at the end of the range (Optional)<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">array </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 keymap" id="_keymap">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_keymap">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.ArrayUtil.php.html#52" title="go to source code"><b>keymap</b></a>(
+					<a href="Traversable.html">Traversable</a>
+					
+					<var>$traversable</var>, 
+					<a href="Closure.html">Closure</a>
+					
+					<var>$key</var>, 
+					<a href="Closure.html">Closure</a>
+					
+					<var>$value</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Creates an associative array from iterator which doesn't return
+proper keys.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Creates an associative array from iterator which doesn't return proper
+keys.<br>
+Keys are generated by applying callback $key to the current value.<br>
+It is also possible to apply another callback directly to the value.<br>
+Key callback is called BEFORE value callback.</p>
+
+<p>&lt;?php<br>
+// Example usage<br>
+$data = \Jyxo\Spl\Arra­yUtil::keymap($i­terator, function(Object $object)
+{<br>
+return $object-&gt;getId();<br>
+});</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$traversable</code> <a href="Traversable.html">Traversable</a> $traversable Iterator<br />
+						<code>$key</code> <a href="Closure.html">Closure</a> $key Closure for generating keys<br />
+						<code>$value</code> <a href="Closure.html">Closure</a> $value Closure for modifying data (Optional)<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">array </div>
+
+
+			</div>
+			</td>
+		</tr>
+		</table>
+	</div>
+
+
+
+
+
+
+
+</div>
+
+		<div id="footer">
+			Jyxo PHP Library generated by <a href="http://github.com/nette/apigen">Apigen</a>
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>

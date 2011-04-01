@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Nette Framework Apigen" />
+	<title>Jyxo PHP Library | Class Jyxo\Spl\MapIterator</title>
+
+	<script type="text/javascript" src="media/combined.js"></script>
+	<script type="text/javascript" src="allclasses.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="media/style.css?v=2011040113" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<div id="main">
+<div id="leftWrapper">
+	<div id="left">
+		<a href="allclasses.html">All Classes</a>
+
+		<h3>Packages</h3>
+		<ul>
+			<li class="all"><a href="overview.html#packages">All</a></li>
+			<li><a href="package-Jyxo.Spl.html" class="active">Jyxo\Spl</a></li>
+		</ul>
+
+		<h3>Namespaces</h3>
+		<ul>
+			<li class="all"><a href="overview.html#namespaces">All</a></li>
+			<li><a href="namespace-Jyxo.html" >Jyxo</a></li>
+			<li><a href="namespace-Jyxo.Spl.html" class="active">Jyxo\Spl</a></li>
+		</ul>
+
+		<h3>Classes</h3>
+
+		<ul>
+			<li class="all"><a href="allclasses.html#classes">All</a></li>
+				<li class="all"><a href="package-Jyxo.Spl.html#classes">All in package Jyxo\Spl</a></li>
+				<li class="all"><a href="namespace-Jyxo.Spl.html#classes">All in namespace Jyxo\Spl</a></li>
+			<li><a href="Jyxo.Spl.MapIterator.html" class="active">MapIterator</a></li>
+		</ul>
+
+	</div>
+</div>
+<div id="rightWrapper">
+	<div id="right">
+		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+			<input type="hidden" name="cx" value="011549293477758430224:vxofa9ufnhc" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		</form>
+
+<div id="navigation">
+	<ul>
+		<li><a href="overview.html" title="Summary of all namespaces">Overview</a></li>		<li><a href="namespace-Jyxo.Spl.html" title="Summary of Jyxo\Spl">Namespace</a></li>
+		<li class="active">Class</li>
+		<li><a href="elements.html">Elements</a></li>
+	</ul>
+</div>
+
+<div id="content">
+	<div id="classSummary">		<p>namespace <a href="namespace-Jyxo.Spl.html">Jyxo\Spl</a></p>
+
+		<h1>Class MapIterator</h1>
+		<div class="classDescription">
+
+		
+<p>Iterator which applies a callback over results (lazy-loaded calls).<br>
+Supports iteration over both \Traversable and array.</p>
+
+		</div>
+		<dl class="tree">
+
+			<dd style="padding-left:0px"><b>Jyxo\Spl\MapIterator</b>				 implements <a href="Countable.html">Countable</a>, <a href="Jyxo.Spl.ArrayCopy.html">ArrayCopy</a>, <a href="OuterIterator.html">OuterIterator</a>, <a href="Traversable.html">Traversable</a>, <a href="Iterator.html">Iterator</a>, <a href="SeekableIterator.html">SeekableIterator</a>
+			</dd>
+		</dl>
+
+		<div class="classInfo">
+			
+					<b>Category:</b>
+						Jyxo<br />
+					<b>Package:</b>
+						<a href="package-Jyxo.Spl.html">Jyxo\Spl</a><br />
+					<b>Copyright:</b>
+						Copyright © 2005–2011 Jyxo, s.r.o.<br />
+					<b>License:</b>
+						<a
+href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/…/license.txt</a><br />
+					<b>Author:</b>
+						Jakub Tománek<br />
+			<b>Located at</b> <a href="source-Spl.MapIterator.php.html#16">/Spl/MapIterator.php</a><br />
+		</div>
+	</div>
+
+	<div id="methodSummary">
+
+		<table class="summary">
+		<caption>Method Summary</caption>
+		<tr data-order="1 __construct" id="___construct">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#___construct">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.MapIterator.php.html#42" title="go to source code"><b>__construct</b></a>(
+					array|<a href="Iterator.html">Iterator</a>|<a href="IteratorAggregate.html">IteratorAggregate</a>
+					<var>$data</var>, 
+					callback|<a href="Closure.html">Closure</a>
+					<var>$map</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Constructor.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Constructor.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$data</code> array|<a href="Iterator.html">Iterator</a>|<a href="IteratorAggregate.html">IteratorAggregate</a> $data Source data<br />
+						<code>$map</code> callback|<a href="Closure.html">Closure</a> $map Applied callback or closure<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="InvalidArgumentException.html">InvalidArgumentException</a> Invalid source data or callback is not callable<br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 count" id="_count">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				integer
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_count">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.MapIterator.php.html#67" title="go to source code"><b>count</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns count of source data.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns count of source data.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">integer </div>
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="Countable.html#_count">Countable::count</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 rewind" id="_rewind">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_rewind">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.MapIterator.php.html#83" title="go to source code"><b>rewind</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Rewinds the iterator to the beginning.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Rewinds the iterator to the beginning.</p>
+
+
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="Iterator.html#_rewind">Iterator::rewind</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 next" id="_next">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_next">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.MapIterator.php.html#91" title="go to source code"><b>next</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Advances the internal pointer.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Advances the internal pointer.</p>
+
+
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="Iterator.html#_next">Iterator::next</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 valid" id="_valid">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_valid">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.MapIterator.php.html#99" title="go to source code"><b>valid</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns if current pointer position is valid.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns if current pointer position is valid.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">boolean </div>
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="Iterator.html#_valid">Iterator::valid</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 current" id="_current">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				mixed
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_current">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.MapIterator.php.html#109" title="go to source code"><b>current</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns current data.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns current data.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">mixed </div>
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="Iterator.html#_current">Iterator::current</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 key" id="_key">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				integer
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_key">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.MapIterator.php.html#119" title="go to source code"><b>key</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns current key.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns current key.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">integer </div>
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="Iterator.html#_key">Iterator::key</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 toArray" id="_toArray">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_toArray">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.MapIterator.php.html#140" title="go to source code"><b>toArray</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns all data as an array.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns all data as an array.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">array </div>
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="Jyxo.Spl.ArrayCopy.html#_toArray">ArrayCopy::toArray</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getInnerIterator" id="_getInnerIterator">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Iterator.html">Iterator</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getInnerIterator">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.MapIterator.php.html#150" title="go to source code"><b>getInnerIterator</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns inner iterator (works even when constructed with array data)</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns inner iterator (works even when constructed with array data)</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Iterator.html">Iterator</a> </div>
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="OuterIterator.html#_getInnerIterator">OuterIterator::getInnerIterator</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 seek" id="_seek">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_seek">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.MapIterator.php.html#160" title="go to source code"><b>seek</b></a>(
+					integer
+					<var>$position</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Seeks to defined position. Does NOT throw \OutOfBoundsEx­ception.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Seeks to defined position. Does NOT throw \OutOfBoundsEx­ception.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$position</code> integer $position New position<br />
+					</div>
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="SeekableIterator.html#_seek">SeekableIterator::seek</a></code></div>
+			</div>
+			</td>
+		</tr>
+		</table>
+	</div>
+
+
+
+
+
+
+
+</div>
+
+		<div id="footer">
+			Jyxo PHP Library generated by <a href="http://github.com/nette/apigen">Apigen</a>
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>

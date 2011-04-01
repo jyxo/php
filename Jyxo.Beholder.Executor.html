@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Nette Framework Apigen" />
+	<title>Jyxo PHP Library | Class Jyxo\Beholder\Executor</title>
+
+	<script type="text/javascript" src="media/combined.js"></script>
+	<script type="text/javascript" src="allclasses.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="media/style.css?v=2011040113" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<div id="main">
+<div id="leftWrapper">
+	<div id="left">
+		<a href="allclasses.html">All Classes</a>
+
+		<h3>Packages</h3>
+		<ul>
+			<li class="all"><a href="overview.html#packages">All</a></li>
+			<li><a href="package-Jyxo.Beholder.html" class="active">Jyxo\Beholder</a></li>
+		</ul>
+
+		<h3>Namespaces</h3>
+		<ul>
+			<li class="all"><a href="overview.html#namespaces">All</a></li>
+			<li><a href="namespace-Jyxo.html" >Jyxo</a></li>
+			<li><a href="namespace-Jyxo.Beholder.html" class="active">Jyxo\Beholder</a></li>
+			<li><a href="namespace-Jyxo.Beholder.TestCase.html" >Jyxo\Beholder\TestCase</a></li>
+		</ul>
+
+		<h3>Classes</h3>
+
+		<ul>
+			<li class="all"><a href="allclasses.html#classes">All</a></li>
+				<li class="all"><a href="package-Jyxo.Beholder.html#classes">All in package Jyxo\Beholder</a></li>
+				<li class="all"><a href="namespace-Jyxo.Beholder.html#classes">All in namespace Jyxo\Beholder</a></li>
+			<li><a href="Jyxo.Beholder.Executor.html" class="active">Executor</a></li>
+		</ul>
+
+	</div>
+</div>
+<div id="rightWrapper">
+	<div id="right">
+		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+			<input type="hidden" name="cx" value="011549293477758430224:vxofa9ufnhc" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		</form>
+
+<div id="navigation">
+	<ul>
+		<li><a href="overview.html" title="Summary of all namespaces">Overview</a></li>		<li><a href="namespace-Jyxo.Beholder.html" title="Summary of Jyxo\Beholder">Namespace</a></li>
+		<li class="active">Class</li>
+		<li><a href="elements.html">Elements</a></li>
+	</ul>
+</div>
+
+<div id="content">
+	<div id="classSummary">		<p>namespace <a href="namespace-Jyxo.Beholder.html">Jyxo\Beholder</a></p>
+
+		<h1>Class Executor</h1>
+		<div class="classDescription">
+
+		
+<p>Beholder test executor.</p>
+
+<p>Includes filtering and HTML output formatting.</p>
+
+<p>Tests are performed in random order but results are outputted in alphabetical
+order with the order they were performed.</p>
+
+<p>Usage example:</p>
+
+<pre>
+   <span class="php-var">$beholder</span> = <span
+class="php-keyword1">new</span> \Jyxo\Beholder\Executor(<span
+class="php-quote">'Project'</span>, <span
+class="php-var">$_GET</span>);
+   <span
+class="php-var">$beholder</span>-&gt;addTest(<span
+class="php-quote">'T1'</span>, <span
+class="php-keyword1">new</span> \Project\Beholder\Test1(<span
+class="php-quote">'Test 1'</span>));
+   <span
+class="php-var">$beholder</span>-&gt;addTest(<span
+class="php-quote">'T2'</span>, <span
+class="php-keyword1">new</span> \Project\Beholder\Test2(<span
+class="php-quote">'Test 2'</span>));
+   <span
+class="php-var">$beholder</span>-&gt;addTest(<span
+class="php-quote">'T3'</span>, <span
+class="php-keyword1">new</span> \Project\Beholder\Test3Blah(<span
+class="php-quote">'Test 3 Blah'</span>));
+   <span
+class="php-var">$beholder</span>-&gt;run();
+ </pre>
+
+		</div>
+
+		<div class="classInfo">
+			
+					<b>Category:</b>
+						Jyxo<br />
+					<b>Package:</b>
+						<a href="package-Jyxo.Beholder.html">Jyxo\Beholder</a><br />
+					<b>Copyright:</b>
+						Copyright © 2005–2011 Jyxo, s.r.o.<br />
+					<b>License:</b>
+						<a
+href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/…/license.txt</a><br />
+					<b>Author:</b>
+						Jan Matoušek<br />
+					<b>Author:</b>
+						Jaroslav Hanslík<br />
+			<b>Located at</b> <a href="source-Beholder.Executor.php.html#16">/Beholder/Executor.php</a><br />
+		</div>
+	</div>
+
+	<div id="methodSummary">
+
+		<table class="summary">
+		<caption>Method Summary</caption>
+		<tr data-order="1 __construct" id="___construct">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#___construct">#</a>
+			<code class="nowrap">
+				<a href="source-Beholder.Executor.php.html#111" title="go to source code"><b>__construct</b></a>(
+					string
+					<var>$project</var>, 
+					array
+					
+					<var>$params</var> = <span class="php-keyword1">array</span> (
+)
+			)</code>
+
+			<div class="short">
+				
+<p>Constructor.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Constructor.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$project</code> string $project Project name<br />
+						<code>$params</code> array $params Parameters; possible parameters are: include, exclude, output<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 run" id="_run">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_run">#</a>
+			<code class="nowrap">
+				<a href="source-Beholder.Executor.php.html#146" title="go to source code"><b>run</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Performs chosen tests and outputs results according to the selected
+output type.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Performs chosen tests and outputs results according to the selected
+output type.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">boolean Returns if all tests were successful</div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 addTest" id="_addTest">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Beholder.Executor.html">Executor</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_addTest">#</a>
+			<code class="nowrap">
+				<a href="source-Beholder.Executor.php.html#210" title="go to source code"><b>addTest</b></a>(
+					string
+					<var>$ident</var>, 
+					<a href="Jyxo.Beholder.TestCase.html">TestCase</a>
+					
+					<var>$test</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Adds a test.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Adds a test.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$ident</code> string $ident Tests identifier<br />
+						<code>$test</code> <a href="Jyxo.Beholder.TestCase.html">TestCase</a> $test Test instance<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Beholder.Executor.html">Executor</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		</table>
+	</div>
+
+
+
+	<div id="constantSummary">
+
+		<table class="summary">
+		<caption>Constant Summary</caption>
+		<tr data-order="OUTPUT_TEXT" id="OUTPUT_TEXT">
+			<td align="right" width="1%"><code><b>OUTPUT_TEXT</b></code></td>
+			<td><code><span class="php-quote">'t'</span></code> <a href="#OUTPUT_TEXT" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="OUTPUT_HTML" id="OUTPUT_HTML">
+			<td align="right" width="1%"><code><b>OUTPUT_HTML</b></code></td>
+			<td><code><span class="php-quote">'h'</span></code> <a href="#OUTPUT_HTML" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="PARAM_OUTPUT" id="PARAM_OUTPUT">
+			<td align="right" width="1%"><code><b>PARAM_OUTPUT</b></code></td>
+			<td><code><span class="php-quote">'o'</span></code> <a href="#PARAM_OUTPUT" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="PARAM_INCLUDE" id="PARAM_INCLUDE">
+			<td align="right" width="1%"><code><b>PARAM_INCLUDE</b></code></td>
+			<td><code><span class="php-quote">'t'</span></code> <a href="#PARAM_INCLUDE" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="PARAM_EXCLUDE" id="PARAM_EXCLUDE">
+			<td align="right" width="1%"><code><b>PARAM_EXCLUDE</b></code></td>
+			<td><code><span class="php-quote">'nt'</span></code> <a href="#PARAM_EXCLUDE" class="anchor">#</a></td>
+		</tr>
+		</table>
+	</div>
+
+
+
+
+</div>
+
+		<div id="footer">
+			Jyxo PHP Library generated by <a href="http://github.com/nette/apigen">Apigen</a>
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>

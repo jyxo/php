@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Nette Framework Apigen" />
+	<title>Jyxo PHP Library | Class Jyxo\Beholder\TestCase\HttpResponse</title>
+
+	<script type="text/javascript" src="media/combined.js"></script>
+	<script type="text/javascript" src="allclasses.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="media/style.css?v=2011040113" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<div id="main">
+<div id="leftWrapper">
+	<div id="left">
+		<a href="allclasses.html">All Classes</a>
+
+		<h3>Packages</h3>
+		<ul>
+			<li class="all"><a href="overview.html#packages">All</a></li>
+			<li><a href="package-Jyxo.Beholder.html" class="active">Jyxo\Beholder</a></li>
+		</ul>
+
+		<h3>Namespaces</h3>
+		<ul>
+			<li class="all"><a href="overview.html#namespaces">All</a></li>
+			<li><a href="namespace-Jyxo.html" >Jyxo</a></li>
+			<li><a href="namespace-Jyxo.Beholder.html" >Jyxo\Beholder</a></li>
+			<li><a href="namespace-Jyxo.Beholder.TestCase.html" class="active">Jyxo\Beholder\TestCase</a></li>
+		</ul>
+
+		<h3>Classes</h3>
+
+		<ul>
+			<li class="all"><a href="allclasses.html#classes">All</a></li>
+				<li class="all"><a href="package-Jyxo.Beholder.html#classes">All in package Jyxo\Beholder</a></li>
+				<li class="all"><a href="namespace-Jyxo.Beholder.TestCase.html#classes">All in namespace Jyxo\Beholder\TestCase</a></li>
+			<li><a href="Jyxo.Beholder.TestCase.HttpResponse.html" class="active">HttpResponse</a></li>
+		</ul>
+
+	</div>
+</div>
+<div id="rightWrapper">
+	<div id="right">
+		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+			<input type="hidden" name="cx" value="011549293477758430224:vxofa9ufnhc" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		</form>
+
+<div id="navigation">
+	<ul>
+		<li><a href="overview.html" title="Summary of all namespaces">Overview</a></li>		<li><a href="namespace-Jyxo.Beholder.TestCase.html" title="Summary of Jyxo\Beholder\TestCase">Namespace</a></li>
+		<li class="active">Class</li>
+		<li><a href="elements.html">Elements</a></li>
+	</ul>
+</div>
+
+<div id="content">
+	<div id="classSummary">		<p>namespace <a href="namespace-Jyxo.Beholder.TestCase.html">Jyxo\Beholder\TestCase</a></p>
+
+		<h1>Class HttpResponse</h1>
+		<div class="classDescription">
+
+		
+<p>Common HTTP response test.<br>
+Checks only availability in the default form, but can be easily extended with
+additional checks.</p>
+
+<p>Example:<br>
+new \Jyxo\Beholder\Tes­tCase\HttpRes­ponse(‚Foo‘,
+‚http://example­.com/‘, array(‚body‘ ⇒ ‚/this text must be in
+body/m‘))</p>
+
+		</div>
+		<dl class="tree">
+
+			<dd style="padding-left:0px">				<a href="Jyxo.Beholder.TestCase.html">Jyxo\Beholder\TestCase</a>
+				
+			</dd>
+			<dd style="padding-left:30px">				<img src="media/inherit.gif" alt="extended by" />
+<b>Jyxo\Beholder\TestCase\HttpResponse</b>				
+			</dd>
+		</dl>
+
+		<div class="classInfo">
+			
+					<b>Category:</b>
+						Jyxo<br />
+					<b>Package:</b>
+						<a href="package-Jyxo.Beholder.html">Jyxo\Beholder</a><br />
+					<b>Copyright:</b>
+						Copyright © 2005–2011 Jyxo, s.r.o.<br />
+					<b>License:</b>
+						<a
+href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/…/license.txt</a><br />
+					<b>Author:</b>
+						Jan Kaštánek<br />
+			<b>Located at</b> <a href="source-Beholder.TestCase.HttpResponse.php.html#16">/Beholder/TestCase/HttpResponse.php</a><br />
+		</div>
+	</div>
+
+	<div id="methodSummary">
+
+		<table class="summary">
+		<caption>Method Summary</caption>
+		<tr data-order="1 __construct" id="___construct">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#___construct">#</a>
+			<code class="nowrap">
+				<a href="source-Beholder.TestCase.HttpResponse.php.html#45" title="go to source code"><b>__construct</b></a>(
+					string
+					<var>$description</var>, 
+					string
+					<var>$url</var>, 
+					array
+					
+					<var>$tests</var> = <span class="php-keyword1">array</span> (
+)
+			)</code>
+
+			<div class="short">
+				
+<p>Constructor. Gets the testing URL and optional custom tests.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Constructor. Gets the testing URL and optional custom tests.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$description</code> string $description Test description<br />
+						<code>$url</code> string $url Tested URL<br />
+						<code>$tests</code> array $tests Custom tests<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 run" id="_run">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Beholder.Result.html">Jyxo\Beholder\Result</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_run">#</a>
+			<code class="nowrap">
+				<a href="source-Beholder.TestCase.HttpResponse.php.html#60" title="go to source code"><b>run</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Performs the test.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Performs the test.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Beholder.Result.html">Jyxo\Beholder\Result</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		</table>
+	</div>
+
+
+	<h2>Methods Inherited From <a href="Jyxo.Beholder.TestCase.html#methodSummary">Jyxo\Beholder\TestCase</a></h2>
+	<div class="box"><code>
+		<a href="Jyxo.Beholder.TestCase.html#___construct">__construct()</a>, <a href="Jyxo.Beholder.TestCase.html#_run">run()</a>, <a href="Jyxo.Beholder.TestCase.html#_getDescription">getDescription()</a>
+	</code></div>
+
+
+
+
+
+</div>
+
+		<div id="footer">
+			Jyxo PHP Library generated by <a href="http://github.com/nette/apigen">Apigen</a>
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>

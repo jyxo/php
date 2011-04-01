@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+	<loc>http://api.nette.org/2.0/ArrayIterator.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/BadMethodCallException.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Closure.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DateTime.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DateTimeZone.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Exception.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/FilterIterator.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/InvalidArgumentException.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/IteratorIterator.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Beholder.Executor.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Beholder.Result.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Beholder.TestCase.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Beholder.TestCase.FileSystem.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Beholder.TestCase.HttpResponse.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Beholder.TestCase.Imap.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Beholder.TestCase.JsonRpc.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Beholder.TestCase.Memcached.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Beholder.TestCase.Mysql.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Beholder.TestCase.Pgsql.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Beholder.TestCase.PhpExtension.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Beholder.TestCase.PhpVersion.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Beholder.TestCase.PhpZend.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Beholder.TestCase.Smtp.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Beholder.TestCase.Webdav.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Beholder.TestCase.XmlRpc.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Charset.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Color.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Css.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.ErrorHandler.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.ErrorMail.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Exception.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.FirePhp.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Gettext.Parser.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Gettext.Parser.Exception.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Gettext.Parser.Header.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Gettext.Parser.Item.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Html.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.HtmlTag.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Chain.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Chain.Conditional.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Exception.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Factory.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Filter.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Filter.AbstractFilter.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Filter.Exception.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Filter.ExplodeName.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Filter.LowerCase.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Filter.Phone.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Filter.SanitizeUrl.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Filter.ToInt.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Filter.Trim.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Fluent.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Upload.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.AbstractValidator.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.Callback.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.Equals.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.Exception.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.InArray.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.IsArray.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.IsBankAccountNumber.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.IsBirthNumber.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.IsCompanyId.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.IsCountryCode.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.IsDate.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.IsDateTime.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.IsEmail.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.IsIban.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.IsInt.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.IsIpV4.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.IsIpV6.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.IsNumeric.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.IsPhone.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.IsTaxId.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.IsUrl.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.IsZipCode.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.LessThan.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.NotEmpty.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.Regex.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.StringLengthBetween.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.StringLengthGreaterThan.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.StringLengthLessThan.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Input.Validator.Upload.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Email.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Email.Address.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Email.Attachment.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Email.Attachment.File.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Email.Attachment.InlineFile.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Email.Attachment.InlineString.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Email.Attachment.String.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Email.Body.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Email.Header.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Encoding.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Parser.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Parser.DefaultPartIdNotExistException.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Parser.EmailNotExistException.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Parser.Exception.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Parser.PartNotExistException.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Sender.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Sender.CreateException.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Sender.Exception.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Sender.RecipientUnknownException.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Sender.Result.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Sender.Smtp.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Mail.Sender.SmtpException.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Rpc.Client.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Rpc.Exception.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Rpc.Json.Client.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Rpc.Json.Exception.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Rpc.Json.Server.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Rpc.Server.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Rpc.Xml.Client.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Rpc.Xml.Exception.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Rpc.Xml.Server.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Shell.Client.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Shell.Exception.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.SpamFilter.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Spl.ArrayUtil.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Spl.CountableLimitIterator.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Spl.FilterIterator.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Spl.MapIterator.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Spl.Object.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Spl.ObjectCache.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.String.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Svn.Client.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Svn.Exception.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Svn.Result.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Time.Composer.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Time.ComposerException.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Time.Time.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Time.Util.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Timer.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Webdav.Client.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Webdav.Exception.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.Webdav.FileNotExistException.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Jyxo.XmlReader.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/LimitIterator.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/LogicException.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/XMLReader.html</loc>
+</url>
+</urlset>

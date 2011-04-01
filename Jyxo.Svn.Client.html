@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Nette Framework Apigen" />
+	<title>Jyxo PHP Library | Class Jyxo\Svn\Client</title>
+
+	<script type="text/javascript" src="media/combined.js"></script>
+	<script type="text/javascript" src="allclasses.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="media/style.css?v=2011040113" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<div id="main">
+<div id="leftWrapper">
+	<div id="left">
+		<a href="allclasses.html">All Classes</a>
+
+		<h3>Packages</h3>
+		<ul>
+			<li class="all"><a href="overview.html#packages">All</a></li>
+			<li><a href="package-Jyxo.Svn.html" class="active">Jyxo\Svn</a></li>
+		</ul>
+
+		<h3>Namespaces</h3>
+		<ul>
+			<li class="all"><a href="overview.html#namespaces">All</a></li>
+			<li><a href="namespace-Jyxo.html" >Jyxo</a></li>
+			<li><a href="namespace-Jyxo.Svn.html" class="active">Jyxo\Svn</a></li>
+		</ul>
+
+		<h3>Classes</h3>
+
+		<ul>
+			<li class="all"><a href="allclasses.html#classes">All</a></li>
+				<li class="all"><a href="package-Jyxo.Svn.html#classes">All in package Jyxo\Svn</a></li>
+				<li class="all"><a href="namespace-Jyxo.Svn.html#classes">All in namespace Jyxo\Svn</a></li>
+			<li><a href="Jyxo.Svn.Client.html" class="active">Client</a></li>
+		</ul>
+
+	</div>
+</div>
+<div id="rightWrapper">
+	<div id="right">
+		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+			<input type="hidden" name="cx" value="011549293477758430224:vxofa9ufnhc" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		</form>
+
+<div id="navigation">
+	<ul>
+		<li><a href="overview.html" title="Summary of all namespaces">Overview</a></li>		<li><a href="namespace-Jyxo.Svn.html" title="Summary of Jyxo\Svn">Namespace</a></li>
+		<li class="active">Class</li>
+		<li><a href="elements.html">Elements</a></li>
+	</ul>
+</div>
+
+<div id="content">
+	<div id="classSummary">		<p>namespace <a href="namespace-Jyxo.Svn.html">Jyxo\Svn</a></p>
+
+		<h1>Class Client</h1>
+		<div class="classDescription">
+
+		
+<p>SVN client for PHP.</p>
+
+<p>Does not use the php_svn extension, but executes SVN binaries directly.</p>
+
+		</div>
+
+		<div class="classInfo">
+			
+					<b>Category:</b>
+						Jyxo<br />
+					<b>Package:</b>
+						<a href="package-Jyxo.Svn.html">Jyxo\Svn</a><br />
+					<b>Copyright:</b>
+						Copyright © 2005–2011 Jyxo, s.r.o.<br />
+					<b>License:</b>
+						<a
+href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/…/license.txt</a><br />
+					<b>Author:</b>
+						Matěj Humpál<br />
+					<b>Author:</b>
+						Ondřej Nešpor<br />
+			<b>Located at</b> <a href="source-Svn.Client.php.html#16">/Svn/Client.php</a><br />
+		</div>
+	</div>
+
+	<div id="methodSummary">
+
+		<table class="summary">
+		<caption>Method Summary</caption>
+		<tr data-order="1 __construct" id="___construct">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#___construct">#</a>
+			<code class="nowrap">
+				<a href="source-Svn.Client.php.html#59" title="go to source code"><b>__construct</b></a>(
+					string
+					<var>$user</var> = <span class="php-quote">''</span>, 
+					string
+					<var>$password</var> = <span class="php-quote">''</span>, 
+					array
+					
+					<var>$additional</var> = <span class="php-keyword1">array</span> (
+), 
+					string
+					<var>$svnBinary</var> = <span class="php-quote">''</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Constructor.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Constructor.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$user</code> string $user SVN username<br />
+						<code>$password</code> string $password SVN user password<br />
+						<code>$additional</code> array $additional Additional parameters<br />
+						<code>$svnBinary</code> string $svnBinary SVN binary path<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 checkout" id="_checkout">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Svn.Result.html">Result</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_checkout">#</a>
+			<code class="nowrap">
+				<a href="source-Svn.Client.php.html#75" title="go to source code"><b>checkout</b></a>(
+					string
+					<var>$url</var>, 
+					string
+					<var>$path</var>, 
+					mixed
+					<var>$params</var> = <span class="php-keyword1">NULL</span>, 
+					string
+					<var>$user</var> = <span class="php-quote">''</span>, 
+					string
+					<var>$password</var> = <span class="php-quote">''</span>
+			)</code>
+
+			<div class="short">
+				
+<p>SVN checkout.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>SVN checkout.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$url</code> string $url Repository URL<br />
+						<code>$path</code> string $path Local working copy path<br />
+						<code>$params</code> mixed $params Additional parameters<br />
+						<code>$user</code> string $user SVN username<br />
+						<code>$password</code> string $password SVN user password<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Svn.Result.html">Result</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 co" id="_co">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Svn.Result.html">Result</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_co">#</a>
+			<code class="nowrap">
+				<a href="source-Svn.Client.php.html#90" title="go to source code"><b>co</b></a>(
+					string
+					<var>$url</var>, 
+					string
+					<var>$path</var>, 
+					mixed
+					<var>$params</var> = <span class="php-keyword1">NULL</span>, 
+					string
+					<var>$user</var> = <span class="php-quote">''</span>, 
+					string
+					<var>$password</var> = <span class="php-quote">''</span>
+			)</code>
+
+			<div class="short">
+				
+<p>SVN checkout.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>SVN checkout.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$url</code> string $url Repository URL<br />
+						<code>$path</code> string $path Local working copy path<br />
+						<code>$params</code> mixed $params Additional parameters<br />
+						<code>$user</code> string $user SVN username<br />
+						<code>$password</code> string $password SVN user password<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Svn.Result.html">Result</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 update" id="_update">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Svn.Result.html">Result</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_update">#</a>
+			<code class="nowrap">
+				<a href="source-Svn.Client.php.html#105" title="go to source code"><b>update</b></a>(
+					string
+					<var>$path</var>, 
+					mixed
+					<var>$params</var> = <span class="php-keyword1">NULL</span>, 
+					string
+					<var>$user</var> = <span class="php-quote">''</span>, 
+					string
+					<var>$password</var> = <span class="php-quote">''</span>
+			)</code>
+
+			<div class="short">
+				
+<p>SVN Update.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>SVN Update.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$path</code> string $path Local working copy path<br />
+						<code>$params</code> mixed $params Additional parameters<br />
+						<code>$user</code> string $user SVN username<br />
+						<code>$password</code> string $password SVN user password<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Svn.Result.html">Result</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 up" id="_up">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Svn.Result.html">Result</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_up">#</a>
+			<code class="nowrap">
+				<a href="source-Svn.Client.php.html#119" title="go to source code"><b>up</b></a>(
+					string
+					<var>$path</var>, 
+					mixed
+					<var>$params</var> = <span class="php-keyword1">NULL</span>, 
+					string
+					<var>$user</var> = <span class="php-quote">''</span>, 
+					string
+					<var>$password</var> = <span class="php-quote">''</span>
+			)</code>
+
+			<div class="short">
+				
+<p>SVN Update.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>SVN Update.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$path</code> string $path Local working copy path<br />
+						<code>$params</code> mixed $params Additional parameters<br />
+						<code>$user</code> string $user SVN username<br />
+						<code>$password</code> string $password SVN user password<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Svn.Result.html">Result</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 commit" id="_commit">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Svn.Result.html">Result</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_commit">#</a>
+			<code class="nowrap">
+				<a href="source-Svn.Client.php.html#133" title="go to source code"><b>commit</b></a>(
+					string
+					<var>$path</var>, 
+					string
+					<var>$message</var>, 
+					mixed
+					<var>$params</var> = <span class="php-keyword1">NULL</span>, 
+					string
+					<var>$user</var> = <span class="php-quote">''</span>, 
+					string
+					<var>$password</var> = <span class="php-quote">''</span>
+			)</code>
+
+			<div class="short">
+				
+<p>SVN commit.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>SVN commit.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$path</code> string $path Local working copy path<br />
+						<code>$message</code> string $message Commit message<br />
+						<code>$params</code> mixed $params Additional parameters<br />
+						<code>$user</code> string $user SVN username<br />
+						<code>$password</code> string $password SVN user password<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Svn.Result.html">Result</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 ci" id="_ci">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Svn.Result.html">Result</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_ci">#</a>
+			<code class="nowrap">
+				<a href="source-Svn.Client.php.html#148" title="go to source code"><b>ci</b></a>(
+					string
+					<var>$path</var>, 
+					string
+					<var>$message</var>, 
+					mixed
+					<var>$params</var> = <span class="php-keyword1">NULL</span>, 
+					string
+					<var>$user</var> = <span class="php-quote">''</span>, 
+					string
+					<var>$password</var> = <span class="php-quote">''</span>
+			)</code>
+
+			<div class="short">
+				
+<p>SVN commit.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>SVN commit.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$path</code> string $path Local working copy path<br />
+						<code>$message</code> string $message Commit message<br />
+						<code>$params</code> mixed $params Additional parameters<br />
+						<code>$user</code> string $user SVN username<br />
+						<code>$password</code> string $password SVN user password<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Svn.Result.html">Result</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 add" id="_add">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Svn.Result.html">Result</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_add">#</a>
+			<code class="nowrap">
+				<a href="source-Svn.Client.php.html#163" title="go to source code"><b>add</b></a>(
+					array
+					
+					<var>$path</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Runs SVN add on the given path.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Runs SVN add on the given path.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$path</code> array $path Path to be added to SVN<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Svn.Result.html">Result</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 delete" id="_delete">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Svn.Result.html">Result</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_delete">#</a>
+			<code class="nowrap">
+				<a href="source-Svn.Client.php.html#174" title="go to source code"><b>delete</b></a>(
+					array
+					
+					<var>$path</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Runs SVN delete on the given path.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Runs SVN delete on the given path.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$path</code> array $path Path to be deleted from SVN<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Svn.Result.html">Result</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 status" id="_status">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Svn.Result.html">Result</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_status">#</a>
+			<code class="nowrap">
+				<a href="source-Svn.Client.php.html#185" title="go to source code"><b>status</b></a>(
+					array
+					
+					<var>$path</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Retrieves SVN status information of the given path.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Retrieves SVN status information of the given path.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$path</code> array $path Checked path<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Svn.Result.html">Result</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 callSvn" id="_callSvn">
+			<td align="right" width="1%"><code class="nowrap">
+				 protected 
+				<a href="Jyxo.Svn.Result.html">Result</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_callSvn">#</a>
+			<code class="nowrap">
+				<a href="source-Svn.Client.php.html#196" title="go to source code"><b>callSvn</b></a>(
+					string
+					<var>$action</var>, 
+					string
+					<var>$user</var>, 
+					string
+					<var>$password</var>, 
+					string
+					<var>$params</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Executes SVN binary with given parameters.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Executes SVN binary with given parameters.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$action</code> string $action Action<br />
+						<code>$user</code> string $user Username<br />
+						<code>$password</code> string $password User password<br />
+						<code>$params</code> string $params Additional parameters<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Svn.Result.html">Result</a> </div>
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="Jyxo.Svn.Exception.html">Exception</a> On execute error<br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 setUser" id="_setUser">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Svn.Client.html">Client</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setUser">#</a>
+			<code class="nowrap">
+				<a href="source-Svn.Client.php.html#242" title="go to source code"><b>setUser</b></a>(
+					string
+					<var>$user</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets SVN username.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets SVN username.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$user</code> string $user Username<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Svn.Client.html">Client</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 setPassword" id="_setPassword">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Svn.Client.html">Client</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setPassword">#</a>
+			<code class="nowrap">
+				<a href="source-Svn.Client.php.html#255" title="go to source code"><b>setPassword</b></a>(
+					string
+					<var>$password</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets SVN user password.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets SVN user password.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$password</code> string $password Password<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Svn.Client.html">Client</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 setAdditionalParams" id="_setAdditionalParams">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Svn.Client.html">Client</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setAdditionalParams">#</a>
+			<code class="nowrap">
+				<a href="source-Svn.Client.php.html#268" title="go to source code"><b>setAdditionalParams</b></a>(
+					array
+					
+					<var>$params</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets additional parameters.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets additional parameters.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$params</code> array $params Array of parameters<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Svn.Client.html">Client</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 setSvnBinary" id="_setSvnBinary">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Svn.Client.html">Client</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setSvnBinary">#</a>
+			<code class="nowrap">
+				<a href="source-Svn.Client.php.html#281" title="go to source code"><b>setSvnBinary</b></a>(
+					string
+					<var>$path</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets SVN binary path.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets SVN binary path.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$path</code> string $path Path to the SVN binary<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Svn.Client.html">Client</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 addAdditionalParam" id="_addAdditionalParam">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Svn.Client.html">Client</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_addAdditionalParam">#</a>
+			<code class="nowrap">
+				<a href="source-Svn.Client.php.html#294" title="go to source code"><b>addAdditionalParam</b></a>(
+					string
+					<var>$param</var>, 
+					string
+					<var>$value</var> = <span class="php-quote">''</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Adds an additional parameter.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Adds an additional parameter.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$param</code> string $param Parameter name<br />
+						<code>$value</code> string $value Parameter value<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Svn.Client.html">Client</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getUserString" id="_getUserString">
+			<td align="right" width="1%"><code class="nowrap">
+				 protected 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getUserString">#</a>
+			<code class="nowrap">
+				<a href="source-Svn.Client.php.html#312" title="go to source code"><b>getUserString</b></a>(
+					mixed
+					<var>$user</var> = <span class="php-quote">''</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Returns SVN username with the given value for use as SVN binary
+parameter.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns SVN username with the given value for use as SVN binary
+parameter.</p>
+
+<p>Username given in the argument has precedence over the value stored in
+object's attribute.<br>
+Returns empty string if no username is set in any way.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$user</code> mixed $user Username<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">string </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getPasswordString" id="_getPasswordString">
+			<td align="right" width="1%"><code class="nowrap">
+				 protected 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getPasswordString">#</a>
+			<code class="nowrap">
+				<a href="source-Svn.Client.php.html#334" title="go to source code"><b>getPasswordString</b></a>(
+					mixed
+					<var>$password</var> = <span class="php-quote">''</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Returns SVN user password with the given value for use as SVN binary
+parameter.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns SVN user password with the given value for use as SVN binary
+parameter.</p>
+
+<p>Password given in the argument has precedence over the value stored in
+object's attribute.<br>
+Returns empty string if no password is set in any way.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$password</code> mixed $password Password<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">string </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getAdditionalParams" id="_getAdditionalParams">
+			<td align="right" width="1%"><code class="nowrap">
+				 protected 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getAdditionalParams">#</a>
+			<code class="nowrap">
+				<a href="source-Svn.Client.php.html#356" title="go to source code"><b>getAdditionalParams</b></a>(
+					mixed
+					<var>$params</var> = <span class="php-keyword1">array</span> (
+), 
+					boolean
+					<var>$pathsOnly</var> = <span class="php-keyword1">false</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Returns additional parameters with the given value for use as SVN binary
+parameters.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns additional parameters with the given value for use as SVN binary
+parameters.</p>
+
+<p>Parameters given in the argument have precedence over values stored in
+object's attribute.<br>
+If parameters are given as arrays, they get merged.</p>
+
+<p>Returns empty string if no parameters are set in any way.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$params</code> mixed $params Parameters<br />
+						<code>$pathsOnly</code> boolean $pathsOnly Use only path-parameters (not beginning with a dash &quot;-&quot;)<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">string </div>
+
+
+			</div>
+			</td>
+		</tr>
+		</table>
+	</div>
+
+
+
+
+
+	<div id="propertySummary">
+
+		<table class="summary">
+		<caption>Property Summary</caption>
+		<tr data-order="user" id="$user">
+			<td align="right" width="1%"><code class="nowrap">
+				protected 
+				string
+			</code></td>
+
+			<td width="1%"><var>$user</var></td>
+			<td><pre><span class="php-quote">''</span></pre></td>
+			<td>SVN username. <a href="#$user" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="password" id="$password">
+			<td align="right" width="1%"><code class="nowrap">
+				protected 
+				string
+			</code></td>
+
+			<td width="1%"><var>$password</var></td>
+			<td><pre><span class="php-quote">''</span></pre></td>
+			<td>SVN user password. <a href="#$password" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="additional" id="$additional">
+			<td align="right" width="1%"><code class="nowrap">
+				protected 
+				array
+			</code></td>
+
+			<td width="1%"><var>$additional</var></td>
+			<td><pre><span class="php-keyword1">array</span> (
+)</pre></td>
+			<td>Additional SVN parameters. <a href="#$additional" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="svnBinary" id="$svnBinary">
+			<td align="right" width="1%"><code class="nowrap">
+				protected 
+				string
+			</code></td>
+
+			<td width="1%"><var>$svnBinary</var></td>
+			<td><pre><span class="php-quote">'/usr/bin/svn'</span></pre></td>
+			<td>Path to the SVN binary. <a href="#$svnBinary" class="anchor">#</a></td>
+		</tr>
+		</table>
+	</div>
+
+
+</div>
+
+		<div id="footer">
+			Jyxo PHP Library generated by <a href="http://github.com/nette/apigen">Apigen</a>
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>

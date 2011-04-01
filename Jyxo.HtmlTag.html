@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Nette Framework Apigen" />
+	<title>Jyxo PHP Library | Class Jyxo\HtmlTag</title>
+
+	<script type="text/javascript" src="media/combined.js"></script>
+	<script type="text/javascript" src="allclasses.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="media/style.css?v=2011040113" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<div id="main">
+<div id="leftWrapper">
+	<div id="left">
+		<a href="allclasses.html">All Classes</a>
+
+		<h3>Packages</h3>
+		<ul>
+			<li class="all"><a href="overview.html#packages">All</a></li>
+			<li><a href="package-Jyxo.Html.html" class="active">Jyxo\Html</a></li>
+		</ul>
+
+		<h3>Namespaces</h3>
+		<ul>
+			<li class="all"><a href="overview.html#namespaces">All</a></li>
+			<li><a href="namespace-Jyxo.html" class="active">Jyxo</a></li>
+			<li><a href="namespace-Jyxo.Beholder.html" >Jyxo\Beholder</a></li>
+			<li><a href="namespace-Jyxo.Beholder.TestCase.html" >Jyxo\Beholder\TestCase</a></li>
+			<li><a href="namespace-Jyxo.Gettext.html" >Jyxo\Gettext</a></li>
+			<li><a href="namespace-Jyxo.Gettext.Parser.html" >Jyxo\Gettext\Parser</a></li>
+			<li><a href="namespace-Jyxo.Input.html" >Jyxo\Input</a></li>
+			<li><a href="namespace-Jyxo.Input.Chain.html" >Jyxo\Input\Chain</a></li>
+			<li><a href="namespace-Jyxo.Input.Filter.html" >Jyxo\Input\Filter</a></li>
+			<li><a href="namespace-Jyxo.Input.Validator.html" >Jyxo\Input\Validator</a></li>
+			<li><a href="namespace-Jyxo.Mail.html" >Jyxo\Mail</a></li>
+			<li><a href="namespace-Jyxo.Mail.Email.html" >Jyxo\Mail\Email</a></li>
+			<li><a href="namespace-Jyxo.Mail.Email.Attachment.html" >Jyxo\Mail\Email\Attachment</a></li>
+			<li><a href="namespace-Jyxo.Mail.Parser.html" >Jyxo\Mail\Parser</a></li>
+			<li><a href="namespace-Jyxo.Mail.Sender.html" >Jyxo\Mail\Sender</a></li>
+			<li><a href="namespace-Jyxo.Rpc.html" >Jyxo\Rpc</a></li>
+			<li><a href="namespace-Jyxo.Rpc.Json.html" >Jyxo\Rpc\Json</a></li>
+			<li><a href="namespace-Jyxo.Rpc.Xml.html" >Jyxo\Rpc\Xml</a></li>
+			<li><a href="namespace-Jyxo.Shell.html" >Jyxo\Shell</a></li>
+			<li><a href="namespace-Jyxo.Spl.html" >Jyxo\Spl</a></li>
+			<li><a href="namespace-Jyxo.Svn.html" >Jyxo\Svn</a></li>
+			<li><a href="namespace-Jyxo.Time.html" >Jyxo\Time</a></li>
+			<li><a href="namespace-Jyxo.Webdav.html" >Jyxo\Webdav</a></li>
+		</ul>
+
+		<h3>Classes</h3>
+
+		<ul>
+			<li class="all"><a href="allclasses.html#classes">All</a></li>
+				<li class="all"><a href="package-Jyxo.Html.html#classes">All in package Jyxo\Html</a></li>
+				<li class="all"><a href="namespace-Jyxo.html#classes">All in namespace Jyxo</a></li>
+			<li><a href="Jyxo.HtmlTag.html" class="active">HtmlTag</a></li>
+		</ul>
+
+	</div>
+</div>
+<div id="rightWrapper">
+	<div id="right">
+		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+			<input type="hidden" name="cx" value="011549293477758430224:vxofa9ufnhc" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		</form>
+
+<div id="navigation">
+	<ul>
+		<li><a href="overview.html" title="Summary of all namespaces">Overview</a></li>		<li><a href="namespace-Jyxo.html" title="Summary of Jyxo">Namespace</a></li>
+		<li class="active">Class</li>
+		<li><a href="elements.html">Elements</a></li>
+	</ul>
+</div>
+
+<div id="content">
+	<div id="classSummary">		<p>namespace <a href="namespace-Jyxo.html">Jyxo</a></p>
+
+		<h1>Class HtmlTag</h1>
+		<div class="classDescription">
+
+		
+<p>Class for generating (x)HTML source code.<br>
+Allows creating HTML tags and its attributes.</p>
+
+<p>example:</p>
+
+<pre>
+ <span class="php-var">$p</span> = \Jyxo\HtmlTag::create(<span
+class="php-quote">'p'</span>)-&gt;setClass(<span
+class="php-quote">'buttons'</span>);
+ </pre>
+
+<p>The magic __call() method ensures attributes settings.</p>
+
+<pre>
+ <span class="php-var">$p</span>-&gt;render();
+ </pre>
+
+<p>The render() method creates the HTML output.</p>
+
+		</div>
+
+		<div class="classInfo">
+			<b>Final Class</b><br />
+					<b>Category:</b>
+						Jyxo<br />
+					<b>Package:</b>
+						<a href="package-Jyxo.Html.html">Jyxo\Html</a><br />
+					<b>Copyright:</b>
+						Copyright © 2005–2011 Jyxo, s.r.o.<br />
+					<b>License:</b>
+						<a
+href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/…/license.txt</a><br />
+					<b>Author:</b>
+						Roman Řáha<br />
+					<b>Author:</b>
+						Štěpán Svoboda<br />
+			<b>Located at</b> <a href="source-HtmlTag.php.html#16">/HtmlTag.php</a><br />
+		</div>
+	</div>
+
+	<div id="methodSummary">
+
+		<table class="summary">
+		<caption>Method Summary</caption>
+		<tr data-order="0 create" id="_create">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				<a href="Jyxo.HtmlTag.html">HtmlTag</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_create">#</a>
+			<code class="nowrap">
+				<a href="source-HtmlTag.php.html#134" title="go to source code"><b>create</b></a>(
+					string
+					<var>$tag</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Creates an element instance.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Creates an element instance.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$tag</code> string $tag HTML element name<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.HtmlTag.html">HtmlTag</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 createFromSource" id="_createFromSource">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				<a href="Jyxo.HtmlTag.html">HtmlTag</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_createFromSource">#</a>
+			<code class="nowrap">
+				<a href="source-HtmlTag.php.html#145" title="go to source code"><b>createFromSource</b></a>(
+					string
+					<var>$html</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Returns an element instance from the given source.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns an element instance from the given source.<br>
+The first and last tag will be used as the opening and closing tag
+respectively.<br>
+Anything between those tags will be used as contents.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$html</code> string $html HTML source code<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.HtmlTag.html">HtmlTag</a> </div>
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="InvalidArgumentException.html">InvalidArgumentException</a> If an invalid HTML source was given<br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 open" id="_open">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_open">#</a>
+			<code class="nowrap">
+				<a href="source-HtmlTag.php.html#171" title="go to source code"><b>open</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Creates and returns the opening tag.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Creates and returns the opening tag.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">string </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 content" id="_content">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_content">#</a>
+			<code class="nowrap">
+				<a href="source-HtmlTag.php.html#211" title="go to source code"><b>content</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Creates and returns element's contents.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Creates and returns element's contents.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">string </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 close" id="_close">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_close">#</a>
+			<code class="nowrap">
+				<a href="source-HtmlTag.php.html#239" title="go to source code"><b>close</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Creates and returns the closing tag.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Creates and returns the closing tag.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">string </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 render" id="_render">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_render">#</a>
+			<code class="nowrap">
+				<a href="source-HtmlTag.php.html#259" title="go to source code"><b>render</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Renders the element.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Renders the element.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">string </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 addChild" id="_addChild">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.HtmlTag.html">HtmlTag</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_addChild">#</a>
+			<code class="nowrap">
+				<a href="source-HtmlTag.php.html#269" title="go to source code"><b>addChild</b></a>(
+					<a href="Jyxo.HtmlTag.html">HtmlTag</a>
+					
+					<var>$element</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Adds a child element.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Adds a child element.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$element</code> <a href="Jyxo.HtmlTag.html">HtmlTag</a> $element Child element to be added<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.HtmlTag.html">HtmlTag</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 addChildren" id="_addChildren">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.HtmlTag.html">HtmlTag</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_addChildren">#</a>
+			<code class="nowrap">
+				<a href="source-HtmlTag.php.html#281" title="go to source code"><b>addChildren</b></a>(
+					array
+					
+					<var>$elements</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Adds multiple child elements.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Adds multiple child elements.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$elements</code> array $elements Array of child elements<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.HtmlTag.html">HtmlTag</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 setAttributes" id="_setAttributes">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.HtmlTag.html">HtmlTag</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setAttributes">#</a>
+			<code class="nowrap">
+				<a href="source-HtmlTag.php.html#295" title="go to source code"><b>setAttributes</b></a>(
+					array
+					
+					<var>$attributes</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Imports attributes from the given array.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Imports attributes from the given array.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$attributes</code> array $attributes Associative array of attributes and their values<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.HtmlTag.html">HtmlTag</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 setNoEncode" id="_setNoEncode">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.HtmlTag.html">HtmlTag</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setNoEncode">#</a>
+			<code class="nowrap">
+				<a href="source-HtmlTag.php.html#309" title="go to source code"><b>setNoEncode</b></a>(
+					string
+					<var>$attribute</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets an attribute to not be espaced on output.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets an attribute to not be espaced on output.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$attribute</code> string $attribute Attribute name<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.HtmlTag.html">HtmlTag</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 setContentOnly" id="_setContentOnly">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.HtmlTag.html">HtmlTag</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setContentOnly">#</a>
+			<code class="nowrap">
+				<a href="source-HtmlTag.php.html#322" title="go to source code"><b>setContentOnly</b></a>(
+					boolean
+					<var>$contentOnly</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets if only the contents should be rendered.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets if only the contents should be rendered.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$contentOnly</code> boolean $contentOnly Should only the contents be rendered<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.HtmlTag.html">HtmlTag</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 __toString" id="___toString">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#___toString">#</a>
+			<code class="nowrap">
+				<a href="source-HtmlTag.php.html#334" title="go to source code"><b>__toString</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Renders the HTML element.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Renders the HTML element.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">string </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 __call" id="___call">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				mixed
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#___call">#</a>
+			<code class="nowrap">
+				<a href="source-HtmlTag.php.html#344" title="go to source code"><b>__call</b></a>(
+					string
+					<var>$method</var>, 
+					array
+					<var>$args</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets or returns the attribute.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets or returns the attribute.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$method</code> string $method Method name<br />
+						<code>$args</code> array $args Method attributes<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">mixed string|Jyxo_HtmlTag</div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 __get" id="___get">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				mixed
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#___get">#</a>
+			<code class="nowrap">
+				<a href="source-HtmlTag.php.html#365" title="go to source code"><b>__get</b></a>(
+					string
+					<var>$name</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Returns an attribute value.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns an attribute value.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$name</code> string $name Attribute name<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">mixed string|null</div>
+
+
+			</div>
+			</td>
+		</tr>
+		</table>
+	</div>
+
+
+
+
+
+
+
+</div>
+
+		<div id="footer">
+			Jyxo PHP Library generated by <a href="http://github.com/nette/apigen">Apigen</a>
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>

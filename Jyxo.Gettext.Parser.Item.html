@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Nette Framework Apigen" />
+	<title>Jyxo PHP Library | Class Jyxo\Gettext\Parser\Item</title>
+
+	<script type="text/javascript" src="media/combined.js"></script>
+	<script type="text/javascript" src="allclasses.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="media/style.css?v=2011040113" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<div id="main">
+<div id="leftWrapper">
+	<div id="left">
+		<a href="allclasses.html">All Classes</a>
+
+		<h3>Packages</h3>
+		<ul>
+			<li class="all"><a href="overview.html#packages">All</a></li>
+			<li><a href="package-Jyxo.Gettext.html" class="active">Jyxo\Gettext</a></li>
+		</ul>
+
+		<h3>Namespaces</h3>
+		<ul>
+			<li class="all"><a href="overview.html#namespaces">All</a></li>
+			<li><a href="namespace-Jyxo.html" >Jyxo</a></li>
+			<li><a href="namespace-Jyxo.Gettext.html" >Jyxo\Gettext</a></li>
+			<li><a href="namespace-Jyxo.Gettext.Parser.html" class="active">Jyxo\Gettext\Parser</a></li>
+		</ul>
+
+		<h3>Classes</h3>
+
+		<ul>
+			<li class="all"><a href="allclasses.html#classes">All</a></li>
+				<li class="all"><a href="package-Jyxo.Gettext.html#classes">All in package Jyxo\Gettext</a></li>
+				<li class="all"><a href="namespace-Jyxo.Gettext.Parser.html#classes">All in namespace Jyxo\Gettext\Parser</a></li>
+			<li><a href="Jyxo.Gettext.Parser.Item.html" class="active">Item</a></li>
+		</ul>
+
+	</div>
+</div>
+<div id="rightWrapper">
+	<div id="right">
+		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+			<input type="hidden" name="cx" value="011549293477758430224:vxofa9ufnhc" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		</form>
+
+<div id="navigation">
+	<ul>
+		<li><a href="overview.html" title="Summary of all namespaces">Overview</a></li>		<li><a href="namespace-Jyxo.Gettext.Parser.html" title="Summary of Jyxo\Gettext\Parser">Namespace</a></li>
+		<li class="active">Class</li>
+		<li><a href="elements.html">Elements</a></li>
+	</ul>
+</div>
+
+<div id="content">
+	<div id="classSummary">		<p>namespace <a href="namespace-Jyxo.Gettext.Parser.html">Jyxo\Gettext\Parser</a></p>
+
+		<h1>Class Item</h1>
+		<div class="classDescription">
+
+		
+<p>Container class for translation properties.</p>
+
+		</div>
+
+		<div class="classInfo">
+			
+					<b>Category:</b>
+						Jyxo<br />
+					<b>Package:</b>
+						<a href="package-Jyxo.Gettext.html">Jyxo\Gettext</a><br />
+					<b>Subpackage:</b>
+						Parser<br />
+					<b>Copyright:</b>
+						Copyright © 2005–2011 Jyxo, s.r.o.<br />
+					<b>License:</b>
+						<a
+href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/…/license.txt</a><br />
+					<b>Author:</b>
+						Matěj Humpál<br />
+			<b>Located at</b> <a href="source-Gettext.Parser.Item.php.html#16">/Gettext/Parser/Item.php</a><br />
+		</div>
+	</div>
+
+	<div id="methodSummary">
+
+		<table class="summary">
+		<caption>Method Summary</caption>
+		<tr data-order="1 __construct" id="___construct">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#___construct">#</a>
+			<code class="nowrap">
+				<a href="source-Gettext.Parser.Item.php.html#74" title="go to source code"><b>__construct</b></a>(
+					string
+					<var>$chunk</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Constructor.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Constructor.</p>
+
+<p>Retrieves a fragment of the PO file and parses it.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$chunk</code> string $chunk Translation fragment<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="Jyxo.Gettext.Parser.Exception.html">Exception</a> If msgid empty<br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 parse" id="_parse">
+			<td align="right" width="1%"><code class="nowrap">
+				 protected 
+				
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_parse">#</a>
+			<code class="nowrap">
+				<a href="source-Gettext.Parser.Item.php.html#92" title="go to source code"><b>parse</b></a>(
+					array
+					
+					<var>$chunks</var>
+			)</code>
+
+			<div class="short">
+				
+<p>The actual parser.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>The actual parser.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$chunks</code> array $chunks Lines of the PO file fragment<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 isFuzzy" id="_isFuzzy">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_isFuzzy">#</a>
+			<code class="nowrap">
+				<a href="source-Gettext.Parser.Item.php.html#138" title="go to source code"><b>isFuzzy</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns whether the msgid is fuzzy.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns whether the msgid is fuzzy.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">boolean </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 isObsolete" id="_isObsolete">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_isObsolete">#</a>
+			<code class="nowrap">
+				<a href="source-Gettext.Parser.Item.php.html#148" title="go to source code"><b>isObsolete</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns whether the msgid is obsolete.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns whether the msgid is obsolete.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">boolean </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 hasPlural" id="_hasPlural">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_hasPlural">#</a>
+			<code class="nowrap">
+				<a href="source-Gettext.Parser.Item.php.html#158" title="go to source code"><b>hasPlural</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns whether the msgid has plural forms.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns whether the msgid has plural forms.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">boolean </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getLocation" id="_getLocation">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string|array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getLocation">#</a>
+			<code class="nowrap">
+				<a href="source-Gettext.Parser.Item.php.html#168" title="go to source code"><b>getLocation</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns msgid's position in source codes.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns msgid's position in source codes.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">string|array </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getMsgid" id="_getMsgid">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string|array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getMsgid">#</a>
+			<code class="nowrap">
+				<a href="source-Gettext.Parser.Item.php.html#178" title="go to source code"><b>getMsgid</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns msgid.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns msgid.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">string|array </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getMsgstr" id="_getMsgstr">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string|array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getMsgstr">#</a>
+			<code class="nowrap">
+				<a href="source-Gettext.Parser.Item.php.html#188" title="go to source code"><b>getMsgstr</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns msgstr.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns msgstr.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">string|array </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getPlural" id="_getPlural">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getPlural">#</a>
+			<code class="nowrap">
+				<a href="source-Gettext.Parser.Item.php.html#198" title="go to source code"><b>getPlural</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns plural translations.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns plural translations.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">string </div>
+
+
+			</div>
+			</td>
+		</tr>
+		</table>
+	</div>
+
+
+
+
+
+	<div id="propertySummary">
+
+		<table class="summary">
+		<caption>Property Summary</caption>
+		<tr data-order="msgid" id="$msgid">
+			<td align="right" width="1%"><code class="nowrap">
+				protected 
+				string
+			</code></td>
+
+			<td width="1%"><var>$msgid</var></td>
+			<td><pre><span class="php-quote">''</span></pre></td>
+			<td>Msgid. <a href="#$msgid" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="msgstr" id="$msgstr">
+			<td align="right" width="1%"><code class="nowrap">
+				protected 
+				string|array
+			</code></td>
+
+			<td width="1%"><var>$msgstr</var></td>
+			<td><pre><span class="php-quote">''</span></pre></td>
+			<td>Msgid translations. <a href="#$msgstr" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="plural" id="$plural">
+			<td align="right" width="1%"><code class="nowrap">
+				protected 
+				string
+			</code></td>
+
+			<td width="1%"><var>$plural</var></td>
+			<td><pre><span class="php-quote">''</span></pre></td>
+			<td>Plural forms. <a href="#$plural" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="location" id="$location">
+			<td align="right" width="1%"><code class="nowrap">
+				protected 
+				string
+			</code></td>
+
+			<td width="1%"><var>$location</var></td>
+			<td><pre><span class="php-quote">''</span></pre></td>
+			<td>Msgid position in the source code. <a href="#$location" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="fuzzy" id="$fuzzy">
+			<td align="right" width="1%"><code class="nowrap">
+				protected 
+				boolean
+			</code></td>
+
+			<td width="1%"><var>$fuzzy</var></td>
+			<td><pre><span class="php-keyword1">false</span></pre></td>
+			<td>Is msgid fuzzy? <a href="#$fuzzy" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="obsolete" id="$obsolete">
+			<td align="right" width="1%"><code class="nowrap">
+				protected 
+				boolean
+			</code></td>
+
+			<td width="1%"><var>$obsolete</var></td>
+			<td><pre><span class="php-keyword1">false</span></pre></td>
+			<td>Is msgid obsolete? <a href="#$obsolete" class="anchor">#</a></td>
+		</tr>
+		</table>
+	</div>
+
+
+</div>
+
+		<div id="footer">
+			Jyxo PHP Library generated by <a href="http://github.com/nette/apigen">Apigen</a>
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>

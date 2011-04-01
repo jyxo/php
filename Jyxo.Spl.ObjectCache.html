@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Nette Framework Apigen" />
+	<title>Jyxo PHP Library | Class Jyxo\Spl\ObjectCache</title>
+
+	<script type="text/javascript" src="media/combined.js"></script>
+	<script type="text/javascript" src="allclasses.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="media/style.css?v=2011040113" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<div id="main">
+<div id="leftWrapper">
+	<div id="left">
+		<a href="allclasses.html">All Classes</a>
+
+		<h3>Packages</h3>
+		<ul>
+			<li class="all"><a href="overview.html#packages">All</a></li>
+			<li><a href="package-Jyxo.Spl.html" class="active">Jyxo\Spl</a></li>
+		</ul>
+
+		<h3>Namespaces</h3>
+		<ul>
+			<li class="all"><a href="overview.html#namespaces">All</a></li>
+			<li><a href="namespace-Jyxo.html" >Jyxo</a></li>
+			<li><a href="namespace-Jyxo.Spl.html" class="active">Jyxo\Spl</a></li>
+		</ul>
+
+		<h3>Classes</h3>
+
+		<ul>
+			<li class="all"><a href="allclasses.html#classes">All</a></li>
+				<li class="all"><a href="package-Jyxo.Spl.html#classes">All in package Jyxo\Spl</a></li>
+				<li class="all"><a href="namespace-Jyxo.Spl.html#classes">All in namespace Jyxo\Spl</a></li>
+			<li><a href="Jyxo.Spl.ObjectCache.html" class="active">ObjectCache</a></li>
+		</ul>
+
+	</div>
+</div>
+<div id="rightWrapper">
+	<div id="right">
+		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+			<input type="hidden" name="cx" value="011549293477758430224:vxofa9ufnhc" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		</form>
+
+<div id="navigation">
+	<ul>
+		<li><a href="overview.html" title="Summary of all namespaces">Overview</a></li>		<li><a href="namespace-Jyxo.Spl.html" title="Summary of Jyxo\Spl">Namespace</a></li>
+		<li class="active">Class</li>
+		<li><a href="elements.html">Elements</a></li>
+	</ul>
+</div>
+
+<div id="content">
+	<div id="classSummary">		<p>namespace <a href="namespace-Jyxo.Spl.html">Jyxo\Spl</a></p>
+
+		<h1>Class ObjectCache</h1>
+		<div class="classDescription">
+
+		
+<p>Simple object cache so we don't have to create them or write caching
+over again.</p>
+
+<p>&lt;?php<br>
+// Example code</p>
+
+<pre>
+        <span class="php-var">$key</span> = <span
+class="php-quote">'User_Friends/'</span> . <span
+class="php-var">$user</span>-&gt;username();
+        <span
+class="php-keyword1">return</span> \Jyxo\Spl\ObjectCache::get(<span
+class="php-var">$key</span>) ?: \Jyxo\Spl\ObjectCache::set(<span
+class="php-var">$key</span>, <span
+class="php-keyword1">new</span> \User\Friends(<span
+class="php-var">$this</span>-&gt;context, <span
+class="php-var">$user</span>));
+ </pre>
+
+		</div>
+		<dl class="tree">
+
+			<dd style="padding-left:0px"><b>Jyxo\Spl\ObjectCache</b>				 implements <a href="IteratorAggregate.html">IteratorAggregate</a>, <a href="Traversable.html">Traversable</a>
+			</dd>
+		</dl>
+
+		<div class="classInfo">
+			
+					<b>Category:</b>
+						Jyxo<br />
+					<b>Package:</b>
+						<a href="package-Jyxo.Spl.html">Jyxo\Spl</a><br />
+					<b>Copyright:</b>
+						Copyright © 2005–2011 Jyxo, s.r.o.<br />
+					<b>License:</b>
+						<a
+href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/…/license.txt</a><br />
+					<b>Author:</b>
+						Jakub Tománek<br />
+			<b>Located at</b> <a href="source-Spl.ObjectCache.php.html#16">/Spl/ObjectCache.php</a><br />
+		</div>
+	</div>
+
+	<div id="methodSummary">
+
+		<table class="summary">
+		<caption>Method Summary</caption>
+		<tr data-order="0 getInstance" id="_getInstance">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				<a href="Jyxo.Spl.ObjectCache.html">ObjectCache</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getInstance">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.ObjectCache.php.html#41" title="go to source code"><b>getInstance</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns default storage for static access.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns default storage for static access.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Spl.ObjectCache.html">ObjectCache</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 get" id="_get">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				object
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_get">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.ObjectCache.php.html#55" title="go to source code"><b>get</b></a>(
+					string
+					<var>$key</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Returns an object from the default storage.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns an object from the default storage.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$key</code> string $key Object key<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">object </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 clear" id="_clear">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Jyxo.Spl.ObjectCache.html">ObjectCache</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_clear">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.ObjectCache.php.html#66" title="go to source code"><b>clear</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Clear the whole storage.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Clear the whole storage.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Jyxo.Spl.ObjectCache.html">ObjectCache</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 set" id="_set">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				object
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_set">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.ObjectCache.php.html#77" title="go to source code"><b>set</b></a>(
+					string
+					<var>$key</var>, 
+					object
+					<var>$value</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Saves an object into the default storage.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Saves an object into the default storage.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$key</code> string $key Object key<br />
+						<code>$value</code> object $value Object<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">object saved object</div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 __get" id="___get">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				object
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#___get">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.ObjectCache.php.html#90" title="go to source code"><b>__get</b></a>(
+					string
+					<var>$key</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Returns an object from an own storage.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns an object from an own storage.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$key</code> string $key Object key<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">object </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 __set" id="___set">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#___set">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.ObjectCache.php.html#101" title="go to source code"><b>__set</b></a>(
+					string
+					<var>$key</var>, 
+					object
+					<var>$value</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Saves an object into an own storage.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Saves an object into an own storage.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$key</code> string $key Object key<br />
+						<code>$value</code> object $value Object<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 __isset" id="___isset">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#___isset">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.ObjectCache.php.html#112" title="go to source code"><b>__isset</b></a>(
+					string
+					<var>$key</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Returns if there's an object with key $key in the storage.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns if there's an object with key $key in the storage.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$key</code> string $key Object key<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">boolean </div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 __unset" id="___unset">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#___unset">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.ObjectCache.php.html#123" title="go to source code"><b>__unset</b></a>(
+					mixed
+					<var>$key</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Deletes an object with key $key from the storage.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Deletes an object with key $key from the storage.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$key</code> mixed $key Object key<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getIterator" id="_getIterator">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="ArrayIterator.html">ArrayIterator</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getIterator">#</a>
+			<code class="nowrap">
+				<a href="source-Spl.ObjectCache.php.html#133" title="go to source code"><b>getIterator</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns an iterator.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns an iterator.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="ArrayIterator.html">ArrayIterator</a> </div>
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IteratorAggregate.html#_getIterator">IteratorAggregate::getIterator</a></code></div>
+			</div>
+			</td>
+		</tr>
+		</table>
+	</div>
+
+
+
+
+
+
+
+</div>
+
+		<div id="footer">
+			Jyxo PHP Library generated by <a href="http://github.com/nette/apigen">Apigen</a>
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>
