@@ -136,7 +136,7 @@
 	<loc>http://jyxo.github.com/php/ArrayIterator.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/BadMethodCallException.html</loc>
+	<loc>http://jyxo.github.com/php/ArrayObject.html</loc>
 </url>
 <url>
 	<loc>http://jyxo.github.com/php/Closure.html</loc>
@@ -148,13 +148,16 @@
 	<loc>http://jyxo.github.com/php/DateTimeZone.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Exception.html</loc>
-</url>
-<url>
 	<loc>http://jyxo.github.com/php/FilterIterator.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/InvalidArgumentException.html</loc>
+	<loc>http://jyxo.github.com/php/HttpMessage.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/HttpRequest.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/HttpRequestPool.html</loc>
 </url>
 <url>
 	<loc>http://jyxo.github.com/php/IteratorIterator.html</loc>
@@ -223,16 +226,10 @@
 	<loc>http://jyxo.github.com/php/Jyxo.ErrorMail.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Exception.html</loc>
-</url>
-<url>
 	<loc>http://jyxo.github.com/php/Jyxo.FirePhp.html</loc>
 </url>
 <url>
 	<loc>http://jyxo.github.com/php/Jyxo.Gettext.Parser.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/Jyxo.Gettext.Parser.Exception.html</loc>
 </url>
 <url>
 	<loc>http://jyxo.github.com/php/Jyxo.Gettext.Parser.Header.html</loc>
@@ -253,9 +250,6 @@
 	<loc>http://jyxo.github.com/php/Jyxo.Input.Chain.Conditional.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Exception.html</loc>
-</url>
-<url>
 	<loc>http://jyxo.github.com/php/Jyxo.Input.Factory.html</loc>
 </url>
 <url>
@@ -263,9 +257,6 @@
 </url>
 <url>
 	<loc>http://jyxo.github.com/php/Jyxo.Input.Filter.AbstractFilter.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Filter.Exception.html</loc>
 </url>
 <url>
 	<loc>http://jyxo.github.com/php/Jyxo.Input.Filter.ExplodeName.html</loc>
@@ -302,9 +293,6 @@
 </url>
 <url>
 	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.Equals.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.Exception.html</loc>
 </url>
 <url>
 	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.InArray.html</loc>
@@ -415,28 +403,7 @@
 	<loc>http://jyxo.github.com/php/Jyxo.Mail.Parser.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Parser.DefaultPartIdNotExistException.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Parser.EmailNotExistException.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Parser.Exception.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Parser.PartNotExistException.html</loc>
-</url>
-<url>
 	<loc>http://jyxo.github.com/php/Jyxo.Mail.Sender.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Sender.CreateException.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Sender.Exception.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Sender.RecipientUnknownException.html</loc>
 </url>
 <url>
 	<loc>http://jyxo.github.com/php/Jyxo.Mail.Sender.Result.html</loc>
@@ -445,19 +412,10 @@
 	<loc>http://jyxo.github.com/php/Jyxo.Mail.Sender.Smtp.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Sender.SmtpException.html</loc>
-</url>
-<url>
 	<loc>http://jyxo.github.com/php/Jyxo.Rpc.Client.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Rpc.Exception.html</loc>
-</url>
-<url>
 	<loc>http://jyxo.github.com/php/Jyxo.Rpc.Json.Client.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/Jyxo.Rpc.Json.Exception.html</loc>
 </url>
 <url>
 	<loc>http://jyxo.github.com/php/Jyxo.Rpc.Json.Server.html</loc>
@@ -469,16 +427,10 @@
 	<loc>http://jyxo.github.com/php/Jyxo.Rpc.Xml.Client.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Rpc.Xml.Exception.html</loc>
-</url>
-<url>
 	<loc>http://jyxo.github.com/php/Jyxo.Rpc.Xml.Server.html</loc>
 </url>
 <url>
 	<loc>http://jyxo.github.com/php/Jyxo.Shell.Client.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/Jyxo.Shell.Exception.html</loc>
 </url>
 <url>
 	<loc>http://jyxo.github.com/php/Jyxo.SpamFilter.html</loc>
@@ -508,16 +460,10 @@
 	<loc>http://jyxo.github.com/php/Jyxo.Svn.Client.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Svn.Exception.html</loc>
-</url>
-<url>
 	<loc>http://jyxo.github.com/php/Jyxo.Svn.Result.html</loc>
 </url>
 <url>
 	<loc>http://jyxo.github.com/php/Jyxo.Time.Composer.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/Jyxo.Time.ComposerException.html</loc>
 </url>
 <url>
 	<loc>http://jyxo.github.com/php/Jyxo.Time.Time.html</loc>
@@ -532,19 +478,10 @@
 	<loc>http://jyxo.github.com/php/Jyxo.Webdav.Client.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Webdav.Exception.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/Jyxo.Webdav.FileNotExistException.html</loc>
-</url>
-<url>
 	<loc>http://jyxo.github.com/php/Jyxo.XmlReader.html</loc>
 </url>
 <url>
 	<loc>http://jyxo.github.com/php/LimitIterator.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/LogicException.html</loc>
 </url>
 <url>
 	<loc>http://jyxo.github.com/php/XMLReader.html</loc>

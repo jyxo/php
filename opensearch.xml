@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+<ShortName>Jyxo PHP Library</ShortName>
+<Description>Jyxo PHP Library Documentation</Description>
+<Url type="text/html" method="GET" template="http://www.google.com/cse?cx=004718174178290363576%3Af23xklsezl8&amp;ie=UTF-8&amp;q={searchTerms}%20more%3Aapi" />
+<Image width="16" height="16">http://jyxo.github.com/php/favicon.ico</Image>
+<SyndicationRight>open</SyndicationRight>
+<InputEncoding>UTF-8</InputEncoding>
+<OutputEncoding>UTF-8</OutputEncoding>
+</OpenSearchDescription>

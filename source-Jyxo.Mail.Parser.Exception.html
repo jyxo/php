@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.0 beta; http://apigen.org" />	<meta name="robots" content="noindex" />
+
+	<title>Jyxo PHP Library | File Mail/Parser/Exception.php</title>
+
+	<script type="text/javascript" src="resources/combined.js?649939912"></script>
+	<script type="text/javascript" src="allclasses.js?1463540230"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3934716485" />
+	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />	<link rel="search" type="application/opensearchdescription+xml" title="Jyxo PHP Library" href="http://jyxo.github.com/php/opensearch.xml" />
+</head>
+
+<body>
+<div id="main">
+<div id="leftWrapper">
+	<div id="left">
+		<a href="index.html" id="home_link"><span>Overview</span></a>
+
+		<h3>Packages</h3>
+		<ul>			<li class="all"><a href="index.html#packages">All</a></li>
+			<li class="active"><a href="package-Jyxo.Mail.html">Jyxo\Mail</a></li>
+
+		</ul>
+
+		<h3>Namespaces</h3>
+		<ul>			<li class="all"><a href="index.html#namespaces">All</a></li>
+			<li><a href="namespace-Jyxo.html">Jyxo</a>
+					<ul>
+			<li><a href="namespace-Jyxo.Mail.html">Jyxo\Mail</a>
+					<ul>
+			<li class="active"><a href="namespace-Jyxo.Mail.Parser.html">Jyxo\Mail\Parser</a>
+					</ul></li></ul></li>
+			</ul></li></ul></li>
+		</ul>
+
+
+
+		<h3>Exceptions</h3>
+		<ul>
+			<li class="all"><a href="allclasses.html#exceptions">All</a></li>			<li class="all"><a href="package-Jyxo.Mail.html#exceptions">All in package Jyxo\Mail</a></li>
+			<li class="all"><a href="namespace-Jyxo.Mail.Parser.html#exceptions">All in namespace Jyxo\Mail\Parser</a></li>
+			<li class="active"><a href="Jyxo.Mail.Parser.Exception.html">Exception</a></li>
+
+		</ul>
+	</div>
+</div>
+<div id="rightWrapper">
+	<div id="right">		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+
+			<input type="hidden" name="cx" value="004718174178290363576:f23xklsezl8" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		</form>
+
+<div id="navigation">
+	<ul>
+		<li><a href="index.html" title="Summary of all packages">Overview</a></li>
+		<li><a href="package-Jyxo.Mail.html" title="Summary of Jyxo\Mail">Package</a></li>
+		<li><a href="namespace-Jyxo.Mail.Parser.html" title="Summary of Jyxo\Mail\Parser">Namespace</a></li>
+		<li><a href="Jyxo.Mail.Parser.Exception.html" title="Summary of Jyxo\Mail\Parser\Exception">Class</a></li>
+	</ul>
+</div>
+
+<pre><code><a href="#1" id="1" class="l"> 1: </a><span class="xlang">&lt;?php</span>
+<a href="#2" id="2" class="l"> 2: </a>
+<a href="#3" id="3" class="l"> 3: </a><span class="php-comment">/**
+</span><a href="#4" id="4" class="l"> 4: </a><span class="php-comment"> * Jyxo PHP Library
+</span><a href="#5" id="5" class="l"> 5: </a><span class="php-comment"> *
+</span><a href="#6" id="6" class="l"> 6: </a><span class="php-comment"> * LICENSE
+</span><a href="#7" id="7" class="l"> 7: </a><span class="php-comment"> *
+</span><a href="#8" id="8" class="l"> 8: </a><span class="php-comment"> * This source file is subject to the new BSD license that is bundled
+</span><a href="#9" id="9" class="l"> 9: </a><span class="php-comment"> * with this package in the file license.txt.
+</span><a href="#10" id="10" class="l">10: </a><span class="php-comment"> * It is also available through the world-wide-web at this URL:
+</span><a href="#11" id="11" class="l">11: </a><span class="php-comment"> * https://github.com/jyxo/php/blob/master/license.txt
+</span><a href="#12" id="12" class="l">12: </a><span class="php-comment"> */</span>
+<a href="#13" id="13" class="l">13: </a>
+<a href="#14" id="14" class="l">14: </a><span class="php-keyword1">namespace</span> Jyxo\<span class="php-keyword2">Mail</span>\Parser;
+<a href="#15" id="15" class="l">15: </a>
+<a href="#16" id="16" class="l">16: </a><span class="php-comment">/**
+</span><a href="#17" id="17" class="l">17: </a><span class="php-comment"> * Base \Jyxo\Mail\Parser exception.
+</span><a href="#18" id="18" class="l">18: </a><span class="php-comment"> *
+</span><a href="#19" id="19" class="l">19: </a><span class="php-comment"> * @category Jyxo
+</span><a href="#20" id="20" class="l">20: </a><span class="php-comment"> * @package Jyxo\Mail
+</span><a href="#21" id="21" class="l">21: </a><span class="php-comment"> * @subpackage Parser
+</span><a href="#22" id="22" class="l">22: </a><span class="php-comment"> * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
+</span><a href="#23" id="23" class="l">23: </a><span class="php-comment"> * @license https://github.com/jyxo/php/blob/master/license.txt
+</span><a href="#24" id="24" class="l">24: </a><span class="php-comment"> * @author Jaroslav Hanslík
+</span><a href="#25" id="25" class="l">25: </a><span class="php-comment"> */</span>
+<a href="#26" id="26" class="l">26: </a><span class="php-keyword1">class</span> Exception <span class="php-keyword1">extends</span> \Jyxo\Exception
+<a href="#27" id="27" class="l">27: </a>{}
+<a href="#28" id="28" class="l">28: </a></code></pre>
+
+		<div id="footer">
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville" class="gravatar"><img src="http://gravatar.com/avatar/b2acbf0c8af3bdb2a57176d954ff8ba1?s=12" alt="Andrewsville" /></a>&amp;<a href="http://github.com/kukulich" class="gravatar"><img src="http://gravatar.com/avatar/d106644a59a117503d480ec2edf48368?s=12" alt="Kukulich" /></a> <a href="http://github.com/Andrewsville/apigen">ApiGen</a>, a fork of the original <a href="http://github.com/nette/apigen">tool</a>.<br />
+			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>
