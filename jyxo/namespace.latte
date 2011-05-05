@@ -1,0 +1,20 @@
+{layout '@layout.latte'}
+
+{block #title}{if $namespace}Namespace {$namespace}{else}No namespace{/if}{/block}
+
+{block #content}
+<div id="navigation">
+	<ul>
+		<li><a href="index.html" title="Summary of all packages">Overview</a></li>
+		<li><a n:tag-if="$package" href="{$package|packageLink}" title="Summary of {$package}">Package</a></li>
+		<li n:class="$namespace ? active">Namespace</li>
+		<li>Class</li>
+	</ul>
+</div>
+
+<div id="content">
+	<h1>{if $namespace}Namespace {$namespace}{else}No namespace{/if}</h1>
+
+	{include '@classlist.latte'}
+</div>
+{/block}
