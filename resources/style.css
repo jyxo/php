@@ -188,6 +188,12 @@ pre {
 	float: left;
 }
 
+#navigation ul + ul {
+	border-left: 1px solid black;
+	margin-left: 10px;
+	padding-left: 12px;
+}
+
 #navigation ul li {
 	display: inline;
 	margin: 2px 2px 2px 2px;
@@ -199,6 +205,7 @@ pre {
 #navigation ul li a {
 	color: black;
 	font-weight: bold;
+	padding: 3px;
 }
 
 #navigation ul li a:hover, #navigation ul li a:active, #navigation ul li a:focus {
@@ -302,6 +309,9 @@ tr .detailed {
 .deprecated {
 	opacity: .5;
 }
+.right {
+	text-align: right;
+}
 
 .box {
 	border: 1px solid #ccc;
@@ -349,6 +359,35 @@ div.smallList {
 
 #footer img {
 	border: 0;
+}
+
+.classtree ul {
+	list-style: none;
+	background: url('tree-vertical.gif') left repeat-y;
+	padding: 0;
+	margin-left: 20px;
+}
+
+.classtree li {
+	margin: 0;
+	padding: 0;
+}
+
+.classtree div {
+	padding-left: 30px;
+	background: left center no-repeat;
+}
+
+.classtree div.notlast {
+	background-image: url('tree-hasnext.gif');
+}
+
+.classtree div.last {
+	background-image: url('tree-last.png');
+}
+
+.classtree li.last {
+	background: url('tree-cleaner.gif') left repeat-y;
 }
 
 
@@ -403,6 +442,6 @@ div.smallList {
 }
 
 .ac_over {
-	background-color: #006300;
+	background-color: #0A246A;
 	color: white;
 }
