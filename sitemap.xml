@@ -4,69 +4,6 @@
 	<loc>http://jyxo.github.com/php/index.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/package-Jyxo.Beholder.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/package-Jyxo.Charset.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/package-Jyxo.Color.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/package-Jyxo.Css.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/package-Jyxo.ErrorHandling.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/package-Jyxo.FirePhp.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/package-Jyxo.Gettext.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/package-Jyxo.Html.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/package-Jyxo.Input.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/package-Jyxo.Mail.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/package-Jyxo.Rpc.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/package-Jyxo.Shell.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/package-Jyxo.SpamFilter.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/package-Jyxo.Spl.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/package-Jyxo.String.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/package-Jyxo.Svn.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/package-Jyxo.Time.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/package-Jyxo.Timer.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/package-Jyxo.Webdav.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/package-Jyxo.XmlReader.html</loc>
-</url>
-<url>
-	<loc>http://jyxo.github.com/php/package-PHP.html</loc>
-</url>
-<url>
 	<loc>http://jyxo.github.com/php/namespace-Jyxo.html</loc>
 </url>
 <url>
@@ -133,357 +70,483 @@
 	<loc>http://jyxo.github.com/php/namespace-Jyxo.Webdav.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/ArrayIterator.html</loc>
+	<loc>http://jyxo.github.com/php/namespace-PHP.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/ArrayObject.html</loc>
+	<loc>http://jyxo.github.com/php/class-ArrayIterator.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Closure.html</loc>
+	<loc>http://jyxo.github.com/php/class-ArrayObject.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/DateTime.html</loc>
+	<loc>http://jyxo.github.com/php/class-Closure.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/DateTimeZone.html</loc>
+	<loc>http://jyxo.github.com/php/class-DateTime.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/FilterIterator.html</loc>
+	<loc>http://jyxo.github.com/php/class-DateTimeZone.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/HttpMessage.html</loc>
+	<loc>http://jyxo.github.com/php/class-FilterIterator.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/HttpRequest.html</loc>
+	<loc>http://jyxo.github.com/php/class-HttpMessage.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/HttpRequestPool.html</loc>
+	<loc>http://jyxo.github.com/php/class-HttpRequest.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/IteratorIterator.html</loc>
+	<loc>http://jyxo.github.com/php/class-HttpRequestPool.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Beholder.Executor.html</loc>
+	<loc>http://jyxo.github.com/php/class-IteratorIterator.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Beholder.Result.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Beholder.Executor.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Beholder.TestCase.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Beholder.Result.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Beholder.TestCase.FileSystem.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Beholder.TestCase.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Beholder.TestCase.HttpResponse.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Beholder.TestCase.FileSystem.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Beholder.TestCase.Imap.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Beholder.TestCase.HttpResponse.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Beholder.TestCase.JsonRpc.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Beholder.TestCase.Imap.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Beholder.TestCase.Memcached.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Beholder.TestCase.JsonRpc.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Beholder.TestCase.Mysql.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Beholder.TestCase.Memcached.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Beholder.TestCase.Pgsql.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Beholder.TestCase.Mysql.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Beholder.TestCase.PhpExtension.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Beholder.TestCase.Pgsql.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Beholder.TestCase.PhpVersion.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Beholder.TestCase.PhpExtension.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Beholder.TestCase.PhpZend.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Beholder.TestCase.PhpVersion.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Beholder.TestCase.Smtp.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Beholder.TestCase.PhpZend.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Beholder.TestCase.Webdav.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Beholder.TestCase.Smtp.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Beholder.TestCase.XmlRpc.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Beholder.TestCase.Webdav.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Charset.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Beholder.TestCase.XmlRpc.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Color.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Charset.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Css.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Color.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.ErrorHandler.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Css.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.ErrorMail.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.ErrorHandler.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.FirePhp.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.ErrorMail.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Gettext.Parser.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.FirePhp.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Gettext.Parser.Header.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Gettext.Parser.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Gettext.Parser.Item.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Gettext.Parser.Header.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Html.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Gettext.Parser.Item.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.HtmlTag.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Html.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Chain.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.HtmlTag.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Chain.Conditional.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Chain.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Factory.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Chain.Conditional.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Filter.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Factory.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Filter.AbstractFilter.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Filter.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Filter.ExplodeName.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Filter.AbstractFilter.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Filter.LowerCase.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Filter.ExplodeName.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Filter.Phone.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Filter.LowerCase.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Filter.SanitizeUrl.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Filter.Phone.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Filter.ToInt.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Filter.SanitizeUrl.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Filter.Trim.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Filter.ToInt.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Fluent.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Filter.Trim.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Upload.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Fluent.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Upload.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.AbstractValidator.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.Callback.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.AbstractValidator.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.Equals.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.Callback.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.InArray.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.Equals.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.IsArray.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.InArray.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.IsBankAccountNumber.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.IsArray.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.IsBirthNumber.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.IsBankAccountNumber.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.IsCompanyId.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.IsBirthNumber.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.IsCountryCode.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.IsCompanyId.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.IsDate.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.IsCountryCode.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.IsDateTime.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.IsDate.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.IsEmail.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.IsDateTime.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.IsIban.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.IsEmail.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.IsInt.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.IsIban.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.IsIpV4.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.IsInt.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.IsIpV6.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.IsIpV4.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.IsNumeric.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.IsIpV6.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.IsPhone.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.IsNumeric.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.IsTaxId.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.IsPhone.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.IsUrl.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.IsTaxId.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.IsZipCode.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.IsUrl.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.LessThan.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.IsZipCode.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.NotEmpty.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.LessThan.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.Regex.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.NotEmpty.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.StringLengthBetween.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.Regex.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.StringLengthGreaterThan.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.StringLengthBetween.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.StringLengthLessThan.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.StringLengthGreaterThan.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Input.Validator.Upload.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.StringLengthLessThan.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Email.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.Upload.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Email.Address.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Email.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Email.Attachment.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Email.Address.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Email.Attachment.File.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Email.Attachment.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Email.Attachment.InlineFile.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Email.Attachment.File.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Email.Attachment.InlineString.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Email.Attachment.InlineFile.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Email.Attachment.String.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Email.Attachment.InlineString.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Email.Body.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Email.Attachment.String.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Email.Header.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Email.Body.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Encoding.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Email.Header.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Parser.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Encoding.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Sender.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Parser.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Sender.Result.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Sender.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Mail.Sender.Smtp.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Sender.Result.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Rpc.Client.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Sender.Smtp.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Rpc.Json.Client.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Rpc.Client.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Rpc.Json.Server.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Rpc.Json.Client.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Rpc.Server.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Rpc.Json.Server.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Rpc.Xml.Client.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Rpc.Server.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Rpc.Xml.Server.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Rpc.Xml.Client.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Shell.Client.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Rpc.Xml.Server.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.SpamFilter.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Shell.Client.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Spl.ArrayUtil.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.SpamFilter.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Spl.CountableLimitIterator.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Spl.ArrayUtil.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Spl.FilterIterator.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Spl.CountableLimitIterator.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Spl.MapIterator.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Spl.FilterIterator.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Spl.Object.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Spl.MapIterator.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Spl.ObjectCache.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Spl.Object.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.String.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Spl.ObjectCache.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Svn.Client.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.String.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Svn.Result.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Svn.Client.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Time.Composer.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Svn.Result.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Time.Time.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Time.Composer.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Time.Util.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Time.Time.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Timer.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Time.Util.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.Webdav.Client.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Timer.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/Jyxo.XmlReader.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Webdav.Client.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/LimitIterator.html</loc>
+	<loc>http://jyxo.github.com/php/class-Jyxo.XmlReader.html</loc>
 </url>
 <url>
-	<loc>http://jyxo.github.com/php/XMLReader.html</loc>
+	<loc>http://jyxo.github.com/php/class-LimitIterator.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-XMLReader.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-ArrayAccess.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Countable.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Iterator.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-IteratorAggregate.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.FilterInterface.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.ErrorMessage.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.ValidatorInterface.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Spl.ArrayCopy.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-OuterIterator.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-SeekableIterator.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Serializable.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Traversable.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-BadFunctionCallException.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-BadMethodCallException.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Exception.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-InvalidArgumentException.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Exception.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Gettext.Parser.Exception.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Exception.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Filter.Exception.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Input.Validator.Exception.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Parser.DefaultPartIdNotExistException.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Parser.EmailNotExistException.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Parser.Exception.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Parser.PartNotExistException.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Sender.CreateException.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Sender.Exception.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Sender.RecipientUnknownException.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Mail.Sender.SmtpException.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Rpc.Exception.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Rpc.Json.Exception.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Rpc.Xml.Exception.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Shell.Exception.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Svn.Exception.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Time.ComposerException.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Webdav.Exception.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-Jyxo.Webdav.FileNotExistException.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-LogicException.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-ReflectionException.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-RuntimeException.html</loc>
+</url>
+<url>
+	<loc>http://jyxo.github.com/php/class-UnexpectedValueException.html</loc>
 </url>
 </urlset>

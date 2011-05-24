@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="TR ApiGen 2.0 beta 3" />
+
+	<title>Class Jyxo\SpamFilter | Jyxo PHP Library</title>
+
+	<script type="text/javascript" src="resources/combined.js?134547457"></script>
+	<script type="text/javascript" src="elementlist.js?86817454"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3003541655" />
+	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
+	<link rel="search" type="application/opensearchdescription+xml" title="Jyxo PHP Library" href="http://jyxo.github.com/php/opensearch.xml" />
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', "UA-23550486-1"]);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+
+<body>
+<div id="main">
+<div id="leftWrapper">
+	<div id="left">
+		<a id="home" href="index.html"><span>Overview</span></a>
+
+
+		<h3>Namespaces</h3>
+		<ul>
+			<li class="active"><a href="namespace-Jyxo.html">Jyxo</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Beholder.html">Beholder</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Beholder.TestCase.html">TestCase</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Gettext.html">Gettext</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Gettext.Parser.html">Parser</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Input.html">Input</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Input.Chain.html">Chain</a>
+					</li>
+			<li><a href="namespace-Jyxo.Input.Filter.html">Filter</a>
+					</li>
+			<li><a href="namespace-Jyxo.Input.Validator.html">Validator</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Mail.html">Mail</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Mail.Email.html">Email</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Mail.Email.Attachment.html">Attachment</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Mail.Parser.html">Parser</a>
+					</li>
+			<li><a href="namespace-Jyxo.Mail.Sender.html">Sender</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Rpc.html">Rpc</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Rpc.Json.html">Json</a>
+					</li>
+			<li><a href="namespace-Jyxo.Rpc.Xml.html">Xml</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Shell.html">Shell</a>
+					</li>
+			<li><a href="namespace-Jyxo.Spl.html">Spl</a>
+					</li>
+			<li><a href="namespace-Jyxo.Svn.html">Svn</a>
+					</li>
+			<li><a href="namespace-Jyxo.Time.html">Time</a>
+					</li>
+			<li><a href="namespace-Jyxo.Webdav.html">Webdav</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-PHP.html">PHP</a>
+					</li>
+		</ul>
+
+		<hr />
+
+		<h3>Classes</h3>
+		<ul>
+			<li><a href="class-Jyxo.Charset.html">Charset</a></li>
+			<li><a href="class-Jyxo.Color.html">Color</a></li>
+			<li><a href="class-Jyxo.Css.html">Css</a></li>
+			<li><a href="class-Jyxo.ErrorHandler.html">ErrorHandler</a></li>
+			<li><a href="class-Jyxo.ErrorMail.html">ErrorMail</a></li>
+			<li><a href="class-Jyxo.FirePhp.html">FirePhp</a></li>
+			<li><a href="class-Jyxo.Html.html">Html</a></li>
+			<li><a href="class-Jyxo.HtmlTag.html">HtmlTag</a></li>
+			<li class="active"><a href="class-Jyxo.SpamFilter.html">SpamFilter</a></li>
+			<li><a href="class-Jyxo.String.html">String</a></li>
+			<li><a href="class-Jyxo.Timer.html">Timer</a></li>
+			<li><a href="class-Jyxo.XmlReader.html">XmlReader</a></li>
+		</ul>
+
+
+		<h3>Exceptions</h3>
+		<ul>
+			<li><a href="class-Jyxo.Exception.html">Exception</a></li>
+		</ul>
+
+
+	</div>
+</div>
+<div id="rightWrapper">
+	<div id="right">
+		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+			<input type="hidden" name="cx" value="004718174178290363576:f23xklsezl8" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		</form>
+
+		<div id="navigation">
+			<ul>
+				<li>
+					<a href="index.html" title="Overview"><span>Overview</span></a>
+				</li>
+				<li>
+					<a href="namespace-Jyxo.html" title="Summary of Jyxo"><span>Namespace</span></a>
+				</li>
+				<li class="active">
+<span>Class</span>				</li>
+			</ul>
+			<ul>
+				<li>
+					<a href="tree.html" title="Tree view of classes, interfaces and exceptions"><span>Tree</span></a>
+				</li>
+				<li>
+					<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+				</li>
+			</ul>
+		</div>
+
+<div id="content">
+	<h1>Class SpamFilter</h1>
+
+	<div class="description">
+	
+<p>Walks through the given text and computes individual words counts. If more
+than 3/4 words repeat<br />
+the text is considered to be spam.</p>
+
+	</div>
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Jyxo.html">Jyxo</a><br />
+
+				<b>Category:</b>
+				Jyxo<br />
+				<b>Package:</b>
+				Jyxo\SpamFilter<br />
+				<b>Copyright:</b>
+				Copyright © 2005–2011 Jyxo, s.r.o.<br />
+				<b>License:</b>
+				<a
+href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jyxo/php/blob/master/license.txt</a><br />
+				<b>Author:</b>
+				Roman Řáha<br />
+		<b>Located at</b> <a href="source-Jyxo.SpamFilter.html#16" title="Go to source code">SpamFilter.php</a><br />
+	</div>
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="isSpam" id="_isSpam">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_isSpam">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.SpamFilter.html#70" title="Go to source code"><b>isSpam</b></a>(
+									string
+				<var>$text</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Checks if the given text is spam.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Checks if the given text is spam.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$text</code></dt>
+					<dd>string<br /> Checked text</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					boolean<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isBlack" id="_isBlack">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_isBlack">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.SpamFilter.html#93" title="Go to source code"><b>isBlack</b></a>(
+									string
+				<var>$text</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Returns if the given text contains blacklisted words.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns if the given text contains blacklisted words.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$text</code></dt>
+					<dd>string<br /> Checked text</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					boolean<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isLinkSpam" id="_isLinkSpam">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_isLinkSpam">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.SpamFilter.html#110" title="Go to source code"><b>isLinkSpam</b></a>(
+									string
+				<var>$text</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Returns if the text contains too many links.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns if the text contains too many links.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$text</code></dt>
+					<dd>string<br /> Checked text</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					boolean<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isBabble" id="_isBabble">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_isBabble">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.SpamFilter.html#133" title="Go to source code"><b>isBabble</b></a>(
+									string
+				<var>$text</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Returns if the text consists of repeating parts.<br />
+Returns true if the number of at least three times repeated words is greater
+than<br />
+3/4 of all words.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns if the text consists of repeating parts.<br />
+Returns true if the number of at least three times repeated words is greater
+than<br />
+3/4 of all words.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$text</code></dt>
+					<dd>string<br /> Checked text</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					boolean<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setBlackList" id="_setBlackList">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.SpamFilter.html">Jyxo\SpamFilter</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setBlackList">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.SpamFilter.html#171" title="Go to source code"><b>setBlackList</b></a>(
+				array
+								<var>$blackList</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Sets word blacklist.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Sets word blacklist.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$blackList</code></dt>
+					<dd>array<br /> Words blacklist</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.SpamFilter.html">Jyxo\SpamFilter</a><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setIgnoreWords" id="_setIgnoreWords">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.SpamFilter.html">Jyxo\SpamFilter</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setIgnoreWords">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.SpamFilter.html#183" title="Go to source code"><b>setIgnoreWords</b></a>(
+				array
+								<var>$ignoreWords</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Sets ignored word list.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Sets ignored word list.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$ignoreWords</code></dt>
+					<dd>array<br /> Ignored words list</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.SpamFilter.html">Jyxo\SpamFilter</a><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="LINK_MAX_COUNT" id="LINK_MAX_COUNT">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.SpamFilter.html#28" title="Go to source code"><b>LINK_MAX_COUNT</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">10</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#LINK_MAX_COUNT" class="anchor">#</a>
+			<div class="short">
+				
+<p>Maximal number of links in the text.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Maximal number of links in the text.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="LINK_SHORT_MAX_COUNT" id="LINK_SHORT_MAX_COUNT">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.SpamFilter.html#35" title="Go to source code"><b>LINK_SHORT_MAX_COUNT</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">3</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#LINK_SHORT_MAX_COUNT" class="anchor">#</a>
+			<div class="short">
+				
+<p>Maximal number of links in a short text.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Maximal number of links in a short text.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="LINK_MAX_RATIO" id="LINK_MAX_RATIO">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				float
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.SpamFilter.html#42" title="Go to source code"><b>LINK_MAX_RATIO</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">0</span>.<span class="php-num">05</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#LINK_MAX_RATIO" class="anchor">#</a>
+			<div class="short">
+				
+<p>Ratio of links number to the total words number in the text.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Ratio of links number to the total words number in the text.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="LINK_WORDS_MIN_COUNT" id="LINK_WORDS_MIN_COUNT">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.SpamFilter.html#49" title="Go to source code"><b>LINK_WORDS_MIN_COUNT</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">30</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#LINK_WORDS_MIN_COUNT" class="anchor">#</a>
+			<div class="short">
+				
+<p>Minimal words count where the links ratio is computed.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Minimal words count where the links ratio is computed.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+</div>
+
+		<div id="footer">
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville" class="gravatar"><img src="http://gravatar.com/avatar/b2acbf0c8af3bdb2a57176d954ff8ba1?s=12" alt="Andrewsville" /></a>&amp;<a href="http://github.com/kukulich" class="gravatar"><img src="http://gravatar.com/avatar/d106644a59a117503d480ec2edf48368?s=12" alt="Kukulich" /></a> <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>, a fork of the original <a href="http://github.com/nette/apigen">tool</a>.<br />
+			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>

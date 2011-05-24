@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="TR ApiGen 2.0 beta 3" />
+
+	<title>Class Jyxo\ErrorHandler | Jyxo PHP Library</title>
+
+	<script type="text/javascript" src="resources/combined.js?134547457"></script>
+	<script type="text/javascript" src="elementlist.js?86817454"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3003541655" />
+	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
+	<link rel="search" type="application/opensearchdescription+xml" title="Jyxo PHP Library" href="http://jyxo.github.com/php/opensearch.xml" />
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', "UA-23550486-1"]);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+
+<body>
+<div id="main">
+<div id="leftWrapper">
+	<div id="left">
+		<a id="home" href="index.html"><span>Overview</span></a>
+
+
+		<h3>Namespaces</h3>
+		<ul>
+			<li class="active"><a href="namespace-Jyxo.html">Jyxo</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Beholder.html">Beholder</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Beholder.TestCase.html">TestCase</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Gettext.html">Gettext</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Gettext.Parser.html">Parser</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Input.html">Input</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Input.Chain.html">Chain</a>
+					</li>
+			<li><a href="namespace-Jyxo.Input.Filter.html">Filter</a>
+					</li>
+			<li><a href="namespace-Jyxo.Input.Validator.html">Validator</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Mail.html">Mail</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Mail.Email.html">Email</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Mail.Email.Attachment.html">Attachment</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Mail.Parser.html">Parser</a>
+					</li>
+			<li><a href="namespace-Jyxo.Mail.Sender.html">Sender</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Rpc.html">Rpc</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Rpc.Json.html">Json</a>
+					</li>
+			<li><a href="namespace-Jyxo.Rpc.Xml.html">Xml</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Shell.html">Shell</a>
+					</li>
+			<li><a href="namespace-Jyxo.Spl.html">Spl</a>
+					</li>
+			<li><a href="namespace-Jyxo.Svn.html">Svn</a>
+					</li>
+			<li><a href="namespace-Jyxo.Time.html">Time</a>
+					</li>
+			<li><a href="namespace-Jyxo.Webdav.html">Webdav</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-PHP.html">PHP</a>
+					</li>
+		</ul>
+
+		<hr />
+
+		<h3>Classes</h3>
+		<ul>
+			<li><a href="class-Jyxo.Charset.html">Charset</a></li>
+			<li><a href="class-Jyxo.Color.html">Color</a></li>
+			<li><a href="class-Jyxo.Css.html">Css</a></li>
+			<li class="active"><a href="class-Jyxo.ErrorHandler.html">ErrorHandler</a></li>
+			<li><a href="class-Jyxo.ErrorMail.html">ErrorMail</a></li>
+			<li><a href="class-Jyxo.FirePhp.html">FirePhp</a></li>
+			<li><a href="class-Jyxo.Html.html">Html</a></li>
+			<li><a href="class-Jyxo.HtmlTag.html">HtmlTag</a></li>
+			<li><a href="class-Jyxo.SpamFilter.html">SpamFilter</a></li>
+			<li><a href="class-Jyxo.String.html">String</a></li>
+			<li><a href="class-Jyxo.Timer.html">Timer</a></li>
+			<li><a href="class-Jyxo.XmlReader.html">XmlReader</a></li>
+		</ul>
+
+
+		<h3>Exceptions</h3>
+		<ul>
+			<li><a href="class-Jyxo.Exception.html">Exception</a></li>
+		</ul>
+
+
+	</div>
+</div>
+<div id="rightWrapper">
+	<div id="right">
+		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+			<input type="hidden" name="cx" value="004718174178290363576:f23xklsezl8" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		</form>
+
+		<div id="navigation">
+			<ul>
+				<li>
+					<a href="index.html" title="Overview"><span>Overview</span></a>
+				</li>
+				<li>
+					<a href="namespace-Jyxo.html" title="Summary of Jyxo"><span>Namespace</span></a>
+				</li>
+				<li class="active">
+<span>Class</span>				</li>
+			</ul>
+			<ul>
+				<li>
+					<a href="tree.html" title="Tree view of classes, interfaces and exceptions"><span>Tree</span></a>
+				</li>
+				<li>
+					<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+				</li>
+			</ul>
+		</div>
+
+<div id="content">
+	<h1>Class ErrorHandler</h1>
+
+	<div class="description">
+	
+<p>Error and exception handler.</p>
+
+	</div>
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Jyxo.html">Jyxo</a><br />
+
+				<b>Category:</b>
+				Jyxo<br />
+				<b>Package:</b>
+				Jyxo\ErrorHandling<br />
+				<b>Copyright:</b>
+				Copyright © 2005–2011 Jyxo, s.r.o.<br />
+				<b>License:</b>
+				<a
+href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jyxo/php/blob/master/license.txt</a><br />
+				<b>Author:</b>
+				Jaroslav Hanslík<br />
+		<b>Located at</b> <a href="source-Jyxo.ErrorHandler.html#16" title="Go to source code">ErrorHandler.php</a><br />
+	</div>
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			final public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#___construct">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.ErrorHandler.html#90" title="Go to source code"><b>__construct</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Constructor preventing from creating class instances.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Constructor preventing from creating class instances.</p>
+
+
+
+
+
+
+				<h4>Throws</h4>
+				<div class="smallList">
+					<a href="class-LogicException.html">LogicException</a><br />When trying to create an instance<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="init" id="_init">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_init">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.ErrorHandler.html#100" title="Go to source code"><b>init</b></a>(
+									boolean
+				<var>$debug</var> = <span class="php-keyword1">false</span>
+		)</code>
+
+		<div class="short">
+			
+<p>Initializes error handling.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Initializes error handling.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$debug</code></dt>
+					<dd>boolean<br /> Turn debugging on?</dd>
+				</dl></div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setErrorMail" id="_setErrorMail">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setErrorMail">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.ErrorHandler.html#116" title="Go to source code"><b>setErrorMail</b></a>(
+				<a href="class-Jyxo.ErrorMail.html">Jyxo\ErrorMail</a>
+				<var>$errorMail</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Sets \Jyxo\ErrorMail instance for sending fatal error emails (used by the
+shutdown function and error handler).</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Sets \Jyxo\ErrorMail instance for sending fatal error emails (used by the
+shutdown function and error handler).</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$errorMail</code></dt>
+					<dd><a href="class-Jyxo.ErrorMail.html">Jyxo\ErrorMail</a></dd>
+				</dl></div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="handleError" id="_handleError">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_handleError">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.ErrorHandler.html#126" title="Go to source code"><b>handleError</b></a>(
+									integer
+				<var>$type</var>, 
+									string
+				<var>$message</var>, 
+									string
+				<var>$file</var>, 
+									integer
+				<var>$line</var>, 
+									array
+				<var>$context</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Handles errors and logs them.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Handles errors and logs them.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$type</code></dt>
+					<dd>integer<br /> Error type</dd>
+					<dt><code>$message</code></dt>
+					<dd>string<br /> Error message</dd>
+					<dt><code>$file</code></dt>
+					<dd>string<br /> File where the error occurred</dd>
+					<dt><code>$line</code></dt>
+					<dd>integer<br /> Line on which the error occurred</dd>
+					<dt><code>$context</code></dt>
+					<dd>array<br /> Error context variables</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					boolean<br />Was the error processed?<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="handleException" id="_handleException">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_handleException">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.ErrorHandler.html#168" title="Go to source code"><b>handleException</b></a>(
+				<a href="class-Exception.html">Exception</a>
+				<var>$exception</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Catches exceptions and logs them.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Catches exceptions and logs them.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$exception</code></dt>
+					<dd><a href="class-Exception.html">Exception</a><br /> Uncaught exception</dd>
+				</dl></div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="handleFatalError" id="_handleFatalError">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_handleFatalError">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.ErrorHandler.html#181" title="Go to source code"><b>handleFatalError</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Handles critical errors and logs them.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Handles critical errors and logs them.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="exception" id="_exception">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_exception">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.ErrorHandler.html#212" title="Go to source code"><b>exception</b></a>(
+				<a href="class-Exception.html">Exception</a>
+				<var>$exception</var>, 
+									boolean
+				<var>$fire</var> = <span class="php-keyword1">true</span>
+		)</code>
+
+		<div class="short">
+			
+<p>Adds a caught exception.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Adds a caught exception.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$exception</code></dt>
+					<dd><a href="class-Exception.html">Exception</a><br /> Caught exception</dd>
+					<dt><code>$fire</code></dt>
+					<dd>boolean<br /> Shall we use FirePHP?</dd>
+				</dl></div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="log" id="_log">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_log">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.ErrorHandler.html#233" title="Go to source code"><b>log</b></a>(
+				array
+								<var>$message</var>, 
+									boolean
+				<var>$fire</var> = <span class="php-keyword1">true</span>
+		)</code>
+
+		<div class="short">
+			
+<p>Logs a message.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Logs a message.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$message</code></dt>
+					<dd>array<br /> Message definition</dd>
+					<dt><code>$fire</code></dt>
+					<dd>boolean<br /> Shall we use FirePHP?</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					boolean<br />Was logging successful?<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="NOTICE" id="NOTICE">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.ErrorHandler.html#27" title="Go to source code"><b>NOTICE</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'notice'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#NOTICE" class="anchor">#</a>
+			<div class="short">
+				
+<p>Notice.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Notice.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="WARNING" id="WARNING">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.ErrorHandler.html#34" title="Go to source code"><b>WARNING</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'warning'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#WARNING" class="anchor">#</a>
+			<div class="short">
+				
+<p>Warning.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Warning.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="ERROR" id="ERROR">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.ErrorHandler.html#41" title="Go to source code"><b>ERROR</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'error'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#ERROR" class="anchor">#</a>
+			<div class="short">
+				
+<p>Error.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Error.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="FATAL" id="FATAL">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.ErrorHandler.html#48" title="Go to source code"><b>FATAL</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'fatal'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#FATAL" class="anchor">#</a>
+			<div class="short">
+				
+<p>Fatal error.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Fatal error.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="EXCEPTION" id="EXCEPTION">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.ErrorHandler.html#55" title="Go to source code"><b>EXCEPTION</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'exception'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#EXCEPTION" class="anchor">#</a>
+			<div class="short">
+				
+<p>Exception.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Exception.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="STRICT" id="STRICT">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.ErrorHandler.html#62" title="Go to source code"><b>STRICT</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'strict'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#STRICT" class="anchor">#</a>
+			<div class="short">
+				
+<p>Strict rules warning.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Strict rules warning.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="DEPRECATED" id="DEPRECATED">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.ErrorHandler.html#69" title="Go to source code"><b>DEPRECATED</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'deprecated'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#DEPRECATED" class="anchor">#</a>
+			<div class="short">
+				
+<p>Deprecated code usage warning.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Deprecated code usage warning.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+</div>
+
+		<div id="footer">
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville" class="gravatar"><img src="http://gravatar.com/avatar/b2acbf0c8af3bdb2a57176d954ff8ba1?s=12" alt="Andrewsville" /></a>&amp;<a href="http://github.com/kukulich" class="gravatar"><img src="http://gravatar.com/avatar/d106644a59a117503d480ec2edf48368?s=12" alt="Kukulich" /></a> <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>, a fork of the original <a href="http://github.com/nette/apigen">tool</a>.<br />
+			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>

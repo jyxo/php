@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="TR ApiGen 2.0 beta 3" />
+
+	<title>Class Jyxo\Svn\Result | Jyxo PHP Library</title>
+
+	<script type="text/javascript" src="resources/combined.js?134547457"></script>
+	<script type="text/javascript" src="elementlist.js?86817454"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3003541655" />
+	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
+	<link rel="search" type="application/opensearchdescription+xml" title="Jyxo PHP Library" href="http://jyxo.github.com/php/opensearch.xml" />
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', "UA-23550486-1"]);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+
+<body>
+<div id="main">
+<div id="leftWrapper">
+	<div id="left">
+		<a id="home" href="index.html"><span>Overview</span></a>
+
+
+		<h3>Namespaces</h3>
+		<ul>
+			<li class="active"><a href="namespace-Jyxo.html">Jyxo</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Beholder.html">Beholder</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Beholder.TestCase.html">TestCase</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Gettext.html">Gettext</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Gettext.Parser.html">Parser</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Input.html">Input</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Input.Chain.html">Chain</a>
+					</li>
+			<li><a href="namespace-Jyxo.Input.Filter.html">Filter</a>
+					</li>
+			<li><a href="namespace-Jyxo.Input.Validator.html">Validator</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Mail.html">Mail</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Mail.Email.html">Email</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Mail.Email.Attachment.html">Attachment</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Mail.Parser.html">Parser</a>
+					</li>
+			<li><a href="namespace-Jyxo.Mail.Sender.html">Sender</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Rpc.html">Rpc</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Rpc.Json.html">Json</a>
+					</li>
+			<li><a href="namespace-Jyxo.Rpc.Xml.html">Xml</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Shell.html">Shell</a>
+					</li>
+			<li><a href="namespace-Jyxo.Spl.html">Spl</a>
+					</li>
+			<li class="active"><a href="namespace-Jyxo.Svn.html">Svn</a>
+					</li>
+			<li><a href="namespace-Jyxo.Time.html">Time</a>
+					</li>
+			<li><a href="namespace-Jyxo.Webdav.html">Webdav</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-PHP.html">PHP</a>
+					</li>
+		</ul>
+
+		<hr />
+
+		<h3>Classes</h3>
+		<ul>
+			<li><a href="class-Jyxo.Svn.Client.html">Client</a></li>
+			<li class="active"><a href="class-Jyxo.Svn.Result.html">Result</a></li>
+		</ul>
+
+
+		<h3>Exceptions</h3>
+		<ul>
+			<li><a href="class-Jyxo.Svn.Exception.html">Exception</a></li>
+		</ul>
+
+
+	</div>
+</div>
+<div id="rightWrapper">
+	<div id="right">
+		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+			<input type="hidden" name="cx" value="004718174178290363576:f23xklsezl8" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		</form>
+
+		<div id="navigation">
+			<ul>
+				<li>
+					<a href="index.html" title="Overview"><span>Overview</span></a>
+				</li>
+				<li>
+					<a href="namespace-Jyxo.Svn.html" title="Summary of Jyxo\Svn"><span>Namespace</span></a>
+				</li>
+				<li class="active">
+<span>Class</span>				</li>
+			</ul>
+			<ul>
+				<li>
+					<a href="tree.html" title="Tree view of classes, interfaces and exceptions"><span>Tree</span></a>
+				</li>
+				<li>
+					<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+				</li>
+			</ul>
+		</div>
+
+<div id="content">
+	<h1>Class Result</h1>
+
+	<div class="description">
+	
+<p>Container for parsed SVN binary output.</p>
+
+<p>Experimental.</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+<b>Jyxo\Svn\Result</b>			
+			 implements 
+				<a href="class-SeekableIterator.html">SeekableIterator</a>, 
+			
+				<a href="class-Countable.html">Countable</a>
+			
+		</dd>
+	</dl>
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Jyxo.html">Jyxo</a>\<a href="namespace-Jyxo.Svn.html">Svn</a><br />
+
+				<b>Category:</b>
+				Jyxo<br />
+				<b>Package:</b>
+				Jyxo\Svn<br />
+				<b>Copyright:</b>
+				Copyright © 2005–2011 Jyxo, s.r.o.<br />
+				<b>License:</b>
+				<a
+href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jyxo/php/blob/master/license.txt</a><br />
+				<b>Author:</b>
+				Matěj Humpál<br />
+		<b>Located at</b> <a href="source-Jyxo.Svn.Result.html#16" title="Go to source code">Svn/Result.php</a><br />
+	</div>
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#___construct">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Svn.Result.html#208" title="Go to source code"><b>__construct</b></a>(
+									string
+				<var>$action</var>, 
+									string
+				<var>$input</var>, 
+									integer
+				<var>$returnCode</var> = <span class="php-num">1</span>
+		)</code>
+
+		<div class="short">
+			
+<p>Constructor.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Constructor.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$action</code></dt>
+					<dd>string<br /> SVN action</dd>
+					<dt><code>$input</code></dt>
+					<dd>string<br /> Action input</dd>
+					<dt><code>$returnCode</code></dt>
+					<dd>integer<br /> SVN binary return code</dd>
+				</dl></div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="parse" id="_parse">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 protected 
+			array
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_parse">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Svn.Result.html#222" title="Go to source code"><b>parse</b></a>(
+									string
+				<var>$action</var>, 
+									string
+				<var>$input</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Parses SVN binary output according to the action.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Parses SVN binary output according to the action.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$action</code></dt>
+					<dd>string<br /> SVN action</dd>
+					<dt><code>$input</code></dt>
+					<dd>string<br /> SVN binary output</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					array<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="parseStatus" id="_parseStatus">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 protected 
+			array
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_parseStatus">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Svn.Result.html#245" title="Go to source code"><b>parseStatus</b></a>(
+									string
+				<var>$input</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Parses SVN statis.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Parses SVN statis.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$input</code></dt>
+					<dd>string<br /> SVN binary output</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					array<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="parseCommit" id="_parseCommit">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 protected 
+			array
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_parseCommit">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Svn.Result.html#287" title="Go to source code"><b>parseCommit</b></a>(
+									string
+				<var>$input</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Parses commit output and sets revision number.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Parses commit output and sets revision number.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$input</code></dt>
+					<dd>string<br /> SVN binary output</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					array<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="parseUpdate" id="_parseUpdate">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 protected 
+			array
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_parseUpdate">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Svn.Result.html#321" title="Go to source code"><b>parseUpdate</b></a>(
+									mixed
+				<var>$input</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Parses update output.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Parses update output.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$input</code></dt>
+					<dd>mixed<br /> SVN binary output</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					array<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__get" id="___get">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#___get">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Svn.Result.html#350" title="Go to source code"><b>__get</b></a>(
+									string
+				<var>$prop</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Magic __get method.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Magic __get method.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$prop</code></dt>
+					<dd>string<br /> Property name</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					mixed<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="seek" id="_seek">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Svn.Result.html">Jyxo\Svn\Result</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_seek">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Svn.Result.html#361" title="Go to source code"><b>seek</b></a>(
+									integer
+				<var>$position</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Moves the internal pointer to the given position.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Moves the internal pointer to the given position.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$position</code></dt>
+					<dd>integer<br /> New pointer position</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Svn.Result.html">Jyxo\Svn\Result</a><br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Svn.Exception.html">Jyxo\Svn\Exception</a><br />On invalid position<br />
+				</div>
+
+
+				<h4>Implementation of</h4>
+				<div class="smallList"><code><a href="class-SeekableIterator.html#_seek">SeekableIterator::seek</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="current" id="_current">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_current">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Svn.Result.html#379" title="Go to source code"><b>current</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns an item on the actual pointer position.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns an item on the actual pointer position.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					mixed<br />
+				</div>
+
+
+
+				<h4>Implementation of</h4>
+				<div class="smallList"><code><a href="class-Iterator.html#_current">Iterator::current</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="next" id="_next">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_next">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Svn.Result.html#393" title="Go to source code"><b>next</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Advances internal pointer's position to the next item.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Advances internal pointer's position to the next item.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					boolean<br />
+				</div>
+
+
+
+				<h4>Implementation of</h4>
+				<div class="smallList"><code><a href="class-Iterator.html#_next">Iterator::next</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="rewind" id="_rewind">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Svn.Result.html">Jyxo\Svn\Result</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_rewind">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Svn.Result.html#403" title="Go to source code"><b>rewind</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Moves the internal pointer to the beginning.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Moves the internal pointer to the beginning.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Svn.Result.html">Jyxo\Svn\Result</a><br />
+				</div>
+
+
+
+				<h4>Implementation of</h4>
+				<div class="smallList"><code><a href="class-Iterator.html#_rewind">Iterator::rewind</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="key" id="_key">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			null|string
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_key">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Svn.Result.html#415" title="Go to source code"><b>key</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns the current key value.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns the current key value.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					null|string<br />
+				</div>
+
+
+
+				<h4>Implementation of</h4>
+				<div class="smallList"><code><a href="class-Iterator.html#_key">Iterator::key</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="valid" id="_valid">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_valid">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Svn.Result.html#425" title="Go to source code"><b>valid</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Checks if the internal pointer is within correct boundaries.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Checks if the internal pointer is within correct boundaries.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					boolean<br />
+				</div>
+
+
+
+				<h4>Implementation of</h4>
+				<div class="smallList"><code><a href="class-Iterator.html#_valid">Iterator::valid</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="count" id="_count">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_count">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Svn.Result.html#435" title="Go to source code"><b>count</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns item count.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns item count.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					integer<br />
+				</div>
+
+
+
+				<h4>Implementation of</h4>
+				<div class="smallList"><code><a href="class-Countable.html#_count">Countable::count</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="OK" id="OK">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Svn.Result.html#30" title="Go to source code"><b>OK</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'OK'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#OK" class="anchor">#</a>
+			<div class="short">
+				
+<p>OK status.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>OK status.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="KO" id="KO">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Svn.Result.html#37" title="Go to source code"><b>KO</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'KO'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#KO" class="anchor">#</a>
+			<div class="short">
+				
+<p>KO status.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>KO status.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="ADD" id="ADD">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Svn.Result.html#44" title="Go to source code"><b>ADD</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'A'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#ADD" class="anchor">#</a>
+			<div class="short">
+				
+<p>Added file flag.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Added file flag.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="DELETE" id="DELETE">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Svn.Result.html#51" title="Go to source code"><b>DELETE</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'D'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#DELETE" class="anchor">#</a>
+			<div class="short">
+				
+<p>Deleted file flag.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Deleted file flag.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="UPDATE" id="UPDATE">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Svn.Result.html#58" title="Go to source code"><b>UPDATE</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'U'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#UPDATE" class="anchor">#</a>
+			<div class="short">
+				
+<p>Updated file flag.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Updated file flag.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="CONFLICT" id="CONFLICT">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Svn.Result.html#65" title="Go to source code"><b>CONFLICT</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'C'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#CONFLICT" class="anchor">#</a>
+			<div class="short">
+				
+<p>Conflicted file flag.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Conflicted file flag.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="MODIFIED" id="MODIFIED">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Svn.Result.html#72" title="Go to source code"><b>MODIFIED</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'M'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#MODIFIED" class="anchor">#</a>
+			<div class="short">
+				
+<p>Modified file flag.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Modified file flag.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="MERGE" id="MERGE">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Svn.Result.html#79" title="Go to source code"><b>MERGE</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'G'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#MERGE" class="anchor">#</a>
+			<div class="short">
+				
+<p>Merged file flag.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Merged file flag.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="EXTERNALS" id="EXTERNALS">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Svn.Result.html#86" title="Go to source code"><b>EXTERNALS</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'X'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#EXTERNALS" class="anchor">#</a>
+			<div class="short">
+				
+<p>SVN:externals file flag.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>SVN:externals file flag.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="IGNORED" id="IGNORED">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Svn.Result.html#93" title="Go to source code"><b>IGNORED</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'I'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#IGNORED" class="anchor">#</a>
+			<div class="short">
+				
+<p>Ignored file flag.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Ignored file flag.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="LOCKED" id="LOCKED">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Svn.Result.html#100" title="Go to source code"><b>LOCKED</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'L'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#LOCKED" class="anchor">#</a>
+			<div class="short">
+				
+<p>Locked file flag.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Locked file flag.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="NOT_VERSIONED" id="NOT_VERSIONED">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Svn.Result.html#107" title="Go to source code"><b>NOT_VERSIONED</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'?'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#NOT_VERSIONED" class="anchor">#</a>
+			<div class="short">
+				
+<p>Non-versioned file flag.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Non-versioned file flag.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="MISSING" id="MISSING">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Svn.Result.html#114" title="Go to source code"><b>MISSING</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'!'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#MISSING" class="anchor">#</a>
+			<div class="short">
+				
+<p>Missing file flag.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Missing file flag.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="DIR_FILE_SWITCH" id="DIR_FILE_SWITCH">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Svn.Result.html#121" title="Go to source code"><b>DIR_FILE_SWITCH</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'~'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#DIR_FILE_SWITCH" class="anchor">#</a>
+			<div class="short">
+				
+<p>Flag meaning that the versioned object (file, directory, …)<br />
+has been replaced with another kind of object.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Flag meaning that the versioned object (file, directory, …)<br />
+has been replaced with another kind of object.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="SCHEDULED" id="SCHEDULED">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Svn.Result.html#129" title="Go to source code"><b>SCHEDULED</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'+'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#SCHEDULED" class="anchor">#</a>
+			<div class="short">
+				
+<p>History scheduled with commit flag.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>History scheduled with commit flag.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="SWITCHED" id="SWITCHED">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Svn.Result.html#136" title="Go to source code"><b>SWITCHED</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'S'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#SWITCHED" class="anchor">#</a>
+			<div class="short">
+				
+<p>Switched item flag.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Switched item flag.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="NEW_VERSION_EXISTS" id="NEW_VERSION_EXISTS">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Svn.Result.html#143" title="Go to source code"><b>NEW_VERSION_EXISTS</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'*'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#NEW_VERSION_EXISTS" class="anchor">#</a>
+			<div class="short">
+				
+<p>Flag meaning that there is a newer version on the server.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Flag meaning that there is a newer version on the server.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="statusTable" id="$statusTable">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			protected 
+			array
+		</code></td>
+
+		<td width="1%"><var>
+				<a href="source-Jyxo.Svn.Result.html#150" title="Go to source code">$statusTable</a>
+		</var></td>
+		<td width="1%"><pre><span class="php-keyword1">array</span>(
+	self::ADD =&gt; <span class="php-quote">'A'</span>,
+	self::DELETE =&gt; <span class="php-quote">'D'</span>,
+	self::UPDATE =&gt; <span class="php-quote">'U'</span>,
+	self::CONFLICT =&gt; <span class="php-quote">'C'</span>,
+	self::MODIFIED =&gt; <span class="php-quote">'M'</span>,
+	self::MERGE =&gt; <span class="php-quote">'G'</span>,
+	self::EXTERNALS =&gt; <span class="php-quote">'X'</span>,
+	self::IGNORED =&gt; <span class="php-quote">'I'</span>,
+	self::LOCKED =&gt; <span class="php-quote">'L'</span>,
+	self::NOT_VERSIONED =&gt; <span class="php-quote">'?'</span>,
+	self::MISSING =&gt; <span class="php-quote">'!'</span>,
+	self::DIR_FILE_SWITCH =&gt; <span class="php-quote">''</span>,
+	self::SCHEDULED =&gt; <span class="php-quote">'+'</span>,
+	self::SWITCHED =&gt; <span class="php-quote">'S'</span>,
+	self::NEW_VERSION_EXISTS =&gt; <span class="php-quote">'*'</span>,
+)</pre></td>
+		<td><div class="position">
+			<a href="#$statusTable" class="anchor">#</a>
+
+			<div class="short">
+				Status table.
+			</div>
+
+			<div class="detailed">
+				
+<p>Status table.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="revision" id="$revision">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			protected 
+			integer
+		</code></td>
+
+		<td width="1%"><var>
+				<a href="source-Jyxo.Svn.Result.html#173" title="Go to source code">$revision</a>
+		</var></td>
+		<td width="1%"><pre></pre></td>
+		<td><div class="position">
+			<a href="#$revision" class="anchor">#</a>
+
+			<div class="short">
+				Action revision.
+			</div>
+
+			<div class="detailed">
+				
+<p>Action revision.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="error" id="$error">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			protected 
+			string
+		</code></td>
+
+		<td width="1%"><var>
+				<a href="source-Jyxo.Svn.Result.html#180" title="Go to source code">$error</a>
+		</var></td>
+		<td width="1%"><pre><span class="php-quote">''</span></pre></td>
+		<td><div class="position">
+			<a href="#$error" class="anchor">#</a>
+
+			<div class="short">
+				Action error.
+			</div>
+
+			<div class="detailed">
+				
+<p>Action error.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="status" id="$status">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			protected 
+			string
+		</code></td>
+
+		<td width="1%"><var>
+				<a href="source-Jyxo.Svn.Result.html#187" title="Go to source code">$status</a>
+		</var></td>
+		<td width="1%"><pre></pre></td>
+		<td><div class="position">
+			<a href="#$status" class="anchor">#</a>
+
+			<div class="short">
+				Action status.
+			</div>
+
+			<div class="detailed">
+				
+<p>Action status.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="items" id="$items">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			protected 
+			array
+		</code></td>
+
+		<td width="1%"><var>
+				<a href="source-Jyxo.Svn.Result.html#194" title="Go to source code">$items</a>
+		</var></td>
+		<td width="1%"><pre><span class="php-keyword1">array</span>()</pre></td>
+		<td><div class="position">
+			<a href="#$items" class="anchor">#</a>
+
+			<div class="short">
+				Action items.
+			</div>
+
+			<div class="detailed">
+				
+<p>Action items.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="pointer" id="$pointer">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			protected 
+			integer
+		</code></td>
+
+		<td width="1%"><var>
+				<a href="source-Jyxo.Svn.Result.html#201" title="Go to source code">$pointer</a>
+		</var></td>
+		<td width="1%"><pre><span class="php-num">0</span></pre></td>
+		<td><div class="position">
+			<a href="#$pointer" class="anchor">#</a>
+
+			<div class="short">
+				Internal pointer.
+			</div>
+
+			<div class="detailed">
+				
+<p>Internal pointer.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+</div>
+
+		<div id="footer">
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville" class="gravatar"><img src="http://gravatar.com/avatar/b2acbf0c8af3bdb2a57176d954ff8ba1?s=12" alt="Andrewsville" /></a>&amp;<a href="http://github.com/kukulich" class="gravatar"><img src="http://gravatar.com/avatar/d106644a59a117503d480ec2edf48368?s=12" alt="Kukulich" /></a> <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>, a fork of the original <a href="http://github.com/nette/apigen">tool</a>.<br />
+			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="TR ApiGen 2.0 beta 3" />
+
+	<title>Class Jyxo\Input\Upload | Jyxo PHP Library</title>
+
+	<script type="text/javascript" src="resources/combined.js?134547457"></script>
+	<script type="text/javascript" src="elementlist.js?86817454"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3003541655" />
+	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
+	<link rel="search" type="application/opensearchdescription+xml" title="Jyxo PHP Library" href="http://jyxo.github.com/php/opensearch.xml" />
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', "UA-23550486-1"]);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+
+<body>
+<div id="main">
+<div id="leftWrapper">
+	<div id="left">
+		<a id="home" href="index.html"><span>Overview</span></a>
+
+
+		<h3>Namespaces</h3>
+		<ul>
+			<li class="active"><a href="namespace-Jyxo.html">Jyxo</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Beholder.html">Beholder</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Beholder.TestCase.html">TestCase</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Gettext.html">Gettext</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Gettext.Parser.html">Parser</a>
+					</li>
+						</ul></li>
+			<li class="active"><a href="namespace-Jyxo.Input.html">Input</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Input.Chain.html">Chain</a>
+					</li>
+			<li><a href="namespace-Jyxo.Input.Filter.html">Filter</a>
+					</li>
+			<li><a href="namespace-Jyxo.Input.Validator.html">Validator</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Mail.html">Mail</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Mail.Email.html">Email</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Mail.Email.Attachment.html">Attachment</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Mail.Parser.html">Parser</a>
+					</li>
+			<li><a href="namespace-Jyxo.Mail.Sender.html">Sender</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Rpc.html">Rpc</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Rpc.Json.html">Json</a>
+					</li>
+			<li><a href="namespace-Jyxo.Rpc.Xml.html">Xml</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Shell.html">Shell</a>
+					</li>
+			<li><a href="namespace-Jyxo.Spl.html">Spl</a>
+					</li>
+			<li><a href="namespace-Jyxo.Svn.html">Svn</a>
+					</li>
+			<li><a href="namespace-Jyxo.Time.html">Time</a>
+					</li>
+			<li><a href="namespace-Jyxo.Webdav.html">Webdav</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-PHP.html">PHP</a>
+					</li>
+		</ul>
+
+		<hr />
+
+		<h3>Classes</h3>
+		<ul>
+			<li><a href="class-Jyxo.Input.Chain.html">Chain</a></li>
+			<li><a href="class-Jyxo.Input.Factory.html">Factory</a></li>
+			<li><a href="class-Jyxo.Input.Filter.html">Filter</a></li>
+			<li><a href="class-Jyxo.Input.Fluent.html">Fluent</a></li>
+			<li class="active"><a href="class-Jyxo.Input.Upload.html">Upload</a></li>
+			<li><a href="class-Jyxo.Input.Validator.html">Validator</a></li>
+		</ul>
+
+		<h3>Interfaces</h3>
+		<ul>
+			<li><a href="class-Jyxo.Input.FilterInterface.html">FilterInterface</a></li>
+			<li><a href="class-Jyxo.Input.ValidatorInterface.html">ValidatorInterface</a></li>
+		</ul>
+
+		<h3>Exceptions</h3>
+		<ul>
+			<li><a href="class-Jyxo.Input.Exception.html">Exception</a></li>
+		</ul>
+
+
+	</div>
+</div>
+<div id="rightWrapper">
+	<div id="right">
+		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+			<input type="hidden" name="cx" value="004718174178290363576:f23xklsezl8" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		</form>
+
+		<div id="navigation">
+			<ul>
+				<li>
+					<a href="index.html" title="Overview"><span>Overview</span></a>
+				</li>
+				<li>
+					<a href="namespace-Jyxo.Input.html" title="Summary of Jyxo\Input"><span>Namespace</span></a>
+				</li>
+				<li class="active">
+<span>Class</span>				</li>
+			</ul>
+			<ul>
+				<li>
+					<a href="tree.html" title="Tree view of classes, interfaces and exceptions"><span>Tree</span></a>
+				</li>
+				<li>
+					<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+				</li>
+			</ul>
+		</div>
+
+<div id="content">
+	<h1>Class Upload</h1>
+
+	<div class="description">
+	
+<p>Uploaded file.</p>
+
+	</div>
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Jyxo.html">Jyxo</a>\<a href="namespace-Jyxo.Input.html">Input</a><br />
+
+				<b>Category:</b>
+				Jyxo<br />
+				<b>Package:</b>
+				Jyxo\Input<br />
+				<b>Copyright:</b>
+				Copyright © 2005–2011 Jyxo, s.r.o.<br />
+				<b>License:</b>
+				<a
+href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jyxo/php/blob/master/license.txt</a><br />
+				<b>Author:</b>
+				Jakub Tománek<br />
+		<b>Located at</b> <a href="source-Jyxo.Input.Upload.html#16" title="Go to source code">Input/Upload.php</a><br />
+	</div>
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#___construct">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Upload.html#41" title="Go to source code"><b>__construct</b></a>(
+									string
+				<var>$index</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Constructor.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Constructor.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$index</code></dt>
+					<dd>string<br /> File index</dd>
+				</dl></div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="confirmUpload" id="_confirmUpload">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Input.Upload.html">Jyxo\Input\Upload</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_confirmUpload">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Upload.html#51" title="Go to source code"><b>confirmUpload</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Confirms that the file was successfully uploaded.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Confirms that the file was successfully uploaded.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Input.Upload.html">Jyxo\Input\Upload</a><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="tmpName" id="_tmpName">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_tmpName">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Upload.html#63" title="Go to source code"><b>tmpName</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns file's temporary name.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns file's temporary name.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					string<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="error" id="_error">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_error">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Upload.html#73" title="Go to source code"><b>error</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns upload error type.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns upload error type.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					integer<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="move" id="_move">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_move">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Upload.html#83" title="Go to source code"><b>move</b></a>(
+									string
+				<var>$destination</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Moves the uploaded file.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Moves the uploaded file.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$destination</code></dt>
+					<dd>string<br /> File destination</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					boolean<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__toString" id="___toString">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#___toString">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Upload.html#98" title="Go to source code"><b>__toString</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Conversion to string because of other validators.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Conversion to string because of other validators.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					string<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="extension" id="_extension">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_extension">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Upload.html#108" title="Go to source code"><b>extension</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns file extension.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns file extension.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					string<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="filename" id="_filename">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_filename">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Upload.html#122" title="Go to source code"><b>filename</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns file name.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns file name.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					string<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+</div>
+
+		<div id="footer">
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville" class="gravatar"><img src="http://gravatar.com/avatar/b2acbf0c8af3bdb2a57176d954ff8ba1?s=12" alt="Andrewsville" /></a>&amp;<a href="http://github.com/kukulich" class="gravatar"><img src="http://gravatar.com/avatar/d106644a59a117503d480ec2edf48368?s=12" alt="Kukulich" /></a> <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>, a fork of the original <a href="http://github.com/nette/apigen">tool</a>.<br />
+			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>

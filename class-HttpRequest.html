@@ -1,0 +1,3773 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="TR ApiGen 2.0 beta 3" />
+
+	<title>Class HttpRequest | Jyxo PHP Library</title>
+
+	<script type="text/javascript" src="resources/combined.js?134547457"></script>
+	<script type="text/javascript" src="elementlist.js?86817454"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3003541655" />
+	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
+	<link rel="search" type="application/opensearchdescription+xml" title="Jyxo PHP Library" href="http://jyxo.github.com/php/opensearch.xml" />
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', "UA-23550486-1"]);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+
+<body>
+<div id="main">
+<div id="leftWrapper">
+	<div id="left">
+		<a id="home" href="index.html"><span>Overview</span></a>
+
+
+		<h3>Namespaces</h3>
+		<ul>
+			<li><a href="namespace-Jyxo.html">Jyxo</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Beholder.html">Beholder</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Beholder.TestCase.html">TestCase</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Gettext.html">Gettext</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Gettext.Parser.html">Parser</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Input.html">Input</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Input.Chain.html">Chain</a>
+					</li>
+			<li><a href="namespace-Jyxo.Input.Filter.html">Filter</a>
+					</li>
+			<li><a href="namespace-Jyxo.Input.Validator.html">Validator</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Mail.html">Mail</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Mail.Email.html">Email</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Mail.Email.Attachment.html">Attachment</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Mail.Parser.html">Parser</a>
+					</li>
+			<li><a href="namespace-Jyxo.Mail.Sender.html">Sender</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Rpc.html">Rpc</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Rpc.Json.html">Json</a>
+					</li>
+			<li><a href="namespace-Jyxo.Rpc.Xml.html">Xml</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Shell.html">Shell</a>
+					</li>
+			<li><a href="namespace-Jyxo.Spl.html">Spl</a>
+					</li>
+			<li><a href="namespace-Jyxo.Svn.html">Svn</a>
+					</li>
+			<li><a href="namespace-Jyxo.Time.html">Time</a>
+					</li>
+			<li><a href="namespace-Jyxo.Webdav.html">Webdav</a>
+					</li>
+						</ul></li>
+			<li class="active"><a href="namespace-PHP.html">PHP</a>
+					</li>
+		</ul>
+
+		<hr />
+
+		<h3>Classes</h3>
+		<ul>
+			<li><a href="class-ArrayIterator.html">ArrayIterator</a></li>
+			<li><a href="class-ArrayObject.html">ArrayObject</a></li>
+			<li><a href="class-Closure.html">Closure</a></li>
+			<li><a href="class-DateTime.html">DateTime</a></li>
+			<li><a href="class-DateTimeZone.html">DateTimeZone</a></li>
+			<li><a href="class-FilterIterator.html">FilterIterator</a></li>
+			<li><a href="class-HttpMessage.html">HttpMessage</a></li>
+			<li class="active"><a href="class-HttpRequest.html">HttpRequest</a></li>
+			<li><a href="class-HttpRequestPool.html">HttpRequestPool</a></li>
+			<li><a href="class-IteratorIterator.html">IteratorIterator</a></li>
+			<li><a href="class-LimitIterator.html">LimitIterator</a></li>
+			<li><a href="class-XMLReader.html">XMLReader</a></li>
+		</ul>
+
+		<h3>Interfaces</h3>
+		<ul>
+			<li><a href="class-ArrayAccess.html">ArrayAccess</a></li>
+			<li><a href="class-Countable.html">Countable</a></li>
+			<li><a href="class-Iterator.html">Iterator</a></li>
+			<li><a href="class-IteratorAggregate.html">IteratorAggregate</a></li>
+			<li><a href="class-OuterIterator.html">OuterIterator</a></li>
+			<li><a href="class-SeekableIterator.html">SeekableIterator</a></li>
+			<li><a href="class-Serializable.html">Serializable</a></li>
+			<li><a href="class-Traversable.html">Traversable</a></li>
+		</ul>
+
+		<h3>Exceptions</h3>
+		<ul>
+			<li><a href="class-BadFunctionCallException.html">BadFunctionCallException</a></li>
+			<li><a href="class-BadMethodCallException.html">BadMethodCallException</a></li>
+			<li><a href="class-Exception.html">Exception</a></li>
+			<li><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></li>
+			<li><a href="class-LogicException.html">LogicException</a></li>
+			<li><a href="class-ReflectionException.html">ReflectionException</a></li>
+			<li><a href="class-RuntimeException.html">RuntimeException</a></li>
+			<li><a href="class-UnexpectedValueException.html">UnexpectedValueException</a></li>
+		</ul>
+
+
+	</div>
+</div>
+<div id="rightWrapper">
+	<div id="right">
+		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+			<input type="hidden" name="cx" value="004718174178290363576:f23xklsezl8" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		</form>
+
+		<div id="navigation">
+			<ul>
+				<li>
+					<a href="index.html" title="Overview"><span>Overview</span></a>
+				</li>
+				<li>
+					<a href="namespace-PHP.html" title="Summary of PHP"><span>Namespace</span></a>
+				</li>
+				<li class="active">
+<span>Class</span>				</li>
+			</ul>
+			<ul>
+				<li>
+					<a href="tree.html" title="Tree view of classes, interfaces and exceptions"><span>Tree</span></a>
+				</li>
+				<li>
+					<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+				</li>
+			</ul>
+		</div>
+
+<div id="content">
+	<h1>Class HttpRequest</h1>
+
+
+
+
+
+
+
+	<div class="info">
+		
+		<b>PHP Extension:</b> <a href="http://php.net/manual/book.http.php" title="Go to PHP documentation">Http</a><br />
+		
+
+		<b>Documented at</b> <a href="http://php.net/manual/class.httprequest.php" title="Go to PHP documentation">php.net</a><br />
+	</div>
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#___construct">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.construct.php" title="Go to PHP documentation"><b>__construct</b></a>(
+									
+				<var>$url</var>, 
+									
+				<var>$method</var>, 
+									
+				<var>$options</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setOptions" id="_setOptions">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setOptions">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.setoptions.php" title="Go to PHP documentation"><b>setOptions</b></a>(
+									
+				<var>$options</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getOptions" id="_getOptions">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getOptions">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getoptions.php" title="Go to PHP documentation"><b>getOptions</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setSslOptions" id="_setSslOptions">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setSslOptions">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.setssloptions.php" title="Go to PHP documentation"><b>setSslOptions</b></a>(
+									
+				<var>$ssl_options</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getSslOptions" id="_getSslOptions">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getSslOptions">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getssloptions.php" title="Go to PHP documentation"><b>getSslOptions</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addSslOptions" id="_addSslOptions">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_addSslOptions">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.addssloptions.php" title="Go to PHP documentation"><b>addSslOptions</b></a>(
+									
+				<var>$ssl_optins</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addHeaders" id="_addHeaders">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_addHeaders">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.addheaders.php" title="Go to PHP documentation"><b>addHeaders</b></a>(
+									
+				<var>$headers</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getHeaders" id="_getHeaders">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getHeaders">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getheaders.php" title="Go to PHP documentation"><b>getHeaders</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setHeaders" id="_setHeaders">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setHeaders">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.setheaders.php" title="Go to PHP documentation"><b>setHeaders</b></a>(
+									
+				<var>$headers</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addCookies" id="_addCookies">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_addCookies">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.addcookies.php" title="Go to PHP documentation"><b>addCookies</b></a>(
+									
+				<var>$cookies</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getCookies" id="_getCookies">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getCookies">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getcookies.php" title="Go to PHP documentation"><b>getCookies</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setCookies" id="_setCookies">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setCookies">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.setcookies.php" title="Go to PHP documentation"><b>setCookies</b></a>(
+									
+				<var>$cookies</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="enableCookies" id="_enableCookies">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_enableCookies">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.enablecookies.php" title="Go to PHP documentation"><b>enableCookies</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="resetCookies" id="_resetCookies">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_resetCookies">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.resetcookies.php" title="Go to PHP documentation"><b>resetCookies</b></a>(
+									
+				<var>$session_only</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="flushCookies" id="_flushCookies">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_flushCookies">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.flushcookies.php" title="Go to PHP documentation"><b>flushCookies</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setMethod" id="_setMethod">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setMethod">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.setmethod.php" title="Go to PHP documentation"><b>setMethod</b></a>(
+									
+				<var>$request_method</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMethod" id="_getMethod">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getMethod">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getmethod.php" title="Go to PHP documentation"><b>getMethod</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setUrl" id="_setUrl">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setUrl">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.seturl.php" title="Go to PHP documentation"><b>setUrl</b></a>(
+									
+				<var>$url</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getUrl" id="_getUrl">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getUrl">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.geturl.php" title="Go to PHP documentation"><b>getUrl</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setContentType" id="_setContentType">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setContentType">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.setcontenttype.php" title="Go to PHP documentation"><b>setContentType</b></a>(
+									
+				<var>$content_type</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getContentType" id="_getContentType">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getContentType">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getcontenttype.php" title="Go to PHP documentation"><b>getContentType</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setQueryData" id="_setQueryData">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setQueryData">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.setquerydata.php" title="Go to PHP documentation"><b>setQueryData</b></a>(
+									
+				<var>$query_data</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getQueryData" id="_getQueryData">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getQueryData">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getquerydata.php" title="Go to PHP documentation"><b>getQueryData</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addQueryData" id="_addQueryData">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_addQueryData">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.addquerydata.php" title="Go to PHP documentation"><b>addQueryData</b></a>(
+									
+				<var>$query_data</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setPostFields" id="_setPostFields">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setPostFields">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.setpostfields.php" title="Go to PHP documentation"><b>setPostFields</b></a>(
+									
+				<var>$post_fields</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getPostFields" id="_getPostFields">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getPostFields">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getpostfields.php" title="Go to PHP documentation"><b>getPostFields</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addPostFields" id="_addPostFields">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_addPostFields">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.addpostfields.php" title="Go to PHP documentation"><b>addPostFields</b></a>(
+									
+				<var>$post_fields</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setBody" id="_setBody">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setBody">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.setbody.php" title="Go to PHP documentation"><b>setBody</b></a>(
+									
+				<var>$request_body_data</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getBody" id="_getBody">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getBody">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getbody.php" title="Go to PHP documentation"><b>getBody</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addBody" id="_addBody">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_addBody">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.addbody.php" title="Go to PHP documentation"><b>addBody</b></a>(
+									
+				<var>$request_body_data</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setRawPostData" id="_setRawPostData" class="deprecated">
+		<td class="right" width="1%"><code class="nowrap">
+			deprecated
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setRawPostData">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.setrawpostdata.php" title="Go to PHP documentation"><b>setRawPostData</b></a>(
+									
+				<var>$request_body_data</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+				<h4>Deprecated</h4>
+
+Notice: Undefined index: deprecated in P:\Git\support\doc\php\tmp\_Nette.FileTemplate\_jyxo.class.latte-4a3c1584ed795933b6175c4694ca62b8.php on line 175
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getRawPostData" id="_getRawPostData" class="deprecated">
+		<td class="right" width="1%"><code class="nowrap">
+			deprecated
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getRawPostData">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getrawpostdata.php" title="Go to PHP documentation"><b>getRawPostData</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+				<h4>Deprecated</h4>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addRawPostData" id="_addRawPostData" class="deprecated">
+		<td class="right" width="1%"><code class="nowrap">
+			deprecated
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_addRawPostData">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.addrawpostdata.php" title="Go to PHP documentation"><b>addRawPostData</b></a>(
+									
+				<var>$request_body_data</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+				<h4>Deprecated</h4>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setPostFiles" id="_setPostFiles">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setPostFiles">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.setpostfiles.php" title="Go to PHP documentation"><b>setPostFiles</b></a>(
+									
+				<var>$post_files</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addPostFile" id="_addPostFile">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_addPostFile">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.addpostfile.php" title="Go to PHP documentation"><b>addPostFile</b></a>(
+									
+				<var>$formname</var>, 
+									
+				<var>$filename</var>, 
+									
+				<var>$content_type</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getPostFiles" id="_getPostFiles">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getPostFiles">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getpostfiles.php" title="Go to PHP documentation"><b>getPostFiles</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setPutFile" id="_setPutFile">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setPutFile">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.setputfile.php" title="Go to PHP documentation"><b>setPutFile</b></a>(
+									
+				<var>$filename</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getPutFile" id="_getPutFile">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getPutFile">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getputfile.php" title="Go to PHP documentation"><b>getPutFile</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setPutData" id="_setPutData">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setPutData">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.setputdata.php" title="Go to PHP documentation"><b>setPutData</b></a>(
+									
+				<var>$put_data</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getPutData" id="_getPutData">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getPutData">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getputdata.php" title="Go to PHP documentation"><b>getPutData</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addPutData" id="_addPutData">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_addPutData">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.addputdata.php" title="Go to PHP documentation"><b>addPutData</b></a>(
+									
+				<var>$put_data</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="send" id="_send">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_send">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.send.php" title="Go to PHP documentation"><b>send</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getResponseData" id="_getResponseData">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getResponseData">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getresponsedata.php" title="Go to PHP documentation"><b>getResponseData</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getResponseHeader" id="_getResponseHeader">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getResponseHeader">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getresponseheader.php" title="Go to PHP documentation"><b>getResponseHeader</b></a>(
+									
+				<var>$name</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getResponseCookies" id="_getResponseCookies">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getResponseCookies">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getresponsecookies.php" title="Go to PHP documentation"><b>getResponseCookies</b></a>(
+									
+				<var>$flags</var>, 
+									
+				<var>$allowed_extras</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getResponseCode" id="_getResponseCode">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getResponseCode">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getresponsecode.php" title="Go to PHP documentation"><b>getResponseCode</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getResponseStatus" id="_getResponseStatus">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getResponseStatus">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getresponsestatus.php" title="Go to PHP documentation"><b>getResponseStatus</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getResponseBody" id="_getResponseBody">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getResponseBody">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getresponsebody.php" title="Go to PHP documentation"><b>getResponseBody</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getResponseInfo" id="_getResponseInfo">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getResponseInfo">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getresponseinfo.php" title="Go to PHP documentation"><b>getResponseInfo</b></a>(
+									
+				<var>$name</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getResponseMessage" id="_getResponseMessage">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getResponseMessage">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getresponsemessage.php" title="Go to PHP documentation"><b>getResponseMessage</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getRawResponseMessage" id="_getRawResponseMessage">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getRawResponseMessage">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getrawresponsemessage.php" title="Go to PHP documentation"><b>getRawResponseMessage</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getRequestMessage" id="_getRequestMessage">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getRequestMessage">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getrequestmessage.php" title="Go to PHP documentation"><b>getRequestMessage</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getRawRequestMessage" id="_getRawRequestMessage">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getRawRequestMessage">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getrawrequestmessage.php" title="Go to PHP documentation"><b>getRawRequestMessage</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getHistory" id="_getHistory">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getHistory">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.gethistory.php" title="Go to PHP documentation"><b>getHistory</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="clearHistory" id="_clearHistory">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_clearHistory">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.clearhistory.php" title="Go to PHP documentation"><b>clearHistory</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMessageClass" id="_getMessageClass">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getMessageClass">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.getmessageclass.php" title="Go to PHP documentation"><b>getMessageClass</b></a>(
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setMessageClass" id="_setMessageClass">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setMessageClass">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.setmessageclass.php" title="Go to PHP documentation"><b>setMessageClass</b></a>(
+									
+				<var>$message_class_name</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="factory" id="_factory">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_factory">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.factory.php" title="Go to PHP documentation"><b>factory</b></a>(
+									
+				<var>$url</var>, 
+									
+				<var>$method</var>, 
+									
+				<var>$options</var>, 
+									
+				<var>$class_name</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="get" id="_get">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_get">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.get.php" title="Go to PHP documentation"><b>get</b></a>(
+									
+				<var>$url</var>, 
+									
+				<var>$options</var>, 
+									
+				<var>&amp; $info</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="head" id="_head">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_head">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.head.php" title="Go to PHP documentation"><b>head</b></a>(
+									
+				<var>$url</var>, 
+									
+				<var>$options</var>, 
+									
+				<var>&amp; $info</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="postData" id="_postData">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_postData">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.postdata.php" title="Go to PHP documentation"><b>postData</b></a>(
+									
+				<var>$url</var>, 
+									
+				<var>$data</var>, 
+									
+				<var>$options</var>, 
+									
+				<var>&amp; $info</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="postFields" id="_postFields">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_postFields">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.postfields.php" title="Go to PHP documentation"><b>postFields</b></a>(
+									
+				<var>$url</var>, 
+									
+				<var>$data</var>, 
+									
+				<var>$options</var>, 
+									
+				<var>&amp; $info</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="putData" id="_putData">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_putData">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.putdata.php" title="Go to PHP documentation"><b>putData</b></a>(
+									
+				<var>$url</var>, 
+									
+				<var>$data</var>, 
+									
+				<var>$options</var>, 
+									
+				<var>&amp; $info</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="putFile" id="_putFile">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_putFile">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.putfile.php" title="Go to PHP documentation"><b>putFile</b></a>(
+									
+				<var>$url</var>, 
+									
+				<var>$file</var>, 
+									
+				<var>$options</var>, 
+									
+				<var>&amp; $info</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="putStream" id="_putStream">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_putStream">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.putstream.php" title="Go to PHP documentation"><b>putStream</b></a>(
+									
+				<var>$url</var>, 
+									
+				<var>$stream</var>, 
+									
+				<var>$options</var>, 
+									
+				<var>&amp; $info</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="methodRegister" id="_methodRegister">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_methodRegister">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.methodregister.php" title="Go to PHP documentation"><b>methodRegister</b></a>(
+									
+				<var>$method_name</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="methodUnregister" id="_methodUnregister">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_methodUnregister">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.methodunregister.php" title="Go to PHP documentation"><b>methodUnregister</b></a>(
+									
+				<var>$method</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="methodName" id="_methodName">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_methodName">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.methodname.php" title="Go to PHP documentation"><b>methodName</b></a>(
+									
+				<var>$method_id</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="methodExists" id="_methodExists">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_methodExists">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.methodexists.php" title="Go to PHP documentation"><b>methodExists</b></a>(
+									
+				<var>$method</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="encodeBody" id="_encodeBody">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_encodeBody">#</a>
+		<code class="nowrap">
+				<a href="http://php.net/manual/httprequest.encodebody.php" title="Go to PHP documentation"><b>encodeBody</b></a>(
+									
+				<var>$fields</var>, 
+									
+				<var>$files</var>
+		)</code>
+
+		<div class="short">
+			
+		</div>
+
+		<div class="detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="METH_GET" id="METH_GET">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-get" title="Go to PHP documentation"><b>METH_GET</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">1</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_GET" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_HEAD" id="METH_HEAD">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-head" title="Go to PHP documentation"><b>METH_HEAD</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">2</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_HEAD" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_POST" id="METH_POST">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-post" title="Go to PHP documentation"><b>METH_POST</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">3</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_POST" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_PUT" id="METH_PUT">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-put" title="Go to PHP documentation"><b>METH_PUT</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">4</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_PUT" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_DELETE" id="METH_DELETE">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-delete" title="Go to PHP documentation"><b>METH_DELETE</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">5</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_DELETE" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_OPTIONS" id="METH_OPTIONS">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-options" title="Go to PHP documentation"><b>METH_OPTIONS</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">6</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_OPTIONS" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_TRACE" id="METH_TRACE">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-trace" title="Go to PHP documentation"><b>METH_TRACE</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">7</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_TRACE" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_CONNECT" id="METH_CONNECT">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-connect" title="Go to PHP documentation"><b>METH_CONNECT</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">8</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_CONNECT" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_PROPFIND" id="METH_PROPFIND">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-propfind" title="Go to PHP documentation"><b>METH_PROPFIND</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">9</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_PROPFIND" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_PROPPATCH" id="METH_PROPPATCH">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-proppatch" title="Go to PHP documentation"><b>METH_PROPPATCH</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">10</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_PROPPATCH" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_MKCOL" id="METH_MKCOL">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-mkcol" title="Go to PHP documentation"><b>METH_MKCOL</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">11</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_MKCOL" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_COPY" id="METH_COPY">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-copy" title="Go to PHP documentation"><b>METH_COPY</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">12</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_COPY" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_MOVE" id="METH_MOVE">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-move" title="Go to PHP documentation"><b>METH_MOVE</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">13</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_MOVE" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_LOCK" id="METH_LOCK">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-lock" title="Go to PHP documentation"><b>METH_LOCK</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">14</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_LOCK" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_UNLOCK" id="METH_UNLOCK">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-unlock" title="Go to PHP documentation"><b>METH_UNLOCK</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">15</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_UNLOCK" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_VERSION_CONTROL" id="METH_VERSION_CONTROL">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-version-control" title="Go to PHP documentation"><b>METH_VERSION_CONTROL</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">16</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_VERSION_CONTROL" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_REPORT" id="METH_REPORT">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-report" title="Go to PHP documentation"><b>METH_REPORT</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">17</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_REPORT" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_CHECKOUT" id="METH_CHECKOUT">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-checkout" title="Go to PHP documentation"><b>METH_CHECKOUT</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">18</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_CHECKOUT" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_CHECKIN" id="METH_CHECKIN">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-checkin" title="Go to PHP documentation"><b>METH_CHECKIN</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">19</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_CHECKIN" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_UNCHECKOUT" id="METH_UNCHECKOUT">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-uncheckout" title="Go to PHP documentation"><b>METH_UNCHECKOUT</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">20</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_UNCHECKOUT" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_MKWORKSPACE" id="METH_MKWORKSPACE">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-mkworkspace" title="Go to PHP documentation"><b>METH_MKWORKSPACE</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">21</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_MKWORKSPACE" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_UPDATE" id="METH_UPDATE">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-update" title="Go to PHP documentation"><b>METH_UPDATE</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">22</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_UPDATE" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_LABEL" id="METH_LABEL">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-label" title="Go to PHP documentation"><b>METH_LABEL</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">23</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_LABEL" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_MERGE" id="METH_MERGE">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-merge" title="Go to PHP documentation"><b>METH_MERGE</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">24</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_MERGE" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_BASELINE_CONTROL" id="METH_BASELINE_CONTROL">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-baseline-control" title="Go to PHP documentation"><b>METH_BASELINE_CONTROL</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">25</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_BASELINE_CONTROL" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_MKACTIVITY" id="METH_MKACTIVITY">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-mkactivity" title="Go to PHP documentation"><b>METH_MKACTIVITY</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">26</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_MKACTIVITY" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="METH_ACL" id="METH_ACL">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.meth-acl" title="Go to PHP documentation"><b>METH_ACL</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">27</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#METH_ACL" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="VERSION_1_0" id="VERSION_1_0">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.version-1-0" title="Go to PHP documentation"><b>VERSION_1_0</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">1</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#VERSION_1_0" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="VERSION_1_1" id="VERSION_1_1">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.version-1-1" title="Go to PHP documentation"><b>VERSION_1_1</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">2</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#VERSION_1_1" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="VERSION_NONE" id="VERSION_NONE">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.version-none" title="Go to PHP documentation"><b>VERSION_NONE</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">0</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#VERSION_NONE" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="VERSION_ANY" id="VERSION_ANY">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.version-any" title="Go to PHP documentation"><b>VERSION_ANY</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">0</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#VERSION_ANY" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="SSL_VERSION_TLSv1" id="SSL_VERSION_TLSv1">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.ssl-version-tlsv1" title="Go to PHP documentation"><b>SSL_VERSION_TLSv1</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">1</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#SSL_VERSION_TLSv1" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="SSL_VERSION_SSLv2" id="SSL_VERSION_SSLv2">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.ssl-version-sslv2" title="Go to PHP documentation"><b>SSL_VERSION_SSLv2</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">2</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#SSL_VERSION_SSLv2" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="SSL_VERSION_SSLv3" id="SSL_VERSION_SSLv3">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.ssl-version-sslv3" title="Go to PHP documentation"><b>SSL_VERSION_SSLv3</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">3</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#SSL_VERSION_SSLv3" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="SSL_VERSION_ANY" id="SSL_VERSION_ANY">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.ssl-version-any" title="Go to PHP documentation"><b>SSL_VERSION_ANY</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">0</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#SSL_VERSION_ANY" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="IPRESOLVE_V4" id="IPRESOLVE_V4">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.ipresolve-v4" title="Go to PHP documentation"><b>IPRESOLVE_V4</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">1</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#IPRESOLVE_V4" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="IPRESOLVE_V6" id="IPRESOLVE_V6">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.ipresolve-v6" title="Go to PHP documentation"><b>IPRESOLVE_V6</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">2</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#IPRESOLVE_V6" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="IPRESOLVE_ANY" id="IPRESOLVE_ANY">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.ipresolve-any" title="Go to PHP documentation"><b>IPRESOLVE_ANY</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">0</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#IPRESOLVE_ANY" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="AUTH_BASIC" id="AUTH_BASIC">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.auth-basic" title="Go to PHP documentation"><b>AUTH_BASIC</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">1</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#AUTH_BASIC" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="AUTH_DIGEST" id="AUTH_DIGEST">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.auth-digest" title="Go to PHP documentation"><b>AUTH_DIGEST</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">2</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#AUTH_DIGEST" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="AUTH_DIGEST_IE" id="AUTH_DIGEST_IE">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.auth-digest-ie" title="Go to PHP documentation"><b>AUTH_DIGEST_IE</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">16</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#AUTH_DIGEST_IE" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="AUTH_NTLM" id="AUTH_NTLM">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.auth-ntlm" title="Go to PHP documentation"><b>AUTH_NTLM</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">8</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#AUTH_NTLM" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="AUTH_GSSNEG" id="AUTH_GSSNEG">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.auth-gssneg" title="Go to PHP documentation"><b>AUTH_GSSNEG</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">4</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#AUTH_GSSNEG" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="AUTH_ANY" id="AUTH_ANY">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.auth-any" title="Go to PHP documentation"><b>AUTH_ANY</b></a>
+		</code></td>
+		<td width="1%">
+				<code>-<span class="php-num">17</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#AUTH_ANY" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="PROXY_SOCKS4" id="PROXY_SOCKS4">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.proxy-socks4" title="Go to PHP documentation"><b>PROXY_SOCKS4</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">4</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#PROXY_SOCKS4" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="PROXY_SOCKS4A" id="PROXY_SOCKS4A">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.proxy-socks4a" title="Go to PHP documentation"><b>PROXY_SOCKS4A</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">5</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#PROXY_SOCKS4A" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="PROXY_SOCKS5_HOSTNAME" id="PROXY_SOCKS5_HOSTNAME">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.proxy-socks5-hostname" title="Go to PHP documentation"><b>PROXY_SOCKS5_HOSTNAME</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">5</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#PROXY_SOCKS5_HOSTNAME" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="PROXY_SOCKS5" id="PROXY_SOCKS5">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.proxy-socks5" title="Go to PHP documentation"><b>PROXY_SOCKS5</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">5</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#PROXY_SOCKS5" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="PROXY_HTTP" id="PROXY_HTTP">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.proxy-http" title="Go to PHP documentation"><b>PROXY_HTTP</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">0</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#PROXY_HTTP" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="PROXY_HTTP_1_0" id="PROXY_HTTP_1_0">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.proxy-http-1-0" title="Go to PHP documentation"><b>PROXY_HTTP_1_0</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">1</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#PROXY_HTTP_1_0" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="POSTREDIR_301" id="POSTREDIR_301">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.postredir-301" title="Go to PHP documentation"><b>POSTREDIR_301</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">1</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#POSTREDIR_301" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="POSTREDIR_302" id="POSTREDIR_302">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.postredir-302" title="Go to PHP documentation"><b>POSTREDIR_302</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">2</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#POSTREDIR_302" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="POSTREDIR_ALL" id="POSTREDIR_ALL">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.constants.postredir-all" title="Go to PHP documentation"><b>POSTREDIR_ALL</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">3</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#POSTREDIR_ALL" class="anchor">#</a>
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="recordHistory" id="$recordHistory">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			public 
+			boolean
+		</code></td>
+
+		<td width="1%"><var>
+				<a href="http://php.net/manual/class.httprequest.php#httprequest.props.recordhistory" title="Go to PHP documentation">$recordHistory</a>
+		</var></td>
+		<td width="1%"><pre><span class="php-keyword1">false</span></pre></td>
+		<td><div class="position">
+			<a href="#$recordHistory" class="anchor">#</a>
+
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+</div>
+
+		<div id="footer">
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville" class="gravatar"><img src="http://gravatar.com/avatar/b2acbf0c8af3bdb2a57176d954ff8ba1?s=12" alt="Andrewsville" /></a>&amp;<a href="http://github.com/kukulich" class="gravatar"><img src="http://gravatar.com/avatar/d106644a59a117503d480ec2edf48368?s=12" alt="Kukulich" /></a> <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>, a fork of the original <a href="http://github.com/nette/apigen">tool</a>.<br />
+			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>

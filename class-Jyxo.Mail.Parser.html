@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="TR ApiGen 2.0 beta 3" />
+
+	<title>Class Jyxo\Mail\Parser | Jyxo PHP Library</title>
+
+	<script type="text/javascript" src="resources/combined.js?134547457"></script>
+	<script type="text/javascript" src="elementlist.js?86817454"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3003541655" />
+	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
+	<link rel="search" type="application/opensearchdescription+xml" title="Jyxo PHP Library" href="http://jyxo.github.com/php/opensearch.xml" />
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', "UA-23550486-1"]);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+
+<body>
+<div id="main">
+<div id="leftWrapper">
+	<div id="left">
+		<a id="home" href="index.html"><span>Overview</span></a>
+
+
+		<h3>Namespaces</h3>
+		<ul>
+			<li class="active"><a href="namespace-Jyxo.html">Jyxo</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Beholder.html">Beholder</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Beholder.TestCase.html">TestCase</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Gettext.html">Gettext</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Gettext.Parser.html">Parser</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Input.html">Input</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Input.Chain.html">Chain</a>
+					</li>
+			<li><a href="namespace-Jyxo.Input.Filter.html">Filter</a>
+					</li>
+			<li><a href="namespace-Jyxo.Input.Validator.html">Validator</a>
+					</li>
+						</ul></li>
+			<li class="active"><a href="namespace-Jyxo.Mail.html">Mail</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Mail.Email.html">Email</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Mail.Email.Attachment.html">Attachment</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Mail.Parser.html">Parser</a>
+					</li>
+			<li><a href="namespace-Jyxo.Mail.Sender.html">Sender</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Rpc.html">Rpc</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Rpc.Json.html">Json</a>
+					</li>
+			<li><a href="namespace-Jyxo.Rpc.Xml.html">Xml</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Shell.html">Shell</a>
+					</li>
+			<li><a href="namespace-Jyxo.Spl.html">Spl</a>
+					</li>
+			<li><a href="namespace-Jyxo.Svn.html">Svn</a>
+					</li>
+			<li><a href="namespace-Jyxo.Time.html">Time</a>
+					</li>
+			<li><a href="namespace-Jyxo.Webdav.html">Webdav</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-PHP.html">PHP</a>
+					</li>
+		</ul>
+
+		<hr />
+
+		<h3>Classes</h3>
+		<ul>
+			<li><a href="class-Jyxo.Mail.Email.html">Email</a></li>
+			<li><a href="class-Jyxo.Mail.Encoding.html">Encoding</a></li>
+			<li class="active"><a href="class-Jyxo.Mail.Parser.html">Parser</a></li>
+			<li><a href="class-Jyxo.Mail.Sender.html">Sender</a></li>
+		</ul>
+
+
+
+
+	</div>
+</div>
+<div id="rightWrapper">
+	<div id="right">
+		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+			<input type="hidden" name="cx" value="004718174178290363576:f23xklsezl8" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		</form>
+
+		<div id="navigation">
+			<ul>
+				<li>
+					<a href="index.html" title="Overview"><span>Overview</span></a>
+				</li>
+				<li>
+					<a href="namespace-Jyxo.Mail.html" title="Summary of Jyxo\Mail"><span>Namespace</span></a>
+				</li>
+				<li class="active">
+<span>Class</span>				</li>
+			</ul>
+			<ul>
+				<li>
+					<a href="tree.html" title="Tree view of classes, interfaces and exceptions"><span>Tree</span></a>
+				</li>
+				<li>
+					<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+				</li>
+			</ul>
+		</div>
+
+<div id="content">
+	<h1>Class Parser</h1>
+
+	<div class="description">
+	
+<p>Mail parsing class.<br />
+Based on \Mail\IMAPv2 class © Copyright 2004–2005 Richard York</p>
+
+	</div>
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Jyxo.html">Jyxo</a>\<a href="namespace-Jyxo.Mail.html">Mail</a><br />
+
+				<b>Category:</b>
+				Jyxo<br />
+				<b>Package:</b>
+				Jyxo\Mail<br />
+				<b>Subpackage:</b>
+				Parser<br />
+				<b>Copyright:</b>
+				Copyright © 2005–2011 Jyxo, s.r.o.<br />
+				<b>License:</b>
+				<a
+href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jyxo/php/blob/master/license.txt</a><br />
+				<b>Author:</b>
+				Jaroslav Hanslík<br />
+		<b>Located at</b> <a href="source-Jyxo.Mail.Parser.html#16" title="Go to source code">Mail/Parser.php</a><br />
+	</div>
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#___construct">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Mail.Parser.html#129" title="Go to source code"><b>__construct</b></a>(
+									resource
+				<var>$connection</var>, 
+									integer
+				<var>$uid</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Creates an instance.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Creates an instance.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$connection</code></dt>
+					<dd>resource<br /> IMAP folder connection.</dd>
+					<dt><code>$uid</code></dt>
+					<dd>integer<br /> Message Id</dd>
+				</dl></div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getHeaders" id="_getHeaders">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getHeaders">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Mail.Parser.html#445" title="Go to source code"><b>getHeaders</b></a>(
+									string
+				<var>$pid</var> = <span class="php-keyword1">null</span>
+		)</code>
+
+		<div class="short">
+			
+<p>Returns headers.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns headers.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$pid</code></dt>
+					<dd>string<br /> Part Id</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					array<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Mail.Parser.EmailNotExistException.html">Jyxo\Mail\Parser\EmailNotExistException</a><br />If no such email exists<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="parseBody" id="_parseBody">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_parseBody">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Mail.Parser.html#570" title="Go to source code"><b>parseBody</b></a>(
+									string
+				<var>$pid</var> = <span class="php-keyword1">null</span>, 
+									string
+				<var>$mimeType</var> = <span class="php-quote">'text/html'</span>, 
+									boolean
+				<var>$alternative</var> = <span class="php-keyword1">true</span>, 
+									boolean
+				<var>$all</var> = <span class="php-keyword1">false</span>
+		)</code>
+
+		<div class="short">
+			
+<p>Parses message body.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Parses message body.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$pid</code></dt>
+					<dd>string<br /> Part Id</dd>
+					<dt><code>$mimeType</code></dt>
+					<dd>string<br /> Default mime-type</dd>
+					<dt><code>$alternative</code></dt>
+					<dd>boolean<br /> Should the alternative part be used as well</dd>
+					<dt><code>$all</code></dt>
+					<dd>boolean<br /> Should all parts get parsed</dd>
+				</dl></div>
+
+
+				<h4>Throws</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Mail.Parser.EmailNotExistException.html">Jyxo\Mail\Parser\EmailNotExistException</a><br />If no such email exists<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getAttachments" id="_getAttachments">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getAttachments">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Mail.Parser.html#809" title="Go to source code"><b>getAttachments</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns a list of attachments.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns a list of attachments.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					array<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getInlines" id="_getInlines">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getInlines">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Mail.Parser.html#819" title="Go to source code"><b>getInlines</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns a list of part Ids of inline parts.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns a list of part Ids of inline parts.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					array<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getRelatedParts" id="_getRelatedParts">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getRelatedParts">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Mail.Parser.html#829" title="Go to source code"><b>getRelatedParts</b></a>(
+									string
+				<var>$pid</var>, 
+				array
+								<var>$types</var>, 
+									boolean
+				<var>$all</var> = <span class="php-keyword1">false</span>
+		)</code>
+
+		<div class="short">
+			
+<p>Returns related parts.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns related parts.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$pid</code></dt>
+					<dd>string<br /> Part Id</dd>
+					<dt><code>$types</code></dt>
+					<dd>array<br /> List of types to search for</dd>
+					<dt><code>$all</code></dt>
+					<dd>boolean<br /> Return all types</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					array<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Mail.Parser.EmailNotExistException.html">Jyxo\Mail\Parser\EmailNotExistException</a><br />If no such email exists<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getAllRelatedParts" id="_getAllRelatedParts">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getAllRelatedParts">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Mail.Parser.html#875" title="Go to source code"><b>getAllRelatedParts</b></a>(
+									string
+				<var>$pid</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Returns all related parts.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns all related parts.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$pid</code></dt>
+					<dd>string<br /> Part Id</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					array<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Mail.Parser.EmailNotExistException.html">Jyxo\Mail\Parser\EmailNotExistException</a><br />If no such email exists<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getBody" id="_getBody">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getBody">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Mail.Parser.html#891" title="Go to source code"><b>getBody</b></a>(
+									string
+				<var>$pid</var> = <span class="php-quote">'1'</span>, 
+									integer
+				<var>$mode</var> = self::BODY, 
+									string
+				<var>$mimeType</var> = <span class="php-quote">'text/html'</span>, 
+									integer
+				<var>$attempt</var> = <span class="php-num">1</span>
+		)</code>
+
+		<div class="short">
+			
+<p>Returns body of the given part.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns body of the given part.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$pid</code></dt>
+					<dd>string<br /> Part Id</dd>
+					<dt><code>$mode</code></dt>
+					<dd>integer<br /> Body return mode</dd>
+					<dt><code>$mimeType</code></dt>
+					<dd>string<br /> Requested mime-type</dd>
+					<dt><code>$attempt</code></dt>
+					<dd>integer<br /> Number of retries</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					array<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Mail.Parser.EmailNotExistException.html">Jyxo\Mail\Parser\EmailNotExistException</a><br />If no such email exists<br />
+					<a href="class-Jyxo.Mail.Parser.PartNotExistException.html">Jyxo\Mail\Parser\PartNotExistException</a><br />If no such part exists<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="decodeBody" id="_decodeBody">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_decodeBody">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Mail.Parser.html#1002" title="Go to source code"><b>decodeBody</b></a>(
+									string
+				<var>$body</var>, 
+									string
+				<var>$encoding</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Decodes body.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Decodes body.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$body</code></dt>
+					<dd>string<br /> Body</dd>
+					<dt><code>$encoding</code></dt>
+					<dd>string<br /> Body encoding</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					string<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMime" id="_getMime">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getMime">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Mail.Parser.html#1021" title="Go to source code"><b>getMime</b></a>(
+				array
+								<var>$types</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Returns a list of part Ids of given types.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns a list of part Ids of given types.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$types</code></dt>
+					<dd>array<br /> Part types</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					array<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Mail.Parser.EmailNotExistException.html">Jyxo\Mail\Parser\EmailNotExistException</a><br />If no such email exists<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMimeExcept" id="_getMimeExcept">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getMimeExcept">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Mail.Parser.html#1048" title="Go to source code"><b>getMimeExcept</b></a>(
+				array
+								<var>$exceptTypes</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Returns a list of part Ids of all parts except for the given types.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns a list of part Ids of all parts except for the given types.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$exceptTypes</code></dt>
+					<dd>array<br /> Ignored part types</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					array<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Mail.Parser.EmailNotExistException.html">Jyxo\Mail\Parser\EmailNotExistException</a><br />If no such email exists<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="BODY" id="BODY">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Mail.Parser.html#29" title="Go to source code"><b>BODY</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">0</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#BODY" class="anchor">#</a>
+			<div class="short">
+				
+<p>Retrieve message body.<br />
+Search for possible alternatives.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Retrieve message body.<br />
+Search for possible alternatives.</p>
+
+
+					<h4>See</h4>
+					<div class="smallList">
+							<a href="class-Jyxo.Mail.Parser.html#_getBody">Jyxo\Mail\Parser::getBody()</a><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="BODY_INFO" id="BODY_INFO">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Mail.Parser.html#38" title="Go to source code"><b>BODY_INFO</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">1</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#BODY_INFO" class="anchor">#</a>
+			<div class="short">
+				
+<p>Retrieve body info.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Retrieve body info.</p>
+
+
+					<h4>See</h4>
+					<div class="smallList">
+							<a href="class-Jyxo.Mail.Parser.html#_getBody">Jyxo\Mail\Parser::getBody()</a><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="BODY_LITERAL" id="BODY_LITERAL">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Mail.Parser.html#46" title="Go to source code"><b>BODY_LITERAL</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">2</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#BODY_LITERAL" class="anchor">#</a>
+			<div class="short">
+				
+<p>Retrieve raw message body.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Retrieve raw message body.</p>
+
+
+					<h4>See</h4>
+					<div class="smallList">
+							<a href="class-Jyxo.Mail.Parser.html#_getBody">Jyxo\Mail\Parser::getBody()</a><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="BODY_LITERAL_DECODE" id="BODY_LITERAL_DECODE">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Mail.Parser.html#54" title="Go to source code"><b>BODY_LITERAL_DECODE</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">3</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#BODY_LITERAL_DECODE" class="anchor">#</a>
+			<div class="short">
+				
+<p>Retrieve decoded message body.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Retrieve decoded message body.</p>
+
+
+					<h4>See</h4>
+					<div class="smallList">
+							<a href="class-Jyxo.Mail.Parser.html#_getBody">Jyxo\Mail\Parser::getBody()</a><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+</div>
+
+		<div id="footer">
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville" class="gravatar"><img src="http://gravatar.com/avatar/b2acbf0c8af3bdb2a57176d954ff8ba1?s=12" alt="Andrewsville" /></a>&amp;<a href="http://github.com/kukulich" class="gravatar"><img src="http://gravatar.com/avatar/d106644a59a117503d480ec2edf48368?s=12" alt="Kukulich" /></a> <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>, a fork of the original <a href="http://github.com/nette/apigen">tool</a>.<br />
+			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>

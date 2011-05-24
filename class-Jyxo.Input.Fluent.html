@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="TR ApiGen 2.0 beta 3" />
+
+	<title>Class Jyxo\Input\Fluent | Jyxo PHP Library</title>
+
+	<script type="text/javascript" src="resources/combined.js?134547457"></script>
+	<script type="text/javascript" src="elementlist.js?86817454"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3003541655" />
+	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
+	<link rel="search" type="application/opensearchdescription+xml" title="Jyxo PHP Library" href="http://jyxo.github.com/php/opensearch.xml" />
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', "UA-23550486-1"]);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+
+<body>
+<div id="main">
+<div id="leftWrapper">
+	<div id="left">
+		<a id="home" href="index.html"><span>Overview</span></a>
+
+
+		<h3>Namespaces</h3>
+		<ul>
+			<li class="active"><a href="namespace-Jyxo.html">Jyxo</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Beholder.html">Beholder</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Beholder.TestCase.html">TestCase</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Gettext.html">Gettext</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Gettext.Parser.html">Parser</a>
+					</li>
+						</ul></li>
+			<li class="active"><a href="namespace-Jyxo.Input.html">Input</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Input.Chain.html">Chain</a>
+					</li>
+			<li><a href="namespace-Jyxo.Input.Filter.html">Filter</a>
+					</li>
+			<li><a href="namespace-Jyxo.Input.Validator.html">Validator</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Mail.html">Mail</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Mail.Email.html">Email</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Mail.Email.Attachment.html">Attachment</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Mail.Parser.html">Parser</a>
+					</li>
+			<li><a href="namespace-Jyxo.Mail.Sender.html">Sender</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Rpc.html">Rpc</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Rpc.Json.html">Json</a>
+					</li>
+			<li><a href="namespace-Jyxo.Rpc.Xml.html">Xml</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Shell.html">Shell</a>
+					</li>
+			<li><a href="namespace-Jyxo.Spl.html">Spl</a>
+					</li>
+			<li><a href="namespace-Jyxo.Svn.html">Svn</a>
+					</li>
+			<li><a href="namespace-Jyxo.Time.html">Time</a>
+					</li>
+			<li><a href="namespace-Jyxo.Webdav.html">Webdav</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-PHP.html">PHP</a>
+					</li>
+		</ul>
+
+		<hr />
+
+		<h3>Classes</h3>
+		<ul>
+			<li><a href="class-Jyxo.Input.Chain.html">Chain</a></li>
+			<li><a href="class-Jyxo.Input.Factory.html">Factory</a></li>
+			<li><a href="class-Jyxo.Input.Filter.html">Filter</a></li>
+			<li class="active"><a href="class-Jyxo.Input.Fluent.html">Fluent</a></li>
+			<li><a href="class-Jyxo.Input.Upload.html">Upload</a></li>
+			<li><a href="class-Jyxo.Input.Validator.html">Validator</a></li>
+		</ul>
+
+		<h3>Interfaces</h3>
+		<ul>
+			<li><a href="class-Jyxo.Input.FilterInterface.html">FilterInterface</a></li>
+			<li><a href="class-Jyxo.Input.ValidatorInterface.html">ValidatorInterface</a></li>
+		</ul>
+
+		<h3>Exceptions</h3>
+		<ul>
+			<li><a href="class-Jyxo.Input.Exception.html">Exception</a></li>
+		</ul>
+
+
+	</div>
+</div>
+<div id="rightWrapper">
+	<div id="right">
+		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+			<input type="hidden" name="cx" value="004718174178290363576:f23xklsezl8" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		</form>
+
+		<div id="navigation">
+			<ul>
+				<li>
+					<a href="index.html" title="Overview"><span>Overview</span></a>
+				</li>
+				<li>
+					<a href="namespace-Jyxo.Input.html" title="Summary of Jyxo\Input"><span>Namespace</span></a>
+				</li>
+				<li class="active">
+<span>Class</span>				</li>
+			</ul>
+			<ul>
+				<li>
+					<a href="tree.html" title="Tree view of classes, interfaces and exceptions"><span>Tree</span></a>
+				</li>
+				<li>
+					<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+				</li>
+			</ul>
+		</div>
+
+<div id="content">
+	<h1>Class Fluent</h1>
+
+	<div class="description">
+	
+<p>Class implementing „fluent“ design pattern for \Jyxo\Input.</p>
+
+<p>Allows chaining multiple validators and checking multiple values in one
+validation cycle.</p>
+
+	</div>
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Jyxo.html">Jyxo</a>\<a href="namespace-Jyxo.Input.html">Input</a><br />
+
+				<b>Category:</b>
+				Jyxo<br />
+				<b>Package:</b>
+				Jyxo\Input<br />
+				<b>Copyright:</b>
+				Copyright © 2005–2011 Jyxo, s.r.o.<br />
+				<b>License:</b>
+				<a
+href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jyxo/php/blob/master/license.txt</a><br />
+				<b>Author:</b>
+				Jakub Tománek<br />
+		<b>Located at</b> <a href="source-Jyxo.Input.Fluent.html#16" title="Go to source code">Input/Fluent.php</a><br />
+	</div>
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#___construct">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Fluent.html#92" title="Go to source code"><b>__construct</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Constructor.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Constructor.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="check" id="_check">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_check">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Fluent.html#101" title="Go to source code"><b>check</b></a>(
+									mixed
+				<var>$var</var>, 
+									string
+				<var>$name</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Starts a new value checking.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Starts a new value checking.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$var</code></dt>
+					<dd>mixed<br /> Value to check.</dd>
+					<dt><code>$name</code></dt>
+					<dd>string<br /> Variable name</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="all" id="_all">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_all">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Fluent.html#118" title="Go to source code"><b>all</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Validates all variables.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Validates all variables.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="defaultValue" id="_defaultValue">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_defaultValue">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Fluent.html#131" title="Go to source code"><b>defaultValue</b></a>(
+									mixed
+				<var>$value</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Sets a default value in case the validation fails.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Sets a default value in case the validation fails.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$value</code></dt>
+					<dd>mixed<br /> Default value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a><br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="smallList">
+					<a href="class-BadMethodCallException.html">BadMethodCallException</a><br />There is no active variable.<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="validate" id="_validate">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_validate">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Fluent.html#149" title="Go to source code"><b>validate</b></a>(
+									string
+				<var>$name</var>, 
+									string
+				<var>$errorMessage</var> = <span class="php-keyword1">null</span>, 
+									mixed
+				<var>$param</var> = <span class="php-keyword1">null</span>
+		)</code>
+
+		<div class="short">
+			
+<p>Adds a validator to the chain.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Adds a validator to the chain.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$name</code></dt>
+					<dd>string<br /> Validator name</dd>
+					<dt><code>$errorMessage</code></dt>
+					<dd>string<br /> Validator error message</dd>
+					<dt><code>$param</code></dt>
+					<dd>mixed<br /> Additional validator parameter</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="filter" id="_filter">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_filter">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Fluent.html#163" title="Go to source code"><b>filter</b></a>(
+									string
+				<var>$name</var>, 
+									mixed
+				<var>$param</var> = <span class="php-keyword1">null</span>
+		)</code>
+
+		<div class="short">
+			
+<p>Adds a filter to the chain.s</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Adds a filter to the chain.s</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$name</code></dt>
+					<dd>string<br /> Filter name</dd>
+					<dt><code>$param</code></dt>
+					<dd>mixed<br /> Additional filter parameter</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="walk" id="_walk">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_walk">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Fluent.html#176" title="Go to source code"><b>walk</b></a>(
+									boolean
+				<var>$addFilter</var> = <span class="php-keyword1">true</span>
+		)</code>
+
+		<div class="short">
+			
+<p>Adds a subchain to the current chain that treats the value a an array.<br />
+Automatically adds the isArray validator.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Adds a subchain to the current chain that treats the value a an array.<br />
+Automatically adds the isArray validator.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$addFilter</code></dt>
+					<dd>boolean<br /> Add the Trim filter (removes empty elements)</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="condition" id="_condition">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_condition">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Fluent.html#193" title="Go to source code"><b>condition</b></a>(
+									string
+				<var>$name</var>, 
+									mixed
+				<var>$param</var> = <span class="php-keyword1">null</span>
+		)</code>
+
+		<div class="short">
+			
+<p>Adds a conditional chain.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Adds a conditional chain.</p>
+
+<p>If there are conditions in the current chain, adds the condition as a
+subchain.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$name</code></dt>
+					<dd>string<br /> Validator name</dd>
+					<dt><code>$param</code></dt>
+					<dd>mixed<br /> Additional validator parameter</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a><br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="smallList">
+					<a href="class-BadMethodCallException.html">BadMethodCallException</a><br />There is no active variable<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="close" id="_close">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_close">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Fluent.html#219" title="Go to source code"><b>close</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Closes a chain.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Closes a chain.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isValid" id="_isValid">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_isValid">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Fluent.html#230" title="Go to source code"><b>isValid</b></a>(
+									boolean
+				<var>$assocErrors</var> = <span class="php-keyword1">false</span>
+		)</code>
+
+		<div class="short">
+			
+<p>Performs validation and filtering of all variables.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Performs validation and filtering of all variables.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$assocErrors</code></dt>
+					<dd>boolean<br /> Return error messages in an associative array</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					boolean<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="validateAll" id="_validateAll">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_validateAll">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Fluent.html#260" title="Go to source code"><b>validateAll</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Calls isValid(), but throws an exception on error.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Calls isValid(), but throws an exception on error.</p>
+
+<p>The exception contains only the first validation error message.</p>
+
+
+
+
+
+
+				<h4>Throws</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Input.Validator.Exception.html">Jyxo\Input\Validator\Exception</a><br />Validation failed<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getValues" id="_getValues">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getValues">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Fluent.html#299" title="Go to source code"><b>getValues</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns all values.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns all values.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					array<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getValue" id="_getValue">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getValue">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Fluent.html#309" title="Go to source code"><b>getValue</b></a>(
+									string
+				<var>$name</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Returns a value by name.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns a value by name.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$name</code></dt>
+					<dd>string<br /> Variable name</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					mixed<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Input.Exception.html">Jyxo\Input\Exception</a><br />No variable with the given name<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getErrors" id="_getErrors">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getErrors">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Fluent.html#325" title="Go to source code"><b>getErrors</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns errors.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns errors.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					array<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="post" id="_post">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_post">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Fluent.html#335" title="Go to source code"><b>post</b></a>(
+									string
+				<var>$name</var>, 
+									mixed
+				<var>$default</var> = <span class="php-keyword1">null</span>
+		)</code>
+
+		<div class="short">
+			
+<p>Checks a POST variable.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Checks a POST variable.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$name</code></dt>
+					<dd>string<br /> Variable name</dd>
+					<dt><code>$default</code></dt>
+					<dd>mixed<br /> Default value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="query" id="_query">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_query">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Fluent.html#348" title="Go to source code"><b>query</b></a>(
+									string
+				<var>$name</var>, 
+									mixed
+				<var>$default</var> = <span class="php-keyword1">null</span>
+		)</code>
+
+		<div class="short">
+			
+<p>Checks a GET variable.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Checks a GET variable.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$name</code></dt>
+					<dd>string<br /> Variable name</dd>
+					<dt><code>$default</code></dt>
+					<dd>mixed<br /> Default value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="request" id="_request">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_request">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Fluent.html#361" title="Go to source code"><b>request</b></a>(
+									string
+				<var>$name</var>, 
+									mixed
+				<var>$default</var> = <span class="php-keyword1">null</span>
+		)</code>
+
+		<div class="short">
+			
+<p>Checks a POST/GET variable</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Checks a POST/GET variable</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$name</code></dt>
+					<dd>string<br /> Variable name</dd>
+					<dt><code>$default</code></dt>
+					<dd>mixed<br /> Default value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="file" id="_file">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_file">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Fluent.html#374" title="Go to source code"><b>file</b></a>(
+									string
+				<var>$index</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Checks file upload.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Checks file upload.</p>
+
+<p>Requires \Jyxo\Input\Upload.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$index</code></dt>
+					<dd>string<br /> File index</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Input.Fluent.html">Jyxo\Input\Fluent</a><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="smallList">
+						<a href="class-Jyxo.Input.Upload.html">Jyxo\Input\Upload</a><br />
+				</div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__get" id="___get">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#___get">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Input.Fluent.html#407" title="Go to source code"><b>__get</b></a>(
+									string
+				<var>$offset</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Magic getter for easier retrieving of values.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Magic getter for easier retrieving of values.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$offset</code></dt>
+					<dd>string<br /> Value name</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					mixed<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Input.Exception.html">Jyxo\Input\Exception</a><br />No variable with the given name<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="VALIDATORS_PREFIX" id="VALIDATORS_PREFIX">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Input.Fluent.html#29" title="Go to source code"><b>VALIDATORS_PREFIX</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'\Jyxo\Input\Validator\\'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#VALIDATORS_PREFIX" class="anchor">#</a>
+			<div class="short">
+				
+<p>Validator class names prefix.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Validator class names prefix.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="FILTERS_PREFIX" id="FILTERS_PREFIX">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				string
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Input.Fluent.html#36" title="Go to source code"><b>FILTERS_PREFIX</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-quote">'\Jyxo\Input\Filter\\'</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#FILTERS_PREFIX" class="anchor">#</a>
+			<div class="short">
+				
+<p>Filter class names prefix.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Filter class names prefix.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+</div>
+
+		<div id="footer">
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville" class="gravatar"><img src="http://gravatar.com/avatar/b2acbf0c8af3bdb2a57176d954ff8ba1?s=12" alt="Andrewsville" /></a>&amp;<a href="http://github.com/kukulich" class="gravatar"><img src="http://gravatar.com/avatar/d106644a59a117503d480ec2edf48368?s=12" alt="Kukulich" /></a> <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>, a fork of the original <a href="http://github.com/nette/apigen">tool</a>.<br />
+			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="TR ApiGen 2.0 beta 3" />
+
+	<title>Class Jyxo\Color | Jyxo PHP Library</title>
+
+	<script type="text/javascript" src="resources/combined.js?134547457"></script>
+	<script type="text/javascript" src="elementlist.js?86817454"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3003541655" />
+	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
+	<link rel="search" type="application/opensearchdescription+xml" title="Jyxo PHP Library" href="http://jyxo.github.com/php/opensearch.xml" />
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', "UA-23550486-1"]);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+
+<body>
+<div id="main">
+<div id="leftWrapper">
+	<div id="left">
+		<a id="home" href="index.html"><span>Overview</span></a>
+
+
+		<h3>Namespaces</h3>
+		<ul>
+			<li class="active"><a href="namespace-Jyxo.html">Jyxo</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Beholder.html">Beholder</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Beholder.TestCase.html">TestCase</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Gettext.html">Gettext</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Gettext.Parser.html">Parser</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Input.html">Input</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Input.Chain.html">Chain</a>
+					</li>
+			<li><a href="namespace-Jyxo.Input.Filter.html">Filter</a>
+					</li>
+			<li><a href="namespace-Jyxo.Input.Validator.html">Validator</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Mail.html">Mail</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Mail.Email.html">Email</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Mail.Email.Attachment.html">Attachment</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Mail.Parser.html">Parser</a>
+					</li>
+			<li><a href="namespace-Jyxo.Mail.Sender.html">Sender</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Rpc.html">Rpc</a>
+					<span></span>
+					<ul>
+			<li><a href="namespace-Jyxo.Rpc.Json.html">Json</a>
+					</li>
+			<li><a href="namespace-Jyxo.Rpc.Xml.html">Xml</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-Jyxo.Shell.html">Shell</a>
+					</li>
+			<li><a href="namespace-Jyxo.Spl.html">Spl</a>
+					</li>
+			<li><a href="namespace-Jyxo.Svn.html">Svn</a>
+					</li>
+			<li><a href="namespace-Jyxo.Time.html">Time</a>
+					</li>
+			<li><a href="namespace-Jyxo.Webdav.html">Webdav</a>
+					</li>
+						</ul></li>
+			<li><a href="namespace-PHP.html">PHP</a>
+					</li>
+		</ul>
+
+		<hr />
+
+		<h3>Classes</h3>
+		<ul>
+			<li><a href="class-Jyxo.Charset.html">Charset</a></li>
+			<li class="active"><a href="class-Jyxo.Color.html">Color</a></li>
+			<li><a href="class-Jyxo.Css.html">Css</a></li>
+			<li><a href="class-Jyxo.ErrorHandler.html">ErrorHandler</a></li>
+			<li><a href="class-Jyxo.ErrorMail.html">ErrorMail</a></li>
+			<li><a href="class-Jyxo.FirePhp.html">FirePhp</a></li>
+			<li><a href="class-Jyxo.Html.html">Html</a></li>
+			<li><a href="class-Jyxo.HtmlTag.html">HtmlTag</a></li>
+			<li><a href="class-Jyxo.SpamFilter.html">SpamFilter</a></li>
+			<li><a href="class-Jyxo.String.html">String</a></li>
+			<li><a href="class-Jyxo.Timer.html">Timer</a></li>
+			<li><a href="class-Jyxo.XmlReader.html">XmlReader</a></li>
+		</ul>
+
+
+		<h3>Exceptions</h3>
+		<ul>
+			<li><a href="class-Jyxo.Exception.html">Exception</a></li>
+		</ul>
+
+
+	</div>
+</div>
+<div id="rightWrapper">
+	<div id="right">
+		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+			<input type="hidden" name="cx" value="004718174178290363576:f23xklsezl8" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		</form>
+
+		<div id="navigation">
+			<ul>
+				<li>
+					<a href="index.html" title="Overview"><span>Overview</span></a>
+				</li>
+				<li>
+					<a href="namespace-Jyxo.html" title="Summary of Jyxo"><span>Namespace</span></a>
+				</li>
+				<li class="active">
+<span>Class</span>				</li>
+			</ul>
+			<ul>
+				<li>
+					<a href="tree.html" title="Tree view of classes, interfaces and exceptions"><span>Tree</span></a>
+				</li>
+				<li>
+					<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+				</li>
+			</ul>
+		</div>
+
+<div id="content">
+	<h1>Class Color</h1>
+
+	<div class="description">
+	
+<p>Class representing a RGB color.</p>
+
+	</div>
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Jyxo.html">Jyxo</a><br />
+
+				<b>Category:</b>
+				Jyxo<br />
+				<b>Package:</b>
+				Jyxo\Color<br />
+				<b>Copyright:</b>
+				Copyright © 2005–2011 Jyxo, s.r.o.<br />
+				<b>License:</b>
+				<a
+href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jyxo/php/blob/master/license.txt</a><br />
+				<b>Author:</b>
+				Roman Řáha<br />
+		<b>Located at</b> <a href="source-Jyxo.Color.html#16" title="Go to source code">Color.php</a><br />
+	</div>
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#___construct">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Color.html#62" title="Go to source code"><b>__construct</b></a>(
+									mixed
+				<var>$color</var> = <span class="php-keyword1">null</span>
+		)</code>
+
+		<div class="short">
+			
+<p>Constructor.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Constructor.</p>
+
+<p>Accepts the following definition formats:</p>
+
+<ul>
+	<li>Hexadecimal string (with or without the hashmark at the beginning)</li>
+
+	<li>Array with red, green and blue component luminance values (in
+	this order)</li>
+
+	<li>Number,</li>
+
+	<li>\Jyxo\Color,</li>
+
+	<li>null</li>
+</ul>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$color</code></dt>
+					<dd>mixed<br /> Color definition</dd>
+				</dl></div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="toInverse" id="_toInverse">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Color.html">Jyxo\Color</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_toInverse">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Color.html#89" title="Go to source code"><b>toInverse</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns an inverse color.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns an inverse color.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Color.html">Jyxo\Color</a><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="toGrayScale" id="_toGrayScale">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Color.html">Jyxo\Color</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_toGrayScale">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Color.html#104" title="Go to source code"><b>toGrayScale</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns the currect color converted to grayscale.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns the currect color converted to grayscale.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Color.html">Jyxo\Color</a><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__toString" id="___toString">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#___toString">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Color.html#116" title="Go to source code"><b>__toString</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns textual (#RRGGBB) representation of the current color.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns textual (#RRGGBB) representation of the current color.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					string<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getRgb" id="_getRgb">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getRgb">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Color.html#126" title="Go to source code"><b>getRgb</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns the current color as an array of the red, green and blue
+components.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns the current color as an array of the red, green and blue
+components.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					array<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getHex" id="_getHex">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getHex">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Color.html#140" title="Go to source code"><b>getHex</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns the current color as a six-digit hexadecimal number.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns the current color as a six-digit hexadecimal number.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					string<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getBinary" id="_getBinary">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getBinary">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Color.html#152" title="Go to source code"><b>getBinary</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns the current color in binary form 0 – black, 1 – white).</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns the current color in binary form 0 – black, 1 – white).</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					integer<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getRed" id="_getRed">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getRed">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Color.html#164" title="Go to source code"><b>getRed</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns the red component luminance.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns the red component luminance.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					integer<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setRed" id="_setRed">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Color.html">Jyxo\Color</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setRed">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Color.html#174" title="Go to source code"><b>setRed</b></a>(
+									integer|string
+				<var>$red</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Sets the red component luminance.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Sets the red component luminance.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$red</code></dt>
+					<dd>integer|string<br /> Component luminance</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Color.html">Jyxo\Color</a><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getGreen" id="_getGreen">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getGreen">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Color.html#186" title="Go to source code"><b>getGreen</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns the green component luminance.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns the green component luminance.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					integer<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setGreen" id="_setGreen">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Color.html">Jyxo\Color</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setGreen">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Color.html#196" title="Go to source code"><b>setGreen</b></a>(
+									integer|string
+				<var>$green</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Sets the green component luminance.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Sets the green component luminance.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$green</code></dt>
+					<dd>integer|string<br /> Component luminance</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Color.html">Jyxo\Color</a><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getBlue" id="_getBlue">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getBlue">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Color.html#208" title="Go to source code"><b>getBlue</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns the blue component luminance.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns the blue component luminance.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					integer<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setBlue" id="_setBlue">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Color.html">Jyxo\Color</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setBlue">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Color.html#218" title="Go to source code"><b>setBlue</b></a>(
+									integer|string
+				<var>$blue</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Sets the blue component luminance.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Sets the blue component luminance.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$blue</code></dt>
+					<dd>integer|string<br /> Component luminance</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Color.html">Jyxo\Color</a><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getLuminance" id="_getLuminance">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_getLuminance">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Color.html#230" title="Go to source code"><b>getLuminance</b></a>(
+		)</code>
+
+		<div class="short">
+			
+<p>Returns the color luminance according to the human perception.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Returns the color luminance according to the human perception.</p>
+
+
+
+
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					integer<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setLuminance" id="_setLuminance">
+		<td class="right" width="1%"><code class="nowrap">
+			
+			 public 
+			<a href="class-Jyxo.Color.html">Jyxo\Color</a>
+			
+			</code>
+		</td>
+
+		<td><div class="position">
+		<a class="anchor" href="#_setLuminance">#</a>
+		<code class="nowrap">
+				<a href="source-Jyxo.Color.html#241" title="Go to source code"><b>setLuminance</b></a>(
+									integer|string
+				<var>$luminance</var>
+		)</code>
+
+		<div class="short">
+			
+<p>Sets the color in grayscale according to the luminance value.</p>
+
+		</div>
+
+		<div class="detailed">
+			
+<p>Sets the color in grayscale according to the luminance value.</p>
+
+
+
+
+				<h4>Parameters</h4>
+				<div class="smallList"><dl>
+					<dt><code>$luminance</code></dt>
+					<dd>integer|string<br /> Luminance</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="smallList">
+					<a href="class-Jyxo.Color.html">Jyxo\Color</a><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="LUM_MIN" id="LUM_MIN">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Color.html#27" title="Go to source code"><b>LUM_MIN</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">0x00</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#LUM_MIN" class="anchor">#</a>
+			<div class="short">
+				
+<p>Minimal luminance.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Minimal luminance.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="LUM_MAX" id="LUM_MAX">
+		<td class="right" width="1%"><code class="nowrap">
+			
+				integer
+		</code></td>
+		<td width="1%"><code>
+				<a href="source-Jyxo.Color.html#34" title="Go to source code"><b>LUM_MAX</b></a>
+		</code></td>
+		<td width="1%">
+				<code><span class="php-num">0xFF</span></code>
+		</td>
+		<td><div class="position">
+			<a href="#LUM_MAX" class="anchor">#</a>
+			<div class="short">
+				
+<p>Maximal luminance.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Maximal luminance.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+</div>
+
+		<div id="footer">
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville" class="gravatar"><img src="http://gravatar.com/avatar/b2acbf0c8af3bdb2a57176d954ff8ba1?s=12" alt="Andrewsville" /></a>&amp;<a href="http://github.com/kukulich" class="gravatar"><img src="http://gravatar.com/avatar/d106644a59a117503d480ec2edf48368?s=12" alt="Kukulich" /></a> <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>, a fork of the original <a href="http://github.com/nette/apigen">tool</a>.<br />
+			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>
