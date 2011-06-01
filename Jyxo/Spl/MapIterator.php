@@ -158,7 +158,7 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 	}
 
 	/**
-	 * Seeks to defined position. Does NOT throw \OutOfBoundsException.
+	 * Seeks to defined position. Does NOT throw {@link \OutOfBoundsException}.
 	 *
 	 * @param integer $position New position
 	 */

@@ -88,7 +88,7 @@ class Parser implements \Iterator, \Countable
 	 * The actual parser.
 	 *
 	 * Walks through the file, splits it on empty lines and tries to parse each
-	 * fragment using the defined parser class (\Jyxo\Gettext\Parser\Item by default).
+	 * fragment using the defined parser class ({@link \Jyxo\Gettext\Parser\Item} by default).
 	 *
 	 * Does not work with the file header.
 	 *
@@ -127,7 +127,7 @@ class Parser implements \Iterator, \Countable
 	}
 
 	/**
-	 * \Countable interface method
+	 * {@link \Countable} interface method
 	 *
 	 * @return boolean
 	 */
@@ -137,7 +137,7 @@ class Parser implements \Iterator, \Countable
 	}
 
 	/**
-	 * \ArrayIterator interface method.
+	 * {@link \ArrayIterator} interface method.
 	 *
 	 * @return boolean
 	 */
@@ -147,7 +147,7 @@ class Parser implements \Iterator, \Countable
 	}
 
 	/**
-	 * \ArrayIterator interface method.
+	 * {@link \ArrayIterator} interface method.
 	 *
 	 * @return boolean
 	 */
@@ -157,7 +157,7 @@ class Parser implements \Iterator, \Countable
 	}
 
 	/**
-	 * \ArrayIterator interface method.
+	 * {@link \ArrayIterator} interface method.
 	 *
 	 * @return boolean
 	 */
@@ -168,7 +168,7 @@ class Parser implements \Iterator, \Countable
 	}
 
 	/**
-	 * \ArrayIterator interface method.
+	 * {@link \ArrayIterator} interface method.
 	 *
 	 * @return boolean
 	 */
@@ -179,7 +179,7 @@ class Parser implements \Iterator, \Countable
 	}
 
 	/**
-	 * \ArrayIterator interface method.
+	 * {@link \ArrayIterator} interface method.
 	 *
 	 * @return boolean
 	 */

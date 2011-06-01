@@ -17,7 +17,7 @@ namespace Jyxo;
  * Class for generating (x)HTML source code.
  * Allows creating HTML tags and its attributes.
  *
- * example:
+ * Example:
  * <code>
  * $p = \Jyxo\HtmlTag::create('p')->setClass('buttons');
  * </code>

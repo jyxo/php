@@ -120,16 +120,17 @@ class Css
 
 	/**
 	 * Converts HTML styles inside <style> elements to inline styles.
+	 *
 	 * Supported selectors:
-	 *  a {...}
-	 *  #header {...}
-	 *  .icon {...}
-	 *  h1#header {...}
-	 *  a.icon.small {...}
-	 *  a#remove.icon.small {...}
-	 *  a img {...}
-	 *  h1, h2 {...}
-	 *  a:link {...} - converts to a {...}
+	 * * a {...}
+	 * * #header {...}
+	 * * .icon {...}
+	 * * h1#header {...}
+	 * * a.icon.small {...}
+	 * * a#remove.icon.small {...}
+	 * * a img {...}
+	 * * h1, h2 {...}
+	 * * a:link {...} - converts to a {...}
 	 *
 	 * @param string $html Processed HTML source
 	 * @return string
