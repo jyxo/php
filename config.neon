@@ -8,24 +8,26 @@ exclude: ''
 skipDocPath: ''
 # Don't generate documentation for classes with this name prefix
 skipDocPrefix: ''
+# Main project name prefix
+main: ''
 
 # Title of generated documentation
 title: 'Jyxo PHP Library'
 # Documentation base URL
 baseUrl: 'http://jyxo.github.com/php'
 # Google Custom Search ID
-googleCse: '004718174178290363576:f23xklsezl8'
+googleCseId: '004718174178290363576:f23xklsezl8'
+# Google Custom Search label
+googleCseLabel: 'api'
 # Google Analytics tracking code
 googleAnalytics: 'UA-23550486-1'
-# Template name
-template: jyxo
-# Directory with templates
-templateDir: ''
 # List of allowed HTML tags in documentation
 allowedHtml: [b, i, a, ul, ol, li, p, br, var, samp, kbd, tt]
 
 # Generate documentation for methods and properties with given access level
 accessLevels: [public, protected]
+# Generate documentation for elements marked as internal
+internal: No
 # Generate documentation for PHP internal classes
 php: Yes
 # Generate tree view of classes, interfaces and exceptions
