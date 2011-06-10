@@ -2,15 +2,16 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="TR ApiGen 2.0 beta 3" />
+	<meta name="generator" content="TR ApiGen 2.0 RC" />
 
 	<title>Class Jyxo\Rpc\Server | Jyxo PHP Library</title>
 
-	<script type="text/javascript" src="resources/combined.js?134547457"></script>
-	<script type="text/javascript" src="elementlist.js?86817454"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3003541655" />
+	<script type="text/javascript" src="resources/combined.js?810424589"></script>
+	<script type="text/javascript" src="elementlist.js?2796542733"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1274782946" />
 	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
 	<link rel="search" type="application/opensearchdescription+xml" title="Jyxo PHP Library" href="http://jyxo.github.com/php/opensearch.xml" />
+
 	<script type="text/javascript">
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', "UA-23550486-1"]);
@@ -28,94 +29,100 @@
 <div id="main">
 <div id="leftWrapper">
 	<div id="left">
-		<a id="home" href="index.html"><span>Overview</span></a>
+		<a href="index.html" title="Overview"><span><span>Overview</span></span></a>
+
+		<div id="entities">
+
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-Jyxo.html">Jyxo</a>
+						<span></span>
+						<ul>
+				<li><a href="namespace-Jyxo.Beholder.html">Beholder</a>
+						<span></span>
+						<ul>
+				<li><a href="namespace-Jyxo.Beholder.TestCase.html">TestCase</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-Jyxo.Gettext.html">Gettext</a>
+						<span></span>
+						<ul>
+				<li><a href="namespace-Jyxo.Gettext.Parser.html">Parser</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-Jyxo.Input.html">Input</a>
+						<span></span>
+						<ul>
+				<li><a href="namespace-Jyxo.Input.Chain.html">Chain</a>
+						</li>
+				<li><a href="namespace-Jyxo.Input.Filter.html">Filter</a>
+						</li>
+				<li><a href="namespace-Jyxo.Input.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-Jyxo.Mail.html">Mail</a>
+						<span></span>
+						<ul>
+				<li><a href="namespace-Jyxo.Mail.Email.html">Email</a>
+						<span></span>
+						<ul>
+				<li><a href="namespace-Jyxo.Mail.Email.Attachment.html">Attachment</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-Jyxo.Mail.Parser.html">Parser</a>
+						</li>
+				<li><a href="namespace-Jyxo.Mail.Sender.html">Sender</a>
+						</li>
+							</ul></li>
+				<li class="active"><a href="namespace-Jyxo.Rpc.html">Rpc</a>
+						<span></span>
+						<ul>
+				<li><a href="namespace-Jyxo.Rpc.Json.html">Json</a>
+						</li>
+				<li><a href="namespace-Jyxo.Rpc.Xml.html">Xml</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-Jyxo.Shell.html">Shell</a>
+						</li>
+				<li><a href="namespace-Jyxo.Spl.html">Spl</a>
+						</li>
+				<li><a href="namespace-Jyxo.Svn.html">Svn</a>
+						</li>
+				<li><a href="namespace-Jyxo.Time.html">Time</a>
+						</li>
+				<li><a href="namespace-Jyxo.Webdav.html">Webdav</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+			</ul>
+
+			<hr />
+
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Jyxo.Rpc.Client.html">Client</a></li>
+				<li class="active"><a href="class-Jyxo.Rpc.Server.html">Server</a></li>
+			</ul>
 
 
-		<h3>Namespaces</h3>
-		<ul>
-			<li class="active"><a href="namespace-Jyxo.html">Jyxo</a>
-					<span></span>
-					<ul>
-			<li><a href="namespace-Jyxo.Beholder.html">Beholder</a>
-					<span></span>
-					<ul>
-			<li><a href="namespace-Jyxo.Beholder.TestCase.html">TestCase</a>
-					</li>
-						</ul></li>
-			<li><a href="namespace-Jyxo.Gettext.html">Gettext</a>
-					<span></span>
-					<ul>
-			<li><a href="namespace-Jyxo.Gettext.Parser.html">Parser</a>
-					</li>
-						</ul></li>
-			<li><a href="namespace-Jyxo.Input.html">Input</a>
-					<span></span>
-					<ul>
-			<li><a href="namespace-Jyxo.Input.Chain.html">Chain</a>
-					</li>
-			<li><a href="namespace-Jyxo.Input.Filter.html">Filter</a>
-					</li>
-			<li><a href="namespace-Jyxo.Input.Validator.html">Validator</a>
-					</li>
-						</ul></li>
-			<li><a href="namespace-Jyxo.Mail.html">Mail</a>
-					<span></span>
-					<ul>
-			<li><a href="namespace-Jyxo.Mail.Email.html">Email</a>
-					<span></span>
-					<ul>
-			<li><a href="namespace-Jyxo.Mail.Email.Attachment.html">Attachment</a>
-					</li>
-						</ul></li>
-			<li><a href="namespace-Jyxo.Mail.Parser.html">Parser</a>
-					</li>
-			<li><a href="namespace-Jyxo.Mail.Sender.html">Sender</a>
-					</li>
-						</ul></li>
-			<li class="active"><a href="namespace-Jyxo.Rpc.html">Rpc</a>
-					<span></span>
-					<ul>
-			<li><a href="namespace-Jyxo.Rpc.Json.html">Json</a>
-					</li>
-			<li><a href="namespace-Jyxo.Rpc.Xml.html">Xml</a>
-					</li>
-						</ul></li>
-			<li><a href="namespace-Jyxo.Shell.html">Shell</a>
-					</li>
-			<li><a href="namespace-Jyxo.Spl.html">Spl</a>
-					</li>
-			<li><a href="namespace-Jyxo.Svn.html">Svn</a>
-					</li>
-			<li><a href="namespace-Jyxo.Time.html">Time</a>
-					</li>
-			<li><a href="namespace-Jyxo.Webdav.html">Webdav</a>
-					</li>
-						</ul></li>
-			<li><a href="namespace-PHP.html">PHP</a>
-					</li>
-		</ul>
-
-		<hr />
-
-		<h3>Classes</h3>
-		<ul>
-			<li><a href="class-Jyxo.Rpc.Client.html">Client</a></li>
-			<li class="active"><a href="class-Jyxo.Rpc.Server.html">Server</a></li>
-		</ul>
+			<h3>Exceptions</h3>
+			<ul>
+				<li><a href="class-Jyxo.Rpc.Exception.html">Exception</a></li>
+			</ul>
 
 
-		<h3>Exceptions</h3>
-		<ul>
-			<li><a href="class-Jyxo.Rpc.Exception.html">Exception</a></li>
-		</ul>
-
-
+		</div>
 	</div>
 </div>
 <div id="rightWrapper">
 	<div id="right">
-		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
-			<input type="hidden" name="cx" value="004718174178290363576:f23xklsezl8" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		<form action="http://www.google.com/cse" id="search">
+			<input type="hidden" name="cx" value="004718174178290363576:f23xklsezl8" />
+			<input type="hidden" name="ie" value="UTF-8" />
+			<input type="hidden" name="more" value="api" />
+			<input type="text" name="q" class="text" />
+			<input type="submit" value="Search" />
 		</form>
 
 		<div id="navigation">
@@ -168,7 +175,7 @@
 				<b>Package:</b>
 				Jyxo\Rpc<br />
 				<b>Copyright:</b>
-				Copyright © 2005–2011 Jyxo, s.r.o.<br />
+				Copyright (c) 2005-2011 Jyxo, s.r.o.<br />
 				<b>License:</b>
 				<a
 href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jyxo/php/blob/master/license.txt</a><br />
@@ -181,6 +188,7 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
 	<tr data-order="__construct" id="___construct">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
 			 protected 
@@ -192,19 +200,16 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		<td><div class="position">
 		<a class="anchor" href="#___construct">#</a>
 		<code class="nowrap">
-				<a href="source-Jyxo.Rpc.Server.html#49" title="Go to source code"><b>__construct</b></a>(
+				<a href="source-Jyxo.Rpc.Server.html#49" title="Go to source code">__construct</a>(
 		)</code>
 
 		<div class="short">
-			
-<p>Creates a class instance.</p>
-
+			Creates a class instance.
 		</div>
 
 		<div class="detailed">
 			
 <p>Creates a class instance.</p>
-
 
 
 
@@ -216,6 +221,7 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		</div></td>
 	</tr>
 	<tr data-order="__destruct" id="___destruct">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
 			 public 
@@ -227,19 +233,16 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		<td><div class="position">
 		<a class="anchor" href="#___destruct">#</a>
 		<code class="nowrap">
-				<a href="source-Jyxo.Rpc.Server.html#55" title="Go to source code"><b>__destruct</b></a>(
+				<a href="source-Jyxo.Rpc.Server.html#55" title="Go to source code">__destruct</a>(
 		)</code>
 
 		<div class="short">
-			
-<p>Destroys a class instance.</p>
-
+			Destroys a class instance.
 		</div>
 
 		<div class="detailed">
 			
 <p>Destroys a class instance.</p>
-
 
 
 
@@ -251,6 +254,7 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		</div></td>
 	</tr>
 	<tr data-order="__clone" id="___clone">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
 			final public 
@@ -262,19 +266,16 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		<td><div class="position">
 		<a class="anchor" href="#___clone">#</a>
 		<code class="nowrap">
-				<a href="source-Jyxo.Rpc.Server.html#61" title="Go to source code"><b>__clone</b></a>(
+				<a href="source-Jyxo.Rpc.Server.html#61" title="Go to source code">__clone</a>(
 		)</code>
 
 		<div class="short">
-			
-<p>Prevents from singleton cloning.</p>
-
+			Prevents from singleton cloning.
 		</div>
 
 		<div class="detailed">
 			
 <p>Prevents from singleton cloning.</p>
-
 
 
 
@@ -282,7 +283,7 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 
 				<h4>Throws</h4>
 				<div class="smallList">
-					<a href="class-LogicException.html">LogicException</a><br />When trying to clone instance<br />
+					<code><code><a href="class-LogicException.html">LogicException</a></code></code><br />When trying to clone instance<br />
 				</div>
 
 
@@ -290,10 +291,11 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		</div></td>
 	</tr>
 	<tr data-order="getInstance" id="_getInstance">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
 			 public static
-			<a href="class-Jyxo.Rpc.Server.html">Jyxo\Rpc\Server</a>
+			<code><a href="class-Jyxo.Rpc.Server.html">Jyxo\Rpc\Server</a></code>
 			
 			</code>
 		</td>
@@ -301,13 +303,11 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		<td><div class="position">
 		<a class="anchor" href="#_getInstance">#</a>
 		<code class="nowrap">
-				<a href="source-Jyxo.Rpc.Server.html#71" title="Go to source code"><b>getInstance</b></a>(
+				<a href="source-Jyxo.Rpc.Server.html#71" title="Go to source code">getInstance</a>(
 		)</code>
 
 		<div class="short">
-			
-<p>Returns class instance.</p>
-
+			Returns class instance.
 		</div>
 
 		<div class="detailed">
@@ -317,10 +317,9 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 
 
 
-
 				<h4>Returns</h4>
 				<div class="smallList">
-					<a href="class-Jyxo.Rpc.Server.html">Jyxo\Rpc\Server</a><br />
+					<code><code><a href="class-Jyxo.Rpc.Server.html">Jyxo\Rpc\Server</a></code></code><br />
 				</div>
 
 
@@ -329,10 +328,11 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		</div></td>
 	</tr>
 	<tr data-order="enableLogging" id="_enableLogging">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
 			 public 
-			<a href="class-Jyxo.Rpc.Server.html">Jyxo\Rpc\Server</a>
+			<code><a href="class-Jyxo.Rpc.Server.html">Jyxo\Rpc\Server</a></code>
 			
 			</code>
 		</td>
@@ -340,17 +340,15 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		<td><div class="position">
 		<a class="anchor" href="#_enableLogging">#</a>
 		<code class="nowrap">
-				<a href="source-Jyxo.Rpc.Server.html#86" title="Go to source code"><b>enableLogging</b></a>(
-									string
+				<a href="source-Jyxo.Rpc.Server.html#86" title="Go to source code">enableLogging</a>(
+				string
 				<var>$filename</var>, 
-									callback
+				callback
 				<var>$callback</var> = <span class="php-keyword1">null</span>
 		)</code>
 
 		<div class="short">
-			
-<p>Turns on logging.</p>
-
+			Turns on logging.
 		</div>
 
 		<div class="detailed">
@@ -359,23 +357,22 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 
 
 
-
 				<h4>Parameters</h4>
 				<div class="smallList"><dl>
-					<dt><code>$filename</code></dt>
-					<dd>string<br /> Log file path.</dd>
-					<dt><code>$callback</code></dt>
-					<dd>callback<br /> Function to be called prior to logging a message.</dd>
+					<dt><var>$filename</var></dt>
+					<dd><code>string</code><br /> Log file path.</dd>
+					<dt><var>$callback</var></dt>
+					<dd><code>callback</code><br /> Function to be called prior to logging a message.</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="smallList">
-					<a href="class-Jyxo.Rpc.Server.html">Jyxo\Rpc\Server</a><br />
+					<code><code><a href="class-Jyxo.Rpc.Server.html">Jyxo\Rpc\Server</a></code></code><br />
 				</div>
 
 				<h4>Throws</h4>
 				<div class="smallList">
-					<a href="class-InvalidArgumentException.html">InvalidArgumentException</a><br />If no file or an invalid callback was provided.<br />
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br />If no file or an invalid callback was provided.<br />
 				</div>
 
 
@@ -383,10 +380,11 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		</div></td>
 	</tr>
 	<tr data-order="registerClass" id="_registerClass">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
 			 public 
-			<a href="class-Jyxo.Rpc.Server.html">Jyxo\Rpc\Server</a>
+			<code><a href="class-Jyxo.Rpc.Server.html">Jyxo\Rpc\Server</a></code>
 			
 			</code>
 		</td>
@@ -394,17 +392,15 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		<td><div class="position">
 		<a class="anchor" href="#_registerClass">#</a>
 		<code class="nowrap">
-				<a href="source-Jyxo.Rpc.Server.html#116" title="Go to source code"><b>registerClass</b></a>(
-									string
+				<a href="source-Jyxo.Rpc.Server.html#116" title="Go to source code">registerClass</a>(
+				string
 				<var>$class</var>, 
-									boolean
+				boolean
 				<var>$useFullName</var> = <span class="php-keyword1">true</span>
 		)</code>
 
 		<div class="short">
-			
-<p>Registers class public methods.</p>
-
+			Registers class public methods.
 		</div>
 
 		<div class="detailed">
@@ -413,23 +409,22 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 
 
 
-
 				<h4>Parameters</h4>
 				<div class="smallList"><dl>
-					<dt><code>$class</code></dt>
-					<dd>string<br /> Class name</dd>
-					<dt><code>$useFullName</code></dt>
-					<dd>boolean<br /> Register with class name</dd>
+					<dt><var>$class</var></dt>
+					<dd><code>string</code><br /> Class name</dd>
+					<dt><var>$useFullName</var></dt>
+					<dd><code>boolean</code><br /> Register with class name</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="smallList">
-					<a href="class-Jyxo.Rpc.Server.html">Jyxo\Rpc\Server</a><br />
+					<code><code><a href="class-Jyxo.Rpc.Server.html">Jyxo\Rpc\Server</a></code></code><br />
 				</div>
 
 				<h4>Throws</h4>
 				<div class="smallList">
-					<a href="class-InvalidArgumentException.html">InvalidArgumentException</a><br />If no such class exists<br />
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br />If no such class exists<br />
 				</div>
 
 
@@ -437,10 +432,11 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		</div></td>
 	</tr>
 	<tr data-order="registerMethod" id="_registerMethod">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
 			 public 
-			<a href="class-Jyxo.Rpc.Server.html">Jyxo\Rpc\Server</a>
+			<code><a href="class-Jyxo.Rpc.Server.html">Jyxo\Rpc\Server</a></code>
 			
 			</code>
 		</td>
@@ -448,50 +444,45 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		<td><div class="position">
 		<a class="anchor" href="#_registerMethod">#</a>
 		<code class="nowrap">
-				<a href="source-Jyxo.Rpc.Server.html#149" title="Go to source code"><b>registerMethod</b></a>(
-									string
+				<a href="source-Jyxo.Rpc.Server.html#149" title="Go to source code">registerMethod</a>(
+				string
 				<var>$class</var>, 
-									string
+				string
 				<var>$method</var>, 
-									boolean
+				boolean
 				<var>$useFullName</var> = <span class="php-keyword1">true</span>
 		)</code>
 
 		<div class="short">
-			
-<p>Registers given method of given class.<br />
-Method does not necessarily have to exist if __call or __callStatic method is
-defined.</p>
-
+			Registers given method of given class. Method does not necessarily have to exist
+if __call or __callStatic method is defined.
 		</div>
 
 		<div class="detailed">
 			
-<p>Registers given method of given class.<br />
-Method does not necessarily have to exist if __call or __callStatic method is
-defined.</p>
-
+<p>Registers given method of given class. Method does not necessarily have to
+exist if __call or __callStatic method is defined.</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="smallList"><dl>
-					<dt><code>$class</code></dt>
-					<dd>string<br /> Class name</dd>
-					<dt><code>$method</code></dt>
-					<dd>string<br /> Function name</dd>
-					<dt><code>$useFullName</code></dt>
-					<dd>boolean<br /> Register with class name</dd>
+					<dt><var>$class</var></dt>
+					<dd><code>string</code><br /> Class name</dd>
+					<dt><var>$method</var></dt>
+					<dd><code>string</code><br /> Function name</dd>
+					<dt><var>$useFullName</var></dt>
+					<dd><code>boolean</code><br /> Register with class name</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="smallList">
-					<a href="class-Jyxo.Rpc.Server.html">Jyxo\Rpc\Server</a><br />
+					<code><code><a href="class-Jyxo.Rpc.Server.html">Jyxo\Rpc\Server</a></code></code><br />
 				</div>
 
 				<h4>Throws</h4>
 				<div class="smallList">
-					<a href="class-InvalidArgumentException.html">InvalidArgumentException</a><br />If no such class exists or method is not public<br />
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br />If no such class exists or method is not public<br />
 				</div>
 
 
@@ -499,10 +490,11 @@ defined.</p>
 		</div></td>
 	</tr>
 	<tr data-order="registerFunc" id="_registerFunc">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
 			 public 
-			<a href="class-Jyxo.Rpc.Server.html">Jyxo\Rpc\Server</a>
+			<code><a href="class-Jyxo.Rpc.Server.html">Jyxo\Rpc\Server</a></code>
 			
 			</code>
 		</td>
@@ -510,15 +502,13 @@ defined.</p>
 		<td><div class="position">
 		<a class="anchor" href="#_registerFunc">#</a>
 		<code class="nowrap">
-				<a href="source-Jyxo.Rpc.Server.html#192" title="Go to source code"><b>registerFunc</b></a>(
-									string
+				<a href="source-Jyxo.Rpc.Server.html#192" title="Go to source code">registerFunc</a>(
+				string
 				<var>$func</var>
 		)</code>
 
 		<div class="short">
-			
-<p>Registers given function.</p>
-
+			Registers given function.
 		</div>
 
 		<div class="detailed">
@@ -527,21 +517,20 @@ defined.</p>
 
 
 
-
 				<h4>Parameters</h4>
 				<div class="smallList"><dl>
-					<dt><code>$func</code></dt>
-					<dd>string<br /> Function name</dd>
+					<dt><var>$func</var></dt>
+					<dd><code>string</code><br /> Function name</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="smallList">
-					<a href="class-Jyxo.Rpc.Server.html">Jyxo\Rpc\Server</a><br />
+					<code><code><a href="class-Jyxo.Rpc.Server.html">Jyxo\Rpc\Server</a></code></code><br />
 				</div>
 
 				<h4>Throws</h4>
 				<div class="smallList">
-					<a href="class-InvalidArgumentException.html">InvalidArgumentException</a><br />If no such function exists<br />
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br />If no such function exists<br />
 				</div>
 
 
@@ -549,6 +538,7 @@ defined.</p>
 		</div></td>
 	</tr>
 	<tr data-order="register" id="_register">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
 			abstract protected 
@@ -560,15 +550,13 @@ defined.</p>
 		<td><div class="position">
 		<a class="anchor" href="#_register">#</a>
 		<code class="nowrap">
-				<a href="source-Jyxo.Rpc.Server.html#210" title="Go to source code"><b>register</b></a>(
-									string
+				<a href="source-Jyxo.Rpc.Server.html#210" title="Go to source code">register</a>(
+				string
 				<var>$func</var>
 		)</code>
 
 		<div class="short">
-			
-<p>Actually registers a function to a server method.</p>
-
+			Actually registers a function to a server method.
 		</div>
 
 		<div class="detailed">
@@ -577,11 +565,10 @@ defined.</p>
 
 
 
-
 				<h4>Parameters</h4>
 				<div class="smallList"><dl>
-					<dt><code>$func</code></dt>
-					<dd>string<br /> Function name</dd>
+					<dt><var>$func</var></dt>
+					<dd><code>string</code><br /> Function name</dd>
 				</dl></div>
 
 
@@ -591,6 +578,7 @@ defined.</p>
 		</div></td>
 	</tr>
 	<tr data-order="process" id="_process">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
 			abstract public 
@@ -602,19 +590,16 @@ defined.</p>
 		<td><div class="position">
 		<a class="anchor" href="#_process">#</a>
 		<code class="nowrap">
-				<a href="source-Jyxo.Rpc.Server.html#217" title="Go to source code"><b>process</b></a>(
+				<a href="source-Jyxo.Rpc.Server.html#217" title="Go to source code">process</a>(
 		)</code>
 
 		<div class="short">
-			
-<p>Processes a request and sends a RPC response.</p>
-
+			Processes a request and sends a RPC response.
 		</div>
 
 		<div class="detailed">
 			
 <p>Processes a request and sends a RPC response.</p>
-
 
 
 
@@ -626,6 +611,7 @@ defined.</p>
 		</div></td>
 	</tr>
 	<tr data-order="call" id="_call">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
 			 protected 
@@ -637,17 +623,15 @@ defined.</p>
 		<td><div class="position">
 		<a class="anchor" href="#_call">#</a>
 		<code class="nowrap">
-				<a href="source-Jyxo.Rpc.Server.html#222" title="Go to source code"><b>call</b></a>(
-									string
+				<a href="source-Jyxo.Rpc.Server.html#222" title="Go to source code">call</a>(
+				string
 				<var>$method</var>, 
-									array
+				array
 				<var>$params</var>
 		)</code>
 
 		<div class="short">
-			
-<p>Calls a server method with given parameters.</p>
-
+			Calls a server method with given parameters.
 		</div>
 
 		<div class="detailed">
@@ -656,18 +640,17 @@ defined.</p>
 
 
 
-
 				<h4>Parameters</h4>
 				<div class="smallList"><dl>
-					<dt><code>$method</code></dt>
-					<dd>string<br /> Method name</dd>
-					<dt><code>$params</code></dt>
-					<dd>array<br /> Method parameters</dd>
+					<dt><var>$method</var></dt>
+					<dd><code>string</code><br /> Method name</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br /> Method parameters</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="smallList">
-					mixed<br />
+					<code>mixed</code><br />
 				</div>
 
 
@@ -683,11 +666,10 @@ defined.</p>
 
 
 
-
 </div>
 
 		<div id="footer">
-			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville" class="gravatar"><img src="http://gravatar.com/avatar/b2acbf0c8af3bdb2a57176d954ff8ba1?s=12" alt="Andrewsville" /></a>&amp;<a href="http://github.com/kukulich" class="gravatar"><img src="http://gravatar.com/avatar/d106644a59a117503d480ec2edf48368?s=12" alt="Kukulich" /></a> <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>, a fork of the original <a href="http://github.com/nette/apigen">tool</a>.<br />
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>.<br />
 			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
 		</div>
 	</div>

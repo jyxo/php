@@ -2,15 +2,16 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="TR ApiGen 2.0 beta 3" />
+	<meta name="generator" content="TR ApiGen 2.0 RC" />
 
 	<title>Class Jyxo\Mail\Sender\Smtp | Jyxo PHP Library</title>
 
-	<script type="text/javascript" src="resources/combined.js?134547457"></script>
-	<script type="text/javascript" src="elementlist.js?86817454"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3003541655" />
+	<script type="text/javascript" src="resources/combined.js?810424589"></script>
+	<script type="text/javascript" src="elementlist.js?2796542733"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1274782946" />
 	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
 	<link rel="search" type="application/opensearchdescription+xml" title="Jyxo PHP Library" href="http://jyxo.github.com/php/opensearch.xml" />
+
 	<script type="text/javascript">
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', "UA-23550486-1"]);
@@ -28,97 +29,103 @@
 <div id="main">
 <div id="leftWrapper">
 	<div id="left">
-		<a id="home" href="index.html"><span>Overview</span></a>
+		<a href="index.html" title="Overview"><span><span>Overview</span></span></a>
+
+		<div id="entities">
+
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-Jyxo.html">Jyxo</a>
+						<span></span>
+						<ul>
+				<li><a href="namespace-Jyxo.Beholder.html">Beholder</a>
+						<span></span>
+						<ul>
+				<li><a href="namespace-Jyxo.Beholder.TestCase.html">TestCase</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-Jyxo.Gettext.html">Gettext</a>
+						<span></span>
+						<ul>
+				<li><a href="namespace-Jyxo.Gettext.Parser.html">Parser</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-Jyxo.Input.html">Input</a>
+						<span></span>
+						<ul>
+				<li><a href="namespace-Jyxo.Input.Chain.html">Chain</a>
+						</li>
+				<li><a href="namespace-Jyxo.Input.Filter.html">Filter</a>
+						</li>
+				<li><a href="namespace-Jyxo.Input.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+				<li class="active"><a href="namespace-Jyxo.Mail.html">Mail</a>
+						<span></span>
+						<ul>
+				<li><a href="namespace-Jyxo.Mail.Email.html">Email</a>
+						<span></span>
+						<ul>
+				<li><a href="namespace-Jyxo.Mail.Email.Attachment.html">Attachment</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-Jyxo.Mail.Parser.html">Parser</a>
+						</li>
+				<li class="active"><a href="namespace-Jyxo.Mail.Sender.html">Sender</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-Jyxo.Rpc.html">Rpc</a>
+						<span></span>
+						<ul>
+				<li><a href="namespace-Jyxo.Rpc.Json.html">Json</a>
+						</li>
+				<li><a href="namespace-Jyxo.Rpc.Xml.html">Xml</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-Jyxo.Shell.html">Shell</a>
+						</li>
+				<li><a href="namespace-Jyxo.Spl.html">Spl</a>
+						</li>
+				<li><a href="namespace-Jyxo.Svn.html">Svn</a>
+						</li>
+				<li><a href="namespace-Jyxo.Time.html">Time</a>
+						</li>
+				<li><a href="namespace-Jyxo.Webdav.html">Webdav</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+			</ul>
+
+			<hr />
+
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Jyxo.Mail.Sender.Result.html">Result</a></li>
+				<li class="active"><a href="class-Jyxo.Mail.Sender.Smtp.html">Smtp</a></li>
+			</ul>
 
 
-		<h3>Namespaces</h3>
-		<ul>
-			<li class="active"><a href="namespace-Jyxo.html">Jyxo</a>
-					<span></span>
-					<ul>
-			<li><a href="namespace-Jyxo.Beholder.html">Beholder</a>
-					<span></span>
-					<ul>
-			<li><a href="namespace-Jyxo.Beholder.TestCase.html">TestCase</a>
-					</li>
-						</ul></li>
-			<li><a href="namespace-Jyxo.Gettext.html">Gettext</a>
-					<span></span>
-					<ul>
-			<li><a href="namespace-Jyxo.Gettext.Parser.html">Parser</a>
-					</li>
-						</ul></li>
-			<li><a href="namespace-Jyxo.Input.html">Input</a>
-					<span></span>
-					<ul>
-			<li><a href="namespace-Jyxo.Input.Chain.html">Chain</a>
-					</li>
-			<li><a href="namespace-Jyxo.Input.Filter.html">Filter</a>
-					</li>
-			<li><a href="namespace-Jyxo.Input.Validator.html">Validator</a>
-					</li>
-						</ul></li>
-			<li class="active"><a href="namespace-Jyxo.Mail.html">Mail</a>
-					<span></span>
-					<ul>
-			<li><a href="namespace-Jyxo.Mail.Email.html">Email</a>
-					<span></span>
-					<ul>
-			<li><a href="namespace-Jyxo.Mail.Email.Attachment.html">Attachment</a>
-					</li>
-						</ul></li>
-			<li><a href="namespace-Jyxo.Mail.Parser.html">Parser</a>
-					</li>
-			<li class="active"><a href="namespace-Jyxo.Mail.Sender.html">Sender</a>
-					</li>
-						</ul></li>
-			<li><a href="namespace-Jyxo.Rpc.html">Rpc</a>
-					<span></span>
-					<ul>
-			<li><a href="namespace-Jyxo.Rpc.Json.html">Json</a>
-					</li>
-			<li><a href="namespace-Jyxo.Rpc.Xml.html">Xml</a>
-					</li>
-						</ul></li>
-			<li><a href="namespace-Jyxo.Shell.html">Shell</a>
-					</li>
-			<li><a href="namespace-Jyxo.Spl.html">Spl</a>
-					</li>
-			<li><a href="namespace-Jyxo.Svn.html">Svn</a>
-					</li>
-			<li><a href="namespace-Jyxo.Time.html">Time</a>
-					</li>
-			<li><a href="namespace-Jyxo.Webdav.html">Webdav</a>
-					</li>
-						</ul></li>
-			<li><a href="namespace-PHP.html">PHP</a>
-					</li>
-		</ul>
-
-		<hr />
-
-		<h3>Classes</h3>
-		<ul>
-			<li><a href="class-Jyxo.Mail.Sender.Result.html">Result</a></li>
-			<li class="active"><a href="class-Jyxo.Mail.Sender.Smtp.html">Smtp</a></li>
-		</ul>
+			<h3>Exceptions</h3>
+			<ul>
+				<li><a href="class-Jyxo.Mail.Sender.CreateException.html">CreateException</a></li>
+				<li><a href="class-Jyxo.Mail.Sender.Exception.html">Exception</a></li>
+				<li><a href="class-Jyxo.Mail.Sender.RecipientUnknownException.html">RecipientUnknownException</a></li>
+				<li><a href="class-Jyxo.Mail.Sender.SmtpException.html">SmtpException</a></li>
+			</ul>
 
 
-		<h3>Exceptions</h3>
-		<ul>
-			<li><a href="class-Jyxo.Mail.Sender.CreateException.html">CreateException</a></li>
-			<li><a href="class-Jyxo.Mail.Sender.Exception.html">Exception</a></li>
-			<li><a href="class-Jyxo.Mail.Sender.RecipientUnknownException.html">RecipientUnknownException</a></li>
-			<li><a href="class-Jyxo.Mail.Sender.SmtpException.html">SmtpException</a></li>
-		</ul>
-
-
+		</div>
 	</div>
 </div>
 <div id="rightWrapper">
 	<div id="right">
-		<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
-			<input type="hidden" name="cx" value="004718174178290363576:f23xklsezl8" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+		<form action="http://www.google.com/cse" id="search">
+			<input type="hidden" name="cx" value="004718174178290363576:f23xklsezl8" />
+			<input type="hidden" name="ie" value="UTF-8" />
+			<input type="hidden" name="more" value="api" />
+			<input type="text" name="q" class="text" />
+			<input type="submit" value="Search" />
 		</form>
 
 		<div id="navigation">
@@ -147,8 +154,8 @@
 
 	<div class="description">
 	
-<p>Class for sending emails using a SMTP server.<br />
-Works in combination with \Jyxo\Mail\Sender.</p>
+<p>Class for sending emails using a SMTP server. Works in combination with
+\Jyxo\Mail\Sender.</p>
 
 	</div>
 
@@ -169,7 +176,7 @@ Works in combination with \Jyxo\Mail\Sender.</p>
 				<b>Subpackage:</b>
 				Sender<br />
 				<b>Copyright:</b>
-				Copyright © 2005–2011 Jyxo, s.r.o.<br />
+				Copyright (c) 2005-2011 Jyxo, s.r.o.<br />
 				<b>License:</b>
 				<a
 href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jyxo/php/blob/master/license.txt</a><br />
@@ -182,6 +189,7 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
 	<tr data-order="__construct" id="___construct">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
 			 public 
@@ -193,21 +201,19 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		<td><div class="position">
 		<a class="anchor" href="#___construct">#</a>
 		<code class="nowrap">
-				<a href="source-Jyxo.Mail.Sender.Smtp.html#71" title="Go to source code"><b>__construct</b></a>(
-									string
+				<a href="source-Jyxo.Mail.Sender.Smtp.html#71" title="Go to source code">__construct</a>(
+				string
 				<var>$host</var> = <span class="php-quote">'localhost'</span>, 
-									integer
+				integer
 				<var>$port</var> = <span class="php-num">25</span>, 
-									string
+				string
 				<var>$helo</var> = <span class="php-quote">'localhost'</span>, 
-									integer
+				integer
 				<var>$timeout</var> = <span class="php-num">5</span>
 		)</code>
 
 		<div class="short">
-			
-<p>Creates an instance.</p>
-
+			Creates an instance.
 		</div>
 
 		<div class="detailed">
@@ -216,17 +222,16 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 
 
 
-
 				<h4>Parameters</h4>
 				<div class="smallList"><dl>
-					<dt><code>$host</code></dt>
-					<dd>string<br /> Server hostname</dd>
-					<dt><code>$port</code></dt>
-					<dd>integer<br /> Server port</dd>
-					<dt><code>$helo</code></dt>
-					<dd>string<br /> HELO value</dd>
-					<dt><code>$timeout</code></dt>
-					<dd>integer<br /> Connection timeout</dd>
+					<dt><var>$host</var></dt>
+					<dd><code>string</code><br /> Server hostname</dd>
+					<dt><var>$port</var></dt>
+					<dd><code>integer</code><br /> Server port</dd>
+					<dt><var>$helo</var></dt>
+					<dd><code>string</code><br /> HELO value</dd>
+					<dt><var>$timeout</var></dt>
+					<dd><code>integer</code><br /> Connection timeout</dd>
 				</dl></div>
 
 
@@ -236,6 +241,7 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		</div></td>
 	</tr>
 	<tr data-order="__destruct" id="___destruct">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
 			 public 
@@ -247,19 +253,16 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		<td><div class="position">
 		<a class="anchor" href="#___destruct">#</a>
 		<code class="nowrap">
-				<a href="source-Jyxo.Mail.Sender.Smtp.html#87" title="Go to source code"><b>__destruct</b></a>(
+				<a href="source-Jyxo.Mail.Sender.Smtp.html#87" title="Go to source code">__destruct</a>(
 		)</code>
 
 		<div class="short">
-			
-<p>Destroys an instance and disconnects from the server.</p>
-
+			Destroys an instance and disconnects from the server.
 		</div>
 
 		<div class="detailed">
 			
 <p>Destroys an instance and disconnects from the server.</p>
-
 
 
 
@@ -271,10 +274,11 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		</div></td>
 	</tr>
 	<tr data-order="connect" id="_connect">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
 			 public 
-			<a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a>
+			<code><a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a></code>
 			
 			</code>
 		</td>
@@ -282,13 +286,11 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		<td><div class="position">
 		<a class="anchor" href="#_connect">#</a>
 		<code class="nowrap">
-				<a href="source-Jyxo.Mail.Sender.Smtp.html#97" title="Go to source code"><b>connect</b></a>(
+				<a href="source-Jyxo.Mail.Sender.Smtp.html#97" title="Go to source code">connect</a>(
 		)</code>
 
 		<div class="short">
-			
-<p>Connects to the SMTP server.</p>
-
+			Connects to the SMTP server.
 		</div>
 
 		<div class="detailed">
@@ -298,15 +300,14 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 
 
 
-
 				<h4>Returns</h4>
 				<div class="smallList">
-					<a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a><br />
+					<code><code><a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a></code></code><br />
 				</div>
 
 				<h4>Throws</h4>
 				<div class="smallList">
-					<a href="class-Jyxo.Mail.Sender.SmtpException.html">Jyxo\Mail\Sender\SmtpException</a><br />If a connection error occurs<br />
+					<code><code><a href="class-Jyxo.Mail.Sender.SmtpException.html">Jyxo\Mail\Sender\SmtpException</a></code></code><br />If a connection error occurs<br />
 				</div>
 
 
@@ -314,10 +315,11 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		</div></td>
 	</tr>
 	<tr data-order="disconnect" id="_disconnect">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
 			 public 
-			<a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a>
+			<code><a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a></code>
 			
 			</code>
 		</td>
@@ -325,13 +327,11 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		<td><div class="position">
 		<a class="anchor" href="#_disconnect">#</a>
 		<code class="nowrap">
-				<a href="source-Jyxo.Mail.Sender.Smtp.html#119" title="Go to source code"><b>disconnect</b></a>(
+				<a href="source-Jyxo.Mail.Sender.Smtp.html#119" title="Go to source code">disconnect</a>(
 		)</code>
 
 		<div class="short">
-			
-<p>Disconnects from server.</p>
-
+			Disconnects from server.
 		</div>
 
 		<div class="detailed">
@@ -341,10 +341,9 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 
 
 
-
 				<h4>Returns</h4>
 				<div class="smallList">
-					<a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a><br />
+					<code><code><a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a></code></code><br />
 				</div>
 
 
@@ -353,10 +352,11 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		</div></td>
 	</tr>
 	<tr data-order="auth" id="_auth">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
 			 public 
-			<a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a>
+			<code><a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a></code>
 			
 			</code>
 		</td>
@@ -364,17 +364,15 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		<td><div class="position">
 		<a class="anchor" href="#_auth">#</a>
 		<code class="nowrap">
-				<a href="source-Jyxo.Mail.Sender.Smtp.html#140" title="Go to source code"><b>auth</b></a>(
-									string
+				<a href="source-Jyxo.Mail.Sender.Smtp.html#140" title="Go to source code">auth</a>(
+				string
 				<var>$user</var>, 
-									string
+				string
 				<var>$password</var>
 		)</code>
 
 		<div class="short">
-			
-<p>Connects to the server using a username and password.</p>
-
+			Connects to the server using a username and password.
 		</div>
 
 		<div class="detailed">
@@ -383,23 +381,22 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 
 
 
-
 				<h4>Parameters</h4>
 				<div class="smallList"><dl>
-					<dt><code>$user</code></dt>
-					<dd>string<br /> Username</dd>
-					<dt><code>$password</code></dt>
-					<dd>string<br /> Password</dd>
+					<dt><var>$user</var></dt>
+					<dd><code>string</code><br /> Username</dd>
+					<dt><var>$password</var></dt>
+					<dd><code>string</code><br /> Password</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="smallList">
-					<a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a><br />
+					<code><code><a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a></code></code><br />
 				</div>
 
 				<h4>Throws</h4>
 				<div class="smallList">
-					<a href="class-Jyxo.Mail.Sender.SmtpException.html">Jyxo\Mail\Sender\SmtpException</a><br />On authentication error<br />
+					<code><code><a href="class-Jyxo.Mail.Sender.SmtpException.html">Jyxo\Mail\Sender\SmtpException</a></code></code><br />On authentication error<br />
 				</div>
 
 
@@ -407,10 +404,11 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		</div></td>
 	</tr>
 	<tr data-order="from" id="_from">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
 			 public 
-			<a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a>
+			<code><a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a></code>
 			
 			</code>
 		</td>
@@ -418,15 +416,13 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		<td><div class="position">
 		<a class="anchor" href="#_from">#</a>
 		<code class="nowrap">
-				<a href="source-Jyxo.Mail.Sender.Smtp.html#169" title="Go to source code"><b>from</b></a>(
-									string
+				<a href="source-Jyxo.Mail.Sender.Smtp.html#169" title="Go to source code">from</a>(
+				string
 				<var>$from</var>
 		)</code>
 
 		<div class="short">
-			
-<p>Sets the sender.</p>
-
+			Sets the sender.
 		</div>
 
 		<div class="detailed">
@@ -435,16 +431,15 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 
 
 
-
 				<h4>Parameters</h4>
 				<div class="smallList"><dl>
-					<dt><code>$from</code></dt>
-					<dd>string<br /> Sender</dd>
+					<dt><var>$from</var></dt>
+					<dd><code>string</code><br /> Sender</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="smallList">
-					<a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a><br />
+					<code><code><a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a></code></code><br />
 				</div>
 
 
@@ -453,10 +448,11 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		</div></td>
 	</tr>
 	<tr data-order="recipient" id="_recipient">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
 			 public 
-			<a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a>
+			<code><a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a></code>
 			
 			</code>
 		</td>
@@ -464,15 +460,13 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		<td><div class="position">
 		<a class="anchor" href="#_recipient">#</a>
 		<code class="nowrap">
-				<a href="source-Jyxo.Mail.Sender.Smtp.html#182" title="Go to source code"><b>recipient</b></a>(
-									string
+				<a href="source-Jyxo.Mail.Sender.Smtp.html#182" title="Go to source code">recipient</a>(
+				string
 				<var>$recipient</var>
 		)</code>
 
 		<div class="short">
-			
-<p>Adds a recipient.</p>
-
+			Adds a recipient.
 		</div>
 
 		<div class="detailed">
@@ -481,16 +475,15 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 
 
 
-
 				<h4>Parameters</h4>
 				<div class="smallList"><dl>
-					<dt><code>$recipient</code></dt>
-					<dd>string<br /> Recipient</dd>
+					<dt><var>$recipient</var></dt>
+					<dd><code>string</code><br /> Recipient</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="smallList">
-					<a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a><br />
+					<code><code><a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a></code></code><br />
 				</div>
 
 
@@ -499,10 +492,11 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		</div></td>
 	</tr>
 	<tr data-order="data" id="_data">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
 			 public 
-			<a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a>
+			<code><a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a></code>
 			
 			</code>
 		</td>
@@ -510,17 +504,15 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		<td><div class="position">
 		<a class="anchor" href="#_data">#</a>
 		<code class="nowrap">
-				<a href="source-Jyxo.Mail.Sender.Smtp.html#195" title="Go to source code"><b>data</b></a>(
-									string
+				<a href="source-Jyxo.Mail.Sender.Smtp.html#195" title="Go to source code">data</a>(
+				string
 				<var>$header</var>, 
-									string
+				string
 				<var>$body</var>
 		)</code>
 
 		<div class="short">
-			
-<p>Sends email headers and body.</p>
-
+			Sends email headers and body.
 		</div>
 
 		<div class="detailed">
@@ -529,23 +521,22 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 
 
 
-
 				<h4>Parameters</h4>
 				<div class="smallList"><dl>
-					<dt><code>$header</code></dt>
-					<dd>string<br /> Headers</dd>
-					<dt><code>$body</code></dt>
-					<dd>string<br /> Body</dd>
+					<dt><var>$header</var></dt>
+					<dd><code>string</code><br /> Headers</dd>
+					<dt><var>$body</var></dt>
+					<dd><code>string</code><br /> Body</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="smallList">
-					<a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a><br />
+					<code><code><a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a></code></code><br />
 				</div>
 
 				<h4>Throws</h4>
 				<div class="smallList">
-					<a href="class-Jyxo.Mail.Sender.SmtpException.html">Jyxo\Mail\Sender\SmtpException</a><br />On data sending error<br />
+					<code><code><a href="class-Jyxo.Mail.Sender.SmtpException.html">Jyxo\Mail\Sender\SmtpException</a></code></code><br />On data sending error<br />
 				</div>
 
 
@@ -553,10 +544,11 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		</div></td>
 	</tr>
 	<tr data-order="reset" id="_reset">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
 			 public 
-			<a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a>
+			<code><a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a></code>
 			
 			</code>
 		</td>
@@ -564,13 +556,11 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 		<td><div class="position">
 		<a class="anchor" href="#_reset">#</a>
 		<code class="nowrap">
-				<a href="source-Jyxo.Mail.Sender.Smtp.html#226" title="Go to source code"><b>reset</b></a>(
+				<a href="source-Jyxo.Mail.Sender.Smtp.html#226" title="Go to source code">reset</a>(
 		)</code>
 
 		<div class="short">
-			
-<p>Resets previous commands.</p>
-
+			Resets previous commands.
 		</div>
 
 		<div class="detailed">
@@ -580,10 +570,9 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 
 
 
-
 				<h4>Returns</h4>
 				<div class="smallList">
-					<a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a><br />
+					<code><code><a href="class-Jyxo.Mail.Sender.Smtp.html">Jyxo\Mail\Sender\Smtp</a></code></code><br />
 				</div>
 
 
@@ -598,22 +587,21 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 	<table class="summary" id="constants">
 	<caption>Constants summary</caption>
 	<tr data-order="LINE_END" id="LINE_END">
+
 		<td class="right" width="1%"><code class="nowrap">
 			
-				string
+			string
 		</code></td>
 		<td width="1%"><code>
 				<a href="source-Jyxo.Mail.Sender.Smtp.html#29" title="Go to source code"><b>LINE_END</b></a>
 		</code></td>
 		<td width="1%">
-				<code><span class="php-quote">&quot;\r\n&quot;</span></code>
+			<code><span class="php-quote">&quot;\r\n&quot;</span></code>
 		</td>
 		<td><div class="position">
 			<a href="#LINE_END" class="anchor">#</a>
 			<div class="short">
-				
-<p>Line endings.</p>
-
+				Line endings.
 			</div>
 
 			<div class="detailed">
@@ -629,11 +617,10 @@ href="https://github.com/jyxo/php/blob/master/license.txt">https://github.com/jy
 
 
 
-
 </div>
 
 		<div id="footer">
-			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville" class="gravatar"><img src="http://gravatar.com/avatar/b2acbf0c8af3bdb2a57176d954ff8ba1?s=12" alt="Andrewsville" /></a>&amp;<a href="http://github.com/kukulich" class="gravatar"><img src="http://gravatar.com/avatar/d106644a59a117503d480ec2edf48368?s=12" alt="Kukulich" /></a> <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>, a fork of the original <a href="http://github.com/nette/apigen">tool</a>.<br />
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>.<br />
 			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
 		</div>
 	</div>
