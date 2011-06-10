@@ -20,13 +20,13 @@ namespace Jyxo\Beholder;
  *
  * Tests are performed in random order but results are outputted in alphabetical order with the order they were performed.
  *
- * Usage example:
+ * Example:
  * <code>
- *   $beholder = new \Jyxo\Beholder\Executor('Project', $_GET);
- *   $beholder->addTest('T1', new \Project\Beholder\Test1('Test 1'));
- *   $beholder->addTest('T2', new \Project\Beholder\Test2('Test 2'));
- *   $beholder->addTest('T3', new \Project\Beholder\Test3Blah('Test 3 Blah'));
- *   $beholder->run();
+ * $beholder = new \Jyxo\Beholder\Executor('Project', $_GET);
+ * $beholder->addTest('T1', new \Project\Beholder\Test1('Test 1'));
+ * $beholder->addTest('T2', new \Project\Beholder\Test2('Test 2'));
+ * $beholder->addTest('T3', new \Project\Beholder\Test3Blah('Test 3 Blah'));
+ * $beholder->run();
  * </code>
  *
  * @category Jyxo

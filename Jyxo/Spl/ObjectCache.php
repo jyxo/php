@@ -16,11 +16,10 @@ namespace Jyxo\Spl;
 /**
  * Simple object cache so we don't have to create them or write caching over again.
  *
- * <?php
- * // Example code
+ * Example:
  * <code>
- * 	$key = 'User_Friends/' . $user->username();
- * 	return \Jyxo\Spl\ObjectCache::get($key) ?: \Jyxo\Spl\ObjectCache::set($key, new \User\Friends($this->context, $user));
+ * $key = 'User_Friends/' . $user->username();
+ * return \Jyxo\Spl\ObjectCache::get($key) ?: \Jyxo\Spl\ObjectCache::set($key, new \User\Friends($this->context, $user));
  * </code>
  *
  * @category Jyxo

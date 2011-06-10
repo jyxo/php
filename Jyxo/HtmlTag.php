@@ -21,13 +21,14 @@ namespace Jyxo;
  * <code>
  * $p = \Jyxo\HtmlTag::create('p')->setClass('buttons');
  * </code>
+
  * The magic __call() method ensures attributes settings.
  *
  * <code>
  * $p->render();
  * </code>
- * The render() method creates the HTML output.
  *
+ * The render() method creates the HTML output.
  *
  * @category Jyxo
  * @package Jyxo\Html

@@ -55,10 +55,10 @@ class ArrayUtil
 	 * It is also possible to apply another callback directly to the value.
 	 * Key callback is called BEFORE value callback.
 	 *
+	 * Example:
 	 * <code>
-	 * // Example usage
 	 * $data = \Jyxo\Spl\ArrayUtil::keymap($iterator, function(Object $object) {
-	 * 	return $object->getId();
+	 *   return $object->getId();
 	 * });
 	 * </code>
 	 *

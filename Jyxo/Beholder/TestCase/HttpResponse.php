@@ -18,7 +18,9 @@ namespace Jyxo\Beholder\TestCase;
  * Checks only availability in the default form, but can be easily extended with additional checks.
  *
  * Example:
+ * <code>
  * new \Jyxo\Beholder\TestCase\HttpResponse('Foo', 'http://example.com/', array('body' => '/this text must be in body/m'))
+ * </code>
  *
  * @category Jyxo
  * @package Jyxo\Beholder
