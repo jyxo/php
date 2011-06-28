@@ -2,12 +2,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="TR ApiGen 2.0 RC" />
+	<meta name="generator" content="ApiGen 2.0" />
 	<meta name="robots" content="noindex" />
 
 	<title>File HtmlTag.php | Jyxo PHP Library</title>
 
-	<script type="text/javascript" src="resources/combined.js?3309972472"></script>
+	<script type="text/javascript" src="resources/combined.js?4060439551"></script>
 	<script type="text/javascript" src="elementlist.js?2796542733"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1274782946" />
 	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
@@ -225,21 +225,21 @@
 </span><a href="#65" id="65" class="l"> 65: </a><span class="php-comment">     *
 </span><a href="#66" id="66" class="l"> 66: </a><span class="php-comment">     * @var array
 </span><a href="#67" id="67" class="l"> 67: </a><span class="php-comment">     */</span>
-<a href="#68" id="68" class="l"> 68: </a>    <span class="php-keyword1">private</span> <span class="php-var">$attributes</span> = <span class="php-keyword1">array</span>();
+<a href="#68" id="68" class="l"> 68: </a>    <span class="php-keyword1">private</span> <span class="php-var">$attributes</span> = <span class="php-keyword2">array</span>();
 <a href="#69" id="69" class="l"> 69: </a>
 <a href="#70" id="70" class="l"> 70: </a>    <span class="php-comment">/**
 </span><a href="#71" id="71" class="l"> 71: </a><span class="php-comment">     * Array of child elements.
 </span><a href="#72" id="72" class="l"> 72: </a><span class="php-comment">     *
 </span><a href="#73" id="73" class="l"> 73: </a><span class="php-comment">     * @var array
 </span><a href="#74" id="74" class="l"> 74: </a><span class="php-comment">     */</span>
-<a href="#75" id="75" class="l"> 75: </a>    <span class="php-keyword1">private</span> <span class="php-var">$children</span> = <span class="php-keyword1">array</span>();
+<a href="#75" id="75" class="l"> 75: </a>    <span class="php-keyword1">private</span> <span class="php-var">$children</span> = <span class="php-keyword2">array</span>();
 <a href="#76" id="76" class="l"> 76: </a>
 <a href="#77" id="77" class="l"> 77: </a>    <span class="php-comment">/**
 </span><a href="#78" id="78" class="l"> 78: </a><span class="php-comment">     * Array of elements whose value will not be escaped.
 </span><a href="#79" id="79" class="l"> 79: </a><span class="php-comment">     *
 </span><a href="#80" id="80" class="l"> 80: </a><span class="php-comment">     * @var array
 </span><a href="#81" id="81" class="l"> 81: </a><span class="php-comment">     */</span>
-<a href="#82" id="82" class="l"> 82: </a>    <span class="php-keyword1">private</span> <span class="php-var">$noEncode</span> = <span class="php-keyword1">array</span>();
+<a href="#82" id="82" class="l"> 82: </a>    <span class="php-keyword1">private</span> <span class="php-var">$noEncode</span> = <span class="php-keyword2">array</span>();
 <a href="#83" id="83" class="l"> 83: </a>
 <a href="#84" id="84" class="l"> 84: </a>    <span class="php-comment">/**
 </span><a href="#85" id="85" class="l"> 85: </a><span class="php-comment">     * Renders only the contents, not the opening and closing tag.
@@ -253,7 +253,7 @@
 </span><a href="#93" id="93" class="l"> 93: </a><span class="php-comment">     *
 </span><a href="#94" id="94" class="l"> 94: </a><span class="php-comment">     * @var array
 </span><a href="#95" id="95" class="l"> 95: </a><span class="php-comment">     */</span>
-<a href="#96" id="96" class="l"> 96: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var">$attrs</span> = <span class="php-keyword1">array</span>(
+<a href="#96" id="96" class="l"> 96: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var">$attrs</span> = <span class="php-keyword2">array</span>(
 <a href="#97" id="97" class="l"> 97: </a>        <span class="php-quote">'accesskey'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'action'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'alt'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'cellpadding'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'cellspacing'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'checked'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'class'</span> =&gt; <span class="php-keyword1">true</span>,
 <a href="#98" id="98" class="l"> 98: </a>        <span class="php-quote">'cols'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'disabled'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'for'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'href'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'id'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'label'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'method'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'name'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'onblur'</span> =&gt; <span class="php-keyword1">true</span>,
 <a href="#99" id="99" class="l"> 99: </a>        <span class="php-quote">'onchange'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'onclick'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'onfocus'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'onkeyup'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'onsubmit'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'readonly'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'rel'</span> =&gt; <span class="php-keyword1">true</span>,
@@ -266,7 +266,7 @@
 </span><a href="#106" id="106" class="l">106: </a><span class="php-comment">     *
 </span><a href="#107" id="107" class="l">107: </a><span class="php-comment">     * @var array
 </span><a href="#108" id="108" class="l">108: </a><span class="php-comment">     */</span>
-<a href="#109" id="109" class="l">109: </a>    <span class="php-keyword1">private</span> <span class="php-var">$emptyElements</span> = <span class="php-keyword1">array</span>(
+<a href="#109" id="109" class="l">109: </a>    <span class="php-keyword1">private</span> <span class="php-var">$emptyElements</span> = <span class="php-keyword2">array</span>(
 <a href="#110" id="110" class="l">110: </a>        <span class="php-quote">'br'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'hr'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'img'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'input'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'meta'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'link'</span> =&gt; <span class="php-keyword1">true</span>
 <a href="#111" id="111" class="l">111: </a>    );
 <a href="#112" id="112" class="l">112: </a>
@@ -275,7 +275,7 @@
 </span><a href="#115" id="115" class="l">115: </a><span class="php-comment">     *
 </span><a href="#116" id="116" class="l">116: </a><span class="php-comment">     * @var array
 </span><a href="#117" id="117" class="l">117: </a><span class="php-comment">     */</span>
-<a href="#118" id="118" class="l">118: </a>    <span class="php-keyword1">private</span> <span class="php-var">$requiredAttrs</span> = <span class="php-keyword1">array</span>(
+<a href="#118" id="118" class="l">118: </a>    <span class="php-keyword1">private</span> <span class="php-var">$requiredAttrs</span> = <span class="php-keyword2">array</span>(
 <a href="#119" id="119" class="l">119: </a>        <span class="php-quote">'option'</span> =&gt; <span class="php-quote">'value'</span>,
 <a href="#120" id="120" class="l">120: </a>        <span class="php-quote">'optgroup'</span> =&gt; <span class="php-quote">'label'</span>
 <a href="#121" id="121" class="l">121: </a>    );
@@ -317,8 +317,8 @@
 <a href="#157" id="157" class="l">157: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'~&lt;(\w+)(\s[^&gt;]*)+&gt;(.*)((&lt;[^&gt;]+&gt;)?[^&gt;]*)$~'</span>, <span class="php-var">$html</span>, <span class="php-var">$matches</span>)) {
 <a href="#158" id="158" class="l">158: </a>            <span class="php-var">$tag</span> = <span class="php-keyword1">new</span> self(<span class="php-var">$matches</span>[<span class="php-num">1</span>]);
 <a href="#159" id="159" class="l">159: </a>            <span class="php-keyword1">if</span> (<span class="php-quote">''</span> !== <span class="php-var">$matches</span>[<span class="php-num">3</span>]) {
-<a href="#160" id="160" class="l">160: </a>                <span class="php-comment">// @todo Maybe some kind of recursion to create a tree of elements
-</span><a href="#161" id="161" class="l">161: </a>                <span class="php-var">$tag</span>-&gt;setText(<span class="php-var">$matches</span>[<span class="php-num">3</span>]);
+<a href="#160" id="160" class="l">160: </a>                <span class="php-comment">// @todo Maybe some kind of recursion to create a tree of elements</span>
+<a href="#161" id="161" class="l">161: </a>                <span class="php-var">$tag</span>-&gt;setText(<span class="php-var">$matches</span>[<span class="php-num">3</span>]);
 <a href="#162" id="162" class="l">162: </a>            }
 <a href="#163" id="163" class="l">163: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match_all</span>(<span class="php-quote">'/(\w+)\s*=\s*&quot;([^&quot;]+)&quot;/'</span>, <span class="php-var">$matches</span>[<span class="php-num">2</span>], <span class="php-var">$submatches</span>, PREG_PATTERN_ORDER)) {
 <a href="#164" id="164" class="l">164: </a>                <span class="php-var">$attrs</span> = <span class="php-keyword2">array_combine</span>(<span class="php-var">$submatches</span>[<span class="php-num">1</span>], <span class="php-var">$submatches</span>[<span class="php-num">2</span>]);
@@ -341,15 +341,15 @@
 <a href="#181" id="181" class="l">181: </a>        }
 <a href="#182" id="182" class="l">182: </a>        <span class="php-var">$this</span>-&gt;isEmptyElement = <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;emptyElements[<span class="php-var">$this</span>-&gt;tag]);
 <a href="#183" id="183" class="l">183: </a>        <span class="php-var">$buff</span> = <span class="php-quote">''</span>;
-<a href="#184" id="184" class="l">184: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;attributes as <span class="php-var">$name</span> =&gt; <span class="php-var">$value</span>) {
+<a href="#184" id="184" class="l">184: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;attributes <span class="php-keyword1">as</span> <span class="php-var">$name</span> =&gt; <span class="php-var">$value</span>) {
 <a href="#185" id="185" class="l">185: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(self::<span class="php-var">$attrs</span>[<span class="php-var">$name</span>])) {
 <a href="#186" id="186" class="l">186: </a>                <span class="php-keyword1">if</span> ((<span class="php-var">$name</span> === <span class="php-quote">'selected'</span> || <span class="php-var">$name</span> === <span class="php-quote">'checked'</span> || <span class="php-var">$name</span> === <span class="php-quote">'readonly'</span> || <span class="php-var">$name</span> === <span class="php-quote">'disabled'</span>) &amp;&amp; <span class="php-var">$value</span>) {
 <a href="#187" id="187" class="l">187: </a>                    <span class="php-var">$value</span> = <span class="php-var">$name</span>;
 <a href="#188" id="188" class="l">188: </a>                }
 <a href="#189" id="189" class="l">189: </a>                <span class="php-var">$notEmpty</span> = <span class="php-var">$value</span> !== <span class="php-keyword1">null</span> &amp;&amp; <span class="php-var">$value</span> !== <span class="php-quote">''</span> &amp;&amp; <span class="php-var">$value</span> !== <span class="php-keyword1">false</span>;
 <a href="#190" id="190" class="l">190: </a>                <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;isRequiredAttr(<span class="php-var">$this</span>-&gt;tag, <span class="php-var">$name</span>) || <span class="php-var">$notEmpty</span>) {
-<a href="#191" id="191" class="l">191: </a>                    <span class="php-comment">// For not empty attributes and the value attribute by the &lt;option&gt; tag
-</span><a href="#192" id="192" class="l">192: </a>                    <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;noEncode[<span class="php-var">$name</span>])) {
+<a href="#191" id="191" class="l">191: </a>                    <span class="php-comment">// For not empty attributes and the value attribute by the &lt;option&gt; tag</span>
+<a href="#192" id="192" class="l">192: </a>                    <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;noEncode[<span class="php-var">$name</span>])) {
 <a href="#193" id="193" class="l">193: </a>                        <span class="php-var">$value</span> = String::escape(<span class="php-var">$value</span>);
 <a href="#194" id="194" class="l">194: </a>                    }
 <a href="#195" id="195" class="l">195: </a>                    <span class="php-var">$attrString</span> = <span class="php-keyword2">sprintf</span>(<span class="php-quote">' %s=&quot;%s&quot;'</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span>);
@@ -384,13 +384,13 @@
 <a href="#224" id="224" class="l">224: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$hasValue</span> || <span class="php-var">$hasText</span>) {
 <a href="#225" id="225" class="l">225: </a>                <span class="php-var">$text</span> = <span class="php-var">$hasText</span> ? <span class="php-var">$this</span>-&gt;attributes[<span class="php-quote">'text'</span>] : <span class="php-var">$this</span>-&gt;attributes[<span class="php-quote">'value'</span>];
 <a href="#226" id="226" class="l">226: </a>                <span class="php-var">$noEncode</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;noEncode[<span class="php-quote">'value'</span>]) || <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;noEncode[<span class="php-quote">'text'</span>]);
-<a href="#227" id="227" class="l">227: </a>                <span class="php-comment">// &lt;script&gt; contents are not escaped
-</span><a href="#228" id="228" class="l">228: </a>                <span class="php-var">$noEncode</span> = <span class="php-quote">'script'</span> === <span class="php-var">$this</span>-&gt;tag ? <span class="php-keyword1">true</span> : <span class="php-var">$noEncode</span>;
+<a href="#227" id="227" class="l">227: </a>                <span class="php-comment">// &lt;script&gt; contents are not escaped</span>
+<a href="#228" id="228" class="l">228: </a>                <span class="php-var">$noEncode</span> = <span class="php-quote">'script'</span> === <span class="php-var">$this</span>-&gt;tag ? <span class="php-keyword1">true</span> : <span class="php-var">$noEncode</span>;
 <a href="#229" id="229" class="l">229: </a>                <span class="php-var">$buff</span> .= <span class="php-var">$noEncode</span> ? <span class="php-var">$text</span> : String::escape(<span class="php-var">$text</span>);
 <a href="#230" id="230" class="l">230: </a>            }
 <a href="#231" id="231" class="l">231: </a>        }
 <a href="#232" id="232" class="l">232: </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$this</span>-&gt;isEmptyElement &amp;&amp; !<span class="php-keyword1">empty</span>(<span class="php-var">$this</span>-&gt;children)) {
-<a href="#233" id="233" class="l">233: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;children as <span class="php-var">$element</span>) {
+<a href="#233" id="233" class="l">233: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;children <span class="php-keyword1">as</span> <span class="php-var">$element</span>) {
 <a href="#234" id="234" class="l">234: </a>                <span class="php-var">$buff</span> .= <span class="php-var">$element</span>-&gt;render();
 <a href="#235" id="235" class="l">235: </a>            }
 <a href="#236" id="236" class="l">236: </a>        }
@@ -445,9 +445,9 @@
 </span><a href="#285" id="285" class="l">285: </a><span class="php-comment">     * @param array $elements Array of child elements
 </span><a href="#286" id="286" class="l">286: </a><span class="php-comment">     * @return \Jyxo\HtmlTag
 </span><a href="#287" id="287" class="l">287: </a><span class="php-comment">     */</span>
-<a href="#288" id="288" class="l">288: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addChildren(<span class="php-keyword1">array</span> <span class="php-var">$elements</span>)
+<a href="#288" id="288" class="l">288: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addChildren(<span class="php-keyword2">array</span> <span class="php-var">$elements</span>)
 <a href="#289" id="289" class="l">289: </a>    {
-<a href="#290" id="290" class="l">290: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$elements</span> as <span class="php-var">$element</span>) {
+<a href="#290" id="290" class="l">290: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$elements</span> <span class="php-keyword1">as</span> <span class="php-var">$element</span>) {
 <a href="#291" id="291" class="l">291: </a>            <span class="php-var">$this</span>-&gt;addChild(<span class="php-var">$element</span>);
 <a href="#292" id="292" class="l">292: </a>        }
 <a href="#293" id="293" class="l">293: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
@@ -459,9 +459,9 @@
 </span><a href="#299" id="299" class="l">299: </a><span class="php-comment">     * @param array $attributes Associative array of attributes and their values
 </span><a href="#300" id="300" class="l">300: </a><span class="php-comment">     * @return \Jyxo\HtmlTag
 </span><a href="#301" id="301" class="l">301: </a><span class="php-comment">     */</span>
-<a href="#302" id="302" class="l">302: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> setAttributes(<span class="php-keyword1">array</span> <span class="php-var">$attributes</span>)
+<a href="#302" id="302" class="l">302: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> setAttributes(<span class="php-keyword2">array</span> <span class="php-var">$attributes</span>)
 <a href="#303" id="303" class="l">303: </a>    {
-<a href="#304" id="304" class="l">304: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$attributes</span> as <span class="php-var">$name</span> =&gt; <span class="php-var">$value</span>) {
+<a href="#304" id="304" class="l">304: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$attributes</span> <span class="php-keyword1">as</span> <span class="php-var">$name</span> =&gt; <span class="php-var">$value</span>) {
 <a href="#305" id="305" class="l">305: </a>            <span class="php-var">$this</span>-&gt;attributes[<span class="php-keyword2">strtolower</span>(<span class="php-var">$name</span>)] = <span class="php-var">$value</span>;
 <a href="#306" id="306" class="l">306: </a>        }
 <a href="#307" id="307" class="l">307: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
@@ -531,8 +531,8 @@
 </span><a href="#371" id="371" class="l">371: </a><span class="php-comment">     */</span>
 <a href="#372" id="372" class="l">372: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> __get(<span class="php-var">$name</span>)
 <a href="#373" id="373" class="l">373: </a>    {
-<a href="#374" id="374" class="l">374: </a>        <span class="php-comment">// An empty attribute is always null
-</span><a href="#375" id="375" class="l">375: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;attributes[<span class="php-var">$name</span>]) ? <span class="php-var">$this</span>-&gt;attributes[<span class="php-var">$name</span>] : <span class="php-keyword1">null</span>;
+<a href="#374" id="374" class="l">374: </a>        <span class="php-comment">// An empty attribute is always null</span>
+<a href="#375" id="375" class="l">375: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;attributes[<span class="php-var">$name</span>]) ? <span class="php-var">$this</span>-&gt;attributes[<span class="php-var">$name</span>] : <span class="php-keyword1">null</span>;
 <a href="#376" id="376" class="l">376: </a>    }
 <a href="#377" id="377" class="l">377: </a>
 <a href="#378" id="378" class="l">378: </a>    <span class="php-comment">/**
@@ -556,7 +556,7 @@
 <a href="#396" id="396" class="l">396: </a></code></pre>
 
 		<div id="footer">
-			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>.<br />
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">ApiGen</a>.<br />
 			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
 		</div>
 	</div>

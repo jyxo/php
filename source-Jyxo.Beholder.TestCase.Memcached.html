@@ -2,12 +2,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="TR ApiGen 2.0 RC" />
+	<meta name="generator" content="ApiGen 2.0" />
 	<meta name="robots" content="noindex" />
 
 	<title>File Beholder/TestCase/Memcached.php | Jyxo PHP Library</title>
 
-	<script type="text/javascript" src="resources/combined.js?3309972472"></script>
+	<script type="text/javascript" src="resources/combined.js?4060439551"></script>
 	<script type="text/javascript" src="elementlist.js?2796542733"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1274782946" />
 	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
@@ -217,8 +217,8 @@
 </span><a href="#60" id="60" class="l"> 60: </a><span class="php-comment">     */</span>
 <a href="#61" id="61" class="l"> 61: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> run()
 <a href="#62" id="62" class="l"> 62: </a>    {
-<a href="#63" id="63" class="l"> 63: </a>        <span class="php-comment">// The memcache extension is required
-</span><a href="#64" id="64" class="l"> 64: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">extension_loaded</span>(<span class="php-quote">'memcache'</span>)) {
+<a href="#63" id="63" class="l"> 63: </a>        <span class="php-comment">// The memcache extension is required</span>
+<a href="#64" id="64" class="l"> 64: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">extension_loaded</span>(<span class="php-quote">'memcache'</span>)) {
 <a href="#65" id="65" class="l"> 65: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, <span class="php-quote">'Extension memcache missing'</span>);
 <a href="#66" id="66" class="l"> 66: </a>        }
 <a href="#67" id="67" class="l"> 67: </a>
@@ -226,44 +226,44 @@
 <a href="#69" id="69" class="l"> 69: </a>        <span class="php-var">$key</span> = <span class="php-quote">'beholder-'</span> . <span class="php-var">$random</span>;
 <a href="#70" id="70" class="l"> 70: </a>        <span class="php-var">$value</span> = <span class="php-var">$random</span>;
 <a href="#71" id="71" class="l"> 71: </a>
-<a href="#72" id="72" class="l"> 72: </a>        <span class="php-comment">// Status label
-</span><a href="#73" id="73" class="l"> 73: </a>        <span class="php-var">$description</span> = <span class="php-keyword2">gethostbyaddr</span>(<span class="php-var">$this</span>-&gt;ip) . <span class="php-quote">':'</span> . <span class="php-var">$this</span>-&gt;port;
+<a href="#72" id="72" class="l"> 72: </a>        <span class="php-comment">// Status label</span>
+<a href="#73" id="73" class="l"> 73: </a>        <span class="php-var">$description</span> = <span class="php-keyword2">gethostbyaddr</span>(<span class="php-var">$this</span>-&gt;ip) . <span class="php-quote">':'</span> . <span class="php-var">$this</span>-&gt;port;
 <a href="#74" id="74" class="l"> 74: </a>
-<a href="#75" id="75" class="l"> 75: </a>        <span class="php-comment">// Connection
-</span><a href="#76" id="76" class="l"> 76: </a>        <span class="php-var">$memcache</span> = <span class="php-keyword1">new</span> \Memcache();
+<a href="#75" id="75" class="l"> 75: </a>        <span class="php-comment">// Connection</span>
+<a href="#76" id="76" class="l"> 76: </a>        <span class="php-var">$memcache</span> = <span class="php-keyword1">new</span> \Memcache();
 <a href="#77" id="77" class="l"> 77: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">false</span> === <span class="php-var">$memcache</span>-&gt;connect(<span class="php-var">$this</span>-&gt;ip, <span class="php-var">$this</span>-&gt;port)) {
 <a href="#78" id="78" class="l"> 78: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, <span class="php-keyword2">sprintf</span>(<span class="php-quote">'Connection error %s'</span>, <span class="php-var">$description</span>));
 <a href="#79" id="79" class="l"> 79: </a>        }
 <a href="#80" id="80" class="l"> 80: </a>
-<a href="#81" id="81" class="l"> 81: </a>        <span class="php-comment">// Saving
-</span><a href="#82" id="82" class="l"> 82: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">false</span> === <span class="php-var">$memcache</span>-&gt;set(<span class="php-var">$key</span>, <span class="php-var">$value</span>)) {
+<a href="#81" id="81" class="l"> 81: </a>        <span class="php-comment">// Saving</span>
+<a href="#82" id="82" class="l"> 82: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">false</span> === <span class="php-var">$memcache</span>-&gt;set(<span class="php-var">$key</span>, <span class="php-var">$value</span>)) {
 <a href="#83" id="83" class="l"> 83: </a>            <span class="php-var">$memcache</span>-&gt;close();
 <a href="#84" id="84" class="l"> 84: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, <span class="php-keyword2">sprintf</span>(<span class="php-quote">'Write error %s'</span>, <span class="php-var">$description</span>));
 <a href="#85" id="85" class="l"> 85: </a>        }
 <a href="#86" id="86" class="l"> 86: </a>
-<a href="#87" id="87" class="l"> 87: </a>        <span class="php-comment">// Check
-</span><a href="#88" id="88" class="l"> 88: </a>        <span class="php-var">$check</span> = <span class="php-var">$memcache</span>-&gt;get(<span class="php-var">$key</span>);
+<a href="#87" id="87" class="l"> 87: </a>        <span class="php-comment">// Check</span>
+<a href="#88" id="88" class="l"> 88: </a>        <span class="php-var">$check</span> = <span class="php-var">$memcache</span>-&gt;get(<span class="php-var">$key</span>);
 <a href="#89" id="89" class="l"> 89: </a>        <span class="php-keyword1">if</span> ((<span class="php-keyword1">false</span> === <span class="php-var">$check</span>) || (<span class="php-var">$check</span> !== <span class="php-var">$value</span>)) {
 <a href="#90" id="90" class="l"> 90: </a>            <span class="php-var">$memcache</span>-&gt;close();
 <a href="#91" id="91" class="l"> 91: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, <span class="php-keyword2">sprintf</span>(<span class="php-quote">'Read error %s'</span>, <span class="php-var">$description</span>));
 <a href="#92" id="92" class="l"> 92: </a>        }
 <a href="#93" id="93" class="l"> 93: </a>
-<a href="#94" id="94" class="l"> 94: </a>        <span class="php-comment">// Deleting
-</span><a href="#95" id="95" class="l"> 95: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">false</span> === <span class="php-var">$memcache</span>-&gt;delete(<span class="php-var">$key</span>)) {
+<a href="#94" id="94" class="l"> 94: </a>        <span class="php-comment">// Deleting</span>
+<a href="#95" id="95" class="l"> 95: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">false</span> === <span class="php-var">$memcache</span>-&gt;<span class="php-keyword2">delete</span>(<span class="php-var">$key</span>)) {
 <a href="#96" id="96" class="l"> 96: </a>            <span class="php-var">$memcache</span>-&gt;close();
 <a href="#97" id="97" class="l"> 97: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, <span class="php-keyword2">sprintf</span>(<span class="php-quote">'Delete error %s'</span>, <span class="php-var">$description</span>));
 <a href="#98" id="98" class="l"> 98: </a>        }
 <a href="#99" id="99" class="l"> 99: </a>
 <a href="#100" id="100" class="l">100: </a>        <span class="php-var">$memcache</span>-&gt;close();
 <a href="#101" id="101" class="l">101: </a>
-<a href="#102" id="102" class="l">102: </a>        <span class="php-comment">// OK
-</span><a href="#103" id="103" class="l">103: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::SUCCESS, <span class="php-var">$description</span>);
+<a href="#102" id="102" class="l">102: </a>        <span class="php-comment">// OK</span>
+<a href="#103" id="103" class="l">103: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::SUCCESS, <span class="php-var">$description</span>);
 <a href="#104" id="104" class="l">104: </a>    }
 <a href="#105" id="105" class="l">105: </a>}
 <a href="#106" id="106" class="l">106: </a></code></pre>
 
 		<div id="footer">
-			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>.<br />
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">ApiGen</a>.<br />
 			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
 		</div>
 	</div>

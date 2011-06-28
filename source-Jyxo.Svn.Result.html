@@ -2,12 +2,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="TR ApiGen 2.0 RC" />
+	<meta name="generator" content="ApiGen 2.0" />
 	<meta name="robots" content="noindex" />
 
 	<title>File Svn/Result.php | Jyxo PHP Library</title>
 
-	<script type="text/javascript" src="resources/combined.js?3309972472"></script>
+	<script type="text/javascript" src="resources/combined.js?4060439551"></script>
 	<script type="text/javascript" src="elementlist.js?2796542733"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1274782946" />
 	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
@@ -203,7 +203,7 @@
 </span><a href="#53" id="53" class="l"> 53: </a><span class="php-comment">     *
 </span><a href="#54" id="54" class="l"> 54: </a><span class="php-comment">     * @var string
 </span><a href="#55" id="55" class="l"> 55: </a><span class="php-comment">     */</span>
-<a href="#56" id="56" class="l"> 56: </a>    <span class="php-keyword1">const</span> DELETE = <span class="php-quote">'D'</span>;
+<a href="#56" id="56" class="l"> 56: </a>    <span class="php-keyword1">const</span> <span class="php-keyword2">DELETE</span> = <span class="php-quote">'D'</span>;
 <a href="#57" id="57" class="l"> 57: </a>
 <a href="#58" id="58" class="l"> 58: </a>    <span class="php-comment">/**
 </span><a href="#59" id="59" class="l"> 59: </a><span class="php-comment">     * Updated file flag.
@@ -302,9 +302,9 @@
 </span><a href="#152" id="152" class="l">152: </a><span class="php-comment">     *
 </span><a href="#153" id="153" class="l">153: </a><span class="php-comment">     * @var array
 </span><a href="#154" id="154" class="l">154: </a><span class="php-comment">     */</span>
-<a href="#155" id="155" class="l">155: </a>    <span class="php-keyword1">protected</span> <span class="php-var">$statusTable</span> = <span class="php-keyword1">array</span>(
+<a href="#155" id="155" class="l">155: </a>    <span class="php-keyword1">protected</span> <span class="php-var">$statusTable</span> = <span class="php-keyword2">array</span>(
 <a href="#156" id="156" class="l">156: </a>        self::ADD =&gt; <span class="php-quote">'A'</span>,
-<a href="#157" id="157" class="l">157: </a>        self::DELETE =&gt; <span class="php-quote">'D'</span>,
+<a href="#157" id="157" class="l">157: </a>        self::<span class="php-keyword2">DELETE</span> =&gt; <span class="php-quote">'D'</span>,
 <a href="#158" id="158" class="l">158: </a>        self::UPDATE =&gt; <span class="php-quote">'U'</span>,
 <a href="#159" id="159" class="l">159: </a>        self::CONFLICT =&gt; <span class="php-quote">'C'</span>,
 <a href="#160" id="160" class="l">160: </a>        self::MODIFIED =&gt; <span class="php-quote">'M'</span>,
@@ -346,7 +346,7 @@
 </span><a href="#196" id="196" class="l">196: </a><span class="php-comment">     *
 </span><a href="#197" id="197" class="l">197: </a><span class="php-comment">     * @var array
 </span><a href="#198" id="198" class="l">198: </a><span class="php-comment">     */</span>
-<a href="#199" id="199" class="l">199: </a>    <span class="php-keyword1">protected</span> <span class="php-var">$items</span> = <span class="php-keyword1">array</span>();
+<a href="#199" id="199" class="l">199: </a>    <span class="php-keyword1">protected</span> <span class="php-var">$items</span> = <span class="php-keyword2">array</span>();
 <a href="#200" id="200" class="l">200: </a>
 <a href="#201" id="201" class="l">201: </a>    <span class="php-comment">/**
 </span><a href="#202" id="202" class="l">202: </a><span class="php-comment">     * Internal pointer.
@@ -387,8 +387,8 @@
 <a href="#237" id="237" class="l">237: </a>            <span class="php-keyword1">case</span> <span class="php-quote">'update'</span>:
 <a href="#238" id="238" class="l">238: </a>                <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;parseUpdate(<span class="php-var">$input</span>);
 <a href="#239" id="239" class="l">239: </a>            <span class="php-keyword1">default</span>:
-<a href="#240" id="240" class="l">240: </a>                <span class="php-comment">// Do nothing
-</span><a href="#241" id="241" class="l">241: </a>                <span class="php-keyword1">return</span> <span class="php-keyword1">array</span>();
+<a href="#240" id="240" class="l">240: </a>                <span class="php-comment">// Do nothing</span>
+<a href="#241" id="241" class="l">241: </a>                <span class="php-keyword1">return</span> <span class="php-keyword2">array</span>();
 <a href="#242" id="242" class="l">242: </a>        }
 <a href="#243" id="243" class="l">243: </a>    }
 <a href="#244" id="244" class="l">244: </a>
@@ -401,7 +401,7 @@
 <a href="#251" id="251" class="l">251: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> parseStatus(<span class="php-var">$input</span>)
 <a href="#252" id="252" class="l">252: </a>    {
 <a href="#253" id="253" class="l">253: </a>        <span class="php-var">$array</span> = <span class="php-keyword2">explode</span>(<span class="php-quote">&quot;\n&quot;</span>, (string) <span class="php-var">$input</span>);
-<a href="#254" id="254" class="l">254: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$array</span> as <span class="php-var">$key</span> =&gt; &amp;<span class="php-var">$line</span>) {
+<a href="#254" id="254" class="l">254: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$array</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; &amp;<span class="php-var">$line</span>) {
 <a href="#255" id="255" class="l">255: </a>
 <a href="#256" id="256" class="l">256: </a>            <span class="php-var">$line</span> = <span class="php-keyword2">trim</span>(<span class="php-var">$line</span>);
 <a href="#257" id="257" class="l">257: </a>
@@ -411,7 +411,7 @@
 <a href="#261" id="261" class="l">261: </a>            }
 <a href="#262" id="262" class="l">262: </a>
 <a href="#263" id="263" class="l">263: </a>            <span class="php-var">$tmp</span> = <span class="php-var">$line</span>;
-<a href="#264" id="264" class="l">264: </a>            <span class="php-var">$line</span> = <span class="php-keyword1">array</span>();
+<a href="#264" id="264" class="l">264: </a>            <span class="php-var">$line</span> = <span class="php-keyword2">array</span>();
 <a href="#265" id="265" class="l">265: </a>
 <a href="#266" id="266" class="l">266: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$tmp{0}</span> !== <span class="php-quote">' '</span>) {
 <a href="#267" id="267" class="l">267: </a>                <span class="php-var">$line</span>[<span class="php-quote">'status'</span>] = <span class="php-var">$tmp{0}</span>;
@@ -443,7 +443,7 @@
 <a href="#293" id="293" class="l">293: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> parseCommit(<span class="php-var">$input</span>)
 <a href="#294" id="294" class="l">294: </a>    {
 <a href="#295" id="295" class="l">295: </a>        <span class="php-var">$array</span> = <span class="php-keyword2">explode</span>(<span class="php-quote">&quot;\n&quot;</span>, (string) <span class="php-var">$input</span>);
-<a href="#296" id="296" class="l">296: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$array</span> as <span class="php-var">$key</span> =&gt; &amp;<span class="php-var">$line</span>) {
+<a href="#296" id="296" class="l">296: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$array</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; &amp;<span class="php-var">$line</span>) {
 <a href="#297" id="297" class="l">297: </a>
 <a href="#298" id="298" class="l">298: </a>            <span class="php-var">$line</span> = <span class="php-keyword2">trim</span>(<span class="php-var">$line</span>);
 <a href="#299" id="299" class="l">299: </a>
@@ -477,7 +477,7 @@
 <a href="#327" id="327" class="l">327: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> parseUpdate(<span class="php-var">$input</span>)
 <a href="#328" id="328" class="l">328: </a>    {
 <a href="#329" id="329" class="l">329: </a>        <span class="php-var">$array</span> = <span class="php-keyword2">explode</span>(<span class="php-quote">&quot;\n&quot;</span>, (string) <span class="php-var">$input</span>);
-<a href="#330" id="330" class="l">330: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$array</span> as <span class="php-var">$key</span> =&gt; &amp;<span class="php-var">$line</span>) {
+<a href="#330" id="330" class="l">330: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$array</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; &amp;<span class="php-var">$line</span>) {
 <a href="#331" id="331" class="l">331: </a>
 <a href="#332" id="332" class="l">332: </a>            <span class="php-var">$line</span> = <span class="php-keyword2">trim</span>(<span class="php-var">$line</span>);
 <a href="#333" id="333" class="l">333: </a>
@@ -595,7 +595,7 @@
 <a href="#445" id="445" class="l">445: </a></code></pre>
 
 		<div id="footer">
-			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>.<br />
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">ApiGen</a>.<br />
 			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
 		</div>
 	</div>

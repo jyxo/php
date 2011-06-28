@@ -2,12 +2,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="TR ApiGen 2.0 RC" />
+	<meta name="generator" content="ApiGen 2.0" />
 	<meta name="robots" content="noindex" />
 
 	<title>File Mail/Email.php | Jyxo PHP Library</title>
 
-	<script type="text/javascript" src="resources/combined.js?3309972472"></script>
+	<script type="text/javascript" src="resources/combined.js?4060439551"></script>
 	<script type="text/javascript" src="elementlist.js?2796542733"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1274782946" />
 	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
@@ -227,28 +227,28 @@
 </span><a href="#79" id="79" class="l"> 79: </a><span class="php-comment">     *
 </span><a href="#80" id="80" class="l"> 80: </a><span class="php-comment">     * @var array
 </span><a href="#81" id="81" class="l"> 81: </a><span class="php-comment">     */</span>
-<a href="#82" id="82" class="l"> 82: </a>    <span class="php-keyword1">private</span> <span class="php-var">$to</span> = <span class="php-keyword1">array</span>();
+<a href="#82" id="82" class="l"> 82: </a>    <span class="php-keyword1">private</span> <span class="php-var">$to</span> = <span class="php-keyword2">array</span>();
 <a href="#83" id="83" class="l"> 83: </a>
 <a href="#84" id="84" class="l"> 84: </a>    <span class="php-comment">/**
 </span><a href="#85" id="85" class="l"> 85: </a><span class="php-comment">     * List of carbon copy recipients.
 </span><a href="#86" id="86" class="l"> 86: </a><span class="php-comment">     *
 </span><a href="#87" id="87" class="l"> 87: </a><span class="php-comment">     * @var array
 </span><a href="#88" id="88" class="l"> 88: </a><span class="php-comment">     */</span>
-<a href="#89" id="89" class="l"> 89: </a>    <span class="php-keyword1">private</span> <span class="php-var">$cc</span> = <span class="php-keyword1">array</span>();
+<a href="#89" id="89" class="l"> 89: </a>    <span class="php-keyword1">private</span> <span class="php-var">$cc</span> = <span class="php-keyword2">array</span>();
 <a href="#90" id="90" class="l"> 90: </a>
 <a href="#91" id="91" class="l"> 91: </a>    <span class="php-comment">/**
 </span><a href="#92" id="92" class="l"> 92: </a><span class="php-comment">     * List of blind carbon copy recipients.
 </span><a href="#93" id="93" class="l"> 93: </a><span class="php-comment">     *
 </span><a href="#94" id="94" class="l"> 94: </a><span class="php-comment">     * @var array
 </span><a href="#95" id="95" class="l"> 95: </a><span class="php-comment">     */</span>
-<a href="#96" id="96" class="l"> 96: </a>    <span class="php-keyword1">private</span> <span class="php-var">$bcc</span> = <span class="php-keyword1">array</span>();
+<a href="#96" id="96" class="l"> 96: </a>    <span class="php-keyword1">private</span> <span class="php-var">$bcc</span> = <span class="php-keyword2">array</span>();
 <a href="#97" id="97" class="l"> 97: </a>
 <a href="#98" id="98" class="l"> 98: </a>    <span class="php-comment">/**
 </span><a href="#99" id="99" class="l"> 99: </a><span class="php-comment">     * Response recipient address.
 </span><a href="#100" id="100" class="l">100: </a><span class="php-comment">     *
 </span><a href="#101" id="101" class="l">101: </a><span class="php-comment">     * @var array
 </span><a href="#102" id="102" class="l">102: </a><span class="php-comment">     */</span>
-<a href="#103" id="103" class="l">103: </a>    <span class="php-keyword1">private</span> <span class="php-var">$replyTo</span> = <span class="php-keyword1">array</span>();
+<a href="#103" id="103" class="l">103: </a>    <span class="php-keyword1">private</span> <span class="php-var">$replyTo</span> = <span class="php-keyword2">array</span>();
 <a href="#104" id="104" class="l">104: </a>
 <a href="#105" id="105" class="l">105: </a>    <span class="php-comment">/**
 </span><a href="#106" id="106" class="l">106: </a><span class="php-comment">     * Reading confirmation recipient.
@@ -269,7 +269,7 @@
 </span><a href="#121" id="121" class="l">121: </a><span class="php-comment">     *
 </span><a href="#122" id="122" class="l">122: </a><span class="php-comment">     * @var array
 </span><a href="#123" id="123" class="l">123: </a><span class="php-comment">     */</span>
-<a href="#124" id="124" class="l">124: </a>    <span class="php-keyword1">private</span> <span class="php-var">$references</span> = <span class="php-keyword1">array</span>();
+<a href="#124" id="124" class="l">124: </a>    <span class="php-keyword1">private</span> <span class="php-var">$references</span> = <span class="php-keyword2">array</span>();
 <a href="#125" id="125" class="l">125: </a>
 <a href="#126" id="126" class="l">126: </a>    <span class="php-comment">/**
 </span><a href="#127" id="127" class="l">127: </a><span class="php-comment">     * Message priority.
@@ -283,7 +283,7 @@
 </span><a href="#135" id="135" class="l">135: </a><span class="php-comment">     *
 </span><a href="#136" id="136" class="l">136: </a><span class="php-comment">     * @var array
 </span><a href="#137" id="137" class="l">137: </a><span class="php-comment">     */</span>
-<a href="#138" id="138" class="l">138: </a>    <span class="php-keyword1">private</span> <span class="php-var">$headers</span> = <span class="php-keyword1">array</span>();
+<a href="#138" id="138" class="l">138: </a>    <span class="php-keyword1">private</span> <span class="php-var">$headers</span> = <span class="php-keyword2">array</span>();
 <a href="#139" id="139" class="l">139: </a>
 <a href="#140" id="140" class="l">140: </a>    <span class="php-comment">/**
 </span><a href="#141" id="141" class="l">141: </a><span class="php-comment">     * Message body.
@@ -297,7 +297,7 @@
 </span><a href="#149" id="149" class="l">149: </a><span class="php-comment">     *
 </span><a href="#150" id="150" class="l">150: </a><span class="php-comment">     * @var array
 </span><a href="#151" id="151" class="l">151: </a><span class="php-comment">     */</span>
-<a href="#152" id="152" class="l">152: </a>    <span class="php-keyword1">private</span> <span class="php-var">$attachments</span> = <span class="php-keyword1">array</span>();
+<a href="#152" id="152" class="l">152: </a>    <span class="php-keyword1">private</span> <span class="php-var">$attachments</span> = <span class="php-keyword2">array</span>();
 <a href="#153" id="153" class="l">153: </a>
 <a href="#154" id="154" class="l">154: </a>    <span class="php-comment">/**
 </span><a href="#155" id="155" class="l">155: </a><span class="php-comment">     * Returns subject.
@@ -467,7 +467,7 @@
 </span><a href="#319" id="319" class="l">319: </a><span class="php-comment">     * @param array $references Previous mail references
 </span><a href="#320" id="320" class="l">320: </a><span class="php-comment">     * @return \Jyxo\Mail\Email
 </span><a href="#321" id="321" class="l">321: </a><span class="php-comment">     */</span>
-<a href="#322" id="322" class="l">322: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> setInReplyTo(<span class="php-var">$inReplyTo</span>, <span class="php-keyword1">array</span> <span class="php-var">$references</span> = <span class="php-keyword1">array</span>())
+<a href="#322" id="322" class="l">322: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> setInReplyTo(<span class="php-var">$inReplyTo</span>, <span class="php-keyword2">array</span> <span class="php-var">$references</span> = <span class="php-keyword2">array</span>())
 <a href="#323" id="323" class="l">323: </a>    {
 <a href="#324" id="324" class="l">324: </a>        <span class="php-var">$this</span>-&gt;inReplyTo = (string) <span class="php-var">$inReplyTo</span>;
 <a href="#325" id="325" class="l">325: </a>        <span class="php-var">$this</span>-&gt;references = <span class="php-var">$references</span>;
@@ -514,7 +514,7 @@
 </span><a href="#366" id="366" class="l">366: </a><span class="php-comment">     */</span>
 <a href="#367" id="367" class="l">367: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> setPriority(<span class="php-var">$priority</span>)
 <a href="#368" id="368" class="l">368: </a>    {
-<a href="#369" id="369" class="l">369: </a>        <span class="php-keyword1">static</span> <span class="php-var">$priorities</span> = <span class="php-keyword1">array</span>(
+<a href="#369" id="369" class="l">369: </a>        <span class="php-keyword1">static</span> <span class="php-var">$priorities</span> = <span class="php-keyword2">array</span>(
 <a href="#370" id="370" class="l">370: </a>            self::PRIORITY_HIGHEST =&gt; <span class="php-keyword1">true</span>,
 <a href="#371" id="371" class="l">371: </a>            self::PRIORITY_HIGH =&gt; <span class="php-keyword1">true</span>,
 <a href="#372" id="372" class="l">372: </a>            self::PRIORITY_NORMAL =&gt; <span class="php-keyword1">true</span>,
@@ -606,7 +606,7 @@
 </span><a href="#458" id="458" class="l">458: </a><span class="php-comment">     */</span>
 <a href="#459" id="459" class="l">459: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> hasInlineAttachments()
 <a href="#460" id="460" class="l">460: </a>    {
-<a href="#461" id="461" class="l">461: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;attachments as <span class="php-var">$attachment</span>) {
+<a href="#461" id="461" class="l">461: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;attachments <span class="php-keyword1">as</span> <span class="php-var">$attachment</span>) {
 <a href="#462" id="462" class="l">462: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$attachment</span>-&gt;isInline()) {
 <a href="#463" id="463" class="l">463: </a>                <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
 <a href="#464" id="464" class="l">464: </a>            }
@@ -618,7 +618,7 @@
 <a href="#470" id="470" class="l">470: </a></code></pre>
 
 		<div id="footer">
-			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>.<br />
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">ApiGen</a>.<br />
 			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
 		</div>
 	</div>

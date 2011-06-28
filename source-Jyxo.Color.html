@@ -2,12 +2,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="TR ApiGen 2.0 RC" />
+	<meta name="generator" content="ApiGen 2.0" />
 	<meta name="robots" content="noindex" />
 
 	<title>File Color.php | Jyxo PHP Library</title>
 
-	<script type="text/javascript" src="resources/combined.js?3309972472"></script>
+	<script type="text/javascript" src="resources/combined.js?4060439551"></script>
 	<script type="text/javascript" src="elementlist.js?2796542733"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1274782946" />
 	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
@@ -254,8 +254,8 @@
 <a href="#94" id="94" class="l"> 94: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> toInverse()
 <a href="#95" id="95" class="l"> 95: </a>    {
 <a href="#96" id="96" class="l"> 96: </a>        <span class="php-var">$negative</span> = <span class="php-keyword1">new</span> self();
-<a href="#97" id="97" class="l"> 97: </a>        <span class="php-comment">// Subtracts color component values from the maximum luminance
-</span><a href="#98" id="98" class="l"> 98: </a>        <span class="php-var">$negative</span>-&gt;setRed(self::LUM_MAX - <span class="php-var">$this</span>-&gt;red)
+<a href="#97" id="97" class="l"> 97: </a>        <span class="php-comment">// Subtracts color component values from the maximum luminance</span>
+<a href="#98" id="98" class="l"> 98: </a>        <span class="php-var">$negative</span>-&gt;setRed(self::LUM_MAX - <span class="php-var">$this</span>-&gt;red)
 <a href="#99" id="99" class="l"> 99: </a>            -&gt;setGreen(self::LUM_MAX - <span class="php-var">$this</span>-&gt;green)
 <a href="#100" id="100" class="l">100: </a>            -&gt;setBlue(self::LUM_MAX - <span class="php-var">$this</span>-&gt;blue);
 <a href="#101" id="101" class="l">101: </a>        <span class="php-keyword1">return</span> <span class="php-var">$negative</span>;
@@ -290,7 +290,7 @@
 </span><a href="#130" id="130" class="l">130: </a><span class="php-comment">     */</span>
 <a href="#131" id="131" class="l">131: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getRgb()
 <a href="#132" id="132" class="l">132: </a>    {
-<a href="#133" id="133" class="l">133: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">array</span>(
+<a href="#133" id="133" class="l">133: </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">array</span>(
 <a href="#134" id="134" class="l">134: </a>            <span class="php-var">$this</span>-&gt;red,
 <a href="#135" id="135" class="l">135: </a>            <span class="php-var">$this</span>-&gt;green,
 <a href="#136" id="136" class="l">136: </a>            <span class="php-var">$this</span>-&gt;blue
@@ -316,8 +316,8 @@
 </span><a href="#156" id="156" class="l">156: </a><span class="php-comment">     */</span>
 <a href="#157" id="157" class="l">157: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getBinary()
 <a href="#158" id="158" class="l">158: </a>    {
-<a href="#159" id="159" class="l">159: </a>        <span class="php-comment">// Black or white corresponds to the most significant bit value
-</span><a href="#160" id="160" class="l">160: </a>        <span class="php-var">$luminance</span> = <span class="php-var">$this</span>-&gt;getLuminance();
+<a href="#159" id="159" class="l">159: </a>        <span class="php-comment">// Black or white corresponds to the most significant bit value</span>
+<a href="#160" id="160" class="l">160: </a>        <span class="php-var">$luminance</span> = <span class="php-var">$this</span>-&gt;getLuminance();
 <a href="#161" id="161" class="l">161: </a>        <span class="php-keyword1">return</span> <span class="php-var">$luminance</span> &gt;&gt; <span class="php-num">7</span>;
 <a href="#162" id="162" class="l">162: </a>    }
 <a href="#163" id="163" class="l">163: </a>
@@ -422,17 +422,17 @@
 </span><a href="#262" id="262" class="l">262: </a><span class="php-comment">     */</span>
 <a href="#263" id="263" class="l">263: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> initFromHex(<span class="php-var">$hex</span>)
 <a href="#264" id="264" class="l">264: </a>    {
-<a href="#265" id="265" class="l">265: </a>        <span class="php-comment">// Trim the hashmark if present
-</span><a href="#266" id="266" class="l">266: </a>        <span class="php-var">$hex</span> = <span class="php-keyword2">ltrim</span>(<span class="php-var">$hex</span>, <span class="php-quote">'#'</span>);
+<a href="#265" id="265" class="l">265: </a>        <span class="php-comment">// Trim the hashmark if present</span>
+<a href="#266" id="266" class="l">266: </a>        <span class="php-var">$hex</span> = <span class="php-keyword2">ltrim</span>(<span class="php-var">$hex</span>, <span class="php-quote">'#'</span>);
 <a href="#267" id="267" class="l">267: </a>
 <a href="#268" id="268" class="l">268: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">strlen</span>(<span class="php-var">$hex</span>) == <span class="php-num">3</span>) {
-<a href="#269" id="269" class="l">269: </a>            <span class="php-comment">// RGB format support
-</span><a href="#270" id="270" class="l">270: </a>            <span class="php-var">$hex</span> = <span class="php-var">$hex{0}</span> . <span class="php-var">$hex{0}</span> . <span class="php-var">$hex{1}</span> . <span class="php-var">$hex{1}</span> . <span class="php-var">$hex{2}</span> . <span class="php-var">$hex{2}</span>;
+<a href="#269" id="269" class="l">269: </a>            <span class="php-comment">// RGB format support</span>
+<a href="#270" id="270" class="l">270: </a>            <span class="php-var">$hex</span> = <span class="php-var">$hex{0}</span> . <span class="php-var">$hex{0}</span> . <span class="php-var">$hex{1}</span> . <span class="php-var">$hex{1}</span> . <span class="php-var">$hex{2}</span> . <span class="php-var">$hex{2}</span>;
 <a href="#271" id="271" class="l">271: </a>        }
 <a href="#272" id="272" class="l">272: </a>
 <a href="#273" id="273" class="l">273: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">preg_match</span>(<span class="php-quote">'~[a-f0-9]{6}~i'</span>, <span class="php-var">$hex</span>)) {
-<a href="#274" id="274" class="l">274: </a>            <span class="php-comment">// Invalid color definition
-</span><a href="#275" id="275" class="l">275: </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \InvalidArgumentException(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'&quot;%s&quot; in not a valid hexadecimal color definition'</span>, <span class="php-var">$hex</span>));
+<a href="#274" id="274" class="l">274: </a>            <span class="php-comment">// Invalid color definition</span>
+<a href="#275" id="275" class="l">275: </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \InvalidArgumentException(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'&quot;%s&quot; in not a valid hexadecimal color definition'</span>, <span class="php-var">$hex</span>));
 <a href="#276" id="276" class="l">276: </a>        }
 <a href="#277" id="277" class="l">277: </a>
 <a href="#278" id="278" class="l">278: </a>        <span class="php-var">$this</span>-&gt;initFromInt(<span class="php-keyword2">hexdec</span>(<span class="php-var">$hex</span>));
@@ -445,7 +445,7 @@
 </span><a href="#285" id="285" class="l">285: </a><span class="php-comment">     * @param array $rgb Color definition
 </span><a href="#286" id="286" class="l">286: </a><span class="php-comment">     * @return \Jyxo\Color
 </span><a href="#287" id="287" class="l">287: </a><span class="php-comment">     */</span>
-<a href="#288" id="288" class="l">288: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> initFromRgb(<span class="php-keyword1">array</span> <span class="php-var">$rgb</span>)
+<a href="#288" id="288" class="l">288: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> initFromRgb(<span class="php-keyword2">array</span> <span class="php-var">$rgb</span>)
 <a href="#289" id="289" class="l">289: </a>    {
 <a href="#290" id="290" class="l">290: </a>        <span class="php-var">$this</span>-&gt;setRed(<span class="php-var">$rgb</span>[<span class="php-num">0</span>])
 <a href="#291" id="291" class="l">291: </a>            -&gt;setGreen(<span class="php-var">$rgb</span>[<span class="php-num">1</span>])
@@ -461,7 +461,7 @@
 </span><a href="#301" id="301" class="l">301: </a><span class="php-comment">     */</span>
 <a href="#302" id="302" class="l">302: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> initFromInt(<span class="php-var">$int</span>)
 <a href="#303" id="303" class="l">303: </a>    {
-<a href="#304" id="304" class="l">304: </a>        <span class="php-var">$int</span> = <span class="php-keyword2">min</span>(<span class="php-keyword1">array</span>(<span class="php-var">$int</span>, <span class="php-num">0xFFFFFF</span>));
+<a href="#304" id="304" class="l">304: </a>        <span class="php-var">$int</span> = <span class="php-keyword2">min</span>(<span class="php-keyword2">array</span>(<span class="php-var">$int</span>, <span class="php-num">0xFFFFFF</span>));
 <a href="#305" id="305" class="l">305: </a>        <span class="php-var">$this</span>-&gt;red = self::LUM_MAX &amp; (<span class="php-var">$int</span> &gt;&gt; <span class="php-num">16</span>);
 <a href="#306" id="306" class="l">306: </a>        <span class="php-var">$this</span>-&gt;green = self::LUM_MAX &amp; (<span class="php-var">$int</span> &gt;&gt; <span class="php-num">8</span>);
 <a href="#307" id="307" class="l">307: </a>        <span class="php-var">$this</span>-&gt;blue = self::LUM_MAX &amp; <span class="php-var">$int</span>;
@@ -479,14 +479,14 @@
 <a href="#319" id="319" class="l">319: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">is_string</span>(<span class="php-var">$value</span>)) {
 <a href="#320" id="320" class="l">320: </a>            <span class="php-var">$value</span> = <span class="php-keyword2">hexdec</span>(<span class="php-var">$value</span>);
 <a href="#321" id="321" class="l">321: </a>        }
-<a href="#322" id="322" class="l">322: </a>        <span class="php-comment">// Luminance must not be greater than 0xFF
-</span><a href="#323" id="323" class="l">323: </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">min</span>(<span class="php-keyword1">array</span>((integer) <span class="php-var">$value</span>, self::LUM_MAX));
+<a href="#322" id="322" class="l">322: </a>        <span class="php-comment">// Luminance must not be greater than 0xFF</span>
+<a href="#323" id="323" class="l">323: </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">min</span>(<span class="php-keyword2">array</span>((integer) <span class="php-var">$value</span>, self::LUM_MAX));
 <a href="#324" id="324" class="l">324: </a>    }
 <a href="#325" id="325" class="l">325: </a>}
 <a href="#326" id="326" class="l">326: </a></code></pre>
 
 		<div id="footer">
-			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>.<br />
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">ApiGen</a>.<br />
 			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
 		</div>
 	</div>

@@ -2,12 +2,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="TR ApiGen 2.0 RC" />
+	<meta name="generator" content="ApiGen 2.0" />
 	<meta name="robots" content="noindex" />
 
 	<title>File Mail/Sender.php | Jyxo PHP Library</title>
 
-	<script type="text/javascript" src="resources/combined.js?3309972472"></script>
+	<script type="text/javascript" src="resources/combined.js?4060439551"></script>
 	<script type="text/javascript" src="elementlist.js?2796542733"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1274782946" />
 	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
@@ -327,7 +327,7 @@
 </span><a href="#179" id="179" class="l">179: </a><span class="php-comment">     *
 </span><a href="#180" id="180" class="l">180: </a><span class="php-comment">     * @var array
 </span><a href="#181" id="181" class="l">181: </a><span class="php-comment">     */</span>
-<a href="#182" id="182" class="l">182: </a>    <span class="php-keyword1">private</span> <span class="php-var">$boundary</span> = <span class="php-keyword1">array</span>();
+<a href="#182" id="182" class="l">182: </a>    <span class="php-keyword1">private</span> <span class="php-var">$boundary</span> = <span class="php-keyword2">array</span>();
 <a href="#183" id="183" class="l">183: </a>
 <a href="#184" id="184" class="l">184: </a>    <span class="php-comment">/**
 </span><a href="#185" id="185" class="l">185: </a><span class="php-comment">     * Sending mode.
@@ -348,7 +348,7 @@
 </span><a href="#200" id="200" class="l">200: </a><span class="php-comment">     *
 </span><a href="#201" id="201" class="l">201: </a><span class="php-comment">     * @var array
 </span><a href="#202" id="202" class="l">202: </a><span class="php-comment">     */</span>
-<a href="#203" id="203" class="l">203: </a>    <span class="php-keyword1">private</span> <span class="php-var">$createdHeader</span> = <span class="php-keyword1">array</span>();
+<a href="#203" id="203" class="l">203: </a>    <span class="php-keyword1">private</span> <span class="php-var">$createdHeader</span> = <span class="php-keyword2">array</span>();
 <a href="#204" id="204" class="l">204: </a>
 <a href="#205" id="205" class="l">205: </a>    <span class="php-comment">/**
 </span><a href="#206" id="206" class="l">206: </a><span class="php-comment">     * Generated email body.
@@ -515,8 +515,8 @@
 </span><a href="#367" id="367" class="l">367: </a><span class="php-comment">     */</span>
 <a href="#368" id="368" class="l">368: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> send(<span class="php-var">$mode</span>)
 <a href="#369" id="369" class="l">369: </a>    {
-<a href="#370" id="370" class="l">370: </a>        <span class="php-comment">// Sending modes
-</span><a href="#371" id="371" class="l">371: </a>        <span class="php-keyword1">static</span> <span class="php-var">$modes</span> = <span class="php-keyword1">array</span>(
+<a href="#370" id="370" class="l">370: </a>        <span class="php-comment">// Sending modes</span>
+<a href="#371" id="371" class="l">371: </a>        <span class="php-keyword1">static</span> <span class="php-var">$modes</span> = <span class="php-keyword2">array</span>(
 <a href="#372" id="372" class="l">372: </a>            self::MODE_SMTP =&gt; <span class="php-keyword1">true</span>,
 <a href="#373" id="373" class="l">373: </a>            self::MODE_MAIL =&gt; <span class="php-keyword1">true</span>,
 <a href="#374" id="374" class="l">374: </a>            self::MODE_NONE =&gt; <span class="php-keyword1">true</span>
@@ -526,26 +526,26 @@
 <a href="#378" id="378" class="l">378: </a>        }
 <a href="#379" id="379" class="l">379: </a>        <span class="php-var">$this</span>-&gt;mode = (string) <span class="php-var">$mode</span>;
 <a href="#380" id="380" class="l">380: </a>
-<a href="#381" id="381" class="l">381: </a>        <span class="php-comment">// Check of required parameters
-</span><a href="#382" id="382" class="l">382: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">null</span> === <span class="php-var">$this</span>-&gt;email-&gt;from) {
+<a href="#381" id="381" class="l">381: </a>        <span class="php-comment">// Check of required parameters</span>
+<a href="#382" id="382" class="l">382: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">null</span> === <span class="php-var">$this</span>-&gt;email-&gt;from) {
 <a href="#383" id="383" class="l">383: </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> Sender\CreateException(<span class="php-quote">'No sender was set.'</span>);
 <a href="#384" id="384" class="l">384: </a>        }
 <a href="#385" id="385" class="l">385: </a>        <span class="php-keyword1">if</span> ((<span class="php-keyword2">count</span>(<span class="php-var">$this</span>-&gt;email-&gt;to) + <span class="php-keyword2">count</span>(<span class="php-var">$this</span>-&gt;email-&gt;cc) + <span class="php-keyword2">count</span>(<span class="php-var">$this</span>-&gt;email-&gt;bcc)) &lt; <span class="php-num">1</span>) {
 <a href="#386" id="386" class="l">386: </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> Sender\CreateException(<span class="php-quote">'No recipient was set.'</span>);
 <a href="#387" id="387" class="l">387: </a>        }
 <a href="#388" id="388" class="l">388: </a>
-<a href="#389" id="389" class="l">389: </a>        <span class="php-comment">// Creates a result
-</span><a href="#390" id="390" class="l">390: </a>        <span class="php-var">$this</span>-&gt;result = <span class="php-keyword1">new</span> Sender\Result();
+<a href="#389" id="389" class="l">389: </a>        <span class="php-comment">// Creates a result</span>
+<a href="#390" id="390" class="l">390: </a>        <span class="php-var">$this</span>-&gt;result = <span class="php-keyword1">new</span> Sender\Result();
 <a href="#391" id="391" class="l">391: </a>
-<a href="#392" id="392" class="l">392: </a>        <span class="php-comment">// Creates an email
-</span><a href="#393" id="393" class="l">393: </a>        <span class="php-var">$this</span>-&gt;create();
+<a href="#392" id="392" class="l">392: </a>        <span class="php-comment">// Creates an email</span>
+<a href="#393" id="393" class="l">393: </a>        <span class="php-var">$this</span>-&gt;create();
 <a href="#394" id="394" class="l">394: </a>        <span class="php-var">$body</span> = <span class="php-keyword2">trim</span>(<span class="php-var">$this</span>-&gt;createdBody);
 <a href="#395" id="395" class="l">395: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$body</span>)) {
 <a href="#396" id="396" class="l">396: </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> Sender\CreateException(<span class="php-quote">'No body was created.'</span>);
 <a href="#397" id="397" class="l">397: </a>        }
 <a href="#398" id="398" class="l">398: </a>
-<a href="#399" id="399" class="l">399: </a>        <span class="php-comment">// Choose the appropriate sending method
-</span><a href="#400" id="400" class="l">400: </a>        <span class="php-keyword1">switch</span> (<span class="php-var">$this</span>-&gt;mode) {
+<a href="#399" id="399" class="l">399: </a>        <span class="php-comment">// Choose the appropriate sending method</span>
+<a href="#400" id="400" class="l">400: </a>        <span class="php-keyword1">switch</span> (<span class="php-var">$this</span>-&gt;mode) {
 <a href="#401" id="401" class="l">401: </a>            <span class="php-keyword1">case</span> self::MODE_SMTP:
 <a href="#402" id="402" class="l">402: </a>                <span class="php-var">$this</span>-&gt;sendBySmtp();
 <a href="#403" id="403" class="l">403: </a>                <span class="php-keyword1">break</span>;
@@ -553,17 +553,17 @@
 <a href="#405" id="405" class="l">405: </a>                <span class="php-var">$this</span>-&gt;sendByMail();
 <a href="#406" id="406" class="l">406: </a>                <span class="php-keyword1">break</span>;
 <a href="#407" id="407" class="l">407: </a>            <span class="php-keyword1">case</span> self::MODE_NONE:
-<a href="#408" id="408" class="l">408: </a>                <span class="php-comment">// Break missing intentionally
-</span><a href="#409" id="409" class="l">409: </a>            <span class="php-keyword1">default</span>:
-<a href="#410" id="410" class="l">410: </a>                <span class="php-comment">// No sending
-</span><a href="#411" id="411" class="l">411: </a>                <span class="php-keyword1">break</span>;
+<a href="#408" id="408" class="l">408: </a>                <span class="php-comment">// Break missing intentionally</span>
+<a href="#409" id="409" class="l">409: </a>            <span class="php-keyword1">default</span>:
+<a href="#410" id="410" class="l">410: </a>                <span class="php-comment">// No sending</span>
+<a href="#411" id="411" class="l">411: </a>                <span class="php-keyword1">break</span>;
 <a href="#412" id="412" class="l">412: </a>        }
 <a href="#413" id="413" class="l">413: </a>
-<a href="#414" id="414" class="l">414: </a>        <span class="php-comment">// Save the generated source code to the result
-</span><a href="#415" id="415" class="l">415: </a>        <span class="php-var">$this</span>-&gt;result-&gt;source = <span class="php-var">$this</span>-&gt;getHeader() . <span class="php-var">$this</span>-&gt;createdBody;
+<a href="#414" id="414" class="l">414: </a>        <span class="php-comment">// Save the generated source code to the result</span>
+<a href="#415" id="415" class="l">415: </a>        <span class="php-var">$this</span>-&gt;result-&gt;source = <span class="php-var">$this</span>-&gt;getHeader() . <span class="php-var">$this</span>-&gt;createdBody;
 <a href="#416" id="416" class="l">416: </a>
-<a href="#417" id="417" class="l">417: </a>        <span class="php-comment">// Flush of created email
-</span><a href="#418" id="418" class="l">418: </a>        <span class="php-var">$this</span>-&gt;createdHeader = <span class="php-keyword1">array</span>();
+<a href="#417" id="417" class="l">417: </a>        <span class="php-comment">// Flush of created email</span>
+<a href="#418" id="418" class="l">418: </a>        <span class="php-var">$this</span>-&gt;createdHeader = <span class="php-keyword2">array</span>();
 <a href="#419" id="419" class="l">419: </a>        <span class="php-var">$this</span>-&gt;createdBody = <span class="php-quote">''</span>;
 <a href="#420" id="420" class="l">420: </a>
 <a href="#421" id="421" class="l">421: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;result;
@@ -589,7 +589,7 @@
 <a href="#441" id="441" class="l">441: </a>
 <a href="#442" id="442" class="l">442: </a>        <span class="php-var">$subject</span> = <span class="php-var">$this</span>-&gt;changeCharset(<span class="php-var">$this</span>-&gt;clearHeaderValue(<span class="php-var">$this</span>-&gt;email-&gt;subject));
 <a href="#443" id="443" class="l">443: </a>
-<a href="#444" id="444" class="l">444: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">mail</span>(<span class="php-var">$recipients</span>, <span class="php-var">$this</span>-&gt;encodeHeader(<span class="php-var">$subject</span>), <span class="php-var">$this</span>-&gt;createdBody, <span class="php-var">$this</span>-&gt;getHeader(<span class="php-keyword1">array</span>(<span class="php-quote">'To'</span>, <span class="php-quote">'Subject'</span>)))) {
+<a href="#444" id="444" class="l">444: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">mail</span>(<span class="php-var">$recipients</span>, <span class="php-var">$this</span>-&gt;encodeHeader(<span class="php-var">$subject</span>), <span class="php-var">$this</span>-&gt;createdBody, <span class="php-var">$this</span>-&gt;getHeader(<span class="php-keyword2">array</span>(<span class="php-quote">'To'</span>, <span class="php-quote">'Subject'</span>)))) {
 <a href="#445" id="445" class="l">445: </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> Sender\Exception(<span class="php-quote">'Could not send the message.'</span>);
 <a href="#446" id="446" class="l">446: </a>        }
 <a href="#447" id="447" class="l">447: </a>    }
@@ -612,12 +612,12 @@
 <a href="#464" id="464" class="l">464: </a>                <span class="php-var">$smtp</span>-&gt;auth(<span class="php-var">$this</span>-&gt;smtpUser, <span class="php-var">$this</span>-&gt;smtpPsw);
 <a href="#465" id="465" class="l">465: </a>            }
 <a href="#466" id="466" class="l">466: </a>
-<a href="#467" id="467" class="l">467: </a>            <span class="php-comment">// Sender
-</span><a href="#468" id="468" class="l">468: </a>            <span class="php-var">$smtp</span>-&gt;from(<span class="php-var">$this</span>-&gt;email-&gt;from-&gt;email);
+<a href="#467" id="467" class="l">467: </a>            <span class="php-comment">// Sender</span>
+<a href="#468" id="468" class="l">468: </a>            <span class="php-var">$smtp</span>-&gt;from(<span class="php-var">$this</span>-&gt;email-&gt;from-&gt;email);
 <a href="#469" id="469" class="l">469: </a>
-<a href="#470" id="470" class="l">470: </a>            <span class="php-comment">// Recipients
-</span><a href="#471" id="471" class="l">471: </a>            <span class="php-var">$unknownRecipients</span> = <span class="php-keyword1">array</span>();
-<a href="#472" id="472" class="l">472: </a>            <span class="php-keyword1">foreach</span> (<span class="php-keyword2">array_merge</span>(<span class="php-var">$this</span>-&gt;email-&gt;to, <span class="php-var">$this</span>-&gt;email-&gt;cc, <span class="php-var">$this</span>-&gt;email-&gt;bcc) as <span class="php-var">$recipient</span>) {
+<a href="#470" id="470" class="l">470: </a>            <span class="php-comment">// Recipients</span>
+<a href="#471" id="471" class="l">471: </a>            <span class="php-var">$unknownRecipients</span> = <span class="php-keyword2">array</span>();
+<a href="#472" id="472" class="l">472: </a>            <span class="php-keyword1">foreach</span> (<span class="php-keyword2">array_merge</span>(<span class="php-var">$this</span>-&gt;email-&gt;to, <span class="php-var">$this</span>-&gt;email-&gt;cc, <span class="php-var">$this</span>-&gt;email-&gt;bcc) <span class="php-keyword1">as</span> <span class="php-var">$recipient</span>) {
 <a href="#473" id="473" class="l">473: </a>                <span class="php-keyword1">try</span> {
 <a href="#474" id="474" class="l">474: </a>                    <span class="php-var">$smtp</span>-&gt;recipient(<span class="php-var">$recipient</span>-&gt;email);
 <a href="#475" id="475" class="l">475: </a>                } <span class="php-keyword1">catch</span> (\Jyxo\<span class="php-keyword2">Mail</span>\Sender\SmtpException <span class="php-var">$e</span>) {
@@ -628,8 +628,8 @@
 <a href="#480" id="480" class="l">480: </a>                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> Sender\RecipientUnknownException(<span class="php-quote">'Unknown email recipients.'</span>, <span class="php-num">0</span>, <span class="php-var">$unknownRecipients</span>);
 <a href="#481" id="481" class="l">481: </a>            }
 <a href="#482" id="482" class="l">482: </a>
-<a href="#483" id="483" class="l">483: </a>            <span class="php-comment">// Data
-</span><a href="#484" id="484" class="l">484: </a>            <span class="php-var">$smtp</span>-&gt;data(<span class="php-var">$this</span>-&gt;getHeader(), <span class="php-var">$this</span>-&gt;createdBody);
+<a href="#483" id="483" class="l">483: </a>            <span class="php-comment">// Data</span>
+<a href="#484" id="484" class="l">484: </a>            <span class="php-var">$smtp</span>-&gt;data(<span class="php-var">$this</span>-&gt;getHeader(), <span class="php-var">$this</span>-&gt;createdBody);
 <a href="#485" id="485" class="l">485: </a>            <span class="php-var">$smtp</span>-&gt;disconnect();
 <a href="#486" id="486" class="l">486: </a>        } <span class="php-keyword1">catch</span> (\Jyxo\<span class="php-keyword2">Mail</span>\Sender\RecipientUnknownException <span class="php-var">$e</span>) {
 <a href="#487" id="487" class="l">487: </a>            <span class="php-var">$smtp</span>-&gt;disconnect();
@@ -648,41 +648,41 @@
 <a href="#500" id="500" class="l">500: </a>        <span class="php-var">$uniqueId</span> = <span class="php-keyword2">md5</span>(<span class="php-keyword2">uniqid</span>(<span class="php-keyword2">time</span>()));
 <a href="#501" id="501" class="l">501: </a>        <span class="php-var">$hostname</span> = <span class="php-var">$this</span>-&gt;clearHeaderValue(<span class="php-var">$this</span>-&gt;<span class="php-keyword2">getHostname</span>());
 <a href="#502" id="502" class="l">502: </a>
-<a href="#503" id="503" class="l">503: </a>        <span class="php-comment">// Unique email Id
-</span><a href="#504" id="504" class="l">504: </a>        <span class="php-var">$this</span>-&gt;result-&gt;messageId = <span class="php-var">$uniqueId</span> . <span class="php-quote">'@'</span> . <span class="php-var">$hostname</span>;
+<a href="#503" id="503" class="l">503: </a>        <span class="php-comment">// Unique email Id</span>
+<a href="#504" id="504" class="l">504: </a>        <span class="php-var">$this</span>-&gt;result-&gt;messageId = <span class="php-var">$uniqueId</span> . <span class="php-quote">'@'</span> . <span class="php-var">$hostname</span>;
 <a href="#505" id="505" class="l">505: </a>
-<a href="#506" id="506" class="l">506: </a>        <span class="php-comment">// Sending time
-</span><a href="#507" id="507" class="l">507: </a>        <span class="php-var">$this</span>-&gt;result-&gt;datetime = \Jyxo\<span class="php-keyword2">Time</span>\<span class="php-keyword2">Time</span>::now();
+<a href="#506" id="506" class="l">506: </a>        <span class="php-comment">// Sending time</span>
+<a href="#507" id="507" class="l">507: </a>        <span class="php-var">$this</span>-&gt;result-&gt;datetime = \Jyxo\<span class="php-keyword2">Time</span>\<span class="php-keyword2">Time</span>::now();
 <a href="#508" id="508" class="l">508: </a>
-<a href="#509" id="509" class="l">509: </a>        <span class="php-comment">// Parts boundaries
-</span><a href="#510" id="510" class="l">510: </a>        <span class="php-var">$this</span>-&gt;boundary = <span class="php-keyword1">array</span>(
+<a href="#509" id="509" class="l">509: </a>        <span class="php-comment">// Parts boundaries</span>
+<a href="#510" id="510" class="l">510: </a>        <span class="php-var">$this</span>-&gt;boundary = <span class="php-keyword2">array</span>(
 <a href="#511" id="511" class="l">511: </a>            <span class="php-num">1</span> =&gt; <span class="php-quote">'====b1'</span> . <span class="php-var">$uniqueId</span> . <span class="php-quote">'===='</span> . <span class="php-var">$hostname</span> . <span class="php-quote">'===='</span>,
 <a href="#512" id="512" class="l">512: </a>            <span class="php-num">2</span> =&gt; <span class="php-quote">'====b2'</span> . <span class="php-var">$uniqueId</span> . <span class="php-quote">'===='</span> . <span class="php-var">$hostname</span> . <span class="php-quote">'===='</span>
 <a href="#513" id="513" class="l">513: </a>        );
 <a href="#514" id="514" class="l">514: </a>
-<a href="#515" id="515" class="l">515: </a>        <span class="php-comment">// Determine the message type
-</span><a href="#516" id="516" class="l">516: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$this</span>-&gt;email-&gt;attachments)) {
-<a href="#517" id="517" class="l">517: </a>            <span class="php-comment">// Are there any attachments?
-</span><a href="#518" id="518" class="l">518: </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$this</span>-&gt;email-&gt;body-&gt;alternative)) {
-<a href="#519" id="519" class="l">519: </a>                <span class="php-comment">// There is an alternative content
-</span><a href="#520" id="520" class="l">520: </a>                <span class="php-var">$this</span>-&gt;type = self::TYPE_ALTERNATIVE_ATTACHMENTS;
+<a href="#515" id="515" class="l">515: </a>        <span class="php-comment">// Determine the message type</span>
+<a href="#516" id="516" class="l">516: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$this</span>-&gt;email-&gt;attachments)) {
+<a href="#517" id="517" class="l">517: </a>            <span class="php-comment">// Are there any attachments?</span>
+<a href="#518" id="518" class="l">518: </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$this</span>-&gt;email-&gt;body-&gt;alternative)) {
+<a href="#519" id="519" class="l">519: </a>                <span class="php-comment">// There is an alternative content</span>
+<a href="#520" id="520" class="l">520: </a>                <span class="php-var">$this</span>-&gt;type = self::TYPE_ALTERNATIVE_ATTACHMENTS;
 <a href="#521" id="521" class="l">521: </a>            } <span class="php-keyword1">else</span> {
-<a href="#522" id="522" class="l">522: </a>                <span class="php-comment">// No alternative content
-</span><a href="#523" id="523" class="l">523: </a>                <span class="php-var">$this</span>-&gt;type = self::TYPE_ATTACHMENTS;
+<a href="#522" id="522" class="l">522: </a>                <span class="php-comment">// No alternative content</span>
+<a href="#523" id="523" class="l">523: </a>                <span class="php-var">$this</span>-&gt;type = self::TYPE_ATTACHMENTS;
 <a href="#524" id="524" class="l">524: </a>            }
 <a href="#525" id="525" class="l">525: </a>        } <span class="php-keyword1">else</span> {
-<a href="#526" id="526" class="l">526: </a>            <span class="php-comment">// No attachments
-</span><a href="#527" id="527" class="l">527: </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$this</span>-&gt;email-&gt;body-&gt;alternative)) {
-<a href="#528" id="528" class="l">528: </a>                <span class="php-comment">// There is an alternative content
-</span><a href="#529" id="529" class="l">529: </a>                <span class="php-var">$this</span>-&gt;type = self::TYPE_ALTERNATIVE;
+<a href="#526" id="526" class="l">526: </a>            <span class="php-comment">// No attachments</span>
+<a href="#527" id="527" class="l">527: </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$this</span>-&gt;email-&gt;body-&gt;alternative)) {
+<a href="#528" id="528" class="l">528: </a>                <span class="php-comment">// There is an alternative content</span>
+<a href="#529" id="529" class="l">529: </a>                <span class="php-var">$this</span>-&gt;type = self::TYPE_ALTERNATIVE;
 <a href="#530" id="530" class="l">530: </a>            } <span class="php-keyword1">else</span> {
-<a href="#531" id="531" class="l">531: </a>                <span class="php-comment">// No alternative content
-</span><a href="#532" id="532" class="l">532: </a>                <span class="php-var">$this</span>-&gt;type = self::TYPE_SIMPLE;
+<a href="#531" id="531" class="l">531: </a>                <span class="php-comment">// No alternative content</span>
+<a href="#532" id="532" class="l">532: </a>                <span class="php-var">$this</span>-&gt;type = self::TYPE_SIMPLE;
 <a href="#533" id="533" class="l">533: </a>            }
 <a href="#534" id="534" class="l">534: </a>        }
 <a href="#535" id="535" class="l">535: </a>
-<a href="#536" id="536" class="l">536: </a>        <span class="php-comment">// Creates header and body
-</span><a href="#537" id="537" class="l">537: </a>        <span class="php-var">$this</span>-&gt;createHeader();
+<a href="#536" id="536" class="l">536: </a>        <span class="php-comment">// Creates header and body</span>
+<a href="#537" id="537" class="l">537: </a>        <span class="php-var">$this</span>-&gt;createHeader();
 <a href="#538" id="538" class="l">538: </a>        <span class="php-var">$this</span>-&gt;createBody();
 <a href="#539" id="539" class="l">539: </a>    }
 <a href="#540" id="540" class="l">540: </a>
@@ -700,8 +700,8 @@
 <a href="#552" id="552" class="l">552: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$this</span>-&gt;email-&gt;to)) {
 <a href="#553" id="553" class="l">553: </a>            <span class="php-var">$this</span>-&gt;addHeaderLine(<span class="php-quote">'To'</span>, <span class="php-var">$this</span>-&gt;formatAddressList(<span class="php-var">$this</span>-&gt;email-&gt;to));
 <a href="#554" id="554" class="l">554: </a>        } <span class="php-keyword1">elseif</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$this</span>-&gt;email-&gt;cc)) {
-<a href="#555" id="555" class="l">555: </a>            <span class="php-comment">// Only blind carbon copy recipients
-</span><a href="#556" id="556" class="l">556: </a>            <span class="php-var">$this</span>-&gt;addHeaderLine(<span class="php-quote">'To'</span>, <span class="php-quote">'undisclosed-recipients:;'</span>);
+<a href="#555" id="555" class="l">555: </a>            <span class="php-comment">// Only blind carbon copy recipients</span>
+<a href="#556" id="556" class="l">556: </a>            <span class="php-var">$this</span>-&gt;addHeaderLine(<span class="php-quote">'To'</span>, <span class="php-quote">'undisclosed-recipients:;'</span>);
 <a href="#557" id="557" class="l">557: </a>        }
 <a href="#558" id="558" class="l">558: </a>
 <a href="#559" id="559" class="l">559: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$this</span>-&gt;email-&gt;cc)) {
@@ -729,7 +729,7 @@
 <a href="#581" id="581" class="l">581: </a>        }
 <a href="#582" id="582" class="l">582: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$this</span>-&gt;email-&gt;references)) {
 <a href="#583" id="583" class="l">583: </a>            <span class="php-var">$references</span> = <span class="php-var">$this</span>-&gt;email-&gt;references;
-<a href="#584" id="584" class="l">584: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$references</span> as <span class="php-var">$key</span> =&gt; <span class="php-var">$reference</span>) {
+<a href="#584" id="584" class="l">584: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$references</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$reference</span>) {
 <a href="#585" id="585" class="l">585: </a>                <span class="php-var">$references</span>[<span class="php-var">$key</span>] = <span class="php-var">$this</span>-&gt;clearHeaderValue(<span class="php-var">$reference</span>);
 <a href="#586" id="586" class="l">586: </a>            }
 <a href="#587" id="587" class="l">587: </a>            <span class="php-var">$this</span>-&gt;addHeaderLine(<span class="php-quote">'References'</span>, <span class="php-quote">'&lt;'</span> . <span class="php-keyword2">implode</span>(<span class="php-quote">'&gt; &lt;'</span>, <span class="php-var">$references</span>) . <span class="php-quote">'&gt;'</span>);
@@ -741,15 +741,15 @@
 <a href="#593" id="593" class="l">593: </a>
 <a href="#594" id="594" class="l">594: </a>        <span class="php-var">$this</span>-&gt;addHeaderLine(<span class="php-quote">'MIME-Version'</span>, <span class="php-quote">'1.0'</span>);
 <a href="#595" id="595" class="l">595: </a>
-<a href="#596" id="596" class="l">596: </a>        <span class="php-comment">// Custom headers
-</span><a href="#597" id="597" class="l">597: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;email-&gt;headers as <span class="php-var">$header</span>) {
+<a href="#596" id="596" class="l">596: </a>        <span class="php-comment">// Custom headers</span>
+<a href="#597" id="597" class="l">597: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;email-&gt;headers <span class="php-keyword1">as</span> <span class="php-var">$header</span>) {
 <a href="#598" id="598" class="l">598: </a>            <span class="php-var">$this</span>-&gt;addHeaderLine(<span class="php-var">$this</span>-&gt;changeCharset(<span class="php-var">$this</span>-&gt;clearHeaderValue(<span class="php-var">$header</span>-&gt;name)), <span class="php-var">$this</span>-&gt;encodeHeader(<span class="php-var">$this</span>-&gt;clearHeaderValue(<span class="php-var">$header</span>-&gt;value)));
 <a href="#599" id="599" class="l">599: </a>        }
 <a href="#600" id="600" class="l">600: </a>
 <a href="#601" id="601" class="l">601: </a>        <span class="php-keyword1">switch</span> (<span class="php-var">$this</span>-&gt;type) {
 <a href="#602" id="602" class="l">602: </a>            <span class="php-keyword1">case</span> self::TYPE_ATTACHMENTS:
-<a href="#603" id="603" class="l">603: </a>                <span class="php-comment">// Break missing intentionally
-</span><a href="#604" id="604" class="l">604: </a>            <span class="php-keyword1">case</span> self::TYPE_ALTERNATIVE_ATTACHMENTS:
+<a href="#603" id="603" class="l">603: </a>                <span class="php-comment">// Break missing intentionally</span>
+<a href="#604" id="604" class="l">604: </a>            <span class="php-keyword1">case</span> self::TYPE_ALTERNATIVE_ATTACHMENTS:
 <a href="#605" id="605" class="l">605: </a>                <span class="php-var">$subtype</span> = <span class="php-var">$this</span>-&gt;email-&gt;hasInlineAttachments() ? <span class="php-quote">'related'</span> : <span class="php-quote">'mixed'</span>;
 <a href="#606" id="606" class="l">606: </a>                <span class="php-var">$this</span>-&gt;addHeaderLine(<span class="php-quote">'Content-Type'</span>, <span class="php-quote">'multipart/'</span> . <span class="php-var">$subtype</span> . <span class="php-quote">';'</span> . self::LINE_END . <span class="php-quote">' boundary=&quot;'</span> . <span class="php-var">$this</span>-&gt;boundary[<span class="php-num">1</span>] . <span class="php-quote">'&quot;'</span>);
 <a href="#607" id="607" class="l">607: </a>                <span class="php-keyword1">break</span>;
@@ -757,8 +757,8 @@
 <a href="#609" id="609" class="l">609: </a>                <span class="php-var">$this</span>-&gt;addHeaderLine(<span class="php-quote">'Content-Type'</span>, <span class="php-quote">'multipart/alternative;'</span> . self::LINE_END . <span class="php-quote">' boundary=&quot;'</span> . <span class="php-var">$this</span>-&gt;boundary[<span class="php-num">1</span>] . <span class="php-quote">'&quot;'</span>);
 <a href="#610" id="610" class="l">610: </a>                <span class="php-keyword1">break</span>;
 <a href="#611" id="611" class="l">611: </a>            <span class="php-keyword1">case</span> self::TYPE_SIMPLE:
-<a href="#612" id="612" class="l">612: </a>                <span class="php-comment">// Break missing intentionally
-</span><a href="#613" id="613" class="l">613: </a>            <span class="php-keyword1">default</span>:
+<a href="#612" id="612" class="l">612: </a>                <span class="php-comment">// Break missing intentionally</span>
+<a href="#613" id="613" class="l">613: </a>            <span class="php-keyword1">default</span>:
 <a href="#614" id="614" class="l">614: </a>                <span class="php-var">$contentType</span> = <span class="php-var">$this</span>-&gt;email-&gt;body-&gt;isHtml() ? <span class="php-quote">'text/html'</span> : <span class="php-quote">'text/plain'</span>;
 <a href="#615" id="615" class="l">615: </a>
 <a href="#616" id="616" class="l">616: </a>                <span class="php-var">$this</span>-&gt;addHeaderLine(<span class="php-quote">'Content-Type'</span>, <span class="php-var">$contentType</span> . <span class="php-quote">'; charset=&quot;'</span> . <span class="php-var">$this</span>-&gt;clearHeaderValue(<span class="php-var">$this</span>-&gt;charset) . <span class="php-quote">'&quot;'</span>);
@@ -800,8 +800,8 @@
 <a href="#652" id="652" class="l">652: </a>                <span class="php-var">$this</span>-&gt;createdBody .= <span class="php-var">$this</span>-&gt;getBoundaryEnd(<span class="php-var">$this</span>-&gt;boundary[<span class="php-num">1</span>]);
 <a href="#653" id="653" class="l">653: </a>                <span class="php-keyword1">break</span>;
 <a href="#654" id="654" class="l">654: </a>            <span class="php-keyword1">case</span> self::TYPE_SIMPLE:
-<a href="#655" id="655" class="l">655: </a>                <span class="php-comment">// Break missing intentionally
-</span><a href="#656" id="656" class="l">656: </a>            <span class="php-keyword1">default</span>:
+<a href="#655" id="655" class="l">655: </a>                <span class="php-comment">// Break missing intentionally</span>
+<a href="#656" id="656" class="l">656: </a>            <span class="php-keyword1">default</span>:
 <a href="#657" id="657" class="l">657: </a>                <span class="php-var">$this</span>-&gt;createdBody = <span class="php-var">$this</span>-&gt;encodeString(<span class="php-var">$this</span>-&gt;changeCharset(<span class="php-var">$this</span>-&gt;email-&gt;body-&gt;main), <span class="php-var">$this</span>-&gt;encoding);
 <a href="#658" id="658" class="l">658: </a>                <span class="php-keyword1">break</span>;
 <a href="#659" id="659" class="l">659: </a>        }
@@ -814,9 +814,9 @@
 </span><a href="#666" id="666" class="l">666: </a><span class="php-comment">     */</span>
 <a href="#667" id="667" class="l">667: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> attachAll()
 <a href="#668" id="668" class="l">668: </a>    {
-<a href="#669" id="669" class="l">669: </a>        <span class="php-var">$mime</span> = <span class="php-keyword1">array</span>();
+<a href="#669" id="669" class="l">669: </a>        <span class="php-var">$mime</span> = <span class="php-keyword2">array</span>();
 <a href="#670" id="670" class="l">670: </a>
-<a href="#671" id="671" class="l">671: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;email-&gt;attachments as <span class="php-var">$attachment</span>) {
+<a href="#671" id="671" class="l">671: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;email-&gt;attachments <span class="php-keyword1">as</span> <span class="php-var">$attachment</span>) {
 <a href="#672" id="672" class="l">672: </a>            <span class="php-var">$encoding</span> = !<span class="php-keyword1">empty</span>(<span class="php-var">$attachment</span>-&gt;encoding) ? <span class="php-var">$attachment</span>-&gt;encoding : Encoding::BASE64;
 <a href="#673" id="673" class="l">673: </a>            <span class="php-var">$name</span> = <span class="php-var">$this</span>-&gt;changeCharset(<span class="php-var">$this</span>-&gt;clearHeaderValue(<span class="php-var">$attachment</span>-&gt;name));
 <a href="#674" id="674" class="l">674: </a>
@@ -832,8 +832,8 @@
 <a href="#684" id="684" class="l">684: </a>            <span class="php-var">$mime</span>[] = <span class="php-quote">'Content-Disposition: '</span> . <span class="php-var">$attachment</span>-&gt;disposition . <span class="php-quote">';'</span> . self::LINE_END;
 <a href="#685" id="685" class="l">685: </a>            <span class="php-var">$mime</span>[] = <span class="php-quote">' filename=&quot;'</span> . <span class="php-var">$this</span>-&gt;encodeHeader(<span class="php-var">$name</span>) . <span class="php-quote">'&quot;'</span> . self::LINE_END . self::LINE_END;
 <a href="#686" id="686" class="l">686: </a>
-<a href="#687" id="687" class="l">687: </a>            <span class="php-comment">// Just fix line endings in case of encoded attachments, encode otherwise
-</span><a href="#688" id="688" class="l">688: </a>            <span class="php-var">$mime</span>[] = !<span class="php-keyword1">empty</span>(<span class="php-var">$attachment</span>-&gt;encoding)
+<a href="#687" id="687" class="l">687: </a>            <span class="php-comment">// Just fix line endings in case of encoded attachments, encode otherwise</span>
+<a href="#688" id="688" class="l">688: </a>            <span class="php-var">$mime</span>[] = !<span class="php-keyword1">empty</span>(<span class="php-var">$attachment</span>-&gt;encoding)
 <a href="#689" id="689" class="l">689: </a>                ? \Jyxo\String::fixLineEnding(<span class="php-var">$attachment</span>-&gt;content, self::LINE_END)
 <a href="#690" id="690" class="l">690: </a>                : <span class="php-var">$this</span>-&gt;encodeString(<span class="php-var">$attachment</span>-&gt;content, <span class="php-var">$encoding</span>);
 <a href="#691" id="691" class="l">691: </a>            <span class="php-var">$mime</span>[] = self::LINE_END . self::LINE_END;
@@ -851,10 +851,10 @@
 </span><a href="#703" id="703" class="l">703: </a><span class="php-comment">     * @param array $except Headers to be removed
 </span><a href="#704" id="704" class="l">704: </a><span class="php-comment">     * @return string
 </span><a href="#705" id="705" class="l">705: </a><span class="php-comment">     */</span>
-<a href="#706" id="706" class="l">706: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> getHeader(<span class="php-keyword1">array</span> <span class="php-var">$except</span> = <span class="php-keyword1">array</span>())
+<a href="#706" id="706" class="l">706: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> getHeader(<span class="php-keyword2">array</span> <span class="php-var">$except</span> = <span class="php-keyword2">array</span>())
 <a href="#707" id="707" class="l">707: </a>    {
 <a href="#708" id="708" class="l">708: </a>        <span class="php-var">$header</span> = <span class="php-quote">''</span>;
-<a href="#709" id="709" class="l">709: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;createdHeader as <span class="php-var">$headerLine</span>) {
+<a href="#709" id="709" class="l">709: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;createdHeader <span class="php-keyword1">as</span> <span class="php-var">$headerLine</span>) {
 <a href="#710" id="710" class="l">710: </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword2">in_array</span>(<span class="php-var">$headerLine</span>[<span class="php-quote">'name'</span>], <span class="php-var">$except</span>)) {
 <a href="#711" id="711" class="l">711: </a>                <span class="php-var">$header</span> .= <span class="php-var">$headerLine</span>[<span class="php-quote">'name'</span>] . <span class="php-quote">': '</span> . <span class="php-var">$headerLine</span>[<span class="php-quote">'value'</span>] . self::LINE_END;
 <a href="#712" id="712" class="l">712: </a>            }
@@ -874,17 +874,17 @@
 <a href="#726" id="726" class="l">726: </a>        <span class="php-var">$name</span> = <span class="php-var">$this</span>-&gt;changeCharset(<span class="php-var">$this</span>-&gt;clearHeaderValue(<span class="php-var">$address</span>-&gt;name));
 <a href="#727" id="727" class="l">727: </a>        <span class="php-var">$email</span> = <span class="php-var">$this</span>-&gt;clearHeaderValue(<span class="php-var">$address</span>-&gt;email);
 <a href="#728" id="728" class="l">728: </a>
-<a href="#729" id="729" class="l">729: </a>        <span class="php-comment">// No name is set
-</span><a href="#730" id="730" class="l">730: </a>        <span class="php-keyword1">if</span> ((<span class="php-keyword1">empty</span>(<span class="php-var">$name</span>)) || (<span class="php-var">$name</span> === <span class="php-var">$email</span>)) {
+<a href="#729" id="729" class="l">729: </a>        <span class="php-comment">// No name is set</span>
+<a href="#730" id="730" class="l">730: </a>        <span class="php-keyword1">if</span> ((<span class="php-keyword1">empty</span>(<span class="php-var">$name</span>)) || (<span class="php-var">$name</span> === <span class="php-var">$email</span>)) {
 <a href="#731" id="731" class="l">731: </a>            <span class="php-keyword1">return</span> <span class="php-var">$email</span>;
 <a href="#732" id="732" class="l">732: </a>        }
 <a href="#733" id="733" class="l">733: </a>
 <a href="#734" id="734" class="l">734: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'~[\200-\377]~'</span>, <span class="php-var">$name</span>)) {
-<a href="#735" id="735" class="l">735: </a>            <span class="php-comment">// High ascii
-</span><a href="#736" id="736" class="l">736: </a>            <span class="php-var">$name</span> = <span class="php-var">$this</span>-&gt;encodeHeader(<span class="php-var">$name</span>);
+<a href="#735" id="735" class="l">735: </a>            <span class="php-comment">// High ascii</span>
+<a href="#736" id="736" class="l">736: </a>            <span class="php-var">$name</span> = <span class="php-var">$this</span>-&gt;encodeHeader(<span class="php-var">$name</span>);
 <a href="#737" id="737" class="l">737: </a>        } <span class="php-keyword1">elseif</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'~[^\w\s!#\$%&amp;\'*+/=?^_`{|}\~-]~'</span>, <span class="php-var">$name</span>)) {
-<a href="#738" id="738" class="l">738: </a>            <span class="php-comment">// Dangerous characters
-</span><a href="#739" id="739" class="l">739: </a>            <span class="php-var">$name</span> = <span class="php-quote">'&quot;'</span> . <span class="php-var">$name</span> . <span class="php-quote">'&quot;'</span>;
+<a href="#738" id="738" class="l">738: </a>            <span class="php-comment">// Dangerous characters</span>
+<a href="#739" id="739" class="l">739: </a>            <span class="php-var">$name</span> = <span class="php-quote">'&quot;'</span> . <span class="php-var">$name</span> . <span class="php-quote">'&quot;'</span>;
 <a href="#740" id="740" class="l">740: </a>        }
 <a href="#741" id="741" class="l">741: </a>
 <a href="#742" id="742" class="l">742: </a>        <span class="php-keyword1">return</span> <span class="php-var">$name</span> . <span class="php-quote">' &lt;'</span> . <span class="php-var">$email</span> . <span class="php-quote">'&gt;'</span>;
@@ -896,7 +896,7 @@
 </span><a href="#748" id="748" class="l">748: </a><span class="php-comment">     * @param array $addressList Array of addresses
 </span><a href="#749" id="749" class="l">749: </a><span class="php-comment">     * @return string
 </span><a href="#750" id="750" class="l">750: </a><span class="php-comment">     */</span>
-<a href="#751" id="751" class="l">751: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> formatAddressList(<span class="php-keyword1">array</span> <span class="php-var">$addressList</span>)
+<a href="#751" id="751" class="l">751: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> formatAddressList(<span class="php-keyword2">array</span> <span class="php-var">$addressList</span>)
 <a href="#752" id="752" class="l">752: </a>    {
 <a href="#753" id="753" class="l">753: </a>        <span class="php-var">$formated</span> = <span class="php-quote">''</span>;
 <a href="#754" id="754" class="l">754: </a>        <span class="php-keyword1">while</span> (<span class="php-var">$address</span> = <span class="php-keyword2">current</span>(<span class="php-var">$addressList</span>)) {
@@ -917,7 +917,7 @@
 </span><a href="#769" id="769" class="l">769: </a><span class="php-comment">     */</span>
 <a href="#770" id="770" class="l">770: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> addHeaderLine(<span class="php-var">$name</span>, <span class="php-var">$value</span>)
 <a href="#771" id="771" class="l">771: </a>    {
-<a href="#772" id="772" class="l">772: </a>        <span class="php-var">$this</span>-&gt;createdHeader[] = <span class="php-keyword1">array</span>(
+<a href="#772" id="772" class="l">772: </a>        <span class="php-var">$this</span>-&gt;createdHeader[] = <span class="php-keyword2">array</span>(
 <a href="#773" id="773" class="l">773: </a>            <span class="php-quote">'name'</span> =&gt; <span class="php-var">$name</span>,
 <a href="#774" id="774" class="l">774: </a>            <span class="php-quote">'value'</span> =&gt; <span class="php-keyword2">trim</span>(<span class="php-var">$value</span>)
 <a href="#775" id="775" class="l">775: </a>        );
@@ -931,17 +931,17 @@
 </span><a href="#783" id="783" class="l">783: </a><span class="php-comment">     */</span>
 <a href="#784" id="784" class="l">784: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> encodeHeader(<span class="php-var">$string</span>)
 <a href="#785" id="785" class="l">785: </a>    {
-<a href="#786" id="786" class="l">786: </a>        <span class="php-comment">// There might be dangerous characters in the string
-</span><a href="#787" id="787" class="l">787: </a>        <span class="php-var">$count</span> = <span class="php-keyword2">preg_match_all</span>(<span class="php-quote">'~[^\040-\176]~'</span>, <span class="php-var">$string</span>, <span class="php-var">$matches</span>);
+<a href="#786" id="786" class="l">786: </a>        <span class="php-comment">// There might be dangerous characters in the string</span>
+<a href="#787" id="787" class="l">787: </a>        <span class="php-var">$count</span> = <span class="php-keyword2">preg_match_all</span>(<span class="php-quote">'~[^\040-\176]~'</span>, <span class="php-var">$string</span>, <span class="php-var">$matches</span>);
 <a href="#788" id="788" class="l">788: </a>        <span class="php-keyword1">if</span> (<span class="php-num">0</span> === <span class="php-var">$count</span>) {
 <a href="#789" id="789" class="l">789: </a>            <span class="php-keyword1">return</span> <span class="php-var">$string</span>;
 <a href="#790" id="790" class="l">790: </a>        }
 <a href="#791" id="791" class="l">791: </a>
-<a href="#792" id="792" class="l">792: </a>        <span class="php-comment">// 7 is =? + ? + Q/B + ? + ?=
-</span><a href="#793" id="793" class="l">793: </a>        <span class="php-var">$maxlen</span> = <span class="php-num">75</span> - <span class="php-num">7</span> - <span class="php-keyword2">strlen</span>(<span class="php-var">$this</span>-&gt;charset);
+<a href="#792" id="792" class="l">792: </a>        <span class="php-comment">// 7 is =? + ? + Q/B + ? + ?=</span>
+<a href="#793" id="793" class="l">793: </a>        <span class="php-var">$maxlen</span> = <span class="php-num">75</span> - <span class="php-num">7</span> - <span class="php-keyword2">strlen</span>(<span class="php-var">$this</span>-&gt;charset);
 <a href="#794" id="794" class="l">794: </a>
-<a href="#795" id="795" class="l">795: </a>        <span class="php-comment">// Uses encoding with shorter output
-</span><a href="#796" id="796" class="l">796: </a>        <span class="php-comment">/*
+<a href="#795" id="795" class="l">795: </a>        <span class="php-comment">// Uses encoding with shorter output</span>
+<a href="#796" id="796" class="l">796: </a>        <span class="php-comment">/*
 </span><a href="#797" id="797" class="l">797: </a><span class="php-comment">        if (mb_strlen($string, $this-&gt;charset) / 3 &lt; $count) {
 </span><a href="#798" id="798" class="l">798: </a><span class="php-comment">            $encoding = 'B';
 </span><a href="#799" id="799" class="l">799: </a><span class="php-comment">            $maxlen -= $maxlen % 4;
@@ -953,13 +953,13 @@
 </span><a href="#805" id="805" class="l">805: </a><span class="php-comment">        }
 </span><a href="#806" id="806" class="l">806: </a><span class="php-comment">        */</span>
 <a href="#807" id="807" class="l">807: </a>
-<a href="#808" id="808" class="l">808: </a>        <span class="php-comment">// We have to use base64 always, because Thunderbird has problems with quoted-printable
-</span><a href="#809" id="809" class="l">809: </a>        <span class="php-var">$encoding</span> = <span class="php-quote">'B'</span>;
+<a href="#808" id="808" class="l">808: </a>        <span class="php-comment">// We have to use base64 always, because Thunderbird has problems with quoted-printable</span>
+<a href="#809" id="809" class="l">809: </a>        <span class="php-var">$encoding</span> = <span class="php-quote">'B'</span>;
 <a href="#810" id="810" class="l">810: </a>        <span class="php-var">$maxlen</span> -= <span class="php-var">$maxlen</span> % <span class="php-num">4</span>;
 <a href="#811" id="811" class="l">811: </a>        <span class="php-var">$encoded</span> = <span class="php-var">$this</span>-&gt;encodeString(<span class="php-var">$string</span>, Encoding::BASE64, <span class="php-var">$maxlen</span>);
 <a href="#812" id="812" class="l">812: </a>
-<a href="#813" id="813" class="l">813: </a>        <span class="php-comment">// Splitting to multiple lines
-</span><a href="#814" id="814" class="l">814: </a>        <span class="php-var">$encoded</span> = <span class="php-keyword2">trim</span>(<span class="php-keyword2">preg_replace</span>(<span class="php-quote">'~^(.*)$~m'</span>, <span class="php-quote">' =?'</span> . <span class="php-var">$this</span>-&gt;clearHeaderValue(<span class="php-var">$this</span>-&gt;charset) . <span class="php-quote">'?'</span> . <span class="php-var">$encoding</span> . <span class="php-quote">'?\1?='</span>, <span class="php-var">$encoded</span>));
+<a href="#813" id="813" class="l">813: </a>        <span class="php-comment">// Splitting to multiple lines</span>
+<a href="#814" id="814" class="l">814: </a>        <span class="php-var">$encoded</span> = <span class="php-keyword2">trim</span>(<span class="php-keyword2">preg_replace</span>(<span class="php-quote">'~^(.*)$~m'</span>, <span class="php-quote">' =?'</span> . <span class="php-var">$this</span>-&gt;clearHeaderValue(<span class="php-var">$this</span>-&gt;charset) . <span class="php-quote">'?'</span> . <span class="php-var">$encoding</span> . <span class="php-quote">'?\1?='</span>, <span class="php-var">$encoded</span>));
 <a href="#815" id="815" class="l">815: </a>
 <a href="#816" id="816" class="l">816: </a>        <span class="php-keyword1">return</span> <span class="php-var">$encoded</span>;
 <a href="#817" id="817" class="l">817: </a>    }
@@ -1026,8 +1026,8 @@
 <a href="#878" id="878" class="l">878: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> changeCharset(<span class="php-var">$string</span>)
 <a href="#879" id="879" class="l">879: </a>    {
 <a href="#880" id="880" class="l">880: </a>        <span class="php-keyword1">if</span> (<span class="php-quote">'utf-8'</span> !== <span class="php-var">$this</span>-&gt;charset) {
-<a href="#881" id="881" class="l">881: </a>            <span class="php-comment">// Triggers a notice on an invalid character
-</span><a href="#882" id="882" class="l">882: </a>            <span class="php-var">$string</span> = @<span class="php-keyword2">iconv</span>(<span class="php-quote">'utf-8'</span>, <span class="php-var">$this</span>-&gt;charset . <span class="php-quote">'//TRANSLIT'</span>, <span class="php-var">$string</span>);
+<a href="#881" id="881" class="l">881: </a>            <span class="php-comment">// Triggers a notice on an invalid character</span>
+<a href="#882" id="882" class="l">882: </a>            <span class="php-var">$string</span> = @<span class="php-keyword2">iconv</span>(<span class="php-quote">'utf-8'</span>, <span class="php-var">$this</span>-&gt;charset . <span class="php-quote">'//TRANSLIT'</span>, <span class="php-var">$string</span>);
 <a href="#883" id="883" class="l">883: </a>        }
 <a href="#884" id="884" class="l">884: </a>
 <a href="#885" id="885" class="l">885: </a>        <span class="php-keyword1">return</span> <span class="php-var">$string</span>;
@@ -1036,7 +1036,7 @@
 <a href="#888" id="888" class="l">888: </a></code></pre>
 
 		<div id="footer">
-			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>.<br />
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">ApiGen</a>.<br />
 			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
 		</div>
 	</div>

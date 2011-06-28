@@ -2,12 +2,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="TR ApiGen 2.0 RC" />
+	<meta name="generator" content="ApiGen 2.0" />
 	<meta name="robots" content="noindex" />
 
 	<title>File Beholder/TestCase/Imap.php | Jyxo PHP Library</title>
 
-	<script type="text/javascript" src="resources/combined.js?3309972472"></script>
+	<script type="text/javascript" src="resources/combined.js?4060439551"></script>
 	<script type="text/javascript" src="elementlist.js?2796542733"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1274782946" />
 	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
@@ -244,19 +244,19 @@
 </span><a href="#87" id="87" class="l"> 87: </a><span class="php-comment">     */</span>
 <a href="#88" id="88" class="l"> 88: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> run()
 <a href="#89" id="89" class="l"> 89: </a>    {
-<a href="#90" id="90" class="l"> 90: </a>        <span class="php-comment">// The imap extension is required
-</span><a href="#91" id="91" class="l"> 91: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">extension_loaded</span>(<span class="php-quote">'imap'</span>)) {
+<a href="#90" id="90" class="l"> 90: </a>        <span class="php-comment">// The imap extension is required</span>
+<a href="#91" id="91" class="l"> 91: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">extension_loaded</span>(<span class="php-quote">'imap'</span>)) {
 <a href="#92" id="92" class="l"> 92: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, <span class="php-quote">'Extension imap missing'</span>);
 <a href="#93" id="93" class="l"> 93: </a>        }
 <a href="#94" id="94" class="l"> 94: </a>
-<a href="#95" id="95" class="l"> 95: </a>        <span class="php-comment">// Label for status
-</span><a href="#96" id="96" class="l"> 96: </a>        <span class="php-var">$description</span> = <span class="php-keyword2">sprintf</span>(<span class="php-quote">'%s@%s:%s'</span>, <span class="php-var">$this</span>-&gt;user, <span class="php-var">$this</span>-&gt;host, <span class="php-var">$this</span>-&gt;port);
+<a href="#95" id="95" class="l"> 95: </a>        <span class="php-comment">// Label for status</span>
+<a href="#96" id="96" class="l"> 96: </a>        <span class="php-var">$description</span> = <span class="php-keyword2">sprintf</span>(<span class="php-quote">'%s@%s:%s'</span>, <span class="php-var">$this</span>-&gt;user, <span class="php-var">$this</span>-&gt;host, <span class="php-var">$this</span>-&gt;port);
 <a href="#97" id="97" class="l"> 97: </a>
-<a href="#98" id="98" class="l"> 98: </a>        <span class="php-var">$imap</span> = imap_open(<span class="php-quote">'{'</span> . <span class="php-var">$this</span>-&gt;host . <span class="php-quote">':'</span> . <span class="php-var">$this</span>-&gt;port . <span class="php-quote">'/'</span> . (!<span class="php-var">$this</span>-&gt;validateCert ? <span class="php-quote">'no'</span> : <span class="php-quote">''</span>) . <span class="php-quote">'validate-cert}'</span>, <span class="php-var">$this</span>-&gt;user, <span class="php-var">$this</span>-&gt;password, OP_HALFOPEN, <span class="php-num">1</span>);
+<a href="#98" id="98" class="l"> 98: </a>        <span class="php-var">$imap</span> = <span class="php-keyword2">imap_open</span>(<span class="php-quote">'{'</span> . <span class="php-var">$this</span>-&gt;host . <span class="php-quote">':'</span> . <span class="php-var">$this</span>-&gt;port . <span class="php-quote">'/'</span> . (!<span class="php-var">$this</span>-&gt;validateCert ? <span class="php-quote">'no'</span> : <span class="php-quote">''</span>) . <span class="php-quote">'validate-cert}'</span>, <span class="php-var">$this</span>-&gt;user, <span class="php-var">$this</span>-&gt;password, OP_HALFOPEN, <span class="php-num">1</span>);
 <a href="#99" id="99" class="l"> 99: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">false</span> === <span class="php-var">$imap</span>) {
 <a href="#100" id="100" class="l">100: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, <span class="php-keyword2">sprintf</span>(<span class="php-quote">'Connection error %s'</span>, <span class="php-var">$description</span>));
 <a href="#101" id="101" class="l">101: </a>        }
-<a href="#102" id="102" class="l">102: </a>        imap_close(<span class="php-var">$imap</span>);
+<a href="#102" id="102" class="l">102: </a>        <span class="php-keyword2">imap_close</span>(<span class="php-var">$imap</span>);
 <a href="#103" id="103" class="l">103: </a>
 <a href="#104" id="104" class="l">104: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::SUCCESS, <span class="php-var">$description</span>);
 <a href="#105" id="105" class="l">105: </a>    }
@@ -264,7 +264,7 @@
 <a href="#107" id="107" class="l">107: </a></code></pre>
 
 		<div id="footer">
-			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>.<br />
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">ApiGen</a>.<br />
 			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
 		</div>
 	</div>

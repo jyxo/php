@@ -2,12 +2,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="TR ApiGen 2.0 RC" />
+	<meta name="generator" content="ApiGen 2.0" />
 	<meta name="robots" content="noindex" />
 
 	<title>File Time/ComposerException.php | Jyxo PHP Library</title>
 
-	<script type="text/javascript" src="resources/combined.js?3309972472"></script>
+	<script type="text/javascript" src="resources/combined.js?4060439551"></script>
 	<script type="text/javascript" src="elementlist.js?2796542733"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1274782946" />
 	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
@@ -245,32 +245,31 @@
 </span><a href="#94" id="94" class="l"> 94: </a><span class="php-comment">     *
 </span><a href="#95" id="95" class="l"> 95: </a><span class="php-comment">     * @param string $message Exception message
 </span><a href="#96" id="96" class="l"> 96: </a><span class="php-comment">     * @param integer $code Exception code (type)
-</span><a href="#97" id="97" class="l"> 97: </a><span class="php-comment">     * @access parent::__construct()
-</span><a href="#98" id="98" class="l"> 98: </a><span class="php-comment">     */</span>
-<a href="#99" id="99" class="l"> 99: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> __construct(<span class="php-var">$message</span>, <span class="php-var">$code</span>)
-<a href="#100" id="100" class="l">100: </a>    {
-<a href="#101" id="101" class="l">101: </a>        <span class="php-keyword1">static</span> <span class="php-var">$allowedUnits</span> = <span class="php-keyword1">array</span>(
-<a href="#102" id="102" class="l">102: </a>            self::SECOND,
-<a href="#103" id="103" class="l">103: </a>            self::MINUTE,
-<a href="#104" id="104" class="l">104: </a>            self::HOUR,
-<a href="#105" id="105" class="l">105: </a>            self::DAY,
-<a href="#106" id="106" class="l">106: </a>            self::MONTH,
-<a href="#107" id="107" class="l">107: </a>            self::YEAR,
-<a href="#108" id="108" class="l">108: </a>            self::INVALID,
-<a href="#109" id="109" class="l">109: </a>            self::NOT_COMPLETE
-<a href="#110" id="110" class="l">110: </a>        );
-<a href="#111" id="111" class="l">111: </a>
-<a href="#112" id="112" class="l">112: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">in_array</span>(<span class="php-var">$code</span>, <span class="php-var">$allowedUnits</span>)) {
-<a href="#113" id="113" class="l">113: </a>            <span class="php-var">$code</span> = self::UNKNOWN;
-<a href="#114" id="114" class="l">114: </a>        }
-<a href="#115" id="115" class="l">115: </a>
-<a href="#116" id="116" class="l">116: </a>        parent::__construct(<span class="php-var">$message</span>, <span class="php-var">$code</span>);
-<a href="#117" id="117" class="l">117: </a>    }
-<a href="#118" id="118" class="l">118: </a>}
-<a href="#119" id="119" class="l">119: </a></code></pre>
+</span><a href="#97" id="97" class="l"> 97: </a><span class="php-comment">     */</span>
+<a href="#98" id="98" class="l"> 98: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> __construct(<span class="php-var">$message</span>, <span class="php-var">$code</span>)
+<a href="#99" id="99" class="l"> 99: </a>    {
+<a href="#100" id="100" class="l">100: </a>        <span class="php-keyword1">static</span> <span class="php-var">$allowedUnits</span> = <span class="php-keyword2">array</span>(
+<a href="#101" id="101" class="l">101: </a>            self::SECOND,
+<a href="#102" id="102" class="l">102: </a>            self::MINUTE,
+<a href="#103" id="103" class="l">103: </a>            self::HOUR,
+<a href="#104" id="104" class="l">104: </a>            self::DAY,
+<a href="#105" id="105" class="l">105: </a>            self::MONTH,
+<a href="#106" id="106" class="l">106: </a>            self::YEAR,
+<a href="#107" id="107" class="l">107: </a>            self::INVALID,
+<a href="#108" id="108" class="l">108: </a>            self::NOT_COMPLETE
+<a href="#109" id="109" class="l">109: </a>        );
+<a href="#110" id="110" class="l">110: </a>
+<a href="#111" id="111" class="l">111: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">in_array</span>(<span class="php-var">$code</span>, <span class="php-var">$allowedUnits</span>)) {
+<a href="#112" id="112" class="l">112: </a>            <span class="php-var">$code</span> = self::UNKNOWN;
+<a href="#113" id="113" class="l">113: </a>        }
+<a href="#114" id="114" class="l">114: </a>
+<a href="#115" id="115" class="l">115: </a>        parent::__construct(<span class="php-var">$message</span>, <span class="php-var">$code</span>);
+<a href="#116" id="116" class="l">116: </a>    }
+<a href="#117" id="117" class="l">117: </a>}
+<a href="#118" id="118" class="l">118: </a></code></pre>
 
 		<div id="footer">
-			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>.<br />
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">ApiGen</a>.<br />
 			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
 		</div>
 	</div>

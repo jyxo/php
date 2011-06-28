@@ -2,12 +2,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="TR ApiGen 2.0 RC" />
+	<meta name="generator" content="ApiGen 2.0" />
 	<meta name="robots" content="noindex" />
 
 	<title>File Time/Util.php | Jyxo PHP Library</title>
 
-	<script type="text/javascript" src="resources/combined.js?3309972472"></script>
+	<script type="text/javascript" src="resources/combined.js?4060439551"></script>
 	<script type="text/javascript" src="elementlist.js?2796542733"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1274782946" />
 	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
@@ -180,7 +180,7 @@
 </span><a href="#29" id="29" class="l">29: </a><span class="php-comment">     *
 </span><a href="#30" id="30" class="l">30: </a><span class="php-comment">     * @var array
 </span><a href="#31" id="31" class="l">31: </a><span class="php-comment">     */</span>
-<a href="#32" id="32" class="l">32: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var">$holidays</span> = <span class="php-keyword1">array</span>(
+<a href="#32" id="32" class="l">32: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var">$holidays</span> = <span class="php-keyword2">array</span>(
 <a href="#33" id="33" class="l">33: </a>        <span class="php-quote">'1.1'</span>,
 <a href="#34" id="34" class="l">34: </a>        <span class="php-quote">'1.5'</span>,
 <a href="#35" id="35" class="l">35: </a>        <span class="php-quote">'8.5'</span>,
@@ -209,11 +209,11 @@
 <a href="#58" id="58" class="l">58: </a>
 <a href="#59" id="59" class="l">59: </a>        <span class="php-var">$nextMonth</span> = <span class="php-keyword2">date</span>(<span class="php-quote">'n'</span>, <span class="php-var">$now</span>) + <span class="php-num">1</span>;
 <a href="#60" id="60" class="l">60: </a>        <span class="php-var">$thisYear</span> = <span class="php-keyword2">date</span>(<span class="php-quote">'Y'</span>, <span class="php-var">$now</span>);
-<a href="#61" id="61" class="l">61: </a>        <span class="php-comment">// Actual date vs. next month's number of days
-</span><a href="#62" id="62" class="l">62: </a>        <span class="php-var">$day</span> = <span class="php-keyword2">min</span>(<span class="php-keyword2">date</span>(<span class="php-quote">'j'</span>, <span class="php-var">$now</span>), <span class="php-keyword2">date</span>(<span class="php-quote">'t'</span>, <span class="php-keyword2">mktime</span>(<span class="php-num">0</span>, <span class="php-num">0</span>, <span class="php-num">0</span>, <span class="php-var">$nextMonth</span>, <span class="php-num">1</span>, <span class="php-var">$thisYear</span>)));
+<a href="#61" id="61" class="l">61: </a>        <span class="php-comment">// Actual date vs. next month's number of days</span>
+<a href="#62" id="62" class="l">62: </a>        <span class="php-var">$day</span> = <span class="php-keyword2">min</span>(<span class="php-keyword2">date</span>(<span class="php-quote">'j'</span>, <span class="php-var">$now</span>), <span class="php-keyword2">date</span>(<span class="php-quote">'t'</span>, <span class="php-keyword2">mktime</span>(<span class="php-num">0</span>, <span class="php-num">0</span>, <span class="php-num">0</span>, <span class="php-var">$nextMonth</span>, <span class="php-num">1</span>, <span class="php-var">$thisYear</span>)));
 <a href="#63" id="63" class="l">63: </a>
-<a href="#64" id="64" class="l">64: </a>        <span class="php-comment">// Create the date
-</span><a href="#65" id="65" class="l">65: </a>        <span class="php-var">$date</span> = <span class="php-keyword2">mktime</span>(<span class="php-keyword2">date</span>(<span class="php-quote">'H'</span>, <span class="php-var">$now</span>), <span class="php-keyword2">date</span>(<span class="php-quote">'i'</span>, <span class="php-var">$now</span>), <span class="php-keyword2">date</span>(<span class="php-quote">'s'</span>, <span class="php-var">$now</span>), <span class="php-var">$nextMonth</span>, <span class="php-var">$day</span>, <span class="php-var">$thisYear</span>);
+<a href="#64" id="64" class="l">64: </a>        <span class="php-comment">// Create the date</span>
+<a href="#65" id="65" class="l">65: </a>        <span class="php-var">$date</span> = <span class="php-keyword2">mktime</span>(<span class="php-keyword2">date</span>(<span class="php-quote">'H'</span>, <span class="php-var">$now</span>), <span class="php-keyword2">date</span>(<span class="php-quote">'i'</span>, <span class="php-var">$now</span>), <span class="php-keyword2">date</span>(<span class="php-quote">'s'</span>, <span class="php-var">$now</span>), <span class="php-var">$nextMonth</span>, <span class="php-var">$day</span>, <span class="php-var">$thisYear</span>);
 <a href="#66" id="66" class="l">66: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> <span class="php-keyword2">Time</span>(<span class="php-var">$date</span>);
 <a href="#67" id="67" class="l">67: </a>    }
 <a href="#68" id="68" class="l">68: </a>
@@ -227,20 +227,20 @@
 <a href="#76" id="76" class="l">76: </a>    {
 <a href="#77" id="77" class="l">77: </a>        <span class="php-var">$holidays</span> = self::<span class="php-var">$holidays</span>;
 <a href="#78" id="78" class="l">78: </a>
-<a href="#79" id="79" class="l">79: </a>        <span class="php-comment">// Adds Easter Monday. easter_date is supposed to be buggy http://cz.php.net/manual/en/function.easter-date.php#80664
-</span><a href="#80" id="80" class="l">80: </a>        <span class="php-var">$year</span> = (int) <span class="php-var">$day</span>-&gt;format(<span class="php-quote">'Y'</span>);
+<a href="#79" id="79" class="l">79: </a>        <span class="php-comment">// Adds Easter Monday. easter_date is supposed to be buggy http://cz.php.net/manual/en/function.easter-date.php#80664</span>
+<a href="#80" id="80" class="l">80: </a>        <span class="php-var">$year</span> = (int) <span class="php-var">$day</span>-&gt;format(<span class="php-quote">'Y'</span>);
 <a href="#81" id="81" class="l">81: </a>        <span class="php-var">$days</span> = <span class="php-keyword2">easter_days</span>(<span class="php-var">$year</span>);
-<a href="#82" id="82" class="l">82: </a>        <span class="php-comment">// $days returns the number of days from March 21st until the Easter Sunday, +1 because of Monday
-</span><a href="#83" id="83" class="l">83: </a>        <span class="php-var">$holidays</span>[] = <span class="php-keyword2">date</span>(<span class="php-quote">'j.n'</span>, <span class="php-keyword2">strtotime</span>(<span class="php-var">$year</span> . <span class="php-quote">'-03-21 +'</span> . (<span class="php-var">$days</span> + <span class="php-num">1</span>) . <span class="php-quote">' days'</span>));
+<a href="#82" id="82" class="l">82: </a>        <span class="php-comment">// $days returns the number of days from March 21st until the Easter Sunday, +1 because of Monday</span>
+<a href="#83" id="83" class="l">83: </a>        <span class="php-var">$holidays</span>[] = <span class="php-keyword2">date</span>(<span class="php-quote">'j.n'</span>, <span class="php-keyword2">strtotime</span>(<span class="php-var">$year</span> . <span class="php-quote">'-03-21 +'</span> . (<span class="php-var">$days</span> + <span class="php-num">1</span>) . <span class="php-quote">' days'</span>));
 <a href="#84" id="84" class="l">84: </a>
 <a href="#85" id="85" class="l">85: </a>        <span class="php-var">$isWorkDay</span> = <span class="php-keyword1">true</span>;
 <a href="#86" id="86" class="l">86: </a>
 <a href="#87" id="87" class="l">87: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$day</span>-&gt;format(<span class="php-quote">'N'</span>) &gt; <span class="php-num">5</span>) {
-<a href="#88" id="88" class="l">88: </a>            <span class="php-comment">// Saturday or Sunday
-</span><a href="#89" id="89" class="l">89: </a>            <span class="php-var">$isWorkDay</span> = <span class="php-keyword1">false</span>;
+<a href="#88" id="88" class="l">88: </a>            <span class="php-comment">// Saturday or Sunday</span>
+<a href="#89" id="89" class="l">89: </a>            <span class="php-var">$isWorkDay</span> = <span class="php-keyword1">false</span>;
 <a href="#90" id="90" class="l">90: </a>        } <span class="php-keyword1">elseif</span> (<span class="php-keyword2">in_array</span>(<span class="php-var">$day</span>-&gt;format(<span class="php-quote">'j.n'</span>), <span class="php-var">$holidays</span>)) {
-<a href="#91" id="91" class="l">91: </a>            <span class="php-comment">// Public holiday, hurray!
-</span><a href="#92" id="92" class="l">92: </a>            <span class="php-var">$isWorkDay</span> = <span class="php-keyword1">false</span>;
+<a href="#91" id="91" class="l">91: </a>            <span class="php-comment">// Public holiday, hurray!</span>
+<a href="#92" id="92" class="l">92: </a>            <span class="php-var">$isWorkDay</span> = <span class="php-keyword1">false</span>;
 <a href="#93" id="93" class="l">93: </a>        }
 <a href="#94" id="94" class="l">94: </a>
 <a href="#95" id="95" class="l">95: </a>        <span class="php-keyword1">return</span> <span class="php-var">$isWorkDay</span>;
@@ -249,7 +249,7 @@
 <a href="#98" id="98" class="l">98: </a></code></pre>
 
 		<div id="footer">
-			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>.<br />
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">ApiGen</a>.<br />
 			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
 		</div>
 	</div>

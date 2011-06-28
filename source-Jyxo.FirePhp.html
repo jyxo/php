@@ -2,12 +2,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="TR ApiGen 2.0 RC" />
+	<meta name="generator" content="ApiGen 2.0" />
 	<meta name="robots" content="noindex" />
 
 	<title>File FirePhp.php | Jyxo PHP Library</title>
 
-	<script type="text/javascript" src="resources/combined.js?3309972472"></script>
+	<script type="text/javascript" src="resources/combined.js?4060439551"></script>
 	<script type="text/javascript" src="elementlist.js?2796542733"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1274782946" />
 	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
@@ -301,8 +301,8 @@
 </span><a href="#141" id="141" class="l">141: </a><span class="php-comment">     */</span>
 <a href="#142" id="142" class="l">142: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <span class="php-keyword2">log</span>(<span class="php-var">$message</span>, <span class="php-var">$label</span> = <span class="php-quote">''</span>, <span class="php-var">$type</span> = self::<span class="php-keyword2">LOG</span>)
 <a href="#143" id="143" class="l">143: </a>    {
-<a href="#144" id="144" class="l">144: </a>        <span class="php-var">$output</span> = <span class="php-keyword1">array</span>(
-<a href="#145" id="145" class="l">145: </a>            <span class="php-keyword1">array</span>(
+<a href="#144" id="144" class="l">144: </a>        <span class="php-var">$output</span> = <span class="php-keyword2">array</span>(
+<a href="#145" id="145" class="l">145: </a>            <span class="php-keyword2">array</span>(
 <a href="#146" id="146" class="l">146: </a>                <span class="php-quote">'Type'</span> =&gt; <span class="php-var">$type</span>,
 <a href="#147" id="147" class="l">147: </a>                <span class="php-quote">'Label'</span> =&gt; <span class="php-var">$label</span>
 <a href="#148" id="148" class="l">148: </a>            ),
@@ -321,14 +321,14 @@
 </span><a href="#161" id="161" class="l">161: </a><span class="php-comment">     * @param array $trace Trace
 </span><a href="#162" id="162" class="l">162: </a><span class="php-comment">     * @return boolean
 </span><a href="#163" id="163" class="l">163: </a><span class="php-comment">     */</span>
-<a href="#164" id="164" class="l">164: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> trace(<span class="php-var">$message</span>, <span class="php-var">$file</span>, <span class="php-var">$line</span>, <span class="php-keyword1">array</span> <span class="php-var">$trace</span>)
+<a href="#164" id="164" class="l">164: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> trace(<span class="php-var">$message</span>, <span class="php-var">$file</span>, <span class="php-var">$line</span>, <span class="php-keyword2">array</span> <span class="php-var">$trace</span>)
 <a href="#165" id="165" class="l">165: </a>    {
-<a href="#166" id="166" class="l">166: </a>        <span class="php-var">$output</span> = <span class="php-keyword1">array</span>(
-<a href="#167" id="167" class="l">167: </a>            <span class="php-keyword1">array</span>(
+<a href="#166" id="166" class="l">166: </a>        <span class="php-var">$output</span> = <span class="php-keyword2">array</span>(
+<a href="#167" id="167" class="l">167: </a>            <span class="php-keyword2">array</span>(
 <a href="#168" id="168" class="l">168: </a>                <span class="php-quote">'Type'</span> =&gt; self::TRACE,
 <a href="#169" id="169" class="l">169: </a>                <span class="php-quote">'Label'</span> =&gt; <span class="php-keyword1">null</span>
 <a href="#170" id="170" class="l">170: </a>            ),
-<a href="#171" id="171" class="l">171: </a>            <span class="php-keyword1">array</span>(
+<a href="#171" id="171" class="l">171: </a>            <span class="php-keyword2">array</span>(
 <a href="#172" id="172" class="l">172: </a>                <span class="php-quote">'Message'</span> =&gt; Charset::fixUtf(<span class="php-var">$message</span>),
 <a href="#173" id="173" class="l">173: </a>                <span class="php-quote">'File'</span> =&gt; <span class="php-var">$file</span>,
 <a href="#174" id="174" class="l">174: </a>                <span class="php-quote">'Line'</span> =&gt; <span class="php-var">$line</span>,
@@ -348,14 +348,14 @@
 </span><a href="#188" id="188" class="l">188: </a><span class="php-comment">     * @param string $ident Unique identifier
 </span><a href="#189" id="189" class="l">189: </a><span class="php-comment">     * @return boolean
 </span><a href="#190" id="190" class="l">190: </a><span class="php-comment">     */</span>
-<a href="#191" id="191" class="l">191: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> table(<span class="php-var">$label</span>, <span class="php-keyword1">array</span> <span class="php-var">$header</span>, <span class="php-keyword1">array</span> <span class="php-var">$data</span>, <span class="php-var">$ident</span> = <span class="php-quote">''</span>)
+<a href="#191" id="191" class="l">191: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> table(<span class="php-var">$label</span>, <span class="php-keyword2">array</span> <span class="php-var">$header</span>, <span class="php-keyword2">array</span> <span class="php-var">$data</span>, <span class="php-var">$ident</span> = <span class="php-quote">''</span>)
 <a href="#192" id="192" class="l">192: </a>    {
-<a href="#193" id="193" class="l">193: </a>        <span class="php-var">$output</span> = <span class="php-keyword1">array</span>(
-<a href="#194" id="194" class="l">194: </a>            <span class="php-keyword1">array</span>(
+<a href="#193" id="193" class="l">193: </a>        <span class="php-var">$output</span> = <span class="php-keyword2">array</span>(
+<a href="#194" id="194" class="l">194: </a>            <span class="php-keyword2">array</span>(
 <a href="#195" id="195" class="l">195: </a>                <span class="php-quote">'Type'</span> =&gt; self::TABLE,
 <a href="#196" id="196" class="l">196: </a>                <span class="php-quote">'Label'</span> =&gt; <span class="php-var">$label</span>
 <a href="#197" id="197" class="l">197: </a>            ),
-<a href="#198" id="198" class="l">198: </a>            <span class="php-keyword2">array_merge</span>(<span class="php-keyword1">array</span>(<span class="php-var">$header</span>), <span class="php-var">$data</span>)
+<a href="#198" id="198" class="l">198: </a>            <span class="php-keyword2">array_merge</span>(<span class="php-keyword2">array</span>(<span class="php-var">$header</span>), <span class="php-var">$data</span>)
 <a href="#199" id="199" class="l">199: </a>        );
 <a href="#200" id="200" class="l">200: </a>
 <a href="#201" id="201" class="l">201: </a>        <span class="php-keyword1">return</span> self::send(<span class="php-var">$output</span>, <span class="php-var">$ident</span>);
@@ -393,77 +393,77 @@
 </span><a href="#233" id="233" class="l">233: </a><span class="php-comment">     * @param string $ident Message identifier
 </span><a href="#234" id="234" class="l">234: </a><span class="php-comment">     * @return boolean
 </span><a href="#235" id="235" class="l">235: </a><span class="php-comment">     */</span>
-<a href="#236" id="236" class="l">236: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> send(<span class="php-keyword1">array</span> <span class="php-var">$output</span>, <span class="php-var">$ident</span> = <span class="php-quote">''</span>)
+<a href="#236" id="236" class="l">236: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> send(<span class="php-keyword2">array</span> <span class="php-var">$output</span>, <span class="php-var">$ident</span> = <span class="php-quote">''</span>)
 <a href="#237" id="237" class="l">237: </a>    {
-<a href="#238" id="238" class="l">238: </a>        <span class="php-comment">// Headers were already sent, can not proceed
-</span><a href="#239" id="239" class="l">239: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">headers_sent</span>()) {
+<a href="#238" id="238" class="l">238: </a>        <span class="php-comment">// Headers were already sent, can not proceed</span>
+<a href="#239" id="239" class="l">239: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">headers_sent</span>()) {
 <a href="#240" id="240" class="l">240: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
 <a href="#241" id="241" class="l">241: </a>        }
 <a href="#242" id="242" class="l">242: </a>
-<a href="#243" id="243" class="l">243: </a>        <span class="php-comment">// Logging is disabled
-</span><a href="#244" id="244" class="l">244: </a>        <span class="php-keyword1">if</span> (!self::<span class="php-var">$enabled</span>) {
+<a href="#243" id="243" class="l">243: </a>        <span class="php-comment">// Logging is disabled</span>
+<a href="#244" id="244" class="l">244: </a>        <span class="php-keyword1">if</span> (!self::<span class="php-var">$enabled</span>) {
 <a href="#245" id="245" class="l">245: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
 <a href="#246" id="246" class="l">246: </a>        }
 <a href="#247" id="247" class="l">247: </a>
-<a href="#248" id="248" class="l">248: </a>        <span class="php-comment">// Sending only if FirePHP is installed
-</span><a href="#249" id="249" class="l">249: </a>        <span class="php-keyword1">if</span> (!self::isInstalled()) {
+<a href="#248" id="248" class="l">248: </a>        <span class="php-comment">// Sending only if FirePHP is installed</span>
+<a href="#249" id="249" class="l">249: </a>        <span class="php-keyword1">if</span> (!self::isInstalled()) {
 <a href="#250" id="250" class="l">250: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
 <a href="#251" id="251" class="l">251: </a>        }
 <a href="#252" id="252" class="l">252: </a>
-<a href="#253" id="253" class="l">253: </a>        <span class="php-comment">// Sent headers count
-</span><a href="#254" id="254" class="l">254: </a>        <span class="php-keyword1">static</span> <span class="php-var">$no</span> = <span class="php-num">0</span>;
+<a href="#253" id="253" class="l">253: </a>        <span class="php-comment">// Sent headers count</span>
+<a href="#254" id="254" class="l">254: </a>        <span class="php-keyword1">static</span> <span class="php-var">$no</span> = <span class="php-num">0</span>;
 <a href="#255" id="255" class="l">255: </a>
-<a href="#256" id="256" class="l">256: </a>        <span class="php-comment">// Adding filename and line where logging was called
-</span><a href="#257" id="257" class="l">257: </a>        <span class="php-var">$first</span> = <span class="php-keyword2">reset</span>(<span class="php-var">$output</span>);
+<a href="#256" id="256" class="l">256: </a>        <span class="php-comment">// Adding filename and line where logging was called</span>
+<a href="#257" id="257" class="l">257: </a>        <span class="php-var">$first</span> = <span class="php-keyword2">reset</span>(<span class="php-var">$output</span>);
 <a href="#258" id="258" class="l">258: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$first</span>[<span class="php-quote">'File'</span>])) {
-<a href="#259" id="259" class="l">259: </a>            <span class="php-comment">// Cut message information
-</span><a href="#260" id="260" class="l">260: </a>            <span class="php-var">$first</span> = <span class="php-keyword2">array_shift</span>(<span class="php-var">$output</span>);
+<a href="#259" id="259" class="l">259: </a>            <span class="php-comment">// Cut message information</span>
+<a href="#260" id="260" class="l">260: </a>            <span class="php-var">$first</span> = <span class="php-keyword2">array_shift</span>(<span class="php-var">$output</span>);
 <a href="#261" id="261" class="l">261: </a>
-<a href="#262" id="262" class="l">262: </a>            <span class="php-comment">// Find file
-</span><a href="#263" id="263" class="l">263: </a>            <span class="php-var">$backtrace</span> = <span class="php-keyword2">debug_backtrace</span>();
+<a href="#262" id="262" class="l">262: </a>            <span class="php-comment">// Find file</span>
+<a href="#263" id="263" class="l">263: </a>            <span class="php-var">$backtrace</span> = <span class="php-keyword2">debug_backtrace</span>();
 <a href="#264" id="264" class="l">264: </a>            <span class="php-var">$hop</span> = <span class="php-keyword2">array_shift</span>(<span class="php-var">$backtrace</span>);
 <a href="#265" id="265" class="l">265: </a>
-<a href="#266" id="266" class="l">266: </a>            <span class="php-comment">// Remove \Jyxo\FirePhp call
-</span><a href="#267" id="267" class="l">267: </a>            <span class="php-keyword1">while</span> (__FILE__ === <span class="php-var">$hop</span>[<span class="php-quote">'file'</span>]) {
+<a href="#266" id="266" class="l">266: </a>            <span class="php-comment">// Remove \Jyxo\FirePhp call</span>
+<a href="#267" id="267" class="l">267: </a>            <span class="php-keyword1">while</span> (__FILE__ === <span class="php-var">$hop</span>[<span class="php-quote">'file'</span>]) {
 <a href="#268" id="268" class="l">268: </a>                <span class="php-var">$hop</span> = <span class="php-keyword2">array_shift</span>(<span class="php-var">$backtrace</span>);
 <a href="#269" id="269" class="l">269: </a>            }
 <a href="#270" id="270" class="l">270: </a>
-<a href="#271" id="271" class="l">271: </a>            <span class="php-comment">// Add file information
-</span><a href="#272" id="272" class="l">272: </a>            <span class="php-var">$first</span>[<span class="php-quote">'File'</span>] = <span class="php-var">$hop</span>[<span class="php-quote">'file'</span>];
+<a href="#271" id="271" class="l">271: </a>            <span class="php-comment">// Add file information</span>
+<a href="#272" id="272" class="l">272: </a>            <span class="php-var">$first</span>[<span class="php-quote">'File'</span>] = <span class="php-var">$hop</span>[<span class="php-quote">'file'</span>];
 <a href="#273" id="273" class="l">273: </a>            <span class="php-var">$first</span>[<span class="php-quote">'Line'</span>] = <span class="php-var">$hop</span>[<span class="php-quote">'line'</span>];
 <a href="#274" id="274" class="l">274: </a>
-<a href="#275" id="275" class="l">275: </a>            <span class="php-comment">// And return altered information back
-</span><a href="#276" id="276" class="l">276: </a>            <span class="php-keyword2">array_unshift</span>(<span class="php-var">$output</span>, <span class="php-var">$first</span>);
+<a href="#275" id="275" class="l">275: </a>            <span class="php-comment">// And return altered information back</span>
+<a href="#276" id="276" class="l">276: </a>            <span class="php-keyword2">array_unshift</span>(<span class="php-var">$output</span>, <span class="php-var">$first</span>);
 <a href="#277" id="277" class="l">277: </a>        }
 <a href="#278" id="278" class="l">278: </a>
-<a href="#279" id="279" class="l">279: </a>        <span class="php-comment">// Splitting result
-</span><a href="#280" id="280" class="l">280: </a>        <span class="php-var">$parts</span> = <span class="php-keyword2">str_split</span>(<span class="php-keyword2">json_encode</span>(<span class="php-var">$output</span>), <span class="php-num">5000</span>);
+<a href="#279" id="279" class="l">279: </a>        <span class="php-comment">// Splitting result</span>
+<a href="#280" id="280" class="l">280: </a>        <span class="php-var">$parts</span> = <span class="php-keyword2">str_split</span>(<span class="php-keyword2">json_encode</span>(<span class="php-var">$output</span>), <span class="php-num">5000</span>);
 <a href="#281" id="281" class="l">281: </a>
-<a href="#282" id="282" class="l">282: </a>        <span class="php-comment">// If an identifier was provided, delete previous messages with that identifier
-</span><a href="#283" id="283" class="l">283: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$ident</span>)) {
-<a href="#284" id="284" class="l">284: </a>            <span class="php-keyword1">static</span> <span class="php-var">$idents</span> = <span class="php-keyword1">array</span>();
+<a href="#282" id="282" class="l">282: </a>        <span class="php-comment">// If an identifier was provided, delete previous messages with that identifier</span>
+<a href="#283" id="283" class="l">283: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$ident</span>)) {
+<a href="#284" id="284" class="l">284: </a>            <span class="php-keyword1">static</span> <span class="php-var">$idents</span> = <span class="php-keyword2">array</span>();
 <a href="#285" id="285" class="l">285: </a>
-<a href="#286" id="286" class="l">286: </a>            <span class="php-comment">// Delete previous send
-</span><a href="#287" id="287" class="l">287: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$idents</span>[<span class="php-var">$ident</span>])) {
+<a href="#286" id="286" class="l">286: </a>            <span class="php-comment">// Delete previous send</span>
+<a href="#287" id="287" class="l">287: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$idents</span>[<span class="php-var">$ident</span>])) {
 <a href="#288" id="288" class="l">288: </a>                <span class="php-keyword1">for</span> (<span class="php-var">$i</span> = <span class="php-var">$idents</span>[<span class="php-var">$ident</span>][<span class="php-num">0</span>]; <span class="php-var">$i</span> &lt;= <span class="php-var">$idents</span>[<span class="php-var">$ident</span>][<span class="php-num">1</span>]; <span class="php-var">$i</span>++) {
 <a href="#289" id="289" class="l">289: </a>                    <span class="php-keyword2">header_remove</span>(<span class="php-quote">'X-Wf-Jyxo-1-1-Jyxo'</span> . <span class="php-var">$i</span>);
 <a href="#290" id="290" class="l">290: </a>                }
 <a href="#291" id="291" class="l">291: </a>            }
 <a href="#292" id="292" class="l">292: </a>
-<a href="#293" id="293" class="l">293: </a>            <span class="php-comment">// Save identifiers of headers that will be actually used
-</span><a href="#294" id="294" class="l">294: </a>            <span class="php-var">$idents</span>[<span class="php-var">$ident</span>] = <span class="php-keyword1">array</span>(<span class="php-var">$no</span> + <span class="php-num">1</span>, <span class="php-var">$no</span> + <span class="php-keyword2">count</span>(<span class="php-var">$parts</span>));
+<a href="#293" id="293" class="l">293: </a>            <span class="php-comment">// Save identifiers of headers that will be actually used</span>
+<a href="#294" id="294" class="l">294: </a>            <span class="php-var">$idents</span>[<span class="php-var">$ident</span>] = <span class="php-keyword2">array</span>(<span class="php-var">$no</span> + <span class="php-num">1</span>, <span class="php-var">$no</span> + <span class="php-keyword2">count</span>(<span class="php-var">$parts</span>));
 <a href="#295" id="295" class="l">295: </a>        }
 <a href="#296" id="296" class="l">296: </a>
-<a href="#297" id="297" class="l">297: </a>        <span class="php-comment">// Sending
-</span><a href="#298" id="298" class="l">298: </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'X-Wf-Protocol-Jyxo: http://meta.wildfirehq.org/Protocol/JsonStream/0.2'</span>);
+<a href="#297" id="297" class="l">297: </a>        <span class="php-comment">// Sending</span>
+<a href="#298" id="298" class="l">298: </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'X-Wf-Protocol-Jyxo: http://meta.wildfirehq.org/Protocol/JsonStream/0.2'</span>);
 <a href="#299" id="299" class="l">299: </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'X-Wf-Jyxo-Structure-1: http://meta.firephp.org/Wildfire/Structure/FirePHP/FirebugConsole/0.1'</span>);
 <a href="#300" id="300" class="l">300: </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'X-Wf-Jyxo-Plugin-1: http://meta.firephp.org/Wildfire/Plugin/FirePHP/Library-FirePHPCore/0.3'</span>);
-<a href="#301" id="301" class="l">301: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$parts</span> as <span class="php-var">$part</span>) {
+<a href="#301" id="301" class="l">301: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$parts</span> <span class="php-keyword1">as</span> <span class="php-var">$part</span>) {
 <a href="#302" id="302" class="l">302: </a>            <span class="php-var">$no</span>++;
 <a href="#303" id="303" class="l">303: </a>            <span class="php-keyword2">header</span>(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'X-Wf-Jyxo-1-1-Jyxo%s: |%s|\\'</span>, <span class="php-var">$no</span>, <span class="php-var">$part</span>));
 <a href="#304" id="304" class="l">304: </a>        }
-<a href="#305" id="305" class="l">305: </a>        <span class="php-comment">// Last one is sent again but without \
-</span><a href="#306" id="306" class="l">306: </a>        <span class="php-keyword2">header</span>(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'X-Wf-Jyxo-1-1-Jyxo%s: |%s|'</span>, <span class="php-var">$no</span>, <span class="php-var">$part</span>));
+<a href="#305" id="305" class="l">305: </a>        <span class="php-comment">// Last one is sent again but without \</span>
+<a href="#306" id="306" class="l">306: </a>        <span class="php-keyword2">header</span>(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'X-Wf-Jyxo-1-1-Jyxo%s: |%s|'</span>, <span class="php-var">$no</span>, <span class="php-var">$part</span>));
 <a href="#307" id="307" class="l">307: </a>
 <a href="#308" id="308" class="l">308: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
 <a href="#309" id="309" class="l">309: </a>    }
@@ -475,23 +475,23 @@
 </span><a href="#315" id="315" class="l">315: </a><span class="php-comment">     */</span>
 <a href="#316" id="316" class="l">316: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> isInstalled()
 <a href="#317" id="317" class="l">317: </a>    {
-<a href="#318" id="318" class="l">318: </a>        <span class="php-comment">// Header X-FirePHP-Version
-</span><a href="#319" id="319" class="l">319: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_X_FIREPHP_VERSION'</span>])) {
+<a href="#318" id="318" class="l">318: </a>        <span class="php-comment">// Header X-FirePHP-Version</span>
+<a href="#319" id="319" class="l">319: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_X_FIREPHP_VERSION'</span>])) {
 <a href="#320" id="320" class="l">320: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
 <a href="#321" id="321" class="l">321: </a>        }
 <a href="#322" id="322" class="l">322: </a>
-<a href="#323" id="323" class="l">323: </a>        <span class="php-comment">// Header x-insight
-</span><a href="#324" id="324" class="l">324: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_X_INSIGHT'</span>]) &amp;&amp; <span class="php-quote">'activate'</span> === <span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_X_INSIGHT'</span>]) {
+<a href="#323" id="323" class="l">323: </a>        <span class="php-comment">// Header x-insight</span>
+<a href="#324" id="324" class="l">324: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_X_INSIGHT'</span>]) &amp;&amp; <span class="php-quote">'activate'</span> === <span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_X_INSIGHT'</span>]) {
 <a href="#325" id="325" class="l">325: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
 <a href="#326" id="326" class="l">326: </a>        }
 <a href="#327" id="327" class="l">327: </a>
-<a href="#328" id="328" class="l">328: </a>        <span class="php-comment">// Modified user-agent
-</span><a href="#329" id="329" class="l">329: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_USER_AGENT'</span>]) &amp;&amp; <span class="php-keyword1">false</span> !== <span class="php-keyword2">strpos</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_USER_AGENT'</span>], <span class="php-quote">'FirePHP/'</span>)) {
+<a href="#328" id="328" class="l">328: </a>        <span class="php-comment">// Modified user-agent</span>
+<a href="#329" id="329" class="l">329: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_USER_AGENT'</span>]) &amp;&amp; <span class="php-keyword1">false</span> !== <span class="php-keyword2">strpos</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_USER_AGENT'</span>], <span class="php-quote">'FirePHP/'</span>)) {
 <a href="#330" id="330" class="l">330: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
 <a href="#331" id="331" class="l">331: </a>        }
 <a href="#332" id="332" class="l">332: </a>
-<a href="#333" id="333" class="l">333: </a>        <span class="php-comment">// Not installed
-</span><a href="#334" id="334" class="l">334: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
+<a href="#333" id="333" class="l">333: </a>        <span class="php-comment">// Not installed</span>
+<a href="#334" id="334" class="l">334: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
 <a href="#335" id="335" class="l">335: </a>    }
 <a href="#336" id="336" class="l">336: </a>
 <a href="#337" id="337" class="l">337: </a>    <span class="php-comment">/**
@@ -507,7 +507,7 @@
 <a href="#347" id="347" class="l">347: </a>        } <span class="php-keyword1">elseif</span> (<span class="php-keyword2">is_resource</span>(<span class="php-var">$variable</span>)) {
 <a href="#348" id="348" class="l">348: </a>            <span class="php-keyword1">return</span> (string) <span class="php-var">$variable</span>;
 <a href="#349" id="349" class="l">349: </a>        } <span class="php-keyword1">elseif</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$variable</span>)) {
-<a href="#350" id="350" class="l">350: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$variable</span> as <span class="php-var">$k</span> =&gt; <span class="php-var">$v</span>) {
+<a href="#350" id="350" class="l">350: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$variable</span> <span class="php-keyword1">as</span> <span class="php-var">$k</span> =&gt; <span class="php-var">$v</span>) {
 <a href="#351" id="351" class="l">351: </a>                <span class="php-keyword1">unset</span>(<span class="php-var">$variable</span>[<span class="php-var">$k</span>]);
 <a href="#352" id="352" class="l">352: </a>                <span class="php-var">$variable</span>[<span class="php-var">$k</span>] = self::replaceVariable(<span class="php-var">$v</span>);
 <a href="#353" id="353" class="l">353: </a>            }
@@ -531,7 +531,7 @@
 <a href="#371" id="371" class="l">371: </a>        <span class="php-keyword1">static</span> <span class="php-var">$maxObjectDepth</span> = <span class="php-num">5</span>;
 <a href="#372" id="372" class="l">372: </a>        <span class="php-keyword1">static</span> <span class="php-var">$maxArrayDepth</span> = <span class="php-num">5</span>;
 <a href="#373" id="373" class="l">373: </a>        <span class="php-keyword1">static</span> <span class="php-var">$maxTotalDepth</span> = <span class="php-num">10</span>;
-<a href="#374" id="374" class="l">374: </a>        <span class="php-keyword1">static</span> <span class="php-var">$stack</span> = <span class="php-keyword1">array</span>();
+<a href="#374" id="374" class="l">374: </a>        <span class="php-keyword1">static</span> <span class="php-var">$stack</span> = <span class="php-keyword2">array</span>();
 <a href="#375" id="375" class="l">375: </a>
 <a href="#376" id="376" class="l">376: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$totalDepth</span> &gt; <span class="php-var">$maxTotalDepth</span>) {
 <a href="#377" id="377" class="l">377: </a>            <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-quote">'** Max Depth (%s) **'</span>, <span class="php-var">$maxTotalDepth</span>);
@@ -546,20 +546,20 @@
 <a href="#386" id="386" class="l">386: </a>
 <a href="#387" id="387" class="l">387: </a>            <span class="php-var">$class</span> = <span class="php-keyword2">get_class</span>(<span class="php-var">$variable</span>);
 <a href="#388" id="388" class="l">388: </a>
-<a href="#389" id="389" class="l">389: </a>            <span class="php-comment">// Check recursion
-</span><a href="#390" id="390" class="l">390: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$stack</span> as <span class="php-var">$item</span>) {
+<a href="#389" id="389" class="l">389: </a>            <span class="php-comment">// Check recursion</span>
+<a href="#390" id="390" class="l">390: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$stack</span> <span class="php-keyword1">as</span> <span class="php-var">$item</span>) {
 <a href="#391" id="391" class="l">391: </a>                <span class="php-keyword1">if</span> (<span class="php-var">$item</span> === <span class="php-var">$variable</span>) {
 <a href="#392" id="392" class="l">392: </a>                    <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-quote">'** Recursion (%s) **'</span>, <span class="php-var">$class</span>);
 <a href="#393" id="393" class="l">393: </a>                }
 <a href="#394" id="394" class="l">394: </a>            }
 <a href="#395" id="395" class="l">395: </a>            <span class="php-keyword2">array_push</span>(<span class="php-var">$stack</span>, <span class="php-var">$variable</span>);
 <a href="#396" id="396" class="l">396: </a>
-<a href="#397" id="397" class="l">397: </a>            <span class="php-comment">// Add class name
-</span><a href="#398" id="398" class="l">398: </a>            <span class="php-var">$return</span> = <span class="php-keyword1">array</span>(<span class="php-quote">'__className'</span> =&gt; <span class="php-var">$class</span>);
+<a href="#397" id="397" class="l">397: </a>            <span class="php-comment">// Add class name</span>
+<a href="#398" id="398" class="l">398: </a>            <span class="php-var">$return</span> = <span class="php-keyword2">array</span>(<span class="php-quote">'__className'</span> =&gt; <span class="php-var">$class</span>);
 <a href="#399" id="399" class="l">399: </a>
-<a href="#400" id="400" class="l">400: </a>            <span class="php-comment">// Add properties
-</span><a href="#401" id="401" class="l">401: </a>            <span class="php-var">$reflectionClass</span> = <span class="php-keyword1">new</span> \ReflectionClass(<span class="php-var">$class</span>);
-<a href="#402" id="402" class="l">402: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$reflectionClass</span>-&gt;getProperties() as <span class="php-var">$property</span>) {
+<a href="#400" id="400" class="l">400: </a>            <span class="php-comment">// Add properties</span>
+<a href="#401" id="401" class="l">401: </a>            <span class="php-var">$reflectionClass</span> = <span class="php-keyword1">new</span> \ReflectionClass(<span class="php-var">$class</span>);
+<a href="#402" id="402" class="l">402: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$reflectionClass</span>-&gt;getProperties() <span class="php-keyword1">as</span> <span class="php-var">$property</span>) {
 <a href="#403" id="403" class="l">403: </a>                <span class="php-var">$name</span> = <span class="php-var">$property</span>-&gt;getName();
 <a href="#404" id="404" class="l">404: </a>                <span class="php-var">$rawName</span> = <span class="php-var">$name</span>;
 <a href="#405" id="405" class="l">405: </a>
@@ -583,9 +583,9 @@
 <a href="#423" id="423" class="l">423: </a>                <span class="php-var">$return</span>[<span class="php-var">$name</span>] = self::encodeVariable(<span class="php-var">$property</span>-&gt;getValue(<span class="php-var">$variable</span>), <span class="php-var">$objectDepth</span> + <span class="php-num">1</span>, <span class="php-num">1</span>, <span class="php-var">$totalDepth</span> + <span class="php-num">1</span>);
 <a href="#424" id="424" class="l">424: </a>            }
 <a href="#425" id="425" class="l">425: </a>
-<a href="#426" id="426" class="l">426: </a>            <span class="php-comment">// Add members that are not defined in the class but exist in the object
-</span><a href="#427" id="427" class="l">427: </a>            <span class="php-var">$members</span> = (<span class="php-keyword1">array</span>) <span class="php-var">$variable</span>;
-<a href="#428" id="428" class="l">428: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$members</span> as <span class="php-var">$rawName</span> =&gt; <span class="php-var">$member</span>) {
+<a href="#426" id="426" class="l">426: </a>            <span class="php-comment">// Add members that are not defined in the class but exist in the object</span>
+<a href="#427" id="427" class="l">427: </a>            <span class="php-var">$members</span> = (<span class="php-keyword2">array</span>) <span class="php-var">$variable</span>;
+<a href="#428" id="428" class="l">428: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$members</span> <span class="php-keyword1">as</span> <span class="php-var">$rawName</span> =&gt; <span class="php-var">$member</span>) {
 <a href="#429" id="429" class="l">429: </a>                <span class="php-var">$name</span> = <span class="php-var">$rawName</span>;
 <a href="#430" id="430" class="l">430: </a>                <span class="php-keyword1">if</span> (<span class="php-quote">&quot;\0&quot;</span> === <span class="php-var">$name</span>[<span class="php-num">0</span>]) {
 <a href="#431" id="431" class="l">431: </a>                    <span class="php-var">$parts</span> = <span class="php-keyword2">explode</span>(<span class="php-quote">&quot;\0&quot;</span>, <span class="php-var">$name</span>);
@@ -606,10 +606,10 @@
 <a href="#446" id="446" class="l">446: </a>                <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-quote">'** Max Array Depth (%s) **'</span>, <span class="php-var">$maxArrayDepth</span>);
 <a href="#447" id="447" class="l">447: </a>            }
 <a href="#448" id="448" class="l">448: </a>
-<a href="#449" id="449" class="l">449: </a>            <span class="php-var">$return</span> = <span class="php-keyword1">array</span>();
-<a href="#450" id="450" class="l">450: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$variable</span> as <span class="php-var">$k</span> =&gt; <span class="php-var">$v</span>) {
-<a href="#451" id="451" class="l">451: </a>                <span class="php-comment">// Encoding the $GLOBALS PHP array causes an infinite loop as it contains a reference to itself
-</span><a href="#452" id="452" class="l">452: </a>                <span class="php-keyword1">if</span> (<span class="php-quote">'GLOBALS'</span> === <span class="php-var">$k</span> &amp;&amp; <span class="php-keyword2">is_array</span>(<span class="php-var">$v</span>) &amp;&amp; <span class="php-keyword2">array_key_exists</span>(<span class="php-quote">'GLOBALS'</span>, <span class="php-var">$v</span>)) {
+<a href="#449" id="449" class="l">449: </a>            <span class="php-var">$return</span> = <span class="php-keyword2">array</span>();
+<a href="#450" id="450" class="l">450: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$variable</span> <span class="php-keyword1">as</span> <span class="php-var">$k</span> =&gt; <span class="php-var">$v</span>) {
+<a href="#451" id="451" class="l">451: </a>                <span class="php-comment">// Encoding the $GLOBALS PHP array causes an infinite loop as it contains a reference to itself</span>
+<a href="#452" id="452" class="l">452: </a>                <span class="php-keyword1">if</span> (<span class="php-quote">'GLOBALS'</span> === <span class="php-var">$k</span> &amp;&amp; <span class="php-keyword2">is_array</span>(<span class="php-var">$v</span>) &amp;&amp; <span class="php-keyword2">array_key_exists</span>(<span class="php-quote">'GLOBALS'</span>, <span class="php-var">$v</span>)) {
 <a href="#453" id="453" class="l">453: </a>                    <span class="php-var">$v</span>[<span class="php-quote">'GLOBALS'</span>] = <span class="php-quote">'** Recursion (GLOBALS) **'</span>;
 <a href="#454" id="454" class="l">454: </a>                }
 <a href="#455" id="455" class="l">455: </a>                <span class="php-var">$return</span>[<span class="php-var">$k</span>] = self::encodeVariable(<span class="php-var">$v</span>, <span class="php-num">1</span>, <span class="php-var">$arrayDepth</span> + <span class="php-num">1</span>, <span class="php-var">$totalDepth</span> + <span class="php-num">1</span>);
@@ -624,7 +624,7 @@
 <a href="#464" id="464" class="l">464: </a></code></pre>
 
 		<div id="footer">
-			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>.<br />
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">ApiGen</a>.<br />
 			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
 		</div>
 	</div>

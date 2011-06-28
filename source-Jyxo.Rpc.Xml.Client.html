@@ -2,12 +2,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="TR ApiGen 2.0 RC" />
+	<meta name="generator" content="ApiGen 2.0" />
 	<meta name="robots" content="noindex" />
 
 	<title>File Rpc/Xml/Client.php | Jyxo PHP Library</title>
 
-	<script type="text/javascript" src="resources/combined.js?3309972472"></script>
+	<script type="text/javascript" src="resources/combined.js?4060439551"></script>
 	<script type="text/javascript" src="elementlist.js?2796542733"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1274782946" />
 	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
@@ -186,10 +186,10 @@
 <a href="#36" id="36" class="l">36: </a>    {
 <a href="#37" id="37" class="l">37: </a>        parent::__construct(<span class="php-var">$url</span>);
 <a href="#38" id="38" class="l">38: </a>
-<a href="#39" id="39" class="l">39: </a>        <span class="php-var">$this</span>-&gt;options = <span class="php-keyword1">array</span>(
+<a href="#39" id="39" class="l">39: </a>        <span class="php-var">$this</span>-&gt;options = <span class="php-keyword2">array</span>(
 <a href="#40" id="40" class="l">40: </a>            <span class="php-quote">'output_type'</span> =&gt; <span class="php-quote">'xml'</span>,
 <a href="#41" id="41" class="l">41: </a>            <span class="php-quote">'verbosity'</span> =&gt; <span class="php-quote">'pretty'</span>,
-<a href="#42" id="42" class="l">42: </a>            <span class="php-quote">'escaping'</span> =&gt; <span class="php-keyword1">array</span>(<span class="php-quote">'markup'</span>),
+<a href="#42" id="42" class="l">42: </a>            <span class="php-quote">'escaping'</span> =&gt; <span class="php-keyword2">array</span>(<span class="php-quote">'markup'</span>),
 <a href="#43" id="43" class="l">43: </a>            <span class="php-quote">'version'</span> =&gt; <span class="php-quote">'xmlrpc'</span>,
 <a href="#44" id="44" class="l">44: </a>            <span class="php-quote">'encoding'</span> =&gt; <span class="php-quote">'utf-8'</span>
 <a href="#45" id="45" class="l">45: </a>        );
@@ -204,30 +204,30 @@
 </span><a href="#54" id="54" class="l">54: </a><span class="php-comment">     * @throws \BadMethodCallException If no server address was provided
 </span><a href="#55" id="55" class="l">55: </a><span class="php-comment">     * @throws \Jyxo\Rpc\Xml\Exception On error
 </span><a href="#56" id="56" class="l">56: </a><span class="php-comment">     */</span>
-<a href="#57" id="57" class="l">57: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> send(<span class="php-var">$method</span>, <span class="php-keyword1">array</span> <span class="php-var">$params</span>)
+<a href="#57" id="57" class="l">57: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> send(<span class="php-var">$method</span>, <span class="php-keyword2">array</span> <span class="php-var">$params</span>)
 <a href="#58" id="58" class="l">58: </a>    {
-<a href="#59" id="59" class="l">59: </a>        <span class="php-comment">// Start profiling
-</span><a href="#60" id="60" class="l">60: </a>        <span class="php-var">$this</span>-&gt;profileStart();
+<a href="#59" id="59" class="l">59: </a>        <span class="php-comment">// Start profiling</span>
+<a href="#60" id="60" class="l">60: </a>        <span class="php-var">$this</span>-&gt;profileStart();
 <a href="#61" id="61" class="l">61: </a>
 <a href="#62" id="62" class="l">62: </a>        <span class="php-keyword1">try</span> {
-<a href="#63" id="63" class="l">63: </a>            <span class="php-comment">// Fetch response
-</span><a href="#64" id="64" class="l">64: </a>            <span class="php-var">$response</span> = <span class="php-var">$this</span>-&gt;process(<span class="php-quote">'text/xml'</span>, xmlrpc_encode_request(<span class="php-var">$method</span>, <span class="php-var">$params</span>, <span class="php-var">$this</span>-&gt;options));
+<a href="#63" id="63" class="l">63: </a>            <span class="php-comment">// Fetch response</span>
+<a href="#64" id="64" class="l">64: </a>            <span class="php-var">$response</span> = <span class="php-var">$this</span>-&gt;process(<span class="php-quote">'text/xml'</span>, <span class="php-keyword2">xmlrpc_encode_request</span>(<span class="php-var">$method</span>, <span class="php-var">$params</span>, <span class="php-var">$this</span>-&gt;options));
 <a href="#65" id="65" class="l">65: </a>
-<a href="#66" id="66" class="l">66: </a>            <span class="php-comment">// Process response
-</span><a href="#67" id="67" class="l">67: </a>            <span class="php-var">$response</span> = xmlrpc_decode(<span class="php-var">$response</span>, <span class="php-quote">'utf-8'</span>);
+<a href="#66" id="66" class="l">66: </a>            <span class="php-comment">// Process response</span>
+<a href="#67" id="67" class="l">67: </a>            <span class="php-var">$response</span> = <span class="php-keyword2">xmlrpc_decode</span>(<span class="php-var">$response</span>, <span class="php-quote">'utf-8'</span>);
 <a href="#68" id="68" class="l">68: </a>
 <a href="#69" id="69" class="l">69: </a>        } <span class="php-keyword1">catch</span> (\Jyxo\Rpc\Exception <span class="php-var">$e</span>) {
-<a href="#70" id="70" class="l">70: </a>            <span class="php-comment">// Finish profiling
-</span><a href="#71" id="71" class="l">71: </a>            <span class="php-var">$this</span>-&gt;profileEnd(<span class="php-quote">'XML'</span>, <span class="php-var">$method</span>, <span class="php-var">$params</span>, <span class="php-var">$e</span>-&gt;getMessage());
+<a href="#70" id="70" class="l">70: </a>            <span class="php-comment">// Finish profiling</span>
+<a href="#71" id="71" class="l">71: </a>            <span class="php-var">$this</span>-&gt;profileEnd(<span class="php-quote">'XML'</span>, <span class="php-var">$method</span>, <span class="php-var">$params</span>, <span class="php-var">$e</span>-&gt;getMessage());
 <a href="#72" id="72" class="l">72: </a>
 <a href="#73" id="73" class="l">73: </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> Exception(<span class="php-var">$e</span>-&gt;getMessage(), <span class="php-num">0</span>, <span class="php-var">$e</span>);
 <a href="#74" id="74" class="l">74: </a>        }
 <a href="#75" id="75" class="l">75: </a>
-<a href="#76" id="76" class="l">76: </a>        <span class="php-comment">// Finish profiling
-</span><a href="#77" id="77" class="l">77: </a>        <span class="php-var">$this</span>-&gt;profileEnd(<span class="php-quote">'XML'</span>, <span class="php-var">$method</span>, <span class="php-var">$params</span>, <span class="php-var">$response</span>);
+<a href="#76" id="76" class="l">76: </a>        <span class="php-comment">// Finish profiling</span>
+<a href="#77" id="77" class="l">77: </a>        <span class="php-var">$this</span>-&gt;profileEnd(<span class="php-quote">'XML'</span>, <span class="php-var">$method</span>, <span class="php-var">$params</span>, <span class="php-var">$response</span>);
 <a href="#78" id="78" class="l">78: </a>
-<a href="#79" id="79" class="l">79: </a>        <span class="php-comment">// Error in response
-</span><a href="#80" id="80" class="l">80: </a>        <span class="php-keyword1">if</span> ((<span class="php-keyword2">is_array</span>(<span class="php-var">$response</span>)) &amp;&amp; (<span class="php-keyword1">isset</span>(<span class="php-var">$response</span>[<span class="php-quote">'faultString'</span>]))) {
+<a href="#79" id="79" class="l">79: </a>        <span class="php-comment">// Error in response</span>
+<a href="#80" id="80" class="l">80: </a>        <span class="php-keyword1">if</span> ((<span class="php-keyword2">is_array</span>(<span class="php-var">$response</span>)) &amp;&amp; (<span class="php-keyword1">isset</span>(<span class="php-var">$response</span>[<span class="php-quote">'faultString'</span>]))) {
 <a href="#81" id="81" class="l">81: </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> Exception(<span class="php-keyword2">preg_replace</span>(<span class="php-quote">'~\s+~'</span>, <span class="php-quote">' '</span>, <span class="php-var">$response</span>[<span class="php-quote">'faultString'</span>]));
 <a href="#82" id="82" class="l">82: </a>        }
 <a href="#83" id="83" class="l">83: </a>
@@ -237,7 +237,7 @@
 <a href="#87" id="87" class="l">87: </a></code></pre>
 
 		<div id="footer">
-			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>.<br />
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">ApiGen</a>.<br />
 			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
 		</div>
 	</div>

@@ -2,12 +2,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="TR ApiGen 2.0 RC" />
+	<meta name="generator" content="ApiGen 2.0" />
 	<meta name="robots" content="noindex" />
 
 	<title>File Charset.php | Jyxo PHP Library</title>
 
-	<script type="text/javascript" src="resources/combined.js?3309972472"></script>
+	<script type="text/javascript" src="resources/combined.js?4060439551"></script>
 	<script type="text/javascript" src="elementlist.js?2796542733"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1274782946" />
 	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
@@ -196,8 +196,8 @@
 <a href="#36" id="36" class="l"> 36: </a>    {
 <a href="#37" id="37" class="l"> 37: </a>        <span class="php-var">$charset</span> = <span class="php-keyword2">mb_detect_encoding</span>(<span class="php-var">$string</span>, <span class="php-quote">'UTF-8, ISO-8859-2, ASCII, UTF-7, EUC-JP, SJIS, eucJP-win, SJIS-win, JIS, ISO-2022-JP'</span>);
 <a href="#38" id="38" class="l"> 38: </a>
-<a href="#39" id="39" class="l"> 39: </a>        <span class="php-comment">// The previous function can not handle WINDOWS-1250 and returns ISO-8859-2 instead
-</span><a href="#40" id="40" class="l"> 40: </a>        <span class="php-keyword1">if</span> (<span class="php-quote">'ISO-8859-2'</span> === <span class="php-var">$charset</span> &amp;&amp; <span class="php-keyword2">preg_match</span>(<span class="php-quote">'~[\x7F-\x9F\xBC]~'</span>, <span class="php-var">$string</span>)) {
+<a href="#39" id="39" class="l"> 39: </a>        <span class="php-comment">// The previous function can not handle WINDOWS-1250 and returns ISO-8859-2 instead</span>
+<a href="#40" id="40" class="l"> 40: </a>        <span class="php-keyword1">if</span> (<span class="php-quote">'ISO-8859-2'</span> === <span class="php-var">$charset</span> &amp;&amp; <span class="php-keyword2">preg_match</span>(<span class="php-quote">'~[\x7F-\x9F\xBC]~'</span>, <span class="php-var">$string</span>)) {
 <a href="#41" id="41" class="l"> 41: </a>            <span class="php-var">$charset</span> = <span class="php-quote">'WINDOWS-1250'</span>;
 <a href="#42" id="42" class="l"> 42: </a>        }
 <a href="#43" id="43" class="l"> 43: </a>
@@ -216,8 +216,8 @@
 <a href="#56" id="56" class="l"> 56: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> convert2utf(<span class="php-var">$string</span>, <span class="php-var">$charset</span> = <span class="php-quote">''</span>)
 <a href="#57" id="57" class="l"> 57: </a>    {
 <a href="#58" id="58" class="l"> 58: </a>        <span class="php-var">$charset</span> = <span class="php-var">$charset</span> ?: self::detect(<span class="php-var">$string</span>);
-<a href="#59" id="59" class="l"> 59: </a>        <span class="php-comment">// Detection sometimes fails or the string may be in wrong format, so we remove invalid UTF-8 letters
-</span><a href="#60" id="60" class="l"> 60: </a>        <span class="php-keyword1">return</span> @<span class="php-keyword2">iconv</span>(<span class="php-var">$charset</span>, <span class="php-quote">'UTF-8//TRANSLIT//IGNORE'</span>, <span class="php-var">$string</span>);
+<a href="#59" id="59" class="l"> 59: </a>        <span class="php-comment">// Detection sometimes fails or the string may be in wrong format, so we remove invalid UTF-8 letters</span>
+<a href="#60" id="60" class="l"> 60: </a>        <span class="php-keyword1">return</span> @<span class="php-keyword2">iconv</span>(<span class="php-var">$charset</span>, <span class="php-quote">'UTF-8//TRANSLIT//IGNORE'</span>, <span class="php-var">$string</span>);
 <a href="#61" id="61" class="l"> 61: </a>    }
 <a href="#62" id="62" class="l"> 62: </a>
 <a href="#63" id="63" class="l"> 63: </a>    <span class="php-comment">/**
@@ -228,10 +228,10 @@
 </span><a href="#68" id="68" class="l"> 68: </a><span class="php-comment">     */</span>
 <a href="#69" id="69" class="l"> 69: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> utf2ident(<span class="php-var">$string</span>)
 <a href="#70" id="70" class="l"> 70: </a>    {
-<a href="#71" id="71" class="l"> 71: </a>        <span class="php-comment">// Convert to lowercase ASCII and than all non-alphanumeric characters to dashes
-</span><a href="#72" id="72" class="l"> 72: </a>        <span class="php-var">$ident</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-quote">'~[^a-z0-9]~'</span>, <span class="php-quote">'-'</span>, <span class="php-keyword2">strtolower</span>(self::utf2ascii(<span class="php-var">$string</span>)));
-<a href="#73" id="73" class="l"> 73: </a>        <span class="php-comment">// Remove multiple dashes and dashes on boundaries
-</span><a href="#74" id="74" class="l"> 74: </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">trim</span>(<span class="php-keyword2">preg_replace</span>(<span class="php-quote">'~-+~'</span>, <span class="php-quote">'-'</span>, <span class="php-var">$ident</span>), <span class="php-quote">'-'</span>);
+<a href="#71" id="71" class="l"> 71: </a>        <span class="php-comment">// Convert to lowercase ASCII and than all non-alphanumeric characters to dashes</span>
+<a href="#72" id="72" class="l"> 72: </a>        <span class="php-var">$ident</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-quote">'~[^a-z0-9]~'</span>, <span class="php-quote">'-'</span>, <span class="php-keyword2">strtolower</span>(self::utf2ascii(<span class="php-var">$string</span>)));
+<a href="#73" id="73" class="l"> 73: </a>        <span class="php-comment">// Remove multiple dashes and dashes on boundaries</span>
+<a href="#74" id="74" class="l"> 74: </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">trim</span>(<span class="php-keyword2">preg_replace</span>(<span class="php-quote">'~-+~'</span>, <span class="php-quote">'-'</span>, <span class="php-var">$ident</span>), <span class="php-quote">'-'</span>);
 <a href="#75" id="75" class="l"> 75: </a>    }
 <a href="#76" id="76" class="l"> 76: </a>
 <a href="#77" id="77" class="l"> 77: </a>    <span class="php-comment">/**
@@ -242,7 +242,7 @@
 </span><a href="#82" id="82" class="l"> 82: </a><span class="php-comment">     */</span>
 <a href="#83" id="83" class="l"> 83: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> utf2ascii(<span class="php-var">$string</span>)
 <a href="#84" id="84" class="l"> 84: </a>    {
-<a href="#85" id="85" class="l"> 85: </a>        <span class="php-keyword1">static</span> <span class="php-var">$replace</span> = <span class="php-keyword1">array</span>(
+<a href="#85" id="85" class="l"> 85: </a>        <span class="php-keyword1">static</span> <span class="php-var">$replace</span> = <span class="php-keyword2">array</span>(
 <a href="#86" id="86" class="l"> 86: </a>            <span class="php-quote">'á'</span> =&gt; <span class="php-quote">'a'</span>, <span class="php-quote">'Á'</span> =&gt; <span class="php-quote">'A'</span>, <span class="php-quote">'ä'</span> =&gt; <span class="php-quote">'a'</span>, <span class="php-quote">'Ä'</span> =&gt; <span class="php-quote">'A'</span>, <span class="php-quote">'â'</span> =&gt; <span class="php-quote">'a'</span>, <span class="php-quote">'Â'</span> =&gt; <span class="php-quote">'A'</span>, <span class="php-quote">'ă'</span> =&gt; <span class="php-quote">'a'</span>, <span class="php-quote">'Ă'</span> =&gt; <span class="php-quote">'A'</span>, <span class="php-quote">'ą'</span> =&gt; <span class="php-quote">'a'</span>, <span class="php-quote">'Ą'</span> =&gt; <span class="php-quote">'A'</span>,
 <a href="#87" id="87" class="l"> 87: </a>            <span class="php-quote">'č'</span> =&gt; <span class="php-quote">'c'</span>, <span class="php-quote">'Č'</span> =&gt; <span class="php-quote">'C'</span>, <span class="php-quote">'ç'</span> =&gt; <span class="php-quote">'c'</span>, <span class="php-quote">'Ç'</span> =&gt; <span class="php-quote">'C'</span>, <span class="php-quote">'ć'</span> =&gt; <span class="php-quote">'c'</span>, <span class="php-quote">'Ć'</span> =&gt; <span class="php-quote">'C'</span>, <span class="php-quote">'ď'</span> =&gt; <span class="php-quote">'d'</span>, <span class="php-quote">'Ď'</span> =&gt; <span class="php-quote">'D'</span>, <span class="php-quote">'đ'</span> =&gt; <span class="php-quote">'d'</span>, <span class="php-quote">'Đ'</span> =&gt; <span class="php-quote">'D'</span>,
 <a href="#88" id="88" class="l"> 88: </a>            <span class="php-quote">'é'</span> =&gt; <span class="php-quote">'e'</span>, <span class="php-quote">'É'</span> =&gt; <span class="php-quote">'E'</span>, <span class="php-quote">'ě'</span> =&gt; <span class="php-quote">'e'</span>, <span class="php-quote">'Ě'</span> =&gt; <span class="php-quote">'E'</span>, <span class="php-quote">'ë'</span> =&gt; <span class="php-quote">'e'</span>, <span class="php-quote">'Ë'</span> =&gt; <span class="php-quote">'E'</span>, <span class="php-quote">'ę'</span> =&gt; <span class="php-quote">'e'</span>, <span class="php-quote">'Ę'</span> =&gt; <span class="php-quote">'E'</span>, <span class="php-quote">'í'</span> =&gt; <span class="php-quote">'i'</span>, <span class="php-quote">'Í'</span> =&gt; <span class="php-quote">'I'</span>,
@@ -264,12 +264,12 @@
 </span><a href="#104" id="104" class="l">104: </a><span class="php-comment">     */</span>
 <a href="#105" id="105" class="l">105: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> russian2ascii(<span class="php-var">$string</span>)
 <a href="#106" id="106" class="l">106: </a>    {
-<a href="#107" id="107" class="l">107: </a>        <span class="php-keyword1">static</span> <span class="php-var">$russian</span> = <span class="php-keyword1">array</span>(
+<a href="#107" id="107" class="l">107: </a>        <span class="php-keyword1">static</span> <span class="php-var">$russian</span> = <span class="php-keyword2">array</span>(
 <a href="#108" id="108" class="l">108: </a>            <span class="php-quote">'КВ'</span>, <span class="php-quote">'кв'</span>, <span class="php-quote">'КС'</span>, <span class="php-quote">'кс'</span>, <span class="php-quote">'А'</span>, <span class="php-quote">'а'</span>, <span class="php-quote">'Б'</span>, <span class="php-quote">'б'</span>, <span class="php-quote">'Ц'</span>, <span class="php-quote">'ц'</span>, <span class="php-quote">'Д'</span>, <span class="php-quote">'д'</span>, <span class="php-quote">'Э'</span>, <span class="php-quote">'э'</span>, <span class="php-quote">'Е'</span>, <span class="php-quote">'е'</span>, <span class="php-quote">'Ф'</span>, <span class="php-quote">'ф'</span>, <span class="php-quote">'Г'</span>, <span class="php-quote">'г'</span>, <span class="php-quote">'Х'</span>, <span class="php-quote">'х'</span>,
 <a href="#109" id="109" class="l">109: </a>            <span class="php-quote">'И'</span>, <span class="php-quote">'и'</span>, <span class="php-quote">'Й'</span>, <span class="php-quote">'й'</span>, <span class="php-quote">'К'</span>, <span class="php-quote">'к'</span>, <span class="php-quote">'Л'</span>, <span class="php-quote">'л'</span>, <span class="php-quote">'М'</span>, <span class="php-quote">'м'</span>, <span class="php-quote">'Н'</span>, <span class="php-quote">'н'</span>, <span class="php-quote">'О'</span>, <span class="php-quote">'о'</span>, <span class="php-quote">'П'</span>, <span class="php-quote">'п'</span>, <span class="php-quote">'Р'</span>, <span class="php-quote">'р'</span>, <span class="php-quote">'С'</span>, <span class="php-quote">'с'</span>, <span class="php-quote">'Т'</span>, <span class="php-quote">'т'</span>, <span class="php-quote">'У'</span>,
 <a href="#110" id="110" class="l">110: </a>            <span class="php-quote">'у'</span>, <span class="php-quote">'В'</span>, <span class="php-quote">'в'</span>, <span class="php-quote">'В'</span>, <span class="php-quote">'в'</span>, <span class="php-quote">'Ы'</span>, <span class="php-quote">'ы'</span>, <span class="php-quote">'З'</span>, <span class="php-quote">'з'</span>, <span class="php-quote">'Ч'</span>, <span class="php-quote">'ч'</span>, <span class="php-quote">'Ш'</span>, <span class="php-quote">'ш'</span>, <span class="php-quote">'Щ'</span>, <span class="php-quote">'щ'</span>, <span class="php-quote">'Ж'</span>, <span class="php-quote">'ж'</span>, <span class="php-quote">'Я'</span>, <span class="php-quote">'я'</span>, <span class="php-quote">'Ю'</span>, <span class="php-quote">'ю'</span>, <span class="php-quote">'ъ'</span>, <span class="php-quote">'ь'</span>
 <a href="#111" id="111" class="l">111: </a>        );
-<a href="#112" id="112" class="l">112: </a>        <span class="php-keyword1">static</span> <span class="php-var">$ascii</span> = <span class="php-keyword1">array</span>(
+<a href="#112" id="112" class="l">112: </a>        <span class="php-keyword1">static</span> <span class="php-var">$ascii</span> = <span class="php-keyword2">array</span>(
 <a href="#113" id="113" class="l">113: </a>            <span class="php-quote">'Q'</span>, <span class="php-quote">'q'</span>, <span class="php-quote">'X'</span>, <span class="php-quote">'x'</span>, <span class="php-quote">'A'</span>, <span class="php-quote">'a'</span>, <span class="php-quote">'B'</span>, <span class="php-quote">'b'</span>, <span class="php-quote">'C'</span>, <span class="php-quote">'c'</span>, <span class="php-quote">'D'</span>, <span class="php-quote">'d'</span>, <span class="php-quote">'E'</span>, <span class="php-quote">'e'</span>, <span class="php-quote">'E'</span>, <span class="php-quote">'e'</span>, <span class="php-quote">'F'</span>, <span class="php-quote">'f'</span>, <span class="php-quote">'G'</span>, <span class="php-quote">'g'</span>, <span class="php-quote">'H'</span>, <span class="php-quote">'h'</span>, <span class="php-quote">'I'</span>,
 <a href="#114" id="114" class="l">114: </a>            <span class="php-quote">'i'</span>, <span class="php-quote">'J'</span>, <span class="php-quote">'j'</span>, <span class="php-quote">'K'</span>, <span class="php-quote">'k'</span>, <span class="php-quote">'L'</span>, <span class="php-quote">'l'</span>, <span class="php-quote">'M'</span>, <span class="php-quote">'m'</span>, <span class="php-quote">'N'</span>, <span class="php-quote">'n'</span>, <span class="php-quote">'O'</span>, <span class="php-quote">'o'</span>, <span class="php-quote">'P'</span>, <span class="php-quote">'p'</span>, <span class="php-quote">'R'</span>, <span class="php-quote">'r'</span>, <span class="php-quote">'S'</span>, <span class="php-quote">'s'</span>, <span class="php-quote">'T'</span>, <span class="php-quote">'t'</span>, <span class="php-quote">'U'</span>, <span class="php-quote">'u'</span>,
 <a href="#115" id="115" class="l">115: </a>            <span class="php-quote">'V'</span>, <span class="php-quote">'v'</span>, <span class="php-quote">'W'</span>, <span class="php-quote">'w'</span>, <span class="php-quote">'Y'</span>, <span class="php-quote">'y'</span>, <span class="php-quote">'Z'</span>, <span class="php-quote">'z'</span>, <span class="php-quote">'Ch'</span>, <span class="php-quote">'ch'</span>, <span class="php-quote">'Sh'</span>, <span class="php-quote">'sh'</span>, <span class="php-quote">'Sht'</span>, <span class="php-quote">'sht'</span>, <span class="php-quote">'Zh'</span>, <span class="php-quote">'zh'</span>, <span class="php-quote">'Ja'</span>, <span class="php-quote">'ja'</span>, <span class="php-quote">'Ju'</span>, <span class="php-quote">'ju'</span>
@@ -323,7 +323,7 @@
 <a href="#163" id="163" class="l">163: </a></code></pre>
 
 		<div id="footer">
-			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>.<br />
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">ApiGen</a>.<br />
 			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
 		</div>
 	</div>

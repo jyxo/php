@@ -2,12 +2,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="TR ApiGen 2.0 RC" />
+	<meta name="generator" content="ApiGen 2.0" />
 	<meta name="robots" content="noindex" />
 
 	<title>File Input/Factory.php | Jyxo PHP Library</title>
 
-	<script type="text/javascript" src="resources/combined.js?3309972472"></script>
+	<script type="text/javascript" src="resources/combined.js?4060439551"></script>
 	<script type="text/javascript" src="elementlist.js?2796542733"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1274782946" />
 	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
@@ -188,7 +188,7 @@
 </span><a href="#29" id="29" class="l"> 29: </a><span class="php-comment">     *
 </span><a href="#30" id="30" class="l"> 30: </a><span class="php-comment">     * @var string
 </span><a href="#31" id="31" class="l"> 31: </a><span class="php-comment">     */</span>
-<a href="#32" id="32" class="l"> 32: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var">$filterPrefix</span> = <span class="php-keyword1">array</span>(
+<a href="#32" id="32" class="l"> 32: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var">$filterPrefix</span> = <span class="php-keyword2">array</span>(
 <a href="#33" id="33" class="l"> 33: </a>        <span class="php-quote">'\Jyxo\Input\Filter\\'</span>
 <a href="#34" id="34" class="l"> 34: </a>    );
 <a href="#35" id="35" class="l"> 35: </a>
@@ -197,7 +197,7 @@
 </span><a href="#38" id="38" class="l"> 38: </a><span class="php-comment">     *
 </span><a href="#39" id="39" class="l"> 39: </a><span class="php-comment">     * @var string
 </span><a href="#40" id="40" class="l"> 40: </a><span class="php-comment">     */</span>
-<a href="#41" id="41" class="l"> 41: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var">$validatorPrefix</span> = <span class="php-keyword1">array</span>(
+<a href="#41" id="41" class="l"> 41: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var">$validatorPrefix</span> = <span class="php-keyword2">array</span>(
 <a href="#42" id="42" class="l"> 42: </a>        <span class="php-quote">'\Jyxo\Input\Validator\\'</span>
 <a href="#43" id="43" class="l"> 43: </a>    );
 <a href="#44" id="44" class="l"> 44: </a>
@@ -215,7 +215,7 @@
 <a href="#56" id="56" class="l"> 56: </a>            <span class="php-keyword1">return</span> <span class="php-var">$name</span>;
 <a href="#57" id="57" class="l"> 57: </a>        }
 <a href="#58" id="58" class="l"> 58: </a>
-<a href="#59" id="59" class="l"> 59: </a>        <span class="php-var">$params</span> = (<span class="php-keyword1">array</span>) <span class="php-var">$param</span>;
+<a href="#59" id="59" class="l"> 59: </a>        <span class="php-var">$params</span> = (<span class="php-keyword2">array</span>) <span class="php-var">$param</span>;
 <a href="#60" id="60" class="l"> 60: </a>
 <a href="#61" id="61" class="l"> 61: </a>        <span class="php-var">$className</span> = <span class="php-var">$this</span>-&gt;findClass(<span class="php-var">$name</span>, self::<span class="php-var">$validatorPrefix</span>);
 <a href="#62" id="62" class="l"> 62: </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$className</span>) {
@@ -239,7 +239,7 @@
 <a href="#80" id="80" class="l"> 80: </a>            <span class="php-keyword1">return</span> <span class="php-var">$name</span>;
 <a href="#81" id="81" class="l"> 81: </a>        }
 <a href="#82" id="82" class="l"> 82: </a>
-<a href="#83" id="83" class="l"> 83: </a>        <span class="php-var">$params</span> = (<span class="php-keyword1">array</span>) <span class="php-var">$param</span>;
+<a href="#83" id="83" class="l"> 83: </a>        <span class="php-var">$params</span> = (<span class="php-keyword2">array</span>) <span class="php-var">$param</span>;
 <a href="#84" id="84" class="l"> 84: </a>
 <a href="#85" id="85" class="l"> 85: </a>        <span class="php-var">$className</span> = <span class="php-var">$this</span>-&gt;findClass(<span class="php-var">$name</span>, self::<span class="php-var">$filterPrefix</span>);
 <a href="#86" id="86" class="l"> 86: </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$className</span>) {
@@ -258,11 +258,11 @@
 </span><a href="#99" id="99" class="l"> 99: </a><span class="php-comment">     * @param array $prefixes Class prefixes
 </span><a href="#100" id="100" class="l">100: </a><span class="php-comment">     * @return string
 </span><a href="#101" id="101" class="l">101: </a><span class="php-comment">     */</span>
-<a href="#102" id="102" class="l">102: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> findClass(<span class="php-var">$name</span>, <span class="php-keyword1">array</span> <span class="php-var">$prefixes</span>)
+<a href="#102" id="102" class="l">102: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> findClass(<span class="php-var">$name</span>, <span class="php-keyword2">array</span> <span class="php-var">$prefixes</span>)
 <a href="#103" id="103" class="l">103: </a>    {
 <a href="#104" id="104" class="l">104: </a>        <span class="php-var">$className</span> = <span class="php-keyword1">null</span>;
 <a href="#105" id="105" class="l">105: </a>        <span class="php-var">$name</span> = <span class="php-keyword2">ucfirst</span>(<span class="php-var">$name</span>);
-<a href="#106" id="106" class="l">106: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$prefixes</span> as <span class="php-var">$prefix</span>) {
+<a href="#106" id="106" class="l">106: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$prefixes</span> <span class="php-keyword1">as</span> <span class="php-var">$prefix</span>) {
 <a href="#107" id="107" class="l">107: </a>            <span class="php-var">$tempName</span> = <span class="php-var">$prefix</span> . <span class="php-var">$name</span>;
 <a href="#108" id="108" class="l">108: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">class_exists</span>(<span class="php-var">$tempName</span>)) {
 <a href="#109" id="109" class="l">109: </a>                <span class="php-var">$className</span> = <span class="php-var">$tempName</span>;
@@ -280,7 +280,7 @@
 </span><a href="#121" id="121" class="l">121: </a><span class="php-comment">     * @return object
 </span><a href="#122" id="122" class="l">122: </a><span class="php-comment">     * @throws \ReflectionException An error occurred; the class was probably not found
 </span><a href="#123" id="123" class="l">123: </a><span class="php-comment">     */</span>
-<a href="#124" id="124" class="l">124: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> getClass(<span class="php-var">$className</span>, <span class="php-keyword1">array</span> <span class="php-var">$params</span>)
+<a href="#124" id="124" class="l">124: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> getClass(<span class="php-var">$className</span>, <span class="php-keyword2">array</span> <span class="php-var">$params</span>)
 <a href="#125" id="125" class="l">125: </a>    {
 <a href="#126" id="126" class="l">126: </a>        <span class="php-var">$instance</span> = <span class="php-keyword1">null</span>;
 <a href="#127" id="127" class="l">127: </a>        <span class="php-keyword1">switch</span> (<span class="php-keyword2">count</span>(<span class="php-var">$params</span>)) {
@@ -328,7 +328,7 @@
 <a href="#169" id="169" class="l">169: </a></code></pre>
 
 		<div id="footer">
-			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>.<br />
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">ApiGen</a>.<br />
 			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
 		</div>
 	</div>

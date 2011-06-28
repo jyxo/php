@@ -2,12 +2,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="TR ApiGen 2.0 RC" />
+	<meta name="generator" content="ApiGen 2.0" />
 	<meta name="robots" content="noindex" />
 
 	<title>File Input/Validator/IsBankAccountNumber.php | Jyxo PHP Library</title>
 
-	<script type="text/javascript" src="resources/combined.js?3309972472"></script>
+	<script type="text/javascript" src="resources/combined.js?4060439551"></script>
 	<script type="text/javascript" src="elementlist.js?2796542733"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1274782946" />
 	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
@@ -219,8 +219,8 @@
 <a href="#39" id="39" class="l">39: </a>
 <a href="#40" id="40" class="l">40: </a>        <span class="php-keyword1">list</span>(, <span class="php-var">$prefix</span>, <span class="php-var">$base</span>, <span class="php-var">$bankCode</span>) = <span class="php-var">$matches</span>;
 <a href="#41" id="41" class="l">41: </a>
-<a href="#42" id="42" class="l">42: </a>        <span class="php-comment">// Bank codes valid in the Czech Republic on 2008-09-01
-</span><a href="#43" id="43" class="l">43: </a>        <span class="php-keyword1">static</span> <span class="php-var">$bankCodes</span> = <span class="php-keyword1">array</span>(
+<a href="#42" id="42" class="l">42: </a>        <span class="php-comment">// Bank codes valid in the Czech Republic on 2008-09-01</span>
+<a href="#43" id="43" class="l">43: </a>        <span class="php-keyword1">static</span> <span class="php-var">$bankCodes</span> = <span class="php-keyword2">array</span>(
 <a href="#44" id="44" class="l">44: </a>            <span class="php-quote">'0100'</span>, <span class="php-quote">'0300'</span>, <span class="php-quote">'0400'</span>, <span class="php-quote">'0600'</span>, <span class="php-quote">'0700'</span>, <span class="php-quote">'0800'</span>, <span class="php-quote">'2010'</span>, <span class="php-quote">'2020'</span>, <span class="php-quote">'2030'</span>, <span class="php-quote">'2040'</span>,
 <a href="#45" id="45" class="l">45: </a>            <span class="php-quote">'2050'</span>, <span class="php-quote">'2070'</span>, <span class="php-quote">'2100'</span>, <span class="php-quote">'2200'</span>, <span class="php-quote">'2400'</span>, <span class="php-quote">'2600'</span>, <span class="php-quote">'2700'</span>, <span class="php-quote">'3500'</span>, <span class="php-quote">'4000'</span>, <span class="php-quote">'4300'</span>,
 <a href="#46" id="46" class="l">46: </a>            <span class="php-quote">'5000'</span>, <span class="php-quote">'5400'</span>, <span class="php-quote">'5500'</span>, <span class="php-quote">'5800'</span>, <span class="php-quote">'6000'</span>, <span class="php-quote">'6100'</span>, <span class="php-quote">'6200'</span>, <span class="php-quote">'6210'</span>, <span class="php-quote">'6300'</span>, <span class="php-quote">'6700'</span>,
@@ -228,20 +228,20 @@
 <a href="#48" id="48" class="l">48: </a>            <span class="php-quote">'8060'</span>, <span class="php-quote">'8090'</span>, <span class="php-quote">'8150'</span>, <span class="php-quote">'8200'</span>
 <a href="#49" id="49" class="l">49: </a>        );
 <a href="#50" id="50" class="l">50: </a>
-<a href="#51" id="51" class="l">51: </a>        <span class="php-comment">// Valid bank code
-</span><a href="#52" id="52" class="l">52: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">in_array</span>(<span class="php-var">$bankCode</span>, <span class="php-var">$bankCodes</span>)) {
+<a href="#51" id="51" class="l">51: </a>        <span class="php-comment">// Valid bank code</span>
+<a href="#52" id="52" class="l">52: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">in_array</span>(<span class="php-var">$bankCode</span>, <span class="php-var">$bankCodes</span>)) {
 <a href="#53" id="53" class="l">53: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
 <a href="#54" id="54" class="l">54: </a>        }
 <a href="#55" id="55" class="l">55: </a>
-<a href="#56" id="56" class="l">56: </a>        <span class="php-comment">// Prefix check
-</span><a href="#57" id="57" class="l">57: </a>        <span class="php-var">$prefix</span> = <span class="php-keyword2">str_pad</span>(<span class="php-var">$prefix</span>, <span class="php-num">6</span>, <span class="php-quote">'0'</span>, STR_PAD_LEFT);
+<a href="#56" id="56" class="l">56: </a>        <span class="php-comment">// Prefix check</span>
+<a href="#57" id="57" class="l">57: </a>        <span class="php-var">$prefix</span> = <span class="php-keyword2">str_pad</span>(<span class="php-var">$prefix</span>, <span class="php-num">6</span>, <span class="php-quote">'0'</span>, STR_PAD_LEFT);
 <a href="#58" id="58" class="l">58: </a>        <span class="php-var">$mod</span> = (<span class="php-var">$prefix</span>[<span class="php-num">0</span>] * <span class="php-num">10</span> + <span class="php-var">$prefix</span>[<span class="php-num">1</span>] * <span class="php-num">5</span> + <span class="php-var">$prefix</span>[<span class="php-num">2</span>] * <span class="php-num">8</span> + <span class="php-var">$prefix</span>[<span class="php-num">3</span>] * <span class="php-num">4</span> + <span class="php-var">$prefix</span>[<span class="php-num">4</span>] * <span class="php-num">2</span> + <span class="php-var">$prefix</span>[<span class="php-num">5</span>] * <span class="php-num">1</span>) % <span class="php-num">11</span>;
 <a href="#59" id="59" class="l">59: </a>        <span class="php-keyword1">if</span> (<span class="php-num">0</span> !== <span class="php-var">$mod</span>) {
 <a href="#60" id="60" class="l">60: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
 <a href="#61" id="61" class="l">61: </a>        }
 <a href="#62" id="62" class="l">62: </a>
-<a href="#63" id="63" class="l">63: </a>        <span class="php-comment">// Base number part check
-</span><a href="#64" id="64" class="l">64: </a>        <span class="php-var">$base</span> = <span class="php-keyword2">str_pad</span>(<span class="php-var">$base</span>, <span class="php-num">10</span>, <span class="php-quote">'0'</span>, STR_PAD_LEFT);
+<a href="#63" id="63" class="l">63: </a>        <span class="php-comment">// Base number part check</span>
+<a href="#64" id="64" class="l">64: </a>        <span class="php-var">$base</span> = <span class="php-keyword2">str_pad</span>(<span class="php-var">$base</span>, <span class="php-num">10</span>, <span class="php-quote">'0'</span>, STR_PAD_LEFT);
 <a href="#65" id="65" class="l">65: </a>        <span class="php-var">$mod</span> = (<span class="php-var">$base</span>[<span class="php-num">0</span>] * <span class="php-num">6</span> + <span class="php-var">$base</span>[<span class="php-num">1</span>] * <span class="php-num">3</span> + <span class="php-var">$base</span>[<span class="php-num">2</span>] * <span class="php-num">7</span> + <span class="php-var">$base</span>[<span class="php-num">3</span>] * <span class="php-num">9</span> + <span class="php-var">$base</span>[<span class="php-num">4</span>] * <span class="php-num">10</span> + <span class="php-var">$base</span>[<span class="php-num">5</span>] * <span class="php-num">5</span> + <span class="php-var">$base</span>[<span class="php-num">6</span>] * <span class="php-num">8</span> + <span class="php-var">$base</span>[<span class="php-num">7</span>] * <span class="php-num">4</span> + <span class="php-var">$base</span>[<span class="php-num">8</span>] * <span class="php-num">2</span> + <span class="php-var">$base</span>[<span class="php-num">9</span>] * <span class="php-num">1</span>) % <span class="php-num">11</span>;
 <a href="#66" id="66" class="l">66: </a>        <span class="php-keyword1">if</span> (<span class="php-num">0</span> !== <span class="php-var">$mod</span>) {
 <a href="#67" id="67" class="l">67: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
@@ -253,7 +253,7 @@
 <a href="#73" id="73" class="l">73: </a></code></pre>
 
 		<div id="footer">
-			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>.<br />
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">ApiGen</a>.<br />
 			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
 		</div>
 	</div>

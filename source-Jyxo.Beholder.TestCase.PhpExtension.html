@@ -2,12 +2,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="TR ApiGen 2.0 RC" />
+	<meta name="generator" content="ApiGen 2.0" />
 	<meta name="robots" content="noindex" />
 
 	<title>File Beholder/TestCase/PhpExtension.php | Jyxo PHP Library</title>
 
-	<script type="text/javascript" src="resources/combined.js?3309972472"></script>
+	<script type="text/javascript" src="resources/combined.js?4060439551"></script>
 	<script type="text/javascript" src="elementlist.js?2796542733"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1274782946" />
 	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
@@ -186,7 +186,7 @@
 </span><a href="#29" id="29" class="l">29: </a><span class="php-comment">     *
 </span><a href="#30" id="30" class="l">30: </a><span class="php-comment">     * @var array
 </span><a href="#31" id="31" class="l">31: </a><span class="php-comment">     */</span>
-<a href="#32" id="32" class="l">32: </a>    <span class="php-keyword1">private</span> <span class="php-var">$extensionList</span> = <span class="php-keyword1">array</span>();
+<a href="#32" id="32" class="l">32: </a>    <span class="php-keyword1">private</span> <span class="php-var">$extensionList</span> = <span class="php-keyword2">array</span>();
 <a href="#33" id="33" class="l">33: </a>
 <a href="#34" id="34" class="l">34: </a>    <span class="php-comment">/**
 </span><a href="#35" id="35" class="l">35: </a><span class="php-comment">     * Constructor.
@@ -194,7 +194,7 @@
 </span><a href="#37" id="37" class="l">37: </a><span class="php-comment">     * @param string $description Test description
 </span><a href="#38" id="38" class="l">38: </a><span class="php-comment">     * @param array $extensionList List of extensions
 </span><a href="#39" id="39" class="l">39: </a><span class="php-comment">     */</span>
-<a href="#40" id="40" class="l">40: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> __construct(<span class="php-var">$description</span>, <span class="php-keyword1">array</span> <span class="php-var">$extensionList</span>)
+<a href="#40" id="40" class="l">40: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> __construct(<span class="php-var">$description</span>, <span class="php-keyword2">array</span> <span class="php-var">$extensionList</span>)
 <a href="#41" id="41" class="l">41: </a>    {
 <a href="#42" id="42" class="l">42: </a>        parent::__construct(<span class="php-var">$description</span>);
 <a href="#43" id="43" class="l">43: </a>
@@ -208,27 +208,27 @@
 </span><a href="#51" id="51" class="l">51: </a><span class="php-comment">     */</span>
 <a href="#52" id="52" class="l">52: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> run()
 <a href="#53" id="53" class="l">53: </a>    {
-<a href="#54" id="54" class="l">54: </a>        <span class="php-comment">// Check
-</span><a href="#55" id="55" class="l">55: </a>        <span class="php-var">$missing</span> = <span class="php-keyword1">array</span>();
-<a href="#56" id="56" class="l">56: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;extensionList as <span class="php-var">$extension</span>) {
+<a href="#54" id="54" class="l">54: </a>        <span class="php-comment">// Check</span>
+<a href="#55" id="55" class="l">55: </a>        <span class="php-var">$missing</span> = <span class="php-keyword2">array</span>();
+<a href="#56" id="56" class="l">56: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;extensionList <span class="php-keyword1">as</span> <span class="php-var">$extension</span>) {
 <a href="#57" id="57" class="l">57: </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword2">extension_loaded</span>(<span class="php-var">$extension</span>)) {
 <a href="#58" id="58" class="l">58: </a>                <span class="php-var">$missing</span>[] = <span class="php-var">$extension</span>;
 <a href="#59" id="59" class="l">59: </a>            }
 <a href="#60" id="60" class="l">60: </a>        }
 <a href="#61" id="61" class="l">61: </a>
-<a href="#62" id="62" class="l">62: </a>        <span class="php-comment">// Some extensions are missing
-</span><a href="#63" id="63" class="l">63: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$missing</span>)) {
+<a href="#62" id="62" class="l">62: </a>        <span class="php-comment">// Some extensions are missing</span>
+<a href="#63" id="63" class="l">63: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$missing</span>)) {
 <a href="#64" id="64" class="l">64: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, <span class="php-keyword2">sprintf</span>(<span class="php-quote">'Missing %s'</span>, <span class="php-keyword2">implode</span>(<span class="php-quote">', '</span>, <span class="php-var">$missing</span>)));
 <a href="#65" id="65" class="l">65: </a>        }
 <a href="#66" id="66" class="l">66: </a>
-<a href="#67" id="67" class="l">67: </a>        <span class="php-comment">// OK
-</span><a href="#68" id="68" class="l">68: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::SUCCESS);
+<a href="#67" id="67" class="l">67: </a>        <span class="php-comment">// OK</span>
+<a href="#68" id="68" class="l">68: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::SUCCESS);
 <a href="#69" id="69" class="l">69: </a>    }
 <a href="#70" id="70" class="l">70: </a>}
 <a href="#71" id="71" class="l">71: </a></code></pre>
 
 		<div id="footer">
-			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>.<br />
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">ApiGen</a>.<br />
 			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
 		</div>
 	</div>

@@ -2,12 +2,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="TR ApiGen 2.0 RC" />
+	<meta name="generator" content="ApiGen 2.0" />
 	<meta name="robots" content="noindex" />
 
 	<title>File Time/Time.php | Jyxo PHP Library</title>
 
-	<script type="text/javascript" src="resources/combined.js?3309972472"></script>
+	<script type="text/javascript" src="resources/combined.js?4060439551"></script>
 	<script type="text/javascript" src="elementlist.js?2796542733"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1274782946" />
 	<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
@@ -310,12 +310,12 @@
 <a href="#159" id="159" class="l">159: </a>            <span class="php-var">$timeZone</span> = <span class="php-var">$this</span>-&gt;createTimeZone(<span class="php-var">$timeZone</span> ? <span class="php-var">$timeZone</span> : <span class="php-keyword2">date_default_timezone_get</span>());
 <a href="#160" id="160" class="l">160: </a>
 <a href="#161" id="161" class="l">161: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">is_numeric</span>(<span class="php-var">$time</span>)) {
-<a href="#162" id="162" class="l">162: </a>                <span class="php-comment">// Unix timestamp as an integer or string
-</span><a href="#163" id="163" class="l">163: </a>                <span class="php-var">$this</span>-&gt;dateTime = <span class="php-keyword1">new</span> \DateTime(<span class="php-keyword1">null</span>, <span class="php-var">$timeZone</span>);
+<a href="#162" id="162" class="l">162: </a>                <span class="php-comment">// Unix timestamp as an integer or string</span>
+<a href="#163" id="163" class="l">163: </a>                <span class="php-var">$this</span>-&gt;dateTime = <span class="php-keyword1">new</span> \DateTime(<span class="php-keyword1">null</span>, <span class="php-var">$timeZone</span>);
 <a href="#164" id="164" class="l">164: </a>                <span class="php-var">$this</span>-&gt;dateTime-&gt;setTimestamp(<span class="php-var">$time</span>);
 <a href="#165" id="165" class="l">165: </a>            } <span class="php-keyword1">elseif</span> (<span class="php-keyword2">is_string</span>(<span class="php-var">$time</span>)) {
-<a href="#166" id="166" class="l">166: </a>                <span class="php-comment">// Textual representation
-</span><a href="#167" id="167" class="l">167: </a>                <span class="php-keyword1">try</span> {
+<a href="#166" id="166" class="l">166: </a>                <span class="php-comment">// Textual representation</span>
+<a href="#167" id="167" class="l">167: </a>                <span class="php-keyword1">try</span> {
 <a href="#168" id="168" class="l">168: </a>                    <span class="php-var">$this</span>-&gt;dateTime = <span class="php-keyword1">new</span> \DateTime(<span class="php-var">$time</span>, <span class="php-var">$timeZone</span>);
 <a href="#169" id="169" class="l">169: </a>                } <span class="php-keyword1">catch</span> (\Exception <span class="php-var">$e</span>) {
 <a href="#170" id="170" class="l">170: </a>                    <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \InvalidArgumentException(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'Provided textual date/time definition &quot;%s&quot; is invalid'</span>, <span class="php-var">$time</span>), <span class="php-num">0</span>, <span class="php-var">$e</span>);
@@ -324,14 +324,14 @@
 <a href="#173" id="173" class="l">173: </a>                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \InvalidArgumentException(<span class="php-quote">'Provided date/time must be a number, \Jyxo\Time\Time or \DateTime instance or a parameter compatible with PHP function strtotime().'</span>);
 <a href="#174" id="174" class="l">174: </a>            }
 <a href="#175" id="175" class="l">175: </a>        } <span class="php-keyword1">elseif</span> (<span class="php-var">$time</span> <span class="php-keyword1">instanceof</span> self) {
-<a href="#176" id="176" class="l">176: </a>            <span class="php-comment">// \Jyxo\Time\Time
-</span><a href="#177" id="177" class="l">177: </a>            <span class="php-var">$this</span>-&gt;dateTime = <span class="php-keyword1">new</span> \DateTime(<span class="php-var">$time</span>-&gt;format(<span class="php-quote">'Y-m-d H:i:s'</span>), <span class="php-var">$time</span>-&gt;getTimeZone());
+<a href="#176" id="176" class="l">176: </a>            <span class="php-comment">// \Jyxo\Time\Time</span>
+<a href="#177" id="177" class="l">177: </a>            <span class="php-var">$this</span>-&gt;dateTime = <span class="php-keyword1">new</span> \DateTime(<span class="php-var">$time</span>-&gt;format(<span class="php-quote">'Y-m-d H:i:s'</span>), <span class="php-var">$time</span>-&gt;getTimeZone());
 <a href="#178" id="178" class="l">178: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$timeZone</span>) {
 <a href="#179" id="179" class="l">179: </a>                <span class="php-var">$this</span>-&gt;dateTime-&gt;setTimezone(<span class="php-var">$this</span>-&gt;createTimeZone(<span class="php-var">$timeZone</span>));
 <a href="#180" id="180" class="l">180: </a>            }
 <a href="#181" id="181" class="l">181: </a>        } <span class="php-keyword1">elseif</span> (<span class="php-var">$time</span> <span class="php-keyword1">instanceof</span> \DateTime) {
-<a href="#182" id="182" class="l">182: </a>            <span class="php-comment">// \DateTime
-</span><a href="#183" id="183" class="l">183: </a>            <span class="php-var">$this</span>-&gt;dateTime = <span class="php-keyword1">clone</span> (<span class="php-var">$time</span>);
+<a href="#182" id="182" class="l">182: </a>            <span class="php-comment">// \DateTime</span>
+<a href="#183" id="183" class="l">183: </a>            <span class="php-var">$this</span>-&gt;dateTime = <span class="php-keyword1">clone</span> (<span class="php-var">$time</span>);
 <a href="#184" id="184" class="l">184: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$timeZone</span>) {
 <a href="#185" id="185" class="l">185: </a>                <span class="php-var">$this</span>-&gt;dateTime-&gt;setTimezone(<span class="php-var">$this</span>-&gt;createTimeZone(<span class="php-var">$timeZone</span>));
 <a href="#186" id="186" class="l">186: </a>            }
@@ -419,8 +419,8 @@
 <a href="#268" id="268" class="l">268: </a>            <span class="php-keyword1">case</span> <span class="php-quote">'rss'</span>:
 <a href="#269" id="269" class="l">269: </a>                <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;dateTime-&gt;format(\DateTime::RSS);
 <a href="#270" id="270" class="l">270: </a>            <span class="php-keyword1">case</span> <span class="php-quote">'unix'</span>:
-<a href="#271" id="271" class="l">271: </a>                <span class="php-comment">// Returns false if the stored date/time has no valid unix timestamp representation
-</span><a href="#272" id="272" class="l">272: </a>                <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;dateTime-&gt;getTimestamp();
+<a href="#271" id="271" class="l">271: </a>                <span class="php-comment">// Returns false if the stored date/time has no valid unix timestamp representation</span>
+<a href="#272" id="272" class="l">272: </a>                <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;dateTime-&gt;getTimestamp();
 <a href="#273" id="273" class="l">273: </a>            <span class="php-keyword1">case</span> <span class="php-quote">'http'</span>:
 <a href="#274" id="274" class="l">274: </a>                <span class="php-var">$this</span>-&gt;setTemporaryTimeZone(<span class="php-quote">'GMT'</span>);
 <a href="#275" id="275" class="l">275: </a>                <span class="php-var">$result</span> = <span class="php-var">$this</span>-&gt;dateTime-&gt;format(<span class="php-quote">'D, d M Y H:i:s'</span>) . <span class="php-quote">' GMT'</span>;
@@ -432,8 +432,8 @@
 <a href="#281" id="281" class="l">281: </a>                <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;formatAsInterval();
 <a href="#282" id="282" class="l">282: </a>            <span class="php-keyword1">case</span> <span class="php-quote">'full'</span>:
 <a href="#283" id="283" class="l">283: </a>                <span class="php-keyword1">if</span> ((int) <span class="php-var">$this</span>-&gt;dateTime-&gt;diff(<span class="php-keyword1">new</span> \DateTime())-&gt;format(<span class="php-quote">'%y%m%d%h'</span>) &gt; <span class="php-num">0</span>) {
-<a href="#284" id="284" class="l">284: </a>                    <span class="php-comment">// If the difference between now and the stored date/time if greater than one hour
-</span><a href="#285" id="285" class="l">285: </a>                    <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;formatExtended();
+<a href="#284" id="284" class="l">284: </a>                    <span class="php-comment">// If the difference between now and the stored date/time if greater than one hour</span>
+<a href="#285" id="285" class="l">285: </a>                    <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;formatExtended();
 <a href="#286" id="286" class="l">286: </a>                } <span class="php-keyword1">else</span> {
 <a href="#287" id="287" class="l">287: </a>                    <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;formatAsInterval();
 <a href="#288" id="288" class="l">288: </a>                }
@@ -451,7 +451,7 @@
 </span><a href="#300" id="300" class="l">300: </a><span class="php-comment">     */</span>
 <a href="#301" id="301" class="l">301: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> __call(<span class="php-var">$method</span>, <span class="php-var">$args</span>)
 <a href="#302" id="302" class="l">302: </a>    {
-<a href="#303" id="303" class="l">303: </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">call_user_func_array</span>(<span class="php-keyword1">array</span>(<span class="php-var">$this</span>-&gt;dateTime, <span class="php-var">$method</span>), <span class="php-var">$args</span>);
+<a href="#303" id="303" class="l">303: </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">call_user_func_array</span>(<span class="php-keyword2">array</span>(<span class="php-var">$this</span>-&gt;dateTime, <span class="php-var">$method</span>), <span class="php-var">$args</span>);
 <a href="#304" id="304" class="l">304: </a>    }
 <a href="#305" id="305" class="l">305: </a>
 <a href="#306" id="306" class="l">306: </a>    <span class="php-comment">/**
@@ -528,62 +528,62 @@
 </span><a href="#377" id="377" class="l">377: </a><span class="php-comment">     */</span>
 <a href="#378" id="378" class="l">378: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> format(<span class="php-var">$format</span>, <span class="php-var">$timeZone</span> = <span class="php-keyword1">null</span>)
 <a href="#379" id="379" class="l">379: </a>    {
-<a href="#380" id="380" class="l">380: </a>        <span class="php-comment">// Prepares the right result time zone if needed
-</span><a href="#381" id="381" class="l">381: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$timeZone</span>) {
+<a href="#380" id="380" class="l">380: </a>        <span class="php-comment">// Prepares the right result time zone if needed</span>
+<a href="#381" id="381" class="l">381: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$timeZone</span>) {
 <a href="#382" id="382" class="l">382: </a>            <span class="php-var">$this</span>-&gt;setTemporaryTimeZone(<span class="php-var">$timeZone</span>);
 <a href="#383" id="383" class="l">383: </a>        }
 <a href="#384" id="384" class="l">384: </a>
-<a href="#385" id="385" class="l">385: </a>        <span class="php-comment">// Translation required?
-</span><a href="#386" id="386" class="l">386: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'~(?:^|[^\\\])[lDFM]~'</span>, <span class="php-var">$format</span>)) {
-<a href="#387" id="387" class="l">387: </a>            <span class="php-keyword1">static</span> <span class="php-var">$days</span> = <span class="php-keyword1">array</span>();
+<a href="#385" id="385" class="l">385: </a>        <span class="php-comment">// Translation required?</span>
+<a href="#386" id="386" class="l">386: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'~(?:^|[^\\\])[lDFM]~'</span>, <span class="php-var">$format</span>)) {
+<a href="#387" id="387" class="l">387: </a>            <span class="php-keyword1">static</span> <span class="php-var">$days</span> = <span class="php-keyword2">array</span>();
 <a href="#388" id="388" class="l">388: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$days</span>)) {
-<a href="#389" id="389" class="l">389: </a>                <span class="php-var">$days</span> = <span class="php-keyword1">array</span>(_(<span class="php-quote">'Monday'</span>), _(<span class="php-quote">'Tuesday'</span>), _(<span class="php-quote">'Wednesday'</span>), _(<span class="php-quote">'Thursday'</span>), _(<span class="php-quote">'Friday'</span>), _(<span class="php-quote">'Saturday'</span>), _(<span class="php-quote">'Sunday'</span>));
+<a href="#389" id="389" class="l">389: </a>                <span class="php-var">$days</span> = <span class="php-keyword2">array</span>(_(<span class="php-quote">'Monday'</span>), _(<span class="php-quote">'Tuesday'</span>), _(<span class="php-quote">'Wednesday'</span>), _(<span class="php-quote">'Thursday'</span>), _(<span class="php-quote">'Friday'</span>), _(<span class="php-quote">'Saturday'</span>), _(<span class="php-quote">'Sunday'</span>));
 <a href="#390" id="390" class="l">390: </a>            }
 <a href="#391" id="391" class="l">391: </a>
-<a href="#392" id="392" class="l">392: </a>            <span class="php-keyword1">static</span> <span class="php-var">$daysShort</span> = <span class="php-keyword1">array</span>();
+<a href="#392" id="392" class="l">392: </a>            <span class="php-keyword1">static</span> <span class="php-var">$daysShort</span> = <span class="php-keyword2">array</span>();
 <a href="#393" id="393" class="l">393: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$daysShort</span>)) {
-<a href="#394" id="394" class="l">394: </a>                <span class="php-var">$daysShort</span> = <span class="php-keyword1">array</span>(_(<span class="php-quote">'Mon'</span>), _(<span class="php-quote">'Tue'</span>), _(<span class="php-quote">'Wed'</span>), _(<span class="php-quote">'Thu'</span>), _(<span class="php-quote">'Fri'</span>), _(<span class="php-quote">'Sat'</span>), _(<span class="php-quote">'Sun'</span>));
+<a href="#394" id="394" class="l">394: </a>                <span class="php-var">$daysShort</span> = <span class="php-keyword2">array</span>(_(<span class="php-quote">'Mon'</span>), _(<span class="php-quote">'Tue'</span>), _(<span class="php-quote">'Wed'</span>), _(<span class="php-quote">'Thu'</span>), _(<span class="php-quote">'Fri'</span>), _(<span class="php-quote">'Sat'</span>), _(<span class="php-quote">'Sun'</span>));
 <a href="#395" id="395" class="l">395: </a>            }
 <a href="#396" id="396" class="l">396: </a>
-<a href="#397" id="397" class="l">397: </a>            <span class="php-keyword1">static</span> <span class="php-var">$months</span> = <span class="php-keyword1">array</span>();
+<a href="#397" id="397" class="l">397: </a>            <span class="php-keyword1">static</span> <span class="php-var">$months</span> = <span class="php-keyword2">array</span>();
 <a href="#398" id="398" class="l">398: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$months</span>)) {
-<a href="#399" id="399" class="l">399: </a>                <span class="php-var">$months</span> = <span class="php-keyword1">array</span>(
+<a href="#399" id="399" class="l">399: </a>                <span class="php-var">$months</span> = <span class="php-keyword2">array</span>(
 <a href="#400" id="400" class="l">400: </a>                    _(<span class="php-quote">'January'</span>), _(<span class="php-quote">'February'</span>), _(<span class="php-quote">'March'</span>), _(<span class="php-quote">'April'</span>), _(<span class="php-quote">'May'</span>), _(<span class="php-quote">'June'</span>), _(<span class="php-quote">'July'</span>), _(<span class="php-quote">'August'</span>),
 <a href="#401" id="401" class="l">401: </a>                    _(<span class="php-quote">'September'</span>), _(<span class="php-quote">'October'</span>), _(<span class="php-quote">'November'</span>), _(<span class="php-quote">'December'</span>)
 <a href="#402" id="402" class="l">402: </a>                );
 <a href="#403" id="403" class="l">403: </a>            }
-<a href="#404" id="404" class="l">404: </a>            <span class="php-keyword1">static</span> <span class="php-var">$monthsGen</span> = <span class="php-keyword1">array</span>();
+<a href="#404" id="404" class="l">404: </a>            <span class="php-keyword1">static</span> <span class="php-var">$monthsGen</span> = <span class="php-keyword2">array</span>();
 <a href="#405" id="405" class="l">405: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$monthsGen</span>)) {
-<a href="#406" id="406" class="l">406: </a>                <span class="php-var">$monthsGen</span> = <span class="php-keyword1">array</span>(
+<a href="#406" id="406" class="l">406: </a>                <span class="php-var">$monthsGen</span> = <span class="php-keyword2">array</span>(
 <a href="#407" id="407" class="l">407: </a>                    _(<span class="php-quote">'January#~Genitive'</span>), _(<span class="php-quote">'February#~Genitive'</span>), _(<span class="php-quote">'March#~Genitive'</span>), _(<span class="php-quote">'April#~Genitive'</span>), _(<span class="php-quote">'May#~Genitive'</span>),
 <a href="#408" id="408" class="l">408: </a>                    _(<span class="php-quote">'June#~Genitive'</span>), _(<span class="php-quote">'July#~Genitive'</span>), _(<span class="php-quote">'August#~Genitive'</span>), _(<span class="php-quote">'September#~Genitive'</span>),
 <a href="#409" id="409" class="l">409: </a>                    _(<span class="php-quote">'October#~Genitive'</span>), _(<span class="php-quote">'November#~Genitive'</span>), _(<span class="php-quote">'December#~Genitive'</span>)
 <a href="#410" id="410" class="l">410: </a>                );
 <a href="#411" id="411" class="l">411: </a>            }
-<a href="#412" id="412" class="l">412: </a>            <span class="php-keyword1">static</span> <span class="php-var">$monthsShort</span> = <span class="php-keyword1">array</span>();
+<a href="#412" id="412" class="l">412: </a>            <span class="php-keyword1">static</span> <span class="php-var">$monthsShort</span> = <span class="php-keyword2">array</span>();
 <a href="#413" id="413" class="l">413: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$monthsShort</span>)) {
-<a href="#414" id="414" class="l">414: </a>                <span class="php-var">$monthsShort</span> = <span class="php-keyword1">array</span>(_(<span class="php-quote">'Jan'</span>), _(<span class="php-quote">'Feb'</span>), _(<span class="php-quote">'Mar'</span>), _(<span class="php-quote">'Apr'</span>), _(<span class="php-quote">'May#~Shortcut'</span>), _(<span class="php-quote">'Jun'</span>), _(<span class="php-quote">'Jul'</span>), _(<span class="php-quote">'Aug'</span>), _(<span class="php-quote">'Sep'</span>), _(<span class="php-quote">'Oct'</span>), _(<span class="php-quote">'Nov'</span>), _(<span class="php-quote">'Dec'</span>));
+<a href="#414" id="414" class="l">414: </a>                <span class="php-var">$monthsShort</span> = <span class="php-keyword2">array</span>(_(<span class="php-quote">'Jan'</span>), _(<span class="php-quote">'Feb'</span>), _(<span class="php-quote">'Mar'</span>), _(<span class="php-quote">'Apr'</span>), _(<span class="php-quote">'May#~Shortcut'</span>), _(<span class="php-quote">'Jun'</span>), _(<span class="php-quote">'Jul'</span>), _(<span class="php-quote">'Aug'</span>), _(<span class="php-quote">'Sep'</span>), _(<span class="php-quote">'Oct'</span>), _(<span class="php-quote">'Nov'</span>), _(<span class="php-quote">'Dec'</span>));
 <a href="#415" id="415" class="l">415: </a>            }
 <a href="#416" id="416" class="l">416: </a>
-<a href="#417" id="417" class="l">417: </a>            <span class="php-comment">// Replace certain identifiers with fake ones
-</span><a href="#418" id="418" class="l">418: </a>            <span class="php-var">$search</span> = <span class="php-keyword1">array</span>(<span class="php-quote">'~(^|[^\\\])l~'</span>, <span class="php-quote">'~(^|[^\\\])D~'</span>, <span class="php-quote">'~(^|[^\\\])F~'</span>, <span class="php-quote">'~(^|[^\\\])M~'</span>);
-<a href="#419" id="419" class="l">419: </a>            <span class="php-var">$replace</span> = <span class="php-keyword1">array</span>(<span class="php-quote">'$1&lt;===&gt;'</span>, <span class="php-quote">'$1&lt;___&gt;'</span>, <span class="php-quote">'$1&lt;---&gt;'</span>, <span class="php-quote">'$1&lt;...&gt;'</span>);
+<a href="#417" id="417" class="l">417: </a>            <span class="php-comment">// Replace certain identifiers with fake ones</span>
+<a href="#418" id="418" class="l">418: </a>            <span class="php-var">$search</span> = <span class="php-keyword2">array</span>(<span class="php-quote">'~(^|[^\\\])l~'</span>, <span class="php-quote">'~(^|[^\\\])D~'</span>, <span class="php-quote">'~(^|[^\\\])F~'</span>, <span class="php-quote">'~(^|[^\\\])M~'</span>);
+<a href="#419" id="419" class="l">419: </a>            <span class="php-var">$replace</span> = <span class="php-keyword2">array</span>(<span class="php-quote">'$1&lt;===&gt;'</span>, <span class="php-quote">'$1&lt;___&gt;'</span>, <span class="php-quote">'$1&lt;---&gt;'</span>, <span class="php-quote">'$1&lt;...&gt;'</span>);
 <a href="#420" id="420" class="l">420: </a>            <span class="php-var">$format</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-var">$search</span>, <span class="php-var">$replace</span>, <span class="php-var">$format</span>);
 <a href="#421" id="421" class="l">421: </a>
-<a href="#422" id="422" class="l">422: </a>            <span class="php-comment">// Format the rest of the date
-</span><a href="#423" id="423" class="l">423: </a>            <span class="php-var">$date</span> = <span class="php-var">$this</span>-&gt;dateTime-&gt;format(<span class="php-var">$format</span>);
+<a href="#422" id="422" class="l">422: </a>            <span class="php-comment">// Format the rest of the date</span>
+<a href="#423" id="423" class="l">423: </a>            <span class="php-var">$date</span> = <span class="php-var">$this</span>-&gt;dateTime-&gt;format(<span class="php-var">$format</span>);
 <a href="#424" id="424" class="l">424: </a>
-<a href="#425" id="425" class="l">425: </a>            <span class="php-comment">// Calculate day and month
-</span><a href="#426" id="426" class="l">426: </a>            <span class="php-var">$day</span> = <span class="php-var">$this</span>-&gt;dateTime-&gt;format(<span class="php-quote">'N'</span>) - <span class="php-num">1</span>;
+<a href="#425" id="425" class="l">425: </a>            <span class="php-comment">// Calculate day and month</span>
+<a href="#426" id="426" class="l">426: </a>            <span class="php-var">$day</span> = <span class="php-var">$this</span>-&gt;dateTime-&gt;format(<span class="php-quote">'N'</span>) - <span class="php-num">1</span>;
 <a href="#427" id="427" class="l">427: </a>            <span class="php-var">$month</span> = <span class="php-var">$this</span>-&gt;dateTime-&gt;format(<span class="php-quote">'n'</span>) - <span class="php-num">1</span>;
 <a href="#428" id="428" class="l">428: </a>
-<a href="#429" id="429" class="l">429: </a>            <span class="php-comment">// If the month is not at the beginning, the genitive case and lowercase will be used
-</span><a href="#430" id="430" class="l">430: </a>            <span class="php-var">$monthName</span> = <span class="php-num">0</span> !== <span class="php-keyword2">strpos</span>(<span class="php-var">$format</span>, <span class="php-quote">'&lt;---&gt;'</span>) ? <span class="php-keyword2">mb_strtolower</span>(<span class="php-var">$monthsGen</span>[<span class="php-var">$month</span>], <span class="php-quote">'utf-8'</span>) : <span class="php-var">$months</span>[<span class="php-var">$month</span>];
+<a href="#429" id="429" class="l">429: </a>            <span class="php-comment">// If the month is not at the beginning, the genitive case and lowercase will be used</span>
+<a href="#430" id="430" class="l">430: </a>            <span class="php-var">$monthName</span> = <span class="php-num">0</span> !== <span class="php-keyword2">strpos</span>(<span class="php-var">$format</span>, <span class="php-quote">'&lt;---&gt;'</span>) ? <span class="php-keyword2">mb_strtolower</span>(<span class="php-var">$monthsGen</span>[<span class="php-var">$month</span>], <span class="php-quote">'utf-8'</span>) : <span class="php-var">$months</span>[<span class="php-var">$month</span>];
 <a href="#431" id="431" class="l">431: </a>
-<a href="#432" id="432" class="l">432: </a>            <span class="php-comment">// Add translated days and months into the result
-</span><a href="#433" id="433" class="l">433: </a>            <span class="php-var">$result</span> = <span class="php-keyword2">strtr</span>(
+<a href="#432" id="432" class="l">432: </a>            <span class="php-comment">// Add translated days and months into the result</span>
+<a href="#433" id="433" class="l">433: </a>            <span class="php-var">$result</span> = <span class="php-keyword2">strtr</span>(
 <a href="#434" id="434" class="l">434: </a>                <span class="php-var">$date</span>,
-<a href="#435" id="435" class="l">435: </a>                <span class="php-keyword1">array</span>(
+<a href="#435" id="435" class="l">435: </a>                <span class="php-keyword2">array</span>(
 <a href="#436" id="436" class="l">436: </a>                    <span class="php-quote">'&lt;===&gt;'</span> =&gt; <span class="php-var">$days</span>[<span class="php-var">$day</span>],
 <a href="#437" id="437" class="l">437: </a>                    <span class="php-quote">'&lt;___&gt;'</span> =&gt; <span class="php-var">$daysShort</span>[<span class="php-var">$day</span>],
 <a href="#438" id="438" class="l">438: </a>                    <span class="php-quote">'&lt;---&gt;'</span> =&gt; <span class="php-var">$monthName</span>,
@@ -591,12 +591,12 @@
 <a href="#440" id="440" class="l">440: </a>                )
 <a href="#441" id="441" class="l">441: </a>            );
 <a href="#442" id="442" class="l">442: </a>        } <span class="php-keyword1">else</span> {
-<a href="#443" id="443" class="l">443: </a>            <span class="php-comment">// No need to translate
-</span><a href="#444" id="444" class="l">444: </a>            <span class="php-var">$result</span> = <span class="php-var">$this</span>-&gt;dateTime-&gt;format(<span class="php-var">$format</span>);
+<a href="#443" id="443" class="l">443: </a>            <span class="php-comment">// No need to translate</span>
+<a href="#444" id="444" class="l">444: </a>            <span class="php-var">$result</span> = <span class="php-var">$this</span>-&gt;dateTime-&gt;format(<span class="php-var">$format</span>);
 <a href="#445" id="445" class="l">445: </a>        }
 <a href="#446" id="446" class="l">446: </a>
-<a href="#447" id="447" class="l">447: </a>        <span class="php-comment">// If a custom result timezone was specified, revert the original one
-</span><a href="#448" id="448" class="l">448: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$timeZone</span>) {
+<a href="#447" id="447" class="l">447: </a>        <span class="php-comment">// If a custom result timezone was specified, revert the original one</span>
+<a href="#448" id="448" class="l">448: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$timeZone</span>) {
 <a href="#449" id="449" class="l">449: </a>            <span class="php-var">$this</span>-&gt;revertOriginalTimeZone();
 <a href="#450" id="450" class="l">450: </a>        }
 <a href="#451" id="451" class="l">451: </a>
@@ -618,39 +618,39 @@
 </span><a href="#467" id="467" class="l">467: </a><span class="php-comment">     */</span>
 <a href="#468" id="468" class="l">468: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> formatExtended(<span class="php-var">$dateFormat</span> = <span class="php-quote">'j. F Y'</span>, <span class="php-var">$timeFormat</span> = <span class="php-quote">'G:i'</span>, <span class="php-var">$timeZone</span> = <span class="php-keyword1">null</span>)
 <a href="#469" id="469" class="l">469: </a>    {
-<a href="#470" id="470" class="l">470: </a>        <span class="php-comment">// Sets a custom result time zone if needed
-</span><a href="#471" id="471" class="l">471: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$timeZone</span>) {
+<a href="#470" id="470" class="l">470: </a>        <span class="php-comment">// Sets a custom result time zone if needed</span>
+<a href="#471" id="471" class="l">471: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$timeZone</span>) {
 <a href="#472" id="472" class="l">472: </a>            <span class="php-var">$this</span>-&gt;setTemporaryTimeZone(<span class="php-var">$timeZone</span>);
 <a href="#473" id="473" class="l">473: </a>        }
 <a href="#474" id="474" class="l">474: </a>
 <a href="#475" id="475" class="l">475: </a>        <span class="php-keyword1">if</span> ((<span class="php-var">$this</span>-&gt;dateTime &lt; <span class="php-keyword1">new</span> \DateTime(<span class="php-quote">'midnight - 6 days'</span>, <span class="php-var">$this</span>-&gt;dateTime-&gt;getTimezone())) || (<span class="php-var">$this</span>-&gt;dateTime &gt;= <span class="php-keyword1">new</span> \DateTime(<span class="php-quote">'midnight + 24 hours'</span>, <span class="php-var">$this</span>-&gt;dateTime-&gt;getTimezone()))) {
-<a href="#476" id="476" class="l">476: </a>            <span class="php-comment">// Past and future dates
-</span><a href="#477" id="477" class="l">477: </a>            <span class="php-var">$date</span> = <span class="php-var">$this</span>-&gt;format(<span class="php-var">$dateFormat</span>);
+<a href="#476" id="476" class="l">476: </a>            <span class="php-comment">// Past and future dates</span>
+<a href="#477" id="477" class="l">477: </a>            <span class="php-var">$date</span> = <span class="php-var">$this</span>-&gt;format(<span class="php-var">$dateFormat</span>);
 <a href="#478" id="478" class="l">478: </a>        } <span class="php-keyword1">elseif</span> (<span class="php-var">$this</span>-&gt;dateTime &gt;= <span class="php-keyword1">new</span> \DateTime(<span class="php-quote">'midnight'</span>, <span class="php-var">$this</span>-&gt;dateTime-&gt;getTimezone())) {
-<a href="#479" id="479" class="l">479: </a>            <span class="php-comment">// Today
-</span><a href="#480" id="480" class="l">480: </a>            <span class="php-var">$date</span> = _(<span class="php-quote">'Today'</span>);
+<a href="#479" id="479" class="l">479: </a>            <span class="php-comment">// Today</span>
+<a href="#480" id="480" class="l">480: </a>            <span class="php-var">$date</span> = _(<span class="php-quote">'Today'</span>);
 <a href="#481" id="481" class="l">481: </a>        } <span class="php-keyword1">elseif</span> (<span class="php-var">$this</span>-&gt;dateTime &gt;= <span class="php-keyword1">new</span> \DateTime(<span class="php-quote">'midnight - 24 hours'</span>, <span class="php-var">$this</span>-&gt;dateTime-&gt;getTimezone())) {
-<a href="#482" id="482" class="l">482: </a>            <span class="php-comment">// Yesterday
-</span><a href="#483" id="483" class="l">483: </a>            <span class="php-var">$date</span> = _(<span class="php-quote">'Yesterday'</span>);
+<a href="#482" id="482" class="l">482: </a>            <span class="php-comment">// Yesterday</span>
+<a href="#483" id="483" class="l">483: </a>            <span class="php-var">$date</span> = _(<span class="php-quote">'Yesterday'</span>);
 <a href="#484" id="484" class="l">484: </a>        } <span class="php-keyword1">else</span> {
-<a href="#485" id="485" class="l">485: </a>            <span class="php-comment">// Last week
-</span><a href="#486" id="486" class="l">486: </a>            <span class="php-keyword1">static</span> <span class="php-var">$days</span> = <span class="php-keyword1">array</span>();
+<a href="#485" id="485" class="l">485: </a>            <span class="php-comment">// Last week</span>
+<a href="#486" id="486" class="l">486: </a>            <span class="php-keyword1">static</span> <span class="php-var">$days</span> = <span class="php-keyword2">array</span>();
 <a href="#487" id="487" class="l">487: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$days</span>)) {
-<a href="#488" id="488" class="l">488: </a>                <span class="php-var">$days</span> = <span class="php-keyword1">array</span>(_(<span class="php-quote">'Monday'</span>), _(<span class="php-quote">'Tuesday'</span>), _(<span class="php-quote">'Wednesday'</span>), _(<span class="php-quote">'Thursday'</span>), _(<span class="php-quote">'Friday'</span>), _(<span class="php-quote">'Saturday'</span>), _(<span class="php-quote">'Sunday'</span>));
+<a href="#488" id="488" class="l">488: </a>                <span class="php-var">$days</span> = <span class="php-keyword2">array</span>(_(<span class="php-quote">'Monday'</span>), _(<span class="php-quote">'Tuesday'</span>), _(<span class="php-quote">'Wednesday'</span>), _(<span class="php-quote">'Thursday'</span>), _(<span class="php-quote">'Friday'</span>), _(<span class="php-quote">'Saturday'</span>), _(<span class="php-quote">'Sunday'</span>));
 <a href="#489" id="489" class="l">489: </a>            }
 <a href="#490" id="490" class="l">490: </a>            <span class="php-var">$date</span> = <span class="php-var">$days</span>[<span class="php-var">$this</span>-&gt;dateTime-&gt;format(<span class="php-quote">'N'</span>) - <span class="php-num">1</span>];
 <a href="#491" id="491" class="l">491: </a>        }
 <a href="#492" id="492" class="l">492: </a>
-<a href="#493" id="493" class="l">493: </a>        <span class="php-comment">// If no time format is provided, only date will be returned
-</span><a href="#494" id="494" class="l">494: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$timeFormat</span>)) {
+<a href="#493" id="493" class="l">493: </a>        <span class="php-comment">// If no time format is provided, only date will be returned</span>
+<a href="#494" id="494" class="l">494: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$timeFormat</span>)) {
 <a href="#495" id="495" class="l">495: </a>            <span class="php-var">$result</span> = <span class="php-var">$date</span>;
 <a href="#496" id="496" class="l">496: </a>        } <span class="php-keyword1">else</span> {
-<a href="#497" id="497" class="l">497: </a>            <span class="php-comment">// Returns date along with time
-</span><a href="#498" id="498" class="l">498: </a>            <span class="php-var">$result</span> = <span class="php-var">$date</span> . <span class="php-quote">' '</span> . _(<span class="php-quote">'at'</span>) . <span class="php-quote">' '</span> . <span class="php-var">$this</span>-&gt;dateTime-&gt;format(<span class="php-var">$timeFormat</span>);
+<a href="#497" id="497" class="l">497: </a>            <span class="php-comment">// Returns date along with time</span>
+<a href="#498" id="498" class="l">498: </a>            <span class="php-var">$result</span> = <span class="php-var">$date</span> . <span class="php-quote">' '</span> . _(<span class="php-quote">'at'</span>) . <span class="php-quote">' '</span> . <span class="php-var">$this</span>-&gt;dateTime-&gt;format(<span class="php-var">$timeFormat</span>);
 <a href="#499" id="499" class="l">499: </a>        }
 <a href="#500" id="500" class="l">500: </a>
-<a href="#501" id="501" class="l">501: </a>        <span class="php-comment">// If a custom result timezone was specified, revert the original one
-</span><a href="#502" id="502" class="l">502: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$timeZone</span>) {
+<a href="#501" id="501" class="l">501: </a>        <span class="php-comment">// If a custom result timezone was specified, revert the original one</span>
+<a href="#502" id="502" class="l">502: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$timeZone</span>) {
 <a href="#503" id="503" class="l">503: </a>            <span class="php-var">$this</span>-&gt;revertOriginalTimeZone();
 <a href="#504" id="504" class="l">504: </a>        }
 <a href="#505" id="505" class="l">505: </a>
@@ -675,7 +675,7 @@
 </span><a href="#524" id="524" class="l">524: </a><span class="php-comment">     */</span>
 <a href="#525" id="525" class="l">525: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> formatAsInterval(<span class="php-var">$useTense</span> = <span class="php-keyword1">true</span>, <span class="php-var">$timeZone</span> = <span class="php-keyword1">null</span>)
 <a href="#526" id="526" class="l">526: </a>    {
-<a href="#527" id="527" class="l">527: </a>        <span class="php-keyword1">static</span> <span class="php-var">$intervalList</span> = <span class="php-keyword1">array</span>(
+<a href="#527" id="527" class="l">527: </a>        <span class="php-keyword1">static</span> <span class="php-var">$intervalList</span> = <span class="php-keyword2">array</span>(
 <a href="#528" id="528" class="l">528: </a>            self::YEAR =&gt; self::INTERVAL_YEAR,
 <a href="#529" id="529" class="l">529: </a>            self::MONTH =&gt; self::INTERVAL_MONTH,
 <a href="#530" id="530" class="l">530: </a>            self::WEEK =&gt; self::INTERVAL_WEEK,
@@ -685,101 +685,101 @@
 <a href="#534" id="534" class="l">534: </a>            self::SECOND =&gt; self::INTERVAL_SECOND
 <a href="#535" id="535" class="l">535: </a>        );
 <a href="#536" id="536" class="l">536: </a>
-<a href="#537" id="537" class="l">537: </a>        <span class="php-comment">// Comparison time zone
-</span><a href="#538" id="538" class="l">538: </a>        <span class="php-var">$timeZone</span> = <span class="php-var">$timeZone</span> ? <span class="php-var">$this</span>-&gt;createTimeZone(<span class="php-var">$timeZone</span>) : <span class="php-var">$this</span>-&gt;dateTime-&gt;getTimezone();
+<a href="#537" id="537" class="l">537: </a>        <span class="php-comment">// Comparison time zone</span>
+<a href="#538" id="538" class="l">538: </a>        <span class="php-var">$timeZone</span> = <span class="php-var">$timeZone</span> ? <span class="php-var">$this</span>-&gt;createTimeZone(<span class="php-var">$timeZone</span>) : <span class="php-var">$this</span>-&gt;dateTime-&gt;getTimezone();
 <a href="#539" id="539" class="l">539: </a>
-<a href="#540" id="540" class="l">540: </a>        <span class="php-comment">// Difference between the stored date/time and now
-</span><a href="#541" id="541" class="l">541: </a>        <span class="php-var">$differenceObject</span> = <span class="php-var">$this</span>-&gt;dateTime-&gt;diff(<span class="php-keyword1">new</span> \DateTime(<span class="php-keyword1">null</span>, <span class="php-var">$timeZone</span>));
+<a href="#540" id="540" class="l">540: </a>        <span class="php-comment">// Difference between the stored date/time and now</span>
+<a href="#541" id="541" class="l">541: </a>        <span class="php-var">$differenceObject</span> = <span class="php-var">$this</span>-&gt;dateTime-&gt;diff(<span class="php-keyword1">new</span> \DateTime(<span class="php-keyword1">null</span>, <span class="php-var">$timeZone</span>));
 <a href="#542" id="542" class="l">542: </a>        <span class="php-var">$diffArray</span> = <span class="php-keyword2">array_combine</span>(
 <a href="#543" id="543" class="l">543: </a>            <span class="php-keyword2">array_keys</span>(<span class="php-var">$intervalList</span>),
 <a href="#544" id="544" class="l">544: </a>            <span class="php-keyword2">explode</span>(<span class="php-quote">'-'</span>, <span class="php-var">$differenceObject</span>-&gt;format(<span class="php-quote">'%y-%m-0-%d-%h-%i-%s'</span>))
 <a href="#545" id="545" class="l">545: </a>        );
 <a href="#546" id="546" class="l">546: </a>
-<a href="#547" id="547" class="l">547: </a>        <span class="php-comment">// Compute the difference in seconds
-</span><a href="#548" id="548" class="l">548: </a>        <span class="php-var">$diff</span> = <span class="php-num">0</span>;
-<a href="#549" id="549" class="l">549: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$diffArray</span> as <span class="php-var">$interval</span> =&gt; <span class="php-var">$intervalCount</span>) {
+<a href="#547" id="547" class="l">547: </a>        <span class="php-comment">// Compute the difference in seconds</span>
+<a href="#548" id="548" class="l">548: </a>        <span class="php-var">$diff</span> = <span class="php-num">0</span>;
+<a href="#549" id="549" class="l">549: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$diffArray</span> <span class="php-keyword1">as</span> <span class="php-var">$interval</span> =&gt; <span class="php-var">$intervalCount</span>) {
 <a href="#550" id="550" class="l">550: </a>            <span class="php-var">$diff</span> += <span class="php-var">$intervalList</span>[<span class="php-var">$interval</span>] * <span class="php-var">$intervalCount</span>;
 <a href="#551" id="551" class="l">551: </a>        }
 <a href="#552" id="552" class="l">552: </a>
-<a href="#553" id="553" class="l">553: </a>        <span class="php-comment">// If the difference is less than 10 seconds, &quot;now&quot; is returned
-</span><a href="#554" id="554" class="l">554: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$diff</span> &lt; <span class="php-num">10</span>) {
+<a href="#553" id="553" class="l">553: </a>        <span class="php-comment">// If the difference is less than 10 seconds, &quot;now&quot; is returned</span>
+<a href="#554" id="554" class="l">554: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$diff</span> &lt; <span class="php-num">10</span>) {
 <a href="#555" id="555" class="l">555: </a>            <span class="php-keyword1">return</span> _(<span class="php-quote">'Now'</span>);
 <a href="#556" id="556" class="l">556: </a>        }
 <a href="#557" id="557" class="l">557: </a>
-<a href="#558" id="558" class="l">558: </a>        <span class="php-comment">// Find the appropriate unit and calculate number of units
-</span><a href="#559" id="559" class="l">559: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$intervalList</span> as <span class="php-var">$interval</span> =&gt; <span class="php-var">$seconds</span>) {
+<a href="#558" id="558" class="l">558: </a>        <span class="php-comment">// Find the appropriate unit and calculate number of units</span>
+<a href="#559" id="559" class="l">559: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$intervalList</span> <span class="php-keyword1">as</span> <span class="php-var">$interval</span> =&gt; <span class="php-var">$seconds</span>) {
 <a href="#560" id="560" class="l">560: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$seconds</span> &lt;= <span class="php-var">$diff</span>) {
 <a href="#561" id="561" class="l">561: </a>                <span class="php-var">$num</span> = <span class="php-keyword2">round</span>(<span class="php-var">$diff</span> / <span class="php-var">$seconds</span>);
 <a href="#562" id="562" class="l">562: </a>                <span class="php-keyword1">break</span>;
 <a href="#563" id="563" class="l">563: </a>            }
 <a href="#564" id="564" class="l">564: </a>        }
 <a href="#565" id="565" class="l">565: </a>
-<a href="#566" id="566" class="l">566: </a>        <span class="php-comment">// Past or future
-</span><a href="#567" id="567" class="l">567: </a>        <span class="php-var">$period</span> = <span class="php-quote">'+'</span> === <span class="php-var">$differenceObject</span>-&gt;format(<span class="php-quote">'%R'</span>) ? <span class="php-quote">'past'</span> : <span class="php-quote">'future'</span>;
+<a href="#566" id="566" class="l">566: </a>        <span class="php-comment">// Past or future</span>
+<a href="#567" id="567" class="l">567: </a>        <span class="php-var">$period</span> = <span class="php-quote">'+'</span> === <span class="php-var">$differenceObject</span>-&gt;format(<span class="php-quote">'%R'</span>) ? <span class="php-quote">'past'</span> : <span class="php-quote">'future'</span>;
 <a href="#568" id="568" class="l">568: </a>
-<a href="#569" id="569" class="l">569: </a>        <span class="php-comment">// Dictionary - this part could be written shorter but this implementation is faster
-</span><a href="#570" id="570" class="l">570: </a>        <span class="php-var">$tense</span> = <span class="php-var">$useTense</span> ? <span class="php-var">$period</span> : <span class="php-quote">'infinitive'</span>;
+<a href="#569" id="569" class="l">569: </a>        <span class="php-comment">// Dictionary - this part could be written shorter but this implementation is faster</span>
+<a href="#570" id="570" class="l">570: </a>        <span class="php-var">$tense</span> = <span class="php-var">$useTense</span> ? <span class="php-var">$period</span> : <span class="php-quote">'infinitive'</span>;
 <a href="#571" id="571" class="l">571: </a>        <span class="php-keyword1">switch</span> (<span class="php-var">$tense</span>) {
-<a href="#572" id="572" class="l">572: </a>            <span class="php-comment">// Past
-</span><a href="#573" id="573" class="l">573: </a>            <span class="php-keyword1">case</span> <span class="php-quote">'past'</span>:
+<a href="#572" id="572" class="l">572: </a>            <span class="php-comment">// Past</span>
+<a href="#573" id="573" class="l">573: </a>            <span class="php-keyword1">case</span> <span class="php-quote">'past'</span>:
 <a href="#574" id="574" class="l">574: </a>                <span class="php-keyword1">switch</span> (<span class="php-var">$interval</span>) {
 <a href="#575" id="575" class="l">575: </a>                    <span class="php-keyword1">case</span> self::YEAR:
-<a href="#576" id="576" class="l">576: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'Year ago'</span>, <span class="php-quote">'%s years ago'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#576" id="576" class="l">576: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'Year ago'</span>, <span class="php-quote">'%s years ago'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#577" id="577" class="l">577: </a>                    <span class="php-keyword1">case</span> self::MONTH:
-<a href="#578" id="578" class="l">578: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'Month ago'</span>, <span class="php-quote">'%s months ago'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#578" id="578" class="l">578: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'Month ago'</span>, <span class="php-quote">'%s months ago'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#579" id="579" class="l">579: </a>                    <span class="php-keyword1">case</span> self::WEEK:
-<a href="#580" id="580" class="l">580: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'Week ago'</span>, <span class="php-quote">'%s weeks ago'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#580" id="580" class="l">580: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'Week ago'</span>, <span class="php-quote">'%s weeks ago'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#581" id="581" class="l">581: </a>                    <span class="php-keyword1">case</span> self::DAY:
-<a href="#582" id="582" class="l">582: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'Day ago'</span>, <span class="php-quote">'%s days ago'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#582" id="582" class="l">582: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'Day ago'</span>, <span class="php-quote">'%s days ago'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#583" id="583" class="l">583: </a>                    <span class="php-keyword1">case</span> self::HOUR:
-<a href="#584" id="584" class="l">584: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'Hour ago'</span>, <span class="php-quote">'%s hours ago'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#584" id="584" class="l">584: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'Hour ago'</span>, <span class="php-quote">'%s hours ago'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#585" id="585" class="l">585: </a>                    <span class="php-keyword1">case</span> self::MINUTE:
-<a href="#586" id="586" class="l">586: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'Minute ago'</span>, <span class="php-quote">'%s minutes ago'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#586" id="586" class="l">586: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'Minute ago'</span>, <span class="php-quote">'%s minutes ago'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#587" id="587" class="l">587: </a>                    <span class="php-keyword1">case</span> self::SECOND:
 <a href="#588" id="588" class="l">588: </a>                    <span class="php-keyword1">default</span>:
-<a href="#589" id="589" class="l">589: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'Second ago'</span>, <span class="php-quote">'%s seconds ago'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#589" id="589" class="l">589: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'Second ago'</span>, <span class="php-quote">'%s seconds ago'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#590" id="590" class="l">590: </a>                }
 <a href="#591" id="591" class="l">591: </a>                <span class="php-keyword1">break</span>;
 <a href="#592" id="592" class="l">592: </a>
-<a href="#593" id="593" class="l">593: </a>            <span class="php-comment">// Future
-</span><a href="#594" id="594" class="l">594: </a>            <span class="php-keyword1">case</span> <span class="php-quote">'future'</span>:
+<a href="#593" id="593" class="l">593: </a>            <span class="php-comment">// Future</span>
+<a href="#594" id="594" class="l">594: </a>            <span class="php-keyword1">case</span> <span class="php-quote">'future'</span>:
 <a href="#595" id="595" class="l">595: </a>                <span class="php-keyword1">switch</span> (<span class="php-var">$interval</span>) {
 <a href="#596" id="596" class="l">596: </a>                    <span class="php-keyword1">case</span> self::YEAR:
-<a href="#597" id="597" class="l">597: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'In year'</span>, <span class="php-quote">'In %s years'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#597" id="597" class="l">597: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'In year'</span>, <span class="php-quote">'In %s years'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#598" id="598" class="l">598: </a>                    <span class="php-keyword1">case</span> self::MONTH:
-<a href="#599" id="599" class="l">599: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'In month'</span>, <span class="php-quote">'In %s months'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#599" id="599" class="l">599: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'In month'</span>, <span class="php-quote">'In %s months'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#600" id="600" class="l">600: </a>                    <span class="php-keyword1">case</span> self::WEEK:
-<a href="#601" id="601" class="l">601: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'In week'</span>, <span class="php-quote">'In %s weeks'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#601" id="601" class="l">601: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'In week'</span>, <span class="php-quote">'In %s weeks'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#602" id="602" class="l">602: </a>                    <span class="php-keyword1">case</span> self::DAY:
-<a href="#603" id="603" class="l">603: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'In day'</span>, <span class="php-quote">'In %s days'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#603" id="603" class="l">603: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'In day'</span>, <span class="php-quote">'In %s days'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#604" id="604" class="l">604: </a>                    <span class="php-keyword1">case</span> self::HOUR:
-<a href="#605" id="605" class="l">605: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'In hour'</span>, <span class="php-quote">'In %s hours'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#605" id="605" class="l">605: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'In hour'</span>, <span class="php-quote">'In %s hours'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#606" id="606" class="l">606: </a>                    <span class="php-keyword1">case</span> self::MINUTE:
-<a href="#607" id="607" class="l">607: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'In minute'</span>, <span class="php-quote">'In %s minutes'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#607" id="607" class="l">607: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'In minute'</span>, <span class="php-quote">'In %s minutes'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#608" id="608" class="l">608: </a>                    <span class="php-keyword1">case</span> self::SECOND:
 <a href="#609" id="609" class="l">609: </a>                    <span class="php-keyword1">default</span>:
-<a href="#610" id="610" class="l">610: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'In second'</span>, <span class="php-quote">'In %s seconds'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#610" id="610" class="l">610: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'In second'</span>, <span class="php-quote">'In %s seconds'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#611" id="611" class="l">611: </a>                }
 <a href="#612" id="612" class="l">612: </a>                <span class="php-keyword1">break</span>;
 <a href="#613" id="613" class="l">613: </a>
-<a href="#614" id="614" class="l">614: </a>            <span class="php-comment">// Infinitive
-</span><a href="#615" id="615" class="l">615: </a>            <span class="php-keyword1">case</span> <span class="php-quote">'infinitive'</span>:
+<a href="#614" id="614" class="l">614: </a>            <span class="php-comment">// Infinitive</span>
+<a href="#615" id="615" class="l">615: </a>            <span class="php-keyword1">case</span> <span class="php-quote">'infinitive'</span>:
 <a href="#616" id="616" class="l">616: </a>                <span class="php-keyword1">switch</span> (<span class="php-var">$interval</span>) {
 <a href="#617" id="617" class="l">617: </a>                    <span class="php-keyword1">case</span> self::YEAR:
-<a href="#618" id="618" class="l">618: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'Year'</span>, <span class="php-quote">'%s years'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#618" id="618" class="l">618: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'Year'</span>, <span class="php-quote">'%s years'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#619" id="619" class="l">619: </a>                    <span class="php-keyword1">case</span> self::MONTH:
-<a href="#620" id="620" class="l">620: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'Month'</span>, <span class="php-quote">'%s months'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#620" id="620" class="l">620: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'Month'</span>, <span class="php-quote">'%s months'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#621" id="621" class="l">621: </a>                    <span class="php-keyword1">case</span> self::WEEK:
-<a href="#622" id="622" class="l">622: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'Week'</span>, <span class="php-quote">'%s weeks'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#622" id="622" class="l">622: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'Week'</span>, <span class="php-quote">'%s weeks'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#623" id="623" class="l">623: </a>                    <span class="php-keyword1">case</span> self::DAY:
-<a href="#624" id="624" class="l">624: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'Day'</span>, <span class="php-quote">'%s days'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#624" id="624" class="l">624: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'Day'</span>, <span class="php-quote">'%s days'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#625" id="625" class="l">625: </a>                    <span class="php-keyword1">case</span> self::HOUR:
-<a href="#626" id="626" class="l">626: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'Hour'</span>, <span class="php-quote">'%s hours'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#626" id="626" class="l">626: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'Hour'</span>, <span class="php-quote">'%s hours'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#627" id="627" class="l">627: </a>                    <span class="php-keyword1">case</span> self::MINUTE:
-<a href="#628" id="628" class="l">628: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'Minute'</span>, <span class="php-quote">'%s minutes'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#628" id="628" class="l">628: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'Minute'</span>, <span class="php-quote">'%s minutes'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#629" id="629" class="l">629: </a>                    <span class="php-keyword1">case</span> self::SECOND:
 <a href="#630" id="630" class="l">630: </a>                    <span class="php-keyword1">default</span>:
-<a href="#631" id="631" class="l">631: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(ngettext(<span class="php-quote">'Second'</span>, <span class="php-quote">'%s seconds'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
+<a href="#631" id="631" class="l">631: </a>                        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-keyword2">ngettext</span>(<span class="php-quote">'Second'</span>, <span class="php-quote">'%s seconds'</span>, <span class="php-var">$num</span>), <span class="php-var">$num</span>);
 <a href="#632" id="632" class="l">632: </a>                }
 <a href="#633" id="633" class="l">633: </a>                <span class="php-keyword1">break</span>;
 <a href="#634" id="634" class="l">634: </a>            <span class="php-keyword1">default</span>:
@@ -844,7 +844,7 @@
 </span><a href="#693" id="693" class="l">693: </a><span class="php-comment">     */</span>
 <a href="#694" id="694" class="l">694: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> truncate(<span class="php-var">$unit</span>)
 <a href="#695" id="695" class="l">695: </a>    {
-<a href="#696" id="696" class="l">696: </a>        <span class="php-var">$dateTime</span> = <span class="php-keyword1">array</span>(
+<a href="#696" id="696" class="l">696: </a>        <span class="php-var">$dateTime</span> = <span class="php-keyword2">array</span>(
 <a href="#697" id="697" class="l">697: </a>            self::YEAR =&gt; <span class="php-num">0</span>,
 <a href="#698" id="698" class="l">698: </a>            self::MONTH =&gt; <span class="php-num">1</span>,
 <a href="#699" id="699" class="l">699: </a>            self::DAY =&gt; <span class="php-num">1</span>,
@@ -856,20 +856,20 @@
 <a href="#705" id="705" class="l">705: </a>        <span class="php-keyword1">switch</span> ((string) <span class="php-var">$unit</span>) {
 <a href="#706" id="706" class="l">706: </a>            <span class="php-keyword1">case</span> self::SECOND:
 <a href="#707" id="707" class="l">707: </a>                <span class="php-var">$dateTime</span>[self::SECOND] = <span class="php-var">$this</span>-&gt;dateTime-&gt;format(<span class="php-quote">'s'</span>);
-<a href="#708" id="708" class="l">708: </a>                <span class="php-comment">// Intentionally missing break
-</span><a href="#709" id="709" class="l">709: </a>            <span class="php-keyword1">case</span> self::MINUTE:
+<a href="#708" id="708" class="l">708: </a>                <span class="php-comment">// Intentionally missing break</span>
+<a href="#709" id="709" class="l">709: </a>            <span class="php-keyword1">case</span> self::MINUTE:
 <a href="#710" id="710" class="l">710: </a>                <span class="php-var">$dateTime</span>[self::MINUTE] = <span class="php-var">$this</span>-&gt;dateTime-&gt;format(<span class="php-quote">'i'</span>);
-<a href="#711" id="711" class="l">711: </a>                <span class="php-comment">// Intentionally missing break
-</span><a href="#712" id="712" class="l">712: </a>            <span class="php-keyword1">case</span> self::HOUR:
+<a href="#711" id="711" class="l">711: </a>                <span class="php-comment">// Intentionally missing break</span>
+<a href="#712" id="712" class="l">712: </a>            <span class="php-keyword1">case</span> self::HOUR:
 <a href="#713" id="713" class="l">713: </a>                <span class="php-var">$dateTime</span>[self::HOUR] = <span class="php-var">$this</span>-&gt;dateTime-&gt;format(<span class="php-quote">'H'</span>);
-<a href="#714" id="714" class="l">714: </a>                <span class="php-comment">// Intentionally missing break
-</span><a href="#715" id="715" class="l">715: </a>            <span class="php-keyword1">case</span> self::DAY:
+<a href="#714" id="714" class="l">714: </a>                <span class="php-comment">// Intentionally missing break</span>
+<a href="#715" id="715" class="l">715: </a>            <span class="php-keyword1">case</span> self::DAY:
 <a href="#716" id="716" class="l">716: </a>                <span class="php-var">$dateTime</span>[self::DAY] = <span class="php-var">$this</span>-&gt;dateTime-&gt;format(<span class="php-quote">'d'</span>);
-<a href="#717" id="717" class="l">717: </a>                <span class="php-comment">// Intentionally missing break
-</span><a href="#718" id="718" class="l">718: </a>            <span class="php-keyword1">case</span> self::MONTH:
+<a href="#717" id="717" class="l">717: </a>                <span class="php-comment">// Intentionally missing break</span>
+<a href="#718" id="718" class="l">718: </a>            <span class="php-keyword1">case</span> self::MONTH:
 <a href="#719" id="719" class="l">719: </a>                <span class="php-var">$dateTime</span>[self::MONTH] = <span class="php-var">$this</span>-&gt;dateTime-&gt;format(<span class="php-quote">'m'</span>);
-<a href="#720" id="720" class="l">720: </a>                <span class="php-comment">// Intentionally missing break
-</span><a href="#721" id="721" class="l">721: </a>            <span class="php-keyword1">case</span> self::YEAR:
+<a href="#720" id="720" class="l">720: </a>                <span class="php-comment">// Intentionally missing break</span>
+<a href="#721" id="721" class="l">721: </a>            <span class="php-keyword1">case</span> self::YEAR:
 <a href="#722" id="722" class="l">722: </a>                <span class="php-var">$dateTime</span>[self::YEAR] = <span class="php-var">$this</span>-&gt;dateTime-&gt;format(<span class="php-quote">'Y'</span>);
 <a href="#723" id="723" class="l">723: </a>                <span class="php-keyword1">break</span>;
 <a href="#724" id="724" class="l">724: </a>            <span class="php-keyword1">default</span>:
@@ -904,11 +904,11 @@
 <a href="#753" id="753" class="l">753: </a>            }
 <a href="#754" id="754" class="l">754: </a>
 <a href="#755" id="755" class="l">755: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'~([+-]\d{2}):?([\d]{2})~'</span>, <span class="php-var">$data</span>[<span class="php-num">2</span>], <span class="php-var">$matches</span>)) {
-<a href="#756" id="756" class="l">756: </a>                <span class="php-comment">// Timezone defined by an UTC offset
-</span><a href="#757" id="757" class="l">757: </a>
+<a href="#756" id="756" class="l">756: </a>                <span class="php-comment">// Timezone defined by an UTC offset</span>
+<a href="#757" id="757" class="l">757: </a>
 <a href="#758" id="758" class="l">758: </a>                <span class="php-keyword1">if</span> (<span class="php-var">$matches</span>[<span class="php-num">2</span>] &lt; <span class="php-num">0</span> || <span class="php-var">$matches</span>[<span class="php-num">2</span>] &gt; <span class="php-num">59</span> || <span class="php-keyword2">intval</span>(<span class="php-var">$matches</span>[<span class="php-num">1</span>] . <span class="php-var">$matches</span>[<span class="php-num">2</span>]) &lt; -<span class="php-num">1200</span> || <span class="php-keyword2">intval</span>(<span class="php-var">$matches</span>[<span class="php-num">1</span>] . <span class="php-var">$matches</span>[<span class="php-num">2</span>]) &gt; <span class="php-num">1200</span>) {
-<a href="#759" id="759" class="l">759: </a>                    <span class="php-comment">// Invalid offset - minutes part is invalid or the whole offset is not &lt;= 12:00 and &gt;= -12:00
-</span><a href="#760" id="760" class="l">760: </a>                    <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \Exception(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'Invalid time zone UTC offset definition: %s'</span>, <span class="php-var">$matches</span>[<span class="php-num">0</span>]));
+<a href="#759" id="759" class="l">759: </a>                    <span class="php-comment">// Invalid offset - minutes part is invalid or the whole offset is not &lt;= 12:00 and &gt;= -12:00</span>
+<a href="#760" id="760" class="l">760: </a>                    <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \Exception(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'Invalid time zone UTC offset definition: %s'</span>, <span class="php-var">$matches</span>[<span class="php-num">0</span>]));
 <a href="#761" id="761" class="l">761: </a>                }
 <a href="#762" id="762" class="l">762: </a>
 <a href="#763" id="763" class="l">763: </a>                <span class="php-var">$data</span>[<span class="php-num">1</span>] .= <span class="php-quote">' '</span> . <span class="php-var">$matches</span>[<span class="php-num">1</span>] . <span class="php-var">$matches</span>[<span class="php-num">2</span>];
@@ -925,7 +925,7 @@
 <a href="#774" id="774" class="l">774: </a></code></pre>
 
 		<div id="footer">
-			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">TR ApiGen</a>.<br />
+			Jyxo PHP Library API documentation generated by <a href="http://github.com/Andrewsville/apigen">ApiGen</a>.<br />
 			Generated using the <a href="https://github.com/Andrewsville/PHP-Token-Reflection" title="All your tokens are belong to us">TokenReflection</a> library.
 		</div>
 	</div>
