@@ -21,12 +21,14 @@ googleCseId: '004718174178290363576:f23xklsezl8'
 googleCseLabel: 'api'
 # Google Analytics tracking code
 googleAnalytics: 'UA-23550486-1'
+# Template config file
+#templateConfig: './templates/default/config.neon'
 # List of allowed HTML tags in documentation
 allowedHtml: [b, i, a, ul, ol, li, p, br, var, samp, kbd, tt]
 
 # Generate documentation for methods and properties with given access level
 accessLevels: [public, protected]
-# Generate documentation for elements marked as internal
+# Generate documentation for elements marked as internal and display internal documentation parts
 internal: No
 # Generate documentation for PHP internal classes
 php: Yes
