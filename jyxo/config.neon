@@ -3,9 +3,9 @@ resources:
 
 templates:
 	common:
-		index.html: overview.latte
-		resources/combined.js: combined.js.latte
-		elementlist.js: elementlist.js.latte
+		overview.latte: index.html
+		combined.js.latte: resources/combined.js
+		elementlist.js.latte: elementlist.js
 
 	main:
 		package:
@@ -43,3 +43,10 @@ templates:
 		opensearch:
 			filename: opensearch.xml
 			template: opensearch.xml.latte
+		robots:
+			filename: robots.txt
+			template: robots.txt.latte
+
+options:
+	elementDetailsCollapsed: Yes
+	elementsOrder: natural
