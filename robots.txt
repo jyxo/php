@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: http://jyxo.github.com/php/sitemap.xml
