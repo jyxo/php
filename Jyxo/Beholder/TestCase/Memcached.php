@@ -72,9 +72,9 @@ class Memcached extends \Jyxo\Beholder\TestCase
 		// Status label
 		$description = gethostbyaddr($this->ip) . ':' . $this->port;
 
-		// Connection
+		// Connection (@ due to notice)
 		$memcache = new \Memcache();
-		if (false === $memcache->connect($this->ip, $this->port)) {
+		if (false === @$memcache->connect($this->ip, $this->port)) {
 			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Connection error %s', $description));
 		}
 
