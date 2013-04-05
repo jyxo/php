@@ -6,10 +6,8 @@
 	"homepage": "http://jyxo.github.com/php/",
 	"license": ["BSD-3-Clause"],
 	"authors": [
-		{
-			"name" : "Jaroslav Hanslík",
-			"name" : "Ondřej Nešpor"
-		}
+		{ "name" : "Jaroslav Hanslík" },
+		{ "name" : "Ondřej Nešpor" }
 	],
 	"require": {
 		"php": ">=5.3.1"
