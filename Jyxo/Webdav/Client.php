@@ -42,6 +42,20 @@ class Client
 	);
 
 	/**
+	 * File for log.
+	 *
+	 * @var string
+	 */
+	private $logFile = null;
+
+	/**
+	 * If pool is enabled.
+	 *
+	 * @var boolean
+	 */
+	private $poolEnabled = true;
+
+	/**
 	 * Request pool.
 	 *
 	 * @var \HttpRequestPool
@@ -56,8 +70,20 @@ class Client
 	public function __construct(array $servers)
 	{
 		$this->servers = $servers;
+	}
 
-		$this->pool = new \HttpRequestPool();
+	/**
+	 * Returns the HTTP request pool.
+	 *
+	 * @return \HttpRequestPool
+	 */
+	protected function getHttpRequestPool()
+	{
+		if (null === $this->pool) {
+			$this->pool = new \HttpRequestPool();
+		}
+
+		return $this->pool;
 	}
 
 	/**
@@ -69,6 +95,35 @@ class Client
 	public function setOption($name, $value)
 	{
 		$this->options[(string) $name] = $value;
+	}
+
+	/**
+	 * Sets a log file.
+	 *
+	 * @param string $file
+	 * @return \Jyxo\Webdav\Client
+	 */
+	public function setLogFile($file)
+	{
+		if ((is_file($file) && !is_writable($file)) || !is_writable(dirname($file))) {
+			throw new \InvalidArgumentException('The log file is not writeable');
+		}
+
+		$this->logFile = (string) $file;
+
+		return $this;
+	}
+
+	/**
+	 * Enables/disables the HTTP request pool.
+	 *
+	 * @param boolean $enabled
+	 * @return \Jyxo\Webdav\Client
+	 */
+	public function setPoolEnabled($enabled)
+	{
+		$this->poolEnabled = (bool) $enabled;
+		return $this;
 	}
 
 	/**
@@ -385,7 +440,7 @@ class Client
 	 * @param string $path File path
 	 * @param string $data Data
 	 * @param boolean $isFile Determines if $data is a file name or actual data
-	 * @return \HttpRequestPool
+	 * @return \ArrayObject
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
 	private function sendPut($path, $data, $isFile)
@@ -399,7 +454,9 @@ class Client
 			}
 		}
 
-		return $this->sendPool($requestList);
+		$this->sendPool($requestList);
+
+		return $requestList;
 	}
 
 	/**
@@ -408,35 +465,51 @@ class Client
 	 * @param string $path Request path
 	 * @param integer $method Request method
 	 * @param array $headers Array of headers
-	 * @return \HttpRequestPool
+	 * @return \ArrayObject
 	 */
 	private function send($path, $method, array $headers = array())
 	{
-		return $this->sendPool($this->getRequestList($path, $method, $headers));
+		$requestList = $this->getRequestList($path, $method, $headers);
+		$this->sendPool($requestList);
+		return $requestList;
 	}
 
 	/**
 	 * Sends a request pool.
 	 *
 	 * @param \ArrayObject $requestList Request list
-	 * @return \HttpRequestPool
+	 * @return \ArrayObject
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
 	private function sendPool(\ArrayObject $requestList)
 	{
 		try {
-			// Clean the pool
-			$this->pool->reset();
+			if ($this->poolEnabled) {
+				// Send by pool
 
-			// Attach requests
-			foreach ($requestList as $request) {
-				$this->pool->attach($request);
+				// Clean the pool
+				$this->getHttpRequestPool()->reset();
+
+				// Attach requests
+				foreach ($requestList as $request) {
+					$this->getHttpRequestPool()->attach($request);
+				}
+
+				// Send
+				$this->getHttpRequestPool()->send();
+			} else {
+				// Send by separate requests
+				foreach ($requestList as $request) {
+					$request->send();
+				}
 			}
 
-			// Send
-			$this->pool->send();
+			// Log
+			if ($this->logFile) {
+				$this->log($requestList);
+			}
 
-			return $this->pool;
+			return $requestList;
 		} catch (\HttpException $e) {
 			// Find the innermost exception
 			$inner = $e;
@@ -444,6 +517,21 @@ class Client
 				$inner = $inner->innerException;
 			}
 			throw new Exception($inner->getMessage(), 0, $inner);
+		}
+	}
+
+	/**
+	 * Logs the result of a HTTP call.
+	 *
+	 * @param \ArrayObject $requestList Request list
+	 */
+	protected function log(\ArrayObject $requestList)
+	{
+		$datetime = date('Y-m-d H:i:s');
+		foreach ($requestList as $request) {
+			$url = preg_replace('~://[^@]+@~', '://***@', $request->getUrl());
+			$data = sprintf("[%s]: %s %d %s\n", $datetime, $this->getMethodName($request->getMethod()), $request->getResponseCode(), $url);
+			file_put_contents($this->logFile, $data, FILE_APPEND);
 		}
 	}
 
@@ -556,5 +644,27 @@ class Client
 		}
 
 		return $properties;
+	}
+
+	/**
+	 * Returns HTTP method name.
+	 *
+	 * @param integer $method
+	 * @return string
+	 */
+	private function getMethodName($method)
+	{
+		static $methods = array();
+
+		if (empty($methods)) {
+			$reflection = new \ReflectionClass('\\HttpRequest');
+			foreach ($reflection->getConstants() as $methodName => $methodId) {
+				if (0 === strpos($methodName, 'METH_')) {
+					$methods[$methodId] = substr($methodName, 5);
+				}
+			}
+		}
+
+		return $methods[$method];
 	}
 }
