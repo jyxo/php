@@ -14,7 +14,7 @@
 namespace Jyxo\Beholder\TestCase;
 
 /**
- * Tests memcache availability.
+ * Tests memcached availability.
  *
  * @category Jyxo
  * @package Jyxo\Beholder
@@ -25,11 +25,11 @@ namespace Jyxo\Beholder\TestCase;
 class Memcached extends \Jyxo\Beholder\TestCase
 {
 	/**
-	 * Server ip address.
+	 * Server host.
 	 *
 	 * @var string
 	 */
-	private $ip;
+	private $host;
 
 	/**
 	 * Port.
@@ -42,14 +42,14 @@ class Memcached extends \Jyxo\Beholder\TestCase
 	 * Constructor.
 	 *
 	 * @param string $description Test description
-	 * @param string $ip Server address
+	 * @param string $host Server host
 	 * @param integer $port Port
 	 */
-	public function __construct($description, $ip, $port)
+	public function __construct($description, $host, $port)
 	{
 		parent::__construct($description);
 
-		$this->ip = (string) $ip;
+		$this->host = (string) $host;
 		$this->port = (int) $port;
 	}
 
@@ -60,9 +60,9 @@ class Memcached extends \Jyxo\Beholder\TestCase
 	 */
 	public function run()
 	{
-		// The memcache extension is required
-		if (!extension_loaded('memcache')) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Extension memcache missing');
+		// The memcached or memcache extension is required
+		if (!extension_loaded('memcached') && !extension_loaded('memcache')) {
+			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Extension memcached or memcache required');
 		}
 
 		$random = md5(uniqid(time(), true));
@@ -70,34 +70,59 @@ class Memcached extends \Jyxo\Beholder\TestCase
 		$value = $random;
 
 		// Status label
-		$description = gethostbyaddr($this->ip) . ':' . $this->port;
+		$description = (false !== filter_var($this->host, FILTER_VALIDATE_IP) ? gethostbyaddr($this->host) : $this->host) . ':' . $this->port;
 
-		// Connection (@ due to notice)
-		$memcache = new \Memcache();
-		if (false === @$memcache->connect($this->ip, $this->port)) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Connection error %s', $description));
+		if (extension_loaded('memcached')) {
+			// Connection
+			$memcached = new \Memcached();
+			if (false === $memcached->addServer($this->host, $this->port)) {
+				return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Connection error %s', $description));
+			}
+		} else {
+			// Connection (@ due to notice)
+			$memcached = new \Memcache();
+			if (false === @$memcached->connect($this->host, $this->port)) {
+				return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Connection error %s', $description));
+			}
 		}
 
 		// Saving
-		if (false === $memcache->set($key, $value)) {
-			$memcache->close();
+		if (false === $memcached->set($key, $value)) {
+			if ($memcached instanceof \Memcached) {
+				$memcached->quit();
+			} else {
+				$memcached->close();
+			}
 			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Write error %s', $description));
 		}
 
 		// Check
-		$check = $memcache->get($key);
+		$check = $memcached->get($key);
 		if ((false === $check) || ($check !== $value)) {
-			$memcache->close();
+			if ($memcached instanceof \Memcached) {
+				$memcached->quit();
+			} else {
+				$memcached->close();
+			}
 			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Read error %s', $description));
 		}
 
 		// Deleting
-		if (false === $memcache->delete($key)) {
-			$memcache->close();
+		if (false === $memcached->delete($key)) {
+			if ($memcached instanceof \Memcached) {
+				$memcached->quit();
+			} else {
+				$memcached->close();
+			}
 			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Delete error %s', $description));
 		}
 
-		$memcache->close();
+		// Disconnect
+		if ($memcached instanceof \Memcached) {
+			$memcached->quit();
+		} else {
+			$memcached->close();
+		}
 
 		// OK
 		return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::SUCCESS, $description);
