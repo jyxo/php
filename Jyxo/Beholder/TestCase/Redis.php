@@ -82,9 +82,16 @@ class Redis extends \Jyxo\Beholder\TestCase
 		$description = (false !== filter_var($this->host, FILTER_VALIDATE_IP) ? gethostbyaddr($this->host) : $this->host) . ':' . $this->port . '?database=' . $this->database;
 
 		// Connection
-		$redis = extension_loaded('redis') ? new \Redis() : new \Predis\Client();
-		if (false === $redis->connect($this->host, $this->port, 2)) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Connection error %s', $description));
+		if (extension_loaded('redis')) {
+			$redis = new \Redis();
+			if (false === $redis->connect($this->host, $this->port, 2)) {
+				return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Connection error %s', $description));
+			}
+		} else {
+			$redis = new \Predis\Client(array('host' => $this->host, 'port' => $this->port));
+			if (false === $redis->connect()) {
+				return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Connection error %s', $description));
+			}
 		}
 
 		// Select database
