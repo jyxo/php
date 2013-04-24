@@ -496,7 +496,7 @@ class Parser
 		}
 
 		// Parses references
-		$headers['references'] = explode('> <', trim($headers['references'], '<>'));
+		$headers['references'] = isset($headers['references']) ? explode('> <', trim($headers['references'], '<>')) : array();
 
 		static $types = array('to', 'cc', 'bcc', 'from', 'reply_to', 'sender', 'return_path', 'disposition_notification_to');
 		for ($i = 0; $i < count($types); $i++) {
