@@ -89,13 +89,13 @@ class Webdav extends \Jyxo\Beholder\TestCase
 
 		// Status label
 		$serverUrl = $this->server;
-		if ('http://' !== substr($this->server, 0, 7)) {
+		if (!preg_match('~^https?://~', $this->server)) {
 			$serverUrl = 'http://' . $serverUrl;
 		}
 		$parsed = parse_url($serverUrl);
-		$ip = $parsed['host'];
+		$host = $parsed['host'];
 		$port = !empty($parsed['port']) ? $parsed['port'] : 80;
-		$description = (false !== filter_var($ip, FILTER_VALIDATE_IP) ? gethostbyaddr($ip) : $ip) . ':' . $port . $dir;
+		$description = (false !== filter_var($host, FILTER_VALIDATE_IP) ? gethostbyaddr($host) : $host) . ':' . $port . $dir;
 
 		try {
 			$webdav = new \Jyxo\Webdav\Client(array($serverUrl));
