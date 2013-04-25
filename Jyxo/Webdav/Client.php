@@ -229,9 +229,16 @@ class Client
 	 */
 	public function copy($pathFrom, $pathTo)
 	{
+		$pathTo = $this->getFilePath($pathTo);
+
 		$requestList = $this->getRequestList($this->getFilePath($pathFrom), \HttpRequest::METH_COPY);
 		foreach ($requestList as $server => $request) {
-			$request->addHeaders(array('Destination' => $server . $this->getFilePath($pathTo)));
+			$request->addHeaders(array('Destination' => $server . $pathTo));
+		}
+
+		// Try creating the directory first
+		if (!$this->mkdir(dirname($pathTo))) {
+			return false;
 		}
 
 		foreach ($this->sendPool($requestList) as $request) {
@@ -255,9 +262,16 @@ class Client
 	 */
 	public function rename($pathFrom, $pathTo)
 	{
+		$pathTo = $this->getFilePath($pathTo);
+
 		$requestList = $this->getRequestList($this->getFilePath($pathFrom), \HttpRequest::METH_MOVE);
 		foreach ($requestList as $server => $request) {
-			$request->addHeaders(array('Destination' => $server . $this->getFilePath($pathTo)));
+			$request->addHeaders(array('Destination' => $server . $pathTo));
+		}
+
+		// Try creating the directory first
+		if (!$this->mkdir(dirname($pathTo))) {
+			return false;
 		}
 
 		foreach ($this->sendPool($requestList) as $request) {
@@ -506,7 +520,11 @@ class Client
 
 			// Log
 			if ($this->logFile) {
-				$this->log($requestList);
+				$datetime = date('Y-m-d H:i:s');
+				foreach ($requestList as $request) {
+					$data = sprintf("[%s]: %s %d %s\n", $datetime, $this->getMethodName($request->getMethod()), $request->getResponseCode(), $request->getUrl());
+					file_put_contents($this->logFile, $data, FILE_APPEND);
+				}
 			}
 
 			return $requestList;
@@ -517,21 +535,6 @@ class Client
 				$inner = $inner->innerException;
 			}
 			throw new Exception($inner->getMessage(), 0, $inner);
-		}
-	}
-
-	/**
-	 * Logs the result of a HTTP call.
-	 *
-	 * @param \ArrayObject $requestList Request list
-	 */
-	protected function log(\ArrayObject $requestList)
-	{
-		$datetime = date('Y-m-d H:i:s');
-		foreach ($requestList as $request) {
-			$url = preg_replace('~://[^@]+@~', '://***@', $request->getUrl());
-			$data = sprintf("[%s]: %s %d %s\n", $datetime, $this->getMethodName($request->getMethod()), $request->getResponseCode(), $url);
-			file_put_contents($this->logFile, $data, FILE_APPEND);
 		}
 	}
 
