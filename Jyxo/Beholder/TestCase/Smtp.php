@@ -61,7 +61,7 @@ class Smtp extends \Jyxo\Beholder\TestCase
 	 * @param string $from Sender
 	 * @param integer $timeout Timeout
 	 */
-	public function __construct($description, $host, $to, $from = '', $timeout = 2)
+	public function __construct($description, $host, $to, $from, $timeout = 2)
 	{
 		parent::__construct($description);
 
@@ -69,11 +69,6 @@ class Smtp extends \Jyxo\Beholder\TestCase
 		$this->to = (string) $to;
 		$this->from = (string) $from;
 		$this->timeout = (int) $timeout;
-
-		// Default sender
-		if (empty($this->from)) {
-			$this->from = 'beholder@jyxo.com';
-		}
 	}
 
 	/**
