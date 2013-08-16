@@ -42,7 +42,7 @@ class IsUrl extends \Jyxo\Input\Validator\AbstractValidator
 		// domain.tld
 		$patternUrl .= '(?:' . $patternDomain . ')';
 		// :port/path/file.extension
-		$patternUrl .= '(?::[0-9]+)?(?:(?:/+[-\w\pL\pN\~.:!%]+)*(?:/|[.][a-z0-9]{2,4})?)?';
+		$patternUrl .= '(?::[0-9]+)?(?:(?:/+[-\w\pL\pN\~.,:!%]+)*(?:/|[.][a-z0-9]{2,4})?)?';
 		// ?query#hash
 		$patternUrl .= '(?:[?&][\]\[-\w\pL\pN.,?!\~%#@&;:/\'\=+]*)?(?:#[\]\[-\w\pL\pN.,?!\~%@&;:/\'\=+]*)?';
 
