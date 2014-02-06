@@ -295,8 +295,16 @@ class Client
 	public function unlink($path)
 	{
 		// We do not delete directories
-		if ($this->isDir($path)) {
-			return false;
+		try {
+			if ($this->isDir($path)) {
+				return false;
+			}
+		} catch (\Jyxo\Webdav\Exception $e) {
+			if (HTTP_E_INVALID_PARAM === $e->getPrevious()->getCode()) {
+				// Probably no PROPFIND support
+			} else {
+				throw $e;
+			}
 		}
 
 		foreach ($this->send($this->getFilePath($path), \HttpRequest::METH_DELETE) as $request) {
