@@ -29,14 +29,14 @@ class Client
 	 *
 	 * @var array
 	 */
-	private $servers = array();
+	protected $servers = array();
 
 	/**
 	 * Connection options.
 	 *
 	 * @var array
 	 */
-	private $options = array(
+	protected $options = array(
 		'connecttimeout' => 1,
 		'timeout' => 30
 	);
@@ -46,21 +46,21 @@ class Client
 	 *
 	 * @var string
 	 */
-	private $logFile = null;
+	protected $logFile = null;
 
 	/**
 	 * If pool is enabled.
 	 *
 	 * @var boolean
 	 */
-	private $poolEnabled = true;
+	protected $poolEnabled = true;
 
 	/**
 	 * Request pool.
 	 *
 	 * @var \HttpRequestPool
 	 */
-	private $pool = null;
+	protected $pool = null;
 
 	/**
 	 * Constructor.
@@ -411,7 +411,7 @@ class Client
 	 * @return boolean
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
-	private function processPut($path, $data, $isFile)
+	protected function processPut($path, $data, $isFile)
 	{
 		$success = true;
 		foreach ($this->sendPut($path, $data, $isFile) as $request) {
@@ -465,7 +465,7 @@ class Client
 	 * @return \ArrayObject
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
-	private function sendPut($path, $data, $isFile)
+	protected function sendPut($path, $data, $isFile)
 	{
 		$requestList = $this->getRequestList($path, \HttpRequest::METH_PUT);
 		foreach ($requestList as $request) {
@@ -489,7 +489,7 @@ class Client
 	 * @param array $headers Array of headers
 	 * @return \ArrayObject
 	 */
-	private function send($path, $method, array $headers = array())
+	protected function send($path, $method, array $headers = array())
 	{
 		$requestList = $this->getRequestList($path, $method, $headers);
 		$this->sendPool($requestList);
@@ -503,7 +503,7 @@ class Client
 	 * @return \ArrayObject
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
-	private function sendPool(\ArrayObject $requestList)
+	protected function sendPool(\ArrayObject $requestList)
 	{
 		try {
 			if ($this->poolEnabled) {
@@ -555,7 +555,7 @@ class Client
 	 * @return \HttpMessage
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
-	private function sendRequest($path, $method, array $headers = array())
+	protected function sendRequest($path, $method, array $headers = array())
 	{
 		try {
 			// Send request to a random server
@@ -574,7 +574,7 @@ class Client
 	 * @param array $headers Array of headers
 	 * @return \ArrayObject
 	 */
-	private function getRequestList($path, $method, array $headers = array())
+	protected function getRequestList($path, $method, array $headers = array())
 	{
 		$requestList = new \ArrayObject();
 		foreach ($this->servers as $server) {
@@ -591,7 +591,7 @@ class Client
 	 * @param array $headers Array of headers
 	 * @return \HttpRequest
 	 */
-	private function getRequest($url, $method, array $headers = array())
+	protected function getRequest($url, $method, array $headers = array())
 	{
 		$request = new \HttpRequest($url, $method, $this->options);
 		$request->setHeaders(array('Expect' => ''));
@@ -605,7 +605,7 @@ class Client
 	 * @param string $path File path
 	 * @return string
 	 */
-	private function getFilePath($path)
+	protected function getFilePath($path)
 	{
 		return '/' . trim($path, '/');
 	}
@@ -616,7 +616,7 @@ class Client
 	 * @param string $path Directory path
 	 * @return string
 	 */
-	private function getDirPath($path)
+	protected function getDirPath($path)
 	{
 		return '/' . trim($path, '/') . '/';
 	}
@@ -627,7 +627,7 @@ class Client
 	 * @param \HttpMessage $response Response
 	 * @return array
 	 */
-	private function getProperties(\HttpMessage $response)
+	protected function getProperties(\HttpMessage $response)
 	{
 		// Process the XML with properties
 		$properties = array();
@@ -663,7 +663,7 @@ class Client
 	 * @param integer $method
 	 * @return string
 	 */
-	private function getMethodName($method)
+	protected function getMethodName($method)
 	{
 		static $methods = array();
 
