@@ -463,6 +463,9 @@ class Html
 	{
 		$text = $html;
 
+		// Remove styles a scripts
+		$text = self::removeTags($text, array('style', 'script'));
+
 		// Re-format lines
 		// <pre>
 		$text = preg_replace_callback('~<pre[^>]*>(.+?)</pre>~is', function($matches) {
