@@ -96,26 +96,38 @@ class Css
 	 * @param string $css Stylesheet definition
 	 * @return string
 	 */
-	public static function pack($css)
+	public static function minify($css)
 	{
 		// Comments
-		$packed = preg_replace('~/\*.*\*/~sU', '', $css);
+		$minified = preg_replace('~/\*.*\*/~sU', '', $css);
 		// Whitespace
-		$packed = preg_replace('~\s*([>+\~,{:;}])\s*~', '\1', $packed);
-		$packed = preg_replace('~\(\s+~', '(', $packed);
-		$packed = preg_replace('~\s+\)~', ')', $packed);
-		$packed = trim($packed);
+		$minified = preg_replace('~\s*([>+\~,{:;}])\s*~', '\1', $minified);
+		$minified = preg_replace('~\(\s+~', '(', $minified);
+		$minified = preg_replace('~\s+\)~', ')', $minified);
+		$minified = trim($minified);
 		// Convert colors from #ffffff to #fff
-		$packed = preg_replace('~(:[^:]*?#)([abcdef0-9]{1})\2([abcdef0-9]{1})\3([abcdef0-9]{1})\4~', '\1\2\3\4', $packed);
+		$minified = preg_replace('~(:[^:]*?#)([abcdef0-9]{1})\2([abcdef0-9]{1})\3([abcdef0-9]{1})\4~', '\1\2\3\4', $minified);
 		// Empty selectors
-		$packed = preg_replace('~(?<=})[^{]+\{\}~', '', $packed);
+		$minified = preg_replace('~(?<=})[^{]+\{\}~', '', $minified);
 		// Remove units when 0
-		$packed = preg_replace('~([\s:]0)(?:px|pt|pc|in|mm|cm|em|ex|%)~', '\1', $packed);
+		$minified = preg_replace('~([\s:]0)(?:px|pt|pc|in|mm|cm|em|ex|%)~', '\1', $minified);
 		// Unnecessary semicolons
-		$packed = str_replace(';}', '}', $packed);
-		$packed = trim($packed, ';');
+		$minified = str_replace(';}', '}', $minified);
+		$minified = trim($minified, ';');
 
-		return $packed;
+		return $minified;
+	}
+
+	/**
+	 * Removes unnecessary characters from a CSS stylesheet.
+	 *
+	 * Use minify() instead.
+	 *
+	 * @deprecated
+	 */
+	public static function pack($css)
+	{
+		return self::minify($css);
 	}
 
 	/**
@@ -296,7 +308,7 @@ class Css
 			$style = str_replace(array('<![CDATA[', ']]>', '<!--', '-->'), '', $style);
 
 			// Optimize the parsed definitions
-			$style = self::pack($style);
+			$style = self::minify($style);
 
 			if (empty($style)) {
 				continue;

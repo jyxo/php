@@ -149,21 +149,21 @@ class CssTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Tests the pack() method.
+	 * Tests the minify() method.
 	 *
-	 * @see \Jyxo\Css::pack()
+	 * @see \Jyxo\Css::minify()
 	 */
-	public function testPack()
+	public function testMinify()
 	{
 		$this->assertStringEqualsFile(
-			$this->filePath . '/pack-expected.css',
-			Css::pack(file_get_contents($this->filePath . '/pack.css'))
+			$this->filePath . '/minify-expected.css',
+			Css::minify(file_get_contents($this->filePath . '/minify.css'))
 		);
 
 		// Color conversion
 		$this->assertEquals(
 			'background:url(\'image.png\') #000 top left;color:#999;border:solid 1px #cfc',
-			Css::pack('background: url( \'image.png\' ) #000000 top left; color: #999999; border: solid 1px #ccffcc;')
+			Css::minify('background: url( \'image.png\' ) #000000 top left; color: #999999; border: solid 1px #ccffcc;')
 		);
 	}
 
