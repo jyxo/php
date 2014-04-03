@@ -188,8 +188,8 @@ class Css
 
 						// Parse attributes
 						foreach (explode('" ', $attributes) as $attribute) {
-							list($attributeName, $attributeContent) = explode('="', $attribute);
-							$attributeList[$attributeName] = trim($attributeContent, '"');
+							list($attributeName, $attributeContent) = preg_split('~=["\']~', $attribute);
+							$attributeList[$attributeName] = trim($attributeContent, '"\'');
 						}
 					} else {
 						$tag = $htmlPart;
