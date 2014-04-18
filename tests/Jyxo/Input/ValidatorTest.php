@@ -90,17 +90,16 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	public function testIsBankAccountNumber()
 	{
 		$good = array(
-			'000000-0145254386/2400',
+			'000000-0145254386/2240',
 			'000019-2000145399/0800',
 			'19-2000145399/0800',
-			'145254386/2400'
+			'145254386/2240'
 		);
 		$wrong = array(
 			'18-2000145399/0800',
 			'000000-0145254386',
 			'000000-014525438/2400',
 			'000000-0145254386/0000',
-			array(),
 			10
 		);
 
@@ -129,7 +128,6 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'670229/1125',
 			'670229/1145',
 			'540621/026',
-			array(),
 			10
 		);
 
@@ -151,7 +149,6 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 		$wrong = array(
 			'267047',
 			'26704705',
-			array(),
 			10
 		);
 
@@ -248,10 +245,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'CZ09 0800 0000 0003 5349 7163',
 			'CZ3208000000000000007894',
 			'CZ23 0300 0000 0001 2708 9559',
-			'CZ50 0400 0000 0042 3781 9004',
 			'CZ 50 0600 0000 0001 7374 6388',
-			'CZ 12 0300 0000 0006 0095 1053',
-			'CZ 6624000000000137641001'
+			'CZ 12 0300 0000 0006 0095 1053'
 		);
 		$wrong = array(
 			'CZ09 0000 0000 0003 5349 7163',
@@ -703,14 +698,14 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 		foreach ($good as $value) {
 			$this->assertTrue(
 				$validator->isValid($value),
-				sprintf('Tests of value %s should be true but is false.', $value)
+				sprintf('Tests of value %s should be true but is false.', print_r($value, true))
 			);
 		}
 
 		foreach ($wrong as $value) {
 			$this->assertFalse(
 				$validator->isValid($value),
-				sprintf('Tests of value %s should be false but is true.', $value)
+				sprintf('Tests of value %s should be false but is true.', print_r($value, true))
 			);
 		}
 	}

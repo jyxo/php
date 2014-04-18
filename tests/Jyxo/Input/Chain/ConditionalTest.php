@@ -49,7 +49,6 @@ class ConditionalTest extends \PHPUnit_Framework_TestCase
 			(int) ($value / 2),
 			sqrt($value),
 			'example',
-			array(),
 			false,
 			true
 		);

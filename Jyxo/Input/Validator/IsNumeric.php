@@ -33,6 +33,10 @@ class IsNumeric extends \Jyxo\Input\Validator\AbstractValidator
 	 */
 	public function isValid($value)
 	{
+		if (is_array($value) || is_object($value)) {
+			return false;
+		}
+
 		if (!is_numeric((string) $value)) {
 			return false;
 		}
