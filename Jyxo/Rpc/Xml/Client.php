@@ -78,7 +78,7 @@ class Client extends \Jyxo\Rpc\Client
 
 		// Error in response
 		if ((is_array($response)) && (isset($response['faultString']))) {
-			throw new Exception(preg_replace('~\s+~', ' ', $response['faultString']));
+			throw new Exception(preg_replace('~\\s+~', ' ', $response['faultString']));
 		}
 
 		return $response;

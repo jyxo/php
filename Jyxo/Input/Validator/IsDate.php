@@ -36,7 +36,7 @@ class IsDate extends \Jyxo\Input\Validator\AbstractValidator
 		$value = (string) $value;
 
 		// Form check
-		if (!preg_match('~^(\d{4})-(\d{2})-(\d{2})$~', $value, $matches)) {
+		if (!preg_match('~^(\\d{4})-(\\d{2})-(\\d{2})$~', $value, $matches)) {
 			return false;
 		}
 

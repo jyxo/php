@@ -33,7 +33,7 @@ class IsInt extends \Jyxo\Input\Validator\AbstractValidator
 	 */
 	public function isValid($value)
 	{
-		if (!preg_match('~^\d+$~', (string) $value)) {
+		if (!preg_match('~^\\d+$~', (string) $value)) {
 			return false;
 		}
 

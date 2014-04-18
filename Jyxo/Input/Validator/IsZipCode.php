@@ -33,7 +33,7 @@ class IsZipCode extends \Jyxo\Input\Validator\AbstractValidator
 	 */
 	public function isValid($value)
 	{
-		if (!preg_match('~^\d{3} ?\d{2}$~', (string) $value)) {
+		if (!preg_match('~^\\d{3} ?\\d{2}$~', (string) $value)) {
 			return false;
 		}
 

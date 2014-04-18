@@ -107,7 +107,7 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 			'2007-11-30 15:16:17'
 		);
 		foreach ($tests as $test) {
-			preg_match('~^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})$~', $test, $matches);
+			preg_match('~^(\\d{4})-(\\d{2})-(\\d{2}) (\\d{2}):(\\d{2}):(\\d{2})$~', $test, $matches);
 			$composer->setDay($matches[3])
 				->setMonth($matches[2])
 				->setYear($matches[1])

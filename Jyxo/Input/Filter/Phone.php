@@ -34,10 +34,10 @@ class Phone extends \Jyxo\Input\Filter\AbstractFilter
 	protected function filterValue($value)
 	{
 		// Removes spaces
-		$value = preg_replace('~\s+~', '', (string) $value);
+		$value = preg_replace('~\\s+~', '', (string) $value);
 
 		// Adds the Czech pre-dial where possible
-		if (preg_match('~^[2-79]\d{8}$~', $value)) {
+		if (preg_match('~^[2-79]\\d{8}$~', $value)) {
 			$value = '+420' . $value;
 		}
 

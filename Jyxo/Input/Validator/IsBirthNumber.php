@@ -37,7 +37,7 @@ class IsBirthNumber extends \Jyxo\Input\Validator\AbstractValidator
 	{
 		$value = (string) $value;
 
-		if (!preg_match('~^(\d{2})(\d{2})(\d{2})[ /]*(\d{3})(\d?)$~', trim($value), $matches)) {
+		if (!preg_match('~^(\\d{2})(\\d{2})(\\d{2})[ /]*(\\d{3})(\\d?)$~', trim($value), $matches)) {
 			return false;
 		}
 

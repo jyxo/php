@@ -36,10 +36,10 @@ class IsCompanyId extends \Jyxo\Input\Validator\AbstractValidator
 	public function isValid($value)
 	{
 		// Removes spaces
-		$companyId = preg_replace('~\s+~', '', (string) $value);
+		$companyId = preg_replace('~\\s+~', '', (string) $value);
 
 		// Only numbers
-		if (!preg_match('~^\d{8}$~', $companyId)) {
+		if (!preg_match('~^\\d{8}$~', $companyId)) {
 			return false;
 		}
 

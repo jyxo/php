@@ -752,7 +752,7 @@ class Time implements \Serializable
 				throw new \Exception('Serialized data have to be in the "Y-m-d H:i:s TimeZone" format');
 			}
 
-			if (preg_match('~([+-]\d{2}):?([\d]{2})~', $data[2], $matches)) {
+			if (preg_match('~([+-]\\d{2}):?([\\d]{2})~', $data[2], $matches)) {
 				// Timezone defined by an UTC offset
 
 				if ($matches[2] < 0 || $matches[2] > 59 || intval($matches[1] . $matches[2]) < -1200 || intval($matches[1] . $matches[2]) > 1200) {

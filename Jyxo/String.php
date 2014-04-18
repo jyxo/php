@@ -40,7 +40,7 @@ class String
 	{
 		$length = (int) $length;
 
-		return preg_replace_callback('~[^\s]{' . $length . ',}~', function($matches) use ($length, $etc) {
+		return preg_replace_callback('~[^\\s]{' . $length . ',}~', function($matches) use ($length, $etc) {
 			return String::cut($matches[0], $length, $etc);
 		}, $string);
 	}
@@ -77,9 +77,9 @@ class String
 
 		// Look for word boundaries
 		$search = mb_substr($string, 0, ($max - $etcLength) + 1, 'utf-8');
-		if (preg_match('~[^\w\pL\pN]~u', $search)) {
+		if (preg_match('~[^\\w\\pL\\pN]~u', $search)) {
 			// Boundary found
-			$string = preg_replace('~[^\w\pL\pN]*[\w\pL\pN]*$~uU', '', $search);
+			$string = preg_replace('~[^\\w\\pL\\pN]*[\\w\\pL\\pN]*$~uU', '', $search);
 		} else {
 			// No word boundary found, will trim in the middle of a word
 			$string = mb_substr($string, 0, $max - $etcLength, 'utf-8');

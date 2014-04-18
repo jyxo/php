@@ -174,7 +174,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 		$this->checkServerOutput('sum');
 
 		// Log check - it is necessary to replace the dynamically generated date
-		$log = preg_replace('~^\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\]~', '[2009-11-15 19:09:24]', file_get_contents($logFile));
+		$log = preg_replace('~^\[\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\]~', '[2009-11-15 19:09:24]', file_get_contents($logFile));
 		$this->assertStringEqualsFile($this->getFilePath('expected.log'), $log);
 
 		// Log cleanup

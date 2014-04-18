@@ -79,7 +79,7 @@ class Client extends \Jyxo\Rpc\Client
 		}
 
 		if (isset($response['error'])) {
-			throw new Exception(preg_replace('~\s+~', ' ', $response['error']['message']), $response['error']['code']);
+			throw new Exception(preg_replace('~\\s+~', ' ', $response['error']['message']), $response['error']['code']);
 		}
 
 		if (!isset($response['result'])) {

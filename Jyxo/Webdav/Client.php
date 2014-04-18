@@ -640,7 +640,7 @@ class Client
 				while (@$reader->read()) {
 					// Element must not be empty and has to look something like <lp1:getcontentlength>13744</lp1:getcontentlength>
 					if ((\XMLReader::ELEMENT === $reader->nodeType) && (!$reader->isEmptyElement)) {
-						if (preg_match('~^lp\d+:(.+)$~', $reader->name, $matches)) {
+						if (preg_match('~^lp\\d+:(.+)$~', $reader->name, $matches)) {
 							// Apache
 							$properties[$matches[1]] = $reader->getTextValue();
 						} elseif (preg_match('~^D:(.+)$~', $reader->name, $matches)) {

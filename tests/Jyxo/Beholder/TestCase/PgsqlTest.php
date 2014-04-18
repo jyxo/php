@@ -75,7 +75,7 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
 	private function getPgsql()
 	{
 		// Skips the test if no PostgreSQL connection is defined
-		if ((empty($GLOBALS['pgsql'])) || (!preg_match('~^([^:]+):([^@]+)@([^:]+):(\d+)/(\w+)$~', $GLOBALS['pgsql'], $matches))) {
+		if ((empty($GLOBALS['pgsql'])) || (!preg_match('~^([^:]+):([^@]+)@([^:]+):(\\d+)/(\\w+)$~', $GLOBALS['pgsql'], $matches))) {
 			$this->markTestSkipped('PostgreSQL not set');
 		}
 

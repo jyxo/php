@@ -35,16 +35,16 @@ class IsUrl extends \Jyxo\Input\Validator\AbstractValidator
 	{
 		$patternGenericTld = '(?:aero|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|asia|post|geo)';
 		$patternTld = '(?-i:' . $patternGenericTld . '|[a-z]{2})';
-		$patternDomain = '(?:(?:[a-z]|[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9]))[.])*(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])[.]' . $patternTld . ')';
+		$patternDomain = '(?:(?:[a-z]|[a-z0-9](?:[\-a-z0-9]{0,61}[a-z0-9]))[.])*(?:[a-z0-9](?:[\-a-z0-9]{0,61}[a-z0-9])[.]' . $patternTld . ')';
 
 		// protocol://user:password@
-		$patternUrl = '(?:(?:http|ftp)s?://(?:[\S]+(?:[:][\S]*)?@)?)?';
+		$patternUrl = '(?:(?:http|ftp)s?://(?:[\\S]+(?:[:][\\S]*)?@)?)?';
 		// domain.tld
 		$patternUrl .= '(?:' . $patternDomain . ')';
 		// :port/path/file.extension
-		$patternUrl .= '(?::[0-9]+)?(?:(?:/+[-\w\pL\pN\~.,:!%]+)*(?:/|[.][a-z0-9]{2,4})?)?';
+		$patternUrl .= '(?::[0-9]+)?(?:(?:/+[\-\\w\\pL\\pN\~.,:!%]+)*(?:/|[.][a-z0-9]{2,4})?)?';
 		// ?query#hash
-		$patternUrl .= '(?:[?&][\]\[-\w\pL\pN.,?!\~%#@&;:/\'\=+]*)?(?:#[\]\[-\w\pL\pN.,?!\~%@&;:/\'\=+]*)?';
+		$patternUrl .= '(?:[?&][\]\[\-\\w\\pL\\pN.,?!\~%#@&;:/\'\=+]*)?(?:#[\]\[\-\\w\\pL\\pN.,?!\~%@&;:/\'\=+]*)?';
 
 		if (!preg_match('~^' . $patternUrl . '$~i', (string) $value)) {
 			return false;

@@ -53,7 +53,7 @@ class IsTaxId extends \Jyxo\Input\Validator\AbstractValidator
 	public function isValid($value)
 	{
 		// Removes spaces
-		$taxId = preg_replace('~\s+~', '', (string) $value);
+		$taxId = preg_replace('~\\s+~', '', (string) $value);
 
 		// Group tax ID format since 1st January 2009
 		if (preg_match('~^CZ699\\d{6}$~', $taxId, $matches)) {
@@ -62,10 +62,10 @@ class IsTaxId extends \Jyxo\Input\Validator\AbstractValidator
 
 		$sub = '';
 		// New Tax ID format since 1st May 2004
-		if (preg_match('~^CZ(\d{8,10})$~', $taxId, $matches)) {
+		if (preg_match('~^CZ(\\d{8,10})$~', $taxId, $matches)) {
 			$sub = $matches[1];
 			// But to be sure we try the old one as well
-		} elseif (preg_match('~^\d{3}-(\d{8,10})$~', $taxId, $matches)) {
+		} elseif (preg_match('~^\\d{3}-(\\d{8,10})$~', $taxId, $matches)) {
 			$sub = $matches[1];
 		}
 		if (!empty($sub)) {

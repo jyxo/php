@@ -464,7 +464,7 @@ class Parser
 		}
 
 		// Adds a header that the IMAP extension does not support
-		if (preg_match("~Disposition-Notification-To:(.+?)(?=\r?\n(?:\S|\r?\n))~is", $rawHeaders, $matches)) {
+		if (preg_match("~Disposition-Notification-To:(.+?)(?=\r?\n(?:\\S|\r?\n))~is", $rawHeaders, $matches)) {
 			$addressList = imap_rfc822_parse_adrlist($matches[1], '');
 			// {''} is used because of CS rules
 			$headerInfo->{'disposition_notification_toaddress'} = substr(trim($matches[1]), 0, 1024);
@@ -529,7 +529,7 @@ class Parser
 		}
 
 		// Adds X-headers
-		if (preg_match_all("~(X(?:[-]\w+)+):(.+?)(?=\r?\n(?:\S|\r?\n))~is", $rawHeaders, $matches) > 0) {
+		if (preg_match_all("~(X(?:[\-]\\w+)+):(.+?)(?=\r?\n(?:\\S|\r?\n))~is", $rawHeaders, $matches) > 0) {
 			for ($i = 0; $i < count($matches[0]); $i++) {
 				// Converts to the format used by imap_headerinfo()
 				$key = str_replace('-', '_', strtolower($matches[1][$i]));

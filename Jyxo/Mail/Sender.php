@@ -734,7 +734,7 @@ class Sender
 		if (preg_match('~[\200-\377]~', $name)) {
 			// High ascii
 			$name = $this->encodeHeader($name);
-		} elseif (preg_match('~[^\w\s!#\$%&\'*+/=?^_`{|}\~-]~', $name)) {
+		} elseif (preg_match('~[^\\w\\s!#\$%&\'*+/=?^_`{|}\~-]~', $name)) {
 			// Dangerous characters
 			$name = '"' . $name . '"';
 		}

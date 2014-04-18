@@ -43,7 +43,7 @@ class Html
 	 */
 	public static function is($text)
 	{
-		return (bool) preg_match('~<[a-z][a-z0-9]*(\s[^<]*)?>~i', $text);
+		return (bool) preg_match('~<[a-z][a-z0-9]*(\\s[^<]*)?>~i', $text);
 	}
 
 	/**
@@ -87,7 +87,7 @@ class Html
 
 		// Removes unnecessary line breaks and keeps them inside <pre> elements
 		// Tidy adds one more line breaks inside <pre> elements
-		$html = preg_replace("~(<pre[^>]*>)\n~", '\1', $html);
+		$html = preg_replace("~(<pre[^>]*>)\n~", '\\1', $html);
 		$html = preg_replace("~\n</pre>~", '</pre>', $html);
 		$html = preg_replace_callback('~(<pre[^>]*>)(.+?)(</pre>)~s', function($matches) {
 			return $matches[1] . strtr(nl2br($matches[2]), array('\"' => '"')) . $matches[3];
@@ -96,11 +96,11 @@ class Html
 		$html = strtr($html, array("\r" => '', "\n" => ''));
 
 		// Replace single quotes with double quotes (for easier processing later)
-		$html = preg_replace('~(<[a-z][a-z0-9]*[^>]+[a-z]+=)\'([^\']*)\'~i', '\1"\2"', $html);
+		$html = preg_replace('~(<[a-z][a-z0-9]*[^>]+[a-z]+=)\'([^\']*)\'~i', '\\1"\\2"', $html);
 
 		// Remove unnecessary spaces inside elements (for easier processing later)
-		$html = preg_replace('~(<[a-z][a-z0-9]*[^>]+[a-z]+=")\s+([^"]*")~i', '\1\2', $html);
-		$html = preg_replace('~(<[a-z][a-z0-9]*[^>]+[a-z]+="[^"]*)\s+(")~i', '\1\2', $html);
+		$html = preg_replace('~(<[a-z][a-z0-9]*[^>]+[a-z]+=")\\s+([^"]*")~i', '\\1\\2', $html);
+		$html = preg_replace('~(<[a-z][a-z0-9]*[^>]+[a-z]+="[^"]*)\s+(")~i', '\\1\\2', $html);
 
 		return $html;
 	}
@@ -212,7 +212,7 @@ class Html
 
 		// Remove given attributes
 		foreach ($attributes as $attribute) {
-			$html = preg_replace('~(<[a-z][a-z0-9]*[^>]*?)\s+' . $attribute . '="[^"]*"~is', '\1', $html);
+			$html = preg_replace('~(<[a-z][a-z0-9]*[^>]*?)\\s+' . $attribute . '="[^"]*"~is', '\\1', $html);
 		}
 
 		return $html;
@@ -229,8 +229,8 @@ class Html
 	public static function removeJavascriptEvents($html)
 	{
 		// A tag can have multiple events, therefore it is necessary to process the source multiple times
-		while (preg_match('~<[a-z][a-z0-9]*[^>]*?\s+on[a-z]+="[^"]*"~is', $html)) {
-			$html = preg_replace('~(<[a-z][a-z0-9]*[^>]*?)\s+on[a-z]+="[^"]*"~is', '\1', $html);
+		while (preg_match('~<[a-z][a-z0-9]*[^>]*?\\s+on[a-z]+="[^"]*"~is', $html)) {
+			$html = preg_replace('~(<[a-z][a-z0-9]*[^>]*?)\\s+on[a-z]+="[^"]*"~is', '\\1', $html);
 		}
 		return $html;
 	}
@@ -249,19 +249,19 @@ class Html
 		static $remoteImages = array(
 			'~(<img[^>]+src=")http(?:s)?://[^"]+(")~i',
 			'~(<[a-z][a-z0-9]*[^>]+background=")http(?:s)?://[^"]+(")~i',
-			'~(<[a-z][a-z0-9]*[^>]+style="[^"]*background\s*[:])([-a-z0-9#%\s]*)url\([^)]+\)(;)?~is',
-			'~(<[a-z][a-z0-9]*[^>]+style="[^"]*)background-image\s*[:]([-a-z0-9#%\s]*)url\([^)]+\)(;)?~is',
-			'~(<[a-z][a-z0-9]*[^>]+style="[^"]*list-style\s*[:])([-a-z0-9\s]*)url\([^)]+\)(;)?~is',
-			'~(<[a-z][a-z0-9]*[^>]+style="[^"]*)list-style-image\s*[:]([-a-z0-9\s]*)url\([^)]+\)(;)?~is'
+			'~(<[a-z][a-z0-9]*[^>]+style="[^"]*background\\s*[:])([\-a-z0-9#%\\s]*)url\([^)]+\)(;)?~is',
+			'~(<[a-z][a-z0-9]*[^>]+style="[^"]*)background-image\\s*[:]([\-a-z0-9#%\\s]*)url\([^)]+\)(;)?~is',
+			'~(<[a-z][a-z0-9]*[^>]+style="[^"]*list-style\\s*[:])([\-a-z0-9\\s]*)url\([^)]+\)(;)?~is',
+			'~(<[a-z][a-z0-9]*[^>]+style="[^"]*)list-style-image\\s*[:]([\-a-z0-9\\s]*)url\([^)]+\)(;)?~is'
 		);
 		// We use value about:blank for the <img> tag's src attribute, because removing the tag entirely could affect the page layout
 		static $remoteImagesReplacement = array(
-			'\1about:blank\2',
-			'\1\2',
-			'\1\2\3',
-			'\1',
-			'\1\2\3',
-			'\1'
+			'\\1about:blank\\2',
+			'\\1\\2',
+			'\\1\\2\\3',
+			'\\1',
+			'\\1\\2\\3',
+			'\\1'
 		);
 
 		return preg_replace($remoteImages, $remoteImagesReplacement, $html);
@@ -276,10 +276,10 @@ class Html
 	public static function removeDangerous($html)
 	{
 		static $dangerous = array(
-			'~\s+href="javascript[^"]*"~i',
-			'~\s+src="javascript[^"]*"~i',
-			'~\s+href="data:[^"]*"~i',	// See http://www.soom.cz/index.php?name=projects/testmail/main
-			'~\s+src="data:[^"]*"~i'
+			'~\\s+href="javascript[^"]*"~i',
+			'~\\s+src="javascript[^"]*"~i',
+			'~\\s+href="data:[^"]*"~i',	// See http://www.soom.cz/index.php?name=projects/testmail/main
+			'~\\s+src="data:[^"]*"~i'
 		);
 
 		return preg_replace($dangerous, '', $html);
@@ -323,7 +323,7 @@ class Html
 		$text = trim($text, "\r\n");
 
 		// Two empty lines max
-		$text = preg_replace("~\n\s+\n~", "\n\n", $text);
+		$text = preg_replace("~\n\\s+\n~", "\n\n", $text);
 
 		// Special chars
 		$html = htmlspecialchars($text, ENT_QUOTES, 'utf-8', false);
@@ -334,12 +334,12 @@ class Html
 		$html = str_replace("\t", '&nbsp;&nbsp;&nbsp;&nbsp;', $html);
 
 		// Paragraph
-		$html = '<p>' . preg_replace("~\n\n[^\\n]?~", '</p><p>\0', $html) . '</p>';
+		$html = '<p>' . preg_replace("~\n\n[^\\n]?~", '</p><p>\\0', $html) . '</p>';
 		$html = str_replace("\n", "<br />\n", $html);
 		$html = str_ireplace('<p><br />', "<p>\n", $html);
 
 		// Citation
-		preg_match_all('~(?:(^(?:<p>)?\s*&gt;(?:&gt;|\s)*)(.*)$)|(?:.+)~im', $html, $matches);
+		preg_match_all('~(?:(^(?:<p>)?\\s*&gt;(?:&gt;|\\s)*)(.*)$)|(?:.+)~im', $html, $matches);
 		$html = '';
 		$offset = 0;
 		for ($i = 0; $i < count($matches[0]); $i++) {
@@ -390,7 +390,7 @@ class Html
 	{
 		$patternGenericTld = '(?:tld|aero|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|asia|post|geo)';
 		$patternTld = '(?-i:' . $patternGenericTld . '|[a-z]{2})';
-		$patternDomain = '(?:(?:[a-z]|[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9]))[.])*(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])[.]' . $patternTld . ')';
+		$patternDomain = '(?:(?:[a-z]|[a-z0-9](?:[\-a-z0-9]{0,61}[a-z0-9]))[.])*(?:[a-z0-9](?:[\-a-z0-9]{0,61}[a-z0-9])[.]' . $patternTld . ')';
 
 		$pattern8bit = '(?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9])';
 		$patternIPv4 = '(?:' . $pattern8bit . '(?:[.]' . $pattern8bit . '){3})';
@@ -406,20 +406,20 @@ class Html
 		$patternIpV6 = '(?:' . $patternIpV6Variant8Hex . '|' . $patternIpV6VariantCompressedHex . '|' . $patternIpV6VariantHex4Dec . '|' . $patternIpV6VariantCompressedHex4Dec . ')';
 
 		// mailto:username
-		$patternEmail = '(?:mailto:)?(?:[-\w!#\$%&\'*+/=?^`{|}\~]+(?:[.][-\w!#\$%&\'*+/=?^`{|}\~]+)*)';
+		$patternEmail = '(?:mailto:)?(?:[\-\\w!#\$%&\'*+/=?^`{|}\~]+(?:[.][\-\\w!#\$%&\'*+/=?^`{|}\~]+)*)';
 		// @domain.tld
 		$patternEmail .= '(?:@' . $patternDomain . ')';
 
 		// protocol://user:password@
-		$patternUrl = '(?:(?:http|ftp)s?://(?:[\S]+(?:[:][\S]*)?@)?)?';
+		$patternUrl = '(?:(?:http|ftp)s?://(?:[\\S]+(?:[:][\\S]*)?@)?)?';
 		// domain.tld, IPv4 or IPv6
 		$patternUrl .= '(?:' . $patternDomain . '|' . $patternIPv4 . '|' . $patternIpV6 . ')';
 		// :port/path/file.extension
-		$patternUrl .= '(?::[0-9]+)?(?:(?:/[-\w\pL\pN\~.:!%]+)*(?:/|[.][a-z0-9]{2,4})?)?';
+		$patternUrl .= '(?::[0-9]+)?(?:(?:/[-\\w\\pL\\pN\~.:!%]+)*(?:/|[.][a-z0-9]{2,4})?)?';
 		// ?query#hash
-		$patternUrl .= '(?:[?][\]\[-\w\pL\pN.,?!\~%#@&;:/\'\=+]*)?(?:#[\]\[-\w\pL\pN.,?!\~%@&;:/\'\=+]*)?';
+		$patternUrl .= '(?:[?][\]\[\-\\w\\pL\\pN.,?!\~%#@&;:/\'\=+]*)?(?:#[\]\[\-\\w\\pL\\pN.,?!\~%@&;:/\'\=+]*)?';
 
-		return preg_replace_callback('~(^|[^\pL\pN])(?:(' . $patternEmail . ')|(' . $patternUrl . '))(?=$|\W)~iu', function($matches) {
+		return preg_replace_callback('~(^|[^\\pL\\pN])(?:(' . $patternEmail . ')|(' . $patternUrl . '))(?=$|\\W)~iu', function($matches) {
 			// Url
 			if (isset($matches[3])) {
 				$url = $matches[3];
@@ -537,7 +537,7 @@ class Html
 
 		// Two empty lines at most
 		$text = trim($text, "\n ");
-		$text = preg_replace("~\n\s+\n~", "\n\n", $text);
+		$text = preg_replace("~\n\\s+\n~", "\n\n", $text);
 
 		// Process <blockquote> (empty lines are removed before <blockquote> processing on purpose)
 		$text = self::blockquoteToText($text);
@@ -546,8 +546,8 @@ class Html
 		$text = strip_tags($text);
 
 		// Replacing [textlink] for <> (must be done after strip_tags)
-		$text = preg_replace('~\[textlink\]\s*~s', '<', $text);
-		$text = preg_replace('~\s*\[/textlink\]~s', '>', $text);
+		$text = preg_replace('~\[textlink\]\\s*~s', '<', $text);
+		$text = preg_replace('~\\s*\[/textlink\]~s', '>', $text);
 
 		// Replaces non-breaking spaces
 		$text = preg_replace(array('~&nbsp;&nbsp;&nbsp;&nbsp;~i', '~&nbsp;~i'), array("\t", ' '), $text);
@@ -560,9 +560,9 @@ class Html
 
 		// Two empty lines at most (performed second times on purpose)
 		$text = trim($text, "\n ");
-		$text = preg_replace("~\n\s+\n~", "\n\n", $text);
+		$text = preg_replace("~\n\\s+\n~", "\n\n", $text);
 		// Because of <blockquote> converting
-		$text = preg_replace("~(\n>\s*)+\n~", "\n>\n", $text);
+		$text = preg_replace("~(\n>\\s*)+\n~", "\n>\n", $text);
 
 		// One space at most
 		$text = preg_replace("~(\n|\t)( )+~", '\1', $text);
@@ -582,7 +582,7 @@ class Html
 	 */
 	private static function linkToText($text)
 	{
-		return preg_replace_callback('~<a\s+(?:[^>]+\s+)*href\s*=\s*"([^"]+)"(?:\s+[^>]*)?>(.+?)</a>~is', function($matches) {
+		return preg_replace_callback('~<a\\s+(?:[^>]+\\s+)*href\\s*=\\s*"([^"]+)"(?:\\s+[^>]*)?>(.+?)</a>~is', function($matches) {
 			$url = trim($matches[1]);
 			$content = $matches[2];
 			$clearContent = trim(strip_tags($content));
@@ -667,7 +667,7 @@ class Html
 	 */
 	private static function blockquoteToText($text)
 	{
-		if (preg_match_all('~(?:<blockquote[^>]*>\s*)|(?:\s*</blockquote>)|(?:.+?(?=</?blockquote)|(?:.+))~is', $text, $matches) > 0) {
+		if (preg_match_all('~(?:<blockquote[^>]*>\\s*)|(?:\\s*</blockquote>)|(?:.+?(?=</?blockquote)|(?:.+))~is', $text, $matches) > 0) {
 			$text = '';
 			$offset = 0;
 			foreach ($matches[0] as $textPart) {

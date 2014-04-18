@@ -154,13 +154,13 @@ final class HtmlTag
 	 */
 	public static function createFromSource($html)
 	{
-		if (preg_match('~<(\w+)(\s[^>]*)+>(.*)((<[^>]+>)?[^>]*)$~', $html, $matches)) {
+		if (preg_match('~<(\\w+)(\\s[^>]*)+>(.*)((<[^>]+>)?[^>]*)$~', $html, $matches)) {
 			$tag = new self($matches[1]);
 			if ('' !== $matches[3]) {
 				// @todo Maybe some kind of recursion to create a tree of elements
 				$tag->setText($matches[3]);
 			}
-			if (preg_match_all('/(\w+)\s*=\s*"([^"]+)"/', $matches[2], $submatches, PREG_PATTERN_ORDER)) {
+			if (preg_match_all('/(\\w+)\\s*=\\s*"([^"]+)"/', $matches[2], $submatches, PREG_PATTERN_ORDER)) {
 				$attrs = array_combine($submatches[1], $submatches[2]);
 				$tag->setAttributes($attrs);
 			}

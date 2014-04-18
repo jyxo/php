@@ -33,7 +33,7 @@ class IsBankAccountNumber extends \Jyxo\Input\Validator\AbstractValidator
 	 */
 	public function isValid($value)
 	{
-		if (!preg_match('~^(?:(\d{1,6})-)?(\d{2,10})/(\d{4})$~i', (string) $value, $matches)) {
+		if (!preg_match('~^(?:(\\d{1,6})-)?(\\d{2,10})/(\\d{4})$~i', (string) $value, $matches)) {
 			return false;
 		}
 

@@ -43,25 +43,25 @@ class Css
 	public static function repair($css)
 	{
 		// Convert properties to lowercase
-		$css = preg_replace_callback('~((?:^|\{|;)\s*)([-a-z]+)(\s*:)~i', function($matches) {
+		$css = preg_replace_callback('~((?:^|\{|;)\\s*)([\-a-z]+)(\\s*:)~i', function($matches) {
 			return $matches[1] . strtolower($matches[2]) . $matches[3];
 		}, $css);
 		// Convert rgb() and url() to lowercase
-		$css = preg_replace_callback('~(rgb|url)(?=\s*\()~i', function($matches) {
+		$css = preg_replace_callback('~(rgb|url)(?=\\s*\()~i', function($matches) {
 			return strtolower($matches[1]);
 		}, $css);
 		// Remove properties without values
-		$css = preg_replace_callback('~\s*[-a-z]+\s*:\s*([;}]|$)~i', function($matches) {
+		$css = preg_replace_callback('~\\s*[\-a-z]+\\s*:\\s*([;}]|$)~i', function($matches) {
 			return '}' === $matches[1] ? '}' : '';
 		}, $css);
 		// Remove MS Office properties
-		$css = preg_replace('~\s*mso-[-a-z]+\s*:[^;}]*;?~i', '', $css);
+		$css = preg_replace('~\\s*mso-[\-a-z]+\\s*:[^;}]*;?~i', '', $css);
 		// Convert color definitions to lowercase
 		$css = preg_replace_callback('~(:[^:]*?)(#[abcdef0-9]{3,6})~i', function($matches) {
 			return $matches[1] . strtolower($matches[2]);
 		}, $css);
 		// Convert colors from RGB to HEX
-		$css = preg_replace_callback('~rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)~', function($matches) {
+		$css = preg_replace_callback('~rgb\\s*\(\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*\)~', function($matches) {
 			return sprintf('#%02x%02x%02x', $matches[1], $matches[2], $matches[3]);
 		}, $css);
 
@@ -79,7 +79,7 @@ class Css
 	public static function filterProperties($css, array $properties, $exclude = true)
 	{
 		$properties = array_flip($properties);
-		return preg_replace_callback('~\s*([-a-z]+)\s*:[^;}]*;?~i', function($matches) use ($properties, $exclude) {
+		return preg_replace_callback('~\\s*([\-a-z]+)\\s*:[^;}]*;?~i', function($matches) use ($properties, $exclude) {
 			if ($exclude) {
 				return isset($properties[$matches[1]]) ? '' : $matches[0];
 			} else {
@@ -101,16 +101,16 @@ class Css
 		// Comments
 		$minified = preg_replace('~/\*.*\*/~sU', '', $css);
 		// Whitespace
-		$minified = preg_replace('~\s*([>+\~,{:;}])\s*~', '\1', $minified);
-		$minified = preg_replace('~\(\s+~', '(', $minified);
-		$minified = preg_replace('~\s+\)~', ')', $minified);
+		$minified = preg_replace('~\\s*([>+\~,{:;}])\\s*~', '\\1', $minified);
+		$minified = preg_replace('~\(\\s+~', '(', $minified);
+		$minified = preg_replace('~\\s+\)~', ')', $minified);
 		$minified = trim($minified);
 		// Convert colors from #ffffff to #fff
-		$minified = preg_replace('~(:[^:]*?#)([abcdef0-9]{1})\2([abcdef0-9]{1})\3([abcdef0-9]{1})\4~', '\1\2\3\4', $minified);
+		$minified = preg_replace('~(:[^:]*?#)([abcdef0-9]{1})\\2([abcdef0-9]{1})\\3([abcdef0-9]{1})\\4~', '\\1\\2\\3\\4', $minified);
 		// Empty selectors
 		$minified = preg_replace('~(?<=})[^{]+\{\}~', '', $minified);
 		// Remove units when 0
-		$minified = preg_replace('~([\s:]0)(?:px|pt|pc|in|mm|cm|em|ex|%)~', '\1', $minified);
+		$minified = preg_replace('~([\\s:]0)(?:px|pt|pc|in|mm|cm|em|ex|%)~', '\\1', $minified);
 		// Unnecessary semicolons
 		$minified = str_replace(';}', '}', $minified);
 		$minified = trim($minified, ';');
@@ -158,7 +158,7 @@ class Css
 		}
 
 		// Parse the HTML source
-		preg_match_all('~(?:<\w+[^>]*(?: /)?>)|(?:</\w+>)|(?:<![^>]+>)|(?:[^<]+)~', $html, $matches);
+		preg_match_all('~(?:<\\w+[^>]*(?: /)?>)|(?:</\\w+>)|(?:<![^>]+>)|(?:[^<]+)~', $html, $matches);
 		$path = array();
 		$html = '';
 		$inStyle = false;
@@ -280,8 +280,8 @@ class Css
 
 		// In case of float: add a cleaner (if there is none present already)
 		$cleaner = '<div style="clear: both; visibility: hidden; overflow: hidden; height: 1px;">';
-		if ((preg_match('~<\w+[^>]+style="[^"]*float:[^"]*"~', $html))
-				&& (!preg_match('~' . preg_quote($cleaner) . '\s*</body>\s*</html>\s*$~', $html))) {
+		if ((preg_match('~<\\w+[^>]+style="[^"]*float:[^"]*"~', $html))
+				&& (!preg_match('~' . preg_quote($cleaner) . '\\s*</body>\\s*</html>\\s*$~', $html))) {
 			$html = str_replace('</body>', $cleaner . '</body>', $html);
 		}
 
@@ -298,7 +298,7 @@ class Css
 	private static function parseStyle($html)
 	{
 		// Find <style> elements
-		if (!preg_match_all('~<style\s+(?:[^>]+\s+)*type="text/css"[^>]*>(.*?)</style>~s', $html, $styles)) {
+		if (!preg_match_all('~<style\\s+(?:[^>]+\\s+)*type="text/css"[^>]*>(.*?)</style>~s', $html, $styles)) {
 			return array();
 		}
 
@@ -322,7 +322,7 @@ class Css
 
 			foreach ($definitions as $definition) {
 				// Allows only supported selectors with valid rules
-				if (!preg_match('~^(?:(?:(?:[-_\w#.:]+)\s?)+,?)+{(?:[-\w]+:[^;]+[;]?)+$~', $definition)) {
+				if (!preg_match('~^(?:(?:(?:[\-_\\w#.:]+)\\s?)+,?)+{(?:[-\\w]+:[^;]+[;]?)+$~', $definition)) {
 					continue;
 				}
 

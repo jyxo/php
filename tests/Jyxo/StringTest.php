@@ -98,8 +98,8 @@ class StringTest extends \PHPUnit_Framework_TestCase
 		// &hellip; has length of 1
 		$cut2 = strtr(html_entity_decode($cut), array('&hellip;' => '.'));
 
-		$words = preg_split('~\s+~', $string);
-		$trimmedWords = preg_split('~\s+~', $cut2);
+		$words = preg_split('~\\s+~', $string);
+		$trimmedWords = preg_split('~\\s+~', $cut2);
 
 		$this->assertEquals(count($trimmedWords), count($words));
 

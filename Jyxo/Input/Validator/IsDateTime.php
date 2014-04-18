@@ -34,7 +34,7 @@ class IsDateTime extends \Jyxo\Input\Validator\AbstractValidator
 	public function isValid($value)
 	{
 		// Format check
-		if (!preg_match('~^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})$~', (string) $value, $matches)) {
+		if (!preg_match('~^(\\d{4})-(\\d{2})-(\\d{2}) (\\d{2}):(\\d{2}):(\\d{2})$~', (string) $value, $matches)) {
 			return false;
 		}
 

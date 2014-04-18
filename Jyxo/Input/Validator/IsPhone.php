@@ -35,15 +35,15 @@ class IsPhone extends \Jyxo\Input\Validator\AbstractValidator
 	public function isValid($value)
 	{
 		// Removes spaces
-		$phoneNumber = preg_replace('~\s+~', '', (string) $value);
+		$phoneNumber = preg_replace('~\\s+~', '', (string) $value);
 
-		if (preg_match('~^1\d{2,8}$~', $phoneNumber)) {
+		if (preg_match('~^1\\d{2,8}$~', $phoneNumber)) {
 			// Special numbers
 			return true;
-		} elseif (preg_match('~^8\d{8}$~', $phoneNumber)) {
+		} elseif (preg_match('~^8\\d{8}$~', $phoneNumber)) {
 			// Numbers with special tariffs
 			return true;
-		} elseif (preg_match('~^(?:(?:[+]|00)42(?:0|1))?[2-79]\d{8}$~', $phoneNumber)) {
+		} elseif (preg_match('~^(?:(?:[+]|00)42(?:0|1))?[2-79]\\d{8}$~', $phoneNumber)) {
 			// Normal numbers
 			return true;
 		} else {

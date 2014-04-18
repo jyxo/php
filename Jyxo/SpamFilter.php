@@ -115,13 +115,13 @@ class SpamFilter
 	 */
 	public function isLinkSpam($text)
 	{
-		$urlPattern = '~((ftp|http|https)://)?[-\w]+(\.[-\w]+)*\.[a-z]{2,6}~i';
+		$urlPattern = '~((ftp|http|https)://)?[\-\w]+(\.[\-\w]+)*\.[a-z]{2,6}~i';
 		$linkCount = preg_match_all($urlPattern, $text, $matches);
 		if (self::LINK_MAX_COUNT <= $linkCount) {
 			// More links than allowed
 			return true;
 		}
-		$wordCount = preg_match_all('~[\pZ\s]+~u', trim($text), $matches) + 1;
+		$wordCount = preg_match_all('~[\\pZ\\s]+~u', trim($text), $matches) + 1;
 		if (self::LINK_WORDS_MIN_COUNT >= $wordCount) {
 			// For short texts use links count check
 			return self::LINK_SHORT_MAX_COUNT <= $linkCount;
@@ -143,7 +143,7 @@ class SpamFilter
 		$words = array();
 		$numberOfWords = 0;
 		// Walk through the text a count word appearances
-		foreach (preg_split('~[\pZ\s]+~u', $text) as $word) {
+		foreach (preg_split('~[\\pZ\\s]+~u', $text) as $word) {
 			$word = mb_strtolower(trim($word), 'utf-8');
 			// Check if the word is supposed to be ignored
 			if (!isset($this->ignoreWords[$word])) {

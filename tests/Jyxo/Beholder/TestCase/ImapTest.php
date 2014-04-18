@@ -45,7 +45,7 @@ class ImapTest extends \Jyxo\Beholder\TestCase\DefaultTest
 	public function testAllOk()
 	{
 		// Skip the test if no IMAP connection is defined
-		if ((empty($GLOBALS['imap'])) || (!preg_match('~^([^:]+):([^@]+)@([^:]+):(\d+)$~', $GLOBALS['imap'], $matches))) {
+		if ((empty($GLOBALS['imap'])) || (!preg_match('~^([^:]+):([^@]+)@([^:]+):(\\d+)$~', $GLOBALS['imap'], $matches))) {
 			$this->markTestSkipped('Imap not set');
 		}
 

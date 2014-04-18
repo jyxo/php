@@ -34,9 +34,9 @@ class IsIban extends \Jyxo\Input\Validator\AbstractValidator
 	public function isValid($value)
 	{
 		// Removes spaces
-		$iban = preg_replace('~\s+~', '', (string) $value);
+		$iban = preg_replace('~\\s+~', '', (string) $value);
 
-		if (!preg_match('~^CZ(\d{2})(\d{4})(\d{6})(\d{10})$~i', $iban, $matches)) {
+		if (!preg_match('~^CZ(\\d{2})(\\d{4})(\\d{6})(\\d{10})$~i', $iban, $matches)) {
 			return false;
 		}
 
