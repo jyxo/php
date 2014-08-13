@@ -547,7 +547,6 @@ class Parser
 	 *
 	 * @param string $pid Part Id
 	 * @return string
-	 * @throws \Jyxo\Mail\Parser\PartNotExistException If there is no such
 	 */
 	private function getRawHeaders($pid = null)
 	{
@@ -556,9 +555,6 @@ class Parser
 		}
 
 		$rawHeaders = imap_fetchbody($this->connection, $this->uid, $pid, FT_UID);
-		if (empty($rawHeaders)) {
-			throw new Parser\PartNotExistException('No such part exists.');
-		}
 
 		$headersEnd = (false !== strpos($rawHeaders, "\n\n"))
 			? strpos($rawHeaders, "\n\n")
@@ -597,7 +593,7 @@ class Parser
 				} else {
 					if ($pid == $this->defaultPid) {
 						$this->parseMultiparts($pid, $mimeType, 'top', 2, $alternative);
-					} elseif ('message/rfc822' == $this->structure['ftype'][$i]) {
+					} elseif ('message/rfc822' == $this->structure['ftype'][1]) {
 						$this->parseMultiparts($pid, $mimeType, 'subparts', 1, $alternative);
 					}
 				}
@@ -767,7 +763,7 @@ class Parser
 					$condition = (($level == ($partLevel + 1)) &&  ($pid == substr($this->structure['pid'][$partNo], 0, $pidLength)));
 					break;
 				case 'multipart':
-					$condition = (($level == ($partLevel + 1)) && ($pid == substr($this->structure['pid'][$partNo])));
+					$condition = (($level == ($partLevel + 1)) && ($pid == $this->structure['pid'][$partNo]));
 					break;
 				default:
 					$condition = false;
@@ -795,7 +791,7 @@ class Parser
 						}
 					}
 				} elseif (('inline' == $this->structure['disposition'][$partNo])
-						&& (!$this->isPartMultipart($multipartNo, 'related')) && (!$this->isPartMultipart($multipartNo, 'mixed'))) {
+						&& (!$this->isPartMultipart($partNo, 'related')) && (!$this->isPartMultipart($partNo, 'mixed'))) {
 					// It is inline, but not related or mixed type
 
 					if (($this->structure['ftype'][$partNo] == $mimeType) && (!isset($this->structure['fname'][$partNo]))) {
@@ -1062,7 +1058,7 @@ class Parser
 
 		$parts = array();
 		if (is_array($this->structure['ftype'])) {
-			$allExcept = array_diff($this->structure['ftype'], $types);
+			$allExcept = array_diff($this->structure['ftype'], $exceptTypes);
 			foreach (array_keys($allExcept) as $key) {
 				$parts[] = $this->structure['pid'][$key];
 			}
