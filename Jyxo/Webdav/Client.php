@@ -24,6 +24,30 @@ namespace Jyxo\Webdav;
  */
 class Client
 {
+	/** @var integer */
+	const STATUS_200_OK = 200;
+
+	/** @var integer */
+	const STATUS_201_CREATED = 201;
+
+	/** @var integer */
+	const STATUS_204_NO_CONTENT = 204;
+
+	/** @var integer */
+	const STATUS_207_MULTI_STATUS = 207;
+
+	/** @var integer */
+	const STATUS_403_FORBIDDEN = 403;
+
+	/** @var integer */
+	const STATUS_404_NOT_FOUND = 404;
+
+	/** @var integer */
+	const STATUS_405_METHOD_NOT_ALLOWED = 405;
+
+	/** @var integer */
+	const STATUS_409_CONFLICT = 409;
+
 	/**
 	 * Servers list.
 	 *
@@ -115,7 +139,7 @@ class Client
 	public function exists($path)
 	{
 		$response = $this->sendRequest($this->getFilePath($path), \HttpRequest::METH_HEAD);
-		return (200 === $response->getResponseCode());
+		return self::STATUS_200_OK === $response->getResponseCode();
 	}
 
 	/**
@@ -132,7 +156,7 @@ class Client
 		$path = $this->getFilePath($path);
 		$response = $this->sendRequest($path, \HttpRequest::METH_GET);
 
-		if (200 !== $response->getResponseCode()) {
+		if (self::STATUS_200_OK !== $response->getResponseCode()) {
 			throw new FileNotExistException(sprintf('File %s does not exist.', $path));
 		}
 
@@ -155,7 +179,7 @@ class Client
 		$path = $this->getFilePath($path);
 		$response = $this->sendRequest($path, \HttpRequest::METH_PROPFIND, array('Depth' => '0'));
 
-		if (207 !== $response->getResponseCode()) {
+		if (self::STATUS_207_MULTI_STATUS !== $response->getResponseCode()) {
 			throw new FileNotExistException(sprintf('File %s does not exist.', $path));
 		}
 
@@ -222,7 +246,7 @@ class Client
 
 		foreach ($this->sendPool($requestList) as $request) {
 			// 201 means copied
-			if (201 !== $request->getResponseCode()) {
+			if (self::STATUS_201_CREATED !== $request->getResponseCode()) {
 				return false;
 			}
 		}
@@ -255,7 +279,7 @@ class Client
 
 		foreach ($this->sendPool($requestList) as $request) {
 			// 201 means renamed
-			if (201 !== $request->getResponseCode()) {
+			if (self::STATUS_201_CREATED !== $request->getResponseCode()) {
 				return false;
 			}
 		}
@@ -288,7 +312,7 @@ class Client
 
 		foreach ($this->send($this->getFilePath($path), \HttpRequest::METH_DELETE) as $request) {
 			// 204 means deleted
-			if (204 !== $request->getResponseCode()) {
+			if (self::STATUS_204_NO_CONTENT !== $request->getResponseCode()) {
 				return false;
 			}
 		}
@@ -309,7 +333,7 @@ class Client
 		$response = $this->sendRequest($this->getDirPath($dir), \HttpRequest::METH_PROPFIND, array('Depth' => '0'));
 
 		// The directory does not exist
-		if (207 !== $response->getResponseCode()) {
+		if (self::STATUS_207_MULTI_STATUS !== $response->getResponseCode()) {
 			return false;
 		}
 
@@ -346,10 +370,10 @@ class Client
 			foreach ($this->send($path, \HttpRequest::METH_MKCOL) as $request) {
 				switch ($request->getResponseCode()) {
 					// The directory was created
-					case 201:
+					case self::STATUS_201_CREATED:
 						break;
 					// The directory already exists
-					case 405:
+					case self::STATUS_405_METHOD_NOT_ALLOWED:
 						break;
 					// The directory could not be created
 					default:
@@ -373,7 +397,7 @@ class Client
 	{
 		foreach ($this->send($this->getDirPath($dir), \HttpRequest::METH_DELETE) as $request) {
 			// 204 means deleted
-			if (204 !== $request->getResponseCode()) {
+			if (self::STATUS_204_NO_CONTENT !== $request->getResponseCode()) {
 				return false;
 			}
 		}
@@ -396,16 +420,16 @@ class Client
 		foreach ($this->sendPut($path, $data, $isFile) as $request) {
 			switch ($request->getResponseCode()) {
 				// Saved
-				case 200:
-				case 201:
+				case self::STATUS_200_OK:
+				case self::STATUS_201_CREATED:
 					break;
 				// An existing file was modified
-				case 204:
+				case self::STATUS_204_NO_CONTENT:
 					break;
 				// The directory might not exist
-				case 403:
-				case 404:
-				case 409:
+				case self::STATUS_403_FORBIDDEN:
+				case self::STATUS_404_NOT_FOUND:
+				case self::STATUS_409_CONFLICT:
 					$success = false;
 					break;
 				// Could not save
@@ -427,7 +451,7 @@ class Client
 		// Try again
 		foreach ($this->sendPut($path, $data, $isFile) as $request) {
 			// 201 means saved
-			if (201 !== $request->getResponseCode()) {
+			if (self::STATUS_201_CREATED !== $request->getResponseCode()) {
 				return false;
 			}
 		}
