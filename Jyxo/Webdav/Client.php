@@ -255,11 +255,6 @@ class Client
 	{
 		$pathTo = $this->getFilePath($pathTo);
 
-		$requestList = $this->getRequestList($this->getFilePath($pathFrom), \HttpRequest::METH_COPY);
-		foreach ($requestList as $server => $request) {
-			$request->addHeaders(array('Destination' => $server . $pathTo));
-		}
-
 		// Try creating the directory first
 		if ($this->createDirectoriesAutomatically) {
 			try {
@@ -267,6 +262,11 @@ class Client
 			} catch (DirectoryNotCreatedException $e) {
 				throw new FileNotCopiedException(sprintf('File %s cannot be copied to %s.', $pathFrom, $pathTo), 0, $e);
 			}
+		}
+
+		$requestList = $this->getRequestList($this->getFilePath($pathFrom), \HttpRequest::METH_COPY);
+		foreach ($requestList as $server => $request) {
+			$request->addHeaders(array('Destination' => $server . $pathTo));
 		}
 
 		foreach ($this->sendPool($requestList) as $request) {
@@ -290,11 +290,6 @@ class Client
 	{
 		$pathTo = $this->getFilePath($pathTo);
 
-		$requestList = $this->getRequestList($this->getFilePath($pathFrom), \HttpRequest::METH_MOVE);
-		foreach ($requestList as $server => $request) {
-			$request->addHeaders(array('Destination' => $server . $pathTo));
-		}
-
 		// Try creating the directory first
 		if ($this->createDirectoriesAutomatically) {
 			try {
@@ -304,10 +299,19 @@ class Client
 			}
 		}
 
+		$requestList = $this->getRequestList($this->getFilePath($pathFrom), \HttpRequest::METH_MOVE);
+		foreach ($requestList as $server => $request) {
+			$request->addHeaders(array('Destination' => $server . $pathTo));
+		}
+
 		foreach ($this->sendPool($requestList) as $request) {
-			// 201 means renamed
-			if (self::STATUS_201_CREATED !== $request->getResponseCode()) {
-				throw new FileNotRenamedException(sprintf('File %s cannot be renamed to %s.', $pathFrom, $pathTo));
+			switch ($request->getResponseCode()) {
+				case self::STATUS_201_CREATED:
+				case self::STATUS_204_NO_CONTENT:
+					// Means renamed
+					break;
+				default:
+					throw new FileNotRenamedException(sprintf('File %s cannot be renamed to %s.', $pathFrom, $pathTo));
 			}
 		}
 	}
