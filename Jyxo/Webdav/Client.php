@@ -80,6 +80,15 @@ class Client
 	protected $poolEnabled = true;
 
 	/**
+	 * If directories should be created automatically.
+	 *
+	 * If disabled, commands will throw an error if target directory doesn't exist.
+	 *
+	 * @var boolean
+	 */
+	protected $createDirectoriesAutomatically = true;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param array $servers
@@ -126,6 +135,18 @@ class Client
 	public function setPoolEnabled($enabled)
 	{
 		$this->poolEnabled = (bool) $enabled;
+		return $this;
+	}
+
+	/**
+	 * Enables/disables automatic creation of target directories.
+	 *
+	 * @param boolean $createDirectoriesAutomatically
+	 * @return \Jyxo\Webdav\Client
+	 */
+	public function setCreateDirectoriesAutomatically($createDirectoriesAutomatically)
+	{
+		$this->createDirectoriesAutomatically = $createDirectoriesAutomatically;
 		return $this;
 	}
 
@@ -240,7 +261,7 @@ class Client
 		}
 
 		// Try creating the directory first
-		if (!$this->mkdir(dirname($pathTo))) {
+		if ($this->createDirectoriesAutomatically && !$this->mkdir(dirname($pathTo))) {
 			return false;
 		}
 
@@ -273,7 +294,7 @@ class Client
 		}
 
 		// Try creating the directory first
-		if (!$this->mkdir(dirname($pathTo))) {
+		if ($this->createDirectoriesAutomatically && !$this->mkdir(dirname($pathTo))) {
 			return false;
 		}
 
@@ -444,7 +465,7 @@ class Client
 		}
 
 		// Not saved, try creating the directory first
-		if (!$this->mkdir(dirname($path))) {
+		if (!$this->createDirectoriesAutomatically || !$this->mkdir(dirname($path))) {
 			return false;
 		}
 
