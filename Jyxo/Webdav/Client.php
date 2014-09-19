@@ -221,12 +221,12 @@ class Client
 	 *
 	 * @param string $path File path
 	 * @param string $data Data
-	 * @return boolean
+	 * @throws \Jyxo\Webdav\FileNotCreatedException If the file cannot be created
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
 	public function put($path, $data)
 	{
-		return $this->processPut($this->getFilePath($path), $data, false);
+		$this->processPut($this->getFilePath($path), $data, false);
 	}
 
 	/**
@@ -234,12 +234,12 @@ class Client
 	 *
 	 * @param string $path File path
 	 * @param string $file Local file path
-	 * @return boolean
+	 * @throws \Jyxo\Webdav\FileNotCreatedException If the file cannot be created
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
 	public function putFile($path, $file)
 	{
-		return $this->processPut($this->getFilePath($path), $file, true);
+		$this->processPut($this->getFilePath($path), $file, true);
 	}
 
 	/**
@@ -248,7 +248,7 @@ class Client
 	 *
 	 * @param string $pathFrom Source file path
 	 * @param string $pathTo Target file path
-	 * @return boolean
+	 * @throws \Jyxo\Webdav\FileNotCopiedException If the file cannot be copied
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
 	public function copy($pathFrom, $pathTo)
@@ -261,18 +261,20 @@ class Client
 		}
 
 		// Try creating the directory first
-		if ($this->createDirectoriesAutomatically && !$this->mkdir(dirname($pathTo))) {
-			return false;
+		if ($this->createDirectoriesAutomatically) {
+			try {
+				$this->mkdir(dirname($pathTo));
+			} catch (DirectoryNotCreatedException $e) {
+				throw new FileNotCopiedException(sprintf('File %s cannot be copied to %s.', $pathFrom, $pathTo), 0, $e);
+			}
 		}
 
 		foreach ($this->sendPool($requestList) as $request) {
 			// 201 means copied
 			if (self::STATUS_201_CREATED !== $request->getResponseCode()) {
-				return false;
+				throw new FileNotCopiedException(sprintf('File %s cannot be copied to %s.', $pathFrom, $pathTo));
 			}
 		}
-
-		return true;
 	}
 
 	/**
@@ -281,7 +283,7 @@ class Client
 	 *
 	 * @param string $pathFrom Original file name
 	 * @param string $pathTo New file name
-	 * @return boolean
+	 * @throws \Jyxo\Webdav\FileNotRenamedException If the file cannot be renamed
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
 	public function rename($pathFrom, $pathTo)
@@ -294,18 +296,20 @@ class Client
 		}
 
 		// Try creating the directory first
-		if ($this->createDirectoriesAutomatically && !$this->mkdir(dirname($pathTo))) {
-			return false;
+		if ($this->createDirectoriesAutomatically) {
+			try {
+				$this->mkdir(dirname($pathTo));
+			} catch (DirectoryNotCreatedException $e) {
+				throw new FileNotRenamedException(sprintf('File %s cannot be renamed to %s.', $pathFrom, $pathTo), 0, $e);
+			}
 		}
 
 		foreach ($this->sendPool($requestList) as $request) {
 			// 201 means renamed
 			if (self::STATUS_201_CREATED !== $request->getResponseCode()) {
-				return false;
+				throw new FileNotRenamedException(sprintf('File %s cannot be renamed to %s.', $pathFrom, $pathTo));
 			}
 		}
-
-		return true;
 	}
 
 	/**
@@ -313,7 +317,7 @@ class Client
 	 * Contains a check preventing from deleting directories.
 	 *
 	 * @param string $path Directory path
-	 * @return boolean
+	 * @throws \Jyxo\Webdav\FileNotDeletedException If the file cannot be deleted
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
 	public function unlink($path)
@@ -321,7 +325,7 @@ class Client
 		// We do not delete directories
 		try {
 			if ($this->isDir($path)) {
-				return false;
+				throw new FileNotDeletedException(sprintf('The path %s is a directory.', $path));
 			}
 		} catch (\Jyxo\Webdav\Exception $e) {
 			if (HTTP_E_INVALID_PARAM === $e->getPrevious()->getCode()) {
@@ -334,11 +338,9 @@ class Client
 		foreach ($this->send($this->getFilePath($path), \HttpRequest::METH_DELETE) as $request) {
 			// 204 means deleted
 			if (self::STATUS_204_NO_CONTENT !== $request->getResponseCode()) {
-				return false;
+				throw new FileNotDeletedException(sprintf('File %s cannot be deleted.', $path));
 			}
 		}
-
-		return true;
 	}
 
 	/**
@@ -370,7 +372,7 @@ class Client
 	 *
 	 * @param string $dir Directory path
 	 * @param boolean $recursive Create directories recursively?
-	 * @return boolean
+	 * @throws \Jyxo\Webdav\DirectoryNotCreatedException If the directory cannot be created
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
 	public function mkdir($dir, $recursive = true)
@@ -398,20 +400,17 @@ class Client
 						break;
 					// The directory could not be created
 					default:
-						return false;
+						throw new DirectoryNotCreatedException(sprintf('Directory %s cannot be created.', $path));
 				}
 			}
 		}
-
-		// The directory was created
-		return true;
 	}
 
 	/**
 	 * Deletes a directory.
 	 *
 	 * @param string $dir Directory path
-	 * @return boolean
+	 * @throws \Jyxo\Webdav\DirectoryNotDeletedException If the directory cannot be deleted
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
 	public function rmdir($dir)
@@ -419,11 +418,9 @@ class Client
 		foreach ($this->send($this->getDirPath($dir), \HttpRequest::METH_DELETE) as $request) {
 			// 204 means deleted
 			if (self::STATUS_204_NO_CONTENT !== $request->getResponseCode()) {
-				return false;
+				throw new DirectoryNotDeletedException(sprintf('Directory %s cannot be deleted.', $dir));
 			}
 		}
-
-		return true;
 	}
 
 	/**
@@ -432,7 +429,8 @@ class Client
 	 * @param string $path File path
 	 * @param string $data Data
 	 * @param boolean $isFile Determines if $data is a file name or actual data
-	 * @return boolean
+	 * @throws \Jyxo\Webdav\DirectoryNotCreatedException If the target directory cannot be created
+	 * @throws \Jyxo\Webdav\FileNotCreatedException If the file cannot be created
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
 	protected function processPut($path, $data, $isFile)
@@ -455,29 +453,31 @@ class Client
 					break;
 				// Could not save
 				default:
-					return false;
+					throw new \Jyxo\Webdav\FileNotCreatedException(sprintf('File %s cannot be created.', $path));
 			}
 		}
 
 		// Saved
 		if ($success) {
-			return true;
+			return;
 		}
 
 		// Not saved, try creating the directory first
-		if (!$this->createDirectoriesAutomatically || !$this->mkdir(dirname($path))) {
-			return false;
+		if ($this->createDirectoriesAutomatically) {
+			try {
+				$this->mkdir(dirname($path));
+			} catch (DirectoryNotCreatedException $e) {
+				throw new \Jyxo\Webdav\FileNotCreatedException(sprintf('File %s cannot be created.', $path), 0, $e);
+			}
 		}
 
 		// Try again
 		foreach ($this->sendPut($path, $data, $isFile) as $request) {
 			// 201 means saved
 			if (self::STATUS_201_CREATED !== $request->getResponseCode()) {
-				return false;
+				throw new \Jyxo\Webdav\FileNotCreatedException(sprintf('File %s cannot be created.', $path));
 			}
 		}
-
-		return true;
 	}
 
 	/**
