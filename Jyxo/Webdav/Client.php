@@ -24,6 +24,30 @@ namespace Jyxo\Webdav;
  */
 class Client
 {
+	/** @var string */
+	const METHOD_HEAD = 'HEAD';
+
+	/** @var string */
+	const METHOD_GET = 'GET';
+
+	/** @var string */
+	const METHOD_PUT = 'PUT';
+
+	/** @var string */
+	const METHOD_DELETE = 'DELETE';
+
+	/** @var string */
+	const METHOD_COPY = 'COPY';
+
+	/** @var string */
+	const METHOD_MOVE = 'MOVE';
+
+	/** @var string */
+	const METHOD_MKCOL = 'MKCOL';
+
+	/** @var string */
+	const METHOD_PROPFIND = 'PROPFIND';
+
 	/** @var integer */
 	const STATUS_200_OK = 200;
 
@@ -56,14 +80,21 @@ class Client
 	protected $servers = array();
 
 	/**
-	 * Connection options.
+	 * Connection cURL options.
 	 *
 	 * @var array
 	 */
-	protected $options = array(
+	protected $curlOptions = array(
 		'connecttimeout' => 1,
 		'timeout' => 30
 	);
+
+	/**
+	 * Connection cURL SSL options.
+	 *
+	 * @var array
+	 */
+	protected $curlSslOptions = array();
 
 	/**
 	 * File for log.
@@ -73,11 +104,11 @@ class Client
 	protected $logFile = null;
 
 	/**
-	 * If pool is enabled.
+	 * If parallel request sending is enabled.
 	 *
 	 * @var boolean
 	 */
-	protected $poolEnabled = true;
+	protected $parallelSending = true;
 
 	/**
 	 * If directories should be created automatically.
@@ -99,14 +130,29 @@ class Client
 	}
 
 	/**
-	 * Sets an option.
+	 * Sets an cURL option.
 	 *
 	 * @param string $name Option name
 	 * @param mixed $value Option value
+	 *
+	 * @see \http\Client\Curl
 	 */
-	public function setOption($name, $value)
+	public function setCurlOption($name, $value)
 	{
-		$this->options[(string) $name] = $value;
+		$this->curlOptions[(string) $name] = $value;
+	}
+
+	/**
+	 * Sets an cURL SSL option.
+	 *
+	 * @param string $name Option name
+	 * @param mixed $value Option value
+	 *
+	 * @see \http\Client\Curl::$ssl
+	 */
+	public function setCurlSslOption($name, $value)
+	{
+		$this->curlSslOptions[(string) $name] = $value;
 	}
 
 	/**
@@ -127,14 +173,14 @@ class Client
 	}
 
 	/**
-	 * Enables/disables the HTTP request pool.
+	 * Enables/disables parallel request sending.
 	 *
-	 * @param boolean $enabled
+	 * @param boolean $parallelSending
 	 * @return \Jyxo\Webdav\Client
 	 */
-	public function setPoolEnabled($enabled)
+	public function setParallelSending($parallelSending)
 	{
-		$this->poolEnabled = (bool) $enabled;
+		$this->parallelSending = (bool) $parallelSending;
 		return $this;
 	}
 
@@ -159,7 +205,7 @@ class Client
 	 */
 	public function exists($path)
 	{
-		$response = $this->sendRequest($this->getFilePath($path), \HttpRequest::METH_HEAD);
+		$response = $this->sendRequest($this->getFilePath($path), self::METHOD_HEAD);
 		return self::STATUS_200_OK === $response->getResponseCode();
 	}
 
@@ -175,13 +221,13 @@ class Client
 	{
 		// Asking random server
 		$path = $this->getFilePath($path);
-		$response = $this->sendRequest($path, \HttpRequest::METH_GET);
+		$response = $this->sendRequest($path, self::METHOD_GET);
 
 		if (self::STATUS_200_OK !== $response->getResponseCode()) {
 			throw new FileNotExistException(sprintf('File %s does not exist.', $path));
 		}
 
-		return $response->getBody();
+		return $response->getBody()->toString();
 	}
 
 	/**
@@ -189,16 +235,16 @@ class Client
 	 * If no particular property is set, all properties are returned.
 	 *
 	 * @param string $path File path
-	 * @param string $property Property name
+	 * @param string|null $property Property name
 	 * @return mixed
 	 * @throws \Jyxo\Webdav\FileNotExistException If the file does not exist
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
-	public function getProperty($path, $property = '')
+	public function getProperty($path, $property = null)
 	{
 		// Asking random server
 		$path = $this->getFilePath($path);
-		$response = $this->sendRequest($path, \HttpRequest::METH_PROPFIND, array('Depth' => '0'));
+		$response = $this->sendRequest($path, self::METHOD_PROPFIND, array('Depth' => '0'));
 
 		if (self::STATUS_207_MULTI_STATUS !== $response->getResponseCode()) {
 			throw new FileNotExistException(sprintf('File %s does not exist.', $path));
@@ -208,7 +254,7 @@ class Client
 		$properties = $this->getProperties($response);
 
 		// Returns the requested property value
-		if (isset($properties[$property])) {
+		if ($property !== null && isset($properties[$property])) {
 			return $properties[$property];
 		}
 
@@ -264,14 +310,14 @@ class Client
 			}
 		}
 
-		$requestList = $this->getRequestList($this->getFilePath($pathFrom), \HttpRequest::METH_COPY);
-		foreach ($requestList as $server => $request) {
-			$request->addHeaders(array('Destination' => $server . $pathTo));
+		$requests = $this->createAllRequests($this->getFilePath($pathFrom), self::METHOD_COPY);
+		foreach ($requests as $server => $request) {
+			$request->addHeader('Destination', $server . $pathTo);
 		}
 
-		foreach ($this->sendPool($requestList) as $request) {
+		foreach ($this->sendAllRequests($requests) as $response) {
 			// 201 means copied
-			if (self::STATUS_201_CREATED !== $request->getResponseCode()) {
+			if (self::STATUS_201_CREATED !== $response->getResponseCode()) {
 				throw new FileNotCopiedException(sprintf('File %s cannot be copied to %s.', $pathFrom, $pathTo));
 			}
 		}
@@ -299,13 +345,13 @@ class Client
 			}
 		}
 
-		$requestList = $this->getRequestList($this->getFilePath($pathFrom), \HttpRequest::METH_MOVE);
-		foreach ($requestList as $server => $request) {
-			$request->addHeaders(array('Destination' => $server . $pathTo));
+		$requests = $this->createAllRequests($this->getFilePath($pathFrom), self::METHOD_MOVE);
+		foreach ($requests as $server => $request) {
+			$request->addHeader('Destination', $server . $pathTo);
 		}
 
-		foreach ($this->sendPool($requestList) as $request) {
-			switch ($request->getResponseCode()) {
+		foreach ($this->sendAllRequests($requests) as $response) {
+			switch ($response->getResponseCode()) {
 				case self::STATUS_201_CREATED:
 				case self::STATUS_204_NO_CONTENT:
 					// Means renamed
@@ -327,21 +373,13 @@ class Client
 	public function unlink($path)
 	{
 		// We do not delete directories
-		try {
-			if ($this->isDir($path)) {
-				throw new FileNotDeletedException(sprintf('The path %s is a directory.', $path));
-			}
-		} catch (\Jyxo\Webdav\Exception $e) {
-			if (HTTP_E_INVALID_PARAM === $e->getPrevious()->getCode()) {
-				// Probably no PROPFIND support
-			} else {
-				throw $e;
-			}
+		if ($this->isDir($path)) {
+			throw new FileNotDeletedException(sprintf('The path %s is a directory.', $path));
 		}
 
-		foreach ($this->send($this->getFilePath($path), \HttpRequest::METH_DELETE) as $request) {
+		foreach ($this->sendAllRequests($this->createAllRequests($this->getFilePath($path), self::METHOD_DELETE)) as $response) {
 			// 204 means deleted
-			if (self::STATUS_204_NO_CONTENT !== $request->getResponseCode()) {
+			if (self::STATUS_204_NO_CONTENT !== $response->getResponseCode()) {
 				throw new FileNotDeletedException(sprintf('File %s cannot be deleted.', $path));
 			}
 		}
@@ -357,9 +395,9 @@ class Client
 	public function isDir($dir)
 	{
 		// Asking random server
-		$response = $this->sendRequest($this->getDirPath($dir), \HttpRequest::METH_PROPFIND, array('Depth' => '0'));
+		$response = $this->sendRequest($this->getDirPath($dir), self::METHOD_PROPFIND, array('Depth' => '0'));
 
-		// The directory does not exist
+		// The directory does not exist or server does not support PROPFIND method
 		if (self::STATUS_207_MULTI_STATUS !== $response->getResponseCode()) {
 			return false;
 		}
@@ -394,8 +432,8 @@ class Client
 			$path .= rtrim($dir);
 			$path = $this->getDirPath($path);
 
-			foreach ($this->send($path, \HttpRequest::METH_MKCOL) as $request) {
-				switch ($request->getResponseCode()) {
+			foreach ($this->sendAllRequests($this->createAllRequests($path, self::METHOD_MKCOL)) as $response) {
+				switch ($response->getResponseCode()) {
 					// The directory was created
 					case self::STATUS_201_CREATED:
 						break;
@@ -419,9 +457,9 @@ class Client
 	 */
 	public function rmdir($dir)
 	{
-		foreach ($this->send($this->getDirPath($dir), \HttpRequest::METH_DELETE) as $request) {
+		foreach ($this->sendAllRequests($this->createAllRequests($this->getDirPath($dir), self::METHOD_DELETE)) as $response) {
 			// 204 means deleted
-			if (self::STATUS_204_NO_CONTENT !== $request->getResponseCode()) {
+			if (self::STATUS_204_NO_CONTENT !== $response->getResponseCode()) {
 				throw new DirectoryNotDeletedException(sprintf('Directory %s cannot be deleted.', $dir));
 			}
 		}
@@ -439,9 +477,21 @@ class Client
 	 */
 	protected function processPut($path, $data, $isFile)
 	{
+		$requests = $this->createAllRequests($path, self::METHOD_PUT);
+		foreach ($requests as $request) {
+			if ($isFile) {
+				$body = new \http\Message\Body(fopen($data, 'r'));
+				$request->setBody($body);
+			} else {
+				$body = new \http\Message\Body();
+				$body->append($data);
+				$request->setBody($body);
+			}
+		}
+
 		$success = true;
-		foreach ($this->sendPut($path, $data, $isFile) as $request) {
-			switch ($request->getResponseCode()) {
+		foreach ($this->sendAllRequests($requests) as $response) {
+			switch ($response->getResponseCode()) {
 				// Saved
 				case self::STATUS_200_OK:
 				case self::STATUS_201_CREATED:
@@ -476,101 +526,73 @@ class Client
 		}
 
 		// Try again
-		foreach ($this->sendPut($path, $data, $isFile) as $request) {
+		foreach ($this->sendAllRequests($requests) as $response) {
 			// 201 means saved
-			if (self::STATUS_201_CREATED !== $request->getResponseCode()) {
+			if (self::STATUS_201_CREATED !== $response->getResponseCode()) {
 				throw new \Jyxo\Webdav\FileNotCreatedException(sprintf('File %s cannot be created.', $path));
 			}
 		}
 	}
 
 	/**
-	 * Sends a PUT request.
+	 * Sends requests to all servers.
 	 *
-	 * @param string $path File path
-	 * @param string $data Data
-	 * @param boolean $isFile Determines if $data is a file name or actual data
-	 * @return \ArrayObject
+	 * @param \http\Client\Request[] $requests Request list
+	 * @return \http\Client\Response[]
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
-	protected function sendPut($path, $data, $isFile)
-	{
-		$requestList = $this->getRequestList($path, \HttpRequest::METH_PUT);
-		foreach ($requestList as $request) {
-			if ($isFile) {
-				$request->setPutFile($data);
-			} else {
-				$request->setPutData($data);
-			}
-		}
-
-		$this->sendPool($requestList);
-
-		return $requestList;
-	}
-
-	/**
-	 * Creates a request pool and sends it.
-	 *
-	 * @param string $path Request path
-	 * @param integer $method Request method
-	 * @param array $headers Array of headers
-	 * @return \ArrayObject
-	 */
-	protected function send($path, $method, array $headers = array())
-	{
-		$requestList = $this->getRequestList($path, $method, $headers);
-		$this->sendPool($requestList);
-		return $requestList;
-	}
-
-	/**
-	 * Sends a request pool.
-	 *
-	 * @param \ArrayObject $requestList Request list
-	 * @return \ArrayObject
-	 * @throws \Jyxo\Webdav\Exception On error
-	 */
-	protected function sendPool(\ArrayObject $requestList)
+	protected function sendAllRequests(array $requests)
 	{
 		try {
-			if ($this->poolEnabled) {
-				// Send by pool
+			$responses = array();
 
-				// Create pool
-				$pool = new \HttpRequestPool();
+			if ($this->parallelSending) {
+				// Send parallel requests
+
+				$client = new \http\Client();
 
 				// Attach requests
-				foreach ($requestList as $request) {
-					$pool->attach($request);
+				foreach ($requests as $request) {
+					$client->enqueue($request);
 				}
 
 				// Send
-				$pool->send();
+				$client->send();
+
+				foreach ($requests as $server => $request) {
+					$response = $client->getResponse($request);
+					$responses[$server] = $response;
+
+					// Log
+					if ($this->logFile !== null) {
+						$data = sprintf("[%s]: %s %d %s\n", date('Y-m-d H:i:s'), $request->getRequestMethod(), $response->getResponseCode(), $request->getRequestUrl());
+						file_put_contents($this->logFile, $data, FILE_APPEND);
+					}
+				}
+
 			} else {
+
 				// Send by separate requests
-				foreach ($requestList as $request) {
-					$request->send();
+				$client = new \http\Client();
+				foreach ($requests as $server => $request) {
+					$client->reset();
+					$client->enqueue($request);
+					$client->send();
+
+					$response = $client->getResponse();
+					$responses[$server] = $response;
+
+					// Log
+					if ($this->logFile !== null) {
+						$data = sprintf("[%s]: %s %d %s\n", date('Y-m-d H:i:s'), $request->getRequestMethod(), $response->getResponseCode(), $request->getRequestUrl());
+						file_put_contents($this->logFile, $data, FILE_APPEND);
+					}
 				}
 			}
 
-			// Log
-			if ($this->logFile) {
-				$datetime = date('Y-m-d H:i:s');
-				foreach ($requestList as $request) {
-					$data = sprintf("[%s]: %s %d %s\n", $datetime, $this->getMethodName($request->getMethod()), $request->getResponseCode(), $request->getUrl());
-					file_put_contents($this->logFile, $data, FILE_APPEND);
-				}
-			}
-
-			return $requestList;
-		} catch (\HttpException $e) {
-			// Find the innermost exception
-			$inner = $e;
-			while (null !== $inner->innerException) {
-				$inner = $inner->innerException;
-			}
-			throw new Exception($inner->getMessage(), 0, $inner);
+			return $responses;
+		} catch (\http\Exception $e) {
+			throw new Exception($e->getMessage(), 0, $e);
 		}
 	}
 
@@ -580,50 +602,58 @@ class Client
 	 * @param string $path Request path
 	 * @param integer $method Request method
 	 * @param array $headers Array of headers
-	 * @return \HttpMessage
+	 * @return \http\Client\Response
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
 	protected function sendRequest($path, $method, array $headers = array())
 	{
 		try {
 			// Send request to a random server
-			$request = $this->getRequest($this->servers[array_rand($this->servers)] . $path, $method, $headers);
-			return $request->send();
-		} catch (\HttpException $e) {
+			$request = $this->createRequest($this->getRandomServer(), $path, $method, $headers);
+
+			$client = new \http\Client();
+			$client->enqueue($request);
+			$client->send();
+
+			return $client->getResponse();
+		} catch (\http\Exception $e) {
 			throw new Exception($e->getMessage(), 0, $e);
 		}
 	}
 
 	/**
-	 * Returns a list of requests; one for each server.
+	 * Creates a list of requests; one for each server.
 	 *
 	 * @param string $path Request path
 	 * @param integer $method Request method
 	 * @param array $headers Array of headers
-	 * @return \ArrayObject
+	 * @return \http\Client\Request[]
 	 */
-	protected function getRequestList($path, $method, array $headers = array())
+	protected function createAllRequests($path, $method, array $headers = array())
 	{
-		$requestList = new \ArrayObject();
+		$requests = array();
 		foreach ($this->servers as $server) {
-			$requestList->offsetSet($server, $this->getRequest($server . $path, $method, $headers));
+			$requests[$server] = $this->createRequest($server, $path, $method, $headers);
 		}
-		return $requestList;
+		return $requests;
 	}
 
 	/**
 	 * Creates a request.
 	 *
-	 * @param string $url Request URL
+	 * @param string $server Server
+	 * @param string $path Path
 	 * @param integer $method Request method
 	 * @param array $headers Array of headers
-	 * @return \HttpRequest
+	 * @return \http\Client\Request
 	 */
-	protected function getRequest($url, $method, array $headers = array())
+	protected function createRequest($server, $path, $method, array $headers = array())
 	{
-		$request = new \HttpRequest($url, $method, $this->options);
-		$request->setHeaders(array('Expect' => ''));
-		$request->addHeaders($headers);
+		$request = new \http\Client\Request($method, $server . $path);
+		$request->setOptions($this->curlOptions);
+		$request->setSslOptions($this->curlSslOptions);
+		$request->setHeader('Expect', '');
+		$request->setHeaders($headers);
 		return $request;
 	}
 
@@ -652,15 +682,15 @@ class Client
 	/**
 	 * Fetches properties from the response.
 	 *
-	 * @param \HttpMessage $response Response
+	 * @param \http\Client\Response $response Response
 	 * @return array
 	 */
-	protected function getProperties(\HttpMessage $response)
+	protected function getProperties(\http\Client\Response $response)
 	{
 		// Process the XML with properties
 		$properties = array();
 		$reader = new \Jyxo\XmlReader();
-		$reader->XML($response->getBody());
+		$reader->XML($response->getBody()->toString());
 
 		// Ignore warnings
 		while (@$reader->read()) {
@@ -686,24 +716,10 @@ class Client
 	}
 
 	/**
-	 * Returns HTTP method name.
-	 *
-	 * @param integer $method
 	 * @return string
 	 */
-	protected function getMethodName($method)
+	protected function getRandomServer()
 	{
-		static $methods = array();
-
-		if (empty($methods)) {
-			$reflection = new \ReflectionClass('\\HttpRequest');
-			foreach ($reflection->getConstants() as $methodName => $methodId) {
-				if (0 === strpos($methodName, 'METH_')) {
-					$methods[$methodId] = substr($methodName, 5);
-				}
-			}
-		}
-
-		return $methods[$method];
+		return $this->servers[array_rand($this->servers)];
 	}
 }
