@@ -56,13 +56,6 @@ class Client
 	protected $poolEnabled = true;
 
 	/**
-	 * Request pool.
-	 *
-	 * @var \HttpRequestPool
-	 */
-	protected $pool = null;
-
-	/**
 	 * Constructor.
 	 *
 	 * @param array $servers
@@ -70,20 +63,6 @@ class Client
 	public function __construct(array $servers)
 	{
 		$this->servers = $servers;
-	}
-
-	/**
-	 * Returns the HTTP request pool.
-	 *
-	 * @return \HttpRequestPool
-	 */
-	protected function getHttpRequestPool()
-	{
-		if (null === $this->pool) {
-			$this->pool = new \HttpRequestPool();
-		}
-
-		return $this->pool;
 	}
 
 	/**
@@ -509,16 +488,16 @@ class Client
 			if ($this->poolEnabled) {
 				// Send by pool
 
-				// Clean the pool
-				$this->getHttpRequestPool()->reset();
+				// Create pool
+				$pool = new \HttpRequestPool();
 
 				// Attach requests
 				foreach ($requestList as $request) {
-					$this->getHttpRequestPool()->attach($request);
+					$pool->attach($request);
 				}
 
 				// Send
-				$this->getHttpRequestPool()->send();
+				$pool->send();
 			} else {
 				// Send by separate requests
 				foreach ($requestList as $request) {
