@@ -100,13 +100,11 @@ class Webdav extends \Jyxo\Beholder\TestCase
 		try {
 			$webdav = new \Jyxo\Webdav\Client(array($serverUrl));
 			foreach ($this->options as $name => $value) {
-				$webdav->setOption($name, $value);
+				$webdav->setCurlOption($name, $value);
 			}
 
 			// Writing
-			if (!$webdav->put($path, $content)) {
-				return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Write error %s', $description));
-			}
+			$webdav->put($path, $content);
 
 			// Reading
 			$readContent = $webdav->get($path);
@@ -115,12 +113,13 @@ class Webdav extends \Jyxo\Beholder\TestCase
 			}
 
 			// Deleting
-			if (!$webdav->unlink($path)) {
-				return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Delete error %s', $description));
-			}
-
+			$webdav->unlink($path);
+		} catch (\Jyxo\Webdav\FileNotCreatedException $e) {
+			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Write error %s', $description));
 		} catch (\Jyxo\Webdav\FileNotExistException $e) {
 			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Read error %s', $description));
+		} catch (\Jyxo\Webdav\FileNotDeletedException $e) {
+			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Delete error %s', $description));
 		} catch (\Jyxo\Webdav\Exception $e) {
 			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Error %s', $description));
 		}
