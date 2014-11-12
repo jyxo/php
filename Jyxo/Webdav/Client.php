@@ -378,9 +378,13 @@ class Client
 		}
 
 		foreach ($this->sendAllRequests($this->createAllRequests($this->getFilePath($path), self::METHOD_DELETE)) as $response) {
-			// 204 means deleted
-			if (self::STATUS_204_NO_CONTENT !== $response->getResponseCode()) {
-				throw new FileNotDeletedException(sprintf('File %s cannot be deleted.', $path));
+			switch ($response->getResponseCode()) {
+				case self::STATUS_204_NO_CONTENT:
+					// Means deleted
+				case self::STATUS_404_NOT_FOUND:
+					break;
+				default:
+					throw new FileNotDeletedException(sprintf('File %s cannot be deleted.', $path));
 			}
 		}
 	}
