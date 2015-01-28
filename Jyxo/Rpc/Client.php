@@ -46,6 +46,13 @@ abstract class Client
 	protected $options = array();
 
 	/**
+	 * Parameters for curl_setopt.
+	 *
+	 * @var array
+	 */
+	private $curlOptions = array();
+
+	/**
 	 * Timer name.
 	 *
 	 * @var string
@@ -127,6 +134,33 @@ abstract class Client
 	}
 
 	/**
+	 * Changes curl_setopt settings.
+	 *
+	 * @param string $key Parameter name
+	 * @param mixed $value Parameter value
+	 * @return \Jyxo\Rpc\Client
+	 */
+	public function setCurlOption($key, $value)
+	{
+		$this->curlOptions[$key] = $value;
+		return $this;
+	}
+
+	/**
+	 * Returns certain curl_setopt parameter or whole array of parameters if no parameter name is provided.
+	 *
+	 * @param string $key Parameter name
+	 * @return mixed
+	 */
+	public function getCurlOption($key = '')
+	{
+		if (isset($this->curlOptions[$key])) {
+			return $this->curlOptions[$key];
+		}
+		return $this->curlOptions;
+	}
+
+	/**
 	 * Turns request profiler on.
 	 *
 	 * @return \Jyxo\Rpc\Client
@@ -181,14 +215,22 @@ abstract class Client
 			'Content-Length: ' . strlen($data)
 		);
 
+		$defaultCurlOptions = array(
+			CURLOPT_URL => $this->url,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_CONNECTTIMEOUT => 0,
+			CURLOPT_TIMEOUT => $this->timeout,
+			CURLOPT_HTTPHEADER => $headers,
+			CURLOPT_POSTFIELDS => $data,
+		);
+
+		$curlOptions = $this->curlOptions + $defaultCurlOptions;
+
 		// Open a HTTP channel
 		$channel = curl_init();
-		curl_setopt($channel, CURLOPT_URL, $this->url);
-		curl_setopt($channel, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($channel, CURLOPT_CONNECTTIMEOUT, 0);
-		curl_setopt($channel, CURLOPT_TIMEOUT, $this->timeout);
-		curl_setopt($channel, CURLOPT_HTTPHEADER, $headers);
-		curl_setopt($channel, CURLOPT_POSTFIELDS, $data);
+		foreach ($curlOptions as $key => $value) {
+			curl_setopt($channel, $key, $value);
+		}
 
 		// Send a request
 		$response = curl_exec($channel);
