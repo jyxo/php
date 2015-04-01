@@ -613,7 +613,13 @@ class Client
 			$client->enqueue($request);
 			$client->send();
 
-			return $client->getResponse();
+			$response = $client->getResponse();
+
+			if (null !== $this->logger) {
+				$this->logger->log(sprintf("%s %d %s", $request->getRequestMethod(), $response->getResponseCode(), $request->getRequestUrl()));
+			}
+
+			return $response;
 		} catch (\http\Exception $e) {
 			throw new Exception($e->getMessage(), 0, $e);
 		}
