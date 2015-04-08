@@ -97,11 +97,11 @@ class Client
 	protected $curlSslOptions = array();
 
 	/**
-	 * File for log.
+	 * Logger.
 	 *
-	 * @var string
+	 * @var LoggerInterface
 	 */
-	protected $logFile = null;
+	protected $logger = null;
 
 	/**
 	 * If parallel request sending is enabled.
@@ -156,18 +156,14 @@ class Client
 	}
 
 	/**
-	 * Sets a log file.
+	 * Sets a logger.
 	 *
-	 * @param string $file
+	 * @param LoggerInterface $logger Logger
 	 * @return \Jyxo\Webdav\Client
 	 */
-	public function setLogFile($file)
+	public function setLogger(LoggerInterface $logger)
 	{
-		if ((is_file($file) && !is_writable($file)) || !is_writable(dirname($file))) {
-			throw new \InvalidArgumentException('The log file is not writeable');
-		}
-
-		$this->logFile = (string) $file;
+		$this->logger = $logger;
 
 		return $this;
 	}
@@ -568,9 +564,8 @@ class Client
 					$responses[$server] = $response;
 
 					// Log
-					if ($this->logFile !== null) {
-						$data = sprintf("[%s]: %s %d %s\n", date('Y-m-d H:i:s'), $request->getRequestMethod(), $response->getResponseCode(), $request->getRequestUrl());
-						file_put_contents($this->logFile, $data, FILE_APPEND);
+					if ($this->logger !== null) {
+						$this->logger->log(sprintf("%s %d %s", $request->getRequestMethod(), $response->getResponseCode(), $request->getRequestUrl()));
 					}
 				}
 
@@ -587,9 +582,8 @@ class Client
 					$responses[$server] = $response;
 
 					// Log
-					if ($this->logFile !== null) {
-						$data = sprintf("[%s]: %s %d %s\n", date('Y-m-d H:i:s'), $request->getRequestMethod(), $response->getResponseCode(), $request->getRequestUrl());
-						file_put_contents($this->logFile, $data, FILE_APPEND);
+					if ($this->logger !== null) {
+						$this->logger->log(sprintf("%s %d %s", $request->getRequestMethod(), $response->getResponseCode(), $request->getRequestUrl()));
 					}
 				}
 			}
@@ -619,7 +613,13 @@ class Client
 			$client->enqueue($request);
 			$client->send();
 
-			return $client->getResponse();
+			$response = $client->getResponse();
+
+			if (null !== $this->logger) {
+				$this->logger->log(sprintf("%s %d %s", $request->getRequestMethod(), $response->getResponseCode(), $request->getRequestUrl()));
+			}
+
+			return $response;
 		} catch (\http\Exception $e) {
 			throw new Exception($e->getMessage(), 0, $e);
 		}
