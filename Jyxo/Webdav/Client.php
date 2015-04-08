@@ -656,8 +656,7 @@ class Client
 		$request = new \http\Client\Request($method, $server . $path);
 		$request->setOptions($this->curlOptions);
 		$request->setSslOptions($this->curlSslOptions);
-		$request->setHeader('Expect', '');
-		$request->setHeaders($headers);
+		$request->setHeaders($headers + array('Expect' => ''));
 		return $request;
 	}
 
