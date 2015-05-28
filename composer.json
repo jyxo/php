@@ -12,6 +12,12 @@
 	"require": {
 		"php": ">=5.3.1"
 	},
+	"suggest": {
+		"ext-curl": "To use Jyxo\\Rpc client/server or Jyxo\\Webdav client",
+		"ext-json": "To use Jyxo\\Rpc\\Json client/server or Jyxo\\FirePHP logger",
+		"ext-xmlrpc": "To use Jyxo\\Rpc\\Xml client/server",
+		"ext-imap": "To use Jyxo\\Mail\\Parser",
+	},
 	"autoload": {
 		"psr-0": { "Jyxo": "/" }
 	}
