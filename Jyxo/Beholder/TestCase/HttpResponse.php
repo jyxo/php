@@ -66,39 +66,32 @@ class HttpResponse extends \Jyxo\Beholder\TestCase
 	 */
 	public function run()
 	{
-		// The http extension is required
-		if (!extension_loaded('http')) {
+		// The \GuzzleHttp library is required
+		if (!class_exists('\GuzzleHttp\Client')) {
 			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Extension http missing');
 		}
 
-		$http = new \HttpRequest(
-			$this->url, \HttpRequest::METH_GET, array(
-				'connecttimeout' => 5, 'timeout' => 10, 'useragent' => 'JyxoBeholder'
-			)
-		);
-
 		try {
-			$http->send();
-			if (200 !== $http->getResponseCode()) {
-				throw new \Exception(sprintf('Http error: %s', $http->getResponseCode()));
+
+			$httpClient = new \GuzzleHttp\Client();
+			$httpRequest = new \GuzzleHttp\Psr7\Request('GET', $this->url, array('User-Agent' => 'JyxoBeholder'));
+			$httpResponse = $httpClient->send($httpRequest, array(
+				\GuzzleHttp\RequestOptions::CONNECT_TIMEOUT => 5,
+				\GuzzleHttp\RequestOptions::TIMEOUT => 10
+			));
+
+			if (200 !== $httpResponse->getStatusCode()) {
+				throw new \Exception(sprintf('Http error: %s', $httpResponse->getReasonPhrase()));
 			}
 			if (isset($this->tests['body'])) {
-				$body = $http->getResponseBody();
-				if (!preg_match($this->tests['body'], $body)) {
+				$body = (string) $httpResponse->getBody();
+				if (strpos($body, $this->tests['body']) === false) {
 					$body = trim(strip_tags($body));
-					throw new \Exception(sprintf('Invalid body: %s', \Jyxo\StringUtil::cut($body, 16)));
+					throw new \Exception(sprintf('Invalid body: %s', \Jyxo\StringUtil::cut($body, 128)));
 				}
 			}
 
-			// OK
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::SUCCESS);
-
-		} catch (\HttpException $e) {
-			$inner = $e;
-			while (null !== $inner->innerException) {
-				$inner = $inner->innerException;
-			}
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, $inner->getMessage());
+			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::SUCCESS, $this->url);
 
 		} catch (\Exception $e) {
 			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, $e->getMessage());

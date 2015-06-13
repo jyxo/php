@@ -80,21 +80,14 @@ class Client
 	protected $servers = array();
 
 	/**
-	 * Connection cURL options.
+	 * Request options.
 	 *
 	 * @var array
 	 */
-	protected $curlOptions = array(
-		'connecttimeout' => 1,
-		'timeout' => 30
+	protected $requestOptions = array(
+		\GuzzleHttp\RequestOptions::CONNECT_TIMEOUT => 1,
+		\GuzzleHttp\RequestOptions::TIMEOUT => 30
 	);
-
-	/**
-	 * Connection cURL SSL options.
-	 *
-	 * @var array
-	 */
-	protected $curlSslOptions = array();
 
 	/**
 	 * Logger.
@@ -130,29 +123,16 @@ class Client
 	}
 
 	/**
-	 * Sets an cURL option.
+	 * Sets a request option.
 	 *
 	 * @param string $name Option name
 	 * @param mixed $value Option value
 	 *
-	 * @see \http\Client\Curl
+	 * @see \GuzzleHttp\RequestOptions
 	 */
-	public function setCurlOption($name, $value)
+	public function setRequestOption($name, $value)
 	{
-		$this->curlOptions[(string) $name] = $value;
-	}
-
-	/**
-	 * Sets an cURL SSL option.
-	 *
-	 * @param string $name Option name
-	 * @param mixed $value Option value
-	 *
-	 * @see \http\Client\Curl::$ssl
-	 */
-	public function setCurlSslOption($name, $value)
-	{
-		$this->curlSslOptions[(string) $name] = $value;
+		$this->requestOptions[(string) $name] = $value;
 	}
 
 	/**
@@ -202,7 +182,7 @@ class Client
 	public function exists($path)
 	{
 		$response = $this->sendRequest($this->getFilePath($path), self::METHOD_HEAD);
-		return self::STATUS_200_OK === $response->getResponseCode();
+		return self::STATUS_200_OK === $response->getStatusCode();
 	}
 
 	/**
@@ -219,11 +199,11 @@ class Client
 		$path = $this->getFilePath($path);
 		$response = $this->sendRequest($path, self::METHOD_GET);
 
-		if (self::STATUS_200_OK !== $response->getResponseCode()) {
+		if (self::STATUS_200_OK !== $response->getStatusCode()) {
 			throw new FileNotExistException(sprintf('File %s does not exist.', $path));
 		}
 
-		return $response->getBody()->toString();
+		return (string) $response->getBody();
 	}
 
 	/**
@@ -242,7 +222,7 @@ class Client
 		$path = $this->getFilePath($path);
 		$response = $this->sendRequest($path, self::METHOD_PROPFIND, array('Depth' => '0'));
 
-		if (self::STATUS_207_MULTI_STATUS !== $response->getResponseCode()) {
+		if (self::STATUS_207_MULTI_STATUS !== $response->getStatusCode()) {
 			throw new FileNotExistException(sprintf('File %s does not exist.', $path));
 		}
 
@@ -306,14 +286,16 @@ class Client
 			}
 		}
 
-		$requests = $this->createAllRequests($this->getFilePath($pathFrom), self::METHOD_COPY);
-		foreach ($requests as $server => $request) {
-			$request->addHeader('Destination', $server . $pathTo);
+		$requests = array();
+		foreach ($this->servers as $server) {
+			$requests[$server] = $this->createRequest($server, $this->getFilePath($pathFrom), self::METHOD_COPY, array(
+				'Destination' => $server . $pathTo
+			));
 		}
 
 		foreach ($this->sendAllRequests($requests) as $response) {
 			// 201 means copied
-			if (self::STATUS_201_CREATED !== $response->getResponseCode()) {
+			if (self::STATUS_201_CREATED !== $response->getStatusCode()) {
 				throw new FileNotCopiedException(sprintf('File %s cannot be copied to %s.', $pathFrom, $pathTo));
 			}
 		}
@@ -341,13 +323,15 @@ class Client
 			}
 		}
 
-		$requests = $this->createAllRequests($this->getFilePath($pathFrom), self::METHOD_MOVE);
-		foreach ($requests as $server => $request) {
-			$request->addHeader('Destination', $server . $pathTo);
+		$requests = array();
+		foreach ($this->servers as $server) {
+			$requests[$server] = $this->createRequest($server, $this->getFilePath($pathFrom), self::METHOD_MOVE, array(
+				'Destination' => $server . $pathTo
+			));
 		}
 
 		foreach ($this->sendAllRequests($requests) as $response) {
-			switch ($response->getResponseCode()) {
+			switch ($response->getStatusCode()) {
 				case self::STATUS_201_CREATED:
 				case self::STATUS_204_NO_CONTENT:
 					// Means renamed
@@ -374,9 +358,8 @@ class Client
 		}
 
 		foreach ($this->sendAllRequests($this->createAllRequests($this->getFilePath($path), self::METHOD_DELETE)) as $response) {
-			switch ($response->getResponseCode()) {
+			switch ($response->getStatusCode()) {
 				case self::STATUS_200_OK:
-                			// Means deleted
 				case self::STATUS_204_NO_CONTENT:
 					// Means deleted
 				case self::STATUS_404_NOT_FOUND:
@@ -400,7 +383,7 @@ class Client
 		$response = $this->sendRequest($this->getDirPath($dir), self::METHOD_PROPFIND, array('Depth' => '0'));
 
 		// The directory does not exist or server does not support PROPFIND method
-		if (self::STATUS_207_MULTI_STATUS !== $response->getResponseCode()) {
+		if (self::STATUS_207_MULTI_STATUS !== $response->getStatusCode()) {
 			return false;
 		}
 
@@ -435,7 +418,7 @@ class Client
 			$path = $this->getDirPath($path);
 
 			foreach ($this->sendAllRequests($this->createAllRequests($path, self::METHOD_MKCOL)) as $response) {
-				switch ($response->getResponseCode()) {
+				switch ($response->getStatusCode()) {
 					// The directory was created
 					case self::STATUS_201_CREATED:
 						break;
@@ -461,7 +444,7 @@ class Client
 	{
 		foreach ($this->sendAllRequests($this->createAllRequests($this->getDirPath($dir), self::METHOD_DELETE)) as $response) {
 			// 204 means deleted
-			if (self::STATUS_204_NO_CONTENT !== $response->getResponseCode()) {
+			if (self::STATUS_204_NO_CONTENT !== $response->getStatusCode()) {
 				throw new DirectoryNotDeletedException(sprintf('Directory %s cannot be deleted.', $dir));
 			}
 		}
@@ -479,21 +462,15 @@ class Client
 	 */
 	protected function processPut($path, $data, $isFile)
 	{
-		$requests = $this->createAllRequests($path, self::METHOD_PUT);
-		foreach ($requests as $request) {
-			if ($isFile) {
-				$body = new \http\Message\Body(fopen($data, 'r'));
-				$request->setBody($body);
-			} else {
-				$body = new \http\Message\Body();
-				$body->append($data);
-				$request->setBody($body);
-			}
+		$requests = array();
+		foreach ($this->servers as $server) {
+			$body = $isFile ? fopen($data, 'r') : $data;
+			$requests[$server] = $this->createRequest($server, $path, self::METHOD_PUT, array(), $body);
 		}
 
 		$success = true;
 		foreach ($this->sendAllRequests($requests) as $response) {
-			switch ($response->getResponseCode()) {
+			switch ($response->getStatusCode()) {
 				// Saved
 				case self::STATUS_200_OK:
 				case self::STATUS_201_CREATED:
@@ -530,7 +507,7 @@ class Client
 		// Try again
 		foreach ($this->sendAllRequests($requests) as $response) {
 			// 201 means saved
-			if (self::STATUS_201_CREATED !== $response->getResponseCode()) {
+			if (self::STATUS_201_CREATED !== $response->getStatusCode()) {
 				throw new \Jyxo\Webdav\FileNotCreatedException(sprintf('File %s cannot be created.', $path));
 			}
 		}
@@ -539,8 +516,8 @@ class Client
 	/**
 	 * Sends requests to all servers.
 	 *
-	 * @param \http\Client\Request[] $requests Request list
-	 * @return \http\Client\Response[]
+	 * @param \GuzzleHttp\Psr7\Request[] $requests Request list
+	 * @return \GuzzleHttp\Psr7\Response[]
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
 	protected function sendAllRequests(array $requests)
@@ -548,50 +525,46 @@ class Client
 		try {
 			$responses = array();
 
+			$client = $this->createClient();
+
 			if ($this->parallelSending) {
 				// Send parallel requests
 
-				$client = new \http\Client();
-
-				// Attach requests
-				foreach ($requests as $request) {
-					$client->enqueue($request);
+				// Create promises
+				$promises = array();
+				foreach ($requests as $server => $request) {
+					$promises[$server] = $client->sendAsync($request, $this->requestOptions);
 				}
 
-				// Send
-				$client->send();
+				// Wait on all of the requests to complete
+				$responses = array();
+				foreach ($promises as $server => $promise) {
+					$responses[$server] = $promise->wait();
+				}
 
-				foreach ($requests as $server => $request) {
-					$response = $client->getResponse($request);
-					$responses[$server] = $response;
-
-					// Log
-					if ($this->logger !== null) {
-						$this->logger->log(sprintf("%s %d %s", $request->getRequestMethod(), $response->getResponseCode(), $request->getRequestUrl()));
+				// Log
+				if (null !== $this->logger) {
+					foreach ($responses as $server => $response) {
+						$this->logger->log(sprintf("%s %d %s", $request->getMethod(), $response->getStatusCode(), $request->getUri()));
 					}
 				}
 
 			} else {
 
 				// Send by separate requests
-				$client = new \http\Client();
 				foreach ($requests as $server => $request) {
-					$client->reset();
-					$client->enqueue($request);
-					$client->send();
-
-					$response = $client->getResponse();
+					$response = $client->send($request, $this->requestOptions);
 					$responses[$server] = $response;
 
 					// Log
-					if ($this->logger !== null) {
-						$this->logger->log(sprintf("%s %d %s", $request->getRequestMethod(), $response->getResponseCode(), $request->getRequestUrl()));
+					if (null !== $this->logger) {
+						$this->logger->log(sprintf("%s %d %s", $request->getMethod(), $response->getStatusCode(), $request->getUri()));
 					}
 				}
 			}
 
 			return $responses;
-		} catch (\http\Exception $e) {
+		} catch (\GuzzleHttp\Exception\GuzzleException $e) {
 			throw new Exception($e->getMessage(), 0, $e);
 		}
 	}
@@ -600,9 +573,9 @@ class Client
 	 * Sends a request.
 	 *
 	 * @param string $path Request path
-	 * @param integer $method Request method
+	 * @param string $method Request method
 	 * @param array $headers Array of headers
-	 * @return \http\Client\Response
+	 * @return \GuzzleHttp\Psr7\Response
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
 	protected function sendRequest($path, $method, array $headers = array())
@@ -610,19 +583,14 @@ class Client
 		try {
 			// Send request to a random server
 			$request = $this->createRequest($this->getRandomServer(), $path, $method, $headers);
-
-			$client = new \http\Client();
-			$client->enqueue($request);
-			$client->send();
-
-			$response = $client->getResponse();
+			$response = $this->createClient()->send($request, $this->requestOptions);
 
 			if (null !== $this->logger) {
-				$this->logger->log(sprintf("%s %d %s", $request->getRequestMethod(), $response->getResponseCode(), $request->getRequestUrl()));
+				$this->logger->log(sprintf("%s %d %s", $request->getMethod(), $response->getStatusCode(), $request->getUri()));
 			}
 
 			return $response;
-		} catch (\http\Exception $e) {
+		} catch (\GuzzleHttp\Exception\GuzzleException $e) {
 			throw new Exception($e->getMessage(), 0, $e);
 		}
 	}
@@ -631,15 +599,16 @@ class Client
 	 * Creates a list of requests; one for each server.
 	 *
 	 * @param string $path Request path
-	 * @param integer $method Request method
+	 * @param string $method Request method
 	 * @param array $headers Array of headers
-	 * @return \http\Client\Request[]
+	 * @param string|null $body Request body
+	 * @return \GuzzleHttp\Psr7\Request[]
 	 */
-	protected function createAllRequests($path, $method, array $headers = array())
+	protected function createAllRequests($path, $method, array $headers = array(), $body = null)
 	{
 		$requests = array();
 		foreach ($this->servers as $server) {
-			$requests[$server] = $this->createRequest($server, $path, $method, $headers);
+			$requests[$server] = $this->createRequest($server, $path, $method, $headers, $body);
 		}
 		return $requests;
 	}
@@ -649,17 +618,33 @@ class Client
 	 *
 	 * @param string $server Server
 	 * @param string $path Path
-	 * @param integer $method Request method
+	 * @param string $method Request method
 	 * @param array $headers Array of headers
-	 * @return \http\Client\Request
+	 * @param string|null $body Request body
+	 * @return \GuzzleHttp\Psr7\Request
 	 */
-	protected function createRequest($server, $path, $method, array $headers = array())
+	protected function createRequest($server, $path, $method, array $headers = array(), $body = null)
 	{
-		$request = new \http\Client\Request($method, $server . $path);
-		$request->setOptions($this->curlOptions);
-		$request->setSslOptions($this->curlSslOptions);
-		$request->setHeaders($headers + array('Expect' => ''));
-		return $request;
+		return new \GuzzleHttp\Psr7\Request(
+			$method,
+			rtrim($server, '/') . $path,
+			$headers,
+			$body
+		);
+	}
+
+	/**
+	 * @return \GuzzleHttp\Client
+	 */
+	protected function createClient()
+	{
+		return new \GuzzleHttp\Client(array(
+			\GuzzleHttp\RequestOptions::ALLOW_REDIRECTS => false,
+			\GuzzleHttp\RequestOptions::HTTP_ERRORS => false,
+			\GuzzleHttp\RequestOptions::VERIFY => true,
+			\GuzzleHttp\RequestOptions::DECODE_CONTENT => true,
+			\GuzzleHttp\RequestOptions::EXPECT => false,
+		));
 	}
 
 	/**
@@ -687,15 +672,15 @@ class Client
 	/**
 	 * Fetches properties from the response.
 	 *
-	 * @param \http\Client\Response $response Response
+	 * @param \GuzzleHttp\Psr7\Response $response Response
 	 * @return array
 	 */
-	protected function getProperties(\http\Client\Response $response)
+	protected function getProperties(\GuzzleHttp\Psr7\Response $response)
 	{
 		// Process the XML with properties
 		$properties = array();
 		$reader = new \Jyxo\XmlReader();
-		$reader->XML($response->getBody()->toString());
+		$reader->XML((string) $response->getBody());
 
 		// Ignore warnings
 		while (@$reader->read()) {
