@@ -69,11 +69,6 @@ class Webdav extends \Jyxo\Beholder\TestCase
 	 */
 	public function run()
 	{
-		// The http extension is required
-		if (!extension_loaded('http')) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Extension http missing');
-		}
-
 		// The \Jyxo\Webdav\Client class is required
 		if (!class_exists('\Jyxo\Webdav\Client')) {
 			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Class \Jyxo\Webdav\Client missing');
@@ -100,11 +95,16 @@ class Webdav extends \Jyxo\Beholder\TestCase
 		try {
 			$webdav = new \Jyxo\Webdav\Client(array($serverUrl));
 			foreach ($this->options as $name => $value) {
-				$webdav->setCurlOption($name, $value);
+				$webdav->setRequestOption($name, $value);
 			}
 
 			// Writing
 			$webdav->put($path, $content);
+
+			// Exists
+			if (!$webdav->exists($path)) {
+				return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Exists error %s', $description));
+			}
 
 			// Reading
 			$readContent = $webdav->get($path);
