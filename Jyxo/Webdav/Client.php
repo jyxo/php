@@ -375,6 +375,8 @@ class Client
 
 		foreach ($this->sendAllRequests($this->createAllRequests($this->getFilePath($path), self::METHOD_DELETE)) as $response) {
 			switch ($response->getResponseCode()) {
+				case self::STATUS_200_OK:
+                			// Means deleted
 				case self::STATUS_204_NO_CONTENT:
 					// Means deleted
 				case self::STATUS_404_NOT_FOUND:
