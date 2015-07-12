@@ -17,14 +17,14 @@ namespace Jyxo;
  * Base class for common string operations.
  *
  * @category Jyxo
- * @package Jyxo\String
+ * @package Jyxo\StringUtil
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Tichý
  * @author Jakub Tománek
  * @author Jaroslav Hanslík
  */
-class String
+class StringUtil
 {
 	/**
 	 * Trims all words in a string longer than given length.
@@ -41,7 +41,7 @@ class String
 		$length = (int) $length;
 
 		return preg_replace_callback('~[^\\s]{' . $length . ',}~', function($matches) use ($length, $etc) {
-			return String::cut($matches[0], $length, $etc);
+			return StringUtil::cut($matches[0], $length, $etc);
 		}, $string);
 	}
 

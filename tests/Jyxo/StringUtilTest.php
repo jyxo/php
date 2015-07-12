@@ -24,7 +24,7 @@ require_once __DIR__ . '/../bootstrap.php';
  * @author Jaroslav Hanslík
  * @author Ondřej Nešpor
  */
-class StringTest extends \PHPUnit_Framework_TestCase
+class StringUtilTest extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * Tests string trimming.
@@ -93,7 +93,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	 */
 	private function checkStringWordCut($string, $max = 8, $etc = '...')
 	{
-		$cut = String::cutWords($string, $max, $etc);
+		$cut = StringUtil::cutWords($string, $max, $etc);
 
 		// &hellip; has length of 1
 		$cut2 = strtr(html_entity_decode($cut), array('&hellip;' => '.'));
@@ -125,7 +125,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	 */
 	private function checkStringCut($string, $max = 16, $etc = '...')
 	{
-		$cut = String::cut($string, $max, $etc);
+		$cut = StringUtil::cut($string, $max, $etc);
 		// &hellip; has length of 1
 		$cutLength = mb_strlen(strtr(html_entity_decode($cut), array('&hellip;' => '.')));
 		$this->assertLessThanOrEqual($max, $cutLength, 'String is longer');
@@ -143,8 +143,8 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCrc()
 	{
-		$this->assertSame(-662733300, String::crc('test'));
-		$this->assertSame(-33591962, String::crc('žluťoučký kůň příšerně úpěl ďábelské ódy'));
+		$this->assertSame(-662733300, StringUtil::crc('test'));
+		$this->assertSame(-33591962, StringUtil::crc('žluťoučký kůň příšerně úpěl ďábelské ódy'));
 	}
 
 	/**
@@ -153,7 +153,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	public function testRandom()
 	{
 		for ($i = 1; $i <= 32; $i++) {
-			$random = String::random($i);
+			$random = StringUtil::random($i);
 			$this->assertEquals($i, strlen($random));
 			$this->assertRegExp('~^[a-z0-9]+$~i', $random);
 		}
@@ -174,16 +174,16 @@ class StringTest extends \PHPUnit_Framework_TestCase
 
 		// No line ending given
 		foreach ($tests as $test) {
-			$this->assertEquals("test\nžlutý\n", String::fixLineEnding($test));
-			$this->assertNotEquals($test, String::fixLineEnding($test));
+			$this->assertEquals("test\nžlutý\n", StringUtil::fixLineEnding($test));
+			$this->assertNotEquals($test, StringUtil::fixLineEnding($test));
 		}
-		$this->assertEquals("test\nžlutý\n", String::fixLineEnding("test\nžlutý\n"));
+		$this->assertEquals("test\nžlutý\n", StringUtil::fixLineEnding("test\nžlutý\n"));
 
 		// Line ending given
 		foreach ($tests as $test) {
 			foreach (array("\n", "\r", "\r\n") as $ending) {
-				$this->assertEquals(sprintf('test%1$sžlutý%1$s', $ending), String::fixLineEnding($test, $ending));
-				$this->assertNotEquals("test\nžlutý\r\n", String::fixLineEnding($test, $ending));
+				$this->assertEquals(sprintf('test%1$sžlutý%1$s', $ending), StringUtil::fixLineEnding($test, $ending));
+				$this->assertNotEquals("test\nžlutý\r\n", StringUtil::fixLineEnding($test, $ending));
 			}
 		}
 	}
@@ -195,8 +195,8 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	{
 		$email = 'example@example.com';
 
-		$this->assertEquals('example&#64;example.com', String::obfuscateEmail($email));
-		$this->assertEquals('example&#64;<!---->example.com', String::obfuscateEmail($email, true));
+		$this->assertEquals('example&#64;example.com', StringUtil::obfuscateEmail($email));
+		$this->assertEquals('example&#64;<!---->example.com', StringUtil::obfuscateEmail($email, true));
 	}
 
 	/**
@@ -204,8 +204,8 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testLcfirst()
 	{
-		$this->assertEquals('žlutý kůň', String::lcfirst('Žlutý kůň'));
-		$this->assertEquals('žlutý kůň', String::lcfirst('žlutý kůň'));
+		$this->assertEquals('žlutý kůň', StringUtil::lcfirst('Žlutý kůň'));
+		$this->assertEquals('žlutý kůň', StringUtil::lcfirst('žlutý kůň'));
 	}
 
 	/**
@@ -213,12 +213,12 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testEscape()
 	{
-		$this->assertEquals('test &amp; test', String::escape('test & test'));
-		$this->assertEquals('&quot;test&quot; &amp; &#039;test&#039;', String::escape('"test" & \'test\''));
-		$this->assertEquals('&quot;test&quot; &amp; \'test\'', String::escape('"test" & \'test\'', ENT_COMPAT));
-		$this->assertEquals('"test" &amp; \'test\'', String::escape('"test" & \'test\'', ENT_NOQUOTES));
-		$this->assertEquals('test &amp; test', String::escape('test &amp; test'));
-		$this->assertEquals('test &amp;amp; test', String::escape('test &amp; test', ENT_QUOTES, true));
+		$this->assertEquals('test &amp; test', StringUtil::escape('test & test'));
+		$this->assertEquals('&quot;test&quot; &amp; &#039;test&#039;', StringUtil::escape('"test" & \'test\''));
+		$this->assertEquals('&quot;test&quot; &amp; \'test\'', StringUtil::escape('"test" & \'test\'', ENT_COMPAT));
+		$this->assertEquals('"test" &amp; \'test\'', StringUtil::escape('"test" & \'test\'', ENT_NOQUOTES));
+		$this->assertEquals('test &amp; test', StringUtil::escape('test &amp; test'));
+		$this->assertEquals('test &amp;amp; test', StringUtil::escape('test &amp; test', ENT_QUOTES, true));
 	}
 
 	/**
@@ -226,12 +226,12 @@ class StringTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testFormatBytes()
 	{
-		$this->assertEquals('11 B', String::formatBytes(10.5));
-		$this->assertEquals('11 B', String::formatBytes(10.5, '.'));
-		$this->assertEquals('11 B', String::formatBytes(10.5, '.', ','));
+		$this->assertEquals('11 B', StringUtil::formatBytes(10.5));
+		$this->assertEquals('11 B', StringUtil::formatBytes(10.5, '.'));
+		$this->assertEquals('11 B', StringUtil::formatBytes(10.5, '.', ','));
 
-		$this->assertEquals('1,0 GB', String::formatBytes(1073741824));
-		$this->assertEquals('1.0 GB', String::formatBytes(1073741824, '.'));
-		$this->assertEquals('10,240.0 PB', String::formatBytes(11805916207174113034240, '.', ','));
+		$this->assertEquals('1,0 GB', StringUtil::formatBytes(1073741824));
+		$this->assertEquals('1.0 GB', StringUtil::formatBytes(1073741824, '.'));
+		$this->assertEquals('10,240.0 PB', StringUtil::formatBytes(11805916207174113034240, '.', ','));
 	}
 }

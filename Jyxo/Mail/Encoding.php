@@ -106,7 +106,7 @@ class Encoding
 			case self::BIT7:
 				// Break missing intentionally
 			case self::BIT8:
-				return \Jyxo\String::fixLineEnding(trim($string), $lineEnd) . $lineEnd;
+				return \Jyxo\StringUtil::fixLineEnding(trim($string), $lineEnd) . $lineEnd;
 			case self::QUOTED_PRINTABLE:
 				return self::encodeQuotedPrintable($string, $lineLength, $lineEnd);
 			case self::BINARY:
@@ -126,7 +126,7 @@ class Encoding
 	 */
 	private static function encodeQuotedPrintable($string, $lineLength, $lineEnd)
 	{
-		$encoded = \Jyxo\String::fixLineEnding(trim($string), $lineEnd);
+		$encoded = \Jyxo\StringUtil::fixLineEnding(trim($string), $lineEnd);
 
 		// Replaces all high ASCII characters, control codes and '='
 		$encoded = preg_replace_callback('~([\000-\010\013\014\016-\037\075\177-\377])~', function($matches) {
