@@ -686,7 +686,7 @@ class Sender
 
 			// Just fix line endings in case of encoded attachments, encode otherwise
 			$mime[] = !empty($attachment->encoding)
-				? \Jyxo\String::fixLineEnding($attachment->content, self::LINE_END)
+				? \Jyxo\StringUtil::fixLineEnding($attachment->content, self::LINE_END)
 				: $this->encodeString($attachment->content, $encoding);
 			$mime[] = self::LINE_END . self::LINE_END;
 		}
