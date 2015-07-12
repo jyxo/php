@@ -86,7 +86,7 @@ class HttpResponse extends \Jyxo\Beholder\TestCase
 				$body = $http->getResponseBody();
 				if (!preg_match($this->tests['body'], $body)) {
 					$body = trim(strip_tags($body));
-					throw new \Exception(sprintf('Invalid body: %s', \Jyxo\String::cut($body, 16)));
+					throw new \Exception(sprintf('Invalid body: %s', \Jyxo\StringUtil::cut($body, 16)));
 				}
 			}
 
