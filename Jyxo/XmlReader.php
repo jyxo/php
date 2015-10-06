@@ -54,6 +54,10 @@ class XmlReader extends \XMLReader
 	 */
 	public function getTextValue()
 	{
+		if (self::ELEMENT === $this->nodeType && $this->isEmptyElement) {
+			return '';
+		}
+
 		$depth = 1;
 		$text = '';
 
@@ -78,6 +82,10 @@ class XmlReader extends \XMLReader
 	 */
 	public function getContent()
 	{
+		if (self::ELEMENT === $this->nodeType && $this->isEmptyElement) {
+			return '';
+		}
+
 		$depth = 1;
 		$text = '';
 
