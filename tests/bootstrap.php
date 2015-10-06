@@ -23,8 +23,8 @@ set_include_path(
 
 // Autoload
 spl_autoload_register(function($className) {
-	$file = str_replace('\\', '/', $className) . '.php';
-	$file = str_replace('_', '/', $className) . '.php';
+	$file = str_replace('_', '/', str_replace('\\', '/', $className)) . '.php';
+
 	// Because of non-existent class tests in \Jyxo\Input
 	if (false !== stream_resolve_include_path($file)) {
 		require_once $file;
