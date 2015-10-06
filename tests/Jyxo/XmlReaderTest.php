@@ -65,6 +65,7 @@ class XmlReaderTest extends \PHPUnit_Framework_TestCase
 	{
 		// In the form: tag (key), expected value (value)
 		$tests = array();
+		$tests['zero'] = '';
 		$tests['one'] = 'word';
 		$tests['second'] = 'two words';
 		$tests['third'] = 'three simple words';
@@ -93,6 +94,7 @@ class XmlReaderTest extends \PHPUnit_Framework_TestCase
 	{
 		// In the form: tag (key), expected value (value)
 		$tests = array();
+		$tests['zero'] = '';
 		$tests['one'] = 'word';
 		$tests['second'] = 'two <tag>words</tag>';
 		$tests['third'] = 'three<empty/><tag>simple</tag> words';

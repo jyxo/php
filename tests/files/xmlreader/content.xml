@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <test>
+	<zero/>
 	<one>word</one>
 	<second>two <tag>words</tag></second>
 	<third>three<empty/><tag>simple</tag> words</third>
