@@ -16,14 +16,14 @@ namespace Jyxo\Mail\Email\Attachment;
 require_once __DIR__ . '/../../../../bootstrap.php';
 
 /**
- * \Jyxo\Mail\Email\Attachment\File class test.
+ * \Jyxo\Mail\Email\Attachment\InlineFileAttachment class test.
  *
- * @see \Jyxo\Mail\Email\Attachment\File
+ * @see \Jyxo\Mail\Email\Attachment\InlineFile
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class FileTest extends \PHPUnit_Framework_TestCase
+class InlineFileAttachmentTest extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * Runs the test.
@@ -32,15 +32,16 @@ class FileTest extends \PHPUnit_Framework_TestCase
 	{
 		$path = DIR_FILES . '/mail/logo.gif';
 		$name = 'logo.gif';
+		$cid = 'logo.gif';
 		$mimeType = 'image/gif';
 
-		$attachment = new File($path, $name, $mimeType);
+		$attachment = new InlineFileAttachment($path, $name, $cid, $mimeType);
 		$this->assertEquals(file_get_contents($path), $attachment->getContent());
 		$this->assertEquals($name, $attachment->getName());
 		$this->assertEquals($mimeType, $attachment->getMimeType());
-		$this->assertEquals(\Jyxo\Mail\Email\Attachment::DISPOSITION_ATTACHMENT, $attachment->getDisposition());
-		$this->assertFalse($attachment->isInline());
-		$this->assertEquals('', $attachment->getCid());
+		$this->assertEquals(\Jyxo\Mail\Email\Attachment::DISPOSITION_INLINE, $attachment->getDisposition());
+		$this->assertTrue($attachment->isInline());
+		$this->assertEquals($cid, $attachment->getCid());
 		$this->assertEquals('', $attachment->getEncoding());
 	}
 }

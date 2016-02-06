@@ -57,12 +57,12 @@ class EmailTest extends \PHPUnit_Framework_TestCase
 		$body = new Email\Body($html, \Jyxo\Html::toText($html));
 
 		$attachments = array(
-			new Email\Attachment\File($filePath . '/logo.gif', 'logo.gif', 'image/gif'),
-			new Email\Attachment\String(file_get_contents($filePath . '/star.gif'), 'star.gif', 'image/gif')
+			new Email\Attachment\FileAttachment($filePath . '/logo.gif', 'logo.gif', 'image/gif'),
+			new Email\Attachment\StringAttachment(file_get_contents($filePath . '/star.gif'), 'star.gif', 'image/gif')
 		);
 		$inlineAttachments = array(
-			new Email\Attachment\InlineFile($filePath . '/logo.gif', 'logo.gif', 'logo.gif', 'image/gif'),
-			new Email\Attachment\InlineString(file_get_contents($filePath . '/star.gif'), 'star.gif', 'star.gif', 'image/gif')
+			new Email\Attachment\InlineFileAttachment($filePath . '/logo.gif', 'logo.gif', 'logo.gif', 'image/gif'),
+			new Email\Attachment\InlineStringAttachment(file_get_contents($filePath . '/star.gif'), 'star.gif', 'star.gif', 'image/gif')
 		);
 
 		// Basic settings

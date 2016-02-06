@@ -16,49 +16,31 @@ namespace Jyxo\Mail\Email\Attachment;
 require_once __DIR__ . '/../../../../bootstrap.php';
 
 /**
- * \Jyxo\Mail\Email\Attachment\String class test.
+ * \Jyxo\Mail\Email\Attachment\FileAttachment class test.
  *
- * @see \Jyxo\Mail\Email\Attachment\String
+ * @see \Jyxo\Mail\Email\Attachment\File
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class StringTest extends \PHPUnit_Framework_TestCase
+class FileAttachmentTest extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * Runs the test.
 	 */
 	public function test()
 	{
-		$content = file_get_contents(DIR_FILES . '/mail/logo.gif');
+		$path = DIR_FILES . '/mail/logo.gif';
 		$name = 'logo.gif';
 		$mimeType = 'image/gif';
 
-		$attachment = new String($content, $name, $mimeType);
-		$this->assertEquals($content, $attachment->getContent());
+		$attachment = new FileAttachment($path, $name, $mimeType);
+		$this->assertEquals(file_get_contents($path), $attachment->getContent());
 		$this->assertEquals($name, $attachment->getName());
 		$this->assertEquals($mimeType, $attachment->getMimeType());
 		$this->assertEquals(\Jyxo\Mail\Email\Attachment::DISPOSITION_ATTACHMENT, $attachment->getDisposition());
 		$this->assertFalse($attachment->isInline());
 		$this->assertEquals('', $attachment->getCid());
 		$this->assertEquals('', $attachment->getEncoding());
-
-		// It is possible to set an encoding
-		$reflection = new \ReflectionClass('\Jyxo\Mail\Encoding');
-		foreach ($reflection->getConstants() as $encoding) {
-			$attachment->setEncoding($encoding);
-			$this->assertEquals($encoding, $attachment->getEncoding());
-		}
-
-		// Incompatible encoding
-		try {
-			$attachment->setEncoding('dummy-encoding');
-			$this->fail('Expected exception \InvalidArgumentException.');
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
-			throw $e;
-		} catch (\Exception $e) {
-			// Correctly thrown exception
-			$this->assertInstanceOf('\InvalidArgumentException', $e);
-		}
 	}
 }
