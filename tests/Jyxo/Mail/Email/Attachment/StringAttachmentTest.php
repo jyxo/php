@@ -16,14 +16,14 @@ namespace Jyxo\Mail\Email\Attachment;
 require_once __DIR__ . '/../../../../bootstrap.php';
 
 /**
- * \Jyxo\Mail\Email\Attachment\InlineString class test.
+ * \Jyxo\Mail\Email\Attachment\StringAttachment class test.
  *
- * @see \Jyxo\Mail\Email\Attachment\InlineString
+ * @see \Jyxo\Mail\Email\Attachment\String
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class InlineStringTest extends \PHPUnit_Framework_TestCase
+class StringAttachmentTest extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * Runs the test.
@@ -32,16 +32,15 @@ class InlineStringTest extends \PHPUnit_Framework_TestCase
 	{
 		$content = file_get_contents(DIR_FILES . '/mail/logo.gif');
 		$name = 'logo.gif';
-		$cid = 'logo.gif';
 		$mimeType = 'image/gif';
 
-		$attachment = new InlineString($content, $name, $cid, $mimeType);
+		$attachment = new StringAttachment($content, $name, $mimeType);
 		$this->assertEquals($content, $attachment->getContent());
 		$this->assertEquals($name, $attachment->getName());
 		$this->assertEquals($mimeType, $attachment->getMimeType());
-		$this->assertEquals(\Jyxo\Mail\Email\Attachment::DISPOSITION_INLINE, $attachment->getDisposition());
-		$this->assertTrue($attachment->isInline());
-		$this->assertEquals($cid, $attachment->getCid());
+		$this->assertEquals(\Jyxo\Mail\Email\Attachment::DISPOSITION_ATTACHMENT, $attachment->getDisposition());
+		$this->assertFalse($attachment->isInline());
+		$this->assertEquals('', $attachment->getCid());
 		$this->assertEquals('', $attachment->getEncoding());
 
 		// It is possible to set an encoding

@@ -26,7 +26,7 @@ require_once __DIR__ . '/../../bootstrap.php';
 class SenderTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * File path.
+	 * FileAttachment path.
 	 *
 	 * @var string
 	 */
@@ -224,8 +224,8 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 		// HTML email with attachments
 		$email = $this->getEmail()
 			->setBody(new Email\Body($this->content))
-			->addAttachment(new Email\Attachment\File($this->filePath . '/logo.gif', 'logo.gif', 'image/gif'))
-			->addAttachment(new Email\Attachment\String(file_get_contents($this->filePath . '/star.gif'), 'star.gif', 'image/gif'));
+			->addAttachment(new Email\Attachment\FileAttachment($this->filePath . '/logo.gif', 'logo.gif', 'image/gif'))
+			->addAttachment(new Email\Attachment\StringAttachment(file_get_contents($this->filePath . '/star.gif'), 'star.gif', 'image/gif'));
 		$sender->setEmail($email);
 		$result = $sender->send(Sender::MODE_NONE);
 
@@ -247,8 +247,8 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 		$this->assertResult('sender-type-alternative.eml', $result);
 
 		// Email with an alternative content and inline attachments
-		$email->addAttachment(new Email\Attachment\InlineFile($this->filePath . '/logo.gif', 'logo.gif', 'logo.gif', 'image/gif'))
-			->addAttachment(new Email\Attachment\InlineString(file_get_contents($this->filePath . '/star.gif'), 'star.gif', 'star.gif', 'image/gif'));
+		$email->addAttachment(new Email\Attachment\InlineFileAttachment($this->filePath . '/logo.gif', 'logo.gif', 'logo.gif', 'image/gif'))
+			->addAttachment(new Email\Attachment\InlineStringAttachment(file_get_contents($this->filePath . '/star.gif'), 'star.gif', 'star.gif', 'image/gif'));
 		$sender->setEmail($email);
 		$result = $sender->send(Sender::MODE_NONE);
 
@@ -292,7 +292,7 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Compares the actual and expected result.
 	 *
-	 * @param string $file File with the expected result
+	 * @param string $file FileAttachment with the expected result
 	 * @param \Jyxo\Mail\Sender\Result $result
 	 */
 	private function assertResult($file, \Jyxo\Mail\Sender\Result $result)
