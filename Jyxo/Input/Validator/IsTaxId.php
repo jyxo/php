@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -39,7 +39,7 @@ class IsTaxId extends \Jyxo\Input\Validator\AbstractValidator
 	 *
 	 * @param boolean $strict Turns strict checking on or off.
 	 */
-	public function __construct($strict = true)
+	public function __construct(bool $strict = true)
 	{
 		$this->strict = (bool) $strict;
 	}
@@ -50,7 +50,7 @@ class IsTaxId extends \Jyxo\Input\Validator\AbstractValidator
 	 * @param mixed $value Input value
 	 * @return boolean
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
 		// Removes spaces
 		$taxId = preg_replace('~\\s+~', '', (string) $value);

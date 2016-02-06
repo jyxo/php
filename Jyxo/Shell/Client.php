@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -66,7 +66,7 @@ class Client
 	 * @param string $cwd Working directory
 	 * @param array $env Array of environment properties
 	 */
-	public function __construct($cwd = '', array $env = [])
+	public function __construct(string $cwd = '', array $env = [])
 	{
 		$this->setCwd($cwd);
 		$this->env = $_ENV;
@@ -80,7 +80,7 @@ class Client
 	 *
 	 * @return \Jyxo\Shell\Client
 	 */
-	public function loadProcessList()
+	public function loadProcessList(): self
 	{
 		$output = shell_exec('ps aux');
 
@@ -105,9 +105,9 @@ class Client
 	 * @param string $name Process name
 	 * @return boolean
 	 */
-	public function processExists($name)
+	public function processExists(string $name): bool
 	{
-		return array_key_exists((string) $name, $this->processList);
+		return array_key_exists($name, $this->processList);
 	}
 
 	/**
@@ -118,9 +118,9 @@ class Client
 	 * @param string $name Process name
 	 * @return \Jyxo\Shell\Client
 	 */
-	public function killProcess($name)
+	public function killProcess(string $name): self
 	{
-		shell_exec('killall -s KILL ' . (string) $name);
+		shell_exec('killall -s KILL ' . $name);
 
 		return $this;
 	}
@@ -133,9 +133,9 @@ class Client
 	 * @param string $cwd Working directory
 	 * @return \Jyxo\Shell\Client
 	 */
-	public function setCwd($cwd = '')
+	public function setCwd(string $cwd = ''): Client
 	{
-		$this->cwd = (string) $cwd;
+		$this->cwd = $cwd;
 
 		return $this;
 	}
@@ -146,7 +146,7 @@ class Client
 	 * @param array $env Array of properties
 	 * @return \Jyxo\Shell\Client
 	 */
-	public function setEnv(array $env)
+	public function setEnv(array $env): Client
 	{
 		$this->env = array_merge($this->env, $env);
 
@@ -158,7 +158,7 @@ class Client
 	 *
 	 * @return \Jyxo\Shell\Client
 	 */
-	public function clearEnv()
+	public function clearEnv(): Client
 	{
 		$this->env = $_ENV;
 
@@ -176,7 +176,7 @@ class Client
 	 * @return \Jyxo\Shell\Client
 	 * @throws \Jyxo\Shell\Exception On execution error
 	 */
-	public function exec($cmd, &$status = null)
+	public function exec(string $cmd, int &$status = null): Client
 	{
 		static $descriptorSpec = [
 			0 => ['pipe', 'r'],
@@ -241,7 +241,7 @@ class Client
 	 *
 	 * @return string
 	 */
-	public function getOut()
+	public function getOut(): string
 	{
 		return $this->out;
 	}
@@ -251,7 +251,7 @@ class Client
 	 *
 	 * @return string
 	 */
-	public function getError()
+	public function getError(): string
 	{
 		return $this->error;
 	}

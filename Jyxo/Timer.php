@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -38,7 +38,7 @@ final class Timer
 	 * @param string $name Custom timer name
 	 * @return string
 	 */
-	public static function start($name = '')
+	public static function start(string $name = ''): string
 	{
 		$start = microtime(true);
 		if (empty($name)) {
@@ -54,14 +54,14 @@ final class Timer
 	 * @param string $name Timer name
 	 * @return float
 	 */
-	public static function stop($name)
+	public static function stop(string $name): float
 	{
 		if (isset(self::$starts[$name])) {
 			$delta = microtime(true) - self::$starts[$name];
 			unset(self::$starts[$name]);
 			return $delta;
 		}
-		return 0;
+		return 0.0;
 	}
 
 	/**
@@ -70,12 +70,12 @@ final class Timer
 	 *
 	 * @return float
 	 */
-	public static function timer()
+	public static function timer(): float
 	{
 		static $time = 0;
 		$previousTime = $time;
 		$time = microtime(true);
 
-		return (0 === $previousTime) ? 0 : ($time - $previousTime);
+		return (0 === $previousTime) ? 0.0 : ($time - $previousTime);
 	}
 }

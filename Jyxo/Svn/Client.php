@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -64,12 +64,12 @@ class Client
 	 * @param array $additional Additional parameters
 	 * @param string $svnBinary SVN binary path
 	 */
-	public function __construct($user = '', $password = '', array $additional = [], $svnBinary = '')
+	public function __construct(string $user = '', string $password = '', array $additional = [], string $svnBinary = '')
 	{
-		$this->user = (string) $user;
-		$this->password = (string) $password;
+		$this->user = $user;
+		$this->password = $password;
 		$this->additional = $additional;
-		$this->svnBinary = (string) $svnBinary;
+		$this->svnBinary = $svnBinary;
 	}
 
 	/**
@@ -82,7 +82,7 @@ class Client
 	 * @param string $password SVN user password
 	 * @return \Jyxo\Svn\Result
 	 */
-	public function checkout($url, $path, $params = null, $user = '', $password = '')
+	public function checkout(string $url, string $path, $params = null, string $user = '', string $password = ''): Result
 	{
 		return $this->callSvn('checkout', $user, $password, array_merge((array) $url, (array) $params, (array) $path));
 	}
@@ -97,7 +97,7 @@ class Client
 	 * @param string $password SVN user password
 	 * @return \Jyxo\Svn\Result
 	 */
-	public function co($url, $path, $params = null, $user = '', $password = '')
+	public function co(string $url, string $path, $params = null, string $user = '', string $password = ''): Result
 	{
 		return $this->checkout($url, $path, $params, $user, $password);
 	}
@@ -111,7 +111,7 @@ class Client
 	 * @param string $password SVN user password
 	 * @return \Jyxo\Svn\Result
 	 */
-	public function update($path, $params = null, $user = '', $password = '')
+	public function update(string $path, $params = null, string $user = '', string $password = ''): Result
 	{
 		return $this->callSvn('update', $user, $password, array_merge((array) $params, (array) $path));
 	}
@@ -125,7 +125,7 @@ class Client
 	 * @param string $password SVN user password
 	 * @return \Jyxo\Svn\Result
 	 */
-	public function up($path, $params = null, $user = '', $password = '')
+	public function up(string $path, $params = null, string $user = '', string $password = ''): Result
 	{
 		return $this->update($path, $params, $user, $password);
 	}
@@ -140,7 +140,7 @@ class Client
 	 * @param string $password SVN user password
 	 * @return \Jyxo\Svn\Result
 	 */
-	public function commit($path, $message, $params = null, $user = '', $password = '')
+	public function commit(string $path, string $message, $params = null, string $user = '', string $password = ''): Result
 	{
 		return $this->callSvn('commit', $user, $password, array_merge((array) $params, ['-m' => $message], (array) $path));
 	}
@@ -155,7 +155,7 @@ class Client
 	 * @param string $password SVN user password
 	 * @return \Jyxo\Svn\Result
 	 */
-	public function ci($path, $message, $params = null, $user = '', $password = '')
+	public function ci(string $path, string $message, $params = null, string $user = '', string $password = ''): Result
 	{
 		return $this->commit($path, $message, $params, $user, $password);
 	}
@@ -166,7 +166,7 @@ class Client
 	 * @param array $path Path to be added to SVN
 	 * @return \Jyxo\Svn\Result
 	 */
-	public function add(array $path)
+	public function add(array $path): Result
 	{
 		return $this->callSvn('add', false, false, $path);
 	}
@@ -177,7 +177,7 @@ class Client
 	 * @param array $path Path to be deleted from SVN
 	 * @return \Jyxo\Svn\Result
 	 */
-	public function delete(array $path)
+	public function delete(array $path): Result
 	{
 		return $this->callSvn('delete', false, false, $path);
 	}
@@ -188,7 +188,7 @@ class Client
 	 * @param array $path Checked path
 	 * @return \Jyxo\Svn\Result
 	 */
-	public function status(array $path)
+	public function status(array $path): Result
 	{
 		return $this->callSvn('status', false, false, $path);
 	}
@@ -199,11 +199,11 @@ class Client
 	 * @param string $action Action
 	 * @param string $user Username
 	 * @param string $password User password
-	 * @param string $params Additional parameters
+	 * @param array $params Additional parameters
 	 * @return \Jyxo\Svn\Result
 	 * @throws \Jyxo\Svn\Exception On execute error
 	 */
-	protected function callSvn($action, $user, $password, $params)
+	protected function callSvn(string $action, string $user, string $password, array $params): Result
 	{
 		try {
 
@@ -245,9 +245,9 @@ class Client
 	 * @param string $user Username
 	 * @return \Jyxo\Svn\Client
 	 */
-	public function setUser($user)
+	public function setUser(string $user): Client
 	{
-		$this->user = (string) $user;
+		$this->user = $user;
 
 		return $this;
 	}
@@ -258,9 +258,9 @@ class Client
 	 * @param string $password Password
 	 * @return \Jyxo\Svn\Client
 	 */
-	public function setPassword($password)
+	public function setPassword(string $password): Client
 	{
-		$this->password = (string) $password;
+		$this->password = $password;
 
 		return $this;
 	}
@@ -271,7 +271,7 @@ class Client
 	 * @param array $params Array of parameters
 	 * @return \Jyxo\Svn\Client
 	 */
-	public function setAdditionalParams(array $params)
+	public function setAdditionalParams(array $params): Client
 	{
 		$this->additional = $params;
 
@@ -284,9 +284,9 @@ class Client
 	 * @param string $path Path to the SVN binary
 	 * @return \Jyxo\Svn\Client
 	 */
-	public function setSvnBinary($path)
+	public function setSvnBinary(string $path): Client
 	{
-		$this->svnBinary = (string) $path;
+		$this->svnBinary = $path;
 
 		return $this;
 	}
@@ -298,7 +298,7 @@ class Client
 	 * @param string $value Parameter value
 	 * @return \Jyxo\Svn\Client
 	 */
-	public function addAdditionalParam($param, $value = '')
+	public function addAdditionalParam(string $param, string $value = ''): Client
 	{
 		if (!empty($value)) {
 			$this->additional[$param] = escapeshellarg($value);
@@ -318,7 +318,7 @@ class Client
 	 * @param mixed $user Username
 	 * @return string
 	 */
-	protected function getUserString($user = '')
+	protected function getUserString($user = ''): string
 	{
 		if (false === $user) {
 			return '';
@@ -340,7 +340,7 @@ class Client
 	 * @param mixed $password Password
 	 * @return string
 	 */
-	protected function getPasswordString($password = '')
+	protected function getPasswordString($password = ''): string
 	{
 		if (false === $password) {
 			return '';
@@ -365,7 +365,7 @@ class Client
 	 * @param boolean $pathsOnly Use only path-parameters (not beginning with a dash "-")
 	 * @return string
 	 */
-	protected function getAdditionalParams($params = [], $pathsOnly = false)
+	protected function getAdditionalParams(array $params = [], $pathsOnly = false): string
 	{
 		$ret = ' ';
 

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -31,7 +31,7 @@ class IsDateTime extends \Jyxo\Input\Validator\AbstractValidator
 	 * @param mixed $value Input value
 	 * @return boolean
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
 		// Format check
 		if (!preg_match('~^(\\d{4})-(\\d{2})-(\\d{2}) (\\d{2}):(\\d{2}):(\\d{2})$~', (string) $value, $matches)) {
@@ -41,7 +41,7 @@ class IsDateTime extends \Jyxo\Input\Validator\AbstractValidator
 		list(, $year, $month, $day, $hour, $minute, $second) = $matches;
 
 		// Date validity check
-		if (!checkdate($month, $day, $year)) {
+		if (!checkdate((int) $month, (int) $day, (int) $year)) {
 			return false;
 		}
 

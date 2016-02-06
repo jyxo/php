@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -73,7 +73,7 @@ class SpamFilter
 	 * @param string $text Checked text
 	 * @return boolean
 	 */
-	public function isSpam($text)
+	public function isSpam(string $text): bool
 	{
 		// Blacklisting first
 		if ($this->isBlack($text)) {
@@ -96,7 +96,7 @@ class SpamFilter
 	 * @param string $text Checked text
 	 * @return boolean
 	 */
-	public function isBlack($text)
+	public function isBlack(string $text): bool
 	{
 		foreach ($this->blackList as $black) {
 			if (false !== strpos($text, $black)) {
@@ -113,7 +113,7 @@ class SpamFilter
 	 * @param string $text Checked text
 	 * @return boolean
 	 */
-	public function isLinkSpam($text)
+	public function isLinkSpam(string $text): bool
 	{
 		$urlPattern = '~((ftp|http|https)://)?[\-\w]+(\.[\-\w]+)*\.[a-z]{2,6}~i';
 		$linkCount = preg_match_all($urlPattern, $text, $matches);
@@ -138,7 +138,7 @@ class SpamFilter
 	 * @param string $text Checked text
 	 * @return boolean
 	 */
-	public function isBabble($text)
+	public function isBabble(string $text): bool
 	{
 		$words = [];
 		$numberOfWords = 0;
@@ -174,7 +174,7 @@ class SpamFilter
 	 * @param array $blackList Words blacklist
 	 * @return \Jyxo\SpamFilter
 	 */
-	public function setBlackList(array $blackList)
+	public function setBlackList(array $blackList): self
 	{
 		$this->blackList = $blackList;
 		return $this;
@@ -186,7 +186,7 @@ class SpamFilter
 	 * @param array $ignoreWords Ignored words list
 	 * @return \Jyxo\SpamFilter
 	 */
-	public function setIgnoreWords(array $ignoreWords)
+	public function setIgnoreWords(array $ignoreWords): self
 	{
 		$this->ignoreWords = $ignoreWords;
 		return $this;

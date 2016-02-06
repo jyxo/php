@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -53,12 +53,12 @@ class Webdav extends \Jyxo\Beholder\TestCase
 	 * @param string $dir Tested directory
 	 * @param array $options Connection options
 	 */
-	public function __construct($description, $server, $dir = '', array $options = [])
+	public function __construct(string $description, string $server, string $dir = '', array $options = [])
 	{
 		parent::__construct($description);
 
-		$this->server = (string) $server;
-		$this->dir = (string) $dir;
+		$this->server = $server;
+		$this->dir = $dir;
 		$this->options = $options;
 	}
 
@@ -67,14 +67,14 @@ class Webdav extends \Jyxo\Beholder\TestCase
 	 *
 	 * @return \Jyxo\Beholder\Result
 	 */
-	public function run()
+	public function run(): \Jyxo\Beholder\Result
 	{
 		// The \Jyxo\Webdav\Client class is required
 		if (!class_exists(\Jyxo\Webdav\Client::class)) {
 			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, sprintf('Class %s missing', \Jyxo\Webdav\Client::class));
 		}
 
-		$random = md5(uniqid(time(), true));
+		$random = md5(uniqid((string) time(), true));
 		$dir = trim($this->dir, '/');
 		if (!empty($dir)) {
 			$dir = '/' . $dir;

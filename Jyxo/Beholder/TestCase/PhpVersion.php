@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -53,7 +53,7 @@ class PhpVersion extends \Jyxo\Beholder\TestCase
 	 * @param string $extension Optional extension name
 	 * @param string $comparison Comparison operator for version_compare. >= means "the actual version must be greater or equal to the expected"
 	 */
-	public function __construct($description, $version, $extension = '', $comparison = '=')
+	public function __construct(string $description, string $version, string $extension = '', string $comparison = '=')
 	{
 		parent::__construct($description);
 
@@ -67,7 +67,7 @@ class PhpVersion extends \Jyxo\Beholder\TestCase
 	 *
 	 * @return \Jyxo\Beholder\Result
 	 */
-	public function run()
+	public function run(): \Jyxo\Beholder\Result
 	{
 		// If we test extensions they have to be installed
 		if ((!empty($this->extension)) && (!extension_loaded($this->extension))) {

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -214,7 +214,7 @@ class Sender
 	 *
 	 * @return string
 	 */
-	public function getCharset()
+	public function getCharset(): string
 	{
 		return $this->charset;
 	}
@@ -225,9 +225,9 @@ class Sender
 	 * @param string $charset Final charset
 	 * @return \Jyxo\Mail\Sender
 	 */
-	public function setCharset($charset)
+	public function setCharset(string $charset): self
 	{
-		$this->charset = (string) $charset;
+		$this->charset = $charset;
 
 		return $this;
 	}
@@ -237,7 +237,7 @@ class Sender
 	 *
 	 * @return string
 	 */
-	public function getHostname()
+	public function getHostname(): string
 	{
 		if (empty($this->hostname)) {
 			$this->hostname = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost';
@@ -252,9 +252,9 @@ class Sender
 	 * @param string $hostname Hostname
 	 * @return \Jyxo\Mail\Sender
 	 */
-	public function setHostname($hostname)
+	public function setHostname(string $hostname): self
 	{
-		$this->hostname = (string) $hostname;
+		$this->hostname = $hostname;
 
 		return $this;
 	}
@@ -264,7 +264,7 @@ class Sender
 	 *
 	 * @return string
 	 */
-	public function getXmailer()
+	public function getXmailer(): string
 	{
 		return $this->xmailer;
 	}
@@ -275,9 +275,9 @@ class Sender
 	 * @param string $xmailer X-Mailer header value
 	 * @return \Jyxo\Mail\Sender
 	 */
-	public function setXmailer($xmailer)
+	public function setXmailer(string $xmailer): self
 	{
-		$this->xmailer = (string) $xmailer;
+		$this->xmailer = $xmailer;
 
 		return $this;
 	}
@@ -287,7 +287,7 @@ class Sender
 	 *
 	 * @return string
 	 */
-	public function getEncoding()
+	public function getEncoding(): string
 	{
 		return $this->encoding;
 	}
@@ -299,13 +299,13 @@ class Sender
 	 * @return \Jyxo\Mail\Sender
 	 * @throws \InvalidArgumentException If an incompatible encoding was provided
 	 */
-	public function setEncoding($encoding)
+	public function setEncoding(string $encoding): self
 	{
 		if (!Encoding::isCompatible($encoding)) {
 			throw new \InvalidArgumentException(sprintf('Incompatible encoding %s.', $encoding));
 		}
 
-		$this->encoding = (string) $encoding;
+		$this->encoding = $encoding;
 
 		return $this;
 	}
@@ -313,7 +313,7 @@ class Sender
 	/**
 	 * Returns the email to be sent.
 	 *
-	 * @return \Jyxo\Mail\Email
+	 * @return \Jyxo\Mail\Email|null
 	 */
 	public function getEmail()
 	{
@@ -326,7 +326,7 @@ class Sender
 	 * @param \Jyxo\Mail\Email $email Email instance
 	 * @return \Jyxo\Mail\Sender
 	 */
-	public function setEmail(\Jyxo\Mail\Email $email)
+	public function setEmail(\Jyxo\Mail\Email $email): self
 	{
 		$this->email = $email;
 
@@ -344,14 +344,14 @@ class Sender
 	 * @param integer $timeout Connection timeout
 	 * @return \Jyxo\Mail\Sender
 	 */
-	public function setSmtp($host, $port = 25, $helo = '', $user = '', $password = '', $timeout = 5)
+	public function setSmtp(string $host, int $port = 25, string $helo = '', string $user = '', string $password = '', int $timeout = 5): self
 	{
-		$this->smtpHost = (string) $host;
-		$this->smtpPort = (int) $port;
-		$this->smtpHelo = !empty($helo) ? (string) $helo : $this->getHostname();
-		$this->smtpUser = (string) $user;
-		$this->smtpPsw = (string) $password;
-		$this->smtpTimeout = (int) $timeout;
+		$this->smtpHost = $host;
+		$this->smtpPort = $port;
+		$this->smtpHelo = !empty($helo) ? $helo : $this->getHostname();
+		$this->smtpUser = $user;
+		$this->smtpPsw = $password;
+		$this->smtpTimeout = $timeout;
 
 		return $this;
 	}
@@ -365,7 +365,7 @@ class Sender
 	 * @throws \Jyxo\Mail\Sender\Exception On error
 	 * @throws \Jyxo\Mail\Sender\CreateException If a required setting is missing
 	 */
-	public function send($mode)
+	public function send(string $mode): \Jyxo\Mail\Sender\Result
 	{
 		// Sending modes
 		static $modes = [
@@ -376,7 +376,7 @@ class Sender
 		if (!isset($modes[$mode])) {
 			throw new \InvalidArgumentException(sprintf('Unknown sending mode %s.', $mode));
 		}
-		$this->mode = (string) $mode;
+		$this->mode = $mode;
 
 		// Check of required parameters
 		if (null === $this->email->from) {
@@ -497,7 +497,7 @@ class Sender
 	 */
 	private function create()
 	{
-		$uniqueId = md5(uniqid(time()));
+		$uniqueId = md5(uniqid((string) time()));
 		$hostname = $this->clearHeaderValue($this->getHostname());
 
 		// Unique email Id
@@ -571,7 +571,7 @@ class Sender
 		}
 
 		if (!empty($this->email->priority)) {
-			$this->addHeaderLine('X-Priority', $this->email->priority);
+			$this->addHeaderLine('X-Priority', (string) $this->email->priority);
 		}
 
 		$this->addHeaderLine('Message-ID', '<' . $this->result->messageId . '>');
@@ -664,7 +664,7 @@ class Sender
 	 *
 	 * @return string
 	 */
-	private function attachAll()
+	private function attachAll(): string
 	{
 		$mime = [];
 
@@ -703,7 +703,7 @@ class Sender
 	 * @param array $except Headers to be removed
 	 * @return string
 	 */
-	private function getHeader(array $except = [])
+	private function getHeader(array $except = []): string
 	{
 		$header = '';
 		foreach ($this->createdHeader as $headerLine) {
@@ -721,7 +721,7 @@ class Sender
 	 * @param \Jyxo\Mail\Email\Address $address Address
 	 * @return string
 	 */
-	private function formatAddress(\Jyxo\Mail\Email\Address $address)
+	private function formatAddress(\Jyxo\Mail\Email\Address $address): string
 	{
 		$name = $this->changeCharset($this->clearHeaderValue($address->name));
 		$email = $this->clearHeaderValue($address->email);
@@ -748,7 +748,7 @@ class Sender
 	 * @param array $addressList Array of addresses
 	 * @return string
 	 */
-	private function formatAddressList(array $addressList)
+	private function formatAddressList(array $addressList): string
 	{
 		$formated = '';
 		while ($address = current($addressList)) {
@@ -767,7 +767,7 @@ class Sender
 	 * @param string $name Header name
 	 * @param string $value Header value
 	 */
-	private function addHeaderLine($name, $value)
+	private function addHeaderLine(string $name, string $value)
 	{
 		$this->createdHeader[] = [
 			'name' => $name,
@@ -781,7 +781,7 @@ class Sender
 	 * @param string $string Header definition
 	 * @return string
 	 */
-	private function encodeHeader($string)
+	private function encodeHeader(string $string): string
 	{
 		// There might be dangerous characters in the string
 		$count = preg_match_all('~[^\040-\176]~', $string, $matches);
@@ -811,7 +811,7 @@ class Sender
 	 * @param integer $lineLength Line length
 	 * @return string
 	 */
-	private function encodeString($string, $encoding, $lineLength = self::LINE_LENGTH)
+	private function encodeString(string $string, string $encoding, int $lineLength = self::LINE_LENGTH): string
 	{
 		return Encoding::encode($string, $encoding, $lineLength, self::LINE_END);
 	}
@@ -825,7 +825,7 @@ class Sender
 	 * @param string $encoding Encoding
 	 * @return string
 	 */
-	private function getBoundaryStart($boundary, $contentType, $charset, $encoding)
+	private function getBoundaryStart(string $boundary, string $contentType, string $charset, string $encoding): string
 	{
 		$start = '--' . $boundary . self::LINE_END;
 		$start .= 'Content-Type: ' . $contentType . '; charset="' . $this->clearHeaderValue($charset) . '"' . self::LINE_END;
@@ -840,7 +840,7 @@ class Sender
 	 * @param string $boundary Boundary
 	 * @return string
 	 */
-	private function getBoundaryEnd($boundary)
+	private function getBoundaryEnd(string $boundary): string
 	{
 		return self::LINE_END . '--' . $boundary . '--' . self::LINE_END;
 	}
@@ -851,7 +851,7 @@ class Sender
 	 * @param string $string Headers definition
 	 * @return string
 	 */
-	private function clearHeaderValue($string)
+	private function clearHeaderValue(string $string): string
 	{
 		return strtr(trim($string), "\r\n\t", '   ');
 	}
@@ -862,11 +862,14 @@ class Sender
 	 * @param string $string Input string
 	 * @return string
 	 */
-	private function changeCharset($string)
+	private function changeCharset(string $string): string
 	{
 		if ('utf-8' !== $this->charset) {
 			// Triggers a notice on an invalid character
 			$string = @iconv('utf-8', $this->charset . '//TRANSLIT', $string);
+			if ($string === false) {
+				$string = '';
+			}
 		}
 
 		return $string;

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -45,12 +45,12 @@ class Factory
 	/**
 	 * Returns a particular validator by its name.
 	 *
-	 * @param string $name Validator name
+	 * @param string|\Jyxo\Input\ValidatorInterface $name Validator name
 	 * @param mixed|array $param Validator constructor parameters. In case of a single parameter it can be its value, an array of values otherwise. NULL in case of no parameter.
 	 * @return \Jyxo\Input\ValidatorInterface
 	 * @throws \Jyxo\Input\Exception No validator of the given name could be found
 	 */
-	public function getValidatorByName($name, $param = null)
+	public function getValidatorByName($name, $param = null): \Jyxo\Input\ValidatorInterface
 	{
 		if ($name instanceof \Jyxo\Input\ValidatorInterface) {
 			return $name;
@@ -69,12 +69,12 @@ class Factory
 	/**
 	 * Returns a particular filter by its name.
 	 *
-	 * @param string $name Filter name
+	 * @param string|\Jyxo\Input\FilterInterface $name Filter name
 	 * @param mixed|array $param Filter constructor parameters. In case of a single parameter it can be its value, an array of values otherwise. NULL in case of no parameter.
 	 * @return \Jyxo\Input\FilterInterface
 	 * @throws \Jyxo\Input\Exception No filter of the given name could be found
 	 */
-	public function getFilterByName($name, $param = null)
+	public function getFilterByName($name, $param = null): \Jyxo\Input\FilterInterface
 	{
 		if ($name instanceof \Jyxo\Input\FilterInterface) {
 			return $name;
@@ -97,9 +97,9 @@ class Factory
 	 *
 	 * @param string $name Class name
 	 * @param array $prefixes Class prefixes
-	 * @return string
+	 * @return string|null
 	 */
-	private function findClass($name, array $prefixes)
+	private function findClass(string $name, array $prefixes)
 	{
 		$className = null;
 		$name = ucfirst($name);
@@ -121,7 +121,7 @@ class Factory
 	 * @return object
 	 * @throws \ReflectionException An error occurred; the class was probably not found
 	 */
-	private function getClass($className, array $params)
+	private function getClass(string $className, array $params)
 	{
 		$instance = null;
 		switch (count($params)) {
@@ -149,7 +149,7 @@ class Factory
 	 *
 	 * @param string $prefix Validator class prefix
 	 */
-	public static function addValidatorPrefix($prefix)
+	public static function addValidatorPrefix(string $prefix)
 	{
 		array_unshift(self::$validatorPrefix, $prefix);
 	}
@@ -161,7 +161,7 @@ class Factory
 	 *
 	 * @param string $prefix
 	 */
-	public static function addFilterPrefix($prefix)
+	public static function addFilterPrefix(string $prefix)
 	{
 		array_unshift(self::$filterPrefix, $prefix);
 	}

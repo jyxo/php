@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -39,7 +39,7 @@ class LessThan extends \Jyxo\Input\Validator\AbstractValidator
 	 *
 	 * @param integer $max Maximum value (value must be less)
 	 */
-	public function __construct($max)
+	public function __construct(int $max)
 	{
 		$this->setMax($max);
 	}
@@ -48,11 +48,11 @@ class LessThan extends \Jyxo\Input\Validator\AbstractValidator
 	 * Sets the maximum value.
 	 *
 	 * @param integer $max New maximum value
-	 * @return \Jyxo\Input\Validator\StringLengthLessThan
+	 * @return \Jyxo\Input\Validator\LessThan
 	 */
-	public function setMax($max)
+	public function setMax(int $max): self
 	{
-		$this->max = (int) $max;
+		$this->max = $max;
 
 		return $this;
 	}
@@ -62,7 +62,7 @@ class LessThan extends \Jyxo\Input\Validator\AbstractValidator
 	 *
 	 * @return integer
 	 */
-	public function getMax()
+	public function getMax(): int
 	{
 		return $this->max;
 	}
@@ -73,7 +73,7 @@ class LessThan extends \Jyxo\Input\Validator\AbstractValidator
 	 * @param mixed $value Input value
 	 * @return boolean
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
 		return (int) $value < $this->getMax();
 	}

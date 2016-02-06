@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -29,7 +29,7 @@ class ServerTest extends \Jyxo\Rpc\ServerTestCase
 	 *
 	 * @return \Jyxo\Rpc\Server
 	 */
-	protected function getServerInstance()
+	protected function getServerInstance(): \Jyxo\Rpc\Server
 	{
 		return Server::getInstance();
 	}
@@ -39,7 +39,7 @@ class ServerTest extends \Jyxo\Rpc\ServerTestCase
 	 *
 	 * @return string
 	 */
-	protected function getFileExtension()
+	protected function getFileExtension(): string
 	{
 		return 'json';
 	}

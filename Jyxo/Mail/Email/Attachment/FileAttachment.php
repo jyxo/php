@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -39,7 +39,7 @@ class FileAttachment extends \Jyxo\Mail\Email\Attachment
 	 * @param string $name Attachment name
 	 * @param string $mimeType Attachment mime-type
 	 */
-	public function __construct($path, $name, $mimeType = 'application/octet-stream')
+	public function __construct(string $path, string $name, string $mimeType = 'application/octet-stream')
 	{
 		$this->setContent(file_get_contents($path));
 		$this->setName($name);

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -29,5 +29,5 @@ interface ArrayCopy
 	 *
 	 * @return array
 	 */
-	public function toArray();
+	public function toArray(): array;
 }

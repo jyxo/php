@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -37,7 +37,7 @@ abstract class AbstractValidator implements \Jyxo\Input\ValidatorInterface
 	 * @param mixed $value Input value
 	 * @return boolean
 	 */
-	public static function validate($value)
+	public static function validate($value): bool
 	{
 		$class = new \ReflectionClass(get_called_class());
 		$validator = $class->newInstanceArgs(array_slice(func_get_args(), 1));

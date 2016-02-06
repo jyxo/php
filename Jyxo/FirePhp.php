@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -78,9 +78,9 @@ class FirePhp
 	 *
 	 * @param boolean $flag Is logging enabled
 	 */
-	public static function setEnabled($flag = true)
+	public static function setEnabled(bool $flag = true)
 	{
-		self::$enabled = (bool) $flag;
+		self::$enabled = $flag;
 	}
 
 	/**
@@ -90,9 +90,9 @@ class FirePhp
 	 * @param string $label Variable label
 	 * @return boolean
 	 */
-	public static function dump($variable, $label = '')
+	public static function dump($variable, string $label = ''): bool
 	{
-		return self::log($variable, (string) $label);
+		return self::log($variable, $label);
 	}
 
 	/**
@@ -102,9 +102,9 @@ class FirePhp
 	 * @param string $label Message label
 	 * @return boolean
 	 */
-	public static function info($message, $label = '')
+	public static function info(string $message, string $label = ''): bool
 	{
-		return self::log((string) $message, (string) $label, self::INFO);
+		return self::log($message, $label, self::INFO);
 	}
 
 	/**
@@ -114,9 +114,9 @@ class FirePhp
 	 * @param string $label Message label
 	 * @return boolean
 	 */
-	public static function warning($message, $label = '')
+	public static function warning(string $message, string $label = ''): bool
 	{
-		return self::log((string) $message, (string) $label, self::WARNING);
+		return self::log($message, $label, self::WARNING);
 	}
 
 	/**
@@ -126,9 +126,9 @@ class FirePhp
 	 * @param string $label Message label
 	 * @return boolean
 	 */
-	public static function error($message, $label = '')
+	public static function error(string $message, string $label = ''): bool
 	{
-		return self::log((string) $message, (string) $label, self::ERROR);
+		return self::log($message, $label, self::ERROR);
 	}
 
 	/**
@@ -139,7 +139,7 @@ class FirePhp
 	 * @param string $type Message type
 	 * @return boolean
 	 */
-	public static function log($message, $label = '', $type = self::LOG)
+	public static function log($message, string $label = '', string $type = self::LOG): bool
 	{
 		$output = [
 			[
@@ -161,7 +161,7 @@ class FirePhp
 	 * @param array $trace Trace
 	 * @return boolean
 	 */
-	public static function trace($message, $file, $line, array $trace)
+	public static function trace(string $message, string $file, int $line, array $trace): bool
 	{
 		$output = [
 			[
@@ -188,7 +188,7 @@ class FirePhp
 	 * @param string $ident Unique identifier
 	 * @return boolean
 	 */
-	public static function table($label, array $header, array $data, $ident = '')
+	public static function table(string $label, array $header, array $data, string $ident = ''): bool
 	{
 		$output = [
 			[
@@ -207,7 +207,7 @@ class FirePhp
 	 * @param \Exception $e Exception to log
 	 * @return boolean First exception sending result
 	 */
-	public static function exception(\Exception $e)
+	public static function exception(\Exception $e): bool
 	{
 		$result = self::trace(
 			'Exception: ' . $e->getMessage() . ' [' . $e->getCode() . ']',
@@ -233,7 +233,7 @@ class FirePhp
 	 * @param string $ident Message identifier
 	 * @return boolean
 	 */
-	private static function send(array $output, $ident = '')
+	private static function send(array $output, string $ident = ''): bool
 	{
 		// Headers were already sent, can not proceed
 		if (headers_sent()) {
@@ -313,7 +313,7 @@ class FirePhp
 	 *
 	 * @return boolean
 	 */
-	private static function isInstalled()
+	private static function isInstalled(): bool
 	{
 		// Header X-FirePHP-Version
 		if (isset($_SERVER['HTTP_X_FIREPHP_VERSION'])) {
@@ -364,9 +364,9 @@ class FirePhp
 	 * @param integer $objectDepth Current object traversal depth
 	 * @param integer $arrayDepth Current array traversal depth
 	 * @param integer $totalDepth Current total traversal depth
-	 * @return array
+	 * @return mixed
 	 */
-	private static function encodeVariable($variable, $objectDepth = 1, $arrayDepth = 1, $totalDepth = 1)
+	private static function encodeVariable($variable, int $objectDepth = 1, int $arrayDepth = 1, int $totalDepth = 1)
 	{
 		static $maxObjectDepth = 5;
 		static $maxArrayDepth = 5;

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -48,7 +48,7 @@ class StringLengthBetween extends \Jyxo\Input\Validator\AbstractValidator
 	 * @param integer $max Maximal length (string length must be less or equal)
 	 * @throws \InvalidArgumentException Arguments are invalid (less than zero or minimum is greater than maximum)
 	 */
-	public function __construct($min, $max)
+	public function __construct(int $min, int $max)
 	{
 		$this->setMax($max);
 		$this->setMin($min);
@@ -61,13 +61,12 @@ class StringLengthBetween extends \Jyxo\Input\Validator\AbstractValidator
 	 * @return \Jyxo\Input\Validator\StringLengthBetween
 	 * @throws \InvalidArgumentException If the minimal length is negative or greater than the maximal length
 	 */
-	public function setMin($min)
+	public function setMin(int $min): self
 	{
-		$min = (int) $min;
 		if ($min < 0) {
 			throw new \InvalidArgumentException('Length of string must be greater than zero.');
 		}
-		if ($min > $this->getMax()) {
+		if ($this->max !== null && $min > $this->max) {
 			throw new \InvalidArgumentException('Min length must be lower or equal to max length.');
 		}
 
@@ -80,7 +79,7 @@ class StringLengthBetween extends \Jyxo\Input\Validator\AbstractValidator
 	 *
 	 * @return integer
 	 */
-	public function getMin()
+	public function getMin(): int
 	{
 		return $this->min;
 	}
@@ -92,13 +91,12 @@ class StringLengthBetween extends \Jyxo\Input\Validator\AbstractValidator
 	 * @return \Jyxo\Input\Validator\StringLengthBetween
 	 * @throws \InvalidArgumentException If the maximal length is negative or lower than the minimal length
 	 */
-	public function setMax($max)
+	public function setMax(int $max): self
 	{
-		$max = (int) $max;
 		if ($max <= 0) {
 			throw new \InvalidArgumentException('Length of string must be greater than zero.');
 		}
-		if ($max < $this->getMin()) {
+		if ($this->min !== null && $max < $this->min) {
 			throw new \InvalidArgumentException('Min length must be lower or equal to max length.');
 		}
 
@@ -112,7 +110,7 @@ class StringLengthBetween extends \Jyxo\Input\Validator\AbstractValidator
 	 *
 	 * @return integer
 	 */
-	public function getMax()
+	public function getMax(): int
 	{
 		return $this->max;
 	}
@@ -123,7 +121,7 @@ class StringLengthBetween extends \Jyxo\Input\Validator\AbstractValidator
 	 * @param string $value Input value
 	 * @return boolean
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
 		$length = mb_strlen((string) $value, 'utf-8');
 		return ($length >= $this->getMin()) && ($length <= $this->getMax());

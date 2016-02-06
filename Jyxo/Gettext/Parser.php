@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -79,7 +79,7 @@ class Parser implements \Iterator, \Countable
 	 *
 	 * @param string $file Path to the PO file.
 	 */
-	public function __construct($file)
+	public function __construct(string $file)
 	{
 		$this->parse($file);
 	}
@@ -96,7 +96,7 @@ class Parser implements \Iterator, \Countable
 	 * @see \Jyxo\Gettext\Parser::$items
 	 * @see \Jyxo\Gettext\Parser\Item
 	 */
-	protected function parse($file)
+	protected function parse(string $file)
 	{
 		$linenumber = 0;
 		$chunks = [];
@@ -129,9 +129,9 @@ class Parser implements \Iterator, \Countable
 	/**
 	 * {@link \Countable} interface method
 	 *
-	 * @return boolean
+	 * @return integer
 	 */
-	public function count()
+	public function count(): int
 	{
 		return count($this->items);
 	}
@@ -139,7 +139,7 @@ class Parser implements \Iterator, \Countable
 	/**
 	 * {@link \ArrayIterator} interface method.
 	 *
-	 * @return boolean
+	 * @return mixed
 	 */
 	public function current()
 	{
@@ -149,7 +149,7 @@ class Parser implements \Iterator, \Countable
 	/**
 	 * {@link \ArrayIterator} interface method.
 	 *
-	 * @return boolean
+	 * @return mixed
 	 */
 	public function key()
 	{
@@ -159,7 +159,7 @@ class Parser implements \Iterator, \Countable
 	/**
 	 * {@link \ArrayIterator} interface method.
 	 *
-	 * @return boolean
+	 * @return mixed
 	 */
 	public function next()
 	{
@@ -172,7 +172,7 @@ class Parser implements \Iterator, \Countable
 	 *
 	 * @return boolean
 	 */
-	public function rewind()
+	public function rewind(): bool
 	{
 		$this->current = 0;
 		return $this->items[$this->current];
@@ -183,7 +183,7 @@ class Parser implements \Iterator, \Countable
 	 *
 	 * @return boolean
 	 */
-	public function valid()
+	public function valid(): bool
 	{
 		return isset($this->items[$this->current]);
 	}
@@ -199,7 +199,7 @@ class Parser implements \Iterator, \Countable
 	 * @return mixed Value of variable or \Jyxo\Gettext\Parser
 	 * @throws \Jyxo\Gettext\Parser\Exception Non-existing method
 	 */
-	public function __call($name, $args)
+	public function __call(string $name, array $args)
 	{
 		if (substr($name, 0, 3) == 'get' && $var = substr($name, 3)) {
 			$var = strtolower(substr($var, 0, 1)) . substr($var, 1);

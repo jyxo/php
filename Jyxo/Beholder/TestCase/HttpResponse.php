@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -51,11 +51,11 @@ class HttpResponse extends \Jyxo\Beholder\TestCase
 	 * @param string $url Tested URL
 	 * @param array $tests Custom tests
 	 */
-	public function __construct($description, $url, array $tests = [])
+	public function __construct(string $description, string $url, array $tests = [])
 	{
 		parent::__construct($description);
 
-		$this->url = (string) $url;
+		$this->url = $url;
 		$this->tests = $tests;
 	}
 
@@ -64,7 +64,7 @@ class HttpResponse extends \Jyxo\Beholder\TestCase
 	 *
 	 * @return \Jyxo\Beholder\Result
 	 */
-	public function run()
+	public function run(): \Jyxo\Beholder\Result
 	{
 		// The \GuzzleHttp library is required
 		if (!class_exists(\GuzzleHttp\Client::class)) {

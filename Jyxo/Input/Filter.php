@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -32,7 +32,7 @@ class Filter
 	 * @param array $params Parameters; the first value gets filtered, the rest will be used as constructor parameters
 	 * @return mixed
 	 */
-	public static function __callStatic($method, array $params)
+	public static function __callStatic(string $method, array $params)
 	{
 		$factory = \Jyxo\Spl\ObjectCache::get(\Jyxo\Input\Factory::class) ?: \Jyxo\Spl\ObjectCache::set(\Jyxo\Input\Factory::class, new Factory());
 		$value = array_shift($params);

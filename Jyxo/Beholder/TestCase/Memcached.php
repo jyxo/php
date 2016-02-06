@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -45,12 +45,12 @@ class Memcached extends \Jyxo\Beholder\TestCase
 	 * @param string $host Server host
 	 * @param integer $port Port
 	 */
-	public function __construct($description, $host, $port)
+	public function __construct(string $description, string $host, int $port)
 	{
 		parent::__construct($description);
 
-		$this->host = (string) $host;
-		$this->port = (int) $port;
+		$this->host = $host;
+		$this->port = $port;
 	}
 
 	/**
@@ -58,14 +58,14 @@ class Memcached extends \Jyxo\Beholder\TestCase
 	 *
 	 * @return \Jyxo\Beholder\Result
 	 */
-	public function run()
+	public function run(): \Jyxo\Beholder\Result
 	{
 		// The memcached or memcache extension is required
 		if (!extension_loaded('memcached') && !extension_loaded('memcache')) {
 			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Extension memcached or memcache required');
 		}
 
-		$random = md5(uniqid(time(), true));
+		$random = md5(uniqid((string) time(), true));
 		$key = 'beholder-' . $random;
 		$value = $random;
 

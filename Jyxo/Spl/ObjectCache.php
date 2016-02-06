@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -42,7 +42,7 @@ class ObjectCache implements \IteratorAggregate
 	 *
 	 * @return \Jyxo\Spl\ObjectCache
 	 */
-	public static function getInstance()
+	public static function getInstance(): self
 	{
 		static $instance = null;
 		if (null === $instance) {
@@ -67,7 +67,7 @@ class ObjectCache implements \IteratorAggregate
 	 *
 	 * @return \Jyxo\Spl\ObjectCache
 	 */
-	public function clear()
+	public function clear(): self
 	{
 		$this->storage = [];
 		return $this;
@@ -134,7 +134,7 @@ class ObjectCache implements \IteratorAggregate
 	 *
 	 * @return \ArrayIterator
 	 */
-	public function getIterator()
+	public function getIterator(): \ArrayIterator
 	{
 		return new \ArrayIterator($this->storage);
 	}

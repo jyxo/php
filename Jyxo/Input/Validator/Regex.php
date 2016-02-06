@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -39,7 +39,7 @@ class Regex extends \Jyxo\Input\Validator\AbstractValidator
 	 *
 	 * @param string $pattern Regular expression
 	 */
-	public function __construct($pattern)
+	public function __construct(string $pattern)
 	{
 		$this->setPattern($pattern);
 	}
@@ -51,12 +51,13 @@ class Regex extends \Jyxo\Input\Validator\AbstractValidator
 	 * @return \Jyxo\Input\Validator\Regex
 	 * @throws \Jyxo\Input\Validator\Exception On empty regular expression
 	 */
-	public function setPattern($pattern)
+	public function setPattern(string $pattern): self
 	{
 		if (empty($pattern)) {
 			throw new Exception('Pattern could not be empty');
 		}
-		$this->pattern = (string) $pattern;
+
+		$this->pattern = $pattern;
 
 		return $this;
 	}
@@ -66,7 +67,7 @@ class Regex extends \Jyxo\Input\Validator\AbstractValidator
 	 *
 	 * @return string
 	 */
-	public function getPattern()
+	public function getPattern(): string
 	{
 		return $this->pattern;
 	}
@@ -77,7 +78,7 @@ class Regex extends \Jyxo\Input\Validator\AbstractValidator
 	 * @param mixed $value Input value
 	 * @return boolean
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
 		if (!preg_match($this->getPattern(), (string) $value)) {
 			return false;

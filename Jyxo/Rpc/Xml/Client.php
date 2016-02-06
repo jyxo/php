@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -32,7 +32,7 @@ class Client extends \Jyxo\Rpc\Client
 	 *
 	 * @param string $url Server address
 	 */
-	public function __construct($url = '')
+	public function __construct(string $url = '')
 	{
 		parent::__construct($url);
 
@@ -54,7 +54,7 @@ class Client extends \Jyxo\Rpc\Client
 	 * @throws \BadMethodCallException If no server address was provided
 	 * @throws \Jyxo\Rpc\Xml\Exception On error
 	 */
-	public function send($method, array $params)
+	public function send(string $method, array $params)
 	{
 		// Start profiling
 		$this->profileStart();

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -34,7 +34,9 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		textdomain('messages');
 		putenv('LANG=cs_CZ.UTF-8');
 		putenv('LANGUAGE=cs_CZ.UTF-8');
-		@setlocale(LC_MESSAGES, 'cs_CZ.UTF-8');
+		if (defined('LC_MESSAGES')) {
+			setlocale(LC_MESSAGES, 'cs_CZ.UTF-8');
+		}
 	}
 
 	/**
@@ -72,7 +74,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(date('Y-m-d', $now), $time->format('Y-m-d'));
 
 		// \DateTime
-		$dateTime = \DateTime::createFromFormat('U', $now);
+		$dateTime = \DateTime::createFromFormat('U', (string) $now);
 
 		$time = new Time($dateTime);
 		$this->assertEquals($now, $time->format('U'));
@@ -297,7 +299,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		];
 		$monthsShort = [_('Jan'), _('Feb'), _('Mar'), _('Apr'), _('May#~Shortcut'), _('Jun'), _('Jul'), _('Aug'), _('Sep'), _('Oct'), _('Nov'), _('Dec')];
 		foreach ($months as $month => $name) {
-			$time = new Time('2009-' . str_pad($month + 1, 2, '0', STR_PAD_LEFT) . '-01');
+			$time = new Time('2009-' . str_pad((string) ($month + 1), 2, '0', STR_PAD_LEFT) . '-01');
 			$this->assertEquals($name, $time->format('F'));
 			$this->assertEquals('1. ' . mb_strtolower($monthsGen[$month], 'utf-8'), $time->format('j. F'));
 			$this->assertEquals($monthsShort[$month], $time->format('M'));
@@ -404,8 +406,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		// Date line
 		$time = new Time(gmdate('Y-m-d') . ' 00:00:00', 'UTC');
 
-		$this->assertSame(_('Today'), $time->formatExtended(null, '', 'Europe/Prague'));
-		$this->assertSame(_('Yesterday'), $time->minus('2 hour')->formatExtended(null, '', 'Europe/Prague'));
+		$this->assertSame(_('Today'), $time->formatExtended('', '', 'Europe/Prague'));
+		$this->assertSame(_('Yesterday'), $time->minus('2 hour')->formatExtended('', '', 'Europe/Prague'));
 
 		// Last week
 		$days = [_('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'), _('Sunday')];

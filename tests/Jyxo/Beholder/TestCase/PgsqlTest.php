@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -78,7 +78,7 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return array
 	 */
-	private function getPgsql()
+	private function getPgsql(): array
 	{
 		// Skips the test if no PostgreSQL connection is defined
 		if ((empty($GLOBALS['pgsql'])) || (!preg_match('~^([^:]+):([^@]+)@([^:]+):(\\d+)/(\\w+)$~', $GLOBALS['pgsql'], $matches))) {

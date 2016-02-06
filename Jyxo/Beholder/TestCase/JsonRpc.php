@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -62,14 +62,14 @@ class JsonRpc extends \Jyxo\Beholder\TestCase
 	 * @param array $params Method parameters
 	 * @param integer $timeout Timeout
 	 */
-	public function __construct($description, $url, $method, array $params, $timeout = 2)
+	public function __construct(string $description, string $url, string $method, array $params, int $timeout = 2)
 	{
 		parent::__construct($description);
 
-		$this->url = (string) $url;
-		$this->method = (string) $method;
+		$this->url = $url;
+		$this->method = $method;
 		$this->params = $params;
-		$this->timeout = (int) $timeout;
+		$this->timeout = $timeout;
 	}
 
 	/**
@@ -77,7 +77,7 @@ class JsonRpc extends \Jyxo\Beholder\TestCase
 	 *
 	 * @return \Jyxo\Beholder\Result
 	 */
-	public function run()
+	public function run(): \Jyxo\Beholder\Result
 	{
 		// The json extension is required
 		if (!extension_loaded('json')) {

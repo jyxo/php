@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -39,7 +39,7 @@ class RecipientUnknownException extends \Jyxo\Mail\Sender\Exception
 	 * @param integer $code Exception code
 	 * @param array $list List of non-existent addresses
 	 */
-	public function __construct($message = null, $code = 0, array $list = [])
+	public function __construct(string $message = null, int $code = 0, array $list = [])
 	{
 		parent::__construct($message, $code);
 		$this->list = $list;
@@ -50,7 +50,7 @@ class RecipientUnknownException extends \Jyxo\Mail\Sender\Exception
 	 *
 	 * @return array
 	 */
-	public function getList()
+	public function getList(): array
 	{
 		return $this->list;
 	}

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -86,7 +86,7 @@ class Composer
 	 * @return \Jyxo\Time\Time
 	 * @throws \Jyxo\Time\ComposerException If the date is incomplete or invalid
 	 */
-	public function getTime()
+	public function getTime(): Time
 	{
 		if ($this->month === 0 || $this->year === 0 || $this->day === 0) {
 			throw new ComposerException('Date not complete.', ComposerException::NOT_COMPLETE);
@@ -109,10 +109,8 @@ class Composer
 	 * @return \Jyxo\Time\Composer
 	 * @throws \Jyxo\Time\ComposerException If the provided day is invalid
 	 */
-	public function setDay($day)
+	public function setDay(int $day): self
 	{
-		$day = (integer) $day;
-
 		if ($day < 1 || $day > 31) {
 			throw new ComposerException('Day out of range.', ComposerException::DAY);
 		}
@@ -129,10 +127,8 @@ class Composer
 	 * @return \Jyxo\Time\Composer
 	 * @throws \Jyxo\Time\ComposerException If the month is invalid.
 	 */
-	public function setMonth($month)
+	public function setMonth(int $month): self
 	{
-		$month = (integer) $month;
-
 		if ($month < 1 || $month > 12) {
 			throw new ComposerException('Month out of range.', ComposerException::MONTH);
 		}
@@ -149,10 +145,8 @@ class Composer
 	 * @return \Jyxo\Time\Composer
 	 * @throws \Jyxo\Time\ComposerException If the year is invalid.
 	 */
-	public function setYear($year)
+	public function setYear(int $year): self
 	{
-		$year = (integer) $year;
-
 		if ($year > self::YEAR_MAX || $year < self::YEAR_MIN) {
 			throw new ComposerException('Year out of range.', ComposerException::YEAR);
 		}
@@ -169,10 +163,8 @@ class Composer
 	 * @return \Jyxo\Time\Composer
 	 * @throws \Jyxo\Time\ComposerException If seconds are invalid.
 	 */
-	public function setSecond($second)
+	public function setSecond(int $second): self
 	{
-		$second = (integer) $second;
-
 		if ($second < 0 || $second > 60) {
 			throw new ComposerException('Second out of range.', ComposerException::SECOND);
 		}
@@ -189,10 +181,8 @@ class Composer
 	 * @return \Jyxo\Time\Composer
 	 * @throws \Jyxo\Time\ComposerException If minutes are invalid.
 	 */
-	public function setMinute($minute)
+	public function setMinute(int $minute): self
 	{
-		$minute = (integer) $minute;
-
 		if ($minute < 0 || $minute > 60) {
 			throw new ComposerException('Minute out of range.', ComposerException::MINUTE);
 		}
@@ -209,10 +199,8 @@ class Composer
 	 * @return \Jyxo\Time\Composer
 	 * @throws \Jyxo\Time\ComposerException If hours are invalid.
 	 */
-	public function setHour($hour)
+	public function setHour(int $hour): self
 	{
-		$hour = (integer) $hour;
-
 		if ($hour < 0 || $hour > 24) {
 			throw new ComposerException('Hour out of range.', ComposerException::HOUR);
 		}

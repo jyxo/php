@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -72,18 +72,6 @@ class MapIteratorTest extends \PHPUnit_Framework_TestCase
 		} else {
 			$this->assertInstanceOf(get_class($subject), $iterator->getInnerIterator());
 		}
-	}
-
-	/**
-	 * Tests an invalid callback exception.
-	 */
-	public function testInvalidCallback()
-	{
-		$this->expectException(\InvalidArgumentException::class);
-
-		$callback = 'FunctionThatDoesNotExistForSure';
-		$data = [];
-		$iterator = new MapIterator(new \ArrayIterator($data), $callback);
 	}
 
 	/**

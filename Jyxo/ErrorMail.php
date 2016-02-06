@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -59,7 +59,7 @@ class ErrorMail
 	 * @param string|array $recipients Recipient(s)
 	 * @param string $sender Mail sender
 	 */
-	public function __construct($timerFile, $recipients, $sender)
+	public function __construct(string $timerFile, $recipients, string $sender)
 	{
 		$this->timerFile = $timerFile;
 		$this->email = (array) $recipients;
@@ -72,7 +72,7 @@ class ErrorMail
 	 * @param \Exception $e Caught exception
 	 * @param boolean $forceTimer Ignore timer (Always send)
 	 */
-	public function send(\Exception $e, $forceTimer = false)
+	public function send(\Exception $e, bool $forceTimer = false)
 	{
 		if ($forceTimer || $this->timerOutdated()) {
 			$this->mail($this->createMail($e));
@@ -85,7 +85,7 @@ class ErrorMail
 	 *
 	 * @return boolean
 	 */
-	private function timerOutdated()
+	private function timerOutdated(): bool
 	{
 		$send = true;
 		if (is_file($this->timerFile)) {
@@ -105,7 +105,7 @@ class ErrorMail
 	 * @param \Exception $e Caught exception
 	 * @return array
 	 */
-	private function createMail(\Exception $e)
+	private function createMail(\Exception $e): array
 	{
 		$subject = get_class($e);
 		if (!empty($_SERVER['SERVER_NAME'])) {

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -35,9 +35,9 @@ class FileLogger implements LoggerInterface
 	/**
 	 * Creates the logger.
 	 *
-	 * @param $fileName Logging filename
+	 * @param string $fileName Logging filename
 	 */
-	public function __construct($fileName)
+	public function __construct(string $fileName)
 	{
 		$this->fileName = $fileName;
 	}
@@ -45,9 +45,9 @@ class FileLogger implements LoggerInterface
 	/**
 	 * Logs the given message.
 	 *
-	 * @param $message Message to be logged
+	 * @param string $message Message to be logged
 	 */
-	public function log($message)
+	public function log(string $message)
 	{
 		file_put_contents($this->fileName, sprintf("[%s]: %s\n", date('Y-m-d H:i:s'), $message), FILE_APPEND);
 	}

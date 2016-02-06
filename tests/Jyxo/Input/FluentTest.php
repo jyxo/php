@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -195,9 +195,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 		// Condition fulfilled, but validation fails
 		$bad = [
 			30 => '42',
-			'test' => '42',
-			1.23 => '42',
-			true => 42
+			1 => '42',
 		];
 
 		// Complex value test

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -50,7 +50,7 @@ class Equals extends \Jyxo\Input\Validator\AbstractValidator
 	 * @param mixed $expected Expected value
 	 * @return \Jyxo\Input\Validator\Equals
 	 */
-	public function setExpected($expected)
+	public function setExpected($expected): self
 	{
 		$this->expected = $expected;
 
@@ -73,7 +73,7 @@ class Equals extends \Jyxo\Input\Validator\AbstractValidator
 	 * @param mixed $value Input value
 	 * @return boolean
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
 		return $value == $this->expected;
 	}

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -73,7 +73,7 @@ abstract class Server
 	 *
 	 * @return \Jyxo\Rpc\Server
 	 */
-	public static function getInstance()
+	public static function getInstance(): self
 	{
 		static $instance;
 		if (null === $instance) {
@@ -91,9 +91,8 @@ abstract class Server
 	 * @return \Jyxo\Rpc\Server
 	 * @throws \InvalidArgumentException If no file or an invalid callback was provided.
 	 */
-	public function enableLogging($filename, $callback = null)
+	public function enableLogging(string $filename, callable $callback = null): self
 	{
-		$filename = (string) $filename;
 		$filename = trim($filename);
 
 		// A log file has to be provided
@@ -102,12 +101,6 @@ abstract class Server
 		}
 
 		$this->logFile = $filename;
-
-		// Function must be callable
-		if ((!empty($callback)) && (!is_callable($callback))) {
-			throw new \InvalidArgumentException('Invalid callback was provided.');
-		}
-
 		$this->logCallback = $callback;
 
 		return $this;
@@ -121,7 +114,7 @@ abstract class Server
 	 * @return \Jyxo\Rpc\Server
 	 * @throws \InvalidArgumentException If no such class exists
 	 */
-	public function registerClass($class, $useFullName = true)
+	public function registerClass(string $class, bool $useFullName = true): self
 	{
 		if (!class_exists($class)) {
 			throw new \InvalidArgumentException(sprintf('Class %s does not exist.', $class));
@@ -156,7 +149,7 @@ abstract class Server
 	 * @return \Jyxo\Rpc\Server
 	 * @throws \InvalidArgumentException If no such class exists or method is not public
 	 */
-	public function registerMethod($class, $method, $useFullName = true)
+	public function registerMethod(string $class, string $method, bool $useFullName = true): self
 	{
 		if (!class_exists($class)) {
 			throw new \InvalidArgumentException(sprintf('Třída %s neexistuje.', $class));
@@ -196,7 +189,7 @@ abstract class Server
 	 * @return \Jyxo\Rpc\Server
 	 * @throws \InvalidArgumentException If no such function exists
 	 */
-	public function registerFunc($func)
+	public function registerFunc(string $func): self
 	{
 		if (!function_exists($func)) {
 			throw new \InvalidArgumentException(sprintf('Function %s does not exist.', $func));
@@ -212,7 +205,7 @@ abstract class Server
 	 *
 	 * @param string $func Function name
 	 */
-	abstract protected function register($func);
+	abstract protected function register(string $func);
 
 	/**
 	 * Processes a request and sends a RPC response.
@@ -226,7 +219,7 @@ abstract class Server
 	 * @param array $params Method parameters
 	 * @return mixed
 	 */
-	protected function call($method, $params)
+	protected function call(string $method, array $params)
 	{
 		$func = $method;
 		// If an alias was given, use the actual method
@@ -278,7 +271,7 @@ abstract class Server
 	 * @param array $params Method parameters
 	 * @param mixed $result Function result
 	 */
-	private function log($method, $params, $result)
+	private function log(string $method, array $params, $result)
 	{
 		// Log only if a filename is set
 		if (!empty($this->logFile)) {

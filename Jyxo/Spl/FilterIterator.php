@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -38,12 +38,8 @@ class FilterIterator extends \FilterIterator implements \Jyxo\Spl\ArrayCopy
 	 * @param \Closure|callback $callback Filter callback
 	 * @throws \InvalidArgumentException Supplied callback is not callable
 	 */
-	public function __construct(\Iterator $iterator, $callback)
+	public function __construct(\Iterator $iterator, callable $callback)
 	{
-		if (!is_callable($callback)) {
-			throw new \InvalidArgumentException('Callback is not callable');
-		}
-
 		parent::__construct($iterator);
 		$this->callback = $callback;
 	}
@@ -64,7 +60,7 @@ class FilterIterator extends \FilterIterator implements \Jyxo\Spl\ArrayCopy
 	 *
 	 * @return array
 	 */
-	public function toArray()
+	public function toArray(): array
 	{
 		return iterator_to_array($this);
 	}

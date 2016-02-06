@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -62,9 +62,9 @@ class Result extends \Jyxo\Spl\Object
 	 * @param string $messageId Email Id
 	 * @return \Jyxo\Mail\Sender\Result
 	 */
-	public function setMessageId($messageId)
+	public function setMessageId(string $messageId): self
 	{
-		$this->messageId = (string) $messageId;
+		$this->messageId = $messageId;
 
 		return $this;
 	}
@@ -74,7 +74,7 @@ class Result extends \Jyxo\Spl\Object
 	 *
 	 * @return string
 	 */
-	public function getSource()
+	public function getSource(): string
 	{
 		return $this->source;
 	}
@@ -85,9 +85,9 @@ class Result extends \Jyxo\Spl\Object
 	 * @param string $source
 	 * @return \Jyxo\Mail\Sender\Result
 	 */
-	public function setSource($source)
+	public function setSource(string $source): self
 	{
-		$this->source = (string) $source;
+		$this->source = $source;
 
 		return $this;
 	}
@@ -97,7 +97,7 @@ class Result extends \Jyxo\Spl\Object
 	 *
 	 * @return \Jyxo\Time\Time
 	 */
-	public function getDatetime()
+	public function getDatetime(): \Jyxo\Time\Time
 	{
 		return $this->datetime;
 	}
@@ -108,7 +108,7 @@ class Result extends \Jyxo\Spl\Object
 	 * @param \Jyxo\Time\Time $datetime Sending time
 	 * @return \Jyxo\Mail\Sender\Result
 	 */
-	public function setDatetime(\Jyxo\Time\Time $datetime)
+	public function setDatetime(\Jyxo\Time\Time $datetime): self
 	{
 		$this->datetime = $datetime;
 

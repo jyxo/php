@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -79,7 +79,7 @@ class Item
 	 * @param string $chunk Translation fragment
 	 * @throws \Jyxo\Gettext\Parser\Exception If msgid empty
 	 */
-	public function __construct($chunk)
+	public function __construct(string $chunk)
 	{
 		$array = explode("\n", $chunk);
 		$this->parse($array);
@@ -140,7 +140,7 @@ class Item
 	 *
 	 * @return boolean
 	 */
-	public function isFuzzy()
+	public function isFuzzy(): bool
 	{
 		return $this->fuzzy;
 	}
@@ -150,7 +150,7 @@ class Item
 	 *
 	 * @return boolean
 	 */
-	public function isObsolete()
+	public function isObsolete(): bool
 	{
 		return $this->obsolete;
 	}
@@ -160,7 +160,7 @@ class Item
 	 *
 	 * @return boolean
 	 */
-	public function hasPlural()
+	public function hasPlural(): bool
 	{
 		return !empty($this->plural);
 	}
@@ -200,7 +200,7 @@ class Item
 	 *
 	 * @return string
 	 */
-	public function getPlural()
+	public function getPlural(): string
 	{
 		return $this->plural;
 	}

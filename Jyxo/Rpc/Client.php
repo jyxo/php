@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -71,7 +71,7 @@ abstract class Client
 	 *
 	 * @param string $url Server address
 	 */
-	public function __construct($url = '')
+	public function __construct(string $url = '')
 	{
 		if (!empty($url)) {
 			$this->setUrl($url);
@@ -84,9 +84,9 @@ abstract class Client
 	 * @param string $url Server address
 	 * @return \Jyxo\Rpc\Client
 	 */
-	public function setUrl($url)
+	public function setUrl(string $url): self
 	{
-		$this->url = (string) $url;
+		$this->url = $url;
 
 		return $this;
 	}
@@ -97,9 +97,9 @@ abstract class Client
 	 * @param integer $timeout Call timeout
 	 * @return \Jyxo\Rpc\Client
 	 */
-	public function setTimeout($timeout)
+	public function setTimeout(int $timeout): self
 	{
-		$this->timeout = (int) $timeout;
+		$this->timeout = $timeout;
 
 		return $this;
 	}
@@ -111,7 +111,7 @@ abstract class Client
 	 * @param mixed $value Parameter value
 	 * @return \Jyxo\Rpc\Client
 	 */
-	public function setOption($key, $value)
+	public function setOption(string $key, $value): self
 	{
 		if (isset($this->options[$key])) {
 			$this->options[$key] = $value;
@@ -125,7 +125,7 @@ abstract class Client
 	 * @param string $key Parameter name
 	 * @return mixed
 	 */
-	public function getOption($key = '')
+	public function getOption(string $key = '')
 	{
 		if (isset($this->options[$key])) {
 			return $this->options[$key];
@@ -140,7 +140,7 @@ abstract class Client
 	 * @param mixed $value Parameter value
 	 * @return \Jyxo\Rpc\Client
 	 */
-	public function setCurlOption($key, $value)
+	public function setCurlOption(string $key, $value): self
 	{
 		$this->curlOptions[$key] = $value;
 		return $this;
@@ -152,7 +152,7 @@ abstract class Client
 	 * @param string $key Parameter name
 	 * @return mixed
 	 */
-	public function getCurlOption($key = '')
+	public function getCurlOption(string $key = '')
 	{
 		if (isset($this->curlOptions[$key])) {
 			return $this->curlOptions[$key];
@@ -165,7 +165,7 @@ abstract class Client
 	 *
 	 * @return \Jyxo\Rpc\Client
 	 */
-	public function enableProfiler()
+	public function enableProfiler(): self
 	{
 		$this->profiler = true;
 		return $this;
@@ -176,7 +176,7 @@ abstract class Client
 	 *
 	 * @return \Jyxo\Rpc\Client
 	 */
-	public function disableProfiler()
+	public function disableProfiler(): self
 	{
 		$this->profiler = false;
 		return $this;
@@ -191,7 +191,7 @@ abstract class Client
 	 * @throws \BadMethodCallException If no server address was provided
 	 * @throws \Jyxo\Rpc\Exception On error
 	 */
-	abstract public function send($method, array $params);
+	abstract public function send(string $method, array $params);
 
 	/**
 	 * Processes request data and fetches response.
@@ -202,7 +202,7 @@ abstract class Client
 	 * @throws \BadMethodCallException If no server address was provided
 	 * @throws \Jyxo\Rpc\Exception On error
 	 */
-	protected function process($contentType, $data)
+	protected function process(string $contentType, string $data): string
 	{
 		// Server address must be defined
 		if (empty($this->url)) {
@@ -264,7 +264,7 @@ abstract class Client
 	 *
 	 * @return \Jyxo\Rpc\Client
 	 */
-	protected function profileStart()
+	protected function profileStart(): self
 	{
 		// Set start time
 		if ($this->profiler) {
@@ -283,7 +283,7 @@ abstract class Client
 	 * @param mixed $response Server response
 	 * @return \Jyxo\Rpc\Client
 	 */
-	protected function profileEnd($type, $method, array $params, $response)
+	protected function profileEnd(string $type, string $method, array $params, $response): self
 	{
 		// Profiling has to be turned on
 		if ($this->profiler) {

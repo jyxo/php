@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -95,7 +95,7 @@ class ComposerException extends \Jyxo\Exception
 	 * @param string $message Exception message
 	 * @param integer $code Exception code (type)
 	 */
-	public function __construct($message, $code)
+	public function __construct(string $message, int $code)
 	{
 		static $allowedUnits = [
 			self::SECOND,

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -70,7 +70,7 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Email sender.
 	 *
-	 * @var \Jyxo\Mail\Email\Address
+	 * @var \Jyxo\Mail\Email\Address|null
 	 */
 	private $from = null;
 
@@ -105,7 +105,7 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Reading confirmation recipient.
 	 *
-	 * @var \Jyxo\Mail\Email\Address
+	 * @var \Jyxo\Mail\Email\Address|null
 	 */
 	private $confirmReadingTo = null;
 
@@ -167,9 +167,9 @@ class Email extends \Jyxo\Spl\Object
 	 * @param string $subject Subject
 	 * @return \Jyxo\Mail\Email
 	 */
-	public function setSubject($subject)
+	public function setSubject(string $subject): self
 	{
-		$this->subject = (string) $subject;
+		$this->subject = $subject;
 
 		return $this;
 	}
@@ -177,7 +177,7 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Returns sender address.
 	 *
-	 * @return \Jyxo\Mail\Email\Address
+	 * @return \Jyxo\Mail\Email\Address|null
 	 */
 	public function getFrom()
 	{
@@ -190,7 +190,7 @@ class Email extends \Jyxo\Spl\Object
 	 * @param \Jyxo\Mail\Email\Address $from Message sender
 	 * @return \Jyxo\Mail\Email
 	 */
-	public function setFrom(\Jyxo\Mail\Email\Address $from)
+	public function setFrom(\Jyxo\Mail\Email\Address $from): self
 	{
 		$this->from = $from;
 
@@ -202,7 +202,7 @@ class Email extends \Jyxo\Spl\Object
 	 *
 	 * @return array
 	 */
-	public function getTo()
+	public function getTo(): array
 	{
 		return $this->to;
 	}
@@ -213,7 +213,7 @@ class Email extends \Jyxo\Spl\Object
 	 * @param \Jyxo\Mail\Email\Address $to New recipient
 	 * @return \Jyxo\Mail\Email
 	 */
-	public function addTo(\Jyxo\Mail\Email\Address $to)
+	public function addTo(\Jyxo\Mail\Email\Address $to): self
 	{
 		$this->to[] = $to;
 
@@ -225,7 +225,7 @@ class Email extends \Jyxo\Spl\Object
 	 *
 	 * @return array
 	 */
-	public function getCc()
+	public function getCc(): array
 	{
 		return $this->cc;
 	}
@@ -236,7 +236,7 @@ class Email extends \Jyxo\Spl\Object
 	 * @param \Jyxo\Mail\Email\Address $cc New recipient
 	 * @return \Jyxo\Mail\Email
 	 */
-	public function addCc(\Jyxo\Mail\Email\Address $cc)
+	public function addCc(\Jyxo\Mail\Email\Address $cc): self
 	{
 		$this->cc[] = $cc;
 
@@ -248,7 +248,7 @@ class Email extends \Jyxo\Spl\Object
 	 *
 	 * @return array
 	 */
-	public function getBcc()
+	public function getBcc(): array
 	{
 		return $this->bcc;
 	}
@@ -259,7 +259,7 @@ class Email extends \Jyxo\Spl\Object
 	 * @param \Jyxo\Mail\Email\Address $bcc New recipient
 	 * @return \Jyxo\Mail\Email
 	 */
-	public function addBcc(\Jyxo\Mail\Email\Address $bcc)
+	public function addBcc(\Jyxo\Mail\Email\Address $bcc): self
 	{
 		$this->bcc[] = $bcc;
 
@@ -271,7 +271,7 @@ class Email extends \Jyxo\Spl\Object
 	 *
 	 * @return array
 	 */
-	public function getReplyTo()
+	public function getReplyTo(): array
 	{
 		return $this->replyTo;
 	}
@@ -282,7 +282,7 @@ class Email extends \Jyxo\Spl\Object
 	 * @param \Jyxo\Mail\Email\Address $replyTo
 	 * @return \Jyxo\Mail\Email
 	 */
-	public function addReplyTo(\Jyxo\Mail\Email\Address $replyTo)
+	public function addReplyTo(\Jyxo\Mail\Email\Address $replyTo): self
 	{
 		$this->replyTo[] = $replyTo;
 
@@ -292,7 +292,7 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Returns a reading confirmation address.
 	 *
-	 * @return array
+	 * @return \Jyxo\Mail\Email\Address|null
 	 */
 	public function getConfirmReadingTo()
 	{
@@ -305,7 +305,7 @@ class Email extends \Jyxo\Spl\Object
 	 * @param \Jyxo\Mail\Email\Address $confirmReadingTo Confirmation recipient
 	 * @return \Jyxo\Mail\Email
 	 */
-	public function setConfirmReadingTo(\Jyxo\Mail\Email\Address $confirmReadingTo)
+	public function setConfirmReadingTo(\Jyxo\Mail\Email\Address $confirmReadingTo): self
 	{
 		$this->confirmReadingTo = $confirmReadingTo;
 
@@ -319,9 +319,9 @@ class Email extends \Jyxo\Spl\Object
 	 * @param array $references Previous mail references
 	 * @return \Jyxo\Mail\Email
 	 */
-	public function setInReplyTo($inReplyTo, array $references = [])
+	public function setInReplyTo(string $inReplyTo, array $references = []): self
 	{
-		$this->inReplyTo = (string) $inReplyTo;
+		$this->inReplyTo = $inReplyTo;
 		$this->references = $references;
 
 		return $this;
@@ -332,7 +332,7 @@ class Email extends \Jyxo\Spl\Object
 	 *
 	 * @return string
 	 */
-	public function getInReplyTo()
+	public function getInReplyTo(): string
 	{
 		return $this->inReplyTo;
 	}
@@ -342,7 +342,7 @@ class Email extends \Jyxo\Spl\Object
 	 *
 	 * @return array
 	 */
-	public function getReferences()
+	public function getReferences(): array
 	{
 		return $this->references;
 	}
@@ -352,7 +352,7 @@ class Email extends \Jyxo\Spl\Object
 	 *
 	 * @return integer
 	 */
-	public function getPriority()
+	public function getPriority(): int
 	{
 		return $this->priority;
 	}
@@ -364,7 +364,7 @@ class Email extends \Jyxo\Spl\Object
 	 * @return \Jyxo\Mail\Email
 	 * @throws \InvalidArgumentException If an unknown priority was provided
 	 */
-	public function setPriority($priority)
+	public function setPriority(int $priority): self
 	{
 		static $priorities = [
 			self::PRIORITY_HIGHEST => true,
@@ -387,7 +387,7 @@ class Email extends \Jyxo\Spl\Object
 	 *
 	 * @return array
 	 */
-	public function getHeaders()
+	public function getHeaders(): array
 	{
 		return $this->headers;
 	}
@@ -398,7 +398,7 @@ class Email extends \Jyxo\Spl\Object
 	 * @param \Jyxo\Mail\Email\Header $header Header
 	 * @return \Jyxo\Mail\Email
 	 */
-	public function addHeader(\Jyxo\Mail\Email\Header $header)
+	public function addHeader(\Jyxo\Mail\Email\Header $header): self
 	{
 		$this->headers[] = $header;
 
@@ -410,7 +410,7 @@ class Email extends \Jyxo\Spl\Object
 	 *
 	 * @return \Jyxo\Mail\Email\Body
 	 */
-	public function getBody()
+	public function getBody(): \Jyxo\Mail\Email\Body
 	{
 		return $this->body;
 	}
@@ -421,7 +421,7 @@ class Email extends \Jyxo\Spl\Object
 	 * @param \Jyxo\Mail\Email\Body $body Body
 	 * @return \Jyxo\Mail\Email
 	 */
-	public function setBody(\Jyxo\Mail\Email\Body $body)
+	public function setBody(\Jyxo\Mail\Email\Body $body): self
 	{
 		$this->body = $body;
 
@@ -433,7 +433,7 @@ class Email extends \Jyxo\Spl\Object
 	 *
 	 * @return array
 	 */
-	public function getAttachments()
+	public function getAttachments(): array
 	{
 		return $this->attachments;
 	}
@@ -444,7 +444,7 @@ class Email extends \Jyxo\Spl\Object
 	 * @param \Jyxo\Mail\Email\Attachment $attachment Attachment
 	 * @return \Jyxo\Mail\Email
 	 */
-	public function addAttachment(\Jyxo\Mail\Email\Attachment $attachment)
+	public function addAttachment(\Jyxo\Mail\Email\Attachment $attachment): self
 	{
 		$this->attachments[] = $attachment;
 
@@ -456,7 +456,7 @@ class Email extends \Jyxo\Spl\Object
 	 *
 	 * @return boolean
 	 */
-	public function hasInlineAttachments()
+	public function hasInlineAttachments(): bool
 	{
 		foreach ($this->attachments as $attachment) {
 			if ($attachment->isInline()) {

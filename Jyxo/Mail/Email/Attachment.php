@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -86,7 +86,7 @@ abstract class Attachment extends \Jyxo\Spl\Object
 	 *
 	 * @return string
 	 */
-	public function getDisposition()
+	public function getDisposition(): string
 	{
 		return $this->disposition;
 	}
@@ -96,7 +96,7 @@ abstract class Attachment extends \Jyxo\Spl\Object
 	 *
 	 * @return string
 	 */
-	public function getContent()
+	public function getContent(): string
 	{
 		return $this->content;
 	}
@@ -107,9 +107,9 @@ abstract class Attachment extends \Jyxo\Spl\Object
 	 * @param string $content Contents
 	 * @return \Jyxo\Mail\Email\Attachment
 	 */
-	public function setContent($content)
+	public function setContent(string $content): self
 	{
-		$this->content = (string) $content;
+		$this->content = $content;
 
 		return $this;
 	}
@@ -119,7 +119,7 @@ abstract class Attachment extends \Jyxo\Spl\Object
 	 *
 	 * @return string
 	 */
-	public function getName()
+	public function getName(): string
 	{
 		return $this->name;
 	}
@@ -130,9 +130,9 @@ abstract class Attachment extends \Jyxo\Spl\Object
 	 * @param string $name Name
 	 * @return \Jyxo\Mail\Email\Attachment
 	 */
-	public function setName($name)
+	public function setName(string $name): self
 	{
-		$this->name = (string) $name;
+		$this->name = $name;
 
 		return $this;
 	}
@@ -142,7 +142,7 @@ abstract class Attachment extends \Jyxo\Spl\Object
 	 *
 	 * @return string
 	 */
-	public function getCid()
+	public function getCid(): string
 	{
 		return $this->cid;
 	}
@@ -152,7 +152,7 @@ abstract class Attachment extends \Jyxo\Spl\Object
 	 *
 	 * @return string
 	 */
-	public function getMimeType()
+	public function getMimeType(): string
 	{
 		return $this->mimeType;
 	}
@@ -163,9 +163,9 @@ abstract class Attachment extends \Jyxo\Spl\Object
 	 * @param string $mimeType Mime-type
 	 * @return \Jyxo\Mail\Email\Attachment
 	 */
-	public function setMimeType($mimeType)
+	public function setMimeType(string $mimeType): self
 	{
-		$this->mimeType = (string) $mimeType;
+		$this->mimeType = $mimeType;
 
 		return $this;
 	}
@@ -175,7 +175,7 @@ abstract class Attachment extends \Jyxo\Spl\Object
 	 *
 	 * @return string
 	 */
-	public function getEncoding()
+	public function getEncoding(): string
 	{
 		return $this->encoding;
 	}
@@ -185,7 +185,7 @@ abstract class Attachment extends \Jyxo\Spl\Object
 	 *
 	 * @return boolean
 	 */
-	public function isInline()
+	public function isInline(): bool
 	{
 		return self::DISPOSITION_INLINE === $this->disposition;
 	}

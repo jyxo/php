@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -95,7 +95,7 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	 * @param string $errorMessage Validation error message
 	 * @return \Jyxo\Input\Chain
 	 */
-	public function addValidator(\Jyxo\Input\ValidatorInterface $validator, $errorMessage = null)
+	public function addValidator(\Jyxo\Input\ValidatorInterface $validator, string $errorMessage = null)
 	{
 		$this->chain[] = [self::VALIDATOR, $validator, $errorMessage];
 		return $this;
@@ -107,7 +107,7 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	 * @param \Jyxo\Input\FilterInterface $filter Filter
 	 * @return \Jyxo\Input\Chain
 	 */
-	public function addFilter(\Jyxo\Input\FilterInterface $filter)
+	public function addFilter(\Jyxo\Input\FilterInterface $filter): self
 	{
 		$this->chain[] = [self::FILTER, $filter];
 		return $this;
@@ -118,7 +118,7 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	 *
 	 * @return \Jyxo\Input\Chain
 	 */
-	public function addWalk()
+	public function addWalk(): self
 	{
 		$chain = new self();
 		$chain->setParent($this);
@@ -132,7 +132,7 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	 * @param \Jyxo\Input\Chain\Conditional $chain
 	 * @return \Jyxo\Input\Chain\Conditional
 	 */
-	public function addCondition(\Jyxo\Input\Chain\Conditional $chain)
+	public function addCondition(\Jyxo\Input\Chain\Conditional $chain): self
 	{
 		$chain->setParent($this);
 		$this->chain[] = [self::CONDITION, $chain];
@@ -144,7 +144,7 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	 *
 	 * @return \Jyxo\Input\Chain
 	 */
-	public function close()
+	public function close(): self
 	{
 		if (null === $this->getParent()) {
 			return $this;
@@ -158,7 +158,7 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	 * @param mixed $value Input value
 	 * @return boolean
 	 */
-	private function run(&$value)
+	private function run(&$value): bool
 	{
 		foreach ($this->chain as $item) {
 			if (self::FILTER === $item[0]) {
@@ -207,7 +207,7 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	 *
 	 * @return boolean
 	 */
-	public function isEmpty()
+	public function isEmpty(): bool
 	{
 		return empty($this->chain);
 	}
@@ -218,7 +218,7 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	 * @param mixed $value Input value
 	 * @return boolean
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
 		$success = $this->run($value);
 		// $value passed by reference
@@ -241,7 +241,7 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	 *
 	 * @return array
 	 */
-	public function getErrors()
+	public function getErrors(): array
 	{
 		return $this->errors;
 	}
@@ -251,7 +251,7 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	 *
 	 * @return \Jyxo\Input\Chain
 	 */
-	public function getParent()
+	public function getParent(): self
 	{
 		return $this->parent;
 	}
@@ -262,7 +262,7 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	 * @param \Jyxo\Input\Chain $parent Parent chain
 	 * @return \Jyxo\Input\Chain
 	 */
-	public function setParent(\Jyxo\Input\Chain $parent)
+	public function setParent(\Jyxo\Input\Chain $parent): self
 	{
 		$this->parent = $parent;
 		return $this;

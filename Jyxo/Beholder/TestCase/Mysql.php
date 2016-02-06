@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -85,17 +85,17 @@ class Mysql extends \Jyxo\Beholder\TestCase
 	 * @param integer $port Port
 	 * @param integer $timeout Timeout
 	 */
-	public function __construct($description, $query, $database, $host = 'localhost', $user = '', $password = '', $port = 3306, $timeout = 2)
+	public function __construct(string $description, string $query, string $database, string $host = 'localhost', string $user = '', string $password = '', int $port = 3306, int $timeout = 2)
 	{
 		parent::__construct($description);
 
-		$this->query = (string) $query;
-		$this->database = (string) $database;
-		$this->host = (string) $host;
-		$this->user = (string) $user;
-		$this->password = (string) $password;
-		$this->port = (int) $port;
-		$this->timeout = (int) $timeout;
+		$this->query = $query;
+		$this->database = $database;
+		$this->host = $host;
+		$this->user = $user;
+		$this->password = $password;
+		$this->port = $port;
+		$this->timeout = $timeout;
 	}
 
 	/**
@@ -103,7 +103,7 @@ class Mysql extends \Jyxo\Beholder\TestCase
 	 *
 	 * @return \Jyxo\Beholder\Result
 	 */
-	public function run()
+	public function run(): \Jyxo\Beholder\Result
 	{
 		// The mysqli extension is required
 		if (!extension_loaded('mysqli')) {

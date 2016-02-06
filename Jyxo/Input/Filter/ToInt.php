@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -37,7 +37,7 @@ class ToInt extends \Jyxo\Input\Filter\AbstractFilter
 	 *
 	 * @param integer $base
 	 */
-	public function __construct($base = 10)
+	public function __construct(int $base = 10)
 	{
 		$this->base = $base;
 	}

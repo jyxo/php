@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -61,14 +61,14 @@ class Smtp extends \Jyxo\Beholder\TestCase
 	 * @param string $from Sender
 	 * @param integer $timeout Timeout
 	 */
-	public function __construct($description, $host, $to, $from, $timeout = 2)
+	public function __construct(string $description, string $host, string $to, string $from, int $timeout = 2)
 	{
 		parent::__construct($description);
 
-		$this->host = (string) $host;
-		$this->to = (string) $to;
-		$this->from = (string) $from;
-		$this->timeout = (int) $timeout;
+		$this->host = $host;
+		$this->to = $to;
+		$this->from = $from;
+		$this->timeout = $timeout;
 	}
 
 	/**
@@ -76,7 +76,7 @@ class Smtp extends \Jyxo\Beholder\TestCase
 	 *
 	 * @return \Jyxo\Beholder\Result
 	 */
-	public function run()
+	public function run(): \Jyxo\Beholder\Result
 	{
 		// The \Jyxo\Mail\Sender\Smtp class is required
 		if (!class_exists(\Jyxo\Mail\Sender\Smtp::class)) {

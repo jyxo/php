@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -130,9 +130,10 @@ class Client
 	 *
 	 * @see \GuzzleHttp\RequestOptions
 	 */
-	public function setRequestOption($name, $value)
+	public function setRequestOption(string $name, $value): self
 	{
-		$this->requestOptions[(string) $name] = $value;
+		$this->requestOptions[$name] = $value;
+		return $this;
 	}
 
 	/**
@@ -141,10 +142,9 @@ class Client
 	 * @param LoggerInterface $logger Logger
 	 * @return \Jyxo\Webdav\Client
 	 */
-	public function setLogger(LoggerInterface $logger)
+	public function setLogger(LoggerInterface $logger): self
 	{
 		$this->logger = $logger;
-
 		return $this;
 	}
 
@@ -154,9 +154,9 @@ class Client
 	 * @param boolean $parallelSending
 	 * @return \Jyxo\Webdav\Client
 	 */
-	public function setParallelSending($parallelSending)
+	public function setParallelSending(bool $parallelSending): self
 	{
-		$this->parallelSending = (bool) $parallelSending;
+		$this->parallelSending = $parallelSending;
 		return $this;
 	}
 
@@ -166,7 +166,7 @@ class Client
 	 * @param boolean $createDirectoriesAutomatically
 	 * @return \Jyxo\Webdav\Client
 	 */
-	public function setCreateDirectoriesAutomatically($createDirectoriesAutomatically)
+	public function setCreateDirectoriesAutomatically(bool $createDirectoriesAutomatically): self
 	{
 		$this->createDirectoriesAutomatically = $createDirectoriesAutomatically;
 		return $this;
@@ -179,7 +179,7 @@ class Client
 	 * @return boolean
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
-	public function exists($path)
+	public function exists(string $path): bool
 	{
 		$response = $this->sendRequest($this->getFilePath($path), self::METHOD_HEAD);
 		return self::STATUS_200_OK === $response->getStatusCode();
@@ -193,7 +193,7 @@ class Client
 	 * @throws \Jyxo\Webdav\FileNotExistException If the file does not exist
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
-	public function get($path)
+	public function get(string $path): string
 	{
 		// Asking random server
 		$path = $this->getFilePath($path);
@@ -216,7 +216,7 @@ class Client
 	 * @throws \Jyxo\Webdav\FileNotExistException If the file does not exist
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
-	public function getProperty($path, $property = null)
+	public function getProperty(string $path, string $property = null)
 	{
 		// Asking random server
 		$path = $this->getFilePath($path);
@@ -246,7 +246,7 @@ class Client
 	 * @throws \Jyxo\Webdav\FileNotCreatedException If the file cannot be created
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
-	public function put($path, $data)
+	public function put(string $path, string $data)
 	{
 		$this->processPut($this->getFilePath($path), $data, false);
 	}
@@ -259,7 +259,7 @@ class Client
 	 * @throws \Jyxo\Webdav\FileNotCreatedException If the file cannot be created
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
-	public function putFile($path, $file)
+	public function putFile(string $path, string $file)
 	{
 		$this->processPut($this->getFilePath($path), $file, true);
 	}
@@ -273,7 +273,7 @@ class Client
 	 * @throws \Jyxo\Webdav\FileNotCopiedException If the file cannot be copied
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
-	public function copy($pathFrom, $pathTo)
+	public function copy(string $pathFrom, string $pathTo)
 	{
 		$pathTo = $this->getFilePath($pathTo);
 
@@ -310,7 +310,7 @@ class Client
 	 * @throws \Jyxo\Webdav\FileNotRenamedException If the file cannot be renamed
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
-	public function rename($pathFrom, $pathTo)
+	public function rename(string $pathFrom, string $pathTo)
 	{
 		$pathTo = $this->getFilePath($pathTo);
 
@@ -350,7 +350,7 @@ class Client
 	 * @throws \Jyxo\Webdav\FileNotDeletedException If the file cannot be deleted
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
-	public function unlink($path)
+	public function unlink(string $path)
 	{
 		// We do not delete directories
 		if ($this->isDir($path)) {
@@ -377,7 +377,7 @@ class Client
 	 * @return boolean
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
-	public function isDir($dir)
+	public function isDir(string $dir): bool
 	{
 		// Asking random server
 		$response = $this->sendRequest($this->getDirPath($dir), self::METHOD_PROPFIND, ['Depth' => '0']);
@@ -402,7 +402,7 @@ class Client
 	 * @throws \Jyxo\Webdav\DirectoryNotCreatedException If the directory cannot be created
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
-	public function mkdir($dir, $recursive = true)
+	public function mkdir(string $dir, bool $recursive = true)
 	{
 		// If creating directories recursively, create the parent directory first
 		$dir = trim($dir, '/');
@@ -440,7 +440,7 @@ class Client
 	 * @throws \Jyxo\Webdav\DirectoryNotDeletedException If the directory cannot be deleted
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
-	public function rmdir($dir)
+	public function rmdir(string $dir)
 	{
 		foreach ($this->sendAllRequests($this->createAllRequests($this->getDirPath($dir), self::METHOD_DELETE)) as $response) {
 			// 204 means deleted
@@ -460,7 +460,7 @@ class Client
 	 * @throws \Jyxo\Webdav\FileNotCreatedException If the file cannot be created
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
-	protected function processPut($path, $data, $isFile)
+	protected function processPut(string $path, string $data, bool $isFile)
 	{
 		$requests = [];
 		foreach ($this->servers as $server) {
@@ -520,7 +520,7 @@ class Client
 	 * @return \GuzzleHttp\Psr7\Response[]
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
-	protected function sendAllRequests(array $requests)
+	protected function sendAllRequests(array $requests): array
 	{
 		try {
 			$responses = [];
@@ -578,7 +578,7 @@ class Client
 	 * @return \GuzzleHttp\Psr7\Response
 	 * @throws \Jyxo\Webdav\Exception On error
 	 */
-	protected function sendRequest($path, $method, array $headers = [])
+	protected function sendRequest(string $path, string $method, array $headers = []): \GuzzleHttp\Psr7\Response
 	{
 		try {
 			// Send request to a random server
@@ -601,10 +601,10 @@ class Client
 	 * @param string $path Request path
 	 * @param string $method Request method
 	 * @param array $headers Array of headers
-	 * @param string|null $body Request body
+	 * @param string|resource|null $body Request body
 	 * @return \GuzzleHttp\Psr7\Request[]
 	 */
-	protected function createAllRequests($path, $method, array $headers = [], $body = null)
+	protected function createAllRequests(string $path, string $method, array $headers = [], $body = null): array
 	{
 		$requests = [];
 		foreach ($this->servers as $server) {
@@ -620,10 +620,10 @@ class Client
 	 * @param string $path Path
 	 * @param string $method Request method
 	 * @param array $headers Array of headers
-	 * @param string|null $body Request body
+	 * @param string|resource|null $body Request body
 	 * @return \GuzzleHttp\Psr7\Request
 	 */
-	protected function createRequest($server, $path, $method, array $headers = [], $body = null)
+	protected function createRequest(string $server, string $path, string $method, array $headers = [], $body = null): \GuzzleHttp\Psr7\Request
 	{
 		return new \GuzzleHttp\Psr7\Request(
 			$method,
@@ -636,7 +636,7 @@ class Client
 	/**
 	 * @return \GuzzleHttp\Client
 	 */
-	protected function createClient()
+	protected function createClient(): \GuzzleHttp\Client
 	{
 		return new \GuzzleHttp\Client([
 			\GuzzleHttp\RequestOptions::ALLOW_REDIRECTS => false,
@@ -653,7 +653,7 @@ class Client
 	 * @param string $path File path
 	 * @return string
 	 */
-	protected function getFilePath($path)
+	protected function getFilePath(string $path): string
 	{
 		return '/' . trim($path, '/');
 	}
@@ -664,7 +664,7 @@ class Client
 	 * @param string $path Directory path
 	 * @return string
 	 */
-	protected function getDirPath($path)
+	protected function getDirPath(string $path): string
 	{
 		return '/' . trim($path, '/') . '/';
 	}
@@ -675,7 +675,7 @@ class Client
 	 * @param \GuzzleHttp\Psr7\Response $response Response
 	 * @return array
 	 */
-	protected function getProperties(\GuzzleHttp\Psr7\Response $response)
+	protected function getProperties(\GuzzleHttp\Psr7\Response $response): array
 	{
 		// Process the XML with properties
 		$properties = [];
@@ -708,7 +708,7 @@ class Client
 	/**
 	 * @return string
 	 */
-	protected function getRandomServer()
+	protected function getRandomServer(): string
 	{
 		return $this->servers[array_rand($this->servers)];
 	}

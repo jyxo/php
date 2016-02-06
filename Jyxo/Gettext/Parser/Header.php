@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -30,7 +30,7 @@ class Header
 	 *
 	 * @param string $items PO file header
 	 */
-	public function __construct($items)
+	public function __construct(string $items)
 	{
 		$items = explode("\n", $items);
 		foreach ($items as $item) {

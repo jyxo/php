@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -40,7 +40,7 @@ class TimerTest extends \PHPUnit_Framework_TestCase
 		$this->assertLessThan($outerDelta, $delta);
 
 		// Non-existent timer
-		$this->assertSame(0, Timer::stop('foo'));
+		$this->assertSame(0.0, Timer::stop('foo'));
 
 		// Start 4 timers
 		$names = ['foo', 'bar', 'tmp', 'ohai'];

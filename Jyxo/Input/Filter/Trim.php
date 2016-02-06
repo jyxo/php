@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -29,12 +29,12 @@ class Trim extends \Jyxo\Input\Filter\AbstractFilter
 	/**
 	 * Filters a value.
 	 *
-	 * @param mixed $in
-	 * @return mixed
+	 * @param string $in
+	 * @return string
 	 */
-	protected function filterValue($in)
+	protected function filterValue( $in)
 	{
-		return trim($in);
+		return trim((string) $in);
 	}
 
 	/**

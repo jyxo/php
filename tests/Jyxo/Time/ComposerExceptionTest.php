@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -36,7 +36,7 @@ class ComposerExceptionTest extends \PHPUnit_Framework_TestCase
 		}
 
 		// Non-existent code
-		$exception = new ComposerException('Test', 'dummy-code');
+		$exception = new ComposerException('Test', 99);
 		$this->assertEquals(ComposerException::UNKNOWN, $exception->getCode());
 	}
 }

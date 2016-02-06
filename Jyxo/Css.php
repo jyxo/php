@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -40,7 +40,7 @@ class Css
 	 * @param string $css Stylesheet definition
 	 * @return string
 	 */
-	public static function repair($css)
+	public static function repair(string $css): string
 	{
 		// Convert properties to lowercase
 		$css = preg_replace_callback('~((?:^|\{|;)\\s*)([\-a-z]+)(\\s*:)~i', function($matches) {
@@ -76,7 +76,7 @@ class Css
 	 * @param boolean $exclude If true, $properties will be removed from the stylesheet; if false, only $properties will be left
 	 * @return string
 	 */
-	public static function filterProperties($css, array $properties, $exclude = true)
+	public static function filterProperties(string $css, array $properties, bool $exclude = true): string
 	{
 		$properties = array_flip($properties);
 		return preg_replace_callback('~\\s*([\-a-z]+)\\s*:[^;}]*;?~i', function($matches) use ($properties, $exclude) {
@@ -96,7 +96,7 @@ class Css
 	 * @param string $css Stylesheet definition
 	 * @return string
 	 */
-	public static function minify($css)
+	public static function minify(string $css): string
 	{
 		// Comments
 		$minified = preg_replace('~/\*.*\*/~sU', '', $css);
@@ -119,18 +119,6 @@ class Css
 	}
 
 	/**
-	 * Removes unnecessary characters from a CSS stylesheet.
-	 *
-	 * Use minify() instead.
-	 *
-	 * @deprecated
-	 */
-	public static function pack($css)
-	{
-		return self::minify($css);
-	}
-
-	/**
 	 * Converts HTML styles inside <style> elements to inline styles.
 	 *
 	 * Supported selectors:
@@ -147,7 +135,7 @@ class Css
 	 * @param string $html Processed HTML source
 	 * @return string
 	 */
-	public static function convertStyleToInline($html)
+	public static function convertStyleToInline(string $html): string
 	{
 		// Extract styles from the source
 		$cssList = self::parseStyle($html);
@@ -295,7 +283,7 @@ class Css
 	 * @return array
 	 * @see \Jyxo\Css::convertStyleToInline()
 	 */
-	private static function parseStyle($html)
+	private static function parseStyle(string $html): array
 	{
 		// Find <style> elements
 		if (!preg_match_all('~<style\\s+(?:[^>]+\\s+)*type="text/css"[^>]*>(.*?)</style>~s', $html, $styles)) {

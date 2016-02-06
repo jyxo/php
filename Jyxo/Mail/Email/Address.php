@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -46,7 +46,7 @@ class Address extends \Jyxo\Spl\Object
 	 * @param string $name Name
 	 * @throws \InvalidArgumentException If an invalid email address was provided
 	 */
-	public function __construct($email, $name = '')
+	public function __construct(string $email, string $name = '')
 	{
 		$this->setEmail($email);
 		$this->setName($name);
@@ -57,7 +57,7 @@ class Address extends \Jyxo\Spl\Object
 	 *
 	 * @return string
 	 */
-	public function getEmail()
+	public function getEmail(): string
 	{
 		return $this->email;
 	}
@@ -69,9 +69,9 @@ class Address extends \Jyxo\Spl\Object
 	 * @return \Jyxo\Mail\Email\Address
 	 * @throws \InvalidArgumentException If an invalid email address was provided
 	 */
-	public function setEmail($email)
+	public function setEmail(string $email): self
 	{
-		$email = trim((string) $email);
+		$email = trim($email);
 
 		// Validity check
 		if (!\Jyxo\Input\Validator\IsEmail::validate($email)) {
@@ -88,7 +88,7 @@ class Address extends \Jyxo\Spl\Object
 	 *
 	 * @return string
 	 */
-	public function getName()
+	public function getName(): string
 	{
 		return $this->name;
 	}
@@ -99,9 +99,9 @@ class Address extends \Jyxo\Spl\Object
 	 * @param string $name Name
 	 * @return \Jyxo\Mail\Email\Address
 	 */
-	public function setName($name)
+	public function setName(string $name): self
 	{
-		$this->name = trim((string) $name);
+		$this->name = trim($name);
 
 		return $this;
 	}

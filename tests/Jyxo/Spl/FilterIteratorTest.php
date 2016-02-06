@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -51,18 +51,6 @@ class FilterIteratorTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertSame($expected, $results);
 		$this->assertSame($expected, $iterator->toArray());
-	}
-
-	/**
-	 * Tests an invalid callback exception.
-	 */
-	public function testInvalidCallback()
-	{
-		$this->expectException(\InvalidArgumentException::class);
-
-		$callback = 'FunctionThatDoesNotExistForSure';
-		$data = [];
-		$iterator = new FilterIterator(new \ArrayIterator($data), $callback);
 	}
 
 }

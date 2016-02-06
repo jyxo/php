@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -127,9 +127,9 @@ final class HtmlTag
 	 *
 	 * @param string $tag
 	 */
-	private function __construct($tag)
+	private function __construct(string $tag)
 	{
-		$this->tag = (string) $tag;
+		$this->tag = $tag;
 	}
 
 	/**
@@ -138,7 +138,7 @@ final class HtmlTag
 	 * @param string $tag HTML element name
 	 * @return \Jyxo\HtmlTag
 	 */
-	public static function create($tag)
+	public static function create(string $tag): self
 	{
 		return new self($tag);
 	}
@@ -152,7 +152,7 @@ final class HtmlTag
 	 * @return \Jyxo\HtmlTag
 	 * @throws \InvalidArgumentException If an invalid HTML source was given
 	 */
-	public static function createFromSource($html)
+	public static function createFromSource(string $html): self
 	{
 		if (preg_match('~<(\\w+)(\\s[^>]*)+>(.*)((<[^>]+>)?[^>]*)$~', $html, $matches)) {
 			$tag = new self($matches[1]);
@@ -174,7 +174,7 @@ final class HtmlTag
 	 *
 	 * @return string
 	 */
-	public function open()
+	public function open(): string
 	{
 		if (TRUE === $this->contentOnly) {
 			return '';
@@ -214,7 +214,7 @@ final class HtmlTag
 	 *
 	 * @return string
 	 */
-	public function content()
+	public function content(): string
 	{
 		$buff = '';
 		if (!$this->isEmptyElement) {
@@ -242,7 +242,7 @@ final class HtmlTag
 	 *
 	 * @return string
 	 */
-	public function close()
+	public function close(): string
 	{
 		if (true === $this->contentOnly) {
 			return '';
@@ -262,7 +262,7 @@ final class HtmlTag
 	 *
 	 * @return string
 	 */
-	public function render()
+	public function render(): string
 	{
 		return $this->open() . $this->content() . $this->close();
 	}
@@ -273,7 +273,7 @@ final class HtmlTag
 	 * @param \Jyxo\HtmlTag $element Child element to be added
 	 * @return \Jyxo\HtmlTag
 	 */
-	public function addChild(\Jyxo\HtmlTag $element)
+	public function addChild(\Jyxo\HtmlTag $element): self
 	{
 		$this->children[] = $element;
 		return $this;
@@ -285,7 +285,7 @@ final class HtmlTag
 	 * @param array $elements Array of child elements
 	 * @return \Jyxo\HtmlTag
 	 */
-	public function addChildren(array $elements)
+	public function addChildren(array $elements): self
 	{
 		foreach ($elements as $element) {
 			$this->addChild($element);
@@ -299,7 +299,7 @@ final class HtmlTag
 	 * @param array $attributes Associative array of attributes and their values
 	 * @return \Jyxo\HtmlTag
 	 */
-	public function setAttributes(array $attributes)
+	public function setAttributes(array $attributes): self
 	{
 		foreach ($attributes as $name => $value) {
 			$this->attributes[strtolower($name)] = $value;
@@ -313,7 +313,7 @@ final class HtmlTag
 	 * @param string $attribute Attribute name
 	 * @return \Jyxo\HtmlTag
 	 */
-	public function setNoEncode($attribute)
+	public function setNoEncode(string $attribute): self
 	{
 		$this->noEncode[$attribute] = true;
 
@@ -326,9 +326,9 @@ final class HtmlTag
 	 * @param boolean $contentOnly Should only the contents be rendered
 	 * @return \Jyxo\HtmlTag
 	 */
-	public function setContentOnly($contentOnly)
+	public function setContentOnly(bool $contentOnly): selfs
 	{
-		$this->contentOnly = (bool) $contentOnly;
+		$this->contentOnly = $contentOnly;
 		return $this;
 	}
 
@@ -337,7 +337,7 @@ final class HtmlTag
 	 *
 	 * @return string
 	 */
-	public function __toString()
+	public function __toString(): string
 	{
 		return $this->render();
 	}
@@ -349,7 +349,7 @@ final class HtmlTag
 	 * @param array $args Method attributes
 	 * @return mixed string|Jyxo_HtmlTag
 	 */
-	public function __call($method, $args)
+	public function __call(string $method, array $args)
 	{
 		$type = $method[0] === 's' ? 'set' : 'get';
 		if ($type === 'set') {
@@ -369,7 +369,7 @@ final class HtmlTag
 	 * @param string $name Attribute name
 	 * @return mixed string|null
 	 */
-	public function __get($name)
+	public function __get(string $name)
 	{
 		// An empty attribute is always null
 		return isset($this->attributes[$name]) ? $this->attributes[$name] : null;
@@ -382,7 +382,7 @@ final class HtmlTag
 	 * @param string $attr Attribute name
 	 * @return boolean
 	 */
-	private function isRequiredAttr($tag, $attr)
+	private function isRequiredAttr(string $tag, string $attr): bool
 	{
 		if (isset($this->requiredAttrs[$tag])) {
 			if (is_array($this->requiredAttrs[$tag])) {

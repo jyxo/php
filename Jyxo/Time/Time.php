@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -160,7 +160,7 @@ class Time implements \Serializable
 
 			if (is_numeric($time)) {
 				// Unix timestamp as an integer or string
-				$this->dateTime = new \DateTime(null, $timeZone);
+				$this->dateTime = new \DateTime('', $timeZone);
 				$this->dateTime->setTimestamp($time);
 			} elseif (is_string($time)) {
 				// Textual representation
@@ -196,7 +196,7 @@ class Time implements \Serializable
 	 * @return \DateTimeZone
 	 * @throws \InvalidArgumentException If an invalid time zone definition was provided
 	 */
-	protected function createTimeZone($definition)
+	protected function createTimeZone($definition): \DateTimeZone
 	{
 		if (is_string($definition)) {
 			try {
@@ -220,7 +220,7 @@ class Time implements \Serializable
 	 * @param string|\DateTimeZone $timeZone Time zone definition
 	 * @return \Jyxo\Time\Time
 	 */
-	public static function get($time, $timeZone = null)
+	public static function get($time, $timeZone = null): self
 	{
 		return new self($time, $timeZone);
 	}
@@ -230,7 +230,7 @@ class Time implements \Serializable
 	 *
 	 * @return \Jyxo\Time\Time
 	 */
-	public static function now()
+	public static function now(): self
 	{
 		return new self(time());
 	}
@@ -242,7 +242,7 @@ class Time implements \Serializable
 	 * @param string $time Date/time definition
 	 * @return \Jyxo\Time\Time
 	 */
-	public static function createFromFormat($format, $time)
+	public static function createFromFormat(string $format, string $time): self
 	{
 		return new self(\DateTime::createFromFormat($format, $time));
 	}
@@ -254,7 +254,7 @@ class Time implements \Serializable
 	 * @return mixed
 	 * @throws \InvalidArgumentException If an unknown format is requested
 	 */
-	public function __get($name)
+	public function __get(string $name)
 	{
 		switch ($name) {
 			case 'sql':
@@ -298,7 +298,7 @@ class Time implements \Serializable
 	 * @param array $args Method arguments
 	 * @return mixed
 	 */
-	public function __call($method, $args)
+	public function __call(string $method, array $args)
 	{
 		return call_user_func_array([$this->dateTime, $method], $args);
 	}
@@ -308,7 +308,7 @@ class Time implements \Serializable
 	 *
 	 * @return string Returns empty string if the stored date/time has no valid UT representation
 	 */
-	public function __toString()
+	public function __toString(): string
 	{
 		return (string) $this->dateTime->getTimestamp();
 	}
@@ -318,7 +318,7 @@ class Time implements \Serializable
 	 *
 	 * @return \DateTimeZone
 	 */
-	public function getTimeZone()
+	public function getTimeZone(): \DateTimeZone
 	{
 		return $this->dateTime->getTimezone();
 	}
@@ -329,7 +329,7 @@ class Time implements \Serializable
 	 * @param string|\DateTimeZone $timeZone The new time zone
 	 * @return \Jyxo\Time\Time
 	 */
-	public function setTimeZone($timeZone)
+	public function setTimeZone($timeZone): self
 	{
 		$this->dateTime->setTimezone($this->createTimeZone($timeZone));
 		return $this;
@@ -358,7 +358,7 @@ class Time implements \Serializable
 	 * @return \Jyxo\Time\Time
 	 * @throws \InvalidArgumentException If there is no time zone to return to
 	 */
-	protected function revertOriginalTimeZone()
+	protected function revertOriginalTimeZone(): self
 	{
 		if (null !== $this->originalTimeZone) {
 			$this->dateTime->setTimezone($this->originalTimeZone);
@@ -375,7 +375,7 @@ class Time implements \Serializable
 	 * @param string|\DateTimeZone $timeZone Result time zone definition
 	 * @return string
 	 */
-	public function format($format, $timeZone = null)
+	public function format(string $format, $timeZone = null): string
 	{
 		// Prepares the right result time zone if needed
 		if ($timeZone) {
@@ -465,7 +465,7 @@ class Time implements \Serializable
 	 * @param string|\DateTimeZone $timeZone Result time zone definition
 	 * @return string
 	 */
-	public function formatExtended($dateFormat = 'j. F Y', $timeFormat = 'G:i', $timeZone = null)
+	public function formatExtended(string $dateFormat = 'j. F Y', string $timeFormat = 'G:i', $timeZone = null): string
 	{
 		// Sets a custom result time zone if needed
 		if ($timeZone) {
@@ -522,7 +522,7 @@ class Time implements \Serializable
 	 * @param string|\DateTimeZone $timeZone Result time zone definition
 	 * @return string
 	 */
-	public function formatAsInterval($useTense = true, $timeZone = null)
+	public function formatAsInterval(bool $useTense = true, $timeZone = null): string
 	{
 		static $intervalList = [
 			self::YEAR => self::INTERVAL_YEAR,
@@ -538,7 +538,7 @@ class Time implements \Serializable
 		$timeZone = $timeZone ? $this->createTimeZone($timeZone) : $this->dateTime->getTimezone();
 
 		// Difference between the stored date/time and now
-		$differenceObject = $this->dateTime->diff(new \DateTime(null, $timeZone));
+		$differenceObject = $this->dateTime->diff(new \DateTime('', $timeZone));
 		$diffArray = array_combine(
 			array_keys($intervalList),
 			explode('-', $differenceObject->format('%y-%m-0-%d-%h-%i-%s'))
@@ -558,7 +558,7 @@ class Time implements \Serializable
 		// Find the appropriate unit and calculate number of units
 		foreach ($intervalList as $interval => $seconds) {
 			if ($seconds <= $diff) {
-				$num = round($diff / $seconds);
+				$num = (int) round($diff / $seconds);
 				break;
 			}
 		}
@@ -642,7 +642,7 @@ class Time implements \Serializable
 	 * @param integer|string $interval Number of seconds or a string compatible with the strtotime() function
 	 * @return \Jyxo\Time\Time
 	 */
-	public function plus($interval)
+	public function plus($interval): self
 	{
 		if (is_numeric($interval)) {
 			$interval .= ' seconds';
@@ -660,7 +660,7 @@ class Time implements \Serializable
 	 * @param integer|string $interval Number of seconds or a string compatible with the strtotime() function
 	 * @return \Jyxo\Time\Time
 	 */
-	public function minus($interval)
+	public function minus($interval): self
 	{
 		if (is_numeric($interval)) {
 			$interval .= ' seconds';
@@ -679,9 +679,9 @@ class Time implements \Serializable
 	 *
 	 * @return boolean
 	 */
-	public function hasHappened()
+	public function hasHappened(): bool
 	{
-		return '+' === $this->dateTime->diff(\DateTime::createFromFormat('U', time(), $this->dateTime->getTimezone()))->format('%R');
+		return '+' === $this->dateTime->diff(\DateTime::createFromFormat('U', (string) time(), $this->dateTime->getTimezone()))->format('%R');
 	}
 
 	/**
@@ -691,7 +691,7 @@ class Time implements \Serializable
 	 * @return \Jyxo\Time\Time
 	 * @throws \InvalidArgumentException If an invalid unit is provided
 	 */
-	public function truncate($unit)
+	public function truncate($unit): self
 	{
 		$dateTime = [
 			self::YEAR => 0,
@@ -733,7 +733,7 @@ class Time implements \Serializable
 	 *
 	 * @return string
 	 */
-	public function serialize()
+	public function serialize(): string
 	{
 		return $this->dateTime->format('Y-m-d H:i:s ') . $this->dateTime->getTimezone()->getName();
 	}

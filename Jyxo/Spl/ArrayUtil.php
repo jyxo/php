@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -34,7 +34,7 @@ class ArrayUtil
 	 * @param \Closure $compare comparing closure for detecting if we're at the end of the range (Optional)
 	 * @return array
 	 */
-	public static function range($low, $high, \Closure $step, \Closure $compare = null)
+	public static function range($low, $high, \Closure $step, \Closure $compare = null): array
 	{
 		$data = [$low];
 		$stepDown = $low > $high;
@@ -67,7 +67,7 @@ class ArrayUtil
 	 * @param \Closure $value Closure for modifying data (Optional)
 	 * @return array
 	 */
-	public static function keymap(\Traversable $traversable, \Closure $key, \Closure $value = null)
+	public static function keymap(\Traversable $traversable, \Closure $key, \Closure $value = null): array
 	{
 		$data = [];
 		foreach ($traversable as $item) {

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -45,7 +45,7 @@ class Body extends \Jyxo\Spl\Object
 	 * @param string $main Main contents
 	 * @param string $alternative Alternative contents
 	 */
-	public function __construct($main, $alternative = '')
+	public function __construct(string $main, string $alternative = '')
 	{
 		$this->setMain($main);
 		$this->setAlternative($alternative);
@@ -56,7 +56,7 @@ class Body extends \Jyxo\Spl\Object
 	 *
 	 * @return boolean
 	 */
-	public function isHtml()
+	public function isHtml(): bool
 	{
 		return \Jyxo\Html::is($this->main);
 	}
@@ -66,7 +66,7 @@ class Body extends \Jyxo\Spl\Object
 	 *
 	 * @return string
 	 */
-	public function getMain()
+	public function getMain(): string
 	{
 		return $this->main;
 	}
@@ -77,9 +77,9 @@ class Body extends \Jyxo\Spl\Object
 	 * @param string $main Contents
 	 * @return \Jyxo\Mail\Email\Body
 	 */
-	public function setMain($main)
+	public function setMain(string $main): self
 	{
-		$this->main = (string) $main;
+		$this->main = $main;
 
 		return $this;
 	}
@@ -89,7 +89,7 @@ class Body extends \Jyxo\Spl\Object
 	 *
 	 * @return string
 	 */
-	public function getAlternative()
+	public function getAlternative(): string
 	{
 		return $this->alternative;
 	}
@@ -100,9 +100,9 @@ class Body extends \Jyxo\Spl\Object
 	 * @param string $alternative Contents
 	 * @return \Jyxo\Mail\Email\Body
 	 */
-	public function setAlternative($alternative)
+	public function setAlternative(string $alternative): self
 	{
-		$this->alternative = (string) $alternative;
+		$this->alternative = $alternative;
 
 		return $this;
 	}

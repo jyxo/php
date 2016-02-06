@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -52,7 +52,7 @@ class XmlReader extends \XMLReader
 	 *
 	 * @return string
 	 */
-	public function getTextValue()
+	public function getTextValue(): string
 	{
 		if (self::ELEMENT === $this->nodeType && $this->isEmptyElement) {
 			return '';
@@ -80,7 +80,7 @@ class XmlReader extends \XMLReader
 	 *
 	 * @return string
 	 */
-	public function getContent()
+	public function getContent(): string
 	{
 		if (self::ELEMENT === $this->nodeType && $this->isEmptyElement) {
 			return '';

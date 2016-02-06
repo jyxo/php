@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -69,15 +69,15 @@ class Imap extends \Jyxo\Beholder\TestCase
 	 * @param integer $port Port
 	 * @param boolean $validateCert Validate certificates
 	 */
-	public function __construct($description, $host = 'localhost', $user = '', $password = '', $port = 143, $validateCert = true)
+	public function __construct(string $description, string $host = 'localhost', string $user = '', string $password = '', int $port = 143, bool $validateCert = true)
 	{
 		parent::__construct($description);
 
-		$this->host = (string) $host;
-		$this->user = (string) $user;
-		$this->password = (string) $password;
-		$this->port = (int) $port;
-		$this->validateCert = (bool) $validateCert;
+		$this->host = $host;
+		$this->user = $user;
+		$this->password = $password;
+		$this->port = $port;
+		$this->validateCert = $validateCert;
 	}
 
 	/**
@@ -85,7 +85,7 @@ class Imap extends \Jyxo\Beholder\TestCase
 	 *
 	 * @return \Jyxo\Beholder\Result
 	 */
-	public function run()
+	public function run(): \Jyxo\Beholder\Result
 	{
 		// The imap extension is required
 		if (!extension_loaded('imap')) {

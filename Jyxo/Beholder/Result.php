@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -79,17 +79,15 @@ class Result
 	 * @param string $description Status description
 	 * @throws \InvalidArgumentException On an unknown status
 	 */
-	public function __construct($status, $description = '')
+	public function __construct(string $status, string $description = '')
 	{
 		// Checks status
-		$status = (string) $status;
 		if (!isset(self::$statusList[$status])) {
 			throw new \InvalidArgumentException(sprintf('Invalid status %s', $status));
 		}
 		$this->status = $status;
 
 		// Sets description
-		$description = (string) $description;
 		if (empty($description)) {
 			$description = self::$statusList[$status];
 		}
@@ -101,7 +99,7 @@ class Result
 	 *
 	 * @return boolean
 	 */
-	public function isSuccess()
+	public function isSuccess(): bool
 	{
 		return ($this->status !== self::FAILURE);
 	}
@@ -111,7 +109,7 @@ class Result
 	 *
 	 * @return string
 	 */
-	public function getStatus()
+	public function getStatus(): string
 	{
 		return $this->status;
 	}
@@ -121,7 +119,7 @@ class Result
 	 *
 	 * @return string
 	 */
-	public function getStatusMessage()
+	public function getStatusMessage(): string
 	{
 		return self::$statusList[$this->status];
 	}
@@ -131,7 +129,7 @@ class Result
 	 *
 	 * @return string
 	 */
-	public function getDescription()
+	public function getDescription(): string
 	{
 		return $this->description;
 	}

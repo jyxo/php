@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -32,7 +32,7 @@ interface FilterInterface
 	 * Value is passed by reference and therefore it gets altered.
 	 *
 	 * @param mixed $in Filtered value
-	 * @return \Jyxo\Input\FilterInterface This object instance
+	 * @return mixed
 	 */
 	public function filter($in);
 }

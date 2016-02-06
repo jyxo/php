@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -212,7 +212,7 @@ class Result implements \Countable, \SeekableIterator
 	 * @param string $input Action input
 	 * @param integer $returnCode SVN binary return code
 	 */
-	public function __construct($action, $input, $returnCode = 1)
+	public function __construct(string $action, string $input, int $returnCode = 1)
 	{
 		$this->items = $this->parse($action, $input);
 		$this->status = $returnCode === 0 ? self::OK : self::KO;
@@ -226,7 +226,7 @@ class Result implements \Countable, \SeekableIterator
 	 * @param string $input SVN binary output
 	 * @return array
 	 */
-	protected function parse($action, $input)
+	protected function parse(string $action, string $input): array
 	{
 		switch ($action) {
 			case 'add':
@@ -248,7 +248,7 @@ class Result implements \Countable, \SeekableIterator
 	 * @param string $input SVN binary output
 	 * @return array
 	 */
-	protected function parseStatus($input)
+	protected function parseStatus(string $input): array
 	{
 		$array = explode("\n", (string) $input);
 		foreach ($array as $key => &$line) {
@@ -290,7 +290,7 @@ class Result implements \Countable, \SeekableIterator
 	 * @param string $input SVN binary output
 	 * @return array
 	 */
-	protected function parseCommit($input)
+	protected function parseCommit(string $input): array
 	{
 		$array = explode("\n", (string) $input);
 		foreach ($array as $key => &$line) {
@@ -324,7 +324,7 @@ class Result implements \Countable, \SeekableIterator
 	 * @param mixed $input SVN binary output
 	 * @return array
 	 */
-	protected function parseUpdate($input)
+	protected function parseUpdate($input): array
 	{
 		$array = explode("\n", (string) $input);
 		foreach ($array as $key => &$line) {
@@ -353,7 +353,7 @@ class Result implements \Countable, \SeekableIterator
 	 * @param string $prop Property name
 	 * @return mixed
 	 */
-	public function __get($prop)
+	public function __get(string $prop)
 	{
 		return isset($this->$prop) ? $this->$prop : null;
 	}
@@ -365,7 +365,7 @@ class Result implements \Countable, \SeekableIterator
 	 * @return \Jyxo\Svn\Result
 	 * @throws \Jyxo\Svn\Exception On invalid position
 	 */
-	public function seek($position)
+	public function seek($position): self
 	{
 		$position = (int) $position;
 		if ($position < 0 || $position > count($this->items)) {
@@ -427,7 +427,7 @@ class Result implements \Countable, \SeekableIterator
 	 *
 	 * @return boolean
 	 */
-	public function valid()
+	public function valid(): bool
 	{
 		return $this->pointer < count($this->items);
 	}
@@ -437,7 +437,7 @@ class Result implements \Countable, \SeekableIterator
 	 *
 	 * @return integer
 	 */
-	public function count()
+	public function count(): int
 	{
 		return count($this->items);
 	}

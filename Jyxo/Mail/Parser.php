@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -83,7 +83,7 @@ class Parser
 	/**
 	 * Default part Id.
 	 *
-	 * @var integer
+	 * @var string
 	 */
 	private $defaultPid = null;
 
@@ -132,10 +132,10 @@ class Parser
 	 * @param resource $connection IMAP folder connection.
 	 * @param integer $uid Message Id
 	 */
-	public function __construct($connection, $uid)
+	public function __construct($connection, int $uid)
 	{
 		$this->connection = $connection;
-		$this->uid = (int) $uid;
+		$this->uid = $uid;
 	}
 
 	/**
@@ -167,7 +167,7 @@ class Parser
 	 * @param boolean $lastWasSigned Was the pared signed
 	 * @throws \Jyxo\Mail\Parser\EmailNotExistException If no such email exists
 	 */
-	private function setStructure(array $subparts = null, $parentPartId = null, $skipPart = false, $lastWasSigned = false)
+	private function setStructure(array $subparts = null, string $parentPartId = null, bool $skipPart = false, bool $lastWasSigned = false)
 	{
 		// First call - an object returned by the imap_fetchstructure function is returned
 		if (null === $subparts) {
@@ -193,7 +193,7 @@ class Parser
 			$this->structure['obj']->ifsubtype = 1;
 			$this->structure['obj']->subtype = 'MIXED';
 			$this->structure['obj']->ifdescription = 0;
-			$this->structure['obj']->ifid = 0;
+			$this->structure['obj']->ifid = '0';
 			$this->structure['obj']->bytes = isset($temp->bytes) ? $temp->bytes : 0;
 			$this->structure['obj']->ifdisposition = 1;
 			$this->structure['obj']->disposition = 'inline';
@@ -211,13 +211,11 @@ class Parser
 				: $this->getMajorMimeType($this->structure['obj']->type) . '/' . strtolower($this->structure['obj']->subtype);
 
 			// As first they do not have any actual Id, assign a fake one 0
-			// if (('multipart/alternative' == $ftype) || ('multipart/report' == $ftype)) {
-				$this->structure['pid'][0] = 0;
-				$this->structure['ftype'][0] = $ftype;
-				$this->structure['encoding'][0] = !empty($this->structure['obj']->encoding) ? self::$encodingTypes[$this->structure['obj']->encoding] : self::$encodingTypes[0];
-				$this->structure['fsize'][0] = !empty($this->structure['obj']->bytes) ? $this->structure['obj']->bytes : 0;
-				$this->structure['disposition'][0] = 'inline';
-			// }
+			$this->structure['pid'][0] = '0';
+			$this->structure['ftype'][0] = $ftype;
+			$this->structure['encoding'][0] = !empty($this->structure['obj']->encoding) ? self::$encodingTypes[$this->structure['obj']->encoding] : self::$encodingTypes[0];
+			$this->structure['fsize'][0] = !empty($this->structure['obj']->bytes) ? $this->structure['obj']->bytes : 0;
+			$this->structure['disposition'][0] = 'inline';
 		}
 
 		// Subparts
@@ -348,7 +346,7 @@ class Parser
 		} else {
 			// No subparts
 
-			$this->structure['pid'][0] = 1;
+			$this->structure['pid'][0] = '1';
 
 			$this->structure['ftype'][0] = $this->getMajorMimeType($this->structure['obj']->type) . '/' . strtolower($this->structure['obj']->subtype);
 
@@ -384,9 +382,9 @@ class Parser
 	 *
 	 * @param string $mimeType Mime-type
 	 * @param integer $attempt Number of retries
-	 * @return integer
+	 * @return string
 	 */
-	private function getDefaultPid($mimeType = 'text/html', $attempt = 1)
+	private function getDefaultPid(string $mimeType = 'text/html', $attempt = 1): string
 	{
 		$mimeCheck = ('text/html' == $mimeType) ? ['text/html', 'text/plain'] : ['text/plain', 'text/html'];
 
@@ -437,8 +435,7 @@ class Parser
 			}
 		} else {
 			// There should be a default part found in every mail; this is because of spams that are often in wrong format
-			return 1;
-			// throw new \Jyxo\Mail\Parser\DefaultPartIdNotExistException('Default part Id does no exist.');
+			return '1';
 		}
 	}
 
@@ -449,7 +446,7 @@ class Parser
 	 * @return array
 	 * @throws \Jyxo\Mail\Parser\EmailNotExistException If no such email exists
 	 */
-	public function getHeaders($pid = null)
+	public function getHeaders(string $pid = null): array
 	{
 		// Parses headers
 		$rawHeaders = $this->getRawHeaders($pid);
@@ -481,7 +478,7 @@ class Parser
 				if (in_array($key, $mimeHeaders)) {
 					$headers[$key] = $this->decodeMimeHeader($value);
 				} else {
-					$headers[$key] = $this->convertToUtf8($value);
+					$headers[$key] = $this->convertToUtf8((string) $value);
 				}
 			}
 		}
@@ -548,7 +545,7 @@ class Parser
 	 * @param string $pid Part Id
 	 * @return string
 	 */
-	private function getRawHeaders($pid = null)
+	private function getRawHeaders(string $pid = null): string
 	{
 		if (null === $pid) {
 			return imap_fetchheader($this->connection, $this->uid, FT_UID);
@@ -559,6 +556,10 @@ class Parser
 		$headersEnd = (false !== strpos($rawHeaders, "\n\n"))
 			? strpos($rawHeaders, "\n\n")
 			: strpos($rawHeaders, "\n\r\n");
+
+		if ($headersEnd === false) {
+			return '';
+		}
 
 		return substr($rawHeaders, 0, $headersEnd);
 	}
@@ -572,7 +573,7 @@ class Parser
 	 * @param boolean $all Should all parts get parsed
 	 * @throws \Jyxo\Mail\Parser\EmailNotExistException If no such email exists
 	 */
-	public function parseBody($pid = null, $mimeType = 'text/html', $alternative = true, $all = false)
+	public function parseBody(string $pid = null, string $mimeType = 'text/html', bool $alternative = true, bool $all = false)
 	{
 		try {
 			$this->checkIfParsed();
@@ -610,7 +611,7 @@ class Parser
 	 * @param integer $pidAdd The level of nesting
 	 * @param boolean $getAlternative Should the alternative part be used as well
 	 */
-	private function parseMultiparts($pid, $mimeType, $lookFor = 'all', $pidAdd = 1, $getAlternative = true)
+	private function parseMultiparts(string $pid, string $mimeType, string $lookFor = 'all', int $pidAdd = 1, bool $getAlternative = true)
 	{
 		// If the type is message/rfc822, gathers subparts that begin with the same Id
 		// Skips multipart/alternative or multipart/report
@@ -677,7 +678,7 @@ class Parser
 	 * @param integer $partNo Part Id
 	 * @return boolean
 	 */
-	private function isParentAlternative($partNo)
+	private function isParentAlternative(int $partNo): bool
 	{
 		// Multipart/alternative can be a child of only two types
 		if (($this->structure['ftype'][$partNo] != 'text/plain') && ($this->structure['ftype'][$partNo] != 'text/plain')) {
@@ -707,9 +708,9 @@ class Parser
 	 * @param string $subtype Subtype
 	 * @return boolean
 	 */
-	private function isMultipart($subtype)
+	private function isMultipart(string $subtype): bool
 	{
-		return (count($this->getMime(['multipart/' . $subtype])) > 0);
+		return count($this->getMime(['multipart/' . $subtype])) > 0;
 	}
 
 	/**
@@ -719,9 +720,9 @@ class Parser
 	 * @param string $subtype Subtype
 	 * @return boolean
 	 */
-	private function isPartMultipart($partNo, $subtype)
+	private function isPartMultipart(int $partNo, string $subtype): bool
 	{
-		return ($this->structure['ftype'][$partNo] == ('multipart/' . $subtype));
+		return $this->structure['ftype'][$partNo] === ('multipart/' . $subtype);
 	}
 
 	/**
@@ -730,7 +731,7 @@ class Parser
 	 * @param integer $structureNo Part Id in the structure
 	 * @param string $partType Part type
 	 */
-	private function addPart($structureNo, $partType)
+	private function addPart(int $structureNo, string $partType)
 	{
 		$fields = ['fname', 'pid', 'ftype', 'fsize', 'hasAttach', 'charset'];
 
@@ -750,7 +751,7 @@ class Parser
 	 * @param string $lookFor What to look for
 	 * @return string
 	 */
-	private function getMultipartPid($pid, $mimeType, $lookFor)
+	private function getMultipartPid(string $pid, string $mimeType, string $lookFor): string
 	{
 		$partLevel = count(explode('.', $pid));
 		$pidLength = strlen($pid);
@@ -807,7 +808,7 @@ class Parser
 	 *
 	 * @return array
 	 */
-	public function getAttachments()
+	public function getAttachments(): array
 	{
 		return isset($this->parts['attach']['pid']) ? $this->parts['attach']['pid'] : [];
 	}
@@ -817,7 +818,7 @@ class Parser
 	 *
 	 * @return array
 	 */
-	public function getInlines()
+	public function getInlines(): array
 	{
 		return isset($this->parts['inline']['pid']) ? $this->parts['inline']['pid'] : [];
 	}
@@ -831,7 +832,7 @@ class Parser
 	 * @return array
 	 * @throws \Jyxo\Mail\Parser\EmailNotExistException If no such email exists
 	 */
-	public function getRelatedParts($pid, array $types, $all = false)
+	public function getRelatedParts(string $pid, array $types, bool $all = false): array
 	{
 		try {
 			$this->checkIfParsed();
@@ -842,7 +843,7 @@ class Parser
 		$related = [];
 		if (!empty($this->structure['pid'])) {
 			// Deals a problem with multipart/alternative and multipart/report, when they are as the first part and don't have any real Ids (they have a fake Id 0 assigned then)
-			if (0 === $pid) {
+			if ('0' === $pid) {
 				for ($i = 1; $i < count($this->structure['pid']); $i++) {
 					// Subparts do not contain a dot because they are in the first level
 					if ((false === strpos($this->structure['pid'][$i], '.'))
@@ -875,7 +876,7 @@ class Parser
 	 * @return array
 	 * @throws \Jyxo\Mail\Parser\EmailNotExistException If no such email exists
 	 */
-	public function getAllRelatedParts($pid)
+	public function getAllRelatedParts(string $pid): array
 	{
 		try {
 			return $this->getRelatedParts($pid, [], true);
@@ -895,7 +896,7 @@ class Parser
 	 * @throws \Jyxo\Mail\Parser\EmailNotExistException If no such email exists
 	 * @throws \Jyxo\Mail\Parser\PartNotExistException If no such part exists
 	 */
-	public function getBody($pid = '1', $mode = self::BODY, $mimeType = 'text/html', $attempt = 1)
+	public function getBody(string $pid = '1', int $mode = self::BODY, string $mimeType = 'text/html', int $attempt = 1): array
 	{
 		try {
 			$this->checkIfParsed();
@@ -1002,7 +1003,7 @@ class Parser
 	 * @param string $encoding Body encoding
 	 * @return string
 	 */
-	public static function decodeBody($body, $encoding)
+	public static function decodeBody(string $body, string $encoding): string
 	{
 		switch ($encoding) {
 			case 'quoted-printable':
@@ -1021,7 +1022,7 @@ class Parser
 	 * @return array
 	 * @throws \Jyxo\Mail\Parser\EmailNotExistException If no such email exists
 	 */
-	public function getMime(array $types)
+	public function getMime(array $types): array
 	{
 		try {
 			$this->checkIfParsed();
@@ -1048,7 +1049,7 @@ class Parser
 	 * @return array
 	 * @throws \Jyxo\Mail\Parser\EmailNotExistException If no such email exists
 	 */
-	public function getMimeExcept(array $exceptTypes)
+	public function getMimeExcept(array $exceptTypes): array
 	{
 		try {
 			$this->checkIfParsed();
@@ -1073,7 +1074,7 @@ class Parser
 	 * @param integer $mimetypeNo Mime-type number
 	 * @return string
 	 */
-	private function getMajorMimeType($mimetypeNo)
+	private function getMajorMimeType(int $mimetypeNo): string
 	{
 		if (isset(self::$dataTypes[$mimetypeNo])) {
 			return self::$dataTypes[$mimetypeNo];
@@ -1089,7 +1090,7 @@ class Parser
 	 * @param string $header Header contents
 	 * @return string
 	 */
-	private function decodeMimeHeader($header)
+	private function decodeMimeHeader(string $header): string
 	{
 		$headerDecoded = imap_mime_header_decode($header);
 		// Decode failed
@@ -1110,7 +1111,7 @@ class Parser
 	 * @param string $filename Filename
 	 * @return string
 	 */
-	private function decodeFilename($filename)
+	private function decodeFilename(string $filename): string
 	{
 		if (preg_match('~(?P<charset>[^\']+)\'(?P<lang>[^\']*)\'(?P<filename>.+)~i', $filename, $parts)) {
 			$filename = $this->convertToUtf8(rawurldecode($parts['filename']), $parts['charset']);
@@ -1127,7 +1128,7 @@ class Parser
 	 * @param string $charset String charset
 	 * @return string
 	 */
-	private function convertToUtf8($string, $charset = '')
+	private function convertToUtf8(string $string, string $charset = ''): string
 	{
 		// Imap_mime_header_decode returns "default" in case of ASCII, but we make a detection for sure
 		if ('default' === $charset || 'us-ascii' === $charset || empty($charset)) {

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -98,15 +98,6 @@ class EmailTest extends \PHPUnit_Framework_TestCase
 				$email->setPriority($value);
 				$this->assertEquals($value, $email->getPriority());
 			}
-		}
-		try {
-			$email->setPriority('dummy-priority');
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
-			throw $e;
-		} catch (\Exception $e) {
-			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
 		}
 
 		// Headers

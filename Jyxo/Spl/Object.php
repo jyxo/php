@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -29,7 +29,7 @@ class Object implements \Jyxo\Spl\ArrayCopy
 	 *
 	 * @return string
 	 */
-	public final function getClass()
+	public final function getClass(): string
 	{
 		return get_class($this);
 	}
@@ -40,7 +40,7 @@ class Object implements \Jyxo\Spl\ArrayCopy
 	 * @param string $name Property name
 	 * @return mixed
 	 */
-	public function &__get($name)
+	public function &__get(string $name)
 	{
 		$class = get_class($this);
 		$name = ucfirst($name);
@@ -68,7 +68,7 @@ class Object implements \Jyxo\Spl\ArrayCopy
 	 * @param string $name Propety name
 	 * @param mixed $value Property value
 	 */
-	public function __set($name, $value)
+	public function __set(string $name, $value)
 	{
 		$setter = 'set' . ucfirst($name);
 		if (self::hasMethod(get_class($this), $setter)) {
@@ -82,7 +82,7 @@ class Object implements \Jyxo\Spl\ArrayCopy
 	 * @param string $name
 	 * @return boolean
 	 */
-	public function __isset($name)
+	public function __isset(string $name): bool
 	{
 		$class = get_class($this);
 		$name = ucfirst($name);
@@ -106,7 +106,7 @@ class Object implements \Jyxo\Spl\ArrayCopy
 	 * @param string $method Method name
 	 * @return boolean
 	 */
-	private static function hasMethod($class, $method)
+	private static function hasMethod(string $class, string $method): bool
 	{
 		static $cache;
 		if (!isset($cache[$class])) {
@@ -120,7 +120,7 @@ class Object implements \Jyxo\Spl\ArrayCopy
 	 *
 	 * @return array
 	 */
-	public function toArray()
+	public function toArray(): array
 	{
 		$values = [];
 		foreach ((array) $this as $key => $value) {

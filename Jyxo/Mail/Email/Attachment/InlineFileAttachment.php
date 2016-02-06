@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -40,7 +40,7 @@ class InlineFileAttachment extends \Jyxo\Mail\Email\Attachment
 	 * @param string $cid Id
 	 * @param string $mimeType Attachment mime-type
 	 */
-	public function __construct($path, $name, $cid, $mimeType = 'application/octet-stream')
+	public function __construct(string $path, string $name, string $cid, string $mimeType = 'application/octet-stream')
 	{
 		$this->setContent(file_get_contents($path));
 		$this->setName($name);
@@ -54,9 +54,9 @@ class InlineFileAttachment extends \Jyxo\Mail\Email\Attachment
 	 * @param string $cid Id
 	 * @return \Jyxo\Mail\Email\Attachment\FileAttachment
 	 */
-	public function setCid($cid)
+	public function setCid(string $cid): self
 	{
-		$this->cid = (string) $cid;
+		$this->cid = $cid;
 
 		return $this;
 	}

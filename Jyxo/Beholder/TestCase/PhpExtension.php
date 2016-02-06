@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -37,7 +37,7 @@ class PhpExtension extends \Jyxo\Beholder\TestCase
 	 * @param string $description Test description
 	 * @param array $extensionList List of extensions
 	 */
-	public function __construct($description, array $extensionList)
+	public function __construct(string $description, array $extensionList)
 	{
 		parent::__construct($description);
 
@@ -49,7 +49,7 @@ class PhpExtension extends \Jyxo\Beholder\TestCase
 	 *
 	 * @return \Jyxo\Beholder\Result
 	 */
-	public function run()
+	public function run(): \Jyxo\Beholder\Result
 	{
 		// Check
 		$missing = [];

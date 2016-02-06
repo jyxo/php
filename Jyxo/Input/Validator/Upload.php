@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -59,7 +59,7 @@ class Upload extends \Jyxo\Input\Validator\AbstractValidator implements \Jyxo\In
 	 * @param boolean $flag Does the file have to be uploaded
 	 * @return \Jyxo\Input\Validator\Upload
 	 */
-	public function requireUpload($flag = true)
+	public function requireUpload(bool $flag = true): self
 	{
 		$this->requireUpload = $flag;
 		return $this;
@@ -71,7 +71,7 @@ class Upload extends \Jyxo\Input\Validator\AbstractValidator implements \Jyxo\In
 	 * @param \Jyxo\Input\Upload|string $file File index in the $_FILES array
 	 * @return boolean
 	 */
-	public function isValid($file)
+	public function isValid($file): bool
 	{
 		$valid = false;
 		if (!$file instanceof \Jyxo\Input\Upload) {
@@ -104,7 +104,7 @@ class Upload extends \Jyxo\Input\Validator\AbstractValidator implements \Jyxo\In
 	 *
 	 * @param integer $error Error code
 	 */
-	private function setError($error)
+	private function setError(int $error)
 	{
 		switch ($error) {
 			case UPLOAD_ERR_PARTIAL:
@@ -139,7 +139,7 @@ class Upload extends \Jyxo\Input\Validator\AbstractValidator implements \Jyxo\In
 	 * @param string $file File index in the $_FILES array
 	 * @return boolean
 	 */
-	protected function isUploaded($file)
+	protected function isUploaded(string $file): bool
 	{
 		// Ugly ugly eeeew yuk hack, that is unfortunately needed sometimes
 		if (defined('IS_TEST') && IS_TEST) {
@@ -168,7 +168,7 @@ class Upload extends \Jyxo\Input\Validator\AbstractValidator implements \Jyxo\In
 	 *
 	 * @return string
 	 */
-	public function getError()
+	public function getError(): string
 	{
 		return $this->error;
 	}

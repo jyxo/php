@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -52,7 +52,7 @@ class Conditional extends \Jyxo\Input\Chain
 	 * @param mixed $value Input value
 	 * @return boolean
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
 		// Validation is performed only if the condition is fulfilled
 		if (true === $this->checkCondition($value)) {
@@ -69,7 +69,7 @@ class Conditional extends \Jyxo\Input\Chain
 	 * @param mixed $value Input value
 	 * @return boolean
 	 */
-	private function checkCondition($value)
+	private function checkCondition($value): bool
 	{
 		if (null === $this->condValidator) {
 			// There is no validator -> always fulfilled
@@ -84,7 +84,7 @@ class Conditional extends \Jyxo\Input\Chain
 	 * @param \Jyxo\Input\ValidatorInterface $validator Condition validator
 	 * @return \Jyxo\Input\Chain\Conditional
 	 */
-	public function setCondValidator(\Jyxo\Input\ValidatorInterface $validator)
+	public function setCondValidator(\Jyxo\Input\ValidatorInterface $validator): self
 	{
 		$this->condValidator = $validator;
 		return $this;

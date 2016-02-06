@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -45,7 +45,7 @@ class MonologLogger implements LoggerInterface
 	 * @param \Monolog\Logger $logger Monolog logger
 	 * @param int $level Message level
 	 */
-	public function __construct(\Monolog\Logger $logger, $level)
+	public function __construct(\Monolog\Logger $logger, int $level)
 	{
 		$this->logger = $logger;
 		$this->level = $level;
@@ -54,9 +54,9 @@ class MonologLogger implements LoggerInterface
 	/**
 	 * Logs the given message.
 	 *
-	 * @param $message Message to be logged
+	 * @param string $message Message to be logged
 	 */
-	public function log($message)
+	public function log(string $message)
 	{
 		$this->logger->addRecord($this->level, $message);
 	}

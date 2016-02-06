@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -56,7 +56,7 @@ abstract class AbstractFilter implements \Jyxo\Input\FilterInterface
 	 * Filters a value.
 	 *
 	 * @param mixed $in Object to be filtered
-	 * @return \Jyxo\Input\FilterInterface This object instance
+	 * @return mixed
 	 */
 	public function filter($in)
 	{

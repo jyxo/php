@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -37,7 +37,7 @@ class StringLengthLessThan extends \Jyxo\Input\Validator\AbstractValidator
 	 *
 	 * @param integer $max Maximal string length (value length must be lower)
 	 */
-	public function __construct($max)
+	public function __construct(int $max)
 	{
 		$this->setMax($max);
 	}
@@ -49,10 +49,8 @@ class StringLengthLessThan extends \Jyxo\Input\Validator\AbstractValidator
 	 * @return \Jyxo\Input\Validator\StringLengthLessThan
 	 * @throws \InvalidArgumentException If the maximal length is negative or zero
 	 */
-	public function setMax($max)
+	public function setMax(int $max): self
 	{
-		$max = (int) $max;
-
 		if ($max <= 0) {
 			throw new \InvalidArgumentException('Length of string must be greater than zero.');
 		}
@@ -67,7 +65,7 @@ class StringLengthLessThan extends \Jyxo\Input\Validator\AbstractValidator
 	 *
 	 * @return integer
 	 */
-	public function getMax()
+	public function getMax(): int
 	{
 		return $this->max;
 	}
@@ -78,7 +76,7 @@ class StringLengthLessThan extends \Jyxo\Input\Validator\AbstractValidator
 	 * @param mixed $value Input value
 	 * @return boolean
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
 		return mb_strlen((string) $value, 'utf-8') < $this->getMax();
 	}

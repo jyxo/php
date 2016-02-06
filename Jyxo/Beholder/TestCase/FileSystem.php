@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -37,11 +37,11 @@ class FileSystem extends \Jyxo\Beholder\TestCase
 	 * @param string $description Test description
 	 * @param string $dir Tested directory
 	 */
-	public function __construct($description, $dir)
+	public function __construct(string $description, string $dir)
 	{
 		parent::__construct($description);
 
-		$this->dir = (string) $dir;
+		$this->dir = $dir;
 	}
 
 	/**
@@ -49,9 +49,9 @@ class FileSystem extends \Jyxo\Beholder\TestCase
 	 *
 	 * @return \Jyxo\Beholder\Result
 	 */
-	public function run()
+	public function run(): \Jyxo\Beholder\Result
 	{
-		$random = md5(uniqid(time(), true));
+		$random = md5(uniqid((string) time(), true));
 		$path = $this->dir . '/beholder-' . $random . '.txt';
 		$content = $random;
 

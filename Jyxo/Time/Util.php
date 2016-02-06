@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -52,17 +52,17 @@ class Util
 	 * @param integer $now Current date/time
 	 * @return \Jyxo\Time\Time
 	 */
-	public static function nextMonth(\Jyxo\Time\Time $now = null)
+	public static function nextMonth(\Jyxo\Time\Time $now = null): Time
 	{
 		$now = $now ? $now->unix : time();
 
 		$nextMonth = date('n', $now) + 1;
-		$thisYear = date('Y', $now);
+		$thisYear = (int) date('Y', $now);
 		// Actual date vs. next month's number of days
-		$day = min(date('j', $now), date('t', mktime(0, 0, 0, $nextMonth, 1, $thisYear)));
+		$day = min((int) date('j', $now), (int) date('t', mktime(0, 0, 0, $nextMonth, 1, $thisYear)));
 
 		// Create the date
-		$date = mktime(date('H', $now), date('i', $now), date('s', $now), $nextMonth, $day, $thisYear);
+		$date = mktime((int) date('H', $now), (int) date('i', $now), (int) date('s', $now), $nextMonth, $day, $thisYear);
 		return new Time($date);
 	}
 
@@ -72,7 +72,7 @@ class Util
 	 * @param \Jyxo\Time\Time $day Date to be checked
 	 * @return boolean
 	 */
-	public static function isWorkDay(\Jyxo\Time\Time $day)
+	public static function isWorkDay(\Jyxo\Time\Time $day): bool
 	{
 		$holidays = self::$holidays;
 

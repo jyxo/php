@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -91,7 +91,7 @@ class Color
 	 *
 	 * @return \Jyxo\Color
 	 */
-	public function toInverse()
+	public function toInverse(): self
 	{
 		$negative = new self();
 		// Subtracts color component values from the maximum luminance
@@ -106,7 +106,7 @@ class Color
 	 *
 	 * @return \Jyxo\Color
 	 */
-	public function toGrayScale()
+	public function toGrayScale(): self
 	{
 		$gray = new self();
 		$gray->setLuminance($this->getLuminance());
@@ -118,7 +118,7 @@ class Color
 	 *
 	 * @return string
 	 */
-	public function __toString()
+	public function __toString(): string
 	{
 		return '#' . $this->getHex();
 	}
@@ -128,7 +128,7 @@ class Color
 	 *
 	 * @return array
 	 */
-	public function getRgb()
+	public function getRgb(): array
 	{
 		return [
 			$this->red,
@@ -142,7 +142,7 @@ class Color
 	 *
 	 * @return string
 	 */
-	public function getHex()
+	public function getHex(): string
 	{
 		return str_pad(dechex($this->red), 2, '0', STR_PAD_LEFT)
 			. str_pad(dechex($this->green), 2, '0', STR_PAD_LEFT)
@@ -154,7 +154,7 @@ class Color
 	 *
 	 * @return integer
 	 */
-	public function getBinary()
+	public function getBinary(): int
 	{
 		// Black or white corresponds to the most significant bit value
 		$luminance = $this->getLuminance();
@@ -166,7 +166,7 @@ class Color
 	 *
 	 * @return integer
 	 */
-	public function getRed()
+	public function getRed(): int
 	{
 		return $this->red;
 	}
@@ -177,7 +177,7 @@ class Color
 	 * @param integer|string $red Component luminance
 	 * @return \Jyxo\Color
 	 */
-	public function setRed($red)
+	public function setRed($red): self
 	{
 		$this->red = $this->toInt($red);
 		return $this;
@@ -188,7 +188,7 @@ class Color
 	 *
 	 * @return integer
 	 */
-	public function getGreen()
+	public function getGreen(): int
 	{
 		return $this->green;
 	}
@@ -199,7 +199,7 @@ class Color
 	 * @param integer|string $green Component luminance
 	 * @return \Jyxo\Color
 	 */
-	public function setGreen($green)
+	public function setGreen($green): self
 	{
 		$this->green = $this->toInt($green);
 		return $this;
@@ -210,7 +210,7 @@ class Color
 	 *
 	 * @return integer
 	 */
-	public function getBlue()
+	public function getBlue(): int
 	{
 		return $this->blue;
 	}
@@ -221,7 +221,7 @@ class Color
 	 * @param integer|string $blue Component luminance
 	 * @return \Jyxo\Color
 	 */
-	public function setBlue($blue)
+	public function setBlue($blue): self
 	{
 		$this->blue = $this->toInt($blue);
 		return $this;
@@ -232,7 +232,7 @@ class Color
 	 *
 	 * @return integer
 	 */
-	public function getLuminance()
+	public function getLuminance(): int
 	{
 		$luminance = 0.11 * $this->red + 0.59 * $this->green + 0.3 * $this->blue;
 		return (integer) floor($luminance);
@@ -244,7 +244,7 @@ class Color
 	 * @param integer|string $luminance Luminance
 	 * @return \Jyxo\Color
 	 */
-	public function setLuminance($luminance)
+	public function setLuminance($luminance): self
 	{
 		$luminance = $this->toInt($luminance);
 		$this->red = $luminance;
@@ -260,7 +260,7 @@ class Color
 	 * @return \Jyxo\Color
 	 * @throws \InvalidArgumentException If an invalid hexadecimal definition was provided
 	 */
-	private function initFromHex($hex)
+	private function initFromHex(string $hex): self
 	{
 		// Trim the hashmark if present
 		$hex = ltrim($hex, '#');
@@ -285,7 +285,7 @@ class Color
 	 * @param array $rgb Color definition
 	 * @return \Jyxo\Color
 	 */
-	private function initFromRgb(array $rgb)
+	private function initFromRgb(array $rgb): self
 	{
 		$this->setRed($rgb[0])
 			->setGreen($rgb[1])
@@ -299,7 +299,7 @@ class Color
 	 * @param integer $int Color definition
 	 * @return \Jyxo\Color
 	 */
-	private function initFromInt($int)
+	private function initFromInt(int $int): self
 	{
 		$int = min([$int, 0xFFFFFF]);
 		$this->red = self::LUM_MAX & ($int >> 16);
@@ -314,7 +314,7 @@ class Color
 	 * @param integer|string $value Luminance value
 	 * @return integer
 	 */
-	private function toInt($value)
+	private function toInt($value): int
 	{
 		if (is_string($value)) {
 			$value = hexdec($value);

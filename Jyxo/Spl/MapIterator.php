@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -46,7 +46,7 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 	 * @param callback|\Closure $map Applied callback or closure
 	 * @throws \InvalidArgumentException Invalid source data or callback is not callable
 	 */
-	public function __construct($data, $map)
+	public function __construct($data, callable $map)
 	{
 		if (is_array($data)) {
 			$this->iterator = new \ArrayIterator($data);
@@ -57,9 +57,6 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 		} else {
 			throw new \InvalidArgumentException('Supplied data argument is not traversable.');
 		}
-		if (!is_callable($map)) {
-			throw new \InvalidArgumentException('Supplied callback is not callable.');
-		}
 
 		$this->map = $map;
 	}
@@ -69,9 +66,8 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 	 *
 	 * @return integer
 	 */
-	public function count()
+	public function count(): int
 	{
-		$count = 0;
 		if ($this->iterator instanceof \Countable) {
 			$count = count($this->iterator);
 		} else {
@@ -101,7 +97,7 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 	 *
 	 * @return boolean
 	 */
-	public function valid()
+	public function valid(): bool
 	{
 		return $this->iterator->valid();
 	}
@@ -142,7 +138,7 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 	 *
 	 * @return array
 	 */
-	public function toArray()
+	public function toArray(): array
 	{
 		return array_map($this->map, iterator_to_array($this->iterator));
 	}
@@ -152,7 +148,7 @@ class MapIterator implements \Countable, \Jyxo\Spl\ArrayCopy, \OuterIterator, \S
 	 *
 	 * @return \Iterator
 	 */
-	public function getInnerIterator()
+	public function getInnerIterator(): \Iterator
 	{
 		return $this->iterator;
 	}

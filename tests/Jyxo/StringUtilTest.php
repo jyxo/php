@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -86,7 +86,7 @@ class StringUtilTest extends \PHPUnit_Framework_TestCase
 	 * @param string $etc "Etc" definition
 	 * @return string
 	 */
-	private function checkStringWordCut($string, $max = 8, $etc = '...')
+	private function checkStringWordCut(string $string, int $max = 8, string $etc = '...'): string
 	{
 		$cut = StringUtil::cutWords($string, $max, $etc);
 
@@ -118,7 +118,7 @@ class StringUtilTest extends \PHPUnit_Framework_TestCase
 	 * @param string $etc "Etc" definition
 	 * @return string
 	 */
-	private function checkStringCut($string, $max = 16, $etc = '...')
+	private function checkStringCut(string $string, int $max = 16, string $etc = '...'): string
 	{
 		$cut = StringUtil::cut($string, $max, $etc);
 		// &hellip; has length of 1

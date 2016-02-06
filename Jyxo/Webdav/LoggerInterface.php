@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -28,8 +28,8 @@ interface LoggerInterface
 	/**
 	 * Logs the given message.
 	 *
-	 * @param $message Message to be logged
+	 * @param string $message Message to be logged
 	 */
-	public function log($message);
+	public function log(string $message);
 
 }

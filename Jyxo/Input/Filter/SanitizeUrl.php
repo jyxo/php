@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -33,7 +33,7 @@ class SanitizeUrl extends \Jyxo\Input\Filter\AbstractFilter
 	 */
 	protected function filterValue($in)
 	{
-		if (!preg_match('~^(?:http|ftp)s?://~i', $in)) {
+		if (!preg_match('~^(?:http|ftp)s?://~i', (string) $in)) {
 			$in = 'http://' .  $in;
 		}
 

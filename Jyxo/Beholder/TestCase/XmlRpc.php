@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -69,15 +69,15 @@ class XmlRpc extends \Jyxo\Beholder\TestCase
 	 * @param array $options Request options
 	 * @param integer $timeout Timeout
 	 */
-	public function __construct($description, $url, $method, array $params, array $options = [], $timeout = 2)
+	public function __construct(string $description, string $url, string $method, array $params, array $options = [], int $timeout = 2)
 	{
 		parent::__construct($description);
 
-		$this->url = (string) $url;
-		$this->method = (string) $method;
+		$this->url = $url;
+		$this->method = $method;
 		$this->params = $params;
 		$this->options = $options;
-		$this->timeout = (int) $timeout;
+		$this->timeout = $timeout;
 	}
 
 	/**
@@ -85,7 +85,7 @@ class XmlRpc extends \Jyxo\Beholder\TestCase
 	 *
 	 * @return \Jyxo\Beholder\Result
 	 */
-	public function run()
+	public function run(): \Jyxo\Beholder\Result
 	{
 		// The xmlrpc extension is required
 		if (!extension_loaded('xmlrpc')) {

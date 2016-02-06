@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -57,7 +57,7 @@ class Server extends \Jyxo\Rpc\Server
 	 *
 	 * @param string $func Function definition
 	 */
-	protected function register($func)
+	protected function register(string $func)
 	{
 		xmlrpc_server_register_method($this->server, $func, [$this, 'call']);
 	}

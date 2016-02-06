@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -33,7 +33,7 @@ class IsBirthNumber extends \Jyxo\Input\Validator\AbstractValidator
 	 * @param mixed $value Input value
 	 * @return boolean
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
 		$value = (string) $value;
 
@@ -78,7 +78,7 @@ class IsBirthNumber extends \Jyxo\Input\Validator\AbstractValidator
 		}
 
 		// Date check
-		if (!checkdate($month, $day, $year)) {
+		if (!checkdate((int) $month, (int) $day, (int) $year)) {
 			return false;
 		}
 

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -198,15 +198,6 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Tests registering a not callable function.
-	 */
-	public function testInvalidLogCallback()
-	{
-		$this->expectException(\InvalidArgumentException::class);
-		$this->rpc->enableLogging('file.log', 'dummy');
-	}
-
-	/**
 	 * Tests registering a non-existent function.
 	 */
 	public function testRegisterNonExistingFunction()
@@ -306,12 +297,12 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return \Jyxo\Rpc\Server
 	 */
-	abstract protected function getServerInstance();
+	abstract protected function getServerInstance(): \Jyxo\Rpc\Server;
 
 	/**
 	 * Returns test files extension.
 	 *
 	 * @return string
 	 */
-	abstract protected function getFileExtension();
+	abstract protected function getFileExtension(): string;
 }

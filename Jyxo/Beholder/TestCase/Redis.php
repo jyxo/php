@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -53,13 +53,13 @@ class Redis extends \Jyxo\Beholder\TestCase
 	 * @param integer $port Port
 	 * @param integer $database Database index
 	 */
-	public function __construct($description, $host, $port = 6379, $database = 0)
+	public function __construct(string $description, string $host, int $port = 6379, int $database = 0)
 	{
 		parent::__construct($description);
 
-		$this->host = (string) $host;
-		$this->port = (int) $port;
-		$this->database = (int) $database;
+		$this->host = $host;
+		$this->port = $port;
+		$this->database = $database;
 	}
 
 	/**
@@ -67,14 +67,14 @@ class Redis extends \Jyxo\Beholder\TestCase
 	 *
 	 * @return \Jyxo\Beholder\Result
 	 */
-	public function run()
+	public function run(): \Jyxo\Beholder\Result
 	{
 		// The redis extension or Predis library is required
 		if (!extension_loaded('redis') && !class_exists(\Predis\Client::class)) {
 			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Extension redis or Predis library required');
 		}
 
-		$random = md5(uniqid(time(), true));
+		$random = md5(uniqid((string) time(), true));
 		$key = 'beholder-' . $random;
 		$value = $random;
 

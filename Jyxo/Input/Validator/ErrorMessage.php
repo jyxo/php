@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -31,5 +31,5 @@ interface ErrorMessage
 	 *
 	 * @return string
 	 */
-	public function getError();
+	public function getError(): string;
 }

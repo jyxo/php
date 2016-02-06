@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -114,10 +114,10 @@ class Executor
 	 * @param string $project Project name
 	 * @param array $params Parameters; possible parameters are: include, exclude, output
 	 */
-	public function __construct($project, array $params = [])
+	public function __construct(string $project, array $params = [])
 	{
 		// Project name
-		$this->project = (string) $project;
+		$this->project = $project;
 
 		// Filters
 		if (!empty($params[self::PARAM_INCLUDE])) {
@@ -148,7 +148,7 @@ class Executor
 	 *
 	 * @return boolean Returns if all tests were successful
 	 */
-	public function run()
+	public function run(): bool
 	{
 		// Filters tests
 		foreach (array_keys($this->tests) as $ident) {
@@ -214,9 +214,9 @@ class Executor
 	 * @param \Jyxo\Beholder\TestCase $test Test instance
 	 * @return \Jyxo\Beholder\Executor
 	 */
-	public function addTest($ident, \Jyxo\Beholder\TestCase $test)
+	public function addTest(string $ident, \Jyxo\Beholder\TestCase $test): self
 	{
-		$this->tests[(string) $ident] = $test;
+		$this->tests[$ident] = $test;
 
 		return $this;
 	}
@@ -228,7 +228,7 @@ class Executor
 	 * @return array
 	 * @throws \UnexpectedValueException If the test returned an unknown result value
 	 */
-	private function runTest($ident)
+	private function runTest(string $ident): array
 	{
 		// Runs the test
 		$timer = \Jyxo\Timer::start();
@@ -252,7 +252,7 @@ class Executor
 	 * @param string $ident Test identifier
 	 * @return boolean
 	 */
-	private function includeTest($ident)
+	private function includeTest(string $ident): bool
 	{
 		// If the test is not among the allowed ones, return false
 		$include = false;
@@ -284,7 +284,7 @@ class Executor
 	 * @param string $string String to be matched
 	 * @return boolean
 	 */
-	private function patternMatch($pattern, $string)
+	private function patternMatch(string $pattern, string $string): bool
 	{
 		return fnmatch($pattern, $string);
 	}
@@ -295,7 +295,7 @@ class Executor
 	 * @param boolean $allSucceeded Have all tests been successful
 	 * @param array $outputData Test results
 	 */
-	private function writeHtml($allSucceeded, array $outputData)
+	private function writeHtml(bool $allSucceeded, array $outputData)
 	{
 		header('Content-Type: text/html; charset=utf-8');
 		echo '<head>' . "\n";
@@ -355,7 +355,7 @@ class Executor
 	 * @param boolean $allSucceeded Have all tests been successful
 	 * @param array $outputData Test results
 	 */
-	private function writeText($allSucceeded, array $outputData)
+	private function writeText(bool $allSucceeded, array $outputData)
 	{
 		// HTML is sent on purpose
 		header('Content-Type: text/html; charset=utf-8');

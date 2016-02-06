@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -34,6 +34,6 @@ class LowerCase extends \Jyxo\Input\Filter\AbstractFilter
 	 */
 	protected function filterValue($in)
 	{
-		return mb_strtolower($in, 'utf-8');
+		return mb_strtolower((string) $in, 'utf-8');
 	}
 }

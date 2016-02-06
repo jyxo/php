@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -43,7 +43,7 @@ class Upload
 	 *
 	 * @param string $index File index
 	 */
-	public function __construct($index)
+	public function __construct(string $index)
 	{
 		$this->index = $index;
 	}
@@ -53,7 +53,7 @@ class Upload
 	 *
 	 * @return \Jyxo\Input\Upload
 	 */
-	public function confirmUpload()
+	public function confirmUpload(): self
 	{
 		// Isset is just a simple check, it is not sufficient!
 		$this->success = isset($_FILES[$this->index]);
@@ -65,7 +65,7 @@ class Upload
 	 *
 	 * @return string
 	 */
-	public function tmpName()
+	public function tmpName(): string
 	{
 		return isset($_FILES[$this->index]) ? $_FILES[$this->index]['tmp_name'] : null;
 	}
@@ -75,7 +75,7 @@ class Upload
 	 *
 	 * @return integer
 	 */
-	public function error()
+	public function error(): int
 	{
 		return isset($_FILES[$this->index]) ? $_FILES[$this->index]['error'] : null;
 	}
@@ -86,7 +86,7 @@ class Upload
 	 * @param string $destination File destination
 	 * @return boolean
 	 */
-	public function move($destination)
+	public function move(string $destination): bool
 	{
 		$result = false;
 		if ($this->success) {
@@ -100,7 +100,7 @@ class Upload
 	 *
 	 * @return string
 	 */
-	public function __toString()
+	public function __toString(): string
 	{
 		return $this->tmpName();
 	}
@@ -108,7 +108,7 @@ class Upload
 	/**
 	 * Returns file extension.
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	public function extension()
 	{
@@ -122,7 +122,7 @@ class Upload
 	/**
 	 * Returns file name.
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	public function filename()
 	{

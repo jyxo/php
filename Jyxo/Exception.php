@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -29,7 +29,7 @@ class Exception extends \Exception
 	 *
 	 * @return array
 	 */
-	public function getAllPrevious()
+	public function getAllPrevious(): array
 	{
 		$stack = [];
 		$previous = $this->getPrevious();

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -40,7 +40,7 @@ class StringAttachment extends \Jyxo\Mail\Email\Attachment
 	 * @param string $mimeType Attachment mime-type
 	 * @param string $encoding Source encoding
 	 */
-	public function __construct($content, $name, $mimeType = 'application/octet-stream', $encoding = '')
+	public function __construct(string $content, string $name, string $mimeType = 'application/octet-stream', string $encoding = '')
 	{
 		$this->setContent($content);
 		$this->setName($name);
@@ -56,13 +56,13 @@ class StringAttachment extends \Jyxo\Mail\Email\Attachment
 	 * @return \Jyxo\Mail\Email\Attachment\StringAttachment
 	 * @throws \InvalidArgumentException If an incompatible encoding was provided
 	 */
-	public function setEncoding($encoding)
+	public function setEncoding(string $encoding): self
 	{
 		if ((!empty($encoding)) && (!\Jyxo\Mail\Encoding::isCompatible($encoding))) {
 			throw new \InvalidArgumentException(sprintf('Incompatible encoding %s', $encoding));
 		}
 
-		$this->encoding = (string) $encoding;
+		$this->encoding = $encoding;
 
 		return $this;
 	}

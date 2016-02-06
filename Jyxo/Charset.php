@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -32,7 +32,7 @@ class Charset
 	 * @param string $string String to detect
 	 * @return string
 	 */
-	public static function detect($string)
+	public static function detect(string $string): string
 	{
 		$charset = mb_detect_encoding($string, 'UTF-8, ISO-8859-2, ASCII, UTF-7, EUC-JP, SJIS, eucJP-win, SJIS-win, JIS, ISO-2022-JP');
 
@@ -53,11 +53,15 @@ class Charset
 	 * @param string $charset Actual charset
 	 * @return string
 	 */
-	public static function convert2utf($string, $charset = '')
+	public static function convert2utf(string $string, string $charset = ''): string
 	{
 		$charset = $charset ?: self::detect($string);
 		// Detection sometimes fails or the string may be in wrong format, so we remove invalid UTF-8 letters
-		return @iconv($charset, 'UTF-8//TRANSLIT//IGNORE', $string);
+		$converted = @iconv($charset, 'UTF-8//TRANSLIT//IGNORE', $string);
+		if ($converted === false) {
+			return '';
+		}
+		return $converted;
 	}
 
 	/**
@@ -66,7 +70,7 @@ class Charset
 	 * @param string $string String to convert
 	 * @return string
 	 */
-	public static function utf2ident($string)
+	public static function utf2ident(string $string): string
 	{
 		// Convert to lowercase ASCII and than all non-alphanumeric characters to dashes
 		$ident = preg_replace('~[^a-z0-9]~', '-', strtolower(self::utf2ascii($string)));
@@ -80,7 +84,7 @@ class Charset
 	 * @param string $string String to convert
 	 * @return string
 	 */
-	public static function utf2ascii($string)
+	public static function utf2ascii(string $string): string
 	{
 		static $replace = [
 			'á' => 'a', 'Á' => 'A', 'ä' => 'a', 'Ä' => 'A', 'â' => 'a', 'Â' => 'A', 'ă' => 'a', 'Ă' => 'A', 'ą' => 'a', 'Ą' => 'A',
@@ -102,7 +106,7 @@ class Charset
 	 * @param string $string String to convert
 	 * @return string
 	 */
-	public static function russian2ascii($string)
+	public static function russian2ascii(string $string): string
 	{
 		static $russian = [
 			'КВ', 'кв', 'КС', 'кс', 'А', 'а', 'Б', 'б', 'Ц', 'ц', 'Д', 'д', 'Э', 'э', 'Е', 'е', 'Ф', 'ф', 'Г', 'г', 'Х', 'х',
@@ -123,7 +127,7 @@ class Charset
 	 * @param string $string String to convert
 	 * @return string
 	 */
-	public static function win2ascii($string)
+	public static function win2ascii(string $string): string
 	{
 		return strtr($string,
 			"\xe1\xe4\xe8\xef\xe9\xec\xed\xbe\xe5\xf2\xf3\xf6\xf5\xf4\xf8\xe0\x9a\x9d\xfa\xf9\xfc\xfb\xfd\x9e"
@@ -139,7 +143,7 @@ class Charset
 	 * @param string $string String to convert
 	 * @return string
 	 */
-	public static function iso2ascii($string)
+	public static function iso2ascii(string $string): string
 	{
 		return strtr($string,
 			"\xe1\xe4\xe8\xef\xe9\xec\xed\xb5\xe5\xf2\xf3\xf6\xf5\xf4\xf8\xe0\xb9\xbb\xfa\xf9\xfc\xfb\xfd\xbe"
@@ -154,9 +158,13 @@ class Charset
 	 * @param string $string String to fix
 	 * @return string
 	 */
-	public static function fixUtf($string)
+	public static function fixUtf(string $string): string
 	{
-		return @iconv('UTF-8', 'UTF-8//TRANSLIT//IGNORE', $string);
+		$fixed = @iconv('UTF-8', 'UTF-8//TRANSLIT//IGNORE', $string);
+		if ($fixed === false) {
+			return '';
+		}
+		return $fixed;
 	}
 
 }

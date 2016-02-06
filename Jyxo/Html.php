@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -41,7 +41,7 @@ class Html
 	 * @param string $text Input text to be tested
 	 * @return boolean
 	 */
-	public static function is($text)
+	public static function is(string $text): bool
 	{
 		return (bool) preg_match('~<[a-z][a-z0-9]*(\\s[^<]*)?>~i', $text);
 	}
@@ -53,7 +53,7 @@ class Html
 	 * @param string $html Input HTML source
 	 * @return string
 	 */
-	public static function repair($html)
+	public static function repair(string $html): string
 	{
 		// HTML fixing
 		static $config = [
@@ -114,7 +114,7 @@ class Html
 	 * @param array $tags Tags to be removed
 	 * @return string
 	 */
-	public static function removeTags($html, array $tags = [])
+	public static function removeTags(string $html, array $tags = []): string
 	{
 		// Default set of tags
 		static $default = [
@@ -164,10 +164,8 @@ class Html
 	 * @param string $tag Tags to be processed
 	 * @return string
 	 */
-	public static function removeInnerTags($html, $tag)
+	public static function removeInnerTags(string $html, string $tag): string
 	{
-		$tag = (string) $tag;
-
 		if (preg_match_all('~(?:<' . $tag . '>)|(?:</' . $tag . '>)|(?:<[^>]+>)|(?:[^<]+)~i', $html, $matches)) {
 			$html = '';
 			$level = 0;
@@ -200,7 +198,7 @@ class Html
 	 * @param array $attributes Attributes to be removed
 	 * @return string
 	 */
-	public static function removeAttributes($html, array $attributes = [])
+	public static function removeAttributes(string $html, array $attributes = []): string
 	{
 		// Default set of attributes
 		static $default = ['id', 'class'];
@@ -226,7 +224,7 @@ class Html
 	 * @param string $html HTML source code
 	 * @return string
 	 */
-	public static function removeJavascriptEvents($html)
+	public static function removeJavascriptEvents(string $html): string
 	{
 		// A tag can have multiple events, therefore it is necessary to process the source multiple times
 		while (preg_match('~<[a-z][a-z0-9]*[^>]*?\\s+on[a-z]+="[^"]*"~is', $html)) {
@@ -244,7 +242,7 @@ class Html
 	 * @param string $html HTML source code
 	 * @return string
 	 */
-	public static function removeRemoteImages($html)
+	public static function removeRemoteImages(string $html): string
 	{
 		static $remoteImages = [
 			'~(<img[^>]+src=")http(?:s)?://[^"]+(")~i',
@@ -273,7 +271,7 @@ class Html
 	 * @param string $html HTML source code
 	 * @return string
 	 */
-	public static function removeDangerous($html)
+	public static function removeDangerous(string $html): string
 	{
 		static $dangerous = [
 			'~\\s+href="javascript[^"]*"~i',
@@ -292,7 +290,7 @@ class Html
 	 * @param string $html HTML source code
 	 * @return string
 	 */
-	public static function getBody($html)
+	public static function getBody(string $html): string
 	{
 		// If the source code contains <body>, return this element's contents
 		if (preg_match('~<body([^>]*)>(.*?)</body>~is', $html, $matches)) {
@@ -317,7 +315,7 @@ class Html
 	 * @param boolean $convertLinks Convert urls and emails to links
 	 * @return string
 	 */
-	public static function fromText($text, $convertLinks = true)
+	public static function fromText(string $text, bool $convertLinks = true): string
 	{
 		// Trimming whitespace (except spaces)
 		$text = trim($text, "\r\n");
@@ -386,7 +384,7 @@ class Html
 	 * @param string $text Input text
 	 * @return string
 	 */
-	public static function linkFromText($text)
+	public static function linkFromText(string $text): string
 	{
 		$patternGenericTld = '(?:tld|aero|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|asia|post|geo)';
 		$patternTld = '(?-i:' . $patternGenericTld . '|[a-z]{2})';
@@ -459,7 +457,7 @@ class Html
 	 * @param string $html HTML source code
 	 * @return string
 	 */
-	public static function toText($html)
+	public static function toText(string $html): string
 	{
 		$text = $html;
 
@@ -580,7 +578,7 @@ class Html
 	 * @param string $text Text with HTML fragments
 	 * @return string
 	 */
-	private static function linkToText($text)
+	private static function linkToText(string $text): string
 	{
 		return preg_replace_callback('~<a\\s+(?:[^>]+\\s+)*href\\s*=\\s*"([^"]+)"(?:\\s+[^>]*)?>(.+?)</a>~is', function($matches) {
 			$url = trim($matches[1]);
@@ -612,7 +610,7 @@ class Html
 	 * @param string $text Text with HTML fragments
 	 * @return string
 	 */
-	private static function listToText($text)
+	private static function listToText(string $text): string
 	{
 		static $symbols = ['#', '*', 'o', '+'];
 
@@ -665,7 +663,7 @@ class Html
 	 * @param string $text Text with HTML fragments
 	 * @return string
 	 */
-	private static function blockquoteToText($text)
+	private static function blockquoteToText(string $text): string
 	{
 		if (preg_match_all('~(?:<blockquote[^>]*>\\s*)|(?:\\s*</blockquote>)|(?:.+?(?=</?blockquote)|(?:.+))~is', $text, $matches) > 0) {
 			$text = '';

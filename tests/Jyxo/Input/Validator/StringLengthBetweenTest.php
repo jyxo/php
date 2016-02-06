@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -100,30 +100,6 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->expectException(\InvalidArgumentException::class);
 		$validator = new StringLengthBetween(12, 6);
-	}
-
-	/**
-	 * Tests setters and getters work.
-	 */
-	public function testGettersSetters()
-	{
-		$testcases = [
-			[0, 3, 1, 4],
-			[0, PHP_INT_MAX, 1, PHP_INT_MAX - 1],
-			[24, 42, 30, 60]
-		];
-
-		foreach ($testcases as $testcase) {
-			list ($min, $max, $newMin, $newMax) = $testcase;
-			$validator = new StringLengthBetween($min, $max);
-
-			$this->assertEquals($min, $validator->getMin(), 'minimum not set');
-			$this->assertEquals($max, $validator->getMax(), 'maximum not set');
-			$this->assertEquals(get_class($validator), get_class($validator->setMin($newMin)), 'setMin does not support fluent interface');
-			$this->assertEquals(get_class($validator), get_class($validator->setMax($newMax)), 'setMax does not support fluent interface');
-			$this->assertEquals($newMin, $validator->getMin(), 'minimum not changed');
-			$this->assertEquals($newMax, $validator->getMax(), 'maximum not changed');
-		}
 	}
 
 	/**

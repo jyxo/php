@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -69,7 +69,7 @@ class CountableLimitIterator extends \LimitIterator implements \Countable
 	 * @param integer $mode Result counting mode
 	 * @throws \InvalidArgumentException Inner iterator is not countable
 	 */
-	public function __construct (\Iterator $iterator, $offset = 0, $count = -1, $mode = self::MODE_PASS)
+	public function __construct (\Iterator $iterator, int $offset = 0, int $count = -1, int $mode = self::MODE_PASS)
 	{
 		if (!($iterator instanceof \Countable)) {
 			throw new \InvalidArgumentException('Supplied iterator must be countable');
@@ -86,7 +86,7 @@ class CountableLimitIterator extends \LimitIterator implements \Countable
 	 *
 	 * @return integer
 	 */
-	public function count()
+	public function count(): int
 	{
 		$count = count($this->getInnerIterator());
 		if (self::MODE_LIMIT === $this->mode) {

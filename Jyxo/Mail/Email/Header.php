@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -45,7 +45,7 @@ class Header extends \Jyxo\Spl\Object
 	 * @param string $name Header name
 	 * @param string $value Value
 	 */
-	public function __construct($name, $value)
+	public function __construct(string $name, string $value)
 	{
 		$this->setName($name);
 		$this->setValue($value);
@@ -56,7 +56,7 @@ class Header extends \Jyxo\Spl\Object
 	 *
 	 * @return string
 	 */
-	public function getName()
+	public function getName(): string
 	{
 		return $this->name;
 	}
@@ -67,9 +67,9 @@ class Header extends \Jyxo\Spl\Object
 	 * @param string $name Name
 	 * @return \Jyxo\Mail\Email\Header
 	 */
-	public function setName($name)
+	public function setName(string $name): self
 	{
-		$this->name = (string) $name;
+		$this->name = $name;
 
 		return $this;
 	}
@@ -79,7 +79,7 @@ class Header extends \Jyxo\Spl\Object
 	 *
 	 * @return string
 	 */
-	public function getValue()
+	public function getValue(): string
 	{
 		return $this->value;
 	}
@@ -90,9 +90,9 @@ class Header extends \Jyxo\Spl\Object
 	 * @param string $value Value
 	 * @return \Jyxo\Mail\Email\Header
 	 */
-	public function setValue($value)
+	public function setValue(string $value): self
 	{
-		$this->value = (string) $value;
+		$this->value = $value;
 
 		return $this;
 	}

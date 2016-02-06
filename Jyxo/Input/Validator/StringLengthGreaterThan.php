@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -37,7 +37,7 @@ class StringLengthGreaterThan extends \Jyxo\Input\Validator\AbstractValidator
 	 *
 	 * @param integer $min Minimal string length (value length must be greater)
 	 */
-	public function __construct($min)
+	public function __construct(int $min)
 	{
 		$this->setMin($min);
 	}
@@ -49,10 +49,8 @@ class StringLengthGreaterThan extends \Jyxo\Input\Validator\AbstractValidator
 	 * @return \Jyxo\Input\Validator\StringLengthGreaterThan
 	 * @throws \InvalidArgumentException If the minimal length is negative
 	 */
-	public function setMin($min)
+	public function setMin(int $min): self
 	{
-		$min = (int) $min;
-
 		if ($min < 0) {
 			throw new \InvalidArgumentException('Length of string must be greater than zero.');
 		}
@@ -67,7 +65,7 @@ class StringLengthGreaterThan extends \Jyxo\Input\Validator\AbstractValidator
 	 *
 	 * @return integer
 	 */
-	public function getMin()
+	public function getMin(): int
 	{
 		return $this->min;
 	}
@@ -78,7 +76,7 @@ class StringLengthGreaterThan extends \Jyxo\Input\Validator\AbstractValidator
 	 * @param mixed $value Input value
 	 * @return boolean
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
 		return mb_strlen((string) $value, 'utf-8') > $this->getMin();
 	}

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -46,9 +46,9 @@ class Callback extends \Jyxo\Input\Validator\AbstractValidator
 	 * Optinally accepts additional parameters that will be used as additional callback parameters.
 	 * The validated value will allways be used as the callback's first parameter.
 	 *
-	 * @param string|array|\Closure $callback Validation callback
+	 * @param callable $callback Validation callback
 	 */
-	public function __construct($callback)
+	public function __construct(callable $callback)
 	{
 		$this->setCallback($callback);
 		$this->setAdditionalParams(array_slice(func_get_args(), 1));
@@ -57,20 +57,12 @@ class Callback extends \Jyxo\Input\Validator\AbstractValidator
 	/**
 	 * Sets the validation callback.
 	 *
-	 * @param string|array|\Closure $callback Validation callback
+	 * @param callable $callback Validation callback
 	 * @return \Jyxo\Input\Validator\Callback
 	 * @throws \Jyxo\Input\Validator\Exception On invalid callback definition
 	 */
-	public function setCallback($callback)
+	public function setCallback(callable $callback): self
 	{
-		if (is_string($callback) || is_array($callback)) {
-			if (!is_callable($callback)) {
-				throw new Exception('Invalid callback definition');
-			}
-		} elseif (!is_object($callback) || !$callback instanceof \Closure) {
-			throw new Exception('Invalid callback type; only string, array and \Closure instance are allowed');
-		}
-
 		$this->callback = $callback;
 
 		return $this;
@@ -92,7 +84,7 @@ class Callback extends \Jyxo\Input\Validator\AbstractValidator
 	 * @param array $params Parameters array
 	 * @return \Jyxo\Input\Validator\Callback
 	 */
-	public function setAdditionalParams(array $params = [])
+	public function setAdditionalParams(array $params = []): self
 	{
 		$this->additionalParams = $params;
 
@@ -104,7 +96,7 @@ class Callback extends \Jyxo\Input\Validator\AbstractValidator
 	 *
 	 * @return array
 	 */
-	public function getAdditionalParams()
+	public function getAdditionalParams(): array
 	{
 		return $this->additionalParams;
 	}
@@ -115,7 +107,7 @@ class Callback extends \Jyxo\Input\Validator\AbstractValidator
 	 * @param mixed $value Input value
 	 * @return boolean
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
 		$params = $this->additionalParams;
 		array_unshift($params, $value);

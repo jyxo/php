@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -280,7 +280,7 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return \Jyxo\Mail\Email
 	 */
-	private function getEmail()
+	private function getEmail(): \Jyxo\Mail\Email
 	{
 		$email = new Email();
 		$email->setSubject('Novinky září 2009 ... a kreslící soutěž')
@@ -297,7 +297,7 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 	 * @param string $file FileAttachment with the expected result
 	 * @param \Jyxo\Mail\Sender\Result $result
 	 */
-	private function assertResult($file, \Jyxo\Mail\Sender\Result $result)
+	private function assertResult(string $file, \Jyxo\Mail\Sender\Result $result)
 	{
 		$expected = file_get_contents($this->filePath . '/' . $file);
 

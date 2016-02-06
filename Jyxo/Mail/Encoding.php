@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -75,7 +75,7 @@ class Encoding
 	 * @param string $encoding Encoding name
 	 * @return boolean
 	 */
-	public static function isCompatible($encoding)
+	public static function isCompatible(string $encoding): bool
 	{
 		static $encodings = [
 			self::BIT7 => true,
@@ -98,7 +98,7 @@ class Encoding
 	 * @return string
 	 * @throws \InvalidArgumentException If an incompatible encoding was provided
 	 */
-	public static function encode($string, $encoding, $lineLength, $lineEnd)
+	public static function encode(string $string, string $encoding, int $lineLength, string $lineEnd): string
 	{
 		switch ($encoding) {
 			case self::BASE64:
@@ -124,7 +124,7 @@ class Encoding
 	 * @param string $lineEnd Line ending
 	 * @return string
 	 */
-	private static function encodeQuotedPrintable($string, $lineLength, $lineEnd)
+	private static function encodeQuotedPrintable(string $string, int $lineLength, string $lineEnd): string
 	{
 		$encoded = \Jyxo\StringUtil::fixLineEnding(trim($string), $lineEnd);
 
@@ -189,7 +189,7 @@ class Encoding
 	 * @param string $lineEnd Line ending
 	 * @return string
 	 */
-	private static function encodeBase64($string, $lineLength, $lineEnd)
+	private static function encodeBase64(string $string, int $lineLength, string $lineEnd): string
 	{
 		return trim(chunk_split(base64_encode($string), $lineLength, $lineEnd));
 	}

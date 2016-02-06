@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -32,12 +32,12 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 
 		// Invalid date/time parts
 		$units = [
-			'second' => [-1, 61, '-1', '61'],
-			'minute' => [-1, 61, '-1', '61'],
-			'hour' => [-1, 24, '-1', '24'],
-			'day' => [0, 32, '0', '32'],
-			'month' => [0, 13, '0', '13'],
-			'year' => [1901, 2038, '1901', '2038']
+			'second' => [-1, 61],
+			'minute' => [-1, 61],
+			'hour' => [-1, 24],
+			'day' => [0, 32],
+			'month' => [0, 13],
+			'year' => [1901, 2038]
 		];
 		foreach ($units as $unit => $tests) {
 			foreach ($tests as $test) {
@@ -74,9 +74,9 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 		foreach ($tests as $test) {
 			try {
 				list($year, $month, $day) = explode('-', $test);
-				$composer->setDay($day)
-					->setMonth($month)
-					->setYear($year);
+				$composer->setDay((int) $day)
+					->setMonth((int) $month)
+					->setYear((int) $year);
 				$time = $composer->getTime();
 			} catch (\Exception $e) {
 				$this->assertInstanceOf(\Jyxo\Time\ComposerException::class, $e);
@@ -106,12 +106,12 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 		];
 		foreach ($tests as $test) {
 			preg_match('~^(\\d{4})-(\\d{2})-(\\d{2}) (\\d{2}):(\\d{2}):(\\d{2})$~', $test, $matches);
-			$composer->setDay($matches[3])
-				->setMonth($matches[2])
-				->setYear($matches[1])
-				->setHour($matches[4])
-				->setMinute($matches[5])
-				->setSecond($matches[6]);
+			$composer->setDay((int) $matches[3])
+				->setMonth((int) $matches[2])
+				->setYear((int) $matches[1])
+				->setHour((int) $matches[4])
+				->setMinute((int) $matches[5])
+				->setSecond((int) $matches[6]);
 			$time = $composer->getTime();
 			$this->assertEquals(
 				new Time($test),

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -37,9 +37,9 @@ abstract class TestCase
 	 *
 	 * @param string $description Short description
 	 */
-	public function __construct($description)
+	public function __construct(string $description)
 	{
-		$this->description = (string) $description;
+		$this->description = $description;
 	}
 
 	/**
@@ -47,14 +47,14 @@ abstract class TestCase
 	 *
 	 * @return \Jyxo\Beholder\Result
 	 */
-	abstract public function run();
+	abstract public function run(): \Jyxo\Beholder\Result;
 
 	/**
 	 * Returns the description.
 	 *
 	 * @return string
 	 */
-	public function getDescription()
+	public function getDescription(): string
 	{
 		return $this->description;
 	}

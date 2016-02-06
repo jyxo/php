@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -551,10 +551,6 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 		];
 
 		$callbacks = [
-			'is_numeric',
-			create_function('$a', 'return is_numeric($a);'),
-			'\SomeOtherPrefix\Some\Validator::isNumeric',
-			['\SomeOtherPrefix\Some\Validator', 'isNumeric'],
 			function($a) {
 				return is_numeric($a);
 			}
@@ -587,33 +583,6 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 		}
 		foreach ($wrong as $value) {
 			$this->assertFalse($validator->isValid($value));
-		}
-
-
-		// Ensure that there is no such function defined
-		$funcName = 'definitelyNonExistentFunction';
-		if (function_exists($funcName)) {
-			$this->markTestSkipped(sprintf('Function %s exists', $funcName));
-		}
-
-		// Test exception on invalid callback definition
-		$invalidCallbacks = [
-			$funcName,
-			true,
-			1,
-			new \stdClass()
-		];
-
-		foreach ($invalidCallbacks as $callback) {
-			try {
-				$validator = new Validator\Callback($callback);
-				$this->fail(sprintf('Expected exception %s.', \Jyxo\Input\Validator\Exception::class));
-			} catch (\PHPUnit_Framework_AssertionFailedError $e) {
-				throw $e;
-			} catch (\Exception $e) {
-				// Correctly thrown exception
-				$this->assertInstanceOf(\Jyxo\Input\Validator\Exception::class, $e);
-			}
 		}
 	}
 

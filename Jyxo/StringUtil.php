@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -36,10 +36,8 @@ class StringUtil
 	 * @param string $etc "etc" definition
 	 * @return string
 	 */
-	public static function cutWords($string, $length = 25, $etc = '...')
+	public static function cutWords(string $string, int $length = 25, string $etc = '...'): string
 	{
-		$length = (int) $length;
-
 		return preg_replace_callback('~[^\\s]{' . $length . ',}~', function($matches) use ($length, $etc) {
 			return StringUtil::cut($matches[0], $length, $etc);
 		}, $string);
@@ -55,7 +53,7 @@ class StringUtil
 	 * @param string $etc "etc" definition
 	 * @return string
 	 */
-	public static function cut($string, $max = 50, $etc = '...')
+	public static function cut(string $string, int $max = 50, string $etc = '...'): string
 	{
 		// Trim whitespace
 		$string = trim($string);
@@ -97,7 +95,7 @@ class StringUtil
 	 * @param string $string Input string
 	 * @return integer
 	 */
-	public static function crc($string)
+	public static function crc(string $string): int
 	{
 		$crc = crc32($string);
 		if ($crc & 0x80000000) {
@@ -114,7 +112,7 @@ class StringUtil
 	 * @param integer $length String length
 	 * @return string
 	 */
-	public static function random($length)
+	public static function random(int $length): string
 	{
 		static $chars = 'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$random = '';
@@ -131,7 +129,7 @@ class StringUtil
 	 * @param string $lineEnd Desired line ending
 	 * @return string
 	 */
-	public static function fixLineEnding($string, $lineEnd = "\n")
+	public static function fixLineEnding(string $string, string $lineEnd = "\n"): string
 	{
 		$string = str_replace("\r\n", "\n", $string);
 		$string = str_replace("\r", "\n", $string);
@@ -144,10 +142,10 @@ class StringUtil
 	 * Obfuscates an email address.
 	 *
 	 * @param string $email Email address
-	 * @param string $comment Put a comment into the address
+	 * @param bool $comment Put a comment into the address
 	 * @return string
 	 */
-	public static function obfuscateEmail($email, $comment = false)
+	public static function obfuscateEmail(string $email, bool $comment = false): string
 	{
 		if ($comment) {
 			return str_replace('@', '&#64;<!---->', $email);
@@ -163,7 +161,7 @@ class StringUtil
 	 * @param string $string Input string
 	 * @return string
 	 */
-	public static function lcfirst($string)
+	public static function lcfirst(string $string): string
 	{
 		return mb_strtolower(mb_substr($string, 0, 1, 'utf-8')) . mb_substr($string, 1, mb_strlen($string, 'utf-8') - 1, 'utf-8');
 	}
@@ -176,9 +174,9 @@ class StringUtil
 	 * @param boolean $doubleEncode Prevent from double encoding
 	 * @return string
 	 */
-	public static function escape($string, $quoteStyle = ENT_QUOTES, $doubleEncode = false)
+	public static function escape(string $string, int $quoteStyle = ENT_QUOTES, bool $doubleEncode = false): string
 	{
-		return @htmlspecialchars($string, (int) $quoteStyle, 'utf-8', (bool) $doubleEncode);
+		return @htmlspecialchars($string, $quoteStyle, 'utf-8', $doubleEncode);
 	}
 
 	/**
@@ -190,7 +188,7 @@ class StringUtil
 	 * @param string $thousandsSeparator Thousands separator
 	 * @return string
 	 */
-	public static function formatBytes($size, $decimalPoint = ',', $thousandsSeparator = ' ')
+	public static function formatBytes(float $size, string $decimalPoint = ',', string $thousandsSeparator = ' '): string
 	{
 		static $units = ['B', 'kB', 'MB', 'GB', 'TB', 'PB'];
 		foreach ($units as $unit) {

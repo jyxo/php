@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Jyxo PHP Library
@@ -102,10 +102,10 @@ class ErrorHandler
 	 *
 	 * @param boolean $debug Turn debugging on?
 	 */
-	public static function init($debug = false)
+	public static function init(bool $debug = false)
 	{
 		// Sets debugging
-		self::$debug = (bool) $debug;
+		self::$debug = $debug;
 
 		// Registers handlers
 		set_error_handler([__CLASS__, 'handleError']);
@@ -133,7 +133,7 @@ class ErrorHandler
 	 * @param array $context Error context variables
 	 * @return boolean Was the error processed?
 	 */
-	public static function handleError($type, $message, $file, $line, $context)
+	public static function handleError(int $type, string $message, string $file, int $line, array $context): bool
 	{
 		// 0 means the error was blocked by prepending "@" to the command or by error_reporting settings
 		if (0 === ($type & error_reporting())) {
@@ -215,7 +215,7 @@ class ErrorHandler
 	 * @param \Exception $exception Caught exception
 	 * @param boolean $fire Shall we use FirePHP?
 	 */
-	public static function exception(\Exception $exception, $fire = true)
+	public static function exception(\Exception $exception, bool $fire = true): bool
 	{
 		self::log(
 			[
@@ -237,7 +237,7 @@ class ErrorHandler
 	 * @param boolean $fire Shall we use FirePHP?
 	 * @return boolean Was logging successful?
 	 */
-	public static function log(array $message, $fire = true)
+	public static function log(array $message, bool $fire = true): bool
 	{
 		// Adds default values if missing
 		if (!isset($message['file'])) {
@@ -304,7 +304,7 @@ class ErrorHandler
 	 * @param array $message Message definition
 	 * @return boolean Was sending successful?
 	 */
-	private static function firephp($message)
+	private static function firephp(array $message): bool
 	{
 		static $labels = [
 			self::EXCEPTION => 'Exception',
@@ -331,7 +331,7 @@ class ErrorHandler
 	 * @param array $trace Trace definition
 	 * @return string
 	 */
-	private static function getTraceLog(array $trace)
+	private static function getTraceLog(array $trace): string
 	{
 		$log = '';
 		foreach ($trace as $levelNo => $level) {
@@ -361,7 +361,7 @@ class ErrorHandler
 	 * @param \Exception $exception Exception to process
 	 * @return array
 	 */
-	private static function getAllPreviousExceptions(\Exception $exception)
+	private static function getAllPreviousExceptions(\Exception $exception): array
 	{
 		$stack = [];
 		$previous = $exception->getPrevious();
