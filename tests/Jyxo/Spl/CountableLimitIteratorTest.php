@@ -82,7 +82,7 @@ class CountableLimitIteratorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalidIterator()
 	{
-		$this->setExpectedException('\InvalidArgumentException');
+		$this->expectException(\InvalidArgumentException::class);
 		$iterator = new CountableLimitIterator(new \EmptyIterator());
 	}
 }

@@ -58,14 +58,11 @@ class FilterIteratorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalidCallback()
 	{
-		$this->setExpectedException('\InvalidArgumentException');
+		$this->expectException(\InvalidArgumentException::class);
 
 		$callback = 'FunctionThatDoesNotExistForSure';
 		$data = array();
 		$iterator = new FilterIterator(new \ArrayIterator($data), $callback);
-
-		$this->fail('Expected \InvalidArgumentException exception');
-
 	}
 
 }

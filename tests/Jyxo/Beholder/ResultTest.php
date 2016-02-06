@@ -76,7 +76,7 @@ class ResultTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalidStatus()
 	{
-		$this->setExpectedException('\InvalidArgumentException');
+		$this->expectException(\InvalidArgumentException::class);
 		$result = new Result('dummy');
 	}
 }

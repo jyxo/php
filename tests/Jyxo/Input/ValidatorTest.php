@@ -474,7 +474,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 		$this->executeTests($validator, $good, $wrong);
 		$this->assertEquals($pattern, $validator->getPattern());
 
-		$this->setExpectedException('\Jyxo\Input\Validator\Exception');
+		$this->expectException(\Jyxo\Input\Validator\Exception::class);
 		$validator->setPattern('');
 	}
 

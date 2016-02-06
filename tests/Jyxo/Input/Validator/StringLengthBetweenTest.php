@@ -80,7 +80,7 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalidMin()
 	{
-		$this->setExpectedException('\InvalidArgumentException');
+		$this->expectException(\InvalidArgumentException::class);
 		$validator = new StringLengthBetween(-1, 5);
 	}
 
@@ -89,7 +89,7 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalidMax()
 	{
-		$this->setExpectedException('\InvalidArgumentException');
+		$this->expectException(\InvalidArgumentException::class);
 		$validator = new StringLengthBetween(0, -6);
 	}
 
@@ -98,7 +98,7 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalidMinMax()
 	{
-		$this->setExpectedException('\InvalidArgumentException');
+		$this->expectException(\InvalidArgumentException::class);
 		$validator = new StringLengthBetween(12, 6);
 	}
 
@@ -131,7 +131,7 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalidSetMin()
 	{
-		$this->setExpectedException('\InvalidArgumentException');
+		$this->expectException(\InvalidArgumentException::class);
 		$validator = new StringLengthBetween(2, 6);
 		$validator->setMin(12);
 	}
@@ -141,7 +141,7 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalidSetMax()
 	{
-		$this->setExpectedException('\InvalidArgumentException');
+		$this->expectException(\InvalidArgumentException::class);
 		$validator = new StringLengthBetween(12, 60);
 		$validator->setMax(4);
 	}

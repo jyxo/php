@@ -53,7 +53,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue($input->isValid());
 		$this->assertEquals('default', $input->message);
 
-		$this->setExpectedException('\BadMethodCallException');
+		$this->expectException(\BadMethodCallException::class);
 		$input = new Fluent();
 		$input->defaultValue('default');
 	}
@@ -144,7 +144,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertFalse($input->isValid());
 
-		$this->setExpectedException('\Jyxo\Input\Exception');
+		$this->expectException(\Jyxo\Input\Exception::class);
 		$input->getValue('bar');
 	}
 
@@ -226,7 +226,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue($input->isValid());
 
 		// Not an active variable
-		$this->setExpectedException('\BadMethodCallException');
+		$this->expectException(\BadMethodCallException::class);
 		$input = new Fluent();
 		$input->condition('isInt');
 	}
@@ -256,7 +256,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testAddInvalidFilter()
 	{
-		$this->setExpectedException('\Jyxo\Input\Exception');
+		$this->expectException(\Jyxo\Input\Exception::class);
 		$input = new Fluent();
 		$input->filter('foo');
 	}
@@ -266,7 +266,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testAddInvalidCondition()
 	{
-		$this->setExpectedException('\Jyxo\Input\Exception');
+		$this->expectException(\Jyxo\Input\Exception::class);
 		$input = new Fluent();
 		$input->condition('foo');
 	}
@@ -276,7 +276,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testAddInvalidValidator()
 	{
-		$this->setExpectedException('\Jyxo\Input\Exception');
+		$this->expectException(\Jyxo\Input\Exception::class);
 		$input = new Fluent();
 		$input->validate('foo');
 	}

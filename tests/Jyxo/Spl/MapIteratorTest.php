@@ -79,13 +79,11 @@ class MapIteratorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalidCallback()
 	{
-		$this->setExpectedException('\InvalidArgumentException');
+		$this->expectException(\InvalidArgumentException::class);
 
 		$callback = 'FunctionThatDoesNotExistForSure';
 		$data = array();
 		$iterator = new MapIterator(new \ArrayIterator($data), $callback);
-
-		$this->fail('Expected \InvalidArgumentException exception');
 	}
 
 	/**
@@ -93,11 +91,9 @@ class MapIteratorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalidDataArgument()
 	{
-		$this->setExpectedException('\InvalidArgumentException');
+		$this->expectException(\InvalidArgumentException::class);
 
 		$iterator = new MapIterator(new \stdClass(), 'str_shuffle');
-
-		$this->fail('Expected \InvalidArgumentException exception');
 	}
 
 }

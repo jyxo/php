@@ -148,7 +148,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInexistentFilter()
 	{
-		$this->setExpectedException('\Jyxo\Input\Exception');
+		$this->expectException(\Jyxo\Input\Exception::class);
 		$this->factory->getFilterByName('foo');
 	}
 
@@ -157,7 +157,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInexistentValidator()
 	{
-		$this->setExpectedException('\Jyxo\Input\Exception');
+		$this->expectException(\Jyxo\Input\Exception::class);
 		$this->factory->getValidatorByName('foo');
 	}
 }

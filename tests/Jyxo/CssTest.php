@@ -45,7 +45,7 @@ class CssTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testConstruct()
 	{
-		$this->setExpectedException('\LogicException');
+		$this->expectException(\LogicException::class);
 		$css = new Css();
 	}
 

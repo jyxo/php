@@ -55,7 +55,7 @@ class EncodingTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testConstruct()
 	{
-		$this->setExpectedException('\LogicException');
+		$this->expectException(\LogicException::class);
 		$encoding = new Encoding();
 	}
 
