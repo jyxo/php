@@ -35,7 +35,7 @@ class SmtpTest extends \Jyxo\Beholder\TestCase\DefaultTest
 			$this->markTestSkipped('\Jyxo\Mail\Sender\Smtp already loaded');
 		}
 
-		$test = new Smtp('Smtp', '', '');
+		$test = new Smtp('Smtp', '', '', '');
 
 		// Turns autoload off
 		$this->disableAutoload();
@@ -54,7 +54,7 @@ class SmtpTest extends \Jyxo\Beholder\TestCase\DefaultTest
 	 */
 	public function testSendFailure()
 	{
-		$test = new Smtp('Smtp', 'dummy.jyxo.com', '');
+		$test = new Smtp('Smtp', 'dummy.jyxo.com', '', '');
 		$result = $test->run();
 		$this->assertEquals(\Jyxo\Beholder\Result::FAILURE, $result->getStatus());
 		$this->assertEquals('Send error dummy.jyxo.com', $result->getDescription());

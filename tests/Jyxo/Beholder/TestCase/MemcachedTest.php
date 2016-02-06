@@ -25,11 +25,23 @@ require_once __DIR__ . '/../../../bootstrap.php';
  */
 class MemcachedTest extends \PHPUnit_Framework_TestCase
 {
+
+	public function setUp()
+	{
+		if (!class_exists('Memcached')) {
+			$this->markTestSkipped('Memcached not set');
+		}
+	}
+
 	/**
 	 * Tests connection failure.
 	 */
 	public function testConnectionFailure()
 	{
+		if (!class_exists('Memcached')) {
+			$this->markTestSkipped('Memcached not set');
+		}
+
 		$ip = '127.0.0.1';
 		$port = '12345';
 

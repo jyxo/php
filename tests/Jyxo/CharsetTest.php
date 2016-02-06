@@ -64,8 +64,7 @@ class CharsetTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('žluťoučký kůň pěl ďábelské ódy', Charset::fixUtf('žluťoučký kůň pěl ďábelské ódy'));
 		$this->assertEquals('Государственный гимн Российской Федерации', Charset::fixUtf('Государственный гимн Российской Федерации'));
 
-		$expected = 'glibc' === ICONV_IMPL ? '' : 'luouk k pern pl belsk ';
-		$this->assertEquals($expected, Charset::fixUtf(file_get_contents(DIR_FILES . '/charset/cp1250.txt')));
-		$this->assertEquals($expected, Charset::fixUtf(file_get_contents(DIR_FILES . '/charset/iso-8859-2.txt')));
+		$this->assertEquals('', Charset::fixUtf(file_get_contents(DIR_FILES . '/charset/cp1250.txt')));
+		$this->assertEquals('', Charset::fixUtf(file_get_contents(DIR_FILES . '/charset/iso-8859-2.txt')));
 	}
 }
