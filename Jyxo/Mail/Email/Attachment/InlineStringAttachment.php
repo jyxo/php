@@ -23,7 +23,7 @@ namespace Jyxo\Mail\Email\Attachment;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class InlineString extends \Jyxo\Mail\Email\Attachment
+class InlineStringAttachment extends \Jyxo\Mail\Email\Attachment
 {
 	/**
 	 * Type.
@@ -35,7 +35,7 @@ class InlineString extends \Jyxo\Mail\Email\Attachment
 	/**
 	 * Creates an attachment.
 	 *
-	 * @param string $content File contents
+	 * @param string $content FileAttachment contents
 	 * @param string $name Attachment name
 	 * @param string $cid Id
 	 * @param string $mimeType Attachment mime-type
@@ -54,7 +54,7 @@ class InlineString extends \Jyxo\Mail\Email\Attachment
 	 * Sets Id.
 	 *
 	 * @param string $cid
-	 * @return \Jyxo\Mail\Email\Attachment\InlineString
+	 * @return \Jyxo\Mail\Email\Attachment\InlineStringAttachment
 	 */
 	public function setCid($cid)
 	{
@@ -68,7 +68,7 @@ class InlineString extends \Jyxo\Mail\Email\Attachment
 	 * If none is set, assume no encoding is used.
 	 *
 	 * @param string $encoding Encoding name
-	 * @return \Jyxo\Mail\Email\Attachment\InlineString
+	 * @return \Jyxo\Mail\Email\Attachment\InlineStringAttachment
 	 * @throws \InvalidArgumentException If an incompatible encoding was provided
 	 */
 	public function setEncoding($encoding)
