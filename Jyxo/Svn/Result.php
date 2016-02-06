@@ -152,7 +152,7 @@ class Result implements \Countable, \SeekableIterator
 	 *
 	 * @var array
 	 */
-	protected $statusTable = array(
+	protected $statusTable = [
 		self::ADD => 'A',
 		self::DELETE => 'D',
 		self::UPDATE => 'U',
@@ -168,7 +168,7 @@ class Result implements \Countable, \SeekableIterator
 		self::SCHEDULED => '+',
 		self::SWITCHED => 'S',
 		self::NEW_VERSION_EXISTS => '*',
-	);
+	];
 
 	/**
 	 * Action revision.
@@ -196,7 +196,7 @@ class Result implements \Countable, \SeekableIterator
 	 *
 	 * @var array
 	 */
-	protected $items = array();
+	protected $items = [];
 
 	/**
 	 * Internal pointer.
@@ -238,7 +238,7 @@ class Result implements \Countable, \SeekableIterator
 				return $this->parseUpdate($input);
 			default:
 				// Do nothing
-				return array();
+				return [];
 		}
 	}
 
@@ -261,7 +261,7 @@ class Result implements \Countable, \SeekableIterator
 			}
 
 			$tmp = $line;
-			$line = array();
+			$line = [];
 
 			if ($tmp{0} !== ' ') {
 				$line['status'] = $tmp{0};

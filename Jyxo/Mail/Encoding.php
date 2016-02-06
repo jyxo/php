@@ -77,13 +77,13 @@ class Encoding
 	 */
 	public static function isCompatible($encoding)
 	{
-		static $encodings = array(
+		static $encodings = [
 			self::BIT7 => true,
 			self::BIT8 => true,
 			self::BINARY => true,
 			self::BASE64 => true,
 			self::QUOTED_PRINTABLE => true
-		);
+		];
 
 		return isset($encodings[$encoding]);
 	}

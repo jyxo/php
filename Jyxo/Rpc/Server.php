@@ -29,7 +29,7 @@ abstract class Server
 	 *
 	 * @var array
 	 */
-	private $aliases = array();
+	private $aliases = [];
 
 	/**
 	 * Log file name.
@@ -243,19 +243,19 @@ abstract class Server
 				$reflection = new \ReflectionMethod($className, $methodName);
 				if ($reflection->isStatic()) {
 					// Method is static
-					$callback = array($className, $methodName);
+					$callback = [$className, $methodName];
 				} else {
 					// Method is not static
-					$callback = array(new $className(), $methodName);
+					$callback = [new $className(), $methodName];
 				}
 			} catch (\ReflectionException $e) {
 				// Method does not exist
 				if (method_exists($className, '__call')) {
 					// Is __call available
-					$callback = array(new $className(), $methodName);
+					$callback = [new $className(), $methodName];
 				} else {
 					// Is __callStatic available
-					$callback = array($className, $methodName);
+					$callback = [$className, $methodName];
 				}
 			}
 		} else {
@@ -297,7 +297,7 @@ abstract class Server
 			$text .= sprintf("Result: %s\n", trim(print_r($result, true)));
 
 			// Indent following lines
-			$text = strtr(trim($text), array("\n" => "\n\t"));
+			$text = strtr(trim($text), ["\n" => "\n\t"]);
 
 			// Time, ip address, hostname, uri
 			$text = sprintf("[%s] %s %s %s\n\t%s\n", date('Y-m-d H:i:s'), $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_HOST'], $_SERVER['REQUEST_URI'], $text);

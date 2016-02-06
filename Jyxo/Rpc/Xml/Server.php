@@ -59,7 +59,7 @@ class Server extends \Jyxo\Rpc\Server
 	 */
 	protected function register($func)
 	{
-		xmlrpc_server_register_method($this->server, $func, array($this, 'call'));
+		xmlrpc_server_register_method($this->server, $func, [$this, 'call']);
 	}
 
 	/**
@@ -67,13 +67,13 @@ class Server extends \Jyxo\Rpc\Server
 	 */
 	public function process()
 	{
-		$options = array(
+		$options = [
 			'output_type' => 'xml',
 			'verbosity' => 'pretty',
-			'escaping' => array('markup'),
+			'escaping' => ['markup'],
 			'version' => 'xmlrpc',
 			'encoding' => 'utf-8'
-		);
+		];
 
 		$response = xmlrpc_server_call_method($this->server, file_get_contents('php://input'), null, $options);
 		header('Content-Type: text/xml; charset="utf-8"');

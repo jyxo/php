@@ -47,7 +47,7 @@ class Client
 	 *
 	 * @var array
 	 */
-	protected $additional = array();
+	protected $additional = [];
 
 	/**
 	 * Path to the SVN binary.
@@ -64,7 +64,7 @@ class Client
 	 * @param array $additional Additional parameters
 	 * @param string $svnBinary SVN binary path
 	 */
-	public function __construct($user = '', $password = '', array $additional = array(), $svnBinary = '')
+	public function __construct($user = '', $password = '', array $additional = [], $svnBinary = '')
 	{
 		$this->user = (string) $user;
 		$this->password = (string) $password;
@@ -142,7 +142,7 @@ class Client
 	 */
 	public function commit($path, $message, $params = null, $user = '', $password = '')
 	{
-		return $this->callSvn('commit', $user, $password, array_merge((array) $params, array('-m' => $message), (array) $path));
+		return $this->callSvn('commit', $user, $password, array_merge((array) $params, ['-m' => $message], (array) $path));
 	}
 
 	/**
@@ -365,7 +365,7 @@ class Client
 	 * @param boolean $pathsOnly Use only path-parameters (not beginning with a dash "-")
 	 * @return string
 	 */
-	protected function getAdditionalParams($params = array(), $pathsOnly = false)
+	protected function getAdditionalParams($params = [], $pathsOnly = false)
 	{
 		$ret = ' ';
 

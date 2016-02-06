@@ -57,37 +57,37 @@ class CssTest extends \PHPUnit_Framework_TestCase
 	public function testRepair()
 	{
 		// In the form: expected css, given css
-		$tests = array();
+		$tests = [];
 
 		// Converts property names to lowercase
-		$tests[] = array('html { margin : 10px 20px 10px; color: black}', 'html { MARGIN : 10px 20px 10px; COLOR: black}');
-		$tests[] = array('margin: 10px 20px 10px; color: black;', 'MARGIN: 10px 20px 10px; COLOR: black;');
+		$tests[] = ['html { margin : 10px 20px 10px; color: black}', 'html { MARGIN : 10px 20px 10px; COLOR: black}'];
+		$tests[] = ['margin: 10px 20px 10px; color: black;', 'MARGIN: 10px 20px 10px; COLOR: black;'];
 
 		// Converts rgb() and url() to lowercase
-		$tests[] = array('background: url (\'background.png\') #ffffff;', 'background: URL (\'background.png\') RGB (255, 255, 255);');
+		$tests[] = ['background: url (\'background.png\') #ffffff;', 'background: URL (\'background.png\') RGB (255, 255, 255);'];
 
 		// Remove properties without definitions
-		$tests[] = array('border: solid 1px black;', 'border: solid 1px black; color:; color:; color:');
-		$tests[] = array('border: solid 1px black;', 'border: solid 1px black; color: ;');
-		$tests[] = array('border: solid 1px black;', 'border: solid 1px black; color:');
-		$tests[] = array('{border: solid 1px black;}', '{border: solid 1px black; color: }');
-		$tests[] = array('{border: solid 1px black; } ', '{border: solid 1px black; color : ; } ');
+		$tests[] = ['border: solid 1px black;', 'border: solid 1px black; color:; color:; color:'];
+		$tests[] = ['border: solid 1px black;', 'border: solid 1px black; color: ;'];
+		$tests[] = ['border: solid 1px black;', 'border: solid 1px black; color:'];
+		$tests[] = ['{border: solid 1px black;}', '{border: solid 1px black; color: }'];
+		$tests[] = ['{border: solid 1px black; } ', '{border: solid 1px black; color : ; } '];
 
 		// Remove MS Word properties
-		$tests[] = array('{}', '{mso-bidi-font-weight: normal; mso-bidi-font-weight: normal; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: Calibri; mso-ansi-language: CS; mso-hansi-theme-font: minor-latin;}');
-		$tests[] = array('{color: black;}', '{color: black; mso-bidi-font-weight: normal}');
-		$tests[] = array('{color: black;}', '{color: black; mso-bidi-font-weight : }');
-		$tests[] = array('color: black;', 'color: black; mso-bidi-font-weight:');
+		$tests[] = ['{}', '{mso-bidi-font-weight: normal; mso-bidi-font-weight: normal; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: Calibri; mso-ansi-language: CS; mso-hansi-theme-font: minor-latin;}'];
+		$tests[] = ['{color: black;}', '{color: black; mso-bidi-font-weight: normal}'];
+		$tests[] = ['{color: black;}', '{color: black; mso-bidi-font-weight : }'];
+		$tests[] = ['color: black;', 'color: black; mso-bidi-font-weight:'];
 
 		// Converts colors to lowercase
-		$tests[] = array('color: #aabbcc;', 'color: #aaBBcc;');
-		$tests[] = array('color: #aabbcc', 'color: #aabbcc');
-		$tests[] = array('color:#aa00cc;', 'color:#Aa00Cc;');
+		$tests[] = ['color: #aabbcc;', 'color: #aaBBcc;'];
+		$tests[] = ['color: #aabbcc', 'color: #aabbcc'];
+		$tests[] = ['color:#aa00cc;', 'color:#Aa00Cc;'];
 
 		// Converts color from RGB to HEX
-		$tests[] = array('color: #ffffff;', 'color: rgb(255, 255, 255);');
-		$tests[] = array('color:#000000', 'color:rgb (0,0,0)');
-		$tests[] = array('color: #a4a2a3;', 'color: RGB( 164 , 162 , 163 );');
+		$tests[] = ['color: #ffffff;', 'color: rgb(255, 255, 255);'];
+		$tests[] = ['color:#000000', 'color:rgb (0,0,0)'];
+		$tests[] = ['color: #a4a2a3;', 'color: RGB( 164 , 162 , 163 );'];
 
 		foreach ($tests as $no => $test) {
 			$this->assertEquals($test[0], Css::repair($test[1]), sprintf('Test %s', $no + 1));
@@ -104,45 +104,45 @@ class CssTest extends \PHPUnit_Framework_TestCase
 		// Filters given properties
 		$this->assertEquals(
 			'{border: solid 1px black; padding: 10px;}',
-			Css::filterProperties('{border: solid 1px black; color: black; padding: 10px;}', array('color'))
+			Css::filterProperties('{border: solid 1px black; color: black; padding: 10px;}', ['color'])
 		);
 		$this->assertEquals(
 			'border:solid 1px black;padding:10px',
-			Css::filterProperties('border:solid 1px black;color:black;padding:10px', array('color'))
+			Css::filterProperties('border:solid 1px black;color:black;padding:10px', ['color'])
 		);
 		$this->assertEquals(
 			'border:solid 1px black;',
-			Css::filterProperties('border:solid 1px black;padding:10px', array('padding'))
+			Css::filterProperties('border:solid 1px black;padding:10px', ['padding'])
 		);
 		$this->assertEquals(
 			'{border:solid 1px black}',
-			Css::filterProperties('{padding:10px;border:solid 1px black}', array('padding'))
+			Css::filterProperties('{padding:10px;border:solid 1px black}', ['padding'])
 		);
 		$this->assertEquals(
 			'{}',
-			Css::filterProperties('{color: #000000; padding: 10px; border: solid 1px black;}', array('color', 'border', 'padding'))
+			Css::filterProperties('{color: #000000; padding: 10px; border: solid 1px black;}', ['color', 'border', 'padding'])
 		);
 
 		// Keeps given properties and keeps everything else
 		$this->assertEquals(
 			'{ color: black;}',
-			Css::filterProperties('{border: solid 1px black; color: black; padding: 10px;}', array('color'), false)
+			Css::filterProperties('{border: solid 1px black; color: black; padding: 10px;}', ['color'], false)
 		);
 		$this->assertEquals(
 			'color:black;',
-			Css::filterProperties('border:solid 1px black;color:black;padding:10px', array('color'), false)
+			Css::filterProperties('border:solid 1px black;color:black;padding:10px', ['color'], false)
 		);
 		$this->assertEquals(
 			'padding:10px',
-			Css::filterProperties('border:solid 1px black;padding:10px', array('padding'), false)
+			Css::filterProperties('border:solid 1px black;padding:10px', ['padding'], false)
 		);
 		$this->assertEquals(
 			'{padding:10px;}',
-			Css::filterProperties('{padding:10px;border:solid 1px black}', array('padding'), false)
+			Css::filterProperties('{padding:10px;border:solid 1px black}', ['padding'], false)
 		);
 		$this->assertEquals(
 			'{color: #000000; padding: 10px; border: solid 1px black;}',
-			Css::filterProperties('{color: #000000; padding: 10px; border: solid 1px black;}', array('color', 'border', 'padding'), false)
+			Css::filterProperties('{color: #000000; padding: 10px; border: solid 1px black;}', ['color', 'border', 'padding'], false)
 		);
 	}
 

@@ -28,7 +28,7 @@ class PhpExtensionTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testMissing()
 	{
-		$test = new PhpExtension('Extensions', array('pcre', 'runkit', 'parsekit'));
+		$test = new PhpExtension('Extensions', ['pcre', 'runkit', 'parsekit']);
 		$result = $test->run();
 		$this->assertEquals(\Jyxo\Beholder\Result::FAILURE, $result->getStatus());
 		$this->assertEquals('Missing runkit, parsekit', $result->getDescription());
@@ -39,7 +39,7 @@ class PhpExtensionTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testAvailable()
 	{
-		$test = new PhpExtension('Extensions', array('pcre', 'spl', 'reflection'));
+		$test = new PhpExtension('Extensions', ['pcre', 'spl', 'reflection']);
 		$result = $test->run();
 		$this->assertEquals(\Jyxo\Beholder\Result::SUCCESS, $result->getStatus());
 		$this->assertEquals('OK', $result->getDescription());

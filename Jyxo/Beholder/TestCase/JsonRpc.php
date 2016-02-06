@@ -44,7 +44,7 @@ class JsonRpc extends \Jyxo\Beholder\TestCase
 	 *
 	 * @var string
 	 */
-	private $params = array();
+	private $params = [];
 
 	/**
 	 * Timeout.

@@ -29,18 +29,18 @@ class Factory
 	 *
 	 * @var string
 	 */
-	private static $filterPrefix = array(
+	private static $filterPrefix = [
 		'\Jyxo\Input\Filter\\'
-	);
+	];
 
 	/**
 	 * Validator class names prefix.
 	 *
 	 * @var string
 	 */
-	private static $validatorPrefix = array(
+	private static $validatorPrefix = [
 		'\Jyxo\Input\Validator\\'
-	);
+	];
 
 	/**
 	 * Returns a particular validator by its name.

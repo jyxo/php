@@ -148,7 +148,7 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 		$email->setFrom($from)
 			->addReplyTo($from)
 			->setPriority(Email::PRIORITY_NORMAL)
-			->setInReplyTo('161024ac03484c10203285be576446f2@blog.cz', array('30d6c4933818e36fa46509ad24a91ea4@blog.cz', '8b30935de59b6c89e4fc1204d279a2af@blog.cz'))
+			->setInReplyTo('161024ac03484c10203285be576446f2@blog.cz', ['30d6c4933818e36fa46509ad24a91ea4@blog.cz', '8b30935de59b6c89e4fc1204d279a2af@blog.cz'])
 			->setConfirmReadingTo($from)
 			->addHeader(new Email\Header('Organization', 'Blog.cz'))
 			->addTo(new Email\Address('test2@blog.cz'))

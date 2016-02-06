@@ -35,7 +35,7 @@ class ObjectCache implements \IteratorAggregate
 	 *
 	 * @var array
 	 */
-	private $storage = array();
+	private $storage = [];
 
 	/**
 	 * Returns default storage for static access.
@@ -69,7 +69,7 @@ class ObjectCache implements \IteratorAggregate
 	 */
 	public function clear()
 	{
-		$this->storage = array();
+		$this->storage = [];
 		return $this;
 	}
 

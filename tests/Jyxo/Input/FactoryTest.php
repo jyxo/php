@@ -76,7 +76,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	public function testDoubleParam()
 	{
 		$validator = new Validator\StringLengthBetween(24, 42);
-		$this->assertEquals($validator, $this->factory->getValidatorByName('stringLengthBetween', array(24, 42)));
+		$this->assertEquals($validator, $this->factory->getValidatorByName('stringLengthBetween', [24, 42]));
 	}
 
 	/**

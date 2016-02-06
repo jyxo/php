@@ -43,14 +43,14 @@ class ErrorMail
 	 *
 	 * @var array
 	 */
-	private $headers = array();
+	private $headers = [];
 
 	/**
 	 * Mail recipients.
 	 *
 	 * @var array
 	 */
-	private $email = array();
+	private $email = [];
 
 	/**
 	 * Constructor.
@@ -112,14 +112,14 @@ class ErrorMail
 			$subject .= ': ' . $_SERVER['SERVER_NAME'];
 		}
 
-		$data = array(
+		$data = [
 			'Exception' => '[' . $e->getCode() . '] ' . $e->getMessage(),
 			'File' => $e->getFile() . '@' . $e->getLine(),
 			'Trace' => $e->getTraceAsString(),
 			'GET' => count($_GET) ? print_r($_GET, true) : null,
 			'POST' => count($_POST) ? print_r($_POST, true) : null,
 			'SERVER' => print_r($_SERVER, true)
-		);
+		];
 		// Remove empty GET and POST definitions
 		$data = array_filter($data);
 
@@ -129,7 +129,7 @@ class ErrorMail
 			$message .= $val . "\n\n";
 		}
 
-		return array($subject, $message);
+		return [$subject, $message];
 	}
 
 	/**

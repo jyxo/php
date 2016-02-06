@@ -11,7 +11,7 @@ class Foo3 implements Iterator
 	 *
 	 * @var array
 	 */
-	private $data = array();
+	private $data = [];
 
 	/**
 	 * Internal array pointer.

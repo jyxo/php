@@ -43,7 +43,7 @@ class TimerTest extends \PHPUnit_Framework_TestCase
 		$this->assertSame(0, Timer::stop('foo'));
 
 		// Start 4 timers
-		$names = array('foo', 'bar', 'tmp', 'ohai');
+		$names = ['foo', 'bar', 'tmp', 'ohai'];
 		$times = array_fill_keys($names, 0);
 		foreach ($names as $name) {
 			Timer::start($name);

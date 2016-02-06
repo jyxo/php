@@ -141,13 +141,13 @@ class FirePhp
 	 */
 	public static function log($message, $label = '', $type = self::LOG)
 	{
-		$output = array(
-			array(
+		$output = [
+			[
 				'Type' => $type,
 				'Label' => $label
-			),
+			],
 			self::encodeVariable($message)
-		);
+		];
 
 		return self::send($output);
 	}
@@ -163,18 +163,18 @@ class FirePhp
 	 */
 	public static function trace($message, $file, $line, array $trace)
 	{
-		$output = array(
-			array(
+		$output = [
+			[
 				'Type' => self::TRACE,
 				'Label' => null
-			),
-			array(
+			],
+			[
 				'Message' => Charset::fixUtf($message),
 				'File' => $file,
 				'Line' => $line,
 				'Trace' => self::replaceVariable($trace)
-			)
-		);
+			]
+		];
 
 		return self::send($output);
 	}
@@ -190,13 +190,13 @@ class FirePhp
 	 */
 	public static function table($label, array $header, array $data, $ident = '')
 	{
-		$output = array(
-			array(
+		$output = [
+			[
 				'Type' => self::TABLE,
 				'Label' => $label
-			),
-			array_merge(array($header), $data)
-		);
+			],
+			array_merge([$header], $data)
+		];
 
 		return self::send($output, $ident);
 	}
@@ -281,7 +281,7 @@ class FirePhp
 
 		// If an identifier was provided, delete previous messages with that identifier
 		if (!empty($ident)) {
-			static $idents = array();
+			static $idents = [];
 
 			// Delete previous send
 			if (isset($idents[$ident])) {
@@ -291,7 +291,7 @@ class FirePhp
 			}
 
 			// Save identifiers of headers that will be actually used
-			$idents[$ident] = array($no + 1, $no + count($parts));
+			$idents[$ident] = [$no + 1, $no + count($parts)];
 		}
 
 		// Sending
@@ -371,7 +371,7 @@ class FirePhp
 		static $maxObjectDepth = 5;
 		static $maxArrayDepth = 5;
 		static $maxTotalDepth = 10;
-		static $stack = array();
+		static $stack = [];
 
 		if ($totalDepth > $maxTotalDepth) {
 			return sprintf('** Max Depth (%s) **', $maxTotalDepth);
@@ -395,7 +395,7 @@ class FirePhp
 			array_push($stack, $variable);
 
 			// Add class name
-			$return = array('__className' => $class);
+			$return = ['__className' => $class];
 
 			// Add properties
 			$reflectionClass = new \ReflectionClass($class);
@@ -446,7 +446,7 @@ class FirePhp
 				return sprintf('** Max Array Depth (%s) **', $maxArrayDepth);
 			}
 
-			$return = array();
+			$return = [];
 			foreach ($variable as $k => $v) {
 				// Encoding the $GLOBALS PHP array causes an infinite loop as it contains a reference to itself
 				if ('GLOBALS' === $k && is_array($v) && array_key_exists('GLOBALS', $v)) {

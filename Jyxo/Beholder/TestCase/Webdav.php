@@ -53,7 +53,7 @@ class Webdav extends \Jyxo\Beholder\TestCase
 	 * @param string $dir Tested directory
 	 * @param array $options Connection options
 	 */
-	public function __construct($description, $server, $dir = '', array $options = array())
+	public function __construct($description, $server, $dir = '', array $options = [])
 	{
 		parent::__construct($description);
 
@@ -93,7 +93,7 @@ class Webdav extends \Jyxo\Beholder\TestCase
 		$description = (false !== filter_var($host, FILTER_VALIDATE_IP) ? gethostbyaddr($host) : $host) . ':' . $port . $dir;
 
 		try {
-			$webdav = new \Jyxo\Webdav\Client(array($serverUrl));
+			$webdav = new \Jyxo\Webdav\Client([$serverUrl]);
 			foreach ($this->options as $name => $value) {
 				$webdav->setRequestOption($name, $value);
 			}

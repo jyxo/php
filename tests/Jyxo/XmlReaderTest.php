@@ -62,7 +62,7 @@ class XmlReaderTest extends \PHPUnit_Framework_TestCase
 	public function testGetTextValue()
 	{
 		// In the form: tag (key), expected value (value)
-		$tests = array();
+		$tests = [];
 		$tests['zero'] = '';
 		$tests['one'] = 'word';
 		$tests['second'] = 'two words';
@@ -91,7 +91,7 @@ class XmlReaderTest extends \PHPUnit_Framework_TestCase
 	public function testGetContent()
 	{
 		// In the form: tag (key), expected value (value)
-		$tests = array();
+		$tests = [];
 		$tests['zero'] = '';
 		$tests['one'] = 'word';
 		$tests['second'] = 'two <tag>words</tag>';

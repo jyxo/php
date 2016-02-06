@@ -91,7 +91,7 @@ class StringUtilTest extends \PHPUnit_Framework_TestCase
 		$cut = StringUtil::cutWords($string, $max, $etc);
 
 		// &hellip; has length of 1
-		$cut2 = strtr(html_entity_decode($cut, ENT_COMPAT, 'utf-8'), array('&hellip;' => '.'));
+		$cut2 = strtr(html_entity_decode($cut, ENT_COMPAT, 'utf-8'), ['&hellip;' => '.']);
 
 		$words = preg_split('~\\s+~', $string);
 		$trimmedWords = preg_split('~\\s+~', $cut2);
@@ -122,7 +122,7 @@ class StringUtilTest extends \PHPUnit_Framework_TestCase
 	{
 		$cut = StringUtil::cut($string, $max, $etc);
 		// &hellip; has length of 1
-		$cutLength = mb_strlen(strtr(html_entity_decode($cut, ENT_COMPAT, 'utf-8'), array('&hellip;' => '.')));
+		$cutLength = mb_strlen(strtr(html_entity_decode($cut, ENT_COMPAT, 'utf-8'), ['&hellip;' => '.']));
 		$this->assertLessThanOrEqual($max, $cutLength, 'String is longer');
 
 		if (mb_strlen($string, 'utf-8') <= $max) {
@@ -159,13 +159,13 @@ class StringUtilTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testFixLineEnding()
 	{
-		$tests = array(
+		$tests = [
 			"test\r\nžlutý\r\n",
 			"test\ržlutý\r",
 			"test\r\nžlutý\r",
 			"test\nžlutý\r",
 			"test\nžlutý\r\n"
-		);
+		];
 
 		// No line ending given
 		foreach ($tests as $test) {
@@ -176,7 +176,7 @@ class StringUtilTest extends \PHPUnit_Framework_TestCase
 
 		// Line ending given
 		foreach ($tests as $test) {
-			foreach (array("\n", "\r", "\r\n") as $ending) {
+			foreach (["\n", "\r", "\r\n"] as $ending) {
 				$this->assertEquals(sprintf('test%1$sžlutý%1$s', $ending), StringUtil::fixLineEnding($test, $ending));
 				$this->assertNotEquals("test\nžlutý\r\n", StringUtil::fixLineEnding($test, $ending));
 			}

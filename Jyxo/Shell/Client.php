@@ -44,7 +44,7 @@ class Client
 	 *
 	 * @var array
 	 */
-	protected $env = array();
+	protected $env = [];
 
 	/**
 	 * Stdout output.
@@ -66,7 +66,7 @@ class Client
 	 * @param string $cwd Working directory
 	 * @param array $env Array of environment properties
 	 */
-	public function __construct($cwd = '', array $env = array())
+	public function __construct($cwd = '', array $env = [])
 	{
 		$this->setCwd($cwd);
 		$this->env = $_ENV;
@@ -178,11 +178,11 @@ class Client
 	 */
 	public function exec($cmd, &$status = null)
 	{
-		static $descriptorSpec = array(
-			0 => array('pipe', 'r'),
-			1 => array('pipe', 'w'),
-			2 => array('pipe', 'w')
-		);
+		static $descriptorSpec = [
+			0 => ['pipe', 'r'],
+			1 => ['pipe', 'w'],
+			2 => ['pipe', 'w']
+		];
 
 		$env = $this->env;
 		if (ini_get('safe_mode')) {

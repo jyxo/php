@@ -36,7 +36,7 @@ class ArrayUtil
 	 */
 	public static function range($low, $high, \Closure $step, \Closure $compare = null)
 	{
-		$data = array($low);
+		$data = [$low];
 		$stepDown = $low > $high;
 		$compare = $compare ?: function ($a, $b) use ($stepDown) {
 			return $stepDown ? $a > $b : $a < $b;
@@ -69,7 +69,7 @@ class ArrayUtil
 	 */
 	public static function keymap(\Traversable $traversable, \Closure $key, \Closure $value = null)
 	{
-		$data = array();
+		$data = [];
 		foreach ($traversable as $item) {
 			$data[$key($item)] = $value ? $value($item) : $item;
 		}

@@ -56,7 +56,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 		$this->assertFalse(isset($foo->z));
 
 		// Testing toArray conversion
-		$array = array('x' => 1, 'y' => true);
+		$array = ['x' => 1, 'y' => true];
 		$this->assertEquals($array, $foo->toArray());
 	}
 }

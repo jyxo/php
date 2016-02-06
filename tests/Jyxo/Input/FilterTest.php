@@ -49,11 +49,11 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 		$this->filterTest($filter, '  test  ', 'test');
 
 		$this->filterTest($filter,
-			array('  test1', ' test2 '), array('test1', 'test2'));
+			['  test1', ' test2 '], ['test1', 'test2']);
 
 		// Tests multidimensional array filtering
 		$this->filterTest($filter,
-			array(array(' ', ' ', array(' ')), ' '), array());
+			[[' ', ' ', [' ']], ' '], []);
 
 		$this->filterArrayTest($filter);
 	}
@@ -68,11 +68,11 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 		$this->filterTest($filter, 'tESt', 'test');
 
 		$this->filterTest($filter,
-			array('TEST1', 'tESt2'), array('test1', 'test2'));
+			['TEST1', 'tESt2'], ['test1', 'test2']);
 
 		// Tests multidimensional array filtering
 		$this->filterTest($filter,
-			array('TEST1', array('tESt2', 'TeST')), array('test1', array('test2', 'test')));
+			['TEST1', ['tESt2', 'TeST']], ['test1', ['test2', 'test']]);
 
 		$this->filterArrayTest($filter);
 	}
@@ -84,7 +84,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 	{
 		$filter = new Filter\Phone();
 
-		$this->filterTest($filter, array('123 456 789', '604604 604', '+420 604 604 604', 'foo bar'), array('123456789', '+420604604604', '+420604604604', 'foobar'));
+		$this->filterTest($filter, ['123 456 789', '604604 604', '+420 604 604 604', 'foo bar'], ['123456789', '+420604604604', '+420604604604', 'foobar']);
 	}
 
 	/**
@@ -93,20 +93,20 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 	public function testSanitizeUrl()
 	{
 		// In form: expected value, input value
-		$tests = array(
-			array(
+		$tests = [
+			[
 				'http://www.jyxo.cz',
 				'www.jyxo.cz'
-			),
-			array(
+			],
+			[
 				'http://www.jyxo.cz',
 				'http://www.jyxo.cz'
-			),
-			array(
+			],
+			[
 				'https://www.jyxo.cz',
 				'https://www.jyxo.cz'
-			)
-		);
+			]
+		];
 
 		$filter = new Filter\SanitizeUrl();
 		foreach ($tests as $test) {
@@ -142,9 +142,9 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 	 */
 	private function filterArrayTest(\Jyxo\Input\FilterInterface $filter)
 	{
-		$var = array();
+		$var = [];
 		$result = $filter->filter($var);
-		$this->assertSame(array(), $result);
+		$this->assertSame([], $result);
 
 		$var = 'test';
 		$result = $filter->filter($var);

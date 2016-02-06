@@ -300,7 +300,7 @@ class Time implements \Serializable
 	 */
 	public function __call($method, $args)
 	{
-		return call_user_func_array(array($this->dateTime, $method), $args);
+		return call_user_func_array([$this->dateTime, $method], $args);
 	}
 
 	/**
@@ -384,39 +384,39 @@ class Time implements \Serializable
 
 		// Translation required?
 		if (preg_match('~(?:^|[^\\\])[lDFM]~', $format)) {
-			static $days = array();
+			static $days = [];
 			if (empty($days)) {
-				$days = array(_('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'), _('Sunday'));
+				$days = [_('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'), _('Sunday')];
 			}
 
-			static $daysShort = array();
+			static $daysShort = [];
 			if (empty($daysShort)) {
-				$daysShort = array(_('Mon'), _('Tue'), _('Wed'), _('Thu'), _('Fri'), _('Sat'), _('Sun'));
+				$daysShort = [_('Mon'), _('Tue'), _('Wed'), _('Thu'), _('Fri'), _('Sat'), _('Sun')];
 			}
 
-			static $months = array();
+			static $months = [];
 			if (empty($months)) {
-				$months = array(
+				$months = [
 					_('January'), _('February'), _('March'), _('April'), _('May'), _('June'), _('July'), _('August'),
 					_('September'), _('October'), _('November'), _('December')
-				);
+				];
 			}
-			static $monthsGen = array();
+			static $monthsGen = [];
 			if (empty($monthsGen)) {
-				$monthsGen = array(
+				$monthsGen = [
 					_('January#~Genitive'), _('February#~Genitive'), _('March#~Genitive'), _('April#~Genitive'), _('May#~Genitive'),
 					_('June#~Genitive'), _('July#~Genitive'), _('August#~Genitive'), _('September#~Genitive'),
 					_('October#~Genitive'), _('November#~Genitive'), _('December#~Genitive')
-				);
+				];
 			}
-			static $monthsShort = array();
+			static $monthsShort = [];
 			if (empty($monthsShort)) {
-				$monthsShort = array(_('Jan'), _('Feb'), _('Mar'), _('Apr'), _('May#~Shortcut'), _('Jun'), _('Jul'), _('Aug'), _('Sep'), _('Oct'), _('Nov'), _('Dec'));
+				$monthsShort = [_('Jan'), _('Feb'), _('Mar'), _('Apr'), _('May#~Shortcut'), _('Jun'), _('Jul'), _('Aug'), _('Sep'), _('Oct'), _('Nov'), _('Dec')];
 			}
 
 			// Replace certain identifiers with fake ones
-			$search = array('~(^|[^\\\])l~', '~(^|[^\\\])D~', '~(^|[^\\\])F~', '~(^|[^\\\])M~');
-			$replace = array('$1<===>', '$1<___>', '$1<--->', '$1<...>');
+			$search = ['~(^|[^\\\])l~', '~(^|[^\\\])D~', '~(^|[^\\\])F~', '~(^|[^\\\])M~'];
+			$replace = ['$1<===>', '$1<___>', '$1<--->', '$1<...>'];
 			$format = preg_replace($search, $replace, $format);
 
 			// Format the rest of the date
@@ -432,12 +432,12 @@ class Time implements \Serializable
 			// Add translated days and months into the result
 			$result = strtr(
 				$date,
-				array(
+				[
 					'<===>' => $days[$day],
 					'<___>' => $daysShort[$day],
 					'<--->' => $monthName,
 					'<...>' => $monthsShort[$month]
-				)
+				]
 			);
 		} else {
 			// No need to translate
@@ -483,9 +483,9 @@ class Time implements \Serializable
 			$date = _('Yesterday');
 		} else {
 			// Last week
-			static $days = array();
+			static $days = [];
 			if (empty($days)) {
-				$days = array(_('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'), _('Sunday'));
+				$days = [_('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'), _('Sunday')];
 			}
 			$date = $days[$this->dateTime->format('N') - 1];
 		}
@@ -524,7 +524,7 @@ class Time implements \Serializable
 	 */
 	public function formatAsInterval($useTense = true, $timeZone = null)
 	{
-		static $intervalList = array(
+		static $intervalList = [
 			self::YEAR => self::INTERVAL_YEAR,
 			self::MONTH => self::INTERVAL_MONTH,
 			self::WEEK => self::INTERVAL_WEEK,
@@ -532,7 +532,7 @@ class Time implements \Serializable
 			self::HOUR => self::INTERVAL_HOUR,
 			self::MINUTE => self::INTERVAL_MINUTE,
 			self::SECOND => self::INTERVAL_SECOND
-		);
+		];
 
 		// Comparison time zone
 		$timeZone = $timeZone ? $this->createTimeZone($timeZone) : $this->dateTime->getTimezone();
@@ -693,14 +693,14 @@ class Time implements \Serializable
 	 */
 	public function truncate($unit)
 	{
-		$dateTime = array(
+		$dateTime = [
 			self::YEAR => 0,
 			self::MONTH => 1,
 			self::DAY => 1,
 			self::HOUR => 0,
 			self::MINUTE => 0,
 			self::SECOND => 0
-		);
+		];
 
 		switch ((string) $unit) {
 			case self::SECOND:

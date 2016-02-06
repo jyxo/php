@@ -78,7 +78,7 @@ class Parser
 	 *
 	 * @var array
 	 */
-	private $structure = array();
+	private $structure = [];
 
 	/**
 	 * Default part Id.
@@ -92,14 +92,14 @@ class Parser
 	 *
 	 * @var array
 	 */
-	private $parts = array();
+	private $parts = [];
 
 	/**
 	 * List of part types.
 	 *
 	 * @var array
 	 */
-	private static $dataTypes = array(
+	private static $dataTypes = [
 		TYPETEXT => 'text',
 		TYPEMULTIPART => 'multipart',
 		TYPEMESSAGE => 'message',
@@ -109,14 +109,14 @@ class Parser
 		TYPEVIDEO => 'video',
 		TYPEMODEL => 'model',
 		TYPEOTHER => 'other'
-	);
+	];
 
 	/**
 	 * List of encodings.
 	 *
 	 * @var array
 	 */
-	private static $encodingTypes = array(
+	private static $encodingTypes = [
 		ENC7BIT => '7bit',
 		ENC8BIT => '8bit',
 		ENCBINARY => 'binary',
@@ -124,7 +124,7 @@ class Parser
 		ENCQUOTEDPRINTABLE => 'quoted-printable',
 		ENCOTHER => 'other',
 		6 => 'other'
-	);
+	];
 
 	/**
 	 * Creates an instance.
@@ -198,10 +198,10 @@ class Parser
 			$this->structure['obj']->ifdisposition = 1;
 			$this->structure['obj']->disposition = 'inline';
 			$this->structure['obj']->ifdparameters = 0;
-			$this->structure['obj']->dparameters = array();
+			$this->structure['obj']->dparameters = [];
 			$this->structure['obj']->ifparameters = 0;
-			$this->structure['obj']->parameters = array();
-			$this->structure['obj']->parts = array($temp);
+			$this->structure['obj']->parameters = [];
+			$this->structure['obj']->parts = [$temp];
 		}
 
 		// Deals a multipart/alternative or multipart/report problem when they are as the first part
@@ -388,7 +388,7 @@ class Parser
 	 */
 	private function getDefaultPid($mimeType = 'text/html', $attempt = 1)
 	{
-		$mimeCheck = ('text/html' == $mimeType) ? array('text/html', 'text/plain') : array('text/plain', 'text/html');
+		$mimeCheck = ('text/html' == $mimeType) ? ['text/html', 'text/plain'] : ['text/plain', 'text/html'];
 
 		// Tries to find text/html or text/plain in main parts
 		foreach ($mimeCheck as $mime) {
@@ -468,14 +468,14 @@ class Parser
 			$addressList = imap_rfc822_parse_adrlist($matches[1], '');
 			// {''} is used because of CS rules
 			$headerInfo->{'disposition_notification_toaddress'} = substr(trim($matches[1]), 0, 1024);
-			$headerInfo->{'disposition_notification_to'} = array($addressList[0]);
+			$headerInfo->{'disposition_notification_to'} = [$addressList[0]];
 		}
 
-		$headers = array();
-		static $mimeHeaders = array(
+		$headers = [];
+		static $mimeHeaders = [
 			'toaddress', 'ccaddress', 'bccaddress', 'fromaddress', 'reply_toaddress', 'senderaddress',
 			'return_pathaddress', 'subject', 'fetchfrom', 'fetchsubject', 'disposition_notification_toaddress'
-		);
+		];
 		foreach ($headerInfo as $key => $value) {
 			if ((!is_object($value)) && (!is_array($value))) {
 				if (in_array($key, $mimeHeaders)) {
@@ -496,15 +496,15 @@ class Parser
 		}
 
 		// Parses references
-		$headers['references'] = isset($headers['references']) ? explode('> <', trim($headers['references'], '<>')) : array();
+		$headers['references'] = isset($headers['references']) ? explode('> <', trim($headers['references'], '<>')) : [];
 
-		static $types = array('to', 'cc', 'bcc', 'from', 'reply_to', 'sender', 'return_path', 'disposition_notification_to');
+		static $types = ['to', 'cc', 'bcc', 'from', 'reply_to', 'sender', 'return_path', 'disposition_notification_to'];
 		for ($i = 0; $i < count($types); $i++) {
 			$type = $types[$i];
-			$headers[$type] = array();
+			$headers[$type] = [];
 			if (isset($headerInfo->$type)) {
 				foreach ($headerInfo->$type as $object) {
-					$newHeader = array();
+					$newHeader = [];
 					foreach ($object as $attributeName => $attributeValue) {
 						if (!empty($attributeValue)) {
 							$newHeader[$attributeName] = ('personal' === $attributeName)
@@ -534,7 +534,7 @@ class Parser
 				// Converts to the format used by imap_headerinfo()
 				$key = str_replace('-', '_', strtolower($matches[1][$i]));
 				// Removes line endings
-				$value = strtr(trim($matches[2][$i]), array("\r" => '', "\n" => '', "\t" => ' '));
+				$value = strtr(trim($matches[2][$i]), ["\r" => '', "\n" => '', "\t" => ' ']);
 				$headers[$key] = $value;
 			}
 		}
@@ -709,7 +709,7 @@ class Parser
 	 */
 	private function isMultipart($subtype)
 	{
-		return (count($this->getMime(array('multipart/' . $subtype))) > 0);
+		return (count($this->getMime(['multipart/' . $subtype])) > 0);
 	}
 
 	/**
@@ -732,7 +732,7 @@ class Parser
 	 */
 	private function addPart($structureNo, $partType)
 	{
-		$fields = array('fname', 'pid', 'ftype', 'fsize', 'hasAttach', 'charset');
+		$fields = ['fname', 'pid', 'ftype', 'fsize', 'hasAttach', 'charset'];
 
 		$no = isset($this->parts[$partType]['pid']) ? count($this->parts[$partType]['pid']) : 0;
 		foreach ($fields as $field) {
@@ -809,7 +809,7 @@ class Parser
 	 */
 	public function getAttachments()
 	{
-		return isset($this->parts['attach']['pid']) ? $this->parts['attach']['pid'] : array();
+		return isset($this->parts['attach']['pid']) ? $this->parts['attach']['pid'] : [];
 	}
 
 	/**
@@ -819,7 +819,7 @@ class Parser
 	 */
 	public function getInlines()
 	{
-		return isset($this->parts['inline']['pid']) ? $this->parts['inline']['pid'] : array();
+		return isset($this->parts['inline']['pid']) ? $this->parts['inline']['pid'] : [];
 	}
 
 	/**
@@ -839,7 +839,7 @@ class Parser
 			throw $e;
 		}
 
-		$related = array();
+		$related = [];
 		if (!empty($this->structure['pid'])) {
 			// Deals a problem with multipart/alternative and multipart/report, when they are as the first part and don't have any real Ids (they have a fake Id 0 assigned then)
 			if (0 === $pid) {
@@ -878,7 +878,7 @@ class Parser
 	public function getAllRelatedParts($pid)
 	{
 		try {
-			return $this->getRelatedParts($pid, array(), true);
+			return $this->getRelatedParts($pid, [], true);
 		} catch (\Jyxo\Mail\Parser\EmailNotExistException $e) {
 			throw $e;
 		}
@@ -1029,7 +1029,7 @@ class Parser
 			throw $e;
 		}
 
-		$parts = array();
+		$parts = [];
 		if (is_array($this->structure['ftype'])) {
 			foreach ($types as $type) {
 				foreach (array_keys($this->structure['ftype'], $type) as $key) {
@@ -1056,7 +1056,7 @@ class Parser
 			throw $e;
 		}
 
-		$parts = array();
+		$parts = [];
 		if (is_array($this->structure['ftype'])) {
 			$allExcept = array_diff($this->structure['ftype'], $exceptTypes);
 			foreach (array_keys($allExcept) as $key) {

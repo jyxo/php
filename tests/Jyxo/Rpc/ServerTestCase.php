@@ -166,7 +166,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 
 		require_once $this->getFilePath('TestMath.php');
 		$this->rpc->registerMethod('TestMath', 'sum');
-		$this->rpc->enableLogging($logFile, array(__CLASS__, 'logCallback'));
+		$this->rpc->enableLogging($logFile, [__CLASS__, 'logCallback']);
 
 		// Server output check
 		$this->checkServerOutput('sum');
@@ -263,7 +263,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	 */
 	public static function logCallback($method, array $params, $result)
 	{
-		return array($method, $params, 5);
+		return [$method, $params, 5];
 	}
 
 	/**

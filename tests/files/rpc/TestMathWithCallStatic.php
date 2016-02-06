@@ -14,7 +14,7 @@ class TestMathWithCallStatic
 	 */
 	public static function __callStatic($method, $args)
 	{
-		return call_user_func_array(array(__CLASS__, 'difference'), $args);
+		return call_user_func_array([__CLASS__, 'difference'], $args);
 	}
 
 	/**

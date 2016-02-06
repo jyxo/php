@@ -127,7 +127,7 @@ class Item
 			} elseif (preg_match('/^msgid_plural "(.*)"/', $chunk, $matches)) {
 				$lastChunkType = 'plural';
 				$this->plural = $matches[1];
-				$this->msgstr = array();
+				$this->msgstr = [];
 			} elseif (preg_match('/^msgstr\[([0-9])+\] "(.*)"/', $chunk, $matches)) {
 				$lastChunkType = 'msgstr';
 				$this->msgstr[$matches[1]] = $matches[2];

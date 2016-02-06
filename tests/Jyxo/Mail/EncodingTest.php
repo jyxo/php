@@ -35,7 +35,7 @@ class EncodingTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @var array
 	 */
-	private $encodings = array();
+	private $encodings = [];
 
 	/**
 	 * Prepares the testing environment.

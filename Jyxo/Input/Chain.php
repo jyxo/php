@@ -65,7 +65,7 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	 *
 	 * @var array
 	 */
-	private $chain = array();
+	private $chain = [];
 
 	/**
 	 * Parent chain reference.
@@ -86,7 +86,7 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	 *
 	 * @var array
 	 */
-	private $errors = array();
+	private $errors = [];
 
 	/**
 	 * Adds a validator to the chain.
@@ -97,7 +97,7 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	 */
 	public function addValidator(\Jyxo\Input\ValidatorInterface $validator, $errorMessage = null)
 	{
-		$this->chain[] = array(self::VALIDATOR, $validator, $errorMessage);
+		$this->chain[] = [self::VALIDATOR, $validator, $errorMessage];
 		return $this;
 	}
 
@@ -109,7 +109,7 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	 */
 	public function addFilter(\Jyxo\Input\FilterInterface $filter)
 	{
-		$this->chain[] = array(self::FILTER, $filter);
+		$this->chain[] = [self::FILTER, $filter];
 		return $this;
 	}
 
@@ -122,7 +122,7 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	{
 		$chain = new self();
 		$chain->setParent($this);
-		$this->chain[] = array(self::WALK, $chain);
+		$this->chain[] = [self::WALK, $chain];
 		return $chain;
 	}
 
@@ -135,7 +135,7 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	public function addCondition(\Jyxo\Input\Chain\Conditional $chain)
 	{
 		$chain->setParent($this);
-		$this->chain[] = array(self::CONDITION, $chain);
+		$this->chain[] = [self::CONDITION, $chain];
 		return $chain;
 	}
 

@@ -159,7 +159,7 @@ class Css
 
 		// Parse the HTML source
 		preg_match_all('~(?:<\\w+[^>]*(?: /)?>)|(?:</\\w+>)|(?:<![^>]+>)|(?:[^<]+)~', $html, $matches);
-		$path = array();
+		$path = [];
 		$html = '';
 		$inStyle = false;
 		foreach ($matches[0] as $htmlPart) {
@@ -181,7 +181,7 @@ class Css
 
 					$htmlPart = trim($htmlPart, '/<> ');
 
-					$attributeList = array('id' => '', 'class' => '');
+					$attributeList = ['id' => '', 'class' => ''];
 					// If there is no space, there are no attributes
 					if (false !== strpos($htmlPart, ' ')) {
 						list($tag, $attributes) = explode(' ', $htmlPart, 2);
@@ -194,14 +194,14 @@ class Css
 					} else {
 						$tag = $htmlPart;
 					}
-					$attributeClass = !empty($attributeList['class']) ? explode(' ', $attributeList['class']) : array();
+					$attributeClass = !empty($attributeList['class']) ? explode(' ', $attributeList['class']) : [];
 
 					// Add element information to the path
-					array_push($path, array(
+					array_push($path, [
 							'tag' => $tag,
 							'id' => $attributeList['id'],
 							'class' => $attributeClass
-						)
+						]
 					);
 
 					// Walk through the CSS definition list and add applicable properties
@@ -299,13 +299,13 @@ class Css
 	{
 		// Find <style> elements
 		if (!preg_match_all('~<style\\s+(?:[^>]+\\s+)*type="text/css"[^>]*>(.*?)</style>~s', $html, $styles)) {
-			return array();
+			return [];
 		}
 
-		$cssList = array();
+		$cssList = [];
 		foreach ($styles[1] as $style) {
 			// Remove CDATA and HTML comments
-			$style = str_replace(array('<![CDATA[', ']]>', '<!--', '-->'), '', $style);
+			$style = str_replace(['<![CDATA[', ']]>', '<!--', '-->'], '', $style);
 
 			// Optimize the parsed definitions
 			$style = self::minify($style);
@@ -331,7 +331,7 @@ class Css
 					// Convert a:link to a
 					$part = str_replace(':link', '', $part);
 
-					$parsedSelector = array();
+					$parsedSelector = [];
 					foreach (explode(' ', $part) as $selectorPart) {
 						// If no tag name was given use a fake one
 						if (('.' === $selectorPart[0]) || ('#' === $selectorPart[0])) {
@@ -343,7 +343,7 @@ class Css
 							// There can be multiple classes
 							$class = explode('.', $class);
 						} else {
-							$class = array();
+							$class = [];
 						}
 						if (false !== strpos($selectorPart, '#')) {
 							list($selectorPart, $id) = explode('#', $selectorPart, 2);
@@ -352,17 +352,17 @@ class Css
 						}
 						$tag = trim($selectorPart);
 
-						$parsedSelector[] = array(
+						$parsedSelector[] = [
 							'tag' => strtolower($tag),
 							'id' => $id,
 							'class' => $class
-						);
+						];
 					}
 
-					$cssList[] = array(
+					$cssList[] = [
 						'selector' => $parsedSelector,
 						'rules' => $rules
-					);
+					];
 				}
 			}
 		}

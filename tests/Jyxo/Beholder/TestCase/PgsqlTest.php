@@ -85,12 +85,12 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
 			$this->markTestSkipped('PostgreSQL not set');
 		}
 
-		return array(
+		return [
 			'user' => $matches[1],
 			'password' => $matches[2],
 			'host' => $matches[3],
 			'port' => $matches[4],
 			'database' => $matches[5]
-		);
+		];
 	}
 }

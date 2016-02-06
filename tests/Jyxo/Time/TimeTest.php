@@ -82,7 +82,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 
 		// Invalid parameter
 		try {
-			$time = new Time(array());
+			$time = new Time([]);
 			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
 		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
 			throw $e;
@@ -112,7 +112,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		}
 
 		try {
-			$tmp = new Time($dateTime, (object) array('foo' => 'bar'));
+			$tmp = new Time($dateTime, (object) ['foo' => 'bar']);
 			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
 		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
 			throw $e;
@@ -277,8 +277,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('121212', Time::get('2012-12-12T12:12:12+02:00')->format('ymd'));
 
 		// Weekdays translation
-		$days = array(_('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'), _('Sunday'));
-		$daysShort = array(_('Mon'), _('Tue'), _('Wed'), _('Thu'), _('Fri'), _('Sat'), _('Sun'));
+		$days = [_('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'), _('Sunday')];
+		$daysShort = [_('Mon'), _('Tue'), _('Wed'), _('Thu'), _('Fri'), _('Sat'), _('Sun')];
 		foreach ($days as $day => $name) {
 			$time = new Time('2009-10-' . ($day + 12));
 			$this->assertEquals($days[date('N', strtotime('2009-10-' . ($day + 12))) - 1], $time->format('l'));
@@ -286,16 +286,16 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		}
 
 		// Months translation
-		$months = array(
+		$months = [
 			_('January'), _('February'), _('March'), _('April'), _('May'), _('June'), _('July'), _('August'),
 			_('September'), _('October'), _('November'), _('December')
-		);
-		$monthsGen = array(
+		];
+		$monthsGen = [
 			_('January#~Genitive'), _('February#~Genitive'), _('March#~Genitive'), _('April#~Genitive'), _('May#~Genitive'),
 			_('June#~Genitive'), _('July#~Genitive'), _('August#~Genitive'), _('September#~Genitive'),
 			_('October#~Genitive'), _('November#~Genitive'), _('December#~Genitive')
-		);
-		$monthsShort = array(_('Jan'), _('Feb'), _('Mar'), _('Apr'), _('May#~Shortcut'), _('Jun'), _('Jul'), _('Aug'), _('Sep'), _('Oct'), _('Nov'), _('Dec'));
+		];
+		$monthsShort = [_('Jan'), _('Feb'), _('Mar'), _('Apr'), _('May#~Shortcut'), _('Jun'), _('Jul'), _('Aug'), _('Sep'), _('Oct'), _('Nov'), _('Dec')];
 		foreach ($months as $month => $name) {
 			$time = new Time('2009-' . str_pad($month + 1, 2, '0', STR_PAD_LEFT) . '-01');
 			$this->assertEquals($name, $time->format('F'));
@@ -389,7 +389,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(_('Yesterday') . ' ' . _('at') . ' ' . date('G:i', $yesterday), Time::get($yesterday)->formatExtended());
 
 		// Last week
-		$days = array(_('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'), _('Sunday'));
+		$days = [_('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'), _('Sunday')];
 		for ($i = 2; $i < 7; $i++) {
 			$day = strtotime('-' . $i . ' days');
 			$this->assertEquals($days[date('N', $day) - 1], Time::get($day)->formatExtended('j. F Y', ''));
@@ -408,7 +408,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		$this->assertSame(_('Yesterday'), $time->minus('2 hour')->formatExtended(null, '', 'Europe/Prague'));
 
 		// Last week
-		$days = array(_('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'), _('Sunday'));
+		$days = [_('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'), _('Sunday')];
 		$timestamp = time() - 7 * 86400;
 		$time = new Time(gmdate('Y-m-d', $timestamp) . ' 00:00:00', 'UTC');
 
@@ -432,8 +432,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		$this->assertNotEquals(_('Now'), Time::get('+10 seconds')->formatAsInterval());
 
 		// Most intervals
-		foreach (array('minute', 'hour', 'day', 'year') as $period) {
-			foreach (array(1, 2) as $count) {
+		foreach (['minute', 'hour', 'day', 'year'] as $period) {
+			foreach ([1, 2] as $count) {
 				$this->assertEquals(sprintf(ngettext(sprintf('%s ago', ucfirst($period)), sprintf('%%s %ss ago', $period), $count), $count), Time::get(sprintf('-%s %s', $count, $period))->formatAsInterval());
 				$this->assertEquals(sprintf(ngettext(sprintf('%s', ucfirst($period)), sprintf('%%s %ss', $period), $count), $count), Time::get(sprintf('+%s %s', $count, $period))->formatAsInterval(false));
 				$this->assertEquals(sprintf(ngettext(sprintf('In %s', $period), sprintf('In %%s %ss', $period), $count), $count), Time::get(sprintf('+%s %s', $count, $period))->formatAsInterval());
@@ -441,7 +441,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		}
 
 		// Months have to be tested separately because of Feb, which is shorter
-		foreach (array(1, 2) as $count) {
+		foreach ([1, 2] as $count) {
 			try {
 				$actual = Time::get(sprintf('-%s month', $count))->formatAsInterval();
 				$this->assertEquals(sprintf(ngettext('Month ago', '%s months ago', $count), $count), $actual);
@@ -462,7 +462,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 			}
 		}
 
-		foreach (array(1, 2) as $count) {
+		foreach ([1, 2] as $count) {
 			try {
 				$actual = Time::get(sprintf('-%s week', $count))->formatAsInterval();
 				$this->assertEquals(sprintf(ngettext('Week ago', '%s weeks ago', $count), $count), $actual);
@@ -578,14 +578,14 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
 		}
 
-		$tests = array(
+		$tests = [
 			Time::SECOND => '2004-05-06 07:08:09',
 			Time::MINUTE => '2004-05-06 07:08:00',
 			Time::HOUR => '2004-05-06 07:00:00',
 			Time::DAY => '2004-05-06 00:00:00',
 			Time::MONTH => '2004-05-01 00:00:00',
 			Time::YEAR => '2004-01-01 00:00:00'
-		);
+		];
 
 		$time = new Time('2004-05-06 07:08:09');
 		foreach ($tests as $unit => $expected) {

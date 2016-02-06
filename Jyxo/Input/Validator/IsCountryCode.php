@@ -31,7 +31,7 @@ class IsCountryCode extends \Jyxo\Input\Validator\AbstractValidator
 	 *
 	 * @var array
 	 */
-	private static $countries = array(
+	private static $countries = [
 		'AF', 'AX', 'AL', 'DZ', 'AS', 'AD', 'AO', 'AI', 'AQ', 'AG', 'AR', 'AM', 'AW',
 		'AU', 'AT', 'AZ', 'BS', 'BH', 'BD', 'BB', 'BY', 'BE', 'BZ', 'BJ', 'BM', 'BT',
 		'BO', 'BA', 'BW', 'BV', 'BR', 'IO', 'BN', 'BG', 'BF', 'BI', 'KH', 'CM', 'CA',
@@ -51,7 +51,7 @@ class IsCountryCode extends \Jyxo\Input\Validator\AbstractValidator
 		'SR', 'SJ', 'SZ', 'SE', 'CH', 'SY', 'TW', 'TJ', 'TZ', 'TH', 'TL', 'TG', 'TK',
 		'TO', 'TT', 'TN', 'TR', 'TM', 'TC', 'TV', 'UG', 'UA', 'AE', 'GB', 'US', 'UM',
 		'UY', 'UZ', 'VU', 'VE', 'VN', 'VG', 'VI', 'WF', 'EH', 'YE', 'ZM', 'ZW'
-	);
+	];
 
 	/**
 	 * Validates a value.

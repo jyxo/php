@@ -65,21 +65,21 @@ final class HtmlTag
 	 *
 	 * @var array
 	 */
-	private $attributes = array();
+	private $attributes = [];
 
 	/**
 	 * Array of child elements.
 	 *
 	 * @var array
 	 */
-	private $children = array();
+	private $children = [];
 
 	/**
 	 * Array of elements whose value will not be escaped.
 	 *
 	 * @var array
 	 */
-	private $noEncode = array();
+	private $noEncode = [];
 
 	/**
 	 * Renders only the contents, not the opening and closing tag.
@@ -93,32 +93,32 @@ final class HtmlTag
 	 *
 	 * @var array
 	 */
-	private static $attrs = array(
+	private static $attrs = [
 		'accesskey' => true, 'action' => true, 'alt' => true, 'cellpadding' => true, 'cellspacing' => true, 'checked' => true, 'class' => true,
 		'cols' => true, 'disabled' => true, 'for' => true, 'href' => true, 'id' => true, 'label' => true, 'method' => true, 'name' => true, 'onblur' => true,
 		'onchange' => true, 'onclick' => true, 'onfocus' => true, 'onkeyup' => true, 'onsubmit' => true, 'readonly' => true, 'rel' => true,
 		'rows' => true, 'selected' => true, 'size' => true, 'src' => true, 'style' => true, 'tabindex' => true, 'title' => true, 'type' => true,
 		'value' => true, 'width' => true,
-	);
+	];
 
 	/**
 	 * List of self closing elements.
 	 *
 	 * @var array
 	 */
-	private $emptyElements = array(
+	private $emptyElements = [
 		'br' => true, 'hr' => true, 'img' => true, 'input' => true, 'meta' => true, 'link' => true
-	);
+	];
 
 	/**
 	 * List of mandatory attributes that will be rendered even if empty.
 	 *
 	 * @var array
 	 */
-	private $requiredAttrs = array(
+	private $requiredAttrs = [
 		'option' => 'value',
 		'optgroup' => 'label'
-	);
+	];
 
 	/**
 	 * Constructor.

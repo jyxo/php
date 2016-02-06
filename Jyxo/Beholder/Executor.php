@@ -85,7 +85,7 @@ class Executor
 	 *
 	 * @var array
 	 */
-	private $tests = array();
+	private $tests = [];
 
 	/**
 	 * Filter for including tests.
@@ -114,7 +114,7 @@ class Executor
 	 * @param string $project Project name
 	 * @param array $params Parameters; possible parameters are: include, exclude, output
 	 */
-	public function __construct($project, array $params = array())
+	public function __construct($project, array $params = [])
 	{
 		// Project name
 		$this->project = (string) $project;
@@ -162,7 +162,7 @@ class Executor
 		shuffle($idents);
 
 		// Performs tests and gathers results
-		$outputData = array();
+		$outputData = [];
 		$order = 1;
 		$allSucceeded = true;
 		foreach ($idents as $ident) {
@@ -178,7 +178,7 @@ class Executor
 		}
 
 		// Sorts tests according to their identifiers
-		$idents = array();
+		$idents = [];
 		foreach ($outputData as $key => $data) {
 			$idents[$key] = $data['ident'];
 		}
@@ -238,12 +238,12 @@ class Executor
 		}
 
 		// Returns result data
-		return array(
+		return [
 			'ident' => $ident,
 			'test' => $this->tests[$ident],
 			'result' => $result,
 			'duration' => \Jyxo\Timer::stop($timer)
-		);
+		];
 	}
 
 	/**

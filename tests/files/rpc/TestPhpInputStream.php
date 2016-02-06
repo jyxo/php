@@ -116,6 +116,6 @@ class TestPhpInputStream
 	 */
 	public function stream_stat()
 	{
-		return array();
+		return [];
 	}
 }

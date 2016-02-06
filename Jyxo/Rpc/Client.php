@@ -43,14 +43,14 @@ abstract class Client
 	 *
 	 * @var array
 	 */
-	protected $options = array();
+	protected $options = [];
 
 	/**
 	 * Parameters for curl_setopt.
 	 *
 	 * @var array
 	 */
-	private $curlOptions = array();
+	private $curlOptions = [];
 
 	/**
 	 * Timer name.
@@ -210,19 +210,19 @@ abstract class Client
 		}
 
 		// Headers
-		$headers = array(
+		$headers = [
 			'Content-Type: ' . $contentType,
 			'Content-Length: ' . strlen($data)
-		);
+		];
 
-		$defaultCurlOptions = array(
+		$defaultCurlOptions = [
 			CURLOPT_URL => $this->url,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_CONNECTTIMEOUT => 0,
 			CURLOPT_TIMEOUT => $this->timeout,
 			CURLOPT_HTTPHEADER => $headers,
 			CURLOPT_POSTFIELDS => $data,
-		);
+		];
 
 		$curlOptions = $this->curlOptions + $defaultCurlOptions;
 
@@ -288,18 +288,18 @@ abstract class Client
 		// Profiling has to be turned on
 		if ($this->profiler) {
 			static $totalTime = 0;
-			static $requests = array();
+			static $requests = [];
 
 			// Get elapsed time
 			$time = \Jyxo\Timer::stop($this->timer);
 
 			$totalTime += $time;
-			$requests[] = array(strtoupper($type), (string) $method, $params, $response, sprintf('%0.3f', $time * 1000));
+			$requests[] = [strtoupper($type), (string) $method, $params, $response, sprintf('%0.3f', $time * 1000)];
 
 			// Send to FirePHP
 			\Jyxo\FirePhp::table(
 				sprintf('Jyxo RPC Profiler (%d requests took %0.3f ms)', count($requests), sprintf('%0.3f', $totalTime * 1000)),
-				array('Type', 'Method', 'Request', 'Response', 'Time'),
+				['Type', 'Method', 'Request', 'Response', 'Time'],
 				$requests,
 				'Rpc'
 			);

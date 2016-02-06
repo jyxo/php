@@ -32,36 +32,36 @@ class EmailTest extends \PHPUnit_Framework_TestCase
 
 		$subject = 'Novinky září 2009 ... a kreslící soutěž';
 		$from = new Email\Address('blog-noreply@blog.cz', 'Blog.cz');
-		$to = array(
+		$to = [
 			new Email\Address('test1@blog.cz', 'Test Test1'),
 			new Email\Address('test2@blog.cz')
-		);
-		$cc = array(
+		];
+		$cc = [
 			new Email\Address('test3@blog.cz', 'Test Test3'),
 			new Email\Address('test4@blog.cz')
-		);
-		$bcc = array(
+		];
+		$bcc = [
 			new Email\Address('test5@blog.cz', 'Test Test5')
-		);
+		];
 
-		$headers = array(
+		$headers = [
 			new Email\Header('Organization', 'Blog.cz')
-		);
+		];
 
 		$inReplyTo = '161024ac03484c10203285be576446f2@blog.cz';
-		$references = array('30d6c4933818e36fa46509ad24a91ea4@blog.cz', '8b30935de59b6c89e4fc1204d279a2af@blog.cz');
+		$references = ['30d6c4933818e36fa46509ad24a91ea4@blog.cz', '8b30935de59b6c89e4fc1204d279a2af@blog.cz'];
 
 		$html = file_get_contents($filePath . '/email.html');
 		$body = new Email\Body($html, \Jyxo\Html::toText($html));
 
-		$attachments = array(
+		$attachments = [
 			new Email\Attachment\FileAttachment($filePath . '/logo.gif', 'logo.gif', 'image/gif'),
 			new Email\Attachment\StringAttachment(file_get_contents($filePath . '/star.gif'), 'star.gif', 'image/gif')
-		);
-		$inlineAttachments = array(
+		];
+		$inlineAttachments = [
 			new Email\Attachment\InlineFileAttachment($filePath . '/logo.gif', 'logo.gif', 'logo.gif', 'image/gif'),
 			new Email\Attachment\InlineStringAttachment(file_get_contents($filePath . '/star.gif'), 'star.gif', 'star.gif', 'image/gif')
-		);
+		];
 
 		// Basic settings
 		$email = new Email();
@@ -72,7 +72,7 @@ class EmailTest extends \PHPUnit_Framework_TestCase
 			->setConfirmReadingTo($from);
 		$this->assertEquals($subject, $email->getSubject());
 		$this->assertSame($from, $email->getFrom());
-		$this->assertSame(array($from), $email->getReplyTo());
+		$this->assertSame([$from], $email->getReplyTo());
 		$this->assertSame($from, $email->getConfirmReadingTo());
 		$this->assertEquals($inReplyTo, $email->getInReplyTo());
 		$this->assertSame($references, $email->getReferences());

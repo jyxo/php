@@ -29,7 +29,7 @@ class ConditionalTest extends \PHPUnit_Framework_TestCase
 	{
 		// No validator -> true for any value
 		$validator = new Conditional();
-		foreach (array('example', 42, array(), new \stdClass(), 1.23, true, false) as $value) {
+		foreach (['example', 42, [], new \stdClass(), 1.23, true, false] as $value) {
 			$this->assertTrue($validator->isValid($value));
 		}
 	}
@@ -42,19 +42,19 @@ class ConditionalTest extends \PHPUnit_Framework_TestCase
 		static $value = 42;
 		$validator = new Conditional(new \Jyxo\Input\Validator\IsInt());
 		$validator->addValidator(new \Jyxo\Input\Validator\LessThan($value));
-		$good = array(
+		$good = [
 			$value - 1,
 			(int) ($value / 2),
 			sqrt($value),
 			'example',
 			false,
 			true
-		);
-		$bad = array(
+		];
+		$bad = [
 			$value * 2,
 			(string) ($value * 2),
 			(float) ($value * 2)
-		);
+		];
 
 		foreach ($good as $value) {
 			$this->assertTrue(

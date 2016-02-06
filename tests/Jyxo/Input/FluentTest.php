@@ -35,7 +35,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 				->validate('isInt');
 
 		$this->assertTrue($input->isValid());
-		$this->assertEquals(array('answer' => '42'), $input->getValues());
+		$this->assertEquals(['answer' => '42'], $input->getValues());
 	}
 
 	/**
@@ -63,16 +63,16 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testWalk()
 	{
-		$current = array(
+		$current = [
 			'aBcDe',
 			'Jakub',
 			'ŽLUŤOUČKÝ kůň PĚL ďábelské ÓDY'
-		);
-		$expected = array(
+		];
+		$expected = [
 			'abcde',
 			'jakub',
 			'žluťoučký kůň pěl ďábelské ódy'
-		);
+		];
 
 		$input1 = new Fluent();
 		$input1
@@ -126,7 +126,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 				->validate('isInt', 'not int');
 
 		$this->assertFalse($input->isValid());
-		$this->assertEquals(array('not int'), $input->getErrors());
+		$this->assertEquals(['not int'], $input->getErrors());
 
 		$input = new Fluent();
 		$input
@@ -134,7 +134,7 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 				->validate('isInt', 'not int');
 
 		$this->assertFalse($input->isValid(true));
-		$this->assertEquals(array('bar' => array('not int')), $input->getErrors());
+		$this->assertEquals(['bar' => ['not int']], $input->getErrors());
 
 		$input = new Fluent();
 		$input
@@ -153,11 +153,11 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalidWalk()
 	{
-		$current = array(
+		$current = [
 			42,
 			0,
 			'nulák'
-		);
+		];
 
 		$input = new Fluent();
 		$input
@@ -184,24 +184,24 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testConditional()
 	{
-		$good = array(
+		$good = [
 			43 => '42',		// Condition fulfilled, validates
 			20 => '42.23',		// Condition not fulfilled, no validation - true is returned
 			20 => 'example',
-			20 => array(),
+			20 => [],
 			20 => true,
 			20 => false,
-		);
+		];
 		// Condition fulfilled, but validation fails
-		$bad = array(
+		$bad = [
 			30 => '42',
 			'test' => '42',
 			1.23 => '42',
 			true => 42
-		);
+		];
 
 		// Complex value test
-		foreach (array(true => $good, false => $bad) as $result => $values) {
+		foreach ([true => $good, false => $bad] as $result => $values) {
 			foreach ($values as $lessThan => $value) {
 				$input = new Fluent();
 				$input

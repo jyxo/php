@@ -51,11 +51,11 @@ class Result
 	 *
 	 * @var array
 	 */
-	private static $statusList = array(
+	private static $statusList = [
 		self::SUCCESS => 'OK',
 		self::FAILURE => 'FAILED',
 		self::NOT_APPLICABLE => 'NOT APPLICABLE'
-	);
+	];
 
 	/**
 	 * Status.

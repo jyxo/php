@@ -42,7 +42,7 @@ class TestCaseTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->testcase = $this->getMockForAbstractClass(\Jyxo\Beholder\TestCase::class, array(self::DESCRIPTION));
+		$this->testcase = $this->getMockForAbstractClass(\Jyxo\Beholder\TestCase::class, [self::DESCRIPTION]);
 	}
 
 	/**

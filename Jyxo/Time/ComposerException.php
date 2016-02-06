@@ -97,7 +97,7 @@ class ComposerException extends \Jyxo\Exception
 	 */
 	public function __construct($message, $code)
 	{
-		static $allowedUnits = array(
+		static $allowedUnits = [
 			self::SECOND,
 			self::MINUTE,
 			self::HOUR,
@@ -106,7 +106,7 @@ class ComposerException extends \Jyxo\Exception
 			self::YEAR,
 			self::INVALID,
 			self::NOT_COMPLETE
-		);
+		];
 
 		if (!in_array($code, $allowedUnits)) {
 			$code = self::UNKNOWN;

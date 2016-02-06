@@ -51,7 +51,7 @@ class HttpResponse extends \Jyxo\Beholder\TestCase
 	 * @param string $url Tested URL
 	 * @param array $tests Custom tests
 	 */
-	public function __construct($description, $url, array $tests = array())
+	public function __construct($description, $url, array $tests = [])
 	{
 		parent::__construct($description);
 
@@ -74,11 +74,11 @@ class HttpResponse extends \Jyxo\Beholder\TestCase
 		try {
 
 			$httpClient = new \GuzzleHttp\Client();
-			$httpRequest = new \GuzzleHttp\Psr7\Request('GET', $this->url, array('User-Agent' => 'JyxoBeholder'));
-			$httpResponse = $httpClient->send($httpRequest, array(
+			$httpRequest = new \GuzzleHttp\Psr7\Request('GET', $this->url, ['User-Agent' => 'JyxoBeholder']);
+			$httpResponse = $httpClient->send($httpRequest, [
 				\GuzzleHttp\RequestOptions::CONNECT_TIMEOUT => 5,
 				\GuzzleHttp\RequestOptions::TIMEOUT => 10
-			));
+			]);
 
 			if (200 !== $httpResponse->getStatusCode()) {
 				throw new \Exception(sprintf('Http error: %s', $httpResponse->getReasonPhrase()));

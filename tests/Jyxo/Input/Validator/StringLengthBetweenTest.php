@@ -27,18 +27,18 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testValid()
 	{
-		$testcases = array(
-			array('ano', 0, 3),
-			array('ano', 3, 4),
-			array('ano', 1, PHP_INT_MAX),
-			array('žluťoučký', 9, 9),
-			array('žluťoučký', 8, 9),
-			array('Žluťoučký kůn pěl ďábelské ódy', 0, 30),
-			array('Žluťoučký kůn pěl ďábelské ódy', 15, 45),
-			array('Žluťoučký kůn pěl ďábelské ódy', 30, 60),
-			array('瑞鶴', 1, 3),
-			array('瑞鶴', 2, 2)
-		);
+		$testcases = [
+			['ano', 0, 3],
+			['ano', 3, 4],
+			['ano', 1, PHP_INT_MAX],
+			['žluťoučký', 9, 9],
+			['žluťoučký', 8, 9],
+			['Žluťoučký kůn pěl ďábelské ódy', 0, 30],
+			['Žluťoučký kůn pěl ďábelské ódy', 15, 45],
+			['Žluťoučký kůn pěl ďábelské ódy', 30, 60],
+			['瑞鶴', 1, 3],
+			['瑞鶴', 2, 2]
+		];
 
 		foreach ($testcases as $testcase) {
 			list($str, $min, $max) = $testcase;
@@ -54,17 +54,17 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInvalid()
 	{
-		$testcases = array(
-			array('ano', 4, 8),
-			array('ano', 0, 2),
-			array('žluťoučký', 0, 8),
-			array('žluťoučký', 10, PHP_INT_MAX),
-			array('Žluťoučký kůn pěl ďábelské ódy', 0, 29),
-			array('Žluťoučký kůn pěl ďábelské ódy', 31, 31),
-			array('Žluťoučký kůn pěl ďábelské ódy', 31, 42),
-			array('瑞鶴', 0, 1),
-			array('瑞鶴', 3, 128)
-		);
+		$testcases = [
+			['ano', 4, 8],
+			['ano', 0, 2],
+			['žluťoučký', 0, 8],
+			['žluťoučký', 10, PHP_INT_MAX],
+			['Žluťoučký kůn pěl ďábelské ódy', 0, 29],
+			['Žluťoučký kůn pěl ďábelské ódy', 31, 31],
+			['Žluťoučký kůn pěl ďábelské ódy', 31, 42],
+			['瑞鶴', 0, 1],
+			['瑞鶴', 3, 128]
+		];
 
 		foreach ($testcases as $testcase) {
 			list($str, $min, $max) = $testcase;
@@ -107,11 +107,11 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGettersSetters()
 	{
-		$testcases = array(
-			array(0, 3, 1, 4),
-			array(0, PHP_INT_MAX, 1, PHP_INT_MAX - 1),
-			array(24, 42, 30, 60)
-		);
+		$testcases = [
+			[0, 3, 1, 4],
+			[0, PHP_INT_MAX, 1, PHP_INT_MAX - 1],
+			[24, 42, 30, 60]
+		];
 
 		foreach ($testcases as $testcase) {
 			list ($min, $max, $newMin, $newMax) = $testcase;

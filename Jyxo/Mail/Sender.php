@@ -179,7 +179,7 @@ class Sender
 	 *
 	 * @var array
 	 */
-	private $boundary = array();
+	private $boundary = [];
 
 	/**
 	 * Sending mode.
@@ -200,7 +200,7 @@ class Sender
 	 *
 	 * @var array
 	 */
-	private $createdHeader = array();
+	private $createdHeader = [];
 
 	/**
 	 * Generated email body.
@@ -368,11 +368,11 @@ class Sender
 	public function send($mode)
 	{
 		// Sending modes
-		static $modes = array(
+		static $modes = [
 			self::MODE_SMTP => true,
 			self::MODE_MAIL => true,
 			self::MODE_NONE => true
-		);
+		];
 		if (!isset($modes[$mode])) {
 			throw new \InvalidArgumentException(sprintf('Unknown sending mode %s.', $mode));
 		}
@@ -415,7 +415,7 @@ class Sender
 		$this->result->source = $this->getHeader() . $this->createdBody;
 
 		// Flush of created email
-		$this->createdHeader = array();
+		$this->createdHeader = [];
 		$this->createdBody = '';
 
 		return $this->result;
@@ -441,7 +441,7 @@ class Sender
 
 		$subject = $this->changeCharset($this->clearHeaderValue($this->email->subject));
 
-		if (!mail($recipients, $this->encodeHeader($subject), $this->createdBody, $this->getHeader(array('To', 'Subject')))) {
+		if (!mail($recipients, $this->encodeHeader($subject), $this->createdBody, $this->getHeader(['To', 'Subject']))) {
 			throw new Sender\Exception('Could not send the message.');
 		}
 	}
@@ -468,7 +468,7 @@ class Sender
 			$smtp->from($this->email->from->email);
 
 			// Recipients
-			$unknownRecipients = array();
+			$unknownRecipients = [];
 			foreach (array_merge($this->email->to, $this->email->cc, $this->email->bcc) as $recipient) {
 				try {
 					$smtp->recipient($recipient->email);
@@ -507,10 +507,10 @@ class Sender
 		$this->result->datetime = \Jyxo\Time\Time::now();
 
 		// Parts boundaries
-		$this->boundary = array(
+		$this->boundary = [
 			1 => '====b1' . $uniqueId . '====' . $hostname . '====',
 			2 => '====b2' . $uniqueId . '====' . $hostname . '===='
-		);
+		];
 
 		// Determine the message type
 		if (!empty($this->email->attachments)) {
@@ -666,7 +666,7 @@ class Sender
 	 */
 	private function attachAll()
 	{
-		$mime = array();
+		$mime = [];
 
 		foreach ($this->email->attachments as $attachment) {
 			$encoding = !empty($attachment->encoding) ? $attachment->encoding : Encoding::BASE64;
@@ -703,7 +703,7 @@ class Sender
 	 * @param array $except Headers to be removed
 	 * @return string
 	 */
-	private function getHeader(array $except = array())
+	private function getHeader(array $except = [])
 	{
 		$header = '';
 		foreach ($this->createdHeader as $headerLine) {
@@ -769,10 +769,10 @@ class Sender
 	 */
 	private function addHeaderLine($name, $value)
 	{
-		$this->createdHeader[] = array(
+		$this->createdHeader[] = [
 			'name' => $name,
 			'value' => trim($value)
-		);
+		];
 	}
 
 	/**

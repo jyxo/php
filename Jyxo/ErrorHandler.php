@@ -108,9 +108,9 @@ class ErrorHandler
 		self::$debug = (bool) $debug;
 
 		// Registers handlers
-		set_error_handler(array(__CLASS__, 'handleError'));
-		set_exception_handler(array(__CLASS__, 'handleException'));
-		register_shutdown_function(array(__CLASS__, 'handleFatalError'));
+		set_error_handler([__CLASS__, 'handleError']);
+		set_exception_handler([__CLASS__, 'handleException']);
+		register_shutdown_function([__CLASS__, 'handleFatalError']);
 	}
 
 	/**
@@ -140,7 +140,7 @@ class ErrorHandler
 			return true;
 		}
 
-		static $types = array(
+		static $types = [
 			E_RECOVERABLE_ERROR => self::ERROR,
 			E_USER_ERROR => self::ERROR,
 			E_WARNING => self::WARNING,
@@ -150,18 +150,18 @@ class ErrorHandler
 			E_STRICT => self::STRICT,
 			E_DEPRECATED => self::DEPRECATED,
 			E_USER_DEPRECATED => self::DEPRECATED
-		);
+		];
 
 		// On false, the standard error handler will be used
 		return self::log(
-			array(
+			[
 				'type' => $types[$type],
 				'text' => $message,
 				'file' => $file,
 				'line' => $line,
 				'context' => $context,
 				'trace' => array_slice(debug_backtrace(), 1) // Removes the error handler call from trace
-			)
+			]
 		);
 	}
 
@@ -184,23 +184,23 @@ class ErrorHandler
 	public static function handleFatalError()
 	{
 		// List of critical errors
-		static $fatalErrors = array(
+		static $fatalErrors = [
 			E_ERROR => true,
 			E_CORE_ERROR => true,
 			E_COMPILE_ERROR => true,
 			E_PARSE => true,
-		);
+		];
 
 		// If the last error was critical
 		$error = error_get_last();
 		if (isset($fatalErrors[$error['type']])) {
 			self::log(
-				array(
+				[
 					'type' => self::FATAL,
 					'text' => $error['message'],
 					'file' => $error['file'],
 					'line' => $error['line']
-				)
+				]
 			);
 			if (self::$errorMail) {
 				$ex = new \ErrorException($error['message'], 0, $error['type'], $error['file'], $error['line']);
@@ -218,14 +218,14 @@ class ErrorHandler
 	public static function exception(\Exception $exception, $fire = true)
 	{
 		self::log(
-			array(
+			[
 				'type' => self::EXCEPTION,
 				'text' => $exception->getMessage() . ' [' . $exception->getCode() . ']',
 				'file' => $exception->getFile(),
 				'line' => $exception->getLine(),
 				'trace' => $exception->getTrace(),
 				'previous' => self::getAllPreviousExceptions($exception)
-			),
+			],
 			$fire
 		);
 	}
@@ -247,10 +247,10 @@ class ErrorHandler
 			$message['line'] = null;
 		}
 		if (!isset($message['trace'])) {
-			$message['trace'] = array();
+			$message['trace'] = [];
 		}
 		if (!isset($message['previous'])) {
-			$message['previous'] = array();
+			$message['previous'] = [];
 		}
 
 		// We don't want HTML tags and entities in the log
@@ -306,7 +306,7 @@ class ErrorHandler
 	 */
 	private static function firephp($message)
 	{
-		static $labels = array(
+		static $labels = [
 			self::EXCEPTION => 'Exception',
 			self::FATAL => 'Fatal Error',
 			self::ERROR => 'Error',
@@ -314,7 +314,7 @@ class ErrorHandler
 			self::NOTICE => 'Notice',
 			self::STRICT => 'Strict',
 			self::DEPRECATED => 'Deprecated'
-		);
+		];
 
 		// Adds to FirePHP
 		return FirePhp::trace(
@@ -363,7 +363,7 @@ class ErrorHandler
 	 */
 	private static function getAllPreviousExceptions(\Exception $exception)
 	{
-		$stack = array();
+		$stack = [];
 		$previous = $exception->getPrevious();
 		while (null !== $previous) {
 			$stack[] = $previous;

@@ -30,7 +30,7 @@ class RecipientUnknownException extends \Jyxo\Mail\Sender\Exception
 	 *
 	 * @var array
 	 */
-	private $list = array();
+	private $list = [];
 
 	/**
 	 * Creates an exception.
@@ -39,7 +39,7 @@ class RecipientUnknownException extends \Jyxo\Mail\Sender\Exception
 	 * @param integer $code Exception code
 	 * @param array $list List of non-existent addresses
 	 */
-	public function __construct($message = null, $code = 0, array $list = array())
+	public function __construct($message = null, $code = 0, array $list = [])
 	{
 		parent::__construct($message, $code);
 		$this->list = $list;

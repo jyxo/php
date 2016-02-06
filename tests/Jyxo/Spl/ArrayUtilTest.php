@@ -62,13 +62,13 @@ class ArrayUtilTest extends \PHPUnit_Framework_TestCase
 			return date('Y-m-d', strtotime('first day of last month', strtotime($current)));
 		});
 
-		$expect = array(
+		$expect = [
 			'2010-03-01',
 			'2010-02-01',
 			'2010-01-01',
 			'2009-12-01',
 			'2009-11-01'
-		);
+		];
 
 		$this->assertEquals($expect, $range);
 	}
@@ -78,7 +78,7 @@ class ArrayUtilTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testKeymap()
 	{
-		$source = array();
+		$source = [];
 		foreach (range(ord('a'), ord('z')) as $value) {
 			$source[] = chr($value);
 		}

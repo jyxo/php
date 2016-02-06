@@ -11,7 +11,7 @@ class Foo2 implements IteratorAggregate
 	 *
 	 * @var array
 	 */
-	private $data = array();
+	private $data = [];
 
 	/**
 	 * Constructor.

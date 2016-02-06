@@ -31,14 +31,14 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 		$composer = new Composer();
 
 		// Invalid date/time parts
-		$units = array(
-			'second' => array(-1, 61, '-1', '61'),
-			'minute' => array(-1, 61, '-1', '61'),
-			'hour' => array(-1, 24, '-1', '24'),
-			'day' => array(0, 32, '0', '32'),
-			'month' => array(0, 13, '0', '13'),
-			'year' => array(1901, 2038, '1901', '2038')
-		);
+		$units = [
+			'second' => [-1, 61, '-1', '61'],
+			'minute' => [-1, 61, '-1', '61'],
+			'hour' => [-1, 24, '-1', '24'],
+			'day' => [0, 32, '0', '32'],
+			'month' => [0, 13, '0', '13'],
+			'year' => [1901, 2038, '1901', '2038']
+		];
 		foreach ($units as $unit => $tests) {
 			foreach ($tests as $test) {
 				try {
@@ -63,14 +63,14 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 		}
 
 		// Invalid dates
-		$tests = array(
+		$tests = [
 			'2002-04-31',
 			'2003-02-29',
 			'2004-02-30',
 			'2005-06-31',
 			'2006-09-31',
 			'2007-11-31'
-		);
+		];
 		foreach ($tests as $test) {
 			try {
 				list($year, $month, $day) = explode('-', $test);
@@ -96,14 +96,14 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 	{
 		$composer = new Composer();
 
-		$tests = array(
+		$tests = [
 			'2002-04-30 00:00:00',
 			'2003-02-28 00:00:00',
 			'2004-02-29 05:03:16',
 			'2005-07-31 01:01:01',
 			'2006-10-31 23:59:59',
 			'2007-11-30 15:16:17'
-		);
+		];
 		foreach ($tests as $test) {
 			preg_match('~^(\\d{4})-(\\d{2})-(\\d{2}) (\\d{2}):(\\d{2}):(\\d{2})$~', $test, $matches);
 			$composer->setDay($matches[3])

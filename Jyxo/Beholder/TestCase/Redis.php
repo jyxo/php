@@ -88,7 +88,7 @@ class Redis extends \Jyxo\Beholder\TestCase
 				return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Connection error %s', $description));
 			}
 		} else {
-			$redis = new \Predis\Client(array('host' => $this->host, 'port' => $this->port));
+			$redis = new \Predis\Client(['host' => $this->host, 'port' => $this->port]);
 			if (false === $redis->connect()) {
 				return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Connection error %s', $description));
 			}

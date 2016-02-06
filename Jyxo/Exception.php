@@ -31,7 +31,7 @@ class Exception extends \Exception
 	 */
 	public function getAllPrevious()
 	{
-		$stack = array();
+		$stack = [];
 		$previous = $this->getPrevious();
 		while (null !== $previous) {
 			$stack[] = $previous;

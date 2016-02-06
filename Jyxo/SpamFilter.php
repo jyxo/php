@@ -58,14 +58,14 @@ class SpamFilter
 	 *
 	 * @var array
 	 */
-	private $blackList = array();
+	private $blackList = [];
 
 	/**
 	 * Ignored words (words are array keys).
 	 *
 	 * @var array
 	 */
-	private $ignoreWords = array();
+	private $ignoreWords = [];
 
 	/**
 	 * Checks if the given text is spam.
@@ -140,7 +140,7 @@ class SpamFilter
 	 */
 	public function isBabble($text)
 	{
-		$words = array();
+		$words = [];
 		$numberOfWords = 0;
 		// Walk through the text a count word appearances
 		foreach (preg_split('~[\\pZ\\s]+~u', $text) as $word) {

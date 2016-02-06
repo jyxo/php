@@ -29,21 +29,21 @@ class UtilTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testIsWorkingDay()
 	{
-		$free = array(
+		$free = [
 			'2010-01-01',
 			'2010-11-17',
 			'2010-12-24',
 			'2011-01-16',
 			'2011-04-25',
 			'2020-04-13'
-		);
+		];
 
-		$working = array(
+		$working = [
 			'2010-12-31',
 			'2011-07-20',
 			'2010-11-11',
 			'2020-04-14'
-		);
+		];
 
 		foreach ($free as $day) {
 			$this->assertFalse(Util::isWorkDay(new Time($day)));
@@ -59,13 +59,13 @@ class UtilTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testNextMonth()
 	{
-		$dates = array(
+		$dates = [
 			'2010-01-01' => '2010-02-01',
 			'2010-01-31' => '2010-02-28',
 			'2012-01-31' => '2012-02-29',
 			'2010-12-31' => '2011-01-31',
 			'2010-08-31' => '2010-09-30'
-		);
+		];
 
 		foreach ($dates as $current => $expected) {
 			$time = new Time($current);

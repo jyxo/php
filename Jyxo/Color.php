@@ -130,11 +130,11 @@ class Color
 	 */
 	public function getRgb()
 	{
-		return array(
+		return [
 			$this->red,
 			$this->green,
 			$this->blue
-		);
+		];
 	}
 
 	/**
@@ -301,7 +301,7 @@ class Color
 	 */
 	private function initFromInt($int)
 	{
-		$int = min(array($int, 0xFFFFFF));
+		$int = min([$int, 0xFFFFFF]);
 		$this->red = self::LUM_MAX & ($int >> 16);
 		$this->green = self::LUM_MAX & ($int >> 8);
 		$this->blue = self::LUM_MAX & $int;
@@ -320,6 +320,6 @@ class Color
 			$value = hexdec($value);
 		}
 		// Luminance must not be greater than 0xFF
-		return min(array((integer) $value, self::LUM_MAX));
+		return min([(integer) $value, self::LUM_MAX]);
 	}
 }

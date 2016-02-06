@@ -45,21 +45,21 @@ class Fluent
 	 *
 	 * @var array
 	 */
-	private $chains = array();
+	private $chains = [];
 
 	/**
 	 * All values.
 	 *
 	 * @var array
 	 */
-	private $values = array();
+	private $values = [];
 
 	/**
 	 * Default variable values.
 	 *
 	 * @var array
 	 */
-	private $default = array();
+	private $default = [];
 
 	/**
 	 * Current variable.
@@ -80,7 +80,7 @@ class Fluent
 	 *
 	 * @var array
 	 */
-	private $errors = array();
+	private $errors = [];
 
 	/**
 	 * \Jyxo\Input objects factory.
@@ -290,7 +290,7 @@ class Fluent
 		} else {
 			$valid = false;
 			// If we have $name set, we want an associative array
-			$errors = empty($name) ? $chain->getErrors() : array($name => $chain->getErrors());
+			$errors = empty($name) ? $chain->getErrors() : [$name => $chain->getErrors()];
 			$this->errors = array_merge($this->errors, $errors);
 		}
 		return $valid;

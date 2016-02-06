@@ -30,18 +30,18 @@ class Server extends \Jyxo\Rpc\Server
 	 *
 	 * @var array
 	 */
-	private static $jsonErrors = array(
+	private static $jsonErrors = [
 		JSON_ERROR_DEPTH => 'Maximum stack depth exceeded.',
 		JSON_ERROR_CTRL_CHAR => 'Unexpected control character found.',
 		JSON_ERROR_SYNTAX => 'Syntax error, malformed JSON.'
-	);
+	];
 
 	/**
 	 * List of registered methods.
 	 *
 	 * @var array
 	 */
-	private $methods = array();
+	private $methods = [];
 
 	/**
 	 * Actually registers a function to a server method.
@@ -85,18 +85,18 @@ class Server extends \Jyxo\Rpc\Server
 			}
 
 			// Request processing
-			$params = !empty($data['params']) ? (array) $data['params'] : array();
+			$params = !empty($data['params']) ? (array) $data['params'] : [];
 			$response = $this->call($data['method'], $params);
-			$response = array('result' => $response, 'id' => $data['id']);
+			$response = ['result' => $response, 'id' => $data['id']];
 
 		} catch (\Jyxo\Rpc\Json\Exception $e) {
-			$response = array(
-				'error' => array(
+			$response = [
+				'error' => [
 					'message' => $e->getMessage(),
 					'code' => $e->getCode()
-				),
+				],
 				'id' => $requestId
-			);
+			];
 		}
 
 		header('Content-Type: application/json; charset="utf-8"');

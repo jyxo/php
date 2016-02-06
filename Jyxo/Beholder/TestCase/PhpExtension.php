@@ -29,7 +29,7 @@ class PhpExtension extends \Jyxo\Beholder\TestCase
 	 *
 	 * @var array
 	 */
-	private $extensionList = array();
+	private $extensionList = [];
 
 	/**
 	 * Constructor.
@@ -52,7 +52,7 @@ class PhpExtension extends \Jyxo\Beholder\TestCase
 	public function run()
 	{
 		// Check
-		$missing = array();
+		$missing = [];
 		foreach ($this->extensionList as $extension) {
 			if (!extension_loaded($extension)) {
 				$missing[] = $extension;

@@ -30,7 +30,7 @@ class InArray extends \Jyxo\Input\Validator\AbstractValidator
 	 *
 	 * @var array
 	 */
-	private $allowed = array();
+	private $allowed = [];
 
 	/**
 	 * Constructor.

@@ -82,7 +82,7 @@ class MapIteratorTest extends \PHPUnit_Framework_TestCase
 		$this->expectException(\InvalidArgumentException::class);
 
 		$callback = 'FunctionThatDoesNotExistForSure';
-		$data = array();
+		$data = [];
 		$iterator = new MapIterator(new \ArrayIterator($data), $callback);
 	}
 

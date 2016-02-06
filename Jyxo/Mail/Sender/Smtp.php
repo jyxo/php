@@ -202,7 +202,7 @@ class Smtp
 	 */
 	public function data($header, $body)
 	{
-		$lineEnds = array(\Jyxo\Mail\Sender::LINE_END . '.' => self::LINE_END . '..', \Jyxo\Mail\Sender::LINE_END => self::LINE_END);
+		$lineEnds = [\Jyxo\Mail\Sender::LINE_END . '.' => self::LINE_END . '..', \Jyxo\Mail\Sender::LINE_END => self::LINE_END];
 		$header = strtr($header, $lineEnds);
 		$body = strtr($body, $lineEnds);
 		if ('.' == $body[0]) {

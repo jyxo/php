@@ -192,7 +192,7 @@ class StringUtil
 	 */
 	public static function formatBytes($size, $decimalPoint = ',', $thousandsSeparator = ' ')
 	{
-		static $units = array('B', 'kB', 'MB', 'GB', 'TB', 'PB');
+		static $units = ['B', 'kB', 'MB', 'GB', 'TB', 'PB'];
 		foreach ($units as $unit) {
 			if ($size < 1024) {
 				break;

@@ -91,7 +91,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertStringEqualsFile(
 			$this->filePath . '/removetags-2-expected.html',
-			Html::removeTags(file_get_contents($this->filePath . '/removetags-2.html'), array('p', 'select', 'ul'))
+			Html::removeTags(file_get_contents($this->filePath . '/removetags-2.html'), ['p', 'select', 'ul'])
 		);
 	}
 
@@ -134,7 +134,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertStringEqualsFile(
 			$this->filePath . '/removeattributes-2-expected.html',
-			Html::removeAttributes(file_get_contents($this->filePath . '/removeattributes-2.html'), array('href', 'title'))
+			Html::removeAttributes(file_get_contents($this->filePath . '/removeattributes-2.html'), ['href', 'title'])
 		);
 	}
 
@@ -159,36 +159,36 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	public function testRemoveRemoteImages()
 	{
 		// In format (expected value, input value)
-		$tests = array(
-			array(
+		$tests = [
+			[
 				'<img  width="10"    SRC="about:blank"    />',
 				'<img  width="10"    SRC="http://domain.tld/picture.png"    />'
-			),
-			array(
+			],
+			[
 				'<body  bgcolor="green"    BACKGROUND=""    >',
 				'<body  bgcolor="green"    BACKGROUND="http://domain.tld/picture.png"    >'
-			),
-			array(
+			],
+			[
 				'<a  href="#"    style="font: sans-serif;   background  : center center ; color: green;"    >',
 				'<a  href="#"    style="font: sans-serif;   background  : center center url(\'https://domain.tld/picture.png\'); color: green;"    >'
-			),
-			array(
+			],
+			[
 				'<a  href="#"    style="font: sans-serif;    color: green;"    >',
 				'<a  href="#"    style="font: sans-serif;   background-image  : url(\'http://domain.tld/picture.png\'); color: green;"    >'
-			),
-			array(
+			],
+			[
 				'<li  href="#"    style="font: sans-serif;   list-style  : circle ; color: green;"    >',
 				'<li  href="#"    style="font: sans-serif;   list-style  : circle url(\'http://domain.tld/picture.png\'); color: green;"    >'
-			),
-			array(
+			],
+			[
 				'<li  href="#"    style="font: sans-serif;    color: green;"    >',
 				'<li  href="#"    style="font: sans-serif;   list-style-image  : url(\'http://domain.tld/picture.png\'); color: green;"    >'
-			),
-			array(
+			],
+			[
 				'<img src="data:" />',
 				'<img src="data:" />'
-			)
-		);
+			]
+		];
 
 		foreach ($tests as $test) {
 			$this->assertEquals(

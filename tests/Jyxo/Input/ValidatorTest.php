@@ -45,9 +45,9 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInArray()
 	{
-		$values = array(1, 2, '3', null, 'foo');
+		$values = [1, 2, '3', null, 'foo'];
 
-		$good = array(
+		$good = [
 			1,
 			null,
 			true,
@@ -55,12 +55,12 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'',
 			'2',
 			'foo'
-		);
-		$wrong = array(
+		];
+		$wrong = [
 			'bah',
 			4,
 			1.5
-		);
+		];
 
 		$this->executeTests(new Validator\InArray($values), $good, $wrong);
 	}
@@ -70,15 +70,15 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testIsArray()
 	{
-		$good = array(
-			array('test')
-		);
-		$wrong = array(
+		$good = [
+			['test']
+		];
+		$wrong = [
 			'test',
 			123,
 			1.5,
 			true
-		);
+		];
 
 		$this->executeTests(new Validator\IsArray(), $good, $wrong);
 	}
@@ -88,7 +88,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testIsBirthNumber()
 	{
-		$good = array(
+		$good = [
 			'8203050218',
 			'820305/0218',
 			'820305 0218',
@@ -97,8 +97,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'0681186066',
 			'0531135099',
 			'345514/1360'
-		);
-		$wrong = array(
+		];
+		$wrong = [
 			'820305 0219',
 			'820332/0218',
 			'820305-0218',
@@ -106,7 +106,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'670229/1145',
 			'540621/026',
 			10
-		);
+		];
 
 		$this->executeTests(new Validator\IsBirthNumber(), $good, $wrong);
 	}
@@ -116,18 +116,18 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testIsCompanyId()
 	{
-		$good = array(
+		$good = [
 			'26704706',
 			'27401944',
 			'25596641',
 			'14800381',
 			'47782170'
-		);
-		$wrong = array(
+		];
+		$wrong = [
 			'267047',
 			'26704705',
 			10
-		);
+		];
 
 		$this->executeTests(new Validator\IsCompanyId(), $good, $wrong);
 	}
@@ -138,12 +138,12 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	public function testIsCountryCode()
 	{
 		$good = $this->getGoodValues(Validator\IsCountryCode::getCountries());
-		$wrong = array(
+		$wrong = [
 			'A',
 			'B',
 			1,
 			0
-		);
+		];
 
 		$this->executeTests(new Validator\IsCountryCode(), $good, $wrong);
 	}
@@ -153,15 +153,15 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testIsDate()
 	{
-		$good = array(
+		$good = [
 			'1993-01-01',
 			'2000-02-29',
 			date('Y-m-d')
-		);
-		$wrong = array(
+		];
+		$wrong = [
 			23,
 			'2009-02-29'
-		);
+		];
 
 		$this->executeTests(new Validator\IsDate(), $good, $wrong);
 	}
@@ -172,18 +172,18 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testIsDateTime()
 	{
-		$good = array(
+		$good = [
 			'1993-01-01 01:00:00',
 			'2000-02-29 15:23:59',
 			date('Y-m-d H:i:s')
-		);
-		$wrong = array(
+		];
+		$wrong = [
 			23,
 			'2009-02-29 01:00:00',
 			'2009-02-28 24:00:00',
 			'2009-02-28 23:60:00',
 			'2009-02-28 23:59:60'
-		);
+		];
 
 		$this->executeTests(new Validator\IsDateTime(), $good, $wrong);
 	}
@@ -193,13 +193,13 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testIsEmail()
 	{
-		$good = array(
+		$good = [
 			'test@jyxo.com',
 			'velky.ohromny.test@jyxo.blog.cz',
 			'123@jyxo.com',
 			'ZahradyR+R@email.cz'
-		);
-		$wrong = array(
+		];
+		$wrong = [
 			'česko@jyxo.com',
 			'test test@jyxo.com',
 			'test.jyxo.com',
@@ -207,7 +207,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'test.@jyxo.com',
 			'.test@jyxo.com',
 			'test..test@jyxo.com'
-		);
+		];
 
 		$this->executeTests(new Validator\IsEmail(), $good, $wrong);
 	}
@@ -217,8 +217,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testIsInt()
 	{
-		$good = array('1', 1, '0', 0, '12345');
-		$wrong = array('0xFF', '+0123.45e6');
+		$good = ['1', 1, '0', 0, '12345'];
+		$wrong = ['0xFF', '+0123.45e6'];
 
 		$this->executeTests(new Validator\IsInt(), $good, $wrong);
 	}
@@ -228,7 +228,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testIsIpV4()
 	{
-		$good = array(
+		$good = [
 			'127.0.0.1',
 			'192.168.24.0',
 			'217.31.54.133',
@@ -236,8 +236,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'212.47.13.165',
 			'89.235.3.140',
 			'147.32.127.214'
-		);
-		$wrong = array('999.999.999.999');
+		];
+		$wrong = ['999.999.999.999'];
 
 		$this->executeTests(new Validator\IsIpV4(), $good, $wrong);
 	}
@@ -247,7 +247,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testIsIpV6()
 	{
-		$good = array(
+		$good = [
 			'2001:0db8:0000:0000:0000:0000:1428:57ab',
 			'2001:0db8:0000:0000:0000::1428:57ab',
 			'2001:0db8:0:0:0:0:1428:57ab',
@@ -258,12 +258,12 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'2001:0718:1c01:0016:0214:22ff:fec9:0ca5',
 			'2001:718:1c01:16:214:22ff:fec9:ca5',
 			'ff02:0:0:0:0:0:0:1'
-		);
+		];
 
-		$wrong = array(
+		$wrong = [
 			'xx02:db8::1428:57ab',
 			'2001:0xx8:0:0:0:0:1428:57yy'
-		);
+		];
 
 		$this->executeTests(new Validator\IsIpV6(), $good, $wrong);
 	}
@@ -273,8 +273,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testIsNumeric()
 	{
-		$good = array('1', 1, '0', 0, '42', '1e4', 9.1, '9.1', '+0123.45e6', '-12.2e-6');
-		$wrong = array('not numeric', array(), '123a4', '9,1', '0xBW');
+		$good = ['1', 1, '0', 0, '42', '1e4', 9.1, '9.1', '+0123.45e6', '-12.2e-6'];
+		$wrong = ['not numeric', [], '123a4', '9,1', '0xBW'];
 
 		$this->executeTests(new Validator\IsNumeric(), $good, $wrong);
 	}
@@ -284,7 +284,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testIsPhone()
 	{
-		$good = array(
+		$good = [
 			'112',
 			'1188',
 			'11233',
@@ -295,14 +295,14 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'00420223456789',
 			'223 456 789',
 			'223 45 67 89'
-		);
-		$wrong = array(
+		];
+		$wrong = [
 			'1',
 			'22345678',
 			'-420223456789',
 			'+420800020202',	// 8-number must not have a pre-dial
 			'0420123456789'
-		);
+		];
 
 		$this->executeTests(new Validator\IsPhone(), $good, $wrong);
 	}
@@ -312,21 +312,21 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testIsTaxId()
 	{
-		$good = array(
+		$good = [
 			'CZ 26704706',
 			'267-26704706',
 			'CZ 8405011330'
-		);
-		$wrong = array(
+		];
+		$wrong = [
 			'SK12345678',
 			'CZ 8405011328'
-		);
+		];
 
 		$this->executeTests(new Validator\IsTaxId(), $good, $wrong);
 
 		// Try the so called "own numbers"
 		$taxId = 'CZ12345678';
-		$this->executeTests(new Validator\IsTaxId(false), array($taxId), array());
+		$this->executeTests(new Validator\IsTaxId(false), [$taxId], []);
 	}
 
 	/**
@@ -334,7 +334,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testIsUrl()
 	{
-		$good = array(
+		$good = [
 			'http://jyxo.com',
 			'http://www.jyxo.com',
 			'www.jyxo.cz',
@@ -357,15 +357,15 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'http://www.youtube.com/v/I5ewQSfrn9Q&hl=cs&fs=1&',
 			'http://www.youtube.com/watch#!v=7gcxnoA9K0k&feature=related',
 			'http://image.tn.nova.cz/media/images///600x277/May2009//505002.jpg'
-		);
-		$wrong = array(
+		];
+		$wrong = [
 			'http://www.džikso.cz/',
 			'htt://www.jyxo.cz/',
 			'http://www.jyxo.čz/',
 			'http://a.cz',
 			'http://www.a.cz',
 			'http://domain._abc.com'
-		);
+		];
 
 		$this->executeTests(new Validator\IsUrl(), $good, $wrong);
 	}
@@ -375,14 +375,14 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testIsZipCode()
 	{
-		$good = array(
+		$good = [
 			'14000',
 			'140 00'
-		);
-		$wrong = array(
+		];
+		$wrong = [
 			'1400a',
 			'1400'
-		);
+		];
 
 		$this->executeTests(new Validator\IsZipCode(), $good, $wrong);
 	}
@@ -393,16 +393,16 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testLessThan()
 	{
-		$good = array(
+		$good = [
 			0,
 			10,
 			-10,
 			'-100'
-		);
-		$wrong = array(
+		];
+		$wrong = [
 			101,
 			'102'
-		);
+		];
 
 		$validator = new Validator\LessThan(100);
 		$this->executeTests($validator, $good, $wrong);
@@ -415,16 +415,16 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	public function testEquals()
 	{
 		$expected = 123;
-		$good = array(
+		$good = [
 			123,
 			'123',
 			true
-		);
-		$bad = array(
+		];
+		$bad = [
 			12,
 			'A123',
 			false
-		);
+		];
 
 		$validator = new Validator\Equals($expected);
 
@@ -437,17 +437,17 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testNotEmpty()
 	{
-		$good = array(
+		$good = [
 			'NULL',
-			array(0)
-		);
-		$wrong = array(
+			[0]
+		];
+		$wrong = [
 			'',
 			0,
 			'0',
-			array(),
+			[],
 			null
-		);
+		];
 
 		$this->executeTests(new Validator\NotEmpty(), $good, $wrong);
 	}
@@ -457,17 +457,17 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testRegex()
 	{
-		$good = array(
+		$good = [
 			'test',
 			'123',
 			'JYXO'
-		);
-		$wrong = array(
+		];
+		$wrong = [
 			'test-test',
 			'$test',
 			'--',
 			'..//'
-		);
+		];
 		$pattern = '~^\w+$~i';
 
 		$validator = new Validator\Regex($pattern);
@@ -483,14 +483,14 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testStringLengthGreaterThan()
 	{
-		$good = array(
+		$good = [
 			'test-test-test',
 			'ěščřžýáíéíáýž'
-		);
-		$wrong = array(
+		];
+		$wrong = [
 			'žlutý',
 			'test'
-		);
+		];
 		$length = 10;
 
 		$validator = new Validator\StringLengthGreaterThan($length);
@@ -513,14 +513,14 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testStringLengthLessThan()
 	{
-		$good = array(
+		$good = [
 			'žlutý',
 			'test'
-		);
-		$wrong = array(
+		];
+		$wrong = [
 			'test-test-test',
 			'ěščřžýáíéíáýž'
-		);
+		];
 		$length = 10;
 
 		$validator = new Validator\StringLengthLessThan($length);
@@ -543,22 +543,22 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCallback()
 	{
-		$good = array(
+		$good = [
 			1, '1', '0.1'
-		);
-		$wrong = array(
+		];
+		$wrong = [
 			new \stdClass(), false, 'OLOL'
-		);
+		];
 
-		$callbacks = array(
+		$callbacks = [
 			'is_numeric',
 			create_function('$a', 'return is_numeric($a);'),
 			'\SomeOtherPrefix\Some\Validator::isNumeric',
-			array('\SomeOtherPrefix\Some\Validator', 'isNumeric'),
+			['\SomeOtherPrefix\Some\Validator', 'isNumeric'],
 			function($a) {
 				return is_numeric($a);
 			}
-		);
+		];
 
 		foreach ($callbacks as $callback) {
 			$validator = new Validator\Callback($callback);
@@ -570,18 +570,18 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			}
 
 			$this->assertSame($callback, $validator->getCallback());
-			$this->assertSame(array(), $validator->getAdditionalParams());
+			$this->assertSame([], $validator->getAdditionalParams());
 		}
 
 		// Test additional parameters
-		$good = array(3, 9, 33);
-		$wrong = array(2, 100, true, new \stdClass(), 'OHAI');
+		$good = [3, 9, 33];
+		$wrong = [2, 100, true, new \stdClass(), 'OHAI'];
 		$callback = function($value, $divisor) {
 			return is_numeric($value) && (0 === $value % $divisor);
 		};
 
 		$validator = new Validator\Callback($callback, 3);
-		$this->assertSame(array(3), $validator->getAdditionalParams());
+		$this->assertSame([3], $validator->getAdditionalParams());
 		foreach ($good as $value) {
 			$this->assertTrue($validator->isValid($value));
 		}
@@ -597,12 +597,12 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 		}
 
 		// Test exception on invalid callback definition
-		$invalidCallbacks = array(
+		$invalidCallbacks = [
 			$funcName,
 			true,
 			1,
 			new \stdClass()
-		);
+		];
 
 		foreach ($invalidCallbacks as $callback) {
 			try {

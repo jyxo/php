@@ -28,14 +28,14 @@ class ColorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function test()
 	{
-		$tests = array('#000000', '#000', '000000', 0, array(0, 0, 0), new Color('#000000'));
+		$tests = ['#000000', '#000', '000000', 0, [0, 0, 0], new Color('#000000')];
 		foreach ($tests as $test) {
 			$color = new Color($test);
 			$this->assertEquals(0, $color->getRed());
 			$this->assertEquals(0, $color->getGreen());
 			$this->assertEquals(0, $color->getBlue());
 			$this->assertEquals('000000', $color->getHex());
-			$this->assertEquals(array(0, 0, 0), $color->getRgb());
+			$this->assertEquals([0, 0, 0], $color->getRgb());
 			$this->assertEquals(0, $color->getBinary());
 
 			ob_start();
@@ -52,7 +52,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
 			->setBlue('00');
 		$this->assertEquals('000000', $color->getHex());
 
-		$tests = array('#ffffff', '#FfFFffF', '#fff', 'ffffff', 0xFFFFFF, array(255, 255, 255), array(260, 320, 1024), new Color('#ffffff'));
+		$tests = ['#ffffff', '#FfFFffF', '#fff', 'ffffff', 0xFFFFFF, [255, 255, 255], [260, 320, 1024], new Color('#ffffff')];
 		foreach ($tests as $test) {
 			$color = new Color($test);
 			$this->assertEquals(255, $color->getRed());
@@ -60,7 +60,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
 			$this->assertEquals(255, $color->getBlue());
 
 			$this->assertEquals('ffffff', $color->getHex());
-			$this->assertEquals(array(255, 255, 255), $color->getRgb());
+			$this->assertEquals([255, 255, 255], $color->getRgb());
 			$this->assertEquals(1, $color->getBinary());
 
 			ob_start();
@@ -77,7 +77,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
 			->setBlue('FF');
 		$this->assertEquals('ffffff', $color->getHex());
 
-		$tests = array('#239416', '239416', 0x239416, array(35, 148, 22), new Color('#239416'));
+		$tests = ['#239416', '239416', 0x239416, [35, 148, 22], new Color('#239416')];
 		foreach ($tests as $test) {
 			$color = new Color($test);
 			$this->assertEquals(35, $color->getRed());
@@ -85,7 +85,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
 			$this->assertEquals(22, $color->getBlue());
 
 			$this->assertEquals('239416', $color->getHex());
-			$this->assertEquals(array(35, 148, 22), $color->getRgb());
+			$this->assertEquals([35, 148, 22], $color->getRgb());
 			$this->assertEquals(0, $color->getBinary());
 
 			ob_start();
@@ -97,7 +97,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
 			$this->assertEquals('dc6be9', $color->toInverse()->getHex());
 		}
 
-		$tests = array('#22FF66', '#22Ff66', '#2f6', '2F6', '22FF66', '22fF66', 0x22FF66, array(34, 255, 102), new Color('#22FF66'));
+		$tests = ['#22FF66', '#22Ff66', '#2f6', '2F6', '22FF66', '22fF66', 0x22FF66, [34, 255, 102], new Color('#22FF66')];
 		foreach ($tests as $test) {
 			$color = new Color($test);
 			$this->assertEquals(34, $color->getRed());
@@ -105,7 +105,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
 			$this->assertEquals(102, $color->getBlue());
 
 			$this->assertEquals('22ff66', $color->getHex());
-			$this->assertEquals(array(34, 255, 102), $color->getRgb());
+			$this->assertEquals([34, 255, 102], $color->getRgb());
 			$this->assertEquals(1, $color->getBinary());
 
 			ob_start();
@@ -123,7 +123,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
 			->setBlue('16');
 		$this->assertEquals('239416', $color->getHex());
 
-		$invalids = array('#FFBBC', '#FBCA', '0000', '0', 'AB');
+		$invalids = ['#FFBBC', '#FBCA', '0000', '0', 'AB'];
 		foreach ($invalids as $invalid) {
 			try {
 				$color = new Color($invalid);

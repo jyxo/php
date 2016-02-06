@@ -61,7 +61,7 @@ abstract class AbstractFilter implements \Jyxo\Input\FilterInterface
 	public function filter($in)
 	{
 		if (is_array($in)) {
-			return array_map(array($this, 'filter'), $in);
+			return array_map([$this, 'filter'], $in);
 		}
 		return $this->filterValue($in);
 	}

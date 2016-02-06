@@ -27,7 +27,7 @@ abstract class DefaultTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @var array
 	 */
-	private $autoloadList = array();
+	private $autoloadList = [];
 
 	/**
 	 * Prepares the testing environment.
@@ -58,6 +58,6 @@ abstract class DefaultTest extends \PHPUnit_Framework_TestCase
 		foreach ($this->autoloadList as $function) {
 			spl_autoload_register($function);
 		}
-		$this->autoloadList = array();
+		$this->autoloadList = [];
 	}
 }

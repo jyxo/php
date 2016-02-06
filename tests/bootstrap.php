@@ -21,7 +21,7 @@ spl_autoload_register(function($className) {
 	}
 
 	$file = str_replace('\\', '/', $className) . '.php';
-	foreach (array(realpath(__DIR__ . '/..'), __DIR__) as $dir) {
+	foreach ([realpath(__DIR__ . '/..'), __DIR__] as $dir) {
 		$filePath = $dir . '/' . $file;
 		if (false !== stream_resolve_include_path($filePath)) {
 			require_once $filePath;

@@ -38,7 +38,7 @@ class Callback extends \Jyxo\Input\Validator\AbstractValidator
 	 *
 	 * @var array
 	 */
-	private $additionalParams = array();
+	private $additionalParams = [];
 
 	/**
 	 * Constructor.
@@ -92,7 +92,7 @@ class Callback extends \Jyxo\Input\Validator\AbstractValidator
 	 * @param array $params Parameters array
 	 * @return \Jyxo\Input\Validator\Callback
 	 */
-	public function setAdditionalParams(array $params = array())
+	public function setAdditionalParams(array $params = [])
 	{
 		$this->additionalParams = $params;
 

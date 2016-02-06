@@ -45,7 +45,7 @@ class Parser implements \Iterator, \Countable
 	 *
 	 * @var array of \Jyxo\Gettext\Parser\Item
 	 */
-	protected $items = array();
+	protected $items = [];
 
 	/**
 	 * Internal pointer to the fragments array.
@@ -99,7 +99,7 @@ class Parser implements \Iterator, \Countable
 	protected function parse($file)
 	{
 		$linenumber = 0;
-		$chunks = array();
+		$chunks = [];
 
 		$file = file($file);
 		foreach ($file as $line) {

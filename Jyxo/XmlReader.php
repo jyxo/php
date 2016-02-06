@@ -29,23 +29,23 @@ class XmlReader extends \XMLReader
 	 *
 	 * @var array
 	 */
-	private $textTypes = array(
+	private $textTypes = [
 		self::TEXT => true,
 		self::WHITESPACE => true,
 		self::SIGNIFICANT_WHITESPACE => true
-	);
+	];
 
 	/**
 	 * Content types list.
 	 *
 	 * @var array
 	 */
-	private $contentTypes = array(
+	private $contentTypes = [
 		self::CDATA => true,
 		self::TEXT => true,
 		self::WHITESPACE => true,
 		self::SIGNIFICANT_WHITESPACE => true
-	);
+	];
 
 	/**
 	 * Returns element's text contents.

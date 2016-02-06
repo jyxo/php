@@ -139,11 +139,11 @@ class ObjectCacheTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testIterator()
 	{
-		$objects = array(
+		$objects = [
 			'key1' => new \stdClass(),
 			'key2' => new \stdClass(),
 			'key3' => new \stdClass()
-		);
+		];
 
 		// Put items into cache
 		foreach ($objects as $key => $object) {

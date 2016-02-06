@@ -79,28 +79,28 @@ class Email extends \Jyxo\Spl\Object
 	 *
 	 * @var array
 	 */
-	private $to = array();
+	private $to = [];
 
 	/**
 	 * List of carbon copy recipients.
 	 *
 	 * @var array
 	 */
-	private $cc = array();
+	private $cc = [];
 
 	/**
 	 * List of blind carbon copy recipients.
 	 *
 	 * @var array
 	 */
-	private $bcc = array();
+	private $bcc = [];
 
 	/**
 	 * Response recipient address.
 	 *
 	 * @var array
 	 */
-	private $replyTo = array();
+	private $replyTo = [];
 
 	/**
 	 * Reading confirmation recipient.
@@ -121,7 +121,7 @@ class Email extends \Jyxo\Spl\Object
 	 *
 	 * @var array
 	 */
-	private $references = array();
+	private $references = [];
 
 	/**
 	 * Message priority.
@@ -135,7 +135,7 @@ class Email extends \Jyxo\Spl\Object
 	 *
 	 * @var array
 	 */
-	private $headers = array();
+	private $headers = [];
 
 	/**
 	 * Message body.
@@ -149,7 +149,7 @@ class Email extends \Jyxo\Spl\Object
 	 *
 	 * @var array
 	 */
-	private $attachments = array();
+	private $attachments = [];
 
 	/**
 	 * Returns subject.
@@ -319,7 +319,7 @@ class Email extends \Jyxo\Spl\Object
 	 * @param array $references Previous mail references
 	 * @return \Jyxo\Mail\Email
 	 */
-	public function setInReplyTo($inReplyTo, array $references = array())
+	public function setInReplyTo($inReplyTo, array $references = [])
 	{
 		$this->inReplyTo = (string) $inReplyTo;
 		$this->references = $references;
@@ -366,13 +366,13 @@ class Email extends \Jyxo\Spl\Object
 	 */
 	public function setPriority($priority)
 	{
-		static $priorities = array(
+		static $priorities = [
 			self::PRIORITY_HIGHEST => true,
 			self::PRIORITY_HIGH => true,
 			self::PRIORITY_NORMAL => true,
 			self::PRIORITY_LOW => true,
 			self::PRIORITY_LOWEST => true
-		);
+		];
 		if (!isset($priorities[$priority])) {
 			throw new \InvalidArgumentException(sprintf('Unknown priority %s', $priority));
 		}

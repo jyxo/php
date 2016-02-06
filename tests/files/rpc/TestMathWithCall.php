@@ -14,7 +14,7 @@ class TestMathWithCall
 	 */
 	public function __call($method, $args)
 	{
-		return call_user_func_array(array($this, 'absolute'), $args);
+		return call_user_func_array([$this, 'absolute'], $args);
 	}
 
 	/**

@@ -30,7 +30,7 @@ final class Timer
 	 *
 	 * @var array
 	 */
-	private static $starts = array();
+	private static $starts = [];
 
 	/**
 	 * Starts measuring. Returns timer name.

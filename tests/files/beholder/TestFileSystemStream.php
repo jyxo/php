@@ -47,7 +47,7 @@ class TestFileSystemStream
 	 *
 	 * @var string
 	 */
-	private static $dir = array();
+	private static $dir = [];
 
 	/**
 	 * Path to the current file.
@@ -188,7 +188,7 @@ class TestFileSystemStream
 	 */
 	public function stream_stat()
 	{
-		return array();
+		return [];
 	}
 
 	/**

@@ -49,7 +49,7 @@ class Object implements \Jyxo\Spl\ArrayCopy
 		$value = null;
 
 		// Tests for possible getters
-		static $types = array('get', 'is');
+		static $types = ['get', 'is'];
 		foreach ($types as $type) {
 			$getter = $type . $name;
 			if (self::hasMethod($class, $getter)) {
@@ -88,7 +88,7 @@ class Object implements \Jyxo\Spl\ArrayCopy
 		$name = ucfirst($name);
 
 		// Tests for possible getters
-		static $types = array('get', 'is');
+		static $types = ['get', 'is'];
 		foreach ($types as $type) {
 			$getter = $type . $name;
 			if (self::hasMethod($class, $getter)) {
@@ -122,7 +122,7 @@ class Object implements \Jyxo\Spl\ArrayCopy
 	 */
 	public function toArray()
 	{
-		$values = array();
+		$values = [];
 		foreach ((array) $this as $key => $value) {
 			// Private and protected properties have ugly array key prefixes which we remove
 			$key = preg_replace('~^.+\0~', '', $key);

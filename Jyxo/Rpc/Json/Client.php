@@ -46,11 +46,11 @@ class Client extends \Jyxo\Rpc\Client
 		try {
 			// Prepare JSON-RPC request
 			$data = json_encode(
-				array(
+				[
 					'method' => $method,
 					'params' => $params,
 					'id' => $id
-				)
+				]
 			);
 
 			// Fetch response

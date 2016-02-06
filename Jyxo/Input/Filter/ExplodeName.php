@@ -38,10 +38,10 @@ class ExplodeName extends \Jyxo\Input\Filter\AbstractFilter
 		$lastname = array_pop($data);
 		$firstname = implode(' ', $data);
 
-		$in = array(
+		$in = [
 			'firstname' => $firstname,
 			'lastname' => $lastname
-		);
+		];
 		return $in;
 	}
 }

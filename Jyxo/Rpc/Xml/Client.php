@@ -36,13 +36,13 @@ class Client extends \Jyxo\Rpc\Client
 	{
 		parent::__construct($url);
 
-		$this->options = array(
+		$this->options = [
 			'output_type' => 'xml',
 			'verbosity' => 'pretty',
-			'escaping' => array('markup'),
+			'escaping' => ['markup'],
 			'version' => 'xmlrpc',
 			'encoding' => 'utf-8'
-		);
+		];
 	}
 
 	/**

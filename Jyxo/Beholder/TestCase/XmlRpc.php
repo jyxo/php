@@ -43,14 +43,14 @@ class XmlRpc extends \Jyxo\Beholder\TestCase
 	 *
 	 * @var string
 	 */
-	private $params = array();
+	private $params = [];
 
 	/**
 	 * Request options.
 	 *
 	 * @var array
 	 */
-	private $options = array();
+	private $options = [];
 
 	/**
 	 * Timeout.
@@ -69,7 +69,7 @@ class XmlRpc extends \Jyxo\Beholder\TestCase
 	 * @param array $options Request options
 	 * @param integer $timeout Timeout
 	 */
-	public function __construct($description, $url, $method, array $params, array $options = array(), $timeout = 2)
+	public function __construct($description, $url, $method, array $params, array $options = [], $timeout = 2)
 	{
 		parent::__construct($description);
 

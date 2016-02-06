@@ -29,7 +29,7 @@ class Util
 	 *
 	 * @var array
 	 */
-	private static $holidays = array(
+	private static $holidays = [
 		'1.1',
 		'1.5',
 		'8.5',
@@ -41,7 +41,7 @@ class Util
 		'24.12',
 		'25.12',
 		'26.12'
-	);
+	];
 
 	/**
 	 * Returns the next month.
