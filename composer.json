@@ -10,11 +10,11 @@
 		{ "name" : "Ondřej Nešpor" }
 	],
 	"require": {
-		"php": ">=5.3.1"
+		"php": "^7.0.0"
 	},
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": "^0.9.2",
-		"phpunit/phpunit": "^4.8.22"
+		"phpunit/phpunit": "^5.2.1"
 	},
 	"suggest": {
 		"guzzlehttp/guzzle": "To use Jyxo\\Webdav client",
