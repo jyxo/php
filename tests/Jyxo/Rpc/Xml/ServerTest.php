@@ -13,8 +13,6 @@
 
 namespace Jyxo\Rpc\Xml;
 
-require_once __DIR__ . '/../../../bootstrap.php';
-
 /**
  * Test for class \Jyxo\Rpc\Xml\Server.
  *

@@ -13,8 +13,6 @@
 
 namespace Jyxo\Mail\Email;
 
-require_once __DIR__ . '/../../../bootstrap.php';
-
 /**
  * \Jyxo\Mail\Email\Body class test.
  *

@@ -13,8 +13,6 @@
 
 namespace Jyxo\Time;
 
-require_once __DIR__ . '/../../bootstrap.php';
-
 /**
  * Test for the \Jyxo\Time\ComposerException class.
  *

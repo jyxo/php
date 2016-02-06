@@ -13,7 +13,6 @@
 
 namespace Jyxo\Input;
 
-require_once __DIR__ . '/../../bootstrap.php';
 require_once __DIR__ . '/../../files/input/Filter.php';
 require_once __DIR__ . '/../../files/input/Validator.php';
 

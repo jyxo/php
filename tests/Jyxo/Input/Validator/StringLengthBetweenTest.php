@@ -13,8 +13,6 @@
 
 namespace Jyxo\Input\Validator;
 
-require_once __DIR__ . '/../../../bootstrap.php';
-
 /**
  * Test of \Jyxo\Input\Validator\StringLengthBetween validator.
  *

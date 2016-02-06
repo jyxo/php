@@ -13,8 +13,6 @@
 
 namespace Jyxo\Time;
 
-require_once __DIR__ . '/../../bootstrap.php';
-
 /**
  * Tests for the \Jyxo\Time\Util class.
  *

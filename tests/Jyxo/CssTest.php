@@ -13,8 +13,6 @@
 
 namespace Jyxo;
 
-require_once __DIR__ . '/../bootstrap.php';
-
 /**
  * Test for the \Jyxo\Css class.
  *

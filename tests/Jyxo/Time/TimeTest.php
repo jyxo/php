@@ -13,8 +13,6 @@
 
 namespace Jyxo\Time;
 
-require_once __DIR__ . '/../../bootstrap.php';
-
 /**
  * Test for \Jyxo\Time\Time class.
  *
@@ -176,12 +174,12 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('2009-10-10T00:00:00+0700', $time->sql);
 		$this->assertEquals('Sat, 10 Oct 09 00:00:00 +0700', $time->email);
 		$this->assertEquals('2009-10-10T00:00:00+07:00', $time->web);
-		$this->assertEquals('Saturday, 10-Oct-09 00:00:00 GMT-7', $time->cookie);
+		$this->assertEquals('Saturday, 10-Oct-2009 00:00:00 GMT-7', $time->cookie);
 		$this->assertEquals('Sat, 10 Oct 2009 00:00:00 +0700', $time->rss);
 		$this->assertEquals('1255107600', $time->unix);
 		$this->assertEquals('Fri, 09 Oct 2009 17:00:00 GMT', $time->http);
-		$this->assertEquals(sprintf('10. %s 2009 v 0:00', mb_strtolower(_('October#~Genitive'))), $time->extended);
-		$this->assertEquals(sprintf('10. %s 2009 v 0:00', mb_strtolower(_('October#~Genitive'))), $time->full);
+		$this->assertEquals(sprintf('10. %s 2009 v 0:00', mb_strtolower(_('October#~Genitive'), 'utf-8')), $time->extended);
+		$this->assertEquals(sprintf('10. %s 2009 v 0:00', mb_strtolower(_('October#~Genitive'), 'utf-8')), $time->full);
 
 		// Interval
 		$this->assertEquals(sprintf(ngettext('Day ago', '%s days ago', 5), 5), Time::get('-5 day')->interval);
@@ -242,11 +240,11 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		// Dates with no unix timestamp representation
 		// Before 1970
 		$output = (string) Time::get('1000-02-02 02:02:02', 'UTC');
-		$this->assertSame('', $output);
+		$this->assertSame('-30607451878', $output);
 		// After 2038
 		$time = Time::get('3000-02-02 02:02:02', 'UTC');
 		$output = (string) $time;
-		$this->assertSame('', $output);
+		$this->assertSame('32506452122', $output);
 
 		// Move 1000 years back to get a valid unix timestamp
 		$time = $time->minus('1000 years');
@@ -301,12 +299,12 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		foreach ($months as $month => $name) {
 			$time = new Time('2009-' . str_pad($month + 1, 2, '0', STR_PAD_LEFT) . '-01');
 			$this->assertEquals($name, $time->format('F'));
-			$this->assertEquals('1. ' . mb_strtolower($monthsGen[$month]), $time->format('j. F'));
+			$this->assertEquals('1. ' . mb_strtolower($monthsGen[$month], 'utf-8'), $time->format('j. F'));
 			$this->assertEquals($monthsShort[$month], $time->format('M'));
 		}
 
 		// Full date/time
-		$this->assertEquals(sprintf('%s 10. %s 2012 10:11:12', $days[5], mb_strtolower($monthsGen[10])), Time::get('2012-11-10 10:11:12')->format('l j. F Y H:i:s'));
+		$this->assertEquals(sprintf('%s 10. %s 2012 10:11:12', $days[5], mb_strtolower($monthsGen[10]), 'utf-8'), Time::get('2012-11-10 10:11:12')->format('l j. F Y H:i:s'));
 		$this->assertEquals(sprintf('%s 2012', $months[9]), Time::get('2012-10-10')->format('F Y'));
 		$this->assertEquals(sprintf('%s 2012', $monthsShort[8]), Time::get('2012-09-09')->format('M Y'));
 
@@ -372,7 +370,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	public function testFormatExtended()
 	{
 		// No parameters provided
-		$this->assertEquals(sprintf('6. %s 2008 v 5:04', mb_strtolower(_('July#~Genitive')), _('at')), Time::get('2008-07-06 05:04:03')->formatExtended());
+		$this->assertEquals(sprintf('6. %s 2008 v 5:04', mb_strtolower(_('July#~Genitive'), 'utf-8'), _('at')), Time::get('2008-07-06 05:04:03')->formatExtended());
 		// Date format set
 		$this->assertEquals('08-07-06 v 5:04', Time::get('2008-07-06 05:04:03')->formatExtended('y-m-d'));
 		// Both the date and time format set
@@ -399,8 +397,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		}
 
 		// More than a week ago
-		$this->assertEquals(sprintf('1. %s 2003', mb_strtolower(_('February#~Genitive'))), Time::get('2003-02-01 04:05:06')->formatExtended('j. F Y', ''));
-		$this->assertEquals(sprintf('1. %s 2003 %s 4:05', mb_strtolower(_('February#~Genitive')), _('at')), Time::get('2003-02-01 04:05:06')->formatExtended());
+		$this->assertEquals(sprintf('1. %s 2003', mb_strtolower(_('February#~Genitive'), 'utf-8')), Time::get('2003-02-01 04:05:06')->formatExtended('j. F Y', ''));
+		$this->assertEquals(sprintf('1. %s 2003 %s 4:05', mb_strtolower(_('February#~Genitive'), 'utf-8'), _('at')), Time::get('2003-02-01 04:05:06')->formatExtended());
 
 		// Time zone handling
 		// Date line
@@ -715,17 +713,6 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		$serialized = 'C:14:"Jyxo\Time\Time":26:{' . date('Y-m-d H:i:s', $time) . ' -12:00}';
 		$unserialized = @unserialize($serialized);
 		$this->assertEquals('-12:00', $unserialized->getTimeZone()->getName());
-
-		// PHP bug http://bugs.php.net/bug.php?id=45528 test
-		try {
-			$tz = new \DateTimeZone($unserialized->getTimeZone()->getName());
-			$this->fail('\Exception expected');
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
-			throw $e;
-		} catch (\Exception $e) {
-			// Correctly thrown exception
-			$this->assertInstanceOf('\Exception', $e);
-		}
 
 		// Invalid time zone offset
 		$serialized = 'C:14:"Jyxo\Time\Time":26:{' . date('Y-m-d H:i:s', $time) . ' +05:60}';

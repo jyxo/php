@@ -13,8 +13,6 @@
 
 namespace Jyxo\Beholder\TestCase;
 
-require_once __DIR__ . '/../../../bootstrap.php';
-
 /**
  * Tests the \Jyxo\Beholder\TestCase\Pgsql class.
  *
@@ -25,6 +23,14 @@ require_once __DIR__ . '/../../../bootstrap.php';
  */
 class PgsqlTest extends \PHPUnit_Framework_TestCase
 {
+
+	public function setUp()
+	{
+		if (!class_exists('Pgsql')) {
+			$this->markTestSkipped('Pgsql not set');
+		}
+	}
+
 	/**
 	 * Tests connection failure.
 	 */

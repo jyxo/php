@@ -13,8 +13,6 @@
 
 namespace Jyxo;
 
-require_once __DIR__ . '/../bootstrap.php';
-
 /**
  * \Jyxo\Timer test.
  *
@@ -31,6 +29,7 @@ class TimerTest extends \PHPUnit_Framework_TestCase
 	{
 		$mt = microtime(true);
 		$name = Timer::start();
+		usleep(100);
 		$delta = Timer::stop($name);
 		$outerDelta = microtime(true) - $mt;
 
@@ -51,6 +50,7 @@ class TimerTest extends \PHPUnit_Framework_TestCase
 		}
 		// End them in reverse order
 		foreach (array_reverse($names) as $name) {
+			usleep(100);
 			$times[$name] = Timer::stop($name);
 		}
 
@@ -65,17 +65,12 @@ class TimerTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * Tests the timer function.
-	 *
-	 * Originally the usleep() function took the $i variable as the number of miliseconds.
-	 * However because the real time the script execution is halted is not exactly the
-	 * number of miliseconds given (sometimes slightly less, but enough to make the assertion
-	 * fail), we multiply the sleep time by 1.1 just to be sure.
 	 */
 	public function testTimer()
 	{
 		Timer::timer();
 		for ($i = 100; $i < 1000000; $i *= 10) {
-			usleep($i * 1.1);
+			usleep($i * 2);
 			$delta = Timer::timer();
 
 			$this->assertGreaterThan($i / 1000000, $delta);

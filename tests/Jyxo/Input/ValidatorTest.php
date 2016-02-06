@@ -13,7 +13,6 @@
 
 namespace Jyxo\Input;
 
-require_once __DIR__ . '/../../bootstrap.php';
 require_once __DIR__ . '/../../files/input/Validator.php';
 
 /**
@@ -274,7 +273,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testIsNumeric()
 	{
-		$good = array('1', 1, '0', 0, '42', '1e4', 9.1, '9.1', '+0123.45e6', '-12.2e-6', '0xFF', 0xFF);
+		$good = array('1', 1, '0', 0, '42', '1e4', 9.1, '9.1', '+0123.45e6', '-12.2e-6');
 		$wrong = array('not numeric', array(), '123a4', '9,1', '0xBW');
 
 		$this->executeTests(new Validator\IsNumeric(), $good, $wrong);

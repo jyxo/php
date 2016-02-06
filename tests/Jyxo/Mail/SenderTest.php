@@ -13,8 +13,6 @@
 
 namespace Jyxo\Mail;
 
-require_once __DIR__ . '/../../bootstrap.php';
-
 /**
  * \Jyxo\Mail\Sender class test.
  *
@@ -53,6 +51,10 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testSendMail()
 	{
+		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+			$this->markTestSkipped('Skipped on Windows');
+		}
+
 		$sender = new Sender();
 		$sender->setEmail($this->getEmail());
 		$result = $sender->send(Sender::MODE_MAIL);

@@ -13,8 +13,6 @@
 
 namespace Jyxo\Input\Chain;
 
-require_once __DIR__ . '/../../../bootstrap.php';
-
 /**
  * Test of conditional validator \Jyxo\Input\Chain\Conditional
  *

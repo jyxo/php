@@ -13,8 +13,6 @@
 
 namespace Jyxo\Rpc\Json;
 
-require_once __DIR__ . '/../../../bootstrap.php';
-
 /**
  * Test for class \Jyxo\Rpc\Json\Server.
  *

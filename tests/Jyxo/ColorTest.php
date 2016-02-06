@@ -13,8 +13,6 @@
 
 namespace Jyxo;
 
-require_once __DIR__ . '/../bootstrap.php';
-
 /**
  * Class \Jyxo\Color test.
  *

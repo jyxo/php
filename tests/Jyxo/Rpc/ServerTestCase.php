@@ -13,8 +13,6 @@
 
 namespace Jyxo\Rpc;
 
-require_once __DIR__ . '/../../bootstrap.php';
-
 /**
  * Test for all \Jyxo\Rpc\Server child classes.
  *

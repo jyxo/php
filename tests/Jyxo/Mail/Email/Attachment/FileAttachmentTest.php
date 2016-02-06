@@ -13,8 +13,6 @@
 
 namespace Jyxo\Mail\Email\Attachment;
 
-require_once __DIR__ . '/../../../../bootstrap.php';
-
 /**
  * \Jyxo\Mail\Email\Attachment\FileAttachment class test.
  *

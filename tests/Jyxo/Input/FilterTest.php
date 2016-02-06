@@ -13,8 +13,6 @@
 
 namespace Jyxo\Input;
 
-require_once __DIR__ . '/../../bootstrap.php';
-
 /**
  * Filter tests of package \Jyxo\Input
  *

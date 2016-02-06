@@ -13,8 +13,6 @@
 
 namespace Jyxo\Beholder;
 
-require_once __DIR__ . '/../../bootstrap.php';
-
 /**
  * Test for the \Jyxo\Beholder\TestCase class.
  *

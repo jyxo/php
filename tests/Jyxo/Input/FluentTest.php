@@ -13,8 +13,6 @@
 
 namespace Jyxo\Input;
 
-require_once __DIR__ . '/../../bootstrap.php';
-
 /**
  * Test of \Jyxo\Input\Fluent and chained classes.
  *

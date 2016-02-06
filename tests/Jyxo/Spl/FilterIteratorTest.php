@@ -13,8 +13,6 @@
 
 namespace Jyxo\Spl;
 
-require_once __DIR__ . '/../../bootstrap.php';
-
 /**
  * Test for class \Jyxo\Spl\FilterIterator.
  *
