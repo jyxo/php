@@ -34,9 +34,9 @@ class Filter
 	 */
 	public static function __callStatic($method, array $params)
 	{
-		$factory = \Jyxo\Spl\ObjectCache::get('\Jyxo\Input\Factory') ?: \Jyxo\Spl\ObjectCache::set('\Jyxo\Input\Factory', new Factory());
+		$factory = \Jyxo\Spl\ObjectCache::get(\Jyxo\Input\Factory::class) ?: \Jyxo\Spl\ObjectCache::set(\Jyxo\Input\Factory::class, new Factory());
 		$value = array_shift($params);
-		$key = '\Jyxo\Input\Filter\\' . ucfirst($method) . ($params ? '/' . serialize($params) : '');
+		$key = 'Jyxo\Input\Filter\\' . ucfirst($method) . ($params ? '/' . serialize($params) : '');
 		$filter = \Jyxo\Spl\ObjectCache::get($key) ?: \Jyxo\Spl\ObjectCache::set($key, $factory->getFilterByName($method, $params));
 		/* @var $filter \Jyxo\Input\FilterInterface */
 		return $filter->filter($value);

@@ -169,12 +169,12 @@ class FluentTest extends \PHPUnit_Framework_TestCase
 
 		try {
 			$input->validateAll();
-			$this->fail('Expected exception \Jyxo\Input\Validator\Exception.');
+			$this->fail(sprintf('Expected exception %s.', \Jyxo\Input\Validator\Exception::class));
 		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
 			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf('\Jyxo\Input\Validator\Exception', $e);
+			$this->assertInstanceOf(\Jyxo\Input\Validator\Exception::class, $e);
 		}
 
 	}

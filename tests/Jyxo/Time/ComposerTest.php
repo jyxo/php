@@ -44,7 +44,7 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 				try {
 					$composer->{'set' . ucfirst($unit)}($test);
 				} catch (\Exception $e) {
-					$this->assertInstanceOf('\Jyxo\Time\ComposerException', $e);
+					$this->assertInstanceOf(\Jyxo\Time\ComposerException::class, $e);
 					$this->assertSame(
 						constant('\Jyxo\Time\ComposerException::' . strtoupper($unit)),
 						$e->getCode(),
@@ -58,7 +58,7 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 		try {
 			$date = $composer->getTime();
 		} catch (\Exception $e) {
-			$this->assertInstanceOf('\Jyxo\Time\ComposerException', $e);
+			$this->assertInstanceOf(\Jyxo\Time\ComposerException::class, $e);
 			$this->assertSame(ComposerException::NOT_COMPLETE, $e->getCode());
 		}
 
@@ -79,7 +79,7 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 					->setYear($year);
 				$time = $composer->getTime();
 			} catch (\Exception $e) {
-				$this->assertInstanceOf('\Jyxo\Time\ComposerException', $e);
+				$this->assertInstanceOf(\Jyxo\Time\ComposerException::class, $e);
 				$this->assertSame(
 					ComposerException::INVALID,
 					$e->getCode(),

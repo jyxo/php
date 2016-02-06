@@ -44,7 +44,7 @@ class EncodingTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->filePath = DIR_FILES . '/mail';
 
-		$reflection = new \ReflectionClass('\Jyxo\Mail\Encoding');
+		$reflection = new \ReflectionClass(\Jyxo\Mail\Encoding::class);
 		$this->encodings = $reflection->getConstants();
 	}
 
@@ -90,12 +90,12 @@ class EncodingTest extends \PHPUnit_Framework_TestCase
 
 		try {
 			Encoding::encode('data', 'dummy-encoding', 75, "\n");
-			$this->fail('Expected exception \InvalidArgumentException.');
+			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
 		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
 			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf('\InvalidArgumentException', $e);
+			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
 		}
 	}
 }

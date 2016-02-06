@@ -35,8 +35,8 @@ abstract class DefaultTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		// Loads required classes
-		spl_autoload_call('\Jyxo\Beholder\TestCase');
-		spl_autoload_call('\Jyxo\Beholder\Result');
+		spl_autoload_call(\Jyxo\Beholder\TestCase::class);
+		spl_autoload_call(\Jyxo\Beholder\Result::class);
 	}
 
 	/**

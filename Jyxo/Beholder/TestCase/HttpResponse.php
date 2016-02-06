@@ -67,8 +67,8 @@ class HttpResponse extends \Jyxo\Beholder\TestCase
 	public function run()
 	{
 		// The \GuzzleHttp library is required
-		if (!class_exists('\GuzzleHttp\Client')) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Extension http missing');
+		if (!class_exists(\GuzzleHttp\Client::class)) {
+			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Guzzle library missing');
 		}
 
 		try {

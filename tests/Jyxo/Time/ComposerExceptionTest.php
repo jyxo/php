@@ -29,7 +29,7 @@ class ComposerExceptionTest extends \PHPUnit_Framework_TestCase
 	public function test()
 	{
 		// All possible codes.
-		$reflection = new \ReflectionClass('\Jyxo\Time\ComposerException');
+		$reflection = new \ReflectionClass(\Jyxo\Time\ComposerException::class);
 		foreach ($reflection->getConstants() as $code) {
 			$exception = new ComposerException('Test', $code);
 			$this->assertEquals($code, $exception->getCode());

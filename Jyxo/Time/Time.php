@@ -170,7 +170,7 @@ class Time implements \Serializable
 					throw new \InvalidArgumentException(sprintf('Provided textual date/time definition "%s" is invalid', $time), 0, $e);
 				}
 			} else {
-				throw new \InvalidArgumentException('Provided date/time must be a number, \Jyxo\Time\Time or \DateTime instance or a parameter compatible with PHP function strtotime().');
+				throw new \InvalidArgumentException(sprintf('Provided date/time must be a number, %s or %s instance or a parameter compatible with PHP function strtotime().', \Jyxo\Time\Time::class, \DateTimeInterface::class));
 			}
 		} elseif ($time instanceof self) {
 			// \Jyxo\Time\Time
@@ -185,7 +185,7 @@ class Time implements \Serializable
 				$this->dateTime->setTimezone($this->createTimeZone($timeZone));
 			}
 		} else {
-			throw new \InvalidArgumentException('Provided date/time must be a number, \Jyxo\Time\Time or \DateTime instance or a parameter compatible with PHP function strtotime().');
+			throw new \InvalidArgumentException(sprintf('Provided date/time must be a number, %s or %s instance or a parameter compatible with PHP function strtotime().', \Jyxo\Time\Time::class, \DateTimeInterface::class));
 		}
 	}
 

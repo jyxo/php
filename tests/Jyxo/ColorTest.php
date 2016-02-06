@@ -127,12 +127,12 @@ class ColorTest extends \PHPUnit_Framework_TestCase
 		foreach ($invalids as $invalid) {
 			try {
 				$color = new Color($invalid);
-				$this->fail(sprintf('\InvalidArgumentException expected for value %s', $invalid));
+				$this->fail(sprintf('%s expected for value %s', \InvalidArgumentException::class, $invalid));
 			} catch (\PHPUnit_Framework_AssertionFailedError $e) {
 				throw $e;
 			} catch (\Exception $e) {
 				// Correctly thrown exception
-				$this->assertInstanceOf('\InvalidArgumentException', $e);
+				$this->assertInstanceOf(\InvalidArgumentException::class, $e);
 			}
 		}
 	}

@@ -178,7 +178,7 @@ class CssTest extends \PHPUnit_Framework_TestCase
 			$this->assertStringEqualsFile(
 				$this->filePath . '/' . sprintf('convertstyle-%s-expected.html', $i),
 				Css::convertStyleToInline(file_get_contents($this->filePath . '/' . sprintf('convertstyle-%s.html', $i))),
-				sprintf('Failed test %s for method \Jyxo\Css::convertStyleToInline.', $i)
+				sprintf('Failed test %s for method %s::convertStyleToInline().', $i, \Jyxo\Css::class)
 			);
 		}
 	}

@@ -70,7 +70,7 @@ class Redis extends \Jyxo\Beholder\TestCase
 	public function run()
 	{
 		// The redis extension or Predis library is required
-		if (!extension_loaded('redis') && !class_exists('\\Predis\\Client')) {
+		if (!extension_loaded('redis') && !class_exists(\Predis\Client::class)) {
 			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Extension redis or Predis library required');
 		}
 

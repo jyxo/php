@@ -42,7 +42,7 @@ class StringAttachmentTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('', $attachment->getEncoding());
 
 		// It is possible to set an encoding
-		$reflection = new \ReflectionClass('\Jyxo\Mail\Encoding');
+		$reflection = new \ReflectionClass(\Jyxo\Mail\Encoding::class);
 		foreach ($reflection->getConstants() as $encoding) {
 			$attachment->setEncoding($encoding);
 			$this->assertEquals($encoding, $attachment->getEncoding());
@@ -51,12 +51,12 @@ class StringAttachmentTest extends \PHPUnit_Framework_TestCase
 		// Incompatible encoding
 		try {
 			$attachment->setEncoding('dummy-encoding');
-			$this->fail('Expected exception \InvalidArgumentException.');
+			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
 		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
 			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf('\InvalidArgumentException', $e);
+			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
 		}
 	}
 }

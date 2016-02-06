@@ -234,7 +234,7 @@ class Executor
 		$timer = \Jyxo\Timer::start();
 		$result = $this->tests[$ident]->run();
 		if (!($result instanceof \Jyxo\Beholder\Result)) {
-			throw new \UnexpectedValueException(sprintf('Result %s of the test %s is not a \Jyxo\Beholder\Result instance.', $result, $ident));
+			throw new \UnexpectedValueException(sprintf('Result %s of the test %s is not a %s instance.', $result, $ident, \Jyxo\Beholder\Result::class));
 		}
 
 		// Returns result data

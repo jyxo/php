@@ -79,8 +79,8 @@ class Smtp extends \Jyxo\Beholder\TestCase
 	public function run()
 	{
 		// The \Jyxo\Mail\Sender\Smtp class is required
-		if (!class_exists('\Jyxo\Mail\Sender\Smtp')) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Class \Jyxo\Mail\Sender\Smtp missing');
+		if (!class_exists(\Jyxo\Mail\Sender\Smtp::class)) {
+			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, sprintf('Class %s missing', \Jyxo\Mail\Sender\Smtp::class));
 		}
 
 		try {

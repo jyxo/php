@@ -92,7 +92,7 @@ class EmailTest extends \PHPUnit_Framework_TestCase
 		$this->assertSame($bcc, $email->getBcc());
 
 		// Priority
-		$reflection = new \ReflectionClass('\Jyxo\Mail\Email');
+		$reflection = new \ReflectionClass(\Jyxo\Mail\Email::class);
 		foreach ($reflection->getConstants() as $name => $value) {
 			if (0 === strpos($name, 'PRIORITY_')) {
 				$email->setPriority($value);
@@ -101,12 +101,12 @@ class EmailTest extends \PHPUnit_Framework_TestCase
 		}
 		try {
 			$email->setPriority('dummy-priority');
-			$this->fail('Expected exception \InvalidArgumentException.');
+			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
 		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
 			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf('\InvalidArgumentException', $e);
+			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
 		}
 
 		// Headers

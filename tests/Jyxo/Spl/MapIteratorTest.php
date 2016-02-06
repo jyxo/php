@@ -66,7 +66,7 @@ class MapIteratorTest extends \PHPUnit_Framework_TestCase
 		$this->assertSame(array_map($callback, $originalData), $iterator->toArray());
 
 		if (is_array($subject)) {
-			$this->assertInstanceOf('\ArrayIterator', $iterator->getInnerIterator());
+			$this->assertInstanceOf(\ArrayIterator::class, $iterator->getInnerIterator());
 		} elseif ($subject instanceof \IteratorAggregate) {
 			$this->assertInstanceOf(get_class($subject->getIterator()), $iterator->getInnerIterator());
 		} else {

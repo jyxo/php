@@ -90,8 +90,8 @@ class JsonRpc extends \Jyxo\Beholder\TestCase
 		}
 
 		// The \Jyxo\Rpc\Json\Client class is required
-		if (!class_exists('\Jyxo\Rpc\Json\Client')) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Class \Jyxo\Rpc\Json\Client missing');
+		if (!class_exists(\Jyxo\Rpc\Json\Client::class)) {
+			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, sprintf('Class %s missing', \Jyxo\Rpc\Json\Client::class));
 		}
 
 		// Creates a client

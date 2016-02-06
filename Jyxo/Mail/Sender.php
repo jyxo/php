@@ -453,8 +453,8 @@ class Sender
 	 */
 	private function sendBySmtp()
 	{
-		if (!class_exists('\Jyxo\Mail\Sender\Smtp')) {
-			throw new Sender\Exception('Could not sent the message. Required class \Jyxo\Mail\Sender\Smtp is missing.');
+		if (!class_exists(\Jyxo\Mail\Sender\Smtp::class)) {
+			throw new Sender\Exception(sprintf('Could not sent the message. Required class %s is missing.', \Jyxo\Mail\Sender\Smtp::class));
 		}
 
 		try {

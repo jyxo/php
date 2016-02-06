@@ -61,7 +61,7 @@ class Parser implements \Iterator, \Countable
 	 *
 	 * @var string
 	 */
-	protected $itemClass = '\Jyxo\Gettext\Parser\Item';
+	protected $itemClass = \Jyxo\Gettext\Parser\Item::class;
 
 	/**
 	 * Header parser class name.
@@ -70,7 +70,7 @@ class Parser implements \Iterator, \Countable
 	 *
 	 * @var string
 	 */
-	protected $headerClass = '\Jyxo\Gettext\Parser\Header';
+	protected $headerClass = \Jyxo\Gettext\Parser\Header::class;
 
 	/**
 	 * Constructor.

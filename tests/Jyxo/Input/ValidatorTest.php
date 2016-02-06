@@ -499,12 +499,12 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
 		try {
 			$validator->setMin(-10);
-			$this->fail('Expected exception \InvalidArgumentException.');
+			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
 		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
 			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf('\InvalidArgumentException', $e);
+			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
 		}
 	}
 
@@ -529,12 +529,12 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
 		try {
 			$validator->setMax(-10);
-			$this->fail('Expected exception \InvalidArgumentException.');
+			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
 		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
 			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf('\InvalidArgumentException', $e);
+			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
 		}
 	}
 
@@ -607,12 +607,12 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 		foreach ($invalidCallbacks as $callback) {
 			try {
 				$validator = new Validator\Callback($callback);
-				$this->fail('Expected exception \Jyxo\Input\Validator\Exception.');
+				$this->fail(sprintf('Expected exception %s.', \Jyxo\Input\Validator\Exception::class));
 			} catch (\PHPUnit_Framework_AssertionFailedError $e) {
 				throw $e;
 			} catch (\Exception $e) {
 				// Correctly thrown exception
-				$this->assertInstanceOf('\Jyxo\Input\Validator\Exception', $e);
+				$this->assertInstanceOf(\Jyxo\Input\Validator\Exception::class, $e);
 			}
 		}
 	}
@@ -635,8 +635,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
 		// Tests storing in cache - the first on in cached, the second one isn't
 		// because it had additional parameters that had been added to the cache ID
-		$this->assertNotNull(\Jyxo\Spl\ObjectCache::get('\Jyxo\Input\Validator\IsInt'));
-		$this->assertNull(\Jyxo\Spl\ObjectCache::get('\Jyxo\Input\Validator\LessThan'));
+		$this->assertNotNull(\Jyxo\Spl\ObjectCache::get(\Jyxo\Input\Validator\IsInt::class));
+		$this->assertNull(\Jyxo\Spl\ObjectCache::get(\Jyxo\Input\Validator\LessThan::class));
 	}
 
 	/**

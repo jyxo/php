@@ -98,8 +98,8 @@ class XmlRpc extends \Jyxo\Beholder\TestCase
 		}
 
 		// The \Jyxo\Rpc\Xml\Client class is required
-		if (!class_exists('\Jyxo\Rpc\Xml\Client')) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Class \Jyxo\Rpc\Xml\Client missing');
+		if (!class_exists(\Jyxo\Rpc\Xml\Client::class)) {
+			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, sprintf('Class %s missing', \Jyxo\Rpc\Xml\Client::class));
 		}
 
 		// Create the RPC client

@@ -49,12 +49,12 @@ class AddressTest extends \PHPUnit_Framework_TestCase
 		// Invalid email
 		try {
 			$address = new Address('žlutý kůň@jyxo.com', $name);
-			$this->fail('Expected exception \InvalidArgumentException.');
+			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
 		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
 			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf('\InvalidArgumentException', $e);
+			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
 		}
 	}
 }

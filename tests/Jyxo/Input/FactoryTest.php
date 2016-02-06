@@ -106,11 +106,11 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
 		try {
 			$this->factory->getFilterByName($filterName);
-			$this->fail('\Jyxo\Input\Exception expected');
+			$this->fail(sprintf('Expected exception %s.', \Jyxo\Input\Exception::class));
 		} catch (\PHPUnit_Framework_ExpectationFailedException $e) {
 			throw $e;
 		} catch (\Exception $e) {
-			$this->assertInstanceOf('\Jyxo\Input\Exception', $e);
+			$this->assertInstanceOf(\Jyxo\Input\Exception::class, $e);
 		}
 
 		$this->factory->addFilterPrefix($filterPrefix);
@@ -132,11 +132,11 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
 		try {
 			$this->factory->getValidatorByName($validatorName);
-			$this->fail('\Jyxo\Input\Exception expected');
+			$this->fail(sprintf('Expected exception %s.', \Jyxo\Input\Exception::class));
 		} catch (\PHPUnit_Framework_ExpectationFailedException $e) {
 			throw $e;
 		} catch (\Exception $e) {
-			$this->assertInstanceOf('\Jyxo\Input\Exception', $e);
+			$this->assertInstanceOf(\Jyxo\Input\Exception::class, $e);
 		}
 
 		$this->factory->addValidatorPrefix($validatorPrefix);

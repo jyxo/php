@@ -91,23 +91,23 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 		// Non-existent sending method
 		try {
 			$sender->send('dummy-mode');
-			$this->fail('Expected exception \InvalidArgumentException.');
+			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
 		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
 			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf('\InvalidArgumentException', $e);
+			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
 		}
 
 		// Missing sender
 		try {
 			$sender->send(Sender::MODE_NONE);
-			$this->fail('Expected exception \Jyxo\Mail\Sender\CreateException.');
+			$this->fail(sprintf('Expected exception %s.', \Jyxo\Mail\Sender\CreateException::class));
 		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
 			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf('\Jyxo\Mail\Sender\CreateException', $e);
+			$this->assertInstanceOf(\Jyxo\Mail\Sender\CreateException::class, $e);
 		}
 
 		$email->setFrom(new Email\Address('blog-noreply@blog.cz'));
@@ -115,12 +115,12 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 		// Missing recipients
 		try {
 			$sender->send(Sender::MODE_NONE);
-			$this->fail('Expected exception \Jyxo\Mail\Sender\CreateException.');
+			$this->fail(sprintf('Expected exception %s.', \Jyxo\Mail\Sender\CreateException::class));
 		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
 			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf('\Jyxo\Mail\Sender\CreateException', $e);
+			$this->assertInstanceOf(\Jyxo\Mail\Sender\CreateException::class, $e);
 		}
 
 		$email->addTo(new Email\Address('test@blog.cz'));
@@ -128,12 +128,12 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 		// Empty body
 		try {
 			$sender->send(Sender::MODE_NONE);
-			$this->fail('Expected exception \Jyxo\Mail\Sender\CreateException.');
+			$this->fail(sprintf('Expected exception %s.', \Jyxo\Mail\Sender\CreateException::class));
 		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
 			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf('\Jyxo\Mail\Sender\CreateException', $e);
+			$this->assertInstanceOf(\Jyxo\Mail\Sender\CreateException::class, $e);
 		}
 	}
 
@@ -174,19 +174,19 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($hostname, $sender->getHostname());
 
 		// Encoding
-		$reflection = new \ReflectionClass('\Jyxo\Mail\Encoding');
+		$reflection = new \ReflectionClass(\Jyxo\Mail\Encoding::class);
 		foreach ($reflection->getConstants() as $encoding) {
 			$sender->setEncoding($encoding);
 			$this->assertEquals($encoding, $sender->getEncoding());
 		}
 		try {
 			$sender->setEncoding('dummy-encoding');
-			$this->fail('Expected exception \InvalidArgumentException.');
+			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
 		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
 			throw $e;
 		} catch (\Exception $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf('\InvalidArgumentException', $e);
+			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
 		}
 
 		// Email

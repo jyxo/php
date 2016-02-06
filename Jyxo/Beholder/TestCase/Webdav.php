@@ -70,8 +70,8 @@ class Webdav extends \Jyxo\Beholder\TestCase
 	public function run()
 	{
 		// The \Jyxo\Webdav\Client class is required
-		if (!class_exists('\Jyxo\Webdav\Client')) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Class \Jyxo\Webdav\Client missing');
+		if (!class_exists(\Jyxo\Webdav\Client::class)) {
+			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, sprintf('Class %s missing', \Jyxo\Webdav\Client::class));
 		}
 
 		$random = md5(uniqid(time(), true));

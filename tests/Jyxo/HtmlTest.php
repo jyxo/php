@@ -224,7 +224,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 			$this->assertStringEqualsFile(
 				$this->filePath . '/' . sprintf('getbody-%s-expected.html', $i),
 				Html::getBody(file_get_contents($this->filePath . '/' . sprintf('getbody-%s.html', $i))),
-				sprintf('Failed test %s for method \Jyxo\Html::getBody.', $i)
+				sprintf('Failed test %s for method %s::getBody().', $i, \Jyxo\Html::class)
 			);
 		}
 	}
@@ -242,7 +242,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 			$this->assertStringEqualsFile(
 				$this->filePath . '/' . sprintf('fromtext-%s-expected.html', $i),
 				Html::fromText(file_get_contents($this->filePath . '/' . sprintf('fromtext-%s.txt', $i))),
-				sprintf('Failed test %s for method \Jyxo\Html::fromText.', $i)
+				sprintf('Failed test %s for method %s::fromText().', $i, \Jyxo\Html::class)
 			);
 		}
 	}
@@ -273,7 +273,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 			$this->assertStringEqualsFile(
 				$this->filePath . '/' . sprintf('totext-%s-expected.txt', $i),
 				Html::toText(file_get_contents($this->filePath . '/' . sprintf('totext-%s.html', $i))),
-				sprintf('Failed test %s for method \Jyxo\Html::toText.', $i)
+				sprintf('Failed test %s for method %s::toText().', $i, \Jyxo\Html::class)
 			);
 		}
 	}

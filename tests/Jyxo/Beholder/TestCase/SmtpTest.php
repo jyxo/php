@@ -29,8 +29,8 @@ class SmtpTest extends \Jyxo\Beholder\TestCase\DefaultTest
 	public function testSmtpMissing()
 	{
 		// Skips the test if the class is already loaded
-		if (class_exists('\Jyxo\Mail\Sender\Smtp', false)) {
-			$this->markTestSkipped('\Jyxo\Mail\Sender\Smtp already loaded');
+		if (class_exists(\Jyxo\Mail\Sender\Smtp::class, false)) {
+			$this->markTestSkipped(sprintf('%s already loaded', \Jyxo\Mail\Sender\Smtp::class));
 		}
 
 		$test = new Smtp('Smtp', '', '', '');
@@ -44,7 +44,7 @@ class SmtpTest extends \Jyxo\Beholder\TestCase\DefaultTest
 		$this->enableAutoload();
 
 		$this->assertEquals(\Jyxo\Beholder\Result::NOT_APPLICABLE, $result->getStatus());
-		$this->assertEquals('Class \Jyxo\Mail\Sender\Smtp missing', $result->getDescription());
+		$this->assertEquals(sprintf('Class %s missing', \Jyxo\Mail\Sender\Smtp::class), $result->getDescription());
 	}
 
 	/**
