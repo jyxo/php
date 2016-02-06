@@ -74,9 +74,6 @@ class StringUtilTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('abcdefghijklmn opqrst', $this->checkStringWordCut('abcdefghijklmn opqrst', 14));
 		$this->assertEquals('abcdefghijklm nopqrst', $this->checkStringWordCut('abcdefghijklm nopqrst', 14));
 
-		// Etc as HTML entity
-		$this->assertEquals('žluťouč&hellip; kůň příšerně úpěl ďábelské ódy', $this->checkStringWordCut('žluťoučký kůň příšerně úpěl ďábelské ódy', 8, '&hellip;'));
-
 		// Short
 		$shorty = '12345678';
 		$this->assertEquals($shorty, $this->checkStringWordCut($shorty));
@@ -96,7 +93,7 @@ class StringUtilTest extends \PHPUnit_Framework_TestCase
 		$cut = StringUtil::cutWords($string, $max, $etc);
 
 		// &hellip; has length of 1
-		$cut2 = strtr(html_entity_decode($cut), array('&hellip;' => '.'));
+		$cut2 = strtr(html_entity_decode($cut, ENT_COMPAT, 'utf-8'), array('&hellip;' => '.'));
 
 		$words = preg_split('~\\s+~', $string);
 		$trimmedWords = preg_split('~\\s+~', $cut2);
@@ -104,11 +101,11 @@ class StringUtilTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(count($trimmedWords), count($words));
 
 		foreach ($words as $i => $word) {
-			if (mb_strlen($word) <= $max) {
+			if (mb_strlen($word, 'utf-8') <= $max) {
 				$this->assertEquals($word, $trimmedWords[$i], 'Word trimmed even though it was short enough');
 			} else {
-				$this->assertLessThanOrEqual($max, mb_strlen($trimmedWords[$i]));
-				$this->assertRegExp('~' . preg_quote($etc == '&hellip;' ? '.' : $etc) . '$~', $trimmedWords[$i], 'String does not end with ' . $etc);
+				$this->assertLessThanOrEqual($max, mb_strlen($trimmedWords[$i], 'utf-8'));
+				$this->assertRegExp('~' . preg_quote($etc === '&hellip;' ? '.' : $etc) . '$~', $trimmedWords[$i], 'String does not end with ' . $etc);
 			}
 		}
 
@@ -127,10 +124,10 @@ class StringUtilTest extends \PHPUnit_Framework_TestCase
 	{
 		$cut = StringUtil::cut($string, $max, $etc);
 		// &hellip; has length of 1
-		$cutLength = mb_strlen(strtr(html_entity_decode($cut), array('&hellip;' => '.')));
+		$cutLength = mb_strlen(strtr(html_entity_decode($cut), array('&hellip;' => '.')), 'utf-8');
 		$this->assertLessThanOrEqual($max, $cutLength, 'String is longer');
 
-		if (mb_strlen($string) <= $max) {
+		if (mb_strlen($string, 'utf-8') <= $max) {
 			$this->assertEquals($string, $cut, 'String trimmed even though it was short enough');
 		} else {
 			$this->assertRegExp('~' . preg_quote($etc) . '$~', $cut, 'String does not end with ' . $etc);
