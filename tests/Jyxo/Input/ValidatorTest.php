@@ -85,28 +85,6 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Tests IsBankAccountNumber validator.
-	 */
-	public function testIsBankAccountNumber()
-	{
-		$good = array(
-			'000000-0145254386/2240',
-			'000019-2000145399/0800',
-			'19-2000145399/0800',
-			'145254386/2240'
-		);
-		$wrong = array(
-			'18-2000145399/0800',
-			'000000-0145254386',
-			'000000-014525438/2400',
-			'000000-0145254386/0000',
-			10
-		);
-
-		$this->executeTests(new Validator\IsBankAccountNumber(), $good, $wrong);
-	}
-
-	/**
 	 * Tests IsBirthNumber validator.
 	 */
 	public function testIsBirthNumber()
@@ -233,30 +211,6 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 		);
 
 		$this->executeTests(new Validator\IsEmail(), $good, $wrong);
-	}
-
-	/**
-	 * Tests IsIban validator.
-	 */
-	public function testIsIban()
-	{
-		$good = array(
-			'CZ65 0800 0000 1920 0014 5399',
-			'CZ09 0800 0000 0003 5349 7163',
-			'CZ3208000000000000007894',
-			'CZ23 0300 0000 0001 2708 9559',
-			'CZ 50 0600 0000 0001 7374 6388',
-			'CZ 12 0300 0000 0006 0095 1053'
-		);
-		$wrong = array(
-			'CZ09 0000 0000 0003 5349 7163',
-			'CZ65 0800 0000 1820 0014 5399',
-			'CZ65 0800 0000 1921 0014 5399',
-			'CZ66 0800 0000 1920 0014 5399',
-			'SK3208000000000000007894'
-		);
-
-		$this->executeTests(new Validator\IsIban(), $good, $wrong);
 	}
 
 	/**

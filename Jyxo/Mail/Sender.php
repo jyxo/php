@@ -792,19 +792,6 @@ class Sender
 		// 7 is =? + ? + Q/B + ? + ?=
 		$maxlen = 75 - 7 - strlen($this->charset);
 
-		// Uses encoding with shorter output
-		/*
-		if (mb_strlen($string, $this->charset) / 3 < $count) {
-			$encoding = 'B';
-			$maxlen -= $maxlen % 4;
-			$encoded = $this->encodeString($string, \Jyxo\Mail\Encoding::BASE64, $maxlen);
-		} else {
-			$encoding = 'Q';
-			$encoded = $this->encodeString($string, \Jyxo\Mail\Encoding::QUOTED_PRINTABLE);
-			$encoded = str_replace(array('?', ' '), array('=3F', '=20'), $encoded);
-		}
-		*/
-
 		// We have to use base64 always, because Thunderbird has problems with quoted-printable
 		$encoding = 'B';
 		$maxlen -= $maxlen % 4;
