@@ -1,9 +1,15 @@
 <html>
 <head>
 	<style type="text/css">
+		html h1 {font-family: sans-serif;}
 		a {color: green;}
-		p > a {color: yellow;}
 		#header {border: solid 1px black;}
+
+		@media screen and (max-width: 600px) {
+			a {
+				color: pink;
+			}
+		}
 	</style>
 	<style type="text/css">
 		<![CDATA[
@@ -17,9 +23,56 @@
 			a#remove.icon.small {background-image: url("remove.png");}
 			a img {text-decoration: none;}
 			h1, h2 {font-weight: bold;}
-			a:link {color: orange}
+			a:link {color: orange;}
+			p img.last:last-child {border: solid 1px red;}
+
+			p a:first-child {color: red;}
+			p a:last-child {color: green;}
+			p a:nth-child(3) {color: pink;}
+
+			p#child span:nth-child(0n+1) {background: black;}
+			p#child span:nth-child(odd) {color: yellow;}
+			p#child span:nth-child(2n+1) {font-style: italic;}
+			p#child span:nth-child(even) {color: blue;}
+			p#child span:nth-child(2n) {font-weight: bold;}
+			p#child span:nth-child(3) {background: pink;}
+
+			p#last-child span:nth-last-child(0n+1) {background: black;}
+			p#last-child span:nth-last-child(odd) {color: yellow;}
+			p#last-child span:nth-last-child(2n+1) {font-style: italic;}
+			p#last-child span:nth-last-child(even) {color: blue;}
+			p#last-child span:nth-last-child(2n) {font-weight: bold;}
+			p#last-child span:nth-last-child(3) {background: pink;}
+
+			div#child-positive span:nth-child(4n+3) {color: green;}
+		    div#child-negative span:nth-child(-5n+16) {color: red;}
+
+			div#child-last-positive span:nth-last-child(4n+3) {color: green;}
+			div#child-last-negative span:nth-last-child(-5n+16) {color: red;}
+
+			div#first-of-type strong:first-of-type {color: red;}
+			div#last-of-type strong:last-of-type {color: blue;}
+			div#nth-of-type strong:nth-of-type(3) {color: pink;}
+
+			div#nth-of-type span:nth-of-type(0n+1) {background: black;}
+			div#nth-of-type span:nth-of-type(odd) {color: yellow;}
+			div#nth-of-type span:nth-of-type(2n+1) {font-style: italic;}
+			div#nth-of-type span:nth-of-type(even) {color: blue;}
+			div#nth-of-type span:nth-of-type(2n) {font-weight: bold;}
+			div#nth-of-type span:nth-of-type(3) {background: pink;}
+
+			div#nth-of-type-positive span:nth-of-type(4n+3) {color: green;}
+			div#nth-of-type-negative span:nth-of-type(-5n+16) {color: red;}
+
+			div#nth-of-type-last-positive span:nth-last-of-type(4n+3) {color: green;}
+			div#nth-of-type-last-negative span:nth-last-of-type(-5n+16) {color: red;}
 		/* ]]> */
 	</style>
+	<!--[if gte mso 12]>
+		<style type="text/css">
+			a {color: blue;}
+		</style>
+	<![endif]-->
 </head>
 <body>
 	<h1 id="header" style="background-color: #ffffff; color: #000000;">H1</h1>
@@ -28,8 +81,301 @@
 		<a><img src="image.gif" /></a>
 		<a class="icon small"></a>
 		<a id="remove" class="icon small"></a>
+		<img src="image.gif" />
 	</p>
 	<h2>H2</h2>
-	<p>Text text text</p>
+	<p id="child">
+		<span>First</span>
+		<span>Second</span>
+		<span>Third</span>
+	</p>
+	<p id="last-child">
+		<span>First</span>
+		<span>Second</span>
+		<span>Third</span>
+	</p>
+	<div id="child-positive">
+		<span>1</span>
+		<span>2</span>
+		<span>3</span>
+		<span>4</span>
+		<span>5</span>
+		<span>6</span>
+		<span>7</span>
+		<span>8</span>
+		<span>9</span>
+		<span>10</span>
+		<span>11</span>
+		<span>12</span>
+		<span>13</span>
+		<span>14</span>
+		<span>15</span>
+		<span>16</span>
+		<span>17</span>
+		<span>18</span>
+		<span>19</span>
+		<span>20</span>
+	</div>
+	<div id="child-negative">
+		<span>1</span>
+		<span>2</span>
+		<span>3</span>
+		<span>4</span>
+		<span>5</span>
+		<span>6</span>
+		<span>7</span>
+		<span>8</span>
+		<span>9</span>
+		<span>10</span>
+		<span>11</span>
+		<span>12</span>
+		<span>13</span>
+		<span>14</span>
+		<span>15</span>
+		<span>16</span>
+		<span>17</span>
+		<span>18</span>
+		<span>19</span>
+		<span>20</span>
+	</div>
+	<div id="child-last-positive">
+		<span>1</span>
+		<span>2</span>
+		<span>3</span>
+		<span>4</span>
+		<span>5</span>
+		<span>6</span>
+		<span>7</span>
+		<span>8</span>
+		<span>9</span>
+		<span>10</span>
+		<span>11</span>
+		<span>12</span>
+		<span>13</span>
+		<span>14</span>
+		<span>15</span>
+		<span>16</span>
+		<span>17</span>
+		<span>18</span>
+		<span>19</span>
+		<span>20</span>
+	</div>
+	<div id="child-last-negative">
+		<span>1</span>
+		<span>2</span>
+		<span>3</span>
+		<span>4</span>
+		<span>5</span>
+		<span>6</span>
+		<span>7</span>
+		<span>8</span>
+		<span>9</span>
+		<span>10</span>
+		<span>11</span>
+		<span>12</span>
+		<span>13</span>
+		<span>14</span>
+		<span>15</span>
+		<span>16</span>
+		<span>17</span>
+		<span>18</span>
+		<span>19</span>
+		<span>20</span>
+	</div>
+
+	<div id="first-of-type">
+		<span>Span 1</span>
+		<strong>Strong 1</strong>
+		<span>Span 2</span>
+		<strong>Strong 2</strong>
+	</div>
+
+	<div id="last-of-type">
+		<span>Span 1</span>
+		<strong>Strong 1</strong>
+		<span>Span 2</span>
+		<strong>Strong 2</strong>
+	</div>
+
+	<div id="nth-of-type">
+		<span>Span 1</span>
+		<strong>Strong 1</strong>
+		<span>Span 2</span>
+		<strong>Strong 2</strong>
+		<span>Span 3</span>
+		<strong>Strong 3</strong>
+	</div>
+
+	<div id="nth-of-type-positive">
+		<strong>1</strong>
+		<span>1</span>
+		<strong>2</strong>
+		<span>2</span>
+		<strong>3</strong>
+		<span>3</span>
+		<strong>4</strong>
+		<span>4</span>
+		<strong>5</strong>
+		<span>5</span>
+		<strong>6</strong>
+		<span>6</span>
+		<strong>7</strong>
+		<span>7</span>
+		<strong>8</strong>
+		<span>8</span>
+		<strong>9</strong>
+		<span>9</span>
+		<strong>10</strong>
+		<span>10</span>
+		<strong>11</strong>
+		<span>11</span>
+		<strong>12</strong>
+		<span>12</span>
+		<strong>13</strong>
+		<span>13</span>
+		<strong>14</strong>
+		<span>14</span>
+		<strong>15</strong>
+		<span>15</span>
+		<strong>16</strong>
+		<span>16</span>
+		<strong>17</strong>
+		<span>17</span>
+		<strong>18</strong>
+		<span>18</span>
+		<strong>19</strong>
+		<span>19</span>
+		<strong>20</strong>
+		<span>20</span>
+	</div>
+
+	<div id="nth-of-type-negative">
+		<strong>1</strong>
+		<span>1</span>
+		<strong>2</strong>
+		<span>2</span>
+		<strong>3</strong>
+		<span>3</span>
+		<strong>4</strong>
+		<span>4</span>
+		<strong>5</strong>
+		<span>5</span>
+		<strong>6</strong>
+		<span>6</span>
+		<strong>7</strong>
+		<span>7</span>
+		<strong>8</strong>
+		<span>8</span>
+		<strong>9</strong>
+		<span>9</span>
+		<strong>10</strong>
+		<span>10</span>
+		<strong>11</strong>
+		<span>11</span>
+		<strong>12</strong>
+		<span>12</span>
+		<strong>13</strong>
+		<span>13</span>
+		<strong>14</strong>
+		<span>14</span>
+		<strong>15</strong>
+		<span>15</span>
+		<strong>16</strong>
+		<span>16</span>
+		<strong>17</strong>
+		<span>17</span>
+		<strong>18</strong>
+		<span>18</span>
+		<strong>19</strong>
+		<span>19</span>
+		<strong>20</strong>
+		<span>20</span>
+	</div>
+
+	<div id="nth-of-type-last-positive">
+		<strong>1</strong>
+		<span>1</span>
+		<strong>2</strong>
+		<span>2</span>
+		<strong>3</strong>
+		<span>3</span>
+		<strong>4</strong>
+		<span>4</span>
+		<strong>5</strong>
+		<span>5</span>
+		<strong>6</strong>
+		<span>6</span>
+		<strong>7</strong>
+		<span>7</span>
+		<strong>8</strong>
+		<span>8</span>
+		<strong>9</strong>
+		<span>9</span>
+		<strong>10</strong>
+		<span>10</span>
+		<strong>11</strong>
+		<span>11</span>
+		<strong>12</strong>
+		<span>12</span>
+		<strong>13</strong>
+		<span>13</span>
+		<strong>14</strong>
+		<span>14</span>
+		<strong>15</strong>
+		<span>15</span>
+		<strong>16</strong>
+		<span>16</span>
+		<strong>17</strong>
+		<span>17</span>
+		<strong>18</strong>
+		<span>18</span>
+		<strong>19</strong>
+		<span>19</span>
+		<strong>20</strong>
+		<span>20</span>
+	</div>
+
+	<div id="nth-of-type-last-negative">
+		<strong>1</strong>
+		<span>1</span>
+		<strong>2</strong>
+		<span>2</span>
+		<strong>3</strong>
+		<span>3</span>
+		<strong>4</strong>
+		<span>4</span>
+		<strong>5</strong>
+		<span>5</span>
+		<strong>6</strong>
+		<span>6</span>
+		<strong>7</strong>
+		<span>7</span>
+		<strong>8</strong>
+		<span>8</span>
+		<strong>9</strong>
+		<span>9</span>
+		<strong>10</strong>
+		<span>10</span>
+		<strong>11</strong>
+		<span>11</span>
+		<strong>12</strong>
+		<span>12</span>
+		<strong>13</strong>
+		<span>13</span>
+		<strong>14</strong>
+		<span>14</span>
+		<strong>15</strong>
+		<span>15</span>
+		<strong>16</strong>
+		<span>16</span>
+		<strong>17</strong>
+		<span>17</span>
+		<strong>18</strong>
+		<span>18</span>
+		<strong>19</strong>
+		<span>19</span>
+		<strong>20</strong>
+		<span>20</span>
+	</div>
 </body>
 </html>

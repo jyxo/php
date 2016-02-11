@@ -172,7 +172,7 @@ class CssTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testConvertStyleToInline()
 	{
-		$testCount = 6;
+		$testCount = 10;
 
 		for ($i = 1; $i <= $testCount; $i++) {
 			$this->assertStringEqualsFile(
