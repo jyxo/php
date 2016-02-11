@@ -5,7 +5,7 @@
 	backupGlobals="false"
 	backupStaticAttributes="false"
 	beStrictAboutTestsThatDoNotTestAnything="true"
-	checkForUnintentionallyCoveredCode="true"
+	beStrictAboutCoversAnnotation="true"
 	beStrictAboutOutputDuringTests="true"
 	beStrictAboutTestSize="true"
 	>
