@@ -545,7 +545,7 @@ class Client
 				// Log
 				if (null !== $this->logger) {
 					foreach ($responses as $server => $response) {
-						$this->logger->log(sprintf("%s %d %s", $request->getMethod(), $response->getStatusCode(), $request->getUri()));
+						$this->logger->log(sprintf("%s %d %s", $requests[$server]->getMethod(), $response->getStatusCode(), $requests[$server]->getUri()));
 					}
 				}
 
