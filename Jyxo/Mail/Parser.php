@@ -403,6 +403,10 @@ class Parser
 		$partLevel = 1;
 		$pidLength = 1;
 		foreach ($this->structure['pid'] as $partNo => $pid) {
+			if ($pid === null) {
+				continue;
+			}
+
 			$level = count(explode('.', $pid));
 
 			if (!isset($multipartPid)) {
