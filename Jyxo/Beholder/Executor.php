@@ -118,7 +118,11 @@ class Executor
 	{
 		// Project name
 		$this->project = $project;
+		$this->setParams($params);
+	}
 
+	public function setParams(array $params)
+	{
 		// Filters
 		if (!empty($params[self::PARAM_INCLUDE])) {
 			$this->includeFilter = (string) $params[self::PARAM_INCLUDE];
