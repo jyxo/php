@@ -53,6 +53,13 @@ class Executor
 	const OUTPUT_HTML = 'h';
 
 	/**
+	 * No output.
+	 *
+	 * @var string
+	 */
+	const OUTPUT_NOTHING = 'n';
+
+	/**
 	 * Output parameter.
 	 *
 	 * @var string
@@ -109,6 +116,13 @@ class Executor
 	private $output = self::OUTPUT_HTML;
 
 	/**
+	 * Tests data.
+	 *
+	 * @var array
+	 */
+	private $testsData = [];
+
+	/**
 	 * Constructor.
 	 *
 	 * @param string $project Project name
@@ -134,6 +148,10 @@ class Executor
 		// Output type
 		if (!empty($params[self::PARAM_OUTPUT])) {
 			switch ($params[self::PARAM_OUTPUT]) {
+				// Nothing
+				case self::OUTPUT_NOTHING:
+					$this->output = self::OUTPUT_NOTHING;
+					break;
 				// Plaintext
 				case self::OUTPUT_TEXT:
 					$this->output = self::OUTPUT_TEXT;
@@ -166,7 +184,6 @@ class Executor
 		shuffle($idents);
 
 		// Performs tests and gathers results
-		$outputData = [];
 		$order = 1;
 		$allSucceeded = true;
 		foreach ($idents as $ident) {
@@ -178,15 +195,19 @@ class Executor
 
 			// Adds the text into the output
 			$data['order'] = $order++;
-			$outputData[] = $data;
+			$this->testsData[] = $data;
 		}
 
 		// Sorts tests according to their identifiers
 		$idents = [];
-		foreach ($outputData as $key => $data) {
+		foreach ($this->testsData as $key => $data) {
 			$idents[$key] = $data['ident'];
 		}
-		array_multisort($idents, SORT_ASC, $outputData);
+		array_multisort($idents, SORT_ASC, $this->testsData);
+
+		if ($this->output === self::OUTPUT_NOTHING) {
+			return $allSucceeded;
+		}
 
 		// Outputs the header
 		if ($allSucceeded) {
@@ -199,16 +220,26 @@ class Executor
 		switch ($this->output) {
 			// Plaintext
 			case self::OUTPUT_TEXT:
-				$this->writeText($allSucceeded, $outputData);
+				$this->writeText($allSucceeded);
 				break;
 			// HTML
 			case self::OUTPUT_HTML:
 			default:
-				$this->writeHtml($allSucceeded, $outputData);
+				$this->writeHtml($allSucceeded);
 				break;
 		}
 
 		return $allSucceeded;
+	}
+
+	/**
+	 * Returns tests data.
+	 *
+	 * @return array
+	 */
+	public function getTestsData(): array
+	{
+		return $this->testsData;
 	}
 
 	/**
@@ -297,9 +328,8 @@ class Executor
 	 * Outputs results in HTML form.
 	 *
 	 * @param boolean $allSucceeded Have all tests been successful
-	 * @param array $outputData Test results
 	 */
-	private function writeHtml(bool $allSucceeded, array $outputData)
+	private function writeHtml(bool $allSucceeded)
 	{
 		header('Content-Type: text/html; charset=utf-8');
 		echo '<head>' . "\n";
@@ -318,7 +348,7 @@ class Executor
 		echo '<br>Tests excluded: ' . $this->excludeFilter . "\n";
 		echo '</p>' . "\n";
 		echo '<table><tr><th>Run order</th><th>Duration</th><th>Ident</th><th>Status</th><th>Test name</th><th>Comment</th></tr>' . "\n";
-		foreach ($outputData as $data) {
+		foreach ($this->testsData as $data) {
 			echo sprintf('
 				<tr>
 					<td>%d</td>
@@ -357,9 +387,8 @@ class Executor
 	 * Outputs results in plaintext.
 	 *
 	 * @param boolean $allSucceeded Have all tests been successful
-	 * @param array $outputData Test results
 	 */
-	private function writeText(bool $allSucceeded, array $outputData)
+	private function writeText(bool $allSucceeded)
 	{
 		// HTML is sent on purpose
 		header('Content-Type: text/html; charset=utf-8');
@@ -372,7 +401,7 @@ class Executor
 
 		echo sprintf("%-9s %10s   %-10s %-7s  %-35s    %s\n",
 			'Run Order', 'Duration', 'Ident', 'Status', 'Test Name', 'Description');
-		foreach ($outputData as $data) {
+		foreach ($this->testsData as $data) {
 			echo sprintf("%9d %9.2fs   %-10s %-7s  %-35s    %s\n",
 				$data['order'],
 				$data['duration'],
