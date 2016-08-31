@@ -197,7 +197,9 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 			'test@jyxo.com',
 			'velky.ohromny.test@jyxo.blog.cz',
 			'123@jyxo.com',
-			'ZahradyR+R@email.cz'
+			'ZahradyR+R@email.cz',
+			'muj@dobry.restaurant',
+			'test@test.xn--vermgensberatung-pwb'
 		];
 		$wrong = [
 			'česko@jyxo.com',

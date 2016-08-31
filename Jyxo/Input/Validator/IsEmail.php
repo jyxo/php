@@ -33,7 +33,7 @@ class IsEmail extends \Jyxo\Input\Validator\AbstractValidator
 	 */
 	public function isValid($value): bool
 	{
-		if (!preg_match('~^[a-z0-9-!#\$%&\'*+/=?^_`{|}\~]+(?:[.][a-z0-9-!#\$%&\'*+/=?^_`{|}\~]+)*@(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?[.])+[a-z]{2,6}$~iu', (string) $value)) {
+		if (!preg_match('~^[a-z0-9-!#\$%&\'*+/=?^_`{|}\~]+(?:[.][a-z0-9-!#\$%&\'*+/=?^_`{|}\~]+)*@(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?[.])+[a-z-]{2,24}$~iu', (string) $value)) {
 			return false;
 		}
 
