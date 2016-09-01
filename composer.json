@@ -24,7 +24,7 @@
 		"ext-imap": "To use Jyxo\\Mail\\Parser"
 	},
 	"autoload": {
-		"psr-0": { "Jyxo": "/" }
+		"psr-4": { "Jyxo\\": ["Jyxo/"] }
 	},
 	"config": {
 		"bin-dir": "bin",
