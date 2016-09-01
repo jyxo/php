@@ -30,16 +30,6 @@ abstract class DefaultTest extends \PHPUnit_Framework_TestCase
 	private $autoloadList = [];
 
 	/**
-	 * Prepares the testing environment.
-	 */
-	protected function setUp()
-	{
-		// Loads required classes
-		spl_autoload_call(\Jyxo\Beholder\TestCase::class);
-		spl_autoload_call(\Jyxo\Beholder\Result::class);
-	}
-
-	/**
 	 * Turns autoloading off.
 	 */
 	protected function disableAutoload()
