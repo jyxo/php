@@ -158,24 +158,18 @@ class Parser implements \Iterator, \Countable
 
 	/**
 	 * {@link \ArrayIterator} interface method.
-	 *
-	 * @return mixed
 	 */
 	public function next()
 	{
 		++$this->current;
-		return $this->items[$this->current];
 	}
 
 	/**
 	 * {@link \ArrayIterator} interface method.
-	 *
-	 * @return boolean
 	 */
-	public function rewind(): bool
+	public function rewind()
 	{
 		$this->current = 0;
-		return $this->items[$this->current];
 	}
 
 	/**
