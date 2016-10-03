@@ -1,0 +1,1489 @@
+# translation of patterns.po to czech
+# translation of patterns-openSUSE.po to
+# translation of patterns.cs_CZ.po to
+# Czech message file for YaST2 (description).
+# Copyright (C) 2002 SuSE CR.
+# Klara Cihlarova <koty@seznam.cz>, 2004, 2006, 2008.
+# Jakub Friedl <jfriedl@suse.cz>, 2006, 2007.
+# Klára Cihlářová <koty@seznam.cz>, 2007.
+# Marek Stopka <marekstopka@gmail.com>, 2008.
+# Vojtěch Zeisek <vojta.sc@seznam.cz>, 2008.
+# Marek Stopka <mstopka@opensuse.org>, 2008.
+# Vojtěch Zeisek <Vojtech.Zeisek@opensuse.org>, 2010.
+# Vít Pelčák <vit@pelcak.org>, 2011.
+# Jan Papez <honyczek@centrum.cz>, 2012, 2013, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: patterns\n"
+"Report-Msgid-Bugs-To: http://bugzilla.novell.com\n"
+"POT-Creation-Date: 2013-11-20 12:34+0100\n"
+"PO-Revision-Date: 2014-02-11 20:30+0100\n"
+"Last-Translator: Jan Papez (honyczek) <honyczek@centrum.cz>\n"
+"Language-Team: Czech <kde-i18n-doc@kde.org>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.5\n"
+"Plural-Forms:  nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: src/patterns_utf8.c:61
+msgid "32-Bit Runtime Environment"
+msgstr "32bitový běhový systém"
+
+#: src/patterns_utf8.c:62
+msgid ""
+"This pattern installs the 32-bit variant of all selected patterns, allowing "
+"you to execute 32-bit software."
+msgstr ""
+"Tímto profilem se nainstalují 32bitové verze všech zvolených profilů. Lze "
+"tak spouštět 32bitový software."
+
+#: src/patterns_utf8.c:65
+msgid "64-Bit Runtime Environment"
+msgstr "64 bitový běhový systém"
+
+#: src/patterns_utf8.c:66
+msgid ""
+"This pattern installs the 64-bit variant of all selected patterns, allowing "
+"you to execute 64-bit software."
+msgstr ""
+"Tímto profilem se nainstalují 64bitové verze všech zvolených profilů. Lze "
+"tak spouštět 64bitový software."
+
+#: src/patterns_utf8.c:69 src/patterns_utf8.c:73
+msgid "AppArmor"
+msgstr "AppArmor"
+
+#: src/patterns_utf8.c:70 src/patterns_utf8.c:74
+msgid ""
+"AppArmor is an application security framework that provides mandatory access "
+"control for programs. It protects from exploitation of software flaws and "
+"compromised systems. It offers an advanced tool set that automates the "
+"development of per-program application security without requiring additional "
+"knowledge."
+msgstr ""
+"AppArmor je aplikační bezpečnostní rozhraní, které poskytuje nezbytné řízení "
+"přístupu k programům. Chrání před zneužíváním děr v softwaru a před systémy "
+"hrozeb. Nabízí pokročilou sadu nástrojů, která automatizuje výzkum "
+"bezpečnosti aplikace po jednotlivých programech bez potřeby dalších znalostí."
+
+#: src/patterns_utf8.c:77 src/patterns_utf8.c:894 src/patterns_utf8.c:898
+msgid "Base System"
+msgstr "Základní systém"
+
+#: src/patterns_utf8.c:78 src/patterns_utf8.c:895 src/patterns_utf8.c:899
+msgid ""
+"This is the base runtime system.  It contains only a minimal multiuser "
+"booting system. For running on real hardware, you need to add additional "
+"packages and pattern to make this pattern useful on its own."
+msgstr ""
+"Toto je základní běhový systém. Obsahuje pouze minimální víceuživatelský "
+"spustitelný systém. Pro běh skutečného hardwaru musíte doinstalovat další "
+"balíčky a profily."
+
+#: src/patterns_utf8.c:81
+msgid "Just Enough Operating System"
+msgstr "Jenom celkem operační systém"
+
+#: src/patterns_utf8.c:82
+msgid ""
+"This is the base runtime system.  It contains only a minimal multiuser "
+"booting system."
+msgstr ""
+"Toto je základní systém k běhu počítače. Obsahuje pouze minimální "
+"víceuživatelský startující systém"
+
+#: src/patterns_utf8.c:85
+msgid "C/C++ Compiler and Tools"
+msgstr "C/C++ kompilátor a nástroje"
+
+#: src/patterns_utf8.c:86
+msgid "Minimal set of tools for compiling and linking applications"
+msgstr "Minimální sada nástrojů potřebná pro kompilováni a linkování aplikací"
+
+#: src/patterns_utf8.c:89
+msgid "Common Code Base (for certification)"
+msgstr "Základní kód (certifikovaný)"
+
+#: src/patterns_utf8.c:90
+msgid ""
+"This consists of all packages that are common to all SUSE Linux Enterprise "
+"products. It also provides a Linux Standard Base 3.0 compliant runtime "
+"environment."
+msgstr ""
+"Základ balíčků společný pro všechny produkty Novell SUSE Linux Enterprise. "
+"Obsahuje také běhové prostředí kompatibilní s LSB 3.0."
+
+#: src/patterns_utf8.c:93
+msgid "SUSE Cloud Admin Node"
+msgstr "Administrátorský uzel SUSE Cloudu"
+
+#: src/patterns_utf8.c:94
+msgid "Packages required to setup a Cloud Admin Node."
+msgstr "Balíčky, které jsou vyžadovány pro nastavení uzlu Cloud Admina."
+
+#: src/patterns_utf8.c:97
+msgid "SUSE Cloud Infrastructure Controller"
+msgstr "Řadič infrastruktury SUSE Cloudu"
+
+#: src/patterns_utf8.c:98
+msgid "Packages required to setup a Cloud Controller."
+msgstr "Balíčky, které jsou vyžadovány pro nastavení Řadiče Cloudu."
+
+#: src/patterns_utf8.c:101
+msgid "SUSE Cloud Infrastructure Compute Node"
+msgstr "Výpočetní uzel infrastruktury SUSE Cloudu"
+
+#: src/patterns_utf8.c:102
+msgid "Packages required to setup a Could Compute Node."
+msgstr "Balíčky, které jsou vyžadovány pro nastavení Výpočetního uzlu Cloudu."
+
+#: src/patterns_utf8.c:105
+msgid "SUSE Cloud End User Tools"
+msgstr "Nástroje koncového uživatele SUSE Cloudu"
+
+#: src/patterns_utf8.c:106
+msgid "Packages useful for SUSE Cloud end users."
+msgstr "Balíčky, které jsou užitečné pro koncové uživatele SUSE Cloudu."
+
+# 22756 AttribValues/label
+#: src/patterns_utf8.c:109
+msgid "Console Tools"
+msgstr "Textové nástroje"
+
+# 53834 AttribValues/description
+#: src/patterns_utf8.c:110
+msgid ""
+"Applications useful for those using the console and no graphical desktop "
+"environment."
+msgstr "Aplikace užitečné pro uživatele nepoužívající grafické prostředí."
+
+#: src/patterns_utf8.c:113
+msgid "Default System"
+msgstr "Standardní systém"
+
+#: src/patterns_utf8.c:113
+msgid "This is the default system for this product."
+msgstr "Toto je výchozí systém pro tento produkt."
+
+#: src/patterns_utf8.c:116
+msgid "Desktop Base System"
+msgstr "Základní systém plochy"
+
+#: src/patterns_utf8.c:117
+msgid "This is the base SUSE Linux runtime system."
+msgstr "Toto je základní běhový systém Novell SUSE Linuxu."
+
+#: src/patterns_utf8.c:120
+msgid "GNOME (Default)"
+msgstr "GNOME (výchozí)"
+
+#: src/patterns_utf8.c:121
+msgid ""
+"GNOME is Novell's default enterprise desktop. It is an intuitive and "
+"attractive desktop combining industry-leading usability with a powerful set "
+"of applications and management features that are essential to enterprise "
+"adoption."
+msgstr ""
+"GNOME je výchozí prostředí enterprise pracovní stanice společnosti Novell. "
+"Jde o intuitivní a atraktivní prostředí obsahující všechny aplikace potřebné "
+"pro běžné použití v podnikatelském světě."
+
+#: src/patterns_utf8.c:124 src/patterns_utf8.c:156
+msgid "GNOME Development"
+msgstr "Vývoj GNOME"
+
+#: src/patterns_utf8.c:125
+msgid "GNOME development packages"
+msgstr "Vývoj GNOME"
+
+#: src/patterns_utf8.c:128 src/patterns_utf8.c:308
+msgid "GNOME Laptop"
+msgstr "GNOME notebook"
+
+#: src/patterns_utf8.c:129
+msgid "GNOME laptop packages"
+msgstr "GNOME balíky pro notebooky"
+
+#: src/patterns_utf8.c:132
+msgid "KDE"
+msgstr "KDE"
+
+#: src/patterns_utf8.c:133
+msgid ""
+"KDE is a powerful graphical desktop environment. It combines ease of use, "
+"contemporary functionality, and outstanding graphical design with the "
+"technology of the Linux operating system."
+msgstr ""
+"KDE je svobodné grafické prostředí pro pracovní stanice. Snoubí v sobě "
+"uživatelskou přívětivost, moderní funkcionalitu a atraktivní vzhled s "
+"linuxovou technologií."
+
+#: src/patterns_utf8.c:136 src/patterns_utf8.c:168
+msgid "KDE Development"
+msgstr "Vývoj KDE"
+
+#: src/patterns_utf8.c:137
+msgid "KDE development packages"
+msgstr "Balíčky pro vývoj KDE"
+
+#: src/patterns_utf8.c:140 src/patterns_utf8.c:448 src/patterns_utf8.c:501
+msgid "KDE Laptop"
+msgstr "KDE notebook"
+
+#: src/patterns_utf8.c:141
+msgid "KDE laptop packages"
+msgstr "KDE balíky pro notebooky"
+
+#: src/patterns_utf8.c:144
+msgid "Base Development"
+msgstr "Základní vývoj"
+
+#: src/patterns_utf8.c:145 src/patterns_utf8.c:793
+msgid "Minimal set of tools for compiling and linking applications."
+msgstr "Minimální sada nástrojů potřebná pro kompilováni a linkování aplikací."
+
+#: src/patterns_utf8.c:148
+msgid "Cell Development"
+msgstr "Vývoj pro procesor Cell"
+
+#: src/patterns_utf8.c:149 src/patterns_utf8.c:853
+msgid "Toolchain to build code for the Cell processor."
+msgstr "Toolchain pro vytváření kódu pro procesory Cell."
+
+#: src/patterns_utf8.c:152
+msgid "C/C++ Development"
+msgstr "Vývoj C/C++"
+
+#: src/patterns_utf8.c:153 src/patterns_utf8.c:797
+msgid ""
+"Tools and libraries for software development using C/C++ and other "
+"derivative of the C programming language."
+msgstr ""
+"Nástroje a knihovny pro vývoj v C/C++ a jazycích odvozených od jazyka C."
+
+#: src/patterns_utf8.c:157 src/patterns_utf8.c:801
+msgid "GNOME development packages."
+msgstr "Balíčky pro vývoj GNOME."
+
+# 28855 AttribValues/label
+#: src/patterns_utf8.c:160
+msgid "Integrated Development Environments"
+msgstr "Integrovaná vývojová prostředí"
+
+# 28855 AttribValues/label
+#: src/patterns_utf8.c:161
+msgid "Integrated Development Environments."
+msgstr "Integrovaná vývojová prostředí."
+
+#: src/patterns_utf8.c:164
+msgid "Java Development"
+msgstr "Vývoj v jazyku Java"
+
+# 53574 AttribValues/description
+#: src/patterns_utf8.c:165 src/patterns_utf8.c:805
+msgid ""
+"Tools and libraries for software development using the Java programming "
+"language."
+msgstr "Nástroje a knihovny potřebné pro vývoj v jazyku Java."
+
+#: src/patterns_utf8.c:169 src/patterns_utf8.c:809
+msgid "KDE development packages."
+msgstr "Balíčky pro vývoj KDE."
+
+#: src/patterns_utf8.c:172
+msgid "Linux Kernel Development"
+msgstr "Vývoj linuxového jádra"
+
+#: src/patterns_utf8.c:173 src/patterns_utf8.c:813
+msgid "Tools for Linux kernel development."
+msgstr "Nástroje pro vývoj jádra."
+
+#: src/patterns_utf8.c:176
+msgid ".NET Development"
+msgstr ".NET vývoj"
+
+# 53574 AttribValues/description
+#: src/patterns_utf8.c:177 src/patterns_utf8.c:817
+msgid "Tools and libraries for .NET development using Mono."
+msgstr "Nástroje a knihovny potřebné pro vývoj v :NET pomocí Mono."
+
+#: src/patterns_utf8.c:180
+msgid "Ruby on Rails Development"
+msgstr "Vývoj Ruby on Rails"
+
+# 53574 AttribValues/description
+#: src/patterns_utf8.c:181 src/patterns_utf8.c:821
+msgid ""
+"Tools and libraries for software development using the Ruby on Rails "
+"framework."
+msgstr "Nástroje a knihovny potřebné pro práci s Ruby on Rails."
+
+#: src/patterns_utf8.c:184
+msgid "Perl Development"
+msgstr "Vývoj v Perlu"
+
+# 53574 AttribValues/description
+#: src/patterns_utf8.c:185 src/patterns_utf8.c:825
+msgid ""
+"Tools and libraries for software development using the Perl programming "
+"language."
+msgstr "Nástroje a knihovny potřebné pro vývoj v jazyku Perl."
+
+#: src/patterns_utf8.c:188
+msgid "Python Development"
+msgstr "Vývoj v Pythonu"
+
+# 53574 AttribValues/description
+#: src/patterns_utf8.c:189 src/patterns_utf8.c:829
+msgid ""
+"Tools and libraries for software development using the Python programming "
+"language."
+msgstr "Nástroje a knihovny potřebné pro vývoj v jazyku Python."
+
+# 51485 AttribValues/label
+#: src/patterns_utf8.c:192
+msgid "Qt 4 Development"
+msgstr "Vývoj v Qt 4"
+
+# 53574 AttribValues/description
+#: src/patterns_utf8.c:193 src/patterns_utf8.c:833
+msgid ""
+"Tools and libraries for software development using Qt 4, the latest version "
+"of the Qt toolkit."
+msgstr ""
+"Nástroje a knihovny potřebné pro vývoj v Qt 4, poslední verzi Qt toolkitu."
+
+#: src/patterns_utf8.c:196
+msgid "RPM Build Environment"
+msgstr "Prostředí pro vytváření RPM"
+
+#: src/patterns_utf8.c:197
+msgid ""
+"Minimal set of tools and libraries for building packages using the RPM "
+"package manager."
+msgstr "Základní skupina nástrojů a knihoven pro vytváření RPM balíčků."
+
+#: src/patterns_utf8.c:200
+msgid "Ruby Development"
+msgstr "Vývoj v Ruby"
+
+# 53574 AttribValues/description
+#: src/patterns_utf8.c:201 src/patterns_utf8.c:837
+msgid ""
+"Tools and libraries for software development using the Ruby programming "
+"language."
+msgstr "Nástroje a knihovny potřebné pro vývoj v jazyku Ruby."
+
+#: src/patterns_utf8.c:204
+msgid "Tcl/Tk Development"
+msgstr "Vývojový systém Tcl/Tk"
+
+# 53574 AttribValues/description
+#: src/patterns_utf8.c:205
+msgid "Tools and libraries for development using Tcl and Tk."
+msgstr "Nástroje a knihovny potřebné pro vývoj v Tcl a Tk."
+
+# 54068 AttribValues/label
+#: src/patterns_utf8.c:208
+msgid "Web Development"
+msgstr "Webový vývoj"
+
+# 55869 AttribValues/description
+#: src/patterns_utf8.c:209 src/patterns_utf8.c:841
+msgid "Tools and libraries for Web application development."
+msgstr "Nástroje a knihovny pro vývoj webových aplikací."
+
+#: src/patterns_utf8.c:212
+msgid "YaST Development"
+msgstr "Vývoj YaSTu"
+
+#: src/patterns_utf8.c:213 src/patterns_utf8.c:845
+msgid ""
+"Tools and libraries for developing YaST modules, the setup and configuration "
+"tool for openSUSE."
+msgstr ""
+"Nástroje a knihovny pro vývoj modulů programu YaST, instalačního a "
+"konfiguračního nástroje openSUSE."
+
+#: src/patterns_utf8.c:216
+msgid "DHCP and DNS Server"
+msgstr "DHCP a DNS server"
+
+#: src/patterns_utf8.c:217
+msgid ""
+"Software to set up a server for the Dynamic Host Configuration Protocol "
+"(DHCP) and the Domain Name System (DNS) services. DHCP provides "
+"configuration parameters to client computers to integrate them into a "
+"network, whereas DNS delivers information associated with domain names, in "
+"particular, the IP address."
+msgstr ""
+"Nastavení DHCP serveru, který se postará o automatické síťové nastavení "
+"pracovních stanic ve vaší síti. Součásti je také DNS server, který se "
+"postará o správné rozpoznávání jmen staniv síti."
+
+#: src/patterns_utf8.c:220
+msgid "Directory Server (LDAP)"
+msgstr "Adresářový server (LDAP)"
+
+#: src/patterns_utf8.c:221
+msgid ""
+"Software to set up a directory server with OpenLDAP. The Lightweight "
+"Directory Access Protocol (LDAP) is used to access online directory "
+"services. "
+msgstr ""
+"Nastavení adresářového serveru založeného na OpenLDAP. LDAP (Lightweight "
+"Directory Access Protocol) je využíván k přístupu k online adresářovým "
+"službám."
+
+#: src/patterns_utf8.c:224
+msgid "Documentation"
+msgstr "Dokumentace"
+
+#: src/patterns_utf8.c:225
+msgid "Help and Documentation, various books"
+msgstr "Nápověda a dokumentace, různé knihy"
+
+#: src/patterns_utf8.c:228 src/patterns_utf8.c:229
+msgid "Help and Support Documentation"
+msgstr "Nápověda a dokumentace"
+
+#: src/patterns_utf8.c:232
+msgid "XEN Virtualization Host (non-embedded)"
+msgstr "Virtualizační hostitel XEN (nezabudovaný)"
+
+#: src/patterns_utf8.c:233
+msgid "This is a minimal system with a running XEN Hypervisor."
+msgstr "Toto je minimální systém s běžícím hypervisorem XEN."
+
+#: src/patterns_utf8.c:236
+msgid "KVM Virtualization Host (non-embedded)"
+msgstr "Virtualizační hostitel KVM (nezabudovaný)"
+
+#: src/patterns_utf8.c:237
+msgid "This is a minimal system with a running KVM Hypervisor."
+msgstr "Toto je minimální systém s běžícím hypervisorem KVM."
+
+#: src/patterns_utf8.c:240 src/patterns_utf8.c:244
+msgid "Enhanced Base System"
+msgstr "Rozšířený základní systém"
+
+#: src/patterns_utf8.c:241 src/patterns_utf8.c:245
+msgid ""
+"This is the enhanced base runtime system with lots of convenience packages."
+msgstr ""
+"Toto je rozšíření základního běhového systému s řadou obvyklých balíčků."
+
+#: src/patterns_utf8.c:248
+msgid "File Server"
+msgstr "Souborový server"
+
+#: src/patterns_utf8.c:249
+msgid ""
+"File services to host files so that they may be accessed or retrieved by "
+"other computers on the same network. This includes the FTP, SMB, and NFS "
+"protocols."
+msgstr ""
+"Souborové služby umožňující přístup k souborům z ostatních počítačů v síti. "
+"Obsahuje FTP, SMB a NFS protokoly."
+
+#: src/patterns_utf8.c:252 src/patterns_utf8.c:256
+msgid "Fonts"
+msgstr "Písma"
+
+#: src/patterns_utf8.c:253 src/patterns_utf8.c:257
+msgid "Base fonts and font configuration."
+msgstr "Základní písma a jejich nastavení."
+
+#: src/patterns_utf8.c:260 src/patterns_utf8.c:264
+msgid "Games"
+msgstr "Hry"
+
+# 54201 AttribValues/label
+#: src/patterns_utf8.c:261 src/patterns_utf8.c:265
+msgid "A collection of games."
+msgstr "Sada her."
+
+#: src/patterns_utf8.c:268
+msgid "Internet Gateway"
+msgstr "Internetová brána"
+
+#: src/patterns_utf8.c:269
+msgid ""
+"Software to set up a proxy, firewall, and gateway server, including a "
+"virtual private network (VPN) gateway."
+msgstr ""
+"Nastavení proxy, firewallu a brány pro připojení k Internetu. Součástí je "
+"také VPN (virtual private network)."
+
+#: src/patterns_utf8.c:272
+msgid "GNOME Desktop Environment"
+msgstr "Prostředí GNOME"
+
+#: src/patterns_utf8.c:273
+msgid ""
+"The GNOME desktop environment is an intuitive and attractive desktop for "
+"users."
+msgstr "GNOME je intuitivní a atraktivní grafické prostředí."
+
+#: src/patterns_utf8.c:276
+msgid "GNOME Administration Tools"
+msgstr "Administrační nástroje prostředí GNOME"
+
+#: src/patterns_utf8.c:277 src/patterns_utf8.c:369 src/patterns_utf8.c:373
+msgid "Administration Tools e.g. for desktop lockdown"
+msgstr "Administrační nástroje, např. pro uzamčení prostředí"
+
+#: src/patterns_utf8.c:280 src/patterns_utf8.c:284
+msgid "GNOME Base System"
+msgstr "Základní systém GNOME"
+
+#: src/patterns_utf8.c:281 src/patterns_utf8.c:285
+msgid "Base packages for the GNOME desktop environment."
+msgstr "Základní balíčky prostředí GNOME."
+
+# 49722 AttribValues/label
+#: src/patterns_utf8.c:288 src/patterns_utf8.c:289
+msgid "GNOME Games"
+msgstr "GNOME hry"
+
+# 28855 AttribValues/label
+#: src/patterns_utf8.c:292
+msgid "GNOME Integrated Development Environment"
+msgstr "Integrované vývojové prostředí pro GNOME"
+
+# 49475 AttribValues/label
+#: src/patterns_utf8.c:293
+msgid "Development under GNOME"
+msgstr "Vývoj v GNOME"
+
+# 49722 AttribValues/label
+#: src/patterns_utf8.c:296 src/patterns_utf8.c:300
+msgid "GNOME Graphics"
+msgstr "GNOME grafika"
+
+#: src/patterns_utf8.c:297 src/patterns_utf8.c:301 src/patterns_utf8.c:437
+#: src/patterns_utf8.c:441 src/patterns_utf8.c:490 src/patterns_utf8.c:494
+msgid "Handling of digital photos and graphics"
+msgstr "Práce s fotografiemi a grafikou"
+
+#: src/patterns_utf8.c:304
+msgid "GNOME Internet"
+msgstr "GNOME internet"
+
+#: src/patterns_utf8.c:305
+msgid "GNOME Internet Applications"
+msgstr "GNOME internetové aplikace"
+
+#: src/patterns_utf8.c:309
+msgid "GNOME Tools designed specifically for use with laptop computers."
+msgstr "Nástroje prostředí GNOME navržené pro práci s notebooky."
+
+#: src/patterns_utf8.c:312 src/patterns_utf8.c:313 src/patterns_utf8.c:316
+#: src/patterns_utf8.c:317
+msgid "GNOME Multimedia"
+msgstr "GNOME multimédia"
+
+#: src/patterns_utf8.c:320 src/patterns_utf8.c:321 src/patterns_utf8.c:324
+#: src/patterns_utf8.c:325
+msgid "GNOME Office"
+msgstr "GNOME kancelář"
+
+# 54237 AttribValues/label
+#: src/patterns_utf8.c:328 src/patterns_utf8.c:329 src/patterns_utf8.c:332
+#: src/patterns_utf8.c:333
+msgid "GNOME Utilities"
+msgstr "GNOME nástroje"
+
+#: src/patterns_utf8.c:336 src/patterns_utf8.c:337
+msgid "GNOME Desktop Effects"
+msgstr "Efekty prostředí GNOME"
+
+# 33139 AttribValues/label
+#: src/patterns_utf8.c:340
+msgid "YaST GNOME User Interfaces"
+msgstr "YaST GNOME uživatelského rozhraní"
+
+# 49768 AttribValues/label
+#: src/patterns_utf8.c:341
+msgid "Graphical YaST user interfaces for the GNOME desktop."
+msgstr "Grafické rozhraní programu YaST pro GNOME."
+
+#: src/patterns_utf8.c:344
+msgid "High Availability"
+msgstr "Vysoká dostupnost"
+
+#: src/patterns_utf8.c:345
+msgid ""
+"Provide tools to ensure a high degree of operational continuity and reduce "
+"the downtimes of your system."
+msgstr "Nabízí nástroje k zajištění operability a výkonu systému."
+
+#: src/patterns_utf8.c:348
+msgid "Geographical Clustering"
+msgstr "Geografické clusterování"
+
+#: src/patterns_utf8.c:349
+msgid ""
+"Extend the SLE HA functionality for automatic site fail-over to provide "
+"business continuity and geographical clustering."
+msgstr ""
+"Rozšiřte funkcionalitu SLE HA pro automatický fail-over umístění, abyste tak "
+"zajistili "
+"pokračování obchodu a geografické clusterování."
+
+#: src/patterns_utf8.c:352 src/patterns_utf8.c:356
+msgid "Graphics"
+msgstr "Grafika"
+
+#: src/patterns_utf8.c:353 src/patterns_utf8.c:357
+msgid "Handling of digital photos and graphics."
+msgstr "Práce s fotografiemi a grafikou."
+
+#: src/patterns_utf8.c:360
+msgid "KDE Desktop Environment"
+msgstr "Prostředí KDE"
+
+#: src/patterns_utf8.c:361 src/patterns_utf8.c:365
+msgid ""
+"KDE is a powerful free software graphical desktop environment for Linux "
+"workstations. It combines ease of use, contemporary functionality, and "
+"outstanding graphical design with the technology of the Linux operating "
+"system."
+msgstr ""
+"KDE je svobodné grafické prostředí pro pracovní stanice. Snoubí v sobě "
+"uživatelskou přívětivost, moderní funkcionalitu a atraktivní vzhled s "
+"linuxovou technologií."
+
+#: src/patterns_utf8.c:364
+msgid "KDE4 Desktop Environment"
+msgstr "Prostředí KDE4"
+
+#: src/patterns_utf8.c:368
+msgid "KDE Administration Tools"
+msgstr "Administrační nástroje KDE"
+
+#: src/patterns_utf8.c:372
+msgid "KDE4 Administration Tools"
+msgstr "Administrační nástroje KDE4"
+
+#: src/patterns_utf8.c:376
+msgid "KDE4 Education"
+msgstr "KDE4 Vzdělání"
+
+#: src/patterns_utf8.c:377
+msgid "Tools to teach kids with computers"
+msgstr "Nástroje na učení dětí zacházení s počítačem"
+
+#: src/patterns_utf8.c:380 src/patterns_utf8.c:388
+msgid "KDE Base System"
+msgstr "Základní systém KDE"
+
+#: src/patterns_utf8.c:381
+msgid ""
+"Base packages for the KDE desktop environment. KDE4 is the next major KDE "
+"release."
+msgstr "Základní balíčky prostředí KDE4. KDE4 je budoucí hlavní verze KDE."
+
+#: src/patterns_utf8.c:384 src/patterns_utf8.c:392
+msgid "KDE4 Base System"
+msgstr "Základní systém KDE4"
+
+#: src/patterns_utf8.c:385
+msgid ""
+"Base packages for the KDE4 desktop environment. KDE4 is the next major KDE "
+"release."
+msgstr "Základní balíčky prostředí KDE4. KDE4 je budoucí hlavní verze KDE."
+
+#: src/patterns_utf8.c:389
+msgid "Base packages for the KDE desktop environment."
+msgstr "Základní balíčky prostředí KDE."
+
+#: src/patterns_utf8.c:393
+msgid "Base packages for the KDE4 desktop environment."
+msgstr "Základní balíčky prostředí KDE4."
+
+#: src/patterns_utf8.c:396 src/patterns_utf8.c:397
+msgid "KDE Edutainment"
+msgstr "KDE škola hrou"
+
+#: src/patterns_utf8.c:400 src/patterns_utf8.c:401 src/patterns_utf8.c:408
+#: src/patterns_utf8.c:409
+msgid "KDE Games"
+msgstr "KDE hry"
+
+#: src/patterns_utf8.c:404 src/patterns_utf8.c:405 src/patterns_utf8.c:412
+#: src/patterns_utf8.c:413
+msgid "KDE4 Games"
+msgstr "KDE4 hry"
+
+#: src/patterns_utf8.c:416 src/patterns_utf8.c:417
+msgid "KDE Help System"
+msgstr "KDE systém nápovědy"
+
+#: src/patterns_utf8.c:420 src/patterns_utf8.c:421
+msgid "KDE4 Help System"
+msgstr "KDE4 systém nápovědy"
+
+# 28855 AttribValues/label
+#: src/patterns_utf8.c:424
+msgid "KDE Integrated Development Environment"
+msgstr "Integrované vývojové prostředí pro KDE"
+
+# 49475 AttribValues/label
+#: src/patterns_utf8.c:425
+msgid "Development under KDE"
+msgstr "Vývoj v KDE"
+
+# 28855 AttribValues/label
+#: src/patterns_utf8.c:428
+msgid "KDE4 Integrated Development Environment"
+msgstr "Integrované vývojové prostředí pro KDE4"
+
+# 49475 AttribValues/label
+#: src/patterns_utf8.c:429
+msgid "Development under KDE4"
+msgstr "Vývoj v KDE4"
+
+#: src/patterns_utf8.c:432 src/patterns_utf8.c:433 src/patterns_utf8.c:464
+#: src/patterns_utf8.c:465 src/patterns_utf8.c:517 src/patterns_utf8.c:518
+msgid "KDE System"
+msgstr "Systém KDE"
+
+#: src/patterns_utf8.c:436 src/patterns_utf8.c:440 src/patterns_utf8.c:489
+#: src/patterns_utf8.c:493
+msgid "KDE Graphics"
+msgstr "KDE grafika"
+
+#: src/patterns_utf8.c:444 src/patterns_utf8.c:497
+msgid "KDE Internet"
+msgstr "KDE internet"
+
+#: src/patterns_utf8.c:445 src/patterns_utf8.c:498
+msgid "KDE Internet Applications"
+msgstr "KDE internetové aplikace"
+
+#: src/patterns_utf8.c:449 src/patterns_utf8.c:502
+msgid "KDE Tools designed specifically for use with laptop computers."
+msgstr "Nástroje prostředí KDE navržené pro práci s notebooky."
+
+#: src/patterns_utf8.c:452 src/patterns_utf8.c:453 src/patterns_utf8.c:505
+#: src/patterns_utf8.c:506
+msgid "KDE Multimedia"
+msgstr "KDE multimédia"
+
+#: src/patterns_utf8.c:456 src/patterns_utf8.c:457 src/patterns_utf8.c:460
+#: src/patterns_utf8.c:461 src/patterns_utf8.c:509 src/patterns_utf8.c:510
+#: src/patterns_utf8.c:513 src/patterns_utf8.c:514
+msgid "KDE Office"
+msgstr "KDE kancelář"
+
+# 54237 AttribValues/label
+#: src/patterns_utf8.c:468 src/patterns_utf8.c:469 src/patterns_utf8.c:472
+#: src/patterns_utf8.c:473 src/patterns_utf8.c:521 src/patterns_utf8.c:522
+#: src/patterns_utf8.c:525 src/patterns_utf8.c:526
+msgid "KDE Utilities"
+msgstr "KDE nástroje"
+
+#: src/patterns_utf8.c:476 src/patterns_utf8.c:477 src/patterns_utf8.c:529
+#: src/patterns_utf8.c:530
+msgid "KDE Desktop Effects"
+msgstr "Efekty prostředí KDE"
+
+# 33139 AttribValues/label
+#: src/patterns_utf8.c:480 src/patterns_utf8.c:533
+msgid "YaST KDE User Interfaces"
+msgstr "YaST KDE uživatelského rozhraní"
+
+# 49768 AttribValues/label
+#: src/patterns_utf8.c:481 src/patterns_utf8.c:534
+msgid "Graphical YaST user interfaces for the KDE desktop."
+msgstr "Grafické rozhraní programu YaST pro KDE."
+
+# 33139 AttribValues/label
+#: src/patterns_utf8.c:484
+msgid "YaST User Interfaces"
+msgstr "YaST uživatelského rozhraní"
+
+# 49768 AttribValues/label
+#: src/patterns_utf8.c:485
+msgid "Graphical YaST user interfaces for minimal X desktop."
+msgstr "Grafické rozhraní programu YaST pro minimální X systém."
+
+#: src/patterns_utf8.c:537
+msgid "Kernel Development"
+msgstr "Vývoj jádra"
+
+#: src/patterns_utf8.c:538
+msgid "Kernel development packages"
+msgstr "Balíčky pro vývoj jádra"
+
+#: src/patterns_utf8.c:541
+msgid "Web and LAMP Server"
+msgstr "Webový a LAMP server"
+
+#: src/patterns_utf8.c:542
+msgid ""
+"Software to set up a Web server that is able to serve static, dynamic, and "
+"interactive content (like a Web shop). This includes Apache HTTP Server, the "
+"database management system MySQL, and scripting languages such as PHP, "
+"Python, Ruby on Rails, or Perl."
+msgstr ""
+"Nastavení webového serveru pro statický, dynamické i interaktivní obsah "
+"(např. webový obchod). Základem je webový server Apache, databázový systém "
+"MySQL a skriptovací jazyky jako např. PHP, Python, Ruby on Rails nebo Perl."
+
+#: src/patterns_utf8.c:545
+msgid "Laptop"
+msgstr "Notebook"
+
+#: src/patterns_utf8.c:546
+msgid "Tools designed specifically for laptop computers."
+msgstr "Nástroje navržené pro práci s notebooky."
+
+#: src/patterns_utf8.c:549
+msgid "Mail and News Server"
+msgstr "Poštovní a news server"
+
+#: src/patterns_utf8.c:550
+msgid ""
+"Software to set up electronic mail and message services to handle e-mail, "
+"mailing, and news lists, including a virus scanner to scan messages at the "
+"server level."
+msgstr ""
+"Nastavení poštovních služeb a služeb pro doručování zpráv. Využít můžete "
+"také možnosti nastavení virového skeneru."
+
+#: src/patterns_utf8.c:553
+msgid "Minimal System (Appliances)"
+msgstr "Minimální systém"
+
+#: src/patterns_utf8.c:554
+msgid ""
+"This is the minimal Novell SUSE Linux Enterprise runtime system. It is "
+"really a minimal system, you can login and a shell will be started, that's "
+"all. It is intended as base for Appliances. Support for this minimal pattern "
+"is only possible as part of an OEM agreement or after upgrading the system "
+"to the Server Base pattern"
+msgstr ""
+"Toto je minimální Novell SUSE Linux Enterprise provozní systém. Je to "
+"opravdu minimální systém, můžete se přihlásit a bude spuštěna příkazová "
+"řádka, toť vše. Je zamýšlen jako základ pro aplikace. Podpora pro toto "
+"minimální schéma je možná pouze jako součást OEM dohody nebo po upgrade "
+"systému na serverové schéma."
+
+#: src/patterns_utf8.c:557
+msgid "Miscellaneous Server"
+msgstr "Ostatní servery"
+
+#: src/patterns_utf8.c:558
+msgid "Miscellaneous Server."
+msgstr "Ostatní servery."
+
+#: src/patterns_utf8.c:561 src/patterns_utf8.c:565
+msgid "Multimedia"
+msgstr "Multimédia"
+
+#: src/patterns_utf8.c:562 src/patterns_utf8.c:566
+msgid ""
+"Multimedia players, sound editing tools , video and image manipulation "
+"applications."
+msgstr ""
+"Multimediální přehrávače, nástroje pro editaci zvuku nebo videa a programy "
+"pro práci s obrázky."
+
+#: src/patterns_utf8.c:569
+msgid "Mono Development"
+msgstr "Vývoj Mono"
+
+#: src/patterns_utf8.c:570
+msgid "MONO development packages"
+msgstr "Balíčky pro vývoj MONO"
+
+#: src/patterns_utf8.c:573
+msgid "Network Administration"
+msgstr "Správa sítě"
+
+#: src/patterns_utf8.c:574
+msgid "Tools for administering and debugging networks."
+msgstr "Nástroje pro správu sítě k ladění sítě."
+
+#: src/patterns_utf8.c:577 src/patterns_utf8.c:585
+msgid "Misc. Proprietary Packages"
+msgstr "Různé proprietární balíčky"
+
+#: src/patterns_utf8.c:578 src/patterns_utf8.c:586
+msgid "Packages that are proprietary and not under an Open Source license."
+msgstr "Balíčky, které nejsou šířeny pod některou z open source licencí."
+
+#: src/patterns_utf8.c:581
+msgid "Java Environment"
+msgstr "Java prostředí"
+
+#: src/patterns_utf8.c:582
+msgid "Proprietary Java packages."
+msgstr "Proprietární Java balíčky."
+
+#: src/patterns_utf8.c:589
+msgid "Novell Client for Linux"
+msgstr "Novell klient pro Linux"
+
+#: src/patterns_utf8.c:590
+msgid ""
+"The Novell Client for Linux workstation software extends the capabilities of "
+"a Linux desktop by providing access to NetWare and Open Enterprise Servers "
+"(OES)."
+msgstr ""
+"Novell klient pro linuxovou pracovní stanici rozšiřuje možnosti linuxového "
+"desktopu poskytnutím přístupu k NetWare a Open Enterprise Servers (OES)."
+
+#: src/patterns_utf8.c:593
+msgid "Novell Applications"
+msgstr "Novell aplikace"
+
+#: src/patterns_utf8.c:594
+msgid ""
+"Client software enabling connection to traditional Novell services, "
+"including NetWare CIFS/Samba mounts, GroupWise, and iPrint."
+msgstr ""
+"Software používaný pro připojení k tradičním službám společnosti Novell "
+"včetně NetWare CIFS/Samba mounts, GroupWise, a iPrint."
+
+#: src/patterns_utf8.c:597
+msgid "Infiniband (OFED)"
+msgstr "Infiniband (OFED)"
+
+#: src/patterns_utf8.c:598
+msgid ""
+"This pattern defines the OpenFabrics Enterprise Distribution (OFED) software "
+"base packages. The base pattern includes the packages you need to get your "
+"Infiniband adapter operational, that is IB kernel modules and basic user "
+"level libraries."
+msgstr ""
+"Tento profil obsahuje balíčky založené na OpenFabrics Enterprise "
+"Distribution (OFED). Základní profil obsahuje IB moduly jádra a základní "
+"uživatelské knihovny."
+
+#: src/patterns_utf8.c:601
+msgid "TabletPC"
+msgstr "TabletPC"
+
+#: src/patterns_utf8.c:602
+msgid "Tools designed specifically for use with TabletPCs."
+msgstr "Nástroje navržené pro použití v kombinaci s TabletPC."
+
+#: src/patterns_utf8.c:605 src/patterns_utf8.c:609
+msgid "Office Software"
+msgstr "Kancelářské programy"
+
+#: src/patterns_utf8.c:606 src/patterns_utf8.c:610
+msgid "Office software for your desktop environment including LibreOffice."
+msgstr "Kancelářské programy pro vaše pracovní prostředí včetně LibreOffice."
+
+#: src/patterns_utf8.c:613
+msgid "Oracle Server Base"
+msgstr "Základ pro Oracle"
+
+#: src/patterns_utf8.c:614
+msgid "Set up the server for installing Oracle databases."
+msgstr "Připravuje server na instalaci databáze Oracle."
+
+#: src/patterns_utf8.c:617
+msgid "Print Server"
+msgstr "Tiskový server"
+
+#: src/patterns_utf8.c:618
+msgid ""
+"Software used to host print queues so that they may be accessed by other "
+"computers on the same network. LPD, CUPS, and SMB print servers and queues "
+"are supported."
+msgstr ""
+"Software používaný pro vytváření tiskových front, ke kterým lze přistupovat "
+"z jiných počítačů v síti. Obsahuje podporu pro LDP, CUPS a SMB tiskové "
+"servery a fronty."
+
+#: src/patterns_utf8.c:621 src/patterns_utf8.c:625 src/patterns_utf8.c:629
+#: src/patterns_utf8.c:633 src/patterns_utf8.c:637 src/patterns_utf8.c:641
+#: src/patterns_utf8.c:645 src/patterns_utf8.c:649 src/patterns_utf8.c:653
+#: src/patterns_utf8.c:657 src/patterns_utf8.c:661
+msgid "Remaining Software"
+msgstr "Ostatní software"
+
+#: src/patterns_utf8.c:622 src/patterns_utf8.c:626 src/patterns_utf8.c:630
+#: src/patterns_utf8.c:634 src/patterns_utf8.c:638 src/patterns_utf8.c:642
+#: src/patterns_utf8.c:646 src/patterns_utf8.c:650 src/patterns_utf8.c:654
+#: src/patterns_utf8.c:658 src/patterns_utf8.c:662
+msgid "Packages that are on CD but not in other patterns."
+msgstr "Balíčky, které jsou na CD, ale nejsou součástí žádného profilu."
+
+#: src/patterns_utf8.c:665
+msgid "Remote Desktop"
+msgstr "Vzdálená plocha"
+
+#: src/patterns_utf8.c:666
+msgid "Tools to access a remote desktop."
+msgstr "Nástroje pro přístup ke vzdálené ploše."
+
+#: src/patterns_utf8.c:669
+msgid "SAP Application Server Base"
+msgstr "Základ pro aplikační server SAP"
+
+#: src/patterns_utf8.c:670
+msgid "Set up the server for installing SAP systems."
+msgstr "Připravit server pro instalaci systémů SAP."
+
+# 55598 AttribValues/label
+#: src/patterns_utf8.c:673
+msgid "Software Management"
+msgstr "Správa softwaru"
+
+#: src/patterns_utf8.c:674
+msgid ""
+"This pattern provides a graphical application and a command line tool for "
+"keeping your system up to date."
+msgstr ""
+"Tento profil obsahuje grafickou aplikaci pro aktualizaci a textové nástroje "
+"pro správu softwaru."
+
+# 58968 AttribValues/label
+#: src/patterns_utf8.c:677
+msgid "Package Management - Graphical Tools for GNOME"
+msgstr "Správa balíčků - grafické nástroje pro GNOME"
+
+# 58968 AttribValues/label
+#: src/patterns_utf8.c:678 src/patterns_utf8.c:682 src/patterns_utf8.c:686
+msgid "Package Management - Graphical Tools"
+msgstr "Správa balíčků - grafické nástroje"
+
+# 58968 AttribValues/label
+#: src/patterns_utf8.c:681 src/patterns_utf8.c:685
+msgid "Package Management - Graphical Tools for KDE"
+msgstr "Správa balíčků - grafické nástroje pro KDE"
+
+#: src/patterns_utf8.c:689
+msgid "Tests for the Update Stack"
+msgstr "Testování aktualizace"
+
+#: src/patterns_utf8.c:690
+msgid ""
+"Packages used for testing that the update stack works.  These tiny packages "
+"do not have any functionality themselves."
+msgstr "Balíčky pro testování aktualizace. Tyto balíčky nemají žádnou funkci."
+
+#: src/patterns_utf8.c:693
+msgid "Voice Over IP Clients"
+msgstr "Klienti pro IP telefonii"
+
+# 49893 AttribValues/label
+#: src/patterns_utf8.c:694
+msgid "Client applications for Internet telephony."
+msgstr "Klienti pro internetovou telefonii"
+
+#: src/patterns_utf8.c:697
+msgid "Voice Over IP Server"
+msgstr "Server pro IP telefonii"
+
+#: src/patterns_utf8.c:698
+msgid "Voice over IP server."
+msgstr "Server pro IP telefonii."
+
+#: src/patterns_utf8.c:701
+msgid "Web-Based Enterprise Management"
+msgstr "Webová enterprise správa"
+
+#: src/patterns_utf8.c:702
+msgid "Web-based enterprise management."
+msgstr "Enterprise správa s webovým rozhraním."
+
+#: src/patterns_utf8.c:705
+msgid "XFCE Desktop Environment"
+msgstr "Prostředí XFCE"
+
+#: src/patterns_utf8.c:706
+msgid "Xfce is a lightweight desktop environment for various *NIX systems."
+msgstr "Xfce je jednoduché pracovní prostředí pro různé *NIXové systémy."
+
+#: src/patterns_utf8.c:709
+msgid "XFCE Base System"
+msgstr "Základní systém XFCE"
+
+#: src/patterns_utf8.c:710
+msgid "Base packages for the XFCE Desktop Environment"
+msgstr "Základní balíčky prostředí pracovní plochy XFCE."
+
+#: src/patterns_utf8.c:713 src/patterns_utf8.c:714
+msgid "XFCE Office"
+msgstr "XFCE kancelář"
+
+#: src/patterns_utf8.c:717 src/patterns_utf8.c:718
+msgid "XFCE Laptop"
+msgstr "XFCE Laptop"
+
+#: src/patterns_utf8.c:721
+msgid "LXDE Desktop Environment"
+msgstr "Pracovní prostředí LXDE"
+
+#: src/patterns_utf8.c:722
+msgid ""
+"LXDE is a lightweight X11 desktop environment similiar to XFCE in its nature."
+msgstr "LXDE je odlehčené desktopové prostředí X11 v podstatě podobné XFCE."
+
+#: src/patterns_utf8.c:725
+msgid "LXDE Laptop"
+msgstr "LXDE notebook"
+
+#: src/patterns_utf8.c:726
+msgid "LXDE Tools designed specifically for use with laptop computers."
+msgstr "Nástroje prostředí LXDE navržené pro práci s notebooky."
+
+#: src/patterns_utf8.c:729 src/patterns_utf8.c:730
+msgid "LXDE Office"
+msgstr "LXDE kancelář"
+
+#: src/patterns_utf8.c:733
+msgid "Moblin User eXperience"
+msgstr "Uživatelská zkušenost s Moblinem (Moblin User eXperience)"
+
+#: src/patterns_utf8.c:734
+msgid "Moblin"
+msgstr "Moblin"
+
+#: src/patterns_utf8.c:737
+msgid "Enlightment"
+msgstr "Enlightment"
+
+#: src/patterns_utf8.c:738
+msgid "Enlightment Window Manager and applications"
+msgstr "Aplikace a správce oken Enlightenment"
+
+#: src/patterns_utf8.c:741 src/patterns_utf8.c:745
+msgid "X Window System"
+msgstr "Systém X Window"
+
+#: src/patterns_utf8.c:742 src/patterns_utf8.c:746
+msgid ""
+"The X Window System provides the only standard platform-independent "
+"networked graphical window system bridging the heterogeneous platforms in "
+"today's enterprise: from network servers to desktops, thin clients, laptops, "
+"and handhelds, independent of operating system and hardware."
+msgstr ""
+"X Window je systém na platformě nezávislým grafickým systémem spojujícím "
+"různé platformy. Díky nezávislosti na hardwaru a operačním systému "
+"spolehlivě slouží v serverech, pracovních stanicích, tenkých klientech, "
+"noteboocích a PDA."
+
+#: src/patterns_utf8.c:750
+msgid "x86 Runtime Environment"
+msgstr "x86 běhové prostředí"
+
+#: src/patterns_utf8.c:751
+msgid ""
+"This will install the 32-bit variant of all selected patterns. This allows "
+"to execute 32-bit software."
+msgstr ""
+"Tímto se nainstalují 32bitové verze všech zvolených profilů. Lze tak "
+"spouštět 32bitový software."
+
+#: src/patterns_utf8.c:755
+msgid "KVM Host Server"
+msgstr "Hostitelský server KVM"
+
+#: src/patterns_utf8.c:756 src/patterns_utf8.c:761
+msgid ""
+"Software to set up a server for configuring, managing, and monitoring "
+"virtual machines on a single physical machine."
+msgstr "Nastavení serveru pro správu a monitorování virtuálního stroje."
+
+#: src/patterns_utf8.c:760
+msgid "Xen Virtual Machine Host Server"
+msgstr "Hostitelský systém pro Xen"
+
+#: src/patterns_utf8.c:764
+msgid "Technical Writing"
+msgstr "Technické psaní"
+
+#: src/patterns_utf8.c:765
+msgid "Authoring tools and editors for creating technical documentation."
+msgstr "Vývojové nástroje a editory pro tvorbu technické dokumentace."
+
+# 49865 AttribValues/label
+#: src/patterns_utf8.c:768
+msgid "YaST System Administration"
+msgstr "YaST správa systému"
+
+# 49865 AttribValues/label
+#: src/patterns_utf8.c:769
+msgid "YaST tools for basic system administration."
+msgstr "Nástroje programu YaST pro základní správu systému."
+
+# 51925 AttribValues/label
+#: src/patterns_utf8.c:772
+msgid "YaST Installation Packages"
+msgstr "Instalační balíčky programu YaST2"
+
+#: src/patterns_utf8.c:773
+msgid "YaST tools for installing your system."
+msgstr "Nástroje YaSTu pro instalaci systému."
+
+# 50584 AttribValues/label
+#: src/patterns_utf8.c:776
+msgid "SDK: Documentation Tools"
+msgstr "SDK: Dokumentační nástroje"
+
+#: src/patterns_utf8.c:777
+msgid ""
+"Tools for creating development-related documentation, specifications etc."
+msgstr "Nástroj pro vytváření vývojové dokumentace, specifikací atd..."
+
+# 55033 AttribValues/label
+#: src/patterns_utf8.c:780
+msgid "SDK: Programming Libraries"
+msgstr "SDK: Programovací knihovny"
+
+#: src/patterns_utf8.c:781
+msgid "Miscellaneous programming libraries."
+msgstr "Různé programátorské knihovny."
+
+#: src/patterns_utf8.c:784
+msgid "SDK: Miscellaneous"
+msgstr "SDK: Různé"
+
+# 53574 AttribValues/description
+#: src/patterns_utf8.c:785
+msgid "Miscellaneous software development tools."
+msgstr "Různé vývojářské nástroje."
+
+# 26981 AttribValues/label
+#: src/patterns_utf8.c:788
+msgid "SDK: Version Control Systems"
+msgstr "SDK: Systém pro kontrolu verzí"
+
+#: src/patterns_utf8.c:789
+msgid "Tools for version control and project management."
+msgstr "Nástroje pro správu verzí a správu projektů."
+
+#: src/patterns_utf8.c:792
+msgid "SDK: Base Development"
+msgstr "SDK: Základní vývoj"
+
+#: src/patterns_utf8.c:796
+msgid "SDK: C/C++ Development"
+msgstr "SDK: Vývoj C/C++"
+
+#: src/patterns_utf8.c:800
+msgid "SDK: GNOME Development"
+msgstr "SDK: Vývoj GNOME"
+
+#: src/patterns_utf8.c:804
+msgid "SDK: Java Development"
+msgstr "SDK: Vývoj v jazyku Java"
+
+#: src/patterns_utf8.c:808
+msgid "SDK: KDE Development"
+msgstr "SDK: Vývoj KDE"
+
+#: src/patterns_utf8.c:812
+msgid "SDK: Linux Kernel Development"
+msgstr "SDK: Vývoj linuxového jádra"
+
+#: src/patterns_utf8.c:816
+msgid "SDK: .NET Development"
+msgstr "SDK:.NET vývoj"
+
+#: src/patterns_utf8.c:820
+msgid "SDK: Ruby on Rails Development"
+msgstr "SDK: Vývoj Ruby on Rails"
+
+#: src/patterns_utf8.c:824
+msgid "SDK: Perl Development"
+msgstr "SDK: Vývoj v Perlu"
+
+#: src/patterns_utf8.c:828
+msgid "SDK: Python Development"
+msgstr "SDK: Vývoj v Pythonu"
+
+# 51485 AttribValues/label
+#: src/patterns_utf8.c:832
+msgid "SDK: Qt 4 Development"
+msgstr "SDK: Vývoj v Qt 4"
+
+#: src/patterns_utf8.c:836
+msgid "SDK: Ruby Development"
+msgstr "SDK: Vývoj v Ruby"
+
+# 54068 AttribValues/label
+#: src/patterns_utf8.c:840
+msgid "SDK: Web Development"
+msgstr "SDK: Webový vývoj"
+
+#: src/patterns_utf8.c:844
+msgid "SDK: YaST Development"
+msgstr "SDK: Vývoj YaSTu"
+
+#: src/patterns_utf8.c:848
+msgid "SDK: Certification"
+msgstr "SDK: Certifikace"
+
+#: src/patterns_utf8.c:849
+msgid "Tools to perform software certification, e.g. LSB, IPv6"
+msgstr "Nástroje pro certifikaci, např. LSB, IPv6"
+
+#: src/patterns_utf8.c:852
+msgid "SDK: Cell Development"
+msgstr "SDK: Vývoj pro Cell"
+
+#: src/patterns_utf8.c:857
+msgid "Subscription Management Tool for SUSE Linux Enterprise."
+msgstr "Správa SUSE Linux Enterprise podpory"
+
+#: src/patterns_utf8.c:868
+msgid "SUSE Moblin"
+msgstr "SUSE Moblin"
+
+#: src/patterns_utf8.c:872
+msgid "Real time kernel and utilities for SUSE Linux Enterprise."
+msgstr "Real time jádro a nástroje pro SUSE Linux Enterprise."
+
+#: src/patterns_utf8.c:876 src/patterns_utf8.c:887
+msgid "WebYaST REST service"
+msgstr "Služba WebYaST REST"
+
+# 33139 AttribValues/label
+#: src/patterns_utf8.c:879 src/patterns_utf8.c:891
+msgid "WebYaST user interface"
+msgstr "Uživatelského rozhraní WebYaSTu"
+
+#: src/patterns_utf8.c:881
+msgid "WebYaST"
+msgstr "WebYaST"
+
+#: src/patterns_utf8.c:882
+msgid "Web based system management tool"
+msgstr "Webový nástroj pro správu systému"
+
+#: src/patterns_utf8.c:886
+msgid "WebYaST: REST service components"
+msgstr "WebYaST: Komponenty služby REST"
+
+# 33139 AttribValues/label
+#: src/patterns_utf8.c:890
+msgid "WebYaST: User interface components"
+msgstr "WebYaST: Komponenty uživatelského rozhraní"
+
+#: src/patterns_utf8.c:976
+msgid "Base Technologies"
+msgstr "Základní technologie"
+
+#: src/patterns_utf8.c:977
+msgid "Development"
+msgstr "Vývoj"
+
+#: src/patterns_utf8.c:978
+msgid "Graphical Environments"
+msgstr "Grafická rozhraní"
+
+#: src/patterns_utf8.c:979
+msgid "Proprietary Software"
+msgstr "Proprietární software"
+
+#: src/patterns_utf8.c:980
+msgid "Desktop Functions"
+msgstr "Pracovní stanice"
+
+#: src/patterns_utf8.c:981
+msgid "Server Functions"
+msgstr "Server"
+
+#: src/patterns_utf8.c:982
+msgid "Primary Functions"
+msgstr "Primární funkce"
+
+#: src/patterns_utf8.c:983
+msgid "Desktops"
+msgstr "Pracovní prostředí"
+
+#: src/patterns_utf8.c:984
+msgid "Additional Software"
+msgstr "Dodatečný software"
+
+#: src/patterns_utf8.c:985
+msgid "GNOME Desktop"
+msgstr "Prostředí GNOME"
+
+#: src/patterns_utf8.c:986
+msgid "KDE Desktop"
+msgstr "Prostředí KDE"
+
+#: src/patterns_utf8.c:987
+msgid "Not yet classified"
+msgstr "Nezařazeno"
+
+#~ msgid "Virtualization Host (non-embedded)"
+#~ msgstr "Hostitel virtualizace (není vložený)"
+
+#~ msgid "This is a minimal system with a running Hypervisor."
+#~ msgstr "Minimální systém s hypervisorem."
+
+#~ msgid "Desktop Effects"
+#~ msgstr "Efekty pracovního prostředí"
+
+#~ msgid "All you need to make use of 3D desktop effects."
+#~ msgstr "Vše co potřebujete pro 3D efekty"
+
+#~ msgid "Lightweight X11 Desktop Environment"
+#~ msgstr ""
+#~ "Odlehčené X11 grafické prostředí (Lightweight X11 Desktop Environment, "
+#~ "LXDE)"
+
+#~ msgid ""
+#~ "KDE 4 is a powerful free software graphical desktop environment for Linux "
+#~ "workstations. It combines ease of use, contemporary functionality, and "
+#~ "outstanding graphical design with the technology of the Linux operating "
+#~ "system."
+#~ msgstr ""
+#~ "KDE 4 je svobodné grafické prostředí pro pracovní stanice. Snoubí v sobě "
+#~ "uživatelskou přívětivost, moderní funkcionalitu a atraktivní vzhled s "
+#~ "linuxovou technologií."
+
+#~ msgid "KDE3 Desktop Environment"
+#~ msgstr "Prostředí KDE3"
+
+#~ msgid ""
+#~ "KDE 3 is a powerful free software graphical desktop environment for Linux "
+#~ "workstations. It combines ease of use, contemporary functionality, and "
+#~ "outstanding graphical design with the technology of the Linux operating "
+#~ "system."
+#~ msgstr ""
+#~ "KDE 3 je svobodné grafické prostředí pro pracovní stanice. Snoubí v sobě "
+#~ "uživatelskou přívětivost, moderní funkcionalitu a atraktivní vzhled s "
+#~ "linuxovou technologií."
+
+#~ msgid "KDE3 Administration Tools"
+#~ msgstr "Administrační nástroje KDE3"
+
+#~ msgid "KDE3 Base System"
+#~ msgstr "Základní systém KDE3"
+
+#~ msgid "Base packages for the KDE3 desktop environment."
+#~ msgstr "Základní balíčky prostředí KDE3."
+
+#~ msgid "KDE3 Edutainment"
+#~ msgstr "KDE3 škola hrou"
+
+#~ msgid "KDE4 Edutainment"
+#~ msgstr "KDE4 škola hrou"
+
+#~ msgid "KDE3 Games"
+#~ msgstr "KDE3 hry"
+
+#~ msgid "KDE3 Help System"
+#~ msgstr "KDE3 systém nápovědy"
+
+# 28855 AttribValues/label
+#~ msgid "KDE3 Integrated Development Environment"
+#~ msgstr "Integrované vývojové prostředí pro KDE3"
+
+# 49475 AttribValues/label
+#~ msgid "Development under KDE3"
+#~ msgstr "Vývoj v KDE3"
