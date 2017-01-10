@@ -64,9 +64,6 @@ class IsTaxId extends \Jyxo\Input\Validator\AbstractValidator
 		// New Tax ID format since 1st May 2004
 		if (preg_match('~^CZ(\\d{8,10})$~', $taxId, $matches)) {
 			$sub = $matches[1];
-			// But to be sure we try the old one as well
-		} elseif (preg_match('~^\\d{3}-(\\d{8,10})$~', $taxId, $matches)) {
-			$sub = $matches[1];
 		}
 		if (!empty($sub)) {
 			// Strict checking off - allows the so called "own numbers"
