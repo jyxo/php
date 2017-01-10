@@ -316,12 +316,12 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 	{
 		$good = [
 			'CZ 26704706',
-			'267-26704706',
 			'CZ 8405011330'
 		];
 		$wrong = [
 			'SK12345678',
-			'CZ 8405011328'
+			'CZ 8405011328',
+			'267-26704706'
 		];
 
 		$this->executeTests(new Validator\IsTaxId(), $good, $wrong);
