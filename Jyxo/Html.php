@@ -580,8 +580,8 @@ class Html
 	 */
 	private static function linkToText(string $text): string
 	{
-		return preg_replace_callback('~<a\\s+(?:[^>]+\\s+)*href\\s*=\\s*"([^"]+)"(?:\\s+[^>]*)?>(.+?)</a>~is', function($matches) {
-			$url = trim($matches[1]);
+		return preg_replace_callback('~(<a\\s+[^>]*>)(.+?)</a>~is', function($matches) {
+			$url = preg_match('~\\shref="([^"]+)"~i', $matches[1], $submatches) ? trim($submatches[1]) : '';
 			$content = $matches[2];
 			$clearContent = trim(strip_tags($content));
 
