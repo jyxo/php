@@ -267,7 +267,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testToText()
 	{
-		$testCount = 6;
+		$testCount = 7;
 
 		for ($i = 1; $i <= $testCount; $i++) {
 			$this->assertStringEqualsFile(
