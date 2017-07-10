@@ -53,6 +53,13 @@ class Executor
 	const OUTPUT_HTML = 'h';
 
 	/**
+	 * JSON output.
+	 *
+	 * @var string
+	 */
+	const OUTPUT_JSON = 'j';
+
+	/**
 	 * No output.
 	 *
 	 * @var string
@@ -156,6 +163,10 @@ class Executor
 				case self::OUTPUT_TEXT:
 					$this->output = self::OUTPUT_TEXT;
 					break;
+				// JSON
+				case self::OUTPUT_JSON:
+					$this->output = self::OUTPUT_JSON;
+					break;
 				// HTML
 				case self::OUTPUT_HTML:
 				default:
@@ -221,6 +232,10 @@ class Executor
 			// Plaintext
 			case self::OUTPUT_TEXT:
 				$this->writeText($allSucceeded);
+				break;
+			// JSON
+			case self::OUTPUT_JSON:
+				$this->writeJson($allSucceeded);
 				break;
 			// HTML
 			case self::OUTPUT_HTML:
@@ -374,12 +389,15 @@ class Executor
 				<dt>' . self::PARAM_EXCLUDE . '</dt>
 				<dd>Tests to exclude, empty by default</dd>
 				<dt>' . self::PARAM_OUTPUT . '</dt>
-				<dd>' . self::OUTPUT_HTML . ' = HTML output, ' . self::OUTPUT_TEXT . ' = text output</dd>
+				<dd>' . self::OUTPUT_HTML . ' = HTML output, ' . self::OUTPUT_TEXT . ' = text output, ' . self::OUTPUT_JSON . ' = JSON output</dd>
 				</dl>
 			<p>Tests are included, then excluded.</p>
 			<p><a href="?' . self::PARAM_INCLUDE . '=' . $this->includeFilter
 				. '&amp;' . self::PARAM_EXCLUDE . '=' . $this->excludeFilter
 				. '&amp;' . self::PARAM_OUTPUT . '=' . self::OUTPUT_TEXT . '">Text version</a></p>
+			<p><a href="?' . self::PARAM_INCLUDE . '=' . $this->includeFilter
+				. '&amp;' . self::PARAM_EXCLUDE . '=' . $this->excludeFilter
+				. '&amp;' . self::PARAM_OUTPUT . '=' . self::OUTPUT_JSON . '">JSON version</a></p>
 			</body>' . "\n";
 	}
 
@@ -398,6 +416,9 @@ class Executor
 		echo '<a href="?' . self::PARAM_INCLUDE . '=' . $this->includeFilter
 			. '&amp;' . self::PARAM_EXCLUDE . '=' . $this->excludeFilter
 			. '&amp;' . self::PARAM_OUTPUT . '=' . self::OUTPUT_HTML . "\">Html version</a>\n\n";
+		echo '<a href="?' . self::PARAM_INCLUDE . '=' . $this->includeFilter
+			. '&amp;' . self::PARAM_EXCLUDE . '=' . $this->excludeFilter
+			. '&amp;' . self::PARAM_OUTPUT . '=' . self::OUTPUT_JSON . "\">JSON version</a>\n\n";
 
 		echo sprintf("%-9s %10s   %-10s %-7s  %-35s    %s\n",
 			'Run Order', 'Duration', 'Ident', 'Status', 'Test Name', 'Description');
@@ -414,20 +435,71 @@ class Executor
 		if ($allSucceeded) {
 			echo "\nJust a little prayer so we know we are allright.\n\n";
 
-			for ($i = 0; $i < 5; $i++) {
-				echo 'Our Father in heaven,' . "\n";
-				echo 'hallowed be your name,' . "\n";
-				echo 'your kingdom come,' . "\n";
-				echo 'your will be done' . "\n";
-				echo 'on earth as it is in heaven.' . "\n";
-				echo 'Give us today our daily bread,' . "\n";
-				echo 'and forgive us the wrong we have done' . "\n";
-				echo 'as we forgive those who wrong us.' . "\n";
-				echo 'Subject us not to the trial' . "\n";
-				echo 'but deliver us from the evil one.' . "\n";
-				echo 'And make the ' . $this->project . " project work.\n";
-				echo 'Amen.' . "\n\n";
-			}
+			echo $this->getPrayer();
 		}
 	}
+
+	/**
+	 * Outputs results as a JSON string
+	 *
+	 * @param boolean $allSucceeded Have all tests been successful
+	 */
+	private function writeJson(bool $allSucceeded)
+	{
+		header('Content-Type: application/json; charset=utf-8');
+
+		$tests = [];
+		foreach ($this->testsData as $data) {
+			$tests[] = [
+				'order' => $data['order'],
+				'duration' => sprintf("%.6f s", $data['duration']),
+				'ident' => $data['ident'],
+				'result' => $data['result']->getStatusMessage(),
+				'test_description' => $data['test']->getDescription(),
+				'result_description' => $data['result']->getDescription(),
+			];
+		}
+
+		$data = [
+			'included' => $this->includeFilter,
+			'excluded' => $this->excludeFilter,
+			'tests' => $tests,
+			'urls' => [
+				'text' => '?' . self::PARAM_INCLUDE . '=' . $this->includeFilter
+					. '&amp;' . self::PARAM_EXCLUDE . '=' . $this->excludeFilter
+					. '&amp;' . self::PARAM_OUTPUT . '=' . self::OUTPUT_TEXT,
+				'html' => '?' . self::PARAM_INCLUDE . '=' . $this->includeFilter
+					. '&amp;' . self::PARAM_EXCLUDE . '=' . $this->excludeFilter
+					. '&amp;' . self::PARAM_OUTPUT . '=' . self::OUTPUT_HTML,
+			]
+		];
+
+		if ($allSucceeded) {
+			$data['prayer'] = $this->getPrayer();
+		}
+
+		echo json_encode($data);
+	}
+
+	private function getPrayer(): string
+	{
+		$return = '';
+		for ($i = 0; $i < 5; $i++) {
+			$return .= 'Our Father in heaven,' . "\n";
+			$return .= 'hallowed be your name,' . "\n";
+			$return .= 'your kingdom come,' . "\n";
+			$return .= 'your will be done' . "\n";
+			$return .= 'on earth as it is in heaven.' . "\n";
+			$return .= 'Give us today our daily bread,' . "\n";
+			$return .= 'and forgive us the wrong we have done' . "\n";
+			$return .= 'as we forgive those who wrong us.' . "\n";
+			$return .= 'Subject us not to the trial' . "\n";
+			$return .= 'but deliver us from the evil one.' . "\n";
+			$return .= 'And make the ' . $this->project . " project work.\n";
+			$return .= 'Amen.' . "\n\n";
+		}
+
+		return $return;
+	}
+
 }
