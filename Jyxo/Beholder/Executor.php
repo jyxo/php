@@ -13,6 +13,13 @@
 
 namespace Jyxo\Beholder;
 
+use Jyxo\Beholder\Output\HtmlOutput;
+use Jyxo\Beholder\Output\JsonOutput;
+use Jyxo\Beholder\Output\NoOutput;
+use Jyxo\Beholder\Output\Output;
+use Jyxo\Beholder\Output\TextOutput;
+use Jyxo\Beholder\Result\TestSuiteResult;
+
 /**
  * Beholder test executor.
  *
@@ -179,9 +186,11 @@ class Executor
 	/**
 	 * Performs chosen tests and outputs results according to the selected output type.
 	 *
-	 * @return boolean Returns if all tests were successful
+	 * @param bool $print
+	 *
+	 * @return \Jyxo\Beholder\Output\Output
 	 */
-	public function run(): bool
+	public function run($print = true): Output
 	{
 		// Filters tests
 		foreach (array_keys($this->tests) as $ident) {
@@ -216,10 +225,6 @@ class Executor
 		}
 		array_multisort($idents, SORT_ASC, $this->testsData);
 
-		if ($this->output === self::OUTPUT_NOTHING) {
-			return $allSucceeded;
-		}
-
 		// Outputs the header
 		if ($allSucceeded) {
 			header('HTTP/1.1 200 OK');
@@ -227,24 +232,35 @@ class Executor
 			header('HTTP/1.1 500 Internal Server Error');
 		}
 
+		$result = new TestSuiteResult($this->project, $allSucceeded, $this->testsData, $this->includeFilter, $this->excludeFilter);
+
 		// Outputs the output :)
 		switch ($this->output) {
+			// No output
+			case self::OUTPUT_NOTHING:
+				$output = new NoOutput($result);
+				break;
 			// Plaintext
 			case self::OUTPUT_TEXT:
-				$this->writeText($allSucceeded);
+				$output = new TextOutput($result);
 				break;
 			// JSON
 			case self::OUTPUT_JSON:
-				$this->writeJson($allSucceeded);
+				$output = new JsonOutput($result);
 				break;
 			// HTML
 			case self::OUTPUT_HTML:
 			default:
-				$this->writeHtml($allSucceeded);
+				$output = new HtmlOutput($result);
 				break;
 		}
 
-		return $allSucceeded;
+		if ($print) {
+			header(sprintf('Content-type: %s', $output->getContentType()));
+			echo (string) $output;
+		}
+
+		return $output;
 	}
 
 	/**
@@ -337,169 +353,6 @@ class Executor
 	private function patternMatch(string $pattern, string $string): bool
 	{
 		return fnmatch($pattern, $string);
-	}
-
-	/**
-	 * Outputs results in HTML form.
-	 *
-	 * @param boolean $allSucceeded Have all tests been successful
-	 */
-	private function writeHtml(bool $allSucceeded)
-	{
-		header('Content-Type: text/html; charset=utf-8');
-		echo '<head>' . "\n";
-		echo '<meta http-equiv="content-type" content="text/html; charset=utf-8" />' . "\n";
-		echo '<title>Beholder for project ' . $this->project . '</title>' . "\n";
-		echo '<style>' . "\n";
-		echo '	body {font: 12px Verdana, Geneva, Arial, Helvetica, sans-serif;}' . "\n";
-		echo '	table {font-size: small; border-collapse: collapse;}' . "\n";
-		echo '	table th {border: 1px solid #000; background: #000; color: #fff;}' . "\n";
-		echo '	table td {border: 1px solid #000; padding: .25em .5em;}' . "\n";
-		echo '</style>' . "\n";
-		echo '</head>' . "\n";
-		echo '<body style="background-color: ' . ($allSucceeded ? '#ccffcc' : '#ffcccc') . '; width: 90%; height: 100%; padding: 1em; margin: 0;">' . "\n";
-		echo '<h1>Beholder for project ' . $this->project . "</h1>\n";
-		echo '<p>Tests included: ' . $this->includeFilter . "\n";
-		echo '<br>Tests excluded: ' . $this->excludeFilter . "\n";
-		echo '</p>' . "\n";
-		echo '<table><tr><th>Run order</th><th>Duration</th><th>Ident</th><th>Status</th><th>Test name</th><th>Comment</th></tr>' . "\n";
-		foreach ($this->testsData as $data) {
-			echo sprintf('
-				<tr>
-					<td>%d</td>
-					<td>%.2fs</td>
-					<td>%s</td>
-					<td style="color: %s;">%s</td>
-					<td><b>%s</b></td>
-					<td><i>%s</i></td>
-				</tr>' . "\n",
-				$data['order'],
-				$data['duration'],
-				$data['ident'],
-				$data['result']->isSuccess() ? 'green' : 'red; font-weight: bold;', $data['result']->getStatusMessage(),
-				$data['test']->getDescription(),
-				$data['result']->getDescription()
-			);
-		}
-		echo '</table>
-			<h2>Parameters</h2>
-				<dl>
-				<dt>' . self::PARAM_INCLUDE . '</dt>
-				<dd>Tests to include, list of shell patterns separated by comma, default *</dd>
-				<dt>' . self::PARAM_EXCLUDE . '</dt>
-				<dd>Tests to exclude, empty by default</dd>
-				<dt>' . self::PARAM_OUTPUT . '</dt>
-				<dd>' . self::OUTPUT_HTML . ' = HTML output, ' . self::OUTPUT_TEXT . ' = text output, ' . self::OUTPUT_JSON . ' = JSON output</dd>
-				</dl>
-			<p>Tests are included, then excluded.</p>
-			<p><a href="?' . self::PARAM_INCLUDE . '=' . $this->includeFilter
-				. '&amp;' . self::PARAM_EXCLUDE . '=' . $this->excludeFilter
-				. '&amp;' . self::PARAM_OUTPUT . '=' . self::OUTPUT_TEXT . '">Text version</a></p>
-			<p><a href="?' . self::PARAM_INCLUDE . '=' . $this->includeFilter
-				. '&amp;' . self::PARAM_EXCLUDE . '=' . $this->excludeFilter
-				. '&amp;' . self::PARAM_OUTPUT . '=' . self::OUTPUT_JSON . '">JSON version</a></p>
-			</body>' . "\n";
-	}
-
-	/**
-	 * Outputs results in plaintext.
-	 *
-	 * @param boolean $allSucceeded Have all tests been successful
-	 */
-	private function writeText(bool $allSucceeded)
-	{
-		// HTML is sent on purpose
-		header('Content-Type: text/html; charset=utf-8');
-		echo '<pre>This is Beholder for project ' . $this->project . "\n";
-		echo 'Tests included: ' . $this->includeFilter . "\n";
-		echo 'Tests excluded: ' . $this->excludeFilter . "\n\n";
-		echo '<a href="?' . self::PARAM_INCLUDE . '=' . $this->includeFilter
-			. '&amp;' . self::PARAM_EXCLUDE . '=' . $this->excludeFilter
-			. '&amp;' . self::PARAM_OUTPUT . '=' . self::OUTPUT_HTML . "\">Html version</a>\n\n";
-		echo '<a href="?' . self::PARAM_INCLUDE . '=' . $this->includeFilter
-			. '&amp;' . self::PARAM_EXCLUDE . '=' . $this->excludeFilter
-			. '&amp;' . self::PARAM_OUTPUT . '=' . self::OUTPUT_JSON . "\">JSON version</a>\n\n";
-
-		echo sprintf("%-9s %10s   %-10s %-7s  %-35s    %s\n",
-			'Run Order', 'Duration', 'Ident', 'Status', 'Test Name', 'Description');
-		foreach ($this->testsData as $data) {
-			echo sprintf("%9d %9.2fs   %-10s %-7s  %-35s    %s\n",
-				$data['order'],
-				$data['duration'],
-				$data['ident'],
-				$data['result']->getStatusMessage(),
-				$data['test']->getDescription(),
-				$data['result']->getDescription());
-		}
-
-		if ($allSucceeded) {
-			echo "\nJust a little prayer so we know we are allright.\n\n";
-
-			echo $this->getPrayer();
-		}
-	}
-
-	/**
-	 * Outputs results as a JSON string
-	 *
-	 * @param boolean $allSucceeded Have all tests been successful
-	 */
-	private function writeJson(bool $allSucceeded)
-	{
-		header('Content-Type: application/json; charset=utf-8');
-
-		$tests = [];
-		foreach ($this->testsData as $data) {
-			$tests[] = [
-				'order' => $data['order'],
-				'duration' => sprintf("%.6f s", $data['duration']),
-				'ident' => $data['ident'],
-				'result' => $data['result']->getStatusMessage(),
-				'test_description' => $data['test']->getDescription(),
-				'result_description' => $data['result']->getDescription(),
-			];
-		}
-
-		$data = [
-			'included' => $this->includeFilter,
-			'excluded' => $this->excludeFilter,
-			'tests' => $tests,
-			'urls' => [
-				'text' => '?' . self::PARAM_INCLUDE . '=' . $this->includeFilter
-					. '&amp;' . self::PARAM_EXCLUDE . '=' . $this->excludeFilter
-					. '&amp;' . self::PARAM_OUTPUT . '=' . self::OUTPUT_TEXT,
-				'html' => '?' . self::PARAM_INCLUDE . '=' . $this->includeFilter
-					. '&amp;' . self::PARAM_EXCLUDE . '=' . $this->excludeFilter
-					. '&amp;' . self::PARAM_OUTPUT . '=' . self::OUTPUT_HTML,
-			]
-		];
-
-		if ($allSucceeded) {
-			$data['prayer'] = $this->getPrayer();
-		}
-
-		echo json_encode($data);
-	}
-
-	private function getPrayer(): string
-	{
-		$return = '';
-		for ($i = 0; $i < 5; $i++) {
-			$return .= 'Our Father in heaven,' . "\n";
-			$return .= 'hallowed be your name,' . "\n";
-			$return .= 'your kingdom come,' . "\n";
-			$return .= 'your will be done' . "\n";
-			$return .= 'on earth as it is in heaven.' . "\n";
-			$return .= 'Give us today our daily bread,' . "\n";
-			$return .= 'and forgive us the wrong we have done' . "\n";
-			$return .= 'as we forgive those who wrong us.' . "\n";
-			$return .= 'Subject us not to the trial' . "\n";
-			$return .= 'but deliver us from the evil one.' . "\n";
-			$return .= 'And make the ' . $this->project . " project work.\n";
-			$return .= 'Amen.' . "\n\n";
-		}
-
-		return $return;
 	}
 
 }
