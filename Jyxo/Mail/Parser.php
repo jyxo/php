@@ -1013,7 +1013,11 @@ class Parser
 			case 'quoted-printable':
 				return quoted_printable_decode($body);
 			case 'base64':
-				return imap_base64($body);
+				$decoded = imap_base64($body);
+				if ($decoded === false) {
+					throw new Parser\BodyNotDecodedException('Body cannot be decoded.');
+				}
+				return $decoded;
 			default:
 				return $body;
 		}
