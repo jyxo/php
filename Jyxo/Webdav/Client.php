@@ -85,8 +85,11 @@ class Client
 	 * @var array
 	 */
 	protected $requestOptions = [
+		\GuzzleHttp\RequestOptions::ALLOW_REDIRECTS => false,
+		\GuzzleHttp\RequestOptions::DECODE_CONTENT => true,
 		\GuzzleHttp\RequestOptions::CONNECT_TIMEOUT => 1,
-		\GuzzleHttp\RequestOptions::TIMEOUT => 30
+		\GuzzleHttp\RequestOptions::TIMEOUT => 30,
+		\GuzzleHttp\RequestOptions::VERIFY => true
 	];
 
 	/**
@@ -123,7 +126,7 @@ class Client
 	}
 
 	/**
-	 * Sets a request option.
+	 * Sets a request option for Guzzle client.
 	 *
 	 * @param string $name Option name
 	 * @param mixed $value Option value
@@ -533,7 +536,7 @@ class Client
 				// Create promises
 				$promises = [];
 				foreach ($requests as $server => $request) {
-					$promises[$server] = $client->sendAsync($request, $this->requestOptions);
+					$promises[$server] = $client->sendAsync($request, $this->getStaticRequestOptions());
 				}
 
 				// Wait on all of the requests to complete
@@ -553,7 +556,7 @@ class Client
 
 				// Send by separate requests
 				foreach ($requests as $server => $request) {
-					$response = $client->send($request, $this->requestOptions);
+					$response = $client->send($request, $this->getStaticRequestOptions());
 					$responses[$server] = $response;
 
 					// Log
@@ -583,7 +586,7 @@ class Client
 		try {
 			// Send request to a random server
 			$request = $this->createRequest($this->getRandomServer(), $path, $method, $headers);
-			$response = $this->createClient()->send($request, $this->requestOptions);
+			$response = $this->createClient()->send($request, $this->getStaticRequestOptions());
 
 			if (null !== $this->logger) {
 				$this->logger->log(sprintf("%s %d %s", $request->getMethod(), $response->getStatusCode(), $request->getUri()));
@@ -633,18 +636,20 @@ class Client
 		);
 	}
 
+	private function getStaticRequestOptions(): array
+	{
+		return [
+			\GuzzleHttp\RequestOptions::HTTP_ERRORS => false,
+			\GuzzleHttp\RequestOptions::EXPECT => false,
+		];
+	}
+
 	/**
 	 * @return \GuzzleHttp\Client
 	 */
 	protected function createClient(): \GuzzleHttp\Client
 	{
-		return new \GuzzleHttp\Client([
-			\GuzzleHttp\RequestOptions::ALLOW_REDIRECTS => false,
-			\GuzzleHttp\RequestOptions::HTTP_ERRORS => false,
-			\GuzzleHttp\RequestOptions::VERIFY => true,
-			\GuzzleHttp\RequestOptions::DECODE_CONTENT => true,
-			\GuzzleHttp\RequestOptions::EXPECT => false,
-		]);
+		return new \GuzzleHttp\Client($this->requestOptions);
 	}
 
 	/**
