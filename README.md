@@ -27,11 +27,11 @@ The code you find here is in actual use in various projects and to the best
 of our knowledge, it can be considered stable. But as always, read the License
 first.
 
-##API documentation
+## API documentation
 
 You can find the automatically generated documentation at [http://jyxo.github.com/php](http://jyxo.github.com/php).
 
-##Original library authors
+## Original library authors
 
 Many developers have contributed to the library throughout the years. Here are
 those who were daring enough to put their names into docblocks… or those whose
