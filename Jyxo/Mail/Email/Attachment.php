@@ -23,7 +23,7 @@ namespace Jyxo\Mail\Email;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-abstract class Attachment extends \Jyxo\Spl\Object
+abstract class Attachment extends \Jyxo\Spl\SplObject
 {
 	/**
 	 * Ordinary attachment.

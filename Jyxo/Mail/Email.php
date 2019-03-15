@@ -23,7 +23,7 @@ namespace Jyxo\Mail;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class Email extends \Jyxo\Spl\Object
+class Email extends \Jyxo\Spl\SplObject
 {
 	/**
 	 * Highest priority.

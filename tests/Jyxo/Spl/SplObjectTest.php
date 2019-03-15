@@ -22,7 +22,7 @@ namespace Jyxo\Spl;
  * @author Jaroslav Hanslík
  * @author Ondřej Nešpor
  */
-class ObjectTest extends \PHPUnit_Framework_TestCase
+class SplObjectTest extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * Runs the whole test.

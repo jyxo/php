@@ -22,7 +22,7 @@ namespace Jyxo\Spl;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class Object implements \Jyxo\Spl\ArrayCopy
+class SplObject implements \Jyxo\Spl\ArrayCopy
 {
 	/**
 	 * Returns instance class name.

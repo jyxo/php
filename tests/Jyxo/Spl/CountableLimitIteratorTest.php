@@ -16,7 +16,7 @@ namespace Jyxo\Spl;
 /**
  * Test for class \Jyxo\Spl\CountableLimitIterator.
  *
- * @see \Jyxo\Spl\Object
+ * @see \Jyxo\Spl\SplObject
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek

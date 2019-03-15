@@ -23,7 +23,7 @@ namespace Jyxo\Mail\Sender;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class Result extends \Jyxo\Spl\Object
+class Result extends \Jyxo\Spl\SplObject
 {
 	/**
 	 * Email Id.

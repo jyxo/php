@@ -23,7 +23,7 @@ namespace Jyxo\Mail\Email;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class Header extends \Jyxo\Spl\Object
+class Header extends \Jyxo\Spl\SplObject
 {
 	/**
 	 * Header name.
