@@ -47,7 +47,7 @@ class TextOutput extends \Jyxo\Beholder\Output\Output
 
 		$return .= sprintf("%-9s %10s   %-10s %-7s  %-35s    %s\n",
 			'Run Order', 'Duration', 'Ident', 'Status', 'Test Name', 'Description');
-		foreach ($this->testsData as $data) {
+		foreach ($this->result->getTestsData() as $data) {
 			$return .= sprintf("%9d %9.2fs   %-10s %-7s  %-35s    %s\n",
 				$data['order'],
 				$data['duration'],
