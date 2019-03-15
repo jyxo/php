@@ -41,7 +41,7 @@ class MemcachedTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$ip = '127.0.0.1';
-		$port = '12345';
+		$port = 12345;
 
 		$test = new Memcached('Memcached', $ip, $port);
 		// @ on purpose
