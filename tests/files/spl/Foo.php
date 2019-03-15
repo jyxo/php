@@ -3,7 +3,7 @@
 /**
  * Testing object.
  */
-class Foo extends \Jyxo\Spl\Object
+class Foo extends \Jyxo\Spl\SplObject
 {
 	/**
 	 * First variable.

@@ -55,7 +55,8 @@ class ObjectCache implements \IteratorAggregate
 	 * Returns an object from the default storage.
 	 *
 	 * @param string $key Object key
-	 * @return object
+	 *
+	 * @return SplObject
 	 */
 	public static function get($key)
 	{
@@ -77,8 +78,9 @@ class ObjectCache implements \IteratorAggregate
 	 * Saves an object into the default storage.
 	 *
 	 * @param string $key Object key
-	 * @param object $value Object
-	 * @return object saved object
+	 * @param SplObject $value Object
+	 *
+	 * @return SplObject saved object
 	 */
 	public static function set($key, $value)
 	{
@@ -90,7 +92,8 @@ class ObjectCache implements \IteratorAggregate
 	 * Returns an object from an own storage.
 	 *
 	 * @param string $key Object key
-	 * @return object
+	 *
+	 * @return SplObject
 	 */
 	public function __get($key)
 	{
@@ -101,7 +104,7 @@ class ObjectCache implements \IteratorAggregate
 	 * Saves an object into an own storage.
 	 *
 	 * @param string $key Object key
-	 * @param object $value Object
+	 * @param SplObject $value Object
 	 */
 	public function __set($key, $value)
 	{
