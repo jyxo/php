@@ -32,3 +32,8 @@ install:
 
 script:
   bin/phpunit tests --exclude-group=integration
+
+notifications:
+  email:
+    on_success: change
+    on_failure: always
