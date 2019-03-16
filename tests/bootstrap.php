@@ -11,9 +11,6 @@
  * https://github.com/jyxo/php/blob/master/license.txt
  */
 
-// Because of SessionTest
-session_start();
-
 require __DIR__ . '/../vendor/autoload.php';
 
 // File path
