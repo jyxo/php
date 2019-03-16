@@ -36,18 +36,14 @@ class MemcachedTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testConnectionFailure()
 	{
-		if (!class_exists('Memcached')) {
-			$this->markTestSkipped('Memcached not set');
-		}
-
 		$ip = '127.0.0.1';
-		$port = '12345';
+		$port = 12345;
 
 		$test = new Memcached('Memcached', $ip, $port);
 		// @ on purpose
 		$result = @$test->run();
 		$this->assertEquals(\Jyxo\Beholder\Result::FAILURE, $result->getStatus());
-		$this->assertEquals(sprintf('Connection error %s:%s', gethostbyaddr($ip), $port), $result->getDescription());
+		$this->assertEquals(sprintf('Write error %s:%s', gethostbyaddr($ip), $port), $result->getDescription());
 	}
 
 	/**

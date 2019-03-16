@@ -21,10 +21,14 @@
 		"ext-curl": "To use Jyxo\\Rpc client/server or Jyxo\\Webdav client",
 		"ext-json": "To use Jyxo\\Rpc\\Json client/server or Jyxo\\FirePHP logger",
 		"ext-xmlrpc": "To use Jyxo\\Rpc\\Xml client/server",
-		"ext-imap": "To use Jyxo\\Mail\\Parser"
+		"ext-imap": "To use Jyxo\\Mail\\Parser",
+		"ext-tidy": "To use Jyxo\\Html extended capabilities"
 	},
 	"autoload": {
 		"psr-4": { "Jyxo\\": ["Jyxo/"] }
+	},
+	"autoload-dev": {
+		"psr-4": { "Jyxo\\": ["tests/Jyxo"] }
 	},
 	"config": {
 		"bin-dir": "bin",

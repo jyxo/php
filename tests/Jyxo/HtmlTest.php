@@ -71,6 +71,10 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testRepair()
 	{
+		if (!function_exists('\tidy_repair_string')) {
+			$this->markTestSkipped('Skipping, missing "tidy" extension.');
+		}
+
 		$this->assertStringEqualsFile(
 			$this->filePath . '/repair-expected.html',
 			Html::repair(file_get_contents($this->filePath . '/repair.html'))

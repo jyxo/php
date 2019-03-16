@@ -176,7 +176,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('2009-10-10T00:00:00+0700', $time->sql);
 		$this->assertEquals('Sat, 10 Oct 09 00:00:00 +0700', $time->email);
 		$this->assertEquals('2009-10-10T00:00:00+07:00', $time->web);
-		$this->assertEquals('Saturday, 10-Oct-2009 00:00:00 GMT-7', $time->cookie);
+		$this->assertEquals('Saturday, 10-Oct-2009 00:00:00 +07', $time->cookie);
 		$this->assertEquals('Sat, 10 Oct 2009 00:00:00 +0700', $time->rss);
 		$this->assertEquals('1255107600', $time->unix);
 		$this->assertEquals('Fri, 09 Oct 2009 17:00:00 GMT', $time->http);

@@ -1,0 +1,37 @@
+language: php
+
+dist: xenial
+
+group: edge
+
+addons:
+  apt:
+    packages:
+      - language-pack-cs
+
+php:
+  - '7.0'
+  - '7.1'
+  - nightly
+
+matrix:
+
+  allow_failures:
+    - php: nightly
+
+install:
+  - composer self-update
+  - |
+    if [[ "${TRAVIS_PHP_VERSION:0:7}" == "nightly" ]]; then
+      composer install --ignore-platform-reqs
+    else
+      composer install
+    fi
+
+script:
+  bin/phpunit tests --exclude-group=integration
+
+notifications:
+  email:
+    on_success: change
+    on_failure: always
