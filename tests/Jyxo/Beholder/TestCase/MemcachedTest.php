@@ -43,7 +43,7 @@ class MemcachedTest extends \PHPUnit_Framework_TestCase
 		// @ on purpose
 		$result = @$test->run();
 		$this->assertEquals(\Jyxo\Beholder\Result::FAILURE, $result->getStatus());
-		$this->assertEquals(sprintf('Connection error %s:%s', gethostbyaddr($ip), $port), $result->getDescription());
+		$this->assertEquals(sprintf('Write error %s:%s', gethostbyaddr($ip), $port), $result->getDescription());
 	}
 
 	/**
