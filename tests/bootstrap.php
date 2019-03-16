@@ -13,5 +13,7 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
+date_default_timezone_set('Europe/Prague');
+
 // File path
 define('DIR_FILES', __DIR__ . '/files');
