@@ -4,16 +4,19 @@ dist: xenial
 
 group: edge
 
+addons:
+  apt:
+    packages:
+      - language-pack-cs
+
 php:
-  - 7.0
-  - 7.1
-  - 7.2
-  - 7.3
+  - '7.0'
+  - '7.1'
+  - '7.2'
+  - '7.3'
   - nightly
 
 matrix:
-
-  include:
 
   allow_failures:
     - php: nightly
