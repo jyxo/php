@@ -23,6 +23,8 @@ namespace Jyxo\Mail;
  */
 class SenderTest extends \PHPUnit_Framework_TestCase
 {
+	use EmailTestHelpers;
+
 	/**
 	 * FileAttachment path.
 	 *
@@ -44,38 +46,6 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->filePath = DIR_FILES . '/mail';
 		$this->content = file_get_contents($this->filePath . '/email.html');
-	}
-
-	/**
-	 * Tests sending using the mail() function.
-	 */
-	public function testSendMail()
-	{
-		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-			$this->markTestSkipped('Skipped on Windows');
-		}
-
-		$sender = new Sender();
-		$sender->setEmail($this->getEmail());
-		$result = $sender->send(Sender::MODE_MAIL);
-		$this->assertResult('sender-type-simple-text.eml', $result);
-	}
-
-	/**
-	 * Tests sending using a SMTP server.
-	 */
-	public function testSendSmtp()
-	{
-		// Skips the test if no smtp connection is set
-		if (empty($GLOBALS['smtp'])) {
-			$this->markTestSkipped('Smtp host not set');
-		}
-
-		$sender = new Sender();
-		$sender->setEmail($this->getEmail())
-			->setSmtp($GLOBALS['smtp']);
-		$result = $sender->send(Sender::MODE_SMTP);
-		$this->assertResult('sender-type-simple-text.eml', $result);
 	}
 
 	/**
