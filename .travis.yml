@@ -28,4 +28,4 @@ install:
     fi
 
 script:
-  bin/phpunit
+  bin/phpunit tests --exclude-group=integration
