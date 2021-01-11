@@ -13,6 +13,10 @@
 
 namespace Jyxo\Mail\Email\Attachment;
 
+use Jyxo\Mail\Email\Attachment;
+use PHPUnit\Framework\TestCase;
+use function file_get_contents;
+
 /**
  * \Jyxo\Mail\Email\Attachment\FileAttachment class test.
  *
@@ -21,12 +25,13 @@ namespace Jyxo\Mail\Email\Attachment;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class FileAttachmentTest extends \PHPUnit_Framework_TestCase
+class FileAttachmentTest extends TestCase
 {
+
 	/**
 	 * Runs the test.
 	 */
-	public function test()
+	public function test(): void
 	{
 		$path = DIR_FILES . '/mail/logo.gif';
 		$name = 'logo.gif';
@@ -36,9 +41,10 @@ class FileAttachmentTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(file_get_contents($path), $attachment->getContent());
 		$this->assertEquals($name, $attachment->getName());
 		$this->assertEquals($mimeType, $attachment->getMimeType());
-		$this->assertEquals(\Jyxo\Mail\Email\Attachment::DISPOSITION_ATTACHMENT, $attachment->getDisposition());
+		$this->assertEquals(Attachment::DISPOSITION_ATTACHMENT, $attachment->getDisposition());
 		$this->assertFalse($attachment->isInline());
 		$this->assertEquals('', $attachment->getCid());
 		$this->assertEquals('', $attachment->getEncoding());
 	}
+
 }

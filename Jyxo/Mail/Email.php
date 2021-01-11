@@ -13,52 +13,48 @@
 
 namespace Jyxo\Mail;
 
+use InvalidArgumentException;
+use Jyxo\Mail\Email\Address;
+use Jyxo\Mail\Email\Attachment;
+use Jyxo\Mail\Email\Body;
+use Jyxo\Mail\Email\Header;
+use Jyxo\Spl\BaseObject;
+use function sprintf;
+
 /**
  * Email contents container.
  *
- * @category Jyxo
- * @package Jyxo\Mail
- * @subpackage Email
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class Email extends \Jyxo\Spl\Object
+class Email extends BaseObject
 {
+
 	/**
 	 * Highest priority.
-	 *
-	 * @var integer
 	 */
-	const PRIORITY_HIGHEST = 1;
+	public const PRIORITY_HIGHEST = 1;
 
 	/**
 	 * High priority.
-	 *
-	 * @var integer
 	 */
-	const PRIORITY_HIGH = 2;
+	public const PRIORITY_HIGH = 2;
 
 	/**
 	 * Normal priority.
-	 *
-	 * @var integer
 	 */
-	const PRIORITY_NORMAL = 3;
+	public const PRIORITY_NORMAL = 3;
 
 	/**
 	 * Low priority.
-	 *
-	 * @var integer
 	 */
-	const PRIORITY_LOW = 4;
+	public const PRIORITY_LOW = 4;
 
 	/**
 	 * Lowest priority.
-	 *
-	 * @var integer
 	 */
-	const PRIORITY_LOWEST = 5;
+	public const PRIORITY_LOWEST = 5;
 
 	/**
 	 * Subject.
@@ -70,7 +66,7 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Email sender.
 	 *
-	 * @var \Jyxo\Mail\Email\Address|null
+	 * @var Address|null
 	 */
 	private $from = null;
 
@@ -105,7 +101,7 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Reading confirmation recipient.
 	 *
-	 * @var \Jyxo\Mail\Email\Address|null
+	 * @var Address|null
 	 */
 	private $confirmReadingTo = null;
 
@@ -126,7 +122,7 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Message priority.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $priority = 0;
 
@@ -140,7 +136,7 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Message body.
 	 *
-	 * @var \Jyxo\Mail\Email\Body
+	 * @var Body
 	 */
 	private $body = null;
 
@@ -156,7 +152,7 @@ class Email extends \Jyxo\Spl\Object
 	 *
 	 * @return string
 	 */
-	public function getSubject()
+	public function getSubject(): string
 	{
 		return $this->subject;
 	}
@@ -165,7 +161,7 @@ class Email extends \Jyxo\Spl\Object
 	 * Sets subject.
 	 *
 	 * @param string $subject Subject
-	 * @return \Jyxo\Mail\Email
+	 * @return Email
 	 */
 	public function setSubject(string $subject): self
 	{
@@ -177,9 +173,9 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Returns sender address.
 	 *
-	 * @return \Jyxo\Mail\Email\Address|null
+	 * @return Address|null
 	 */
-	public function getFrom()
+	public function getFrom(): ?Address
 	{
 		return $this->from;
 	}
@@ -187,10 +183,10 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Sets sender address.
 	 *
-	 * @param \Jyxo\Mail\Email\Address $from Message sender
-	 * @return \Jyxo\Mail\Email
+	 * @param Address $from Message sender
+	 * @return Email
 	 */
-	public function setFrom(\Jyxo\Mail\Email\Address $from): self
+	public function setFrom(Address $from): self
 	{
 		$this->from = $from;
 
@@ -210,10 +206,10 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Adds a recipient.
 	 *
-	 * @param \Jyxo\Mail\Email\Address $to New recipient
-	 * @return \Jyxo\Mail\Email
+	 * @param Address $to New recipient
+	 * @return Email
 	 */
-	public function addTo(\Jyxo\Mail\Email\Address $to): self
+	public function addTo(Address $to): self
 	{
 		$this->to[] = $to;
 
@@ -233,10 +229,10 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Adds a carbon copy recipient.
 	 *
-	 * @param \Jyxo\Mail\Email\Address $cc New recipient
-	 * @return \Jyxo\Mail\Email
+	 * @param Address $cc New recipient
+	 * @return Email
 	 */
-	public function addCc(\Jyxo\Mail\Email\Address $cc): self
+	public function addCc(Address $cc): self
 	{
 		$this->cc[] = $cc;
 
@@ -256,10 +252,10 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Adds a blind carbon copy recipient.
 	 *
-	 * @param \Jyxo\Mail\Email\Address $bcc New recipient
-	 * @return \Jyxo\Mail\Email
+	 * @param Address $bcc New recipient
+	 * @return Email
 	 */
-	public function addBcc(\Jyxo\Mail\Email\Address $bcc): self
+	public function addBcc(Address $bcc): self
 	{
 		$this->bcc[] = $bcc;
 
@@ -279,10 +275,10 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Adds a 'ReplyTo' address.
 	 *
-	 * @param \Jyxo\Mail\Email\Address $replyTo
-	 * @return \Jyxo\Mail\Email
+	 * @param Address $replyTo
+	 * @return Email
 	 */
-	public function addReplyTo(\Jyxo\Mail\Email\Address $replyTo): self
+	public function addReplyTo(Address $replyTo): self
 	{
 		$this->replyTo[] = $replyTo;
 
@@ -292,9 +288,9 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Returns a reading confirmation address.
 	 *
-	 * @return \Jyxo\Mail\Email\Address|null
+	 * @return Address|null
 	 */
-	public function getConfirmReadingTo()
+	public function getConfirmReadingTo(): ?Address
 	{
 		return $this->confirmReadingTo;
 	}
@@ -302,10 +298,10 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Sets a reading confirmation address.
 	 *
-	 * @param \Jyxo\Mail\Email\Address $confirmReadingTo Confirmation recipient
-	 * @return \Jyxo\Mail\Email
+	 * @param Address $confirmReadingTo Confirmation recipient
+	 * @return Email
 	 */
-	public function setConfirmReadingTo(\Jyxo\Mail\Email\Address $confirmReadingTo): self
+	public function setConfirmReadingTo(Address $confirmReadingTo): self
 	{
 		$this->confirmReadingTo = $confirmReadingTo;
 
@@ -317,7 +313,7 @@ class Email extends \Jyxo\Spl\Object
 	 *
 	 * @param string $inReplyTo Message Id
 	 * @param array $references Previous mail references
-	 * @return \Jyxo\Mail\Email
+	 * @return Email
 	 */
 	public function setInReplyTo(string $inReplyTo, array $references = []): self
 	{
@@ -350,7 +346,7 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Returns message priority.
 	 *
-	 * @return integer
+	 * @return int
 	 */
 	public function getPriority(): int
 	{
@@ -360,9 +356,8 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Sets message priority.
 	 *
-	 * @param integer $priority Priority
-	 * @return \Jyxo\Mail\Email
-	 * @throws \InvalidArgumentException If an unknown priority was provided
+	 * @param int $priority Priority
+	 * @return Email
 	 */
 	public function setPriority(int $priority): self
 	{
@@ -371,10 +366,11 @@ class Email extends \Jyxo\Spl\Object
 			self::PRIORITY_HIGH => true,
 			self::PRIORITY_NORMAL => true,
 			self::PRIORITY_LOW => true,
-			self::PRIORITY_LOWEST => true
+			self::PRIORITY_LOWEST => true,
 		];
+
 		if (!isset($priorities[$priority])) {
-			throw new \InvalidArgumentException(sprintf('Unknown priority %s', $priority));
+			throw new InvalidArgumentException(sprintf('Unknown priority %s', $priority));
 		}
 
 		$this->priority = (int) $priority;
@@ -395,10 +391,10 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Adds a custom header.
 	 *
-	 * @param \Jyxo\Mail\Email\Header $header Header
-	 * @return \Jyxo\Mail\Email
+	 * @param Header $header Header
+	 * @return Email
 	 */
-	public function addHeader(\Jyxo\Mail\Email\Header $header): self
+	public function addHeader(Header $header): self
 	{
 		$this->headers[] = $header;
 
@@ -408,9 +404,9 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Returns message body.
 	 *
-	 * @return \Jyxo\Mail\Email\Body
+	 * @return Body
 	 */
-	public function getBody(): \Jyxo\Mail\Email\Body
+	public function getBody(): Body
 	{
 		return $this->body;
 	}
@@ -418,10 +414,10 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Sets message body.
 	 *
-	 * @param \Jyxo\Mail\Email\Body $body Body
-	 * @return \Jyxo\Mail\Email
+	 * @param Body $body Body
+	 * @return Email
 	 */
-	public function setBody(\Jyxo\Mail\Email\Body $body): self
+	public function setBody(Body $body): self
 	{
 		$this->body = $body;
 
@@ -441,10 +437,10 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Adds an attachment.
 	 *
-	 * @param \Jyxo\Mail\Email\Attachment $attachment Attachment
-	 * @return \Jyxo\Mail\Email
+	 * @param Attachment $attachment Attachment
+	 * @return Email
 	 */
-	public function addAttachment(\Jyxo\Mail\Email\Attachment $attachment): self
+	public function addAttachment(Attachment $attachment): self
 	{
 		$this->attachments[] = $attachment;
 
@@ -454,7 +450,7 @@ class Email extends \Jyxo\Spl\Object
 	/**
 	 * Checks if the message contains any attachments.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasInlineAttachments(): bool
 	{
@@ -466,4 +462,5 @@ class Email extends \Jyxo\Spl\Object
 
 		return false;
 	}
+
 }

@@ -13,6 +13,15 @@
 
 namespace Jyxo\Time;
 
+use PHPUnit\Framework\TestCase;
+use Throwable;
+use function constant;
+use function explode;
+use function preg_match;
+use function sprintf;
+use function strtoupper;
+use function ucfirst;
+
 /**
  * Tests for the \Jyxo\Time\Composer class.
  *
@@ -21,12 +30,13 @@ namespace Jyxo\Time;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class ComposerTest extends \PHPUnit_Framework_TestCase
+class ComposerTest extends TestCase
 {
+
 	/**
 	 * Tests invalid data.
 	 */
-	public function testInvalidDates()
+	public function testInvalidDates(): void
 	{
 		$composer = new Composer();
 
@@ -37,14 +47,15 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 			'hour' => [-1, 24],
 			'day' => [0, 32],
 			'month' => [0, 13],
-			'year' => [1901, 2038]
+			'year' => [1901, 2038],
 		];
+
 		foreach ($units as $unit => $tests) {
 			foreach ($tests as $test) {
 				try {
 					$composer->{'set' . ucfirst($unit)}($test);
-				} catch (\Exception $e) {
-					$this->assertInstanceOf(\Jyxo\Time\ComposerException::class, $e);
+				} catch (Throwable $e) {
+					$this->assertInstanceOf(ComposerException::class, $e);
 					$this->assertSame(
 						constant('\Jyxo\Time\ComposerException::' . strtoupper($unit)),
 						$e->getCode(),
@@ -57,8 +68,8 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 		// Incomplete date
 		try {
 			$date = $composer->getTime();
-		} catch (\Exception $e) {
-			$this->assertInstanceOf(\Jyxo\Time\ComposerException::class, $e);
+		} catch (Throwable $e) {
+			$this->assertInstanceOf(ComposerException::class, $e);
 			$this->assertSame(ComposerException::NOT_COMPLETE, $e->getCode());
 		}
 
@@ -69,17 +80,18 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 			'2004-02-30',
 			'2005-06-31',
 			'2006-09-31',
-			'2007-11-31'
+			'2007-11-31',
 		];
+
 		foreach ($tests as $test) {
 			try {
-				list($year, $month, $day) = explode('-', $test);
+				[$year, $month, $day] = explode('-', $test);
 				$composer->setDay((int) $day)
 					->setMonth((int) $month)
 					->setYear((int) $year);
 				$time = $composer->getTime();
-			} catch (\Exception $e) {
-				$this->assertInstanceOf(\Jyxo\Time\ComposerException::class, $e);
+			} catch (Throwable $e) {
+				$this->assertInstanceOf(ComposerException::class, $e);
 				$this->assertSame(
 					ComposerException::INVALID,
 					$e->getCode(),
@@ -92,7 +104,7 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests valid date.
 	 */
-	public function testValidDates()
+	public function testValidDates(): void
 	{
 		$composer = new Composer();
 
@@ -102,8 +114,9 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 			'2004-02-29 05:03:16',
 			'2005-07-31 01:01:01',
 			'2006-10-31 23:59:59',
-			'2007-11-30 15:16:17'
+			'2007-11-30 15:16:17',
 		];
+
 		foreach ($tests as $test) {
 			preg_match('~^(\\d{4})-(\\d{2})-(\\d{2}) (\\d{2}):(\\d{2}):(\\d{2})$~', $test, $matches);
 			$composer->setDay((int) $matches[3])
@@ -120,4 +133,5 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 			);
 		}
 	}
+
 }

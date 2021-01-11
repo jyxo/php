@@ -16,12 +16,11 @@ namespace Jyxo\Gettext\Parser;
 /**
  * Exception thrown on Gettext parse errors.
  *
- * @category Jyxo
- * @package Jyxo\Gettext
- * @subpackage Parser
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Matěj Humpál
  */
 class Exception extends \Jyxo\Exception
-{}
+{
+
+}

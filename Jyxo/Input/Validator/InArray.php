@@ -13,29 +13,29 @@
 
 namespace Jyxo\Input\Validator;
 
+use function in_array;
+
 /**
  * Checks if the given value is from an array of predefined values.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
  */
-class InArray extends \Jyxo\Input\Validator\AbstractValidator
+class InArray extends AbstractValidator
 {
+
 	/**
 	 * Array of allowed values.
 	 *
-	 * @var array
+	 * @var mixed[]
 	 */
 	private $allowed = [];
 
 	/**
 	 * Constructor.
 	 *
-	 * @param array $allowed Array of allowed values
+	 * @param mixed[] $allowed Array of allowed values
 	 */
 	public function __construct(array $allowed)
 	{
@@ -46,10 +46,11 @@ class InArray extends \Jyxo\Input\Validator\AbstractValidator
 	 * Validates a value.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isValid($value): bool
 	{
-		return in_array($value, $this->allowed);
+		return in_array($value, $this->allowed, true);
 	}
+
 }

@@ -3,14 +3,16 @@
 /**
  * Testing filter with a prefix.
  */
+
 namespace SomePrefix\Some;
 
-class Filter implements \Jyxo\Input\FilterInterface
+use Jyxo\Input\FilterInterface;
+
+class Filter implements FilterInterface
 {
 
-	public function filter($in)
+	public function filter($in): void
 	{
-
 	}
 
 }

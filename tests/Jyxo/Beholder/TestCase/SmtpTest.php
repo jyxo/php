@@ -13,6 +13,10 @@
 
 namespace Jyxo\Beholder\TestCase;
 
+use Jyxo\Beholder\Result;
+use function class_exists;
+use function sprintf;
+
 /**
  * Tests the \Jyxo\Beholder\TestCase\Smtp class.
  *
@@ -21,12 +25,13 @@ namespace Jyxo\Beholder\TestCase;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class SmtpTest extends \Jyxo\Beholder\TestCase\DefaultTest
+class SmtpTest extends DefaultTest
 {
+
 	/**
 	 * Tests for the sender class missing.
 	 */
-	public function testSmtpMissing()
+	public function testSmtpMissing(): void
 	{
 		// Skips the test if the class is already loaded
 		if (class_exists(\Jyxo\Mail\Sender\Smtp::class, false)) {
@@ -43,25 +48,25 @@ class SmtpTest extends \Jyxo\Beholder\TestCase\DefaultTest
 		// Turns autoload on
 		$this->enableAutoload();
 
-		$this->assertEquals(\Jyxo\Beholder\Result::NOT_APPLICABLE, $result->getStatus());
+		$this->assertEquals(Result::NOT_APPLICABLE, $result->getStatus());
 		$this->assertEquals(sprintf('Class %s missing', \Jyxo\Mail\Sender\Smtp::class), $result->getDescription());
 	}
 
 	/**
 	 * Tests for a sending failure.
 	 */
-	public function testSendFailure()
+	public function testSendFailure(): void
 	{
 		$test = new Smtp('Smtp', 'dummy.jyxo.com', '', '');
 		$result = $test->run();
-		$this->assertEquals(\Jyxo\Beholder\Result::FAILURE, $result->getStatus());
+		$this->assertEquals(Result::FAILURE, $result->getStatus());
 		$this->assertEquals('Send error dummy.jyxo.com', $result->getDescription());
 	}
 
 	/**
 	 * Tests for a successful sending.
 	 */
-	public function testSendOk()
+	public function testSendOk(): void
 	{
 		// Skips the test if no SMTP connection is defined
 		if (empty($GLOBALS['smtp'])) {
@@ -70,7 +75,8 @@ class SmtpTest extends \Jyxo\Beholder\TestCase\DefaultTest
 
 		$test = new Smtp('Smtp', $GLOBALS['smtp'], 'blog-noreply@blog.cz');
 		$result = $test->run();
-		$this->assertEquals(\Jyxo\Beholder\Result::SUCCESS, $result->getStatus());
+		$this->assertEquals(Result::SUCCESS, $result->getStatus());
 		$this->assertEquals($GLOBALS['smtp'], $result->getDescription());
 	}
+
 }

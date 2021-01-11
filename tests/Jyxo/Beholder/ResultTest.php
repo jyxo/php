@@ -13,6 +13,9 @@
 
 namespace Jyxo\Beholder;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
+
 /**
  * Test for the \Jyxo\Beholder\Result class.
  *
@@ -21,12 +24,13 @@ namespace Jyxo\Beholder;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class ResultTest extends \PHPUnit_Framework_TestCase
+class ResultTest extends TestCase
 {
+
 	/**
 	 * Tests success results.
 	 */
-	public function testSuccess()
+	public function testSuccess(): void
 	{
 		// No label
 		$result = new Result(Result::SUCCESS);
@@ -42,7 +46,7 @@ class ResultTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests failure results.
 	 */
-	public function testFailure()
+	public function testFailure(): void
 	{
 		// No label
 		$result = new Result(Result::FAILURE);
@@ -58,7 +62,7 @@ class ResultTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests not applicable results.
 	 */
-	public function testNotApplicable()
+	public function testNotApplicable(): void
 	{
 		// No label
 		$result = new Result(Result::NOT_APPLICABLE);
@@ -74,9 +78,10 @@ class ResultTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests the exception thrown on invalid result type.
 	 */
-	public function testInvalidStatus()
+	public function testInvalidStatus(): void
 	{
-		$this->expectException(\InvalidArgumentException::class);
+		$this->expectException(InvalidArgumentException::class);
 		$result = new Result('dummy');
 	}
+
 }

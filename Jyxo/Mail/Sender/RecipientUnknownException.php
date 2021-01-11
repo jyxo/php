@@ -16,15 +16,13 @@ namespace Jyxo\Mail\Sender;
 /**
  * Exception used when some recipients' addresses do not exist.
  *
- * @category Jyxo
- * @package Jyxo\Mail
- * @subpackage Sender
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class RecipientUnknownException extends \Jyxo\Mail\Sender\Exception
+class RecipientUnknownException extends Exception
 {
+
 	/**
 	 * List of non-existent addresses.
 	 *
@@ -36,12 +34,13 @@ class RecipientUnknownException extends \Jyxo\Mail\Sender\Exception
 	 * Creates an exception.
 	 *
 	 * @param string $message Exception message
-	 * @param integer $code Exception code
+	 * @param int $code Exception code
 	 * @param array $list List of non-existent addresses
 	 */
-	public function __construct(string $message = null, int $code = 0, array $list = [])
+	public function __construct(?string $message = null, int $code = 0, array $list = [])
 	{
 		parent::__construct($message, $code);
+
 		$this->list = $list;
 	}
 
@@ -54,4 +53,5 @@ class RecipientUnknownException extends \Jyxo\Mail\Sender\Exception
 	{
 		return $this->list;
 	}
+
 }

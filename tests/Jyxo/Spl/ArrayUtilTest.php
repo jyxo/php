@@ -13,6 +13,17 @@
 
 namespace Jyxo\Spl;
 
+use ArrayIterator;
+use PHPUnit\Framework\TestCase;
+use function array_combine;
+use function array_reverse;
+use function chr;
+use function count;
+use function date;
+use function ord;
+use function range;
+use function strtotime;
+
 /**
  * Test for class \Jyxo\Spl\ArrayUtil.
  *
@@ -22,14 +33,15 @@ namespace Jyxo\Spl;
  * @author Jakub Tománek
  * @author Ondřej Nešpor
  */
-class ArrayUtilTest extends \PHPUnit_Framework_TestCase
+class ArrayUtilTest extends TestCase
 {
+
 	/**
 	 * Tests a simple integer range.
 	 */
-	public function testRangeInt()
+	public function testRangeInt(): void
 	{
-		$range = ArrayUtil::range(1, 6, function($current) {
+		$range = ArrayUtil::range(1, 6, static function ($current) {
 			return $current + 1;
 		});
 
@@ -39,13 +51,14 @@ class ArrayUtilTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests use of custom closures.
 	 */
-	public function testRangeCompare()
+	public function testRangeCompare(): void
 	{
 		$called = 0;
-		$range = ArrayUtil::range(1, 6, function($current) {
+		$range = ArrayUtil::range(1, 6, static function ($current) {
 			return $current + 1;
-		}, function ($a, $b) use (&$called) {
-			++$called;
+		}, static function ($a, $b) use (&$called) {
+			$called++;
+
 			return $a < $b;
 		});
 
@@ -56,9 +69,9 @@ class ArrayUtilTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests data range generation.
 	 */
-	public function testRangeDate()
+	public function testRangeDate(): void
 	{
-		$range = ArrayUtil::range('2010-03-01', '2009-11-01', function($current) {
+		$range = ArrayUtil::range('2010-03-01', '2009-11-01', static function ($current) {
 			return date('Y-m-d', strtotime('first day of last month', strtotime($current)));
 		});
 
@@ -67,7 +80,7 @@ class ArrayUtilTest extends \PHPUnit_Framework_TestCase
 			'2010-02-01',
 			'2010-01-01',
 			'2009-12-01',
-			'2009-11-01'
+			'2009-11-01',
 		];
 
 		$this->assertEquals($expect, $range);
@@ -76,15 +89,17 @@ class ArrayUtilTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests the keymap() method.
 	 */
-	public function testKeymap()
+	public function testKeymap(): void
 	{
 		$source = [];
+
 		foreach (range(ord('a'), ord('z')) as $value) {
 			$source[] = chr($value);
 		}
-		$traversable = new \ArrayIterator($source);
 
-		$closure = function($value) {
+		$traversable = new ArrayIterator($source);
+
+		$closure = static function ($value) {
 			return chr(ord('z') + ord('a') - ord($value));
 		};
 
@@ -94,4 +109,5 @@ class ArrayUtilTest extends \PHPUnit_Framework_TestCase
 		$mapped = ArrayUtil::keymap($traversable, $closure, $closure);
 		$this->assertSame(array_reverse(array_combine($source, $source)), $mapped);
 	}
+
 }

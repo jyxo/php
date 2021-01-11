@@ -13,25 +13,27 @@
 
 namespace Jyxo\Input\Validator;
 
+use function checkdate;
+use function preg_match;
+use function trim;
+
 /**
  * Validates a birth number.
  *
  * Taken from David Grudl's http://latrine.dgx.cz/jak-overit-platne-ic-a-rodne-cislo
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class IsBirthNumber extends \Jyxo\Input\Validator\AbstractValidator
+class IsBirthNumber extends AbstractValidator
 {
+
 	/**
 	 * Validates a value.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isValid($value): bool
 	{
@@ -41,23 +43,21 @@ class IsBirthNumber extends \Jyxo\Input\Validator\AbstractValidator
 			return false;
 		}
 
-		list(, $year, $month, $day, $ext, $control) = $matches;
+		[, $year, $month, $day, $ext, $control] = $matches;
 
 		// Until 1954 9 numbers were used; can not check
-		if ('' === $control) {
-			if ($year >= 54) {
-				return false;
-			} else {
-				return true;
-			}
+		if ($control === '') {
+			return $year < 54;
 		}
 
 		// Control number
 		$mod = ($year . $month . $day . $ext) % 11;
+
 		// Exception for ca 1000 numbers; no such numbers since 1985
-		if (10 === $mod) {
+		if ($mod === 10) {
 			$mod = 0;
 		}
+
 		if ((int) $control !== $mod) {
 			return false;
 		}
@@ -78,11 +78,7 @@ class IsBirthNumber extends \Jyxo\Input\Validator\AbstractValidator
 		}
 
 		// Date check
-		if (!checkdate((int) $month, (int) $day, (int) $year)) {
-			return false;
-		}
-
-		// Ok
-		return true;
+		return checkdate((int) $month, (int) $day, (int) $year);
 	}
+
 }

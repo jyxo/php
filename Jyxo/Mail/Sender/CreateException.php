@@ -16,12 +16,11 @@ namespace Jyxo\Mail\Sender;
 /**
  * Exception used when an error occurs while creating an email.
  *
- * @category Jyxo
- * @package Jyxo\Mail
- * @subpackage Sender
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
  */
-class CreateException extends \Jyxo\Mail\Sender\Exception
-{}
+class CreateException extends Exception
+{
+
+}

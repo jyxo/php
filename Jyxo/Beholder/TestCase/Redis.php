@@ -13,17 +13,29 @@
 
 namespace Jyxo\Beholder\TestCase;
 
+use Jyxo\Beholder\Result;
+use Jyxo\Beholder\TestCase;
+use Predis\Client;
+use function class_exists;
+use function extension_loaded;
+use function filter_var;
+use function gethostbyaddr;
+use function md5;
+use function sprintf;
+use function time;
+use function uniqid;
+use const FILTER_VALIDATE_IP;
+
 /**
  * Tests Redis availability.
  *
- * @category Jyxo
- * @package Jyxo\Beholder
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class Redis extends \Jyxo\Beholder\TestCase
+class Redis extends TestCase
 {
+
 	/**
 	 * Server host.
 	 *
@@ -34,14 +46,14 @@ class Redis extends \Jyxo\Beholder\TestCase
 	/**
 	 * Port.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $port;
 
 	/**
 	 * Database index.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $database;
 
@@ -50,8 +62,8 @@ class Redis extends \Jyxo\Beholder\TestCase
 	 *
 	 * @param string $description Test description
 	 * @param string $host Server host
-	 * @param integer $port Port
-	 * @param integer $database Database index
+	 * @param int $port Port
+	 * @param int $database Database index
 	 */
 	public function __construct(string $description, string $host, int $port = 6379, int $database = 0)
 	{
@@ -65,13 +77,13 @@ class Redis extends \Jyxo\Beholder\TestCase
 	/**
 	 * Performs the test.
 	 *
-	 * @return \Jyxo\Beholder\Result
+	 * @return Result
 	 */
-	public function run(): \Jyxo\Beholder\Result
+	public function run(): Result
 	{
 		// The redis extension or Predis library is required
-		if (!extension_loaded('redis') && !class_exists(\Predis\Client::class)) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Extension redis or Predis library required');
+		if (!extension_loaded('redis') && !class_exists(Client::class)) {
+			return new Result(Result::NOT_APPLICABLE, 'Extension redis or Predis library required');
 		}
 
 		$random = md5(uniqid((string) time(), true));
@@ -79,55 +91,63 @@ class Redis extends \Jyxo\Beholder\TestCase
 		$value = $random;
 
 		// Status label
-		$description = (false !== filter_var($this->host, FILTER_VALIDATE_IP) ? gethostbyaddr($this->host) : $this->host) . ':' . $this->port . '?database=' . $this->database;
+		$description = (filter_var($this->host, FILTER_VALIDATE_IP) !== false ? gethostbyaddr(
+			$this->host
+		) : $this->host) . ':' . $this->port . '?database=' . $this->database;
 
 		// Connection
 		if (extension_loaded('redis')) {
 			$redis = new \Redis();
-			if (false === $redis->connect($this->host, $this->port, 2)) {
-				return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Connection error %s', $description));
+
+			if ($redis->connect($this->host, $this->port, 2) === false) {
+				return new Result(Result::FAILURE, sprintf('Connection error %s', $description));
 			}
 		} else {
-			$redis = new \Predis\Client(['host' => $this->host, 'port' => $this->port]);
-			if (false === $redis->connect()) {
-				return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Connection error %s', $description));
+			$redis = new Client(['host' => $this->host, 'port' => $this->port]);
+
+			if ($redis->connect() === false) {
+				return new Result(Result::FAILURE, sprintf('Connection error %s', $description));
 			}
 		}
 
 		// Select database
-		if (false === $redis->select($this->database)) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Database error %s', $description));
+		if ($redis->select($this->database) === false) {
+			return new Result(Result::FAILURE, sprintf('Database error %s', $description));
 		}
 
 		// Saving
-		if (false === $redis->set($key, $value)) {
+		if ($redis->set($key, $value) === false) {
 			if ($redis instanceof \Redis) {
 				$redis->close();
 			} else {
 				$redis->quit();
 			}
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Write error %s', $description));
+
+			return new Result(Result::FAILURE, sprintf('Write error %s', $description));
 		}
 
 		// Check
 		$check = $redis->get($key);
-		if ((false === $check) || ($check !== $value)) {
+
+		if (($check === false) || ($check !== $value)) {
 			if ($redis instanceof \Redis) {
 				$redis->close();
 			} else {
 				$redis->quit();
 			}
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Read error %s', $description));
+
+			return new Result(Result::FAILURE, sprintf('Read error %s', $description));
 		}
 
 		// Deleting
-		if (false === $redis->del($key)) {
+		if ($redis->del($key) === false) {
 			if ($redis instanceof \Redis) {
 				$redis->close();
 			} else {
 				$redis->quit();
 			}
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Delete error %s', $description));
+
+			return new Result(Result::FAILURE, sprintf('Delete error %s', $description));
 		}
 
 		// Disconnect
@@ -138,6 +158,7 @@ class Redis extends \Jyxo\Beholder\TestCase
 		}
 
 		// OK
-		return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::SUCCESS, $description);
+		return new Result(Result::SUCCESS, $description);
 	}
+
 }

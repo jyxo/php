@@ -18,30 +18,26 @@ use Jyxo\Beholder\Result\TestSuiteResult;
 /**
  * Beholder output base class
  *
- * @category Jyxo
- * @package Jyxo\Beholder
  * @author Matěj Humpál
  */
 abstract class Output
 {
 
+	/** @var TestSuiteResult */
 	protected $result;
+
+	abstract public function getContentType(): string;
 
 	public function __construct(TestSuiteResult $result)
 	{
 		$this->result = $result;
 	}
 
-	public abstract function getContentType(): string;
-
-	public abstract function __toString(): string;
-
-	/**
-	 * @return \Jyxo\Beholder\Result\TestSuiteResult
-	 */
 	public function getResult(): TestSuiteResult
 	{
 		return $this->result;
 	}
+
+	abstract public function __toString(): string;
 
 }

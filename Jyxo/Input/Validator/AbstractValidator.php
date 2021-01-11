@@ -13,34 +13,33 @@
 
 namespace Jyxo\Input\Validator;
 
+use Jyxo\Input\ValidatorInterface;
+use ReflectionClass;
+use function array_slice;
+use function func_get_args;
+
 /**
  * Base abstract validator class.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-abstract class AbstractValidator implements \Jyxo\Input\ValidatorInterface
+abstract class AbstractValidator implements ValidatorInterface
 {
-	/**
-	 * Constructor.
-	 */
-	public function __construct()
-	{}
 
 	/**
 	 * Validates a value.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function validate($value): bool
 	{
-		$class = new \ReflectionClass(get_called_class());
+		$class = new ReflectionClass(static::class);
 		$validator = $class->newInstanceArgs(array_slice(func_get_args(), 1));
+
 		return $validator->isValid($value);
 	}
+
 }

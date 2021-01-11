@@ -1,4 +1,4 @@
 /bin
-/build
 /composer.lock
+/temp
 /vendor

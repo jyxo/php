@@ -13,6 +13,8 @@
 
 namespace Jyxo\Rpc\Json;
 
+use Jyxo\Rpc\ServerTestCase;
+
 /**
  * Test for class \Jyxo\Rpc\Json\Server.
  *
@@ -22,8 +24,9 @@ namespace Jyxo\Rpc\Json;
  * @author Jan Pěček
  * @author Jaroslav Hanslík
  */
-class ServerTest extends \Jyxo\Rpc\ServerTestCase
+class ServerTest extends ServerTestCase
 {
+
 	/**
 	 * Returns server instance.
 	 *
@@ -43,4 +46,5 @@ class ServerTest extends \Jyxo\Rpc\ServerTestCase
 	{
 		return 'json';
 	}
+
 }

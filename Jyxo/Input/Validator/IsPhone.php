@@ -13,24 +13,25 @@
 
 namespace Jyxo\Input\Validator;
 
+use function preg_match;
+use function preg_replace;
+
 /**
  * (Czech and Slovak) phone number validator.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  * @author Jakub Tománek
  */
-class IsPhone extends \Jyxo\Input\Validator\AbstractValidator
+class IsPhone extends AbstractValidator
 {
+
 	/**
 	 * Validates a value.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isValid($value): bool
 	{
@@ -40,14 +41,14 @@ class IsPhone extends \Jyxo\Input\Validator\AbstractValidator
 		if (preg_match('~^1\\d{2,8}$~', $phoneNumber)) {
 			// Special numbers
 			return true;
-		} elseif (preg_match('~^8\\d{8}$~', $phoneNumber)) {
+		}
+
+		if (preg_match('~^8\\d{8}$~', $phoneNumber)) {
 			// Numbers with special tariffs
 			return true;
-		} elseif (preg_match('~^(?:(?:[+]|00)42(?:0|1))?[2-79]\\d{8}$~', $phoneNumber)) {
-			// Normal numbers
-			return true;
-		} else {
-			return false;
 		}
+
+		return preg_match('~^(?:(?:[+]|00)42(?:0|1))?[2-79]\\d{8}$~', $phoneNumber) === 1;
 	}
+
 }

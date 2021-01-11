@@ -13,18 +13,19 @@
 
 namespace Jyxo\Gettext\Parser;
 
+use function explode;
+use function trim;
+
 /**
  * Container for PO file headers.
  *
- * @category Jyxo
- * @package Jyxo\Gettext
- * @subpackage Parser
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Matěj Humpál
  */
 class Header
 {
+
 	/**
 	 * Constructor.
 	 *
@@ -33,14 +34,19 @@ class Header
 	public function __construct(string $items)
 	{
 		$items = explode("\n", $items);
+
 		foreach ($items as $item) {
 			$item = trim($item, '"');
 			$array = explode(': ', $item);
-			if (!empty($array[0])) {
-				if (!empty($array[1])) {
-					$this->{$array[0]} = $array[1];
-				}
+
+			if (empty($array[0])) {
+				continue;
+			}
+
+			if (!empty($array[1])) {
+				$this->{$array[0]} = $array[1];
 			}
 		}
 	}
+
 }

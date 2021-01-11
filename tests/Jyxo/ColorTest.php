@@ -13,6 +13,14 @@
 
 namespace Jyxo;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\TestCase;
+use Throwable;
+use function ob_get_clean;
+use function ob_start;
+use function sprintf;
+
 /**
  * Class \Jyxo\Color test.
  *
@@ -21,14 +29,16 @@ namespace Jyxo;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class ColorTest extends \PHPUnit_Framework_TestCase
+class ColorTest extends TestCase
 {
+
 	/**
 	 * The whole test.
 	 */
-	public function test()
+	public function test(): void
 	{
 		$tests = ['#000000', '#000', '000000', 0, [0, 0, 0], new Color('#000000')];
+
 		foreach ($tests as $test) {
 			$color = new Color($test);
 			$this->assertEquals(0, $color->getRed());
@@ -46,6 +56,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
 			$this->assertEquals('000000', $color->toGrayScale()->getHex());
 			$this->assertEquals('ffffff', $color->toInverse()->getHex());
 		}
+
 		$color = new Color();
 		$color->setRed('00')
 			->setGreen('00')
@@ -53,6 +64,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('000000', $color->getHex());
 
 		$tests = ['#ffffff', '#FfFFffF', '#fff', 'ffffff', 0xFFFFFF, [255, 255, 255], [260, 320, 1024], new Color('#ffffff')];
+
 		foreach ($tests as $test) {
 			$color = new Color($test);
 			$this->assertEquals(255, $color->getRed());
@@ -71,6 +83,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
 			$this->assertEquals('ffffff', $color->toGrayScale()->getHex());
 			$this->assertEquals('000000', $color->toInverse()->getHex());
 		}
+
 		$color = new Color();
 		$color->setRed('FF')
 			->setGreen('FF')
@@ -78,6 +91,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('ffffff', $color->getHex());
 
 		$tests = ['#239416', '239416', 0x239416, [35, 148, 22], new Color('#239416')];
+
 		foreach ($tests as $test) {
 			$color = new Color($test);
 			$this->assertEquals(35, $color->getRed());
@@ -98,6 +112,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$tests = ['#22FF66', '#22Ff66', '#2f6', '2F6', '22FF66', '22fF66', 0x22FF66, [34, 255, 102], new Color('#22FF66')];
+
 		foreach ($tests as $test) {
 			$color = new Color($test);
 			$this->assertEquals(34, $color->getRed());
@@ -124,16 +139,18 @@ class ColorTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('239416', $color->getHex());
 
 		$invalids = ['#FFBBC', '#FBCA', '0000', '0', 'AB'];
+
 		foreach ($invalids as $invalid) {
 			try {
 				$color = new Color($invalid);
-				$this->fail(sprintf('%s expected for value %s', \InvalidArgumentException::class, $invalid));
-			} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+				$this->fail(sprintf('%s expected for value %s', InvalidArgumentException::class, $invalid));
+			} catch (AssertionFailedError $e) {
 				throw $e;
-			} catch (\Exception $e) {
+			} catch (Throwable $e) {
 				// Correctly thrown exception
-				$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+				$this->assertInstanceOf(InvalidArgumentException::class, $e);
 			}
 		}
 	}
+
 }

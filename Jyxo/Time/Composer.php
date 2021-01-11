@@ -13,78 +13,75 @@
 
 namespace Jyxo\Time;
 
+use function checkdate;
+use function mktime;
+
 /**
  * Time composer used to compose a date/time part by part.
  *
- * @category Jyxo
- * @package Jyxo\Time
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Martin Šamšula
  */
 class Composer
 {
+
 	/**
 	 * Maximal year.
-	 *
-	 * @var integer
 	 */
-	const YEAR_MAX = 2037;
+	public const YEAR_MAX = 2037;
 
 	/**
 	 * Minimal year.
-	 *
-	 * @var integer
 	 */
-	const YEAR_MIN = 1902;
+	public const YEAR_MIN = 1902;
 
 	/**
 	 * Day.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $day = 0;
 
 	/**
 	 * Month.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $month = 0;
 
 	/**
 	 * Year.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $year = 0;
 
 	/**
 	 * Second.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $second = 0;
 
 	/**
 	 * Minute.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $minute = 0;
 
 	/**
 	 * Hour.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $hour = 0;
 
 	/**
 	 * Returns the composed date/time.
 	 *
-	 * @return \Jyxo\Time\Time
-	 * @throws \Jyxo\Time\ComposerException If the date is incomplete or invalid
+	 * @return Time
 	 */
 	public function getTime(): Time
 	{
@@ -99,15 +96,15 @@ class Composer
 		}
 
 		$time = mktime($this->hour, $this->minute, $this->second, $this->month, $this->day, $this->year);
+
 		return new Time($time);
 	}
 
 	/**
 	 * Sets the day.
 	 *
-	 * @param integer $day Day of the month
-	 * @return \Jyxo\Time\Composer
-	 * @throws \Jyxo\Time\ComposerException If the provided day is invalid
+	 * @param int $day Day of the month
+	 * @return Composer
 	 */
 	public function setDay(int $day): self
 	{
@@ -123,9 +120,8 @@ class Composer
 	/**
 	 * Sets the month.
 	 *
-	 * @param integer $month Month
-	 * @return \Jyxo\Time\Composer
-	 * @throws \Jyxo\Time\ComposerException If the month is invalid.
+	 * @param int $month Month
+	 * @return Composer
 	 */
 	public function setMonth(int $month): self
 	{
@@ -141,9 +137,8 @@ class Composer
 	/**
 	 * Sets the year.
 	 *
-	 * @param integer $year Year
-	 * @return \Jyxo\Time\Composer
-	 * @throws \Jyxo\Time\ComposerException If the year is invalid.
+	 * @param int $year Year
+	 * @return Composer
 	 */
 	public function setYear(int $year): self
 	{
@@ -159,9 +154,8 @@ class Composer
 	/**
 	 * Sets seconds.
 	 *
-	 * @param integer $second Seconds
-	 * @return \Jyxo\Time\Composer
-	 * @throws \Jyxo\Time\ComposerException If seconds are invalid.
+	 * @param int $second Seconds
+	 * @return Composer
 	 */
 	public function setSecond(int $second): self
 	{
@@ -177,9 +171,8 @@ class Composer
 	/**
 	 * Sets minutes.
 	 *
-	 * @param integer $minute Minutes
-	 * @return \Jyxo\Time\Composer
-	 * @throws \Jyxo\Time\ComposerException If minutes are invalid.
+	 * @param int $minute Minutes
+	 * @return Composer
 	 */
 	public function setMinute(int $minute): self
 	{
@@ -195,9 +188,8 @@ class Composer
 	/**
 	 * Sets hours.
 	 *
-	 * @param integer $hour Hours
-	 * @return \Jyxo\Time\Composer
-	 * @throws \Jyxo\Time\ComposerException If hours are invalid.
+	 * @param int $hour Hours
+	 * @return Composer
 	 */
 	public function setHour(int $hour): self
 	{
@@ -209,4 +201,5 @@ class Composer
 
 		return $this;
 	}
+
 }

@@ -13,6 +13,8 @@
 
 namespace Jyxo\Input;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * Filter tests of package \Jyxo\Input
  *
@@ -21,39 +23,40 @@ namespace Jyxo\Input;
  * @author Jan Pěček
  * @author Jaroslav Hanslík
  */
-class FilterTest extends \PHPUnit_Framework_TestCase
+class FilterTest extends TestCase
 {
 
 	/**
 	 * String for testing multiple filters.
-	 *
-	 * @var string
 	 */
-	const TEST_STRING = ' tEst ';
+	public const TEST_STRING = ' tEst ';
 
 	/**
 	 * Desired filter chain result.
-	 *
-	 * @var string
 	 */
-	const TEST_STRING_RESULT = 'test';
-
+	public const TEST_STRING_RESULT = 'test';
 
 	/**
 	 * Tests Trim filter.
 	 */
-	public function testTrim()
+	public function testTrim(): void
 	{
 		$filter = new Filter\Trim();
 
-		$this->filterTest($filter, '  test  ', 'test');
+		$this->filter($filter, '  test  ', 'test');
 
-		$this->filterTest($filter,
-			['  test1', ' test2 '], ['test1', 'test2']);
+		$this->filter(
+			$filter,
+			['  test1', ' test2 '],
+			['test1', 'test2']
+		);
 
 		// Tests multidimensional array filtering
-		$this->filterTest($filter,
-			[[' ', ' ', [' ']], ' '], []);
+		$this->filter(
+			$filter,
+			[[' ', ' ', [' ']], ' '],
+			[]
+		);
 
 		$this->filterArrayTest($filter);
 	}
@@ -61,18 +64,24 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests LowerCase filter.
 	 */
-	public function testLowerCase()
+	public function testLowerCase(): void
 	{
 		$filter = new Filter\LowerCase();
 
-		$this->filterTest($filter, 'tESt', 'test');
+		$this->filter($filter, 'tESt', 'test');
 
-		$this->filterTest($filter,
-			['TEST1', 'tESt2'], ['test1', 'test2']);
+		$this->filter(
+			$filter,
+			['TEST1', 'tESt2'],
+			['test1', 'test2']
+		);
 
 		// Tests multidimensional array filtering
-		$this->filterTest($filter,
-			['TEST1', ['tESt2', 'TeST']], ['test1', ['test2', 'test']]);
+		$this->filter(
+			$filter,
+			['TEST1', ['tESt2', 'TeST']],
+			['test1', ['test2', 'test']]
+		);
 
 		$this->filterArrayTest($filter);
 	}
@@ -80,41 +89,43 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests Phone filter.
 	 */
-	public function testPhone()
+	public function testPhone(): void
 	{
 		$filter = new Filter\Phone();
 
-		$this->filterTest($filter, ['123 456 789', '604604 604', '+420 604 604 604', 'foo bar'], ['123456789', '+420604604604', '+420604604604', 'foobar']);
+		$this->filter(
+			$filter,
+			['123 456 789', '604604 604', '+420 604 604 604', 'foo bar'],
+			['123456789', '+420604604604', '+420604604604', 'foobar']
+		);
 	}
 
 	/**
 	 * Tests SanitizeUrl filter.
 	 */
-	public function testSanitizeUrl()
+	public function testSanitizeUrl(): void
 	{
 		// In form: expected value, input value
 		$tests = [
 			[
 				'http://www.jyxo.cz',
-				'www.jyxo.cz'
+				'www.jyxo.cz',
 			],
 			[
 				'http://www.jyxo.cz',
-				'http://www.jyxo.cz'
+				'http://www.jyxo.cz',
 			],
 			[
 				'https://www.jyxo.cz',
-				'https://www.jyxo.cz'
-			]
+				'https://www.jyxo.cz',
+			],
 		];
 
 		$filter = new Filter\SanitizeUrl();
+
 		foreach ($tests as $test) {
 			$result = $filter->filter($test[1]);
-			$this->assertEquals(
-				$test[0],
-				$result
-			);
+			$this->assertEquals($test[0], $result);
 		}
 
 		$actual = 'www.jyxo.cz';
@@ -125,11 +136,11 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Common function for filter testing.
 	 *
-	 * @param \Jyxo\Input\FilterInterface $filter Filter instance
+	 * @param FilterInterface $filter Filter instance
 	 * @param mixed $var Input value
 	 * @param mixed $expected Expected value
 	 */
-	private function filterTest(\Jyxo\Input\FilterInterface $filter, $var, $expected)
+	private function filter(FilterInterface $filter, $var, $expected): void
 	{
 		$result = $filter->filter($var);
 		$this->assertEquals($expected, $result);
@@ -138,9 +149,9 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Array filtering test - uses an invalid value on input.
 	 *
-	 * @param \Jyxo\Input\FilterInterface $filter Filter instance
+	 * @param FilterInterface $filter Filter instance
 	 */
-	private function filterArrayTest(\Jyxo\Input\FilterInterface $filter)
+	private function filterArrayTest(FilterInterface $filter): void
 	{
 		$var = [];
 		$result = $filter->filter($var);

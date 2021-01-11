@@ -13,17 +13,21 @@
 
 namespace Jyxo\Beholder\TestCase;
 
+use Jyxo\Beholder\Result;
+use Jyxo\Beholder\TestCase;
+use function extension_loaded;
+use function sprintf;
+
 /**
  * Tests PostgreSQL availability.
  *
- * @category Jyxo
- * @package Jyxo\Beholder
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class Pgsql extends \Jyxo\Beholder\TestCase
+class Pgsql extends TestCase
 {
+
 	/**
 	 * SQL query.
 	 *
@@ -62,14 +66,14 @@ class Pgsql extends \Jyxo\Beholder\TestCase
 	/**
 	 * Port.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $port;
 
 	/**
 	 * Timeout.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $timeout;
 
@@ -82,10 +86,19 @@ class Pgsql extends \Jyxo\Beholder\TestCase
 	 * @param string $host Hostname
 	 * @param string $user Username
 	 * @param string $password Password
-	 * @param integer $port Port
-	 * @param integer $timeout Timeout
+	 * @param int $port Port
+	 * @param int $timeout Timeout
 	 */
-	public function __construct(string $description, string $query, string $database, string $host = 'localhost', string $user = '', string $password = '', int $port = 5432, int $timeout = 2)
+	public function __construct(
+		string $description,
+		string $query,
+		string $database,
+		string $host = 'localhost',
+		string $user = '',
+		string $password = '',
+		int $port = 5432,
+		int $timeout = 2
+	)
 	{
 		parent::__construct($description);
 
@@ -101,13 +114,13 @@ class Pgsql extends \Jyxo\Beholder\TestCase
 	/**
 	 * Performs the test.
 	 *
-	 * @return \Jyxo\Beholder\Result
+	 * @return Result
 	 */
-	public function run(): \Jyxo\Beholder\Result
+	public function run(): Result
 	{
 		// The pgsql extension is required
 		if (!extension_loaded('pgsql')) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Extension pgsql missing');
+			return new Result(Result::NOT_APPLICABLE, 'Extension pgsql missing');
 		}
 
 		// Status label
@@ -116,23 +129,32 @@ class Pgsql extends \Jyxo\Beholder\TestCase
 		// Connection
 		$db = pg_connect(sprintf(
 			'host=%s port=%d dbname=%s user=%s password=%s connect_timeout=%d',
-			$this->host, $this->port, $this->database, $this->user, $this->password, $this->timeout
+			$this->host,
+			$this->port,
+			$this->database,
+			$this->user,
+			$this->password,
+			$this->timeout
 		));
-		if (false === $db) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Connection error %s', $description));
+
+		if ($db === false) {
+			return new Result(Result::FAILURE, sprintf('Connection error %s', $description));
 		}
 
 		// Query (the leading space is because of pgpool)
 		$result = pg_query($db, ' ' . $this->query);
-		if (false === $result) {
+
+		if ($result === false) {
 			pg_close($db);
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Query error %s', $description));
+
+			return new Result(Result::FAILURE, sprintf('Query error %s', $description));
 		}
 
 		pg_free_result($result);
 		pg_close($db);
 
 		// OK
-		return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::SUCCESS, $description);
+		return new Result(Result::SUCCESS, $description);
 	}
+
 }

@@ -13,17 +13,28 @@
 
 namespace Jyxo\Beholder\TestCase;
 
+use Jyxo\Beholder\Result;
+use Jyxo\Beholder\TestCase;
+use Memcache;
+use function extension_loaded;
+use function filter_var;
+use function gethostbyaddr;
+use function md5;
+use function sprintf;
+use function time;
+use function uniqid;
+use const FILTER_VALIDATE_IP;
+
 /**
  * Tests memcached availability.
  *
- * @category Jyxo
- * @package Jyxo\Beholder
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class Memcached extends \Jyxo\Beholder\TestCase
+class Memcached extends TestCase
 {
+
 	/**
 	 * Server host.
 	 *
@@ -34,7 +45,7 @@ class Memcached extends \Jyxo\Beholder\TestCase
 	/**
 	 * Port.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $port;
 
@@ -43,7 +54,7 @@ class Memcached extends \Jyxo\Beholder\TestCase
 	 *
 	 * @param string $description Test description
 	 * @param string $host Server host
-	 * @param integer $port Port
+	 * @param int $port Port
 	 */
 	public function __construct(string $description, string $host, int $port)
 	{
@@ -56,13 +67,13 @@ class Memcached extends \Jyxo\Beholder\TestCase
 	/**
 	 * Performs the test.
 	 *
-	 * @return \Jyxo\Beholder\Result
+	 * @return Result
 	 */
-	public function run(): \Jyxo\Beholder\Result
+	public function run(): Result
 	{
 		// The memcached or memcache extension is required
 		if (!extension_loaded('memcached') && !extension_loaded('memcache')) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Extension memcached or memcache required');
+			return new Result(Result::NOT_APPLICABLE, 'Extension memcached or memcache required');
 		}
 
 		$random = md5(uniqid((string) time(), true));
@@ -70,51 +81,59 @@ class Memcached extends \Jyxo\Beholder\TestCase
 		$value = $random;
 
 		// Status label
-		$description = (false !== filter_var($this->host, FILTER_VALIDATE_IP) ? gethostbyaddr($this->host) : $this->host) . ':' . $this->port;
+		$description = (filter_var($this->host, FILTER_VALIDATE_IP) !== false ? gethostbyaddr(
+			$this->host
+		) : $this->host) . ':' . $this->port;
 
 		if (extension_loaded('memcached')) {
 			// Connection
 			$memcached = new \Memcached();
-			if (false === $memcached->addServer($this->host, $this->port)) {
-				return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Connection error %s', $description));
+
+			if ($memcached->addServer($this->host, $this->port) === false) {
+				return new Result(Result::FAILURE, sprintf('Connection error %s', $description));
 			}
 		} else {
 			// Connection (@ due to notice)
-			$memcached = new \Memcache();
-			if (false === @$memcached->connect($this->host, $this->port)) {
-				return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Connection error %s', $description));
+			$memcached = new Memcache();
+
+			if (@$memcached->connect($this->host, $this->port) === false) {
+				return new Result(Result::FAILURE, sprintf('Connection error %s', $description));
 			}
 		}
 
 		// Saving
-		if (false === $memcached->set($key, $value)) {
+		if ($memcached->set($key, $value) === false) {
 			if ($memcached instanceof \Memcached) {
 				$memcached->quit();
 			} else {
 				$memcached->close();
 			}
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Write error %s', $description));
+
+			return new Result(Result::FAILURE, sprintf('Write error %s', $description));
 		}
 
 		// Check
 		$check = $memcached->get($key);
-		if ((false === $check) || ($check !== $value)) {
+
+		if (($check === false) || ($check !== $value)) {
 			if ($memcached instanceof \Memcached) {
 				$memcached->quit();
 			} else {
 				$memcached->close();
 			}
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Read error %s', $description));
+
+			return new Result(Result::FAILURE, sprintf('Read error %s', $description));
 		}
 
 		// Deleting
-		if (false === $memcached->delete($key)) {
+		if ($memcached->delete($key) === false) {
 			if ($memcached instanceof \Memcached) {
 				$memcached->quit();
 			} else {
 				$memcached->close();
 			}
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Delete error %s', $description));
+
+			return new Result(Result::FAILURE, sprintf('Delete error %s', $description));
 		}
 
 		// Disconnect
@@ -125,6 +144,7 @@ class Memcached extends \Jyxo\Beholder\TestCase
 		}
 
 		// OK
-		return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::SUCCESS, $description);
+		return new Result(Result::SUCCESS, $description);
 	}
+
 }

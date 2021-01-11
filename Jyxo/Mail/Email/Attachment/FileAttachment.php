@@ -13,24 +13,25 @@
 
 namespace Jyxo\Mail\Email\Attachment;
 
+use Jyxo\Mail\Email\Attachment;
+use function file_get_contents;
+
 /**
  * Mail attachment created from a file.
  *
- * @category Jyxo
- * @package Jyxo\Mail
- * @subpackage Email
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class FileAttachment extends \Jyxo\Mail\Email\Attachment
+class FileAttachment extends Attachment
 {
+
 	/**
 	 * Type.
 	 *
 	 * @var string
 	 */
-	protected $disposition = \Jyxo\Mail\Email\Attachment::DISPOSITION_ATTACHMENT;
+	protected $disposition = Attachment::DISPOSITION_ATTACHMENT;
 
 	/**
 	 * Creates an attachment.
@@ -45,4 +46,5 @@ class FileAttachment extends \Jyxo\Mail\Email\Attachment
 		$this->setName($name);
 		$this->setMimeType($mimeType);
 	}
+
 }

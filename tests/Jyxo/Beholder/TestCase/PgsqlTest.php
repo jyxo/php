@@ -13,6 +13,13 @@
 
 namespace Jyxo\Beholder\TestCase;
 
+use Jyxo\Beholder\Result;
+use PHPUnit\Framework\TestCase;
+use function class_exists;
+use function preg_match;
+use function sprintf;
+use function time;
+
 /**
  * Tests the \Jyxo\Beholder\TestCase\Pgsql class.
  *
@@ -21,20 +28,13 @@ namespace Jyxo\Beholder\TestCase;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class PgsqlTest extends \PHPUnit_Framework_TestCase
+class PgsqlTest extends TestCase
 {
-
-	public function setUp()
-	{
-		if (!class_exists('Pgsql')) {
-			$this->markTestSkipped('Pgsql not set');
-		}
-	}
 
 	/**
 	 * Tests connection failure.
 	 */
-	public function testConnectionFailure()
+	public function testConnectionFailure(): void
 	{
 		$database = 'dummy';
 		$host = 'dummy.jyxo.com';
@@ -42,35 +42,56 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
 		$test = new Pgsql('Pgsql', 'SELECT 1', $database, $host);
 		// @ on purpose
 		$result = @$test->run();
-		$this->assertEquals(\Jyxo\Beholder\Result::FAILURE, $result->getStatus());
+		$this->assertEquals(Result::FAILURE, $result->getStatus());
 		$this->assertEquals(sprintf('Connection error @%s:5432/%s', $host, $database), $result->getDescription());
 	}
 
 	/**
 	 * Tests query failure.
 	 */
-	public function testQueryFailure()
+	public function testQueryFailure(): void
 	{
 		$pgsql = $this->getPgsql();
 
-		$test = new Pgsql('Pgsql', 'SELECT * FROM test' . time(), $pgsql['database'], $pgsql['host'], $pgsql['user'], $pgsql['password'], $pgsql['port']);
+		$test = new Pgsql(
+			'Pgsql',
+			'SELECT * FROM test' . time(),
+			$pgsql['database'],
+			$pgsql['host'],
+			$pgsql['user'],
+			$pgsql['password'],
+			$pgsql['port']
+		);
 		// @ on purpose
 		$result = @$test->run();
-		$this->assertEquals(\Jyxo\Beholder\Result::FAILURE, $result->getStatus());
-		$this->assertEquals(sprintf('Query error %s@%s:%s/%s', $pgsql['user'], $pgsql['host'], $pgsql['port'], $pgsql['database']), $result->getDescription());
+		$this->assertEquals(Result::FAILURE, $result->getStatus());
+		$this->assertEquals(
+			sprintf('Query error %s@%s:%s/%s', $pgsql['user'], $pgsql['host'], $pgsql['port'], $pgsql['database']),
+			$result->getDescription()
+		);
 	}
 
 	/**
 	 * Tests everything working.
 	 */
-	public function testAllOk()
+	public function testAllOk(): void
 	{
 		$pgsql = $this->getPgsql();
 
 		$test = new Pgsql('Pgsql', 'SELECT 1', $pgsql['database'], $pgsql['host'], $pgsql['user'], $pgsql['password'], $pgsql['port']);
 		$result = $test->run();
-		$this->assertEquals(\Jyxo\Beholder\Result::SUCCESS, $result->getStatus());
-		$this->assertEquals(sprintf('%s@%s:%s/%s', $pgsql['user'], $pgsql['host'], $pgsql['port'], $pgsql['database']), $result->getDescription());
+		$this->assertEquals(Result::SUCCESS, $result->getStatus());
+		$this->assertEquals(
+			sprintf('%s@%s:%s/%s', $pgsql['user'], $pgsql['host'], $pgsql['port'], $pgsql['database']),
+			$result->getDescription()
+		);
+	}
+
+	protected function setUp(): void
+	{
+		if (!class_exists('Pgsql')) {
+			$this->markTestSkipped('Pgsql not set');
+		}
 	}
 
 	/**
@@ -81,7 +102,7 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
 	private function getPgsql(): array
 	{
 		// Skips the test if no PostgreSQL connection is defined
-		if ((empty($GLOBALS['pgsql'])) || (!preg_match('~^([^:]+):([^@]+)@([^:]+):(\\d+)/(\\w+)$~', $GLOBALS['pgsql'], $matches))) {
+		if (empty($GLOBALS['pgsql']) || (!preg_match('~^([^:]+):([^@]+)@([^:]+):(\\d+)/(\\w+)$~', $GLOBALS['pgsql'], $matches))) {
 			$this->markTestSkipped('PostgreSQL not set');
 		}
 
@@ -90,7 +111,8 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
 			'password' => $matches[2],
 			'host' => $matches[3],
 			'port' => $matches[4],
-			'database' => $matches[5]
+			'database' => $matches[5],
 		];
 	}
+
 }

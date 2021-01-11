@@ -13,18 +13,19 @@
 
 namespace Jyxo\Input\Filter;
 
+use function preg_match;
+use function preg_replace;
+
 /**
  * Filters phone numbers. Removes spaces and adds the pre-dial where possible.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Filter
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
  */
-class Phone extends \Jyxo\Input\Filter\AbstractFilter
+class Phone extends AbstractFilter
 {
+
 	/**
 	 * Filters a value.
 	 *
@@ -43,4 +44,5 @@ class Phone extends \Jyxo\Input\Filter\AbstractFilter
 
 		return $value;
 	}
+
 }

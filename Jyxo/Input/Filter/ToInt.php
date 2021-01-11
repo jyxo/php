@@ -13,29 +13,29 @@
 
 namespace Jyxo\Input\Filter;
 
+use function intval;
+
 /**
  * Filter for converting to integers.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Filter
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
  */
-class ToInt extends \Jyxo\Input\Filter\AbstractFilter
+class ToInt extends AbstractFilter
 {
+
 	/**
 	 * Base we are converting to.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $base;
 
 	/**
 	 * Constructor.
 	 *
-	 * @param integer $base
+	 * @param int $base
 	 */
 	public function __construct(int $base = 10)
 	{
@@ -52,4 +52,5 @@ class ToInt extends \Jyxo\Input\Filter\AbstractFilter
 	{
 		return intval($in, $this->base);
 	}
+
 }

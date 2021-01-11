@@ -13,17 +13,16 @@
 
 namespace Jyxo\Input\Validator;
 
+use function preg_match;
+
 /**
  * Validates a value using a regular expression.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Pěček
  */
-class Regex extends \Jyxo\Input\Validator\AbstractValidator
+class Regex extends AbstractValidator
 {
 
 	/**
@@ -32,7 +31,6 @@ class Regex extends \Jyxo\Input\Validator\AbstractValidator
 	 * @var string
 	 */
 	protected $pattern;
-
 
 	/**
 	 * Constructor.
@@ -48,8 +46,7 @@ class Regex extends \Jyxo\Input\Validator\AbstractValidator
 	 * Sets the validation regular expression.
 	 *
 	 * @param string $pattern Regular expression
-	 * @return \Jyxo\Input\Validator\Regex
-	 * @throws \Jyxo\Input\Validator\Exception On empty regular expression
+	 * @return Regex
 	 */
 	public function setPattern(string $pattern): self
 	{
@@ -76,15 +73,11 @@ class Regex extends \Jyxo\Input\Validator\AbstractValidator
 	 * Validates a value.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isValid($value): bool
 	{
-		if (!preg_match($this->getPattern(), (string) $value)) {
-			return false;
-		}
-
-		return true;
+		return preg_match($this->getPattern(), (string) $value) === 1;
 	}
 
 }

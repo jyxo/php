@@ -1,30 +1,33 @@
 <?php declare(strict_types = 1);
 
+use Jyxo\Spl\BaseObject;
+
 /**
  * Testing object.
  */
-class Foo extends \Jyxo\Spl\Object
+class Foo extends BaseObject
 {
+
 	/**
 	 * First variable.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $x;
 
 	/**
 	 * Second variable.
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	private $y;
 
 	/**
 	 * Returns the first variable value.
 	 *
-	 * @return integer
+	 * @return int
 	 */
-	public function getX()
+	public function getX(): int
 	{
 		return $this->x;
 	}
@@ -32,19 +35,19 @@ class Foo extends \Jyxo\Spl\Object
 	/**
 	 * Sets the firstvariable value.
 	 *
-	 * @param integer $x New value
+	 * @param int $x New value
 	 */
-	public function setX($x)
+	public function setX(int $x): void
 	{
-		$this->x = (int) $x;
+		$this->x = $x;
 	}
 
 	/**
 	 * Returns the second variable value.
 	 *
-	 * @return integer
+	 * @return bool
 	 */
-	public function isY()
+	public function isY(): bool
 	{
 		return $this->y;
 	}
@@ -52,10 +55,11 @@ class Foo extends \Jyxo\Spl\Object
 	/**
 	 * Sets the second variable value.
 	 *
-	 * @param boolean $y New value
+	 * @param bool $y New value
 	 */
-	public function setY($y)
+	public function setY(bool $y): void
 	{
-		$this->y = (bool) $y;
+		$this->y = $y;
 	}
+
 }

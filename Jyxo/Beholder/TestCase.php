@@ -16,8 +16,6 @@ namespace Jyxo\Beholder;
 /**
  * Base abstract beholder test class.
  *
- * @category Jyxo
- * @package Jyxo\Beholder
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Matoušek
@@ -25,12 +23,20 @@ namespace Jyxo\Beholder;
  */
 abstract class TestCase
 {
+
 	/**
 	 * Short one-line test description.
 	 *
 	 * @var string
 	 */
 	private $description = '';
+
+	/**
+	 * Performs the test.
+	 *
+	 * @return Result
+	 */
+	abstract public function run(): Result;
 
 	/**
 	 * Constructor.
@@ -43,13 +49,6 @@ abstract class TestCase
 	}
 
 	/**
-	 * Performs the test.
-	 *
-	 * @return \Jyxo\Beholder\Result
-	 */
-	abstract public function run(): \Jyxo\Beholder\Result;
-
-	/**
 	 * Returns the description.
 	 *
 	 * @return string
@@ -58,4 +57,5 @@ abstract class TestCase
 	{
 		return $this->description;
 	}
+
 }

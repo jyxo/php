@@ -13,67 +13,70 @@
 
 namespace Jyxo\Mail;
 
+use InvalidArgumentException;
+use Jyxo\StringUtil;
+use LogicException;
+use function base64_encode;
+use function chunk_split;
+use function explode;
+use function ord;
+use function preg_replace_callback;
+use function sprintf;
+use function strlen;
+use function strrpos;
+use function substr;
+use function trim;
+
 /**
  * List of possible content encodings.
  *
- * @category Jyxo
- * @package Jyxo\Mail
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
 class Encoding
 {
+
 	/**
 	 * 8-bit encoding.
-	 *
-	 * @var string
 	 */
-	const BIT8 = '8bit';
+	public const BIT8 = '8bit';
 
 	/**
 	 * 7-bit encoding.
-	 *
-	 * @var string
 	 */
-	const BIT7 = '7bit';
+	public const BIT7 = '7bit';
 
 	/**
 	 * Binary encoding.
-	 *
-	 * @var string
 	 */
-	const BINARY = 'binary';
+	public const BINARY = 'binary';
 
 	/**
 	 * Base64 encoding.
-	 *
-	 * @var string
 	 */
-	const BASE64 = 'base64';
+	public const BASE64 = 'base64';
 
 	/**
 	 * Quoted printable encoding.
-	 *
-	 * @var string
 	 */
-	const QUOTED_PRINTABLE = 'quoted-printable';
+	public const QUOTED_PRINTABLE = 'quoted-printable';
 
 	/**
 	 * Constructor preventing from creating instances.
 	 *
-	 * @throws \LogicException When trying to create an instance
+	 * @throws LogicException When trying to create an instance
 	 */
-	public final function __construct()
+	final public function __construct()
 	{
-		throw new \LogicException(sprintf('Cannot create an instance of a static class %s.', get_class($this)));
+		throw new LogicException(sprintf('Cannot create an instance of a static class %s.', static::class));
 	}
 
 	/**
 	 * Checks if the given encoding is compatible.
 	 *
 	 * @param string $encoding Encoding name
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function isCompatible(string $encoding): bool
 	{
@@ -82,7 +85,7 @@ class Encoding
 			self::BIT8 => true,
 			self::BINARY => true,
 			self::BASE64 => true,
-			self::QUOTED_PRINTABLE => true
+			self::QUOTED_PRINTABLE => true,
 		];
 
 		return isset($encodings[$encoding]);
@@ -93,10 +96,10 @@ class Encoding
 	 *
 	 * @param string $string Input string
 	 * @param string $encoding Encoding name
-	 * @param integer $lineLength Line length
+	 * @param int $lineLength Line length
 	 * @param string $lineEnd Line ending
 	 * @return string
-	 * @throws \InvalidArgumentException If an incompatible encoding was provided
+	 * @throws InvalidArgumentException If an incompatible encoding was provided
 	 */
 	public static function encode(string $string, string $encoding, int $lineLength, string $lineEnd): string
 	{
@@ -106,13 +109,13 @@ class Encoding
 			case self::BIT7:
 				// Break missing intentionally
 			case self::BIT8:
-				return \Jyxo\StringUtil::fixLineEnding(trim($string), $lineEnd) . $lineEnd;
+				return StringUtil::fixLineEnding(trim($string), $lineEnd) . $lineEnd;
 			case self::QUOTED_PRINTABLE:
 				return self::encodeQuotedPrintable($string, $lineLength, $lineEnd);
 			case self::BINARY:
 				return $string;
 			default:
-				throw new \InvalidArgumentException(sprintf('Incompatible encoding %s.', $encoding));
+				throw new InvalidArgumentException(sprintf('Incompatible encoding %s.', $encoding));
 		}
 	}
 
@@ -120,21 +123,21 @@ class Encoding
 	 * Encodes a string using the quoted-printable encoding.
 	 *
 	 * @param string $string Input string
-	 * @param integer $lineLength Line length
+	 * @param int $lineLength Line length
 	 * @param string $lineEnd Line ending
 	 * @return string
 	 */
 	private static function encodeQuotedPrintable(string $string, int $lineLength, string $lineEnd): string
 	{
-		$encoded = \Jyxo\StringUtil::fixLineEnding(trim($string), $lineEnd);
+		$encoded = StringUtil::fixLineEnding(trim($string), $lineEnd);
 
 		// Replaces all high ASCII characters, control codes and '='
-		$encoded = preg_replace_callback('~([\000-\010\013\014\016-\037\075\177-\377])~', function($matches) {
+		$encoded = preg_replace_callback('~([\000-\010\013\014\016-\037\075\177-\377])~', static function ($matches) {
 			return '=' . sprintf('%02X', ord($matches[1]));
 		}, $encoded);
 
 		// Replaces tabs and spaces if on line ends
-		$encoded = preg_replace_callback('~([\011\040])' . $lineEnd . '~', function($matches) use ($lineEnd) {
+		$encoded = preg_replace_callback('~([\011\040])' . $lineEnd . '~', static function ($matches) use ($lineEnd) {
 			return '=' . sprintf('%02X', ord($matches[1])) . $lineEnd;
 		}, $encoded);
 
@@ -146,6 +149,7 @@ class Encoding
 			// Line length is less than maximum
 			if (strlen($line) <= $lineLength) {
 				$output .= $line . $lineEnd;
+
 				continue;
 			}
 
@@ -157,12 +161,12 @@ class Encoding
 
 				// Cannot break a line in the middle of a character
 				$pos = strrpos(substr($line, 0, $partLength), '=');
-				if ((false !== $pos) && ($pos >= $partLength - 2)) {
+				if (($pos !== false) && ($pos >= $partLength - 2)) {
 					$partLength = $pos;
 				}
 
 				// If the last char is a break, move one character backwards
-				if (($partLength > 0) && (' ' == $line[$partLength - 1])) {
+				if (($partLength > 0) && ($line[$partLength - 1] === ' ')) {
 					$partLength--;
 				}
 
@@ -185,7 +189,7 @@ class Encoding
 	 * Encodes a string using the base64 encoding.
 	 *
 	 * @param string $string Input string
-	 * @param integer $lineLength Line length
+	 * @param int $lineLength Line length
 	 * @param string $lineEnd Line ending
 	 * @return string
 	 */
@@ -193,4 +197,5 @@ class Encoding
 	{
 		return trim(chunk_split(base64_encode($string), $lineLength, $lineEnd));
 	}
+
 }

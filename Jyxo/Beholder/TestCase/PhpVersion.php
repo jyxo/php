@@ -13,17 +13,23 @@
 
 namespace Jyxo\Beholder\TestCase;
 
+use Jyxo\Beholder\Result;
+use Jyxo\Beholder\TestCase;
+use function extension_loaded;
+use function phpversion;
+use function sprintf;
+use function version_compare;
+
 /**
  * Tests the current PHP version.
  *
- * @category Jyxo
- * @package Jyxo\Beholder
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class PhpVersion extends \Jyxo\Beholder\TestCase
+class PhpVersion extends TestCase
 {
+
 	/**
 	 * Required version.
 	 *
@@ -65,24 +71,28 @@ class PhpVersion extends \Jyxo\Beholder\TestCase
 	/**
 	 * Performs the test.
 	 *
-	 * @return \Jyxo\Beholder\Result
+	 * @return Result
 	 */
-	public function run(): \Jyxo\Beholder\Result
+	public function run(): Result
 	{
 		// If we test extensions they have to be installed
-		if ((!empty($this->extension)) && (!extension_loaded($this->extension))) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, sprintf('Extension %s missing', $this->extension));
+		if (!empty($this->extension) && (!extension_loaded($this->extension))) {
+			return new Result(Result::NOT_APPLICABLE, sprintf('Extension %s missing', $this->extension));
 		}
 
 		// Current version
 		$actual = !empty($this->extension) ? phpversion($this->extension) : phpversion();
 
 		// Version comparison
-		if (true !== version_compare($actual, $this->version, $this->comparison)) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Version %s, expected %s %s', $actual, $this->comparison, $this->version));
+		if (version_compare($actual, $this->version, $this->comparison) !== true) {
+			return new Result(
+				Result::FAILURE,
+				sprintf('Version %s, expected %s %s', $actual, $this->comparison, $this->version)
+			);
 		}
 
 		// OK
-		return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::SUCCESS, sprintf('Version %s', $actual));
+		return new Result(Result::SUCCESS, sprintf('Version %s', $actual));
 	}
+
 }

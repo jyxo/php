@@ -13,35 +13,36 @@
 
 namespace Jyxo\Input\Chain;
 
+use Jyxo\Input\Chain;
+use Jyxo\Input\ValidatorInterface;
+
 /**
  * Chain of filters and validators for a single variable.
  * The validation itself is performed after fulfilling the condition.
  * The condition is checked by a defined validator.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Chain
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Roman Řáha
  */
-class Conditional extends \Jyxo\Input\Chain
+class Conditional extends Chain
 {
+
 	/**
 	 * Condition validator.
 	 *
-	 * @var \Jyxo\Input\ValidatorInterface
+	 * @var ValidatorInterface
 	 */
 	private $condValidator = null;
 
 	/**
 	 * Sets the condition validator.
 	 *
-	 * @param \Jyxo\Input\ValidatorInterface $validator
+	 * @param ValidatorInterface $validator
 	 */
-	public function __construct(\Jyxo\Input\ValidatorInterface $validator = null)
+	public function __construct(?ValidatorInterface $validator = null)
 	{
-		if (null !== $validator) {
+		if ($validator !== null) {
 			$this->setCondValidator($validator);
 		}
 	}
@@ -50,43 +51,48 @@ class Conditional extends \Jyxo\Input\Chain
 	 * Validates a value.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isValid($value): bool
 	{
 		// Validation is performed only if the condition is fulfilled
-		if (true === $this->checkCondition($value)) {
+		if ($this->checkCondition($value) === true) {
 			return parent::isValid($value);
 		}
+
 		// No validation -> the value is valid
 		$this->value = $value;
+
 		return true;
+	}
+
+	/**
+	 * Sets the condition validator.
+	 *
+	 * @param ValidatorInterface $validator Condition validator
+	 * @return Conditional
+	 */
+	public function setCondValidator(ValidatorInterface $validator): self
+	{
+		$this->condValidator = $validator;
+
+		return $this;
 	}
 
 	/**
 	 * Checks if the condition is fulfilled.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	private function checkCondition($value): bool
 	{
-		if (null === $this->condValidator) {
+		if ($this->condValidator === null) {
 			// There is no validator -> always fulfilled
 			return true;
 		}
+
 		return $this->condValidator->isValid($value);
 	}
 
-	/**
-	 * Sets the condition validator.
-	 *
-	 * @param \Jyxo\Input\ValidatorInterface $validator Condition validator
-	 * @return \Jyxo\Input\Chain\Conditional
-	 */
-	public function setCondValidator(\Jyxo\Input\ValidatorInterface $validator): self
-	{
-		$this->condValidator = $validator;
-		return $this;
-	}
 }

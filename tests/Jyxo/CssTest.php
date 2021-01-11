@@ -13,6 +13,11 @@
 
 namespace Jyxo;
 
+use LogicException;
+use PHPUnit\Framework\TestCase;
+use function file_get_contents;
+use function sprintf;
+
 /**
  * Test for the \Jyxo\Css class.
  *
@@ -21,8 +26,9 @@ namespace Jyxo;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class CssTest extends \PHPUnit_Framework_TestCase
+class CssTest extends TestCase
 {
+
 	/**
 	 * Path to the files.
 	 *
@@ -31,21 +37,13 @@ class CssTest extends \PHPUnit_Framework_TestCase
 	private $filePath;
 
 	/**
-	 * Prepares the testing environment.
-	 */
-	protected function setUp()
-	{
-		$this->filePath = DIR_FILES . '/css';
-	}
-
-	/**
 	 * Tests the constructor.
 	 *
 	 * @see \Jyxo\Css::__construct()
 	 */
-	public function testConstruct()
+	public function testConstruct(): void
 	{
-		$this->expectException(\LogicException::class);
+		$this->expectException(LogicException::class);
 		$css = new Css();
 	}
 
@@ -54,7 +52,7 @@ class CssTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Css::repair()
 	 */
-	public function testRepair()
+	public function testRepair(): void
 	{
 		// In the form: expected css, given css
 		$tests = [];
@@ -99,7 +97,7 @@ class CssTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Css::filterProperties()
 	 */
-	public function testFilterProperties()
+	public function testFilterProperties(): void
 	{
 		// Filters given properties
 		$this->assertEquals(
@@ -151,7 +149,7 @@ class CssTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Css::minify()
 	 */
-	public function testMinify()
+	public function testMinify(): void
 	{
 		$this->assertStringEqualsFile(
 			$this->filePath . '/minify-expected.css',
@@ -170,7 +168,7 @@ class CssTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Css::convertStyleToInline()
 	 */
-	public function testConvertStyleToInline()
+	public function testConvertStyleToInline(): void
 	{
 		$testCount = 10;
 
@@ -178,8 +176,17 @@ class CssTest extends \PHPUnit_Framework_TestCase
 			$this->assertStringEqualsFile(
 				$this->filePath . '/' . sprintf('convertstyle-%s-expected.html', $i),
 				Css::convertStyleToInline(file_get_contents($this->filePath . '/' . sprintf('convertstyle-%s.html', $i))),
-				sprintf('Failed test %s for method %s::convertStyleToInline().', $i, \Jyxo\Css::class)
+				sprintf('Failed test %s for method %s::convertStyleToInline().', $i, Css::class)
 			);
 		}
 	}
+
+	/**
+	 * Prepares the testing environment.
+	 */
+	protected function setUp(): void
+	{
+		$this->filePath = DIR_FILES . '/css';
+	}
+
 }

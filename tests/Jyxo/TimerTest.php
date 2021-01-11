@@ -13,6 +13,12 @@
 
 namespace Jyxo;
 
+use PHPUnit\Framework\TestCase;
+use function array_fill_keys;
+use function array_reverse;
+use function microtime;
+use function usleep;
+
 /**
  * \Jyxo\Timer test.
  *
@@ -20,12 +26,13 @@ namespace Jyxo;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
  */
-class TimerTest extends \PHPUnit_Framework_TestCase
+class TimerTest extends TestCase
 {
+
 	/**
 	 * Tests duration measuring.
 	 */
-	public function testDuration()
+	public function testDuration(): void
 	{
 		$mt = microtime(true);
 		$name = Timer::start();
@@ -45,9 +52,11 @@ class TimerTest extends \PHPUnit_Framework_TestCase
 		// Start 4 timers
 		$names = ['foo', 'bar', 'tmp', 'ohai'];
 		$times = array_fill_keys($names, 0);
+
 		foreach ($names as $name) {
 			Timer::start($name);
 		}
+
 		// End them in reverse order
 		foreach (array_reverse($names) as $name) {
 			usleep(100);
@@ -57,6 +66,7 @@ class TimerTest extends \PHPUnit_Framework_TestCase
 		// The measured time is supposed to be in descending order
 		foreach ($names as $i => $name) {
 			$this->assertGreaterThan(0, $times[$name]);
+
 			if ($i > 0) {
 				$this->assertLessThan($times[$names[$i - 1]], $times[$name]);
 			}
@@ -66,9 +76,10 @@ class TimerTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests the timer function.
 	 */
-	public function testTimer()
+	public function testTimer(): void
 	{
 		Timer::timer();
+
 		for ($i = 100; $i < 1000000; $i *= 10) {
 			usleep($i * 2);
 			$delta = Timer::timer();
@@ -76,4 +87,5 @@ class TimerTest extends \PHPUnit_Framework_TestCase
 			$this->assertGreaterThan($i / 1000000, $delta);
 		}
 	}
+
 }

@@ -13,17 +13,24 @@
 
 namespace Jyxo\Beholder\TestCase;
 
+use Jyxo\Beholder\Result;
+use Jyxo\Beholder\TestCase;
+use Jyxo\Rpc\Xml\Client;
+use Throwable;
+use function class_exists;
+use function extension_loaded;
+use function sprintf;
+
 /**
  * Tests XML-RPC server availability.
  *
- * @category Jyxo
- * @package Jyxo\Beholder
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class XmlRpc extends \Jyxo\Beholder\TestCase
+class XmlRpc extends TestCase
 {
+
 	/**
 	 * XML-RPC server URL.
 	 *
@@ -55,7 +62,7 @@ class XmlRpc extends \Jyxo\Beholder\TestCase
 	/**
 	 * Timeout.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $timeout;
 
@@ -67,7 +74,7 @@ class XmlRpc extends \Jyxo\Beholder\TestCase
 	 * @param string $method Method name
 	 * @param array $params Method parameters
 	 * @param array $options Request options
-	 * @param integer $timeout Timeout
+	 * @param int $timeout Timeout
 	 */
 	public function __construct(string $description, string $url, string $method, array $params, array $options = [], int $timeout = 2)
 	{
@@ -83,41 +90,47 @@ class XmlRpc extends \Jyxo\Beholder\TestCase
 	/**
 	 * Performs the test.
 	 *
-	 * @return \Jyxo\Beholder\Result
+	 * @return Result
 	 */
-	public function run(): \Jyxo\Beholder\Result
+	public function run(): Result
 	{
 		// The xmlrpc extension is required
 		if (!extension_loaded('xmlrpc')) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Extension xmlrpc missing');
+			return new Result(Result::NOT_APPLICABLE, 'Extension xmlrpc missing');
 		}
 
 		// The curl extension is required
 		if (!extension_loaded('curl')) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Extension curl missing');
+			return new Result(Result::NOT_APPLICABLE, 'Extension curl missing');
 		}
 
 		// The \Jyxo\Rpc\Xml\Client class is required
-		if (!class_exists(\Jyxo\Rpc\Xml\Client::class)) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, sprintf('Class %s missing', \Jyxo\Rpc\Xml\Client::class));
+		if (!class_exists(Client::class)) {
+			return new Result(
+				Result::NOT_APPLICABLE,
+				sprintf('Class %s missing', Client::class)
+			);
 		}
 
 		// Create the RPC client
-		$rpc = new \Jyxo\Rpc\Xml\Client();
+		$rpc = new Client();
+
 		foreach ($this->options as $name => $value) {
 			$rpc->setOption($name, $value);
 		}
+
 		$rpc->setUrl($this->url)
 			->setTimeout($this->timeout);
 
 		// Send the request
 		try {
 			$rpc->send($this->method, $this->params);
-		} catch (\Exception $e) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, $this->url);
+		} catch (Throwable $e) {
+			return new Result(Result::FAILURE, $this->url);
 		}
 
 		// OK
-		return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::SUCCESS, $this->url);
+		return new Result(Result::SUCCESS, $this->url);
 	}
+
 }

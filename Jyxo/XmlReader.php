@@ -16,14 +16,13 @@ namespace Jyxo;
 /**
  * XMLReader child class (available since PHP 5.1).
  *
- * @category Jyxo
- * @package Jyxo\XmlReader
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
 class XmlReader extends \XMLReader
 {
+
 	/**
 	 * Text types list.
 	 *
@@ -32,7 +31,7 @@ class XmlReader extends \XMLReader
 	private $textTypes = [
 		self::TEXT => true,
 		self::WHITESPACE => true,
-		self::SIGNIFICANT_WHITESPACE => true
+		self::SIGNIFICANT_WHITESPACE => true,
 	];
 
 	/**
@@ -44,7 +43,7 @@ class XmlReader extends \XMLReader
 		self::CDATA => true,
 		self::TEXT => true,
 		self::WHITESPACE => true,
-		self::SIGNIFICANT_WHITESPACE => true
+		self::SIGNIFICANT_WHITESPACE => true,
 	];
 
 	/**
@@ -54,24 +53,25 @@ class XmlReader extends \XMLReader
 	 */
 	public function getTextValue(): string
 	{
-		if (self::ELEMENT === $this->nodeType && $this->isEmptyElement) {
+		if ($this->nodeType === self::ELEMENT && $this->isEmptyElement) {
 			return '';
 		}
 
 		$depth = 1;
 		$text = '';
 
-		while ((0 !== $depth) && ($this->read())) {
+		while (($depth !== 0) && ($this->read())) {
 			if (isset($this->textTypes[$this->nodeType])) {
 				$text .= $this->value;
-			} elseif (self::ELEMENT === $this->nodeType) {
+			} elseif ($this->nodeType === self::ELEMENT) {
 				if (!$this->isEmptyElement) {
 					$depth++;
 				}
-			} elseif (self::END_ELEMENT === $this->nodeType) {
+			} elseif ($this->nodeType === self::END_ELEMENT) {
 				$depth--;
 			}
 		}
+
 		return $text;
 	}
 
@@ -82,17 +82,17 @@ class XmlReader extends \XMLReader
 	 */
 	public function getContent(): string
 	{
-		if (self::ELEMENT === $this->nodeType && $this->isEmptyElement) {
+		if ($this->nodeType === self::ELEMENT && $this->isEmptyElement) {
 			return '';
 		}
 
 		$depth = 1;
 		$text = '';
 
-		while ((0 !== $depth) && ($this->read())) {
+		while (($depth !== 0) && ($this->read())) {
 			if (isset($this->contentTypes[$this->nodeType])) {
 				$text .= $this->value;
-			} elseif (self::ELEMENT === $this->nodeType) {
+			} elseif ($this->nodeType === self::ELEMENT) {
 				if ($this->isEmptyElement) {
 					$text .= '<' . $this->name . '/>';
 				} else {
@@ -105,8 +105,9 @@ class XmlReader extends \XMLReader
 
 					$text .= '>';
 				}
-			} elseif (self::END_ELEMENT === $this->nodeType) {
+			} elseif ($this->nodeType === self::END_ELEMENT) {
 				$depth--;
+
 				if ($depth > 0) {
 					$text .= '</' . $this->name . '>';
 				}
@@ -115,4 +116,5 @@ class XmlReader extends \XMLReader
 
 		return $text;
 	}
+
 }

@@ -13,32 +13,33 @@
 
 namespace Jyxo\Input;
 
+use BadMethodCallException;
+use function array_key_exists;
+use function array_merge;
+use function reset;
+use function uniqid;
+
 /**
  * Class implementing "fluent" design pattern for \Jyxo\Input.
  *
  * Allows chaining multiple validators and checking multiple values in one validation cycle.
  *
- * @category Jyxo
- * @package Jyxo\Input
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
  */
 class Fluent
 {
+
 	/**
 	 * Validator class names prefix.
-	 *
-	 * @var string
 	 */
-	const VALIDATORS_PREFIX = '\Jyxo\Input\Validator\\';
+	public const VALIDATORS_PREFIX = '\Jyxo\Input\Validator\\';
 
 	/**
 	 * Filter class names prefix.
-	 *
-	 * @var string
 	 */
-	const FILTERS_PREFIX = '\Jyxo\Input\Filter\\';
+	public const FILTERS_PREFIX = '\Jyxo\Input\Filter\\';
 
 	/**
 	 * All chains.
@@ -71,7 +72,7 @@ class Fluent
 	/**
 	 * Current chain.
 	 *
-	 * @var \Jyxo\Input\Chain
+	 * @var Chain
 	 */
 	private $chain = null;
 
@@ -85,7 +86,7 @@ class Fluent
 	/**
 	 * \Jyxo\Input objects factory.
 	 *
-	 * @var \Jyxo\Input\Factory
+	 * @var Factory
 	 */
 	private $factory;
 
@@ -103,7 +104,7 @@ class Fluent
 	 *
 	 * @param mixed $var Value to check.
 	 * @param string $name Variable name
-	 * @return \Jyxo\Input\Fluent
+	 * @return Fluent
 	 */
 	public function check($var, string $name): self
 	{
@@ -112,19 +113,21 @@ class Fluent
 		$this->values[$name] = $var;
 		$this->default[$name] = null;
 		$this->currentName = $name;
+
 		return $this;
 	}
 
 	/**
 	 * Validates all variables.
 	 *
-	 * @return \Jyxo\Input\Fluent
+	 * @return Fluent
 	 */
 	public function all(): self
 	{
 		$this->chain = new Chain();
 		$this->chains[uniqid('fluent:')] = $this->chain;
 		$this->currentName = null;
+
 		return $this;
 	}
 
@@ -132,13 +135,12 @@ class Fluent
 	 * Sets a default value in case the validation fails.
 	 *
 	 * @param mixed $value Default value
-	 * @return \Jyxo\Input\Fluent
-	 * @throws \BadMethodCallException There is no active variable.
+	 * @return Fluent
 	 */
 	public function defaultValue($value): self
 	{
-		if (null === $this->currentName) {
-			throw new \BadMethodCallException('No active variable');
+		if ($this->currentName === null) {
+			throw new BadMethodCallException('No active variable');
 		}
 
 		$this->default[$this->currentName] = $value;
@@ -152,11 +154,12 @@ class Fluent
 	 * @param string $name Validator name
 	 * @param string $errorMessage Validator error message
 	 * @param mixed $param Additional validator parameter
-	 * @return \Jyxo\Input\Fluent
+	 * @return Fluent
 	 */
-	public function validate(string $name, string $errorMessage = null, $param = null): self
+	public function validate(string $name, ?string $errorMessage = null, $param = null): self
 	{
 		$this->chain->addValidator($this->factory->getValidatorByName($name, $param), $errorMessage);
+
 		return $this;
 	}
 
@@ -165,11 +168,12 @@ class Fluent
 	 *
 	 * @param string $name Filter name
 	 * @param mixed $param Additional filter parameter
-	 * @return \Jyxo\Input\Fluent
+	 * @return Fluent
 	 */
 	public function filter(string $name, $param = null): self
 	{
 		$this->chain->addFilter($this->factory->getFilterByName($name, $param));
+
 		return $this;
 	}
 
@@ -177,16 +181,19 @@ class Fluent
 	 * Adds a subchain to the current chain that treats the value a an array.
 	 * Automatically adds the isArray validator.
 	 *
-	 * @param boolean $addFilter Add the Trim filter (removes empty elements)
-	 * @return \Jyxo\Input\Fluent
+	 * @param bool $addFilter Add the Trim filter (removes empty elements)
+	 * @return Fluent
 	 */
 	public function walk(bool $addFilter = true): self
 	{
 		$this->validate('isArray');
-		if (false != $addFilter) {
+
+		if ($addFilter !== false) {
 			$this->filter('trim');
 		}
+
 		$this->chain = $this->chain->addWalk();
+
 		return $this;
 	}
 
@@ -197,47 +204,52 @@ class Fluent
 	 *
 	 * @param string $name Validator name
 	 * @param mixed $param Additional validator parameter
-	 * @return \Jyxo\Input\Fluent
-	 * @throws \BadMethodCallException There is no active variable
+	 * @return Fluent
 	 */
 	public function condition(string $name, $param = null): self
 	{
 		$condChain = new Chain\Conditional($this->factory->getValidatorByName($name, $param));
-		if (true === $this->chain->isEmpty()) {
+
+		if ($this->chain->isEmpty() === true) {
 			// The actual chain is empty, can be replaced by the condition
 			$this->chain = $condChain;
-			if (null === $this->currentName) {
-				throw new \BadMethodCallException('No active variable');
+
+			if ($this->currentName === null) {
+				throw new BadMethodCallException('No active variable');
 			}
+
 			$this->chains[$this->currentName] = $condChain;
 		} else {
 			$this->chain = $this->chain->addCondition($condChain);
 		}
+
 		return $this;
 	}
 
 	/**
 	 * Closes a chain.
 	 *
-	 * @return \Jyxo\Input\Fluent
+	 * @return Fluent
 	 */
 	public function close(): self
 	{
 		$this->chain = $this->chain->close();
+
 		return $this;
 	}
 
 	/**
 	 * Performs validation and filtering of all variables.
 	 *
-	 * @param boolean $assocErrors Return error messages in an associative array
-	 * @return boolean
+	 * @param bool $assocErrors Return error messages in an associative array
+	 * @return bool
 	 */
 	public function isValid(bool $assocErrors = false): bool
 	{
 		$valid = true;
+
 		foreach ($this->chains as $name => $chain) {
-			/* @var $chain \Jyxo\Input\Chain */
+			/** @var Chain $chain */
 			if (array_key_exists($name, $this->values)) {
 				// Variable
 				if (!$this->checkChain($chain, $this->values[$name], $this->default[$name], $assocErrors ? $name : null)) {
@@ -247,6 +259,7 @@ class Fluent
 				foreach ($this->values as $name => &$value) {
 					if (!$this->checkChain($chain, $value, $this->default[$name])) {
 						$valid = false;
+
 						// No need to check other variables
 						break;
 					}
@@ -261,39 +274,12 @@ class Fluent
 	 * Calls isValid(), but throws an exception on error.
 	 *
 	 * The exception contains only the first validation error message.
-	 *
-	 * @throws \Jyxo\Input\Validator\Exception Validation failed
 	 */
-	public function validateAll()
+	public function validateAll(): void
 	{
 		if (!$this->isValid()) {
 			throw new Validator\Exception(reset($this->errors) ?: 'Validation failed');
 		}
-	}
-
-	/**
-	 * Checks a chain.
-	 *
-	 * @param \Jyxo\Input\Chain $chain Validation chain
-	 * @param mixed $value Input value
-	 * @param mixed $default Default value to be used in case the validation fails
-	 * @param string $name Chain name to be used in the error array
-	 * @return boolean
-	 */
-	private function checkChain(\Jyxo\Input\Chain $chain, &$value, $default, string $name = null): bool
-	{
-		$valid = true;
-		if ($chain->isValid($value)) {
-			$value = $chain->getValue();
-		} elseif (null !== $default) {
-			$value = $default;
-		} else {
-			$valid = false;
-			// If we have $name set, we want an associative array
-			$errors = empty($name) ? $chain->getErrors() : [$name => $chain->getErrors()];
-			$this->errors = array_merge($this->errors, $errors);
-		}
-		return $valid;
 	}
 
 	/**
@@ -311,7 +297,6 @@ class Fluent
 	 *
 	 * @param string $name Variable name
 	 * @return mixed
-	 * @throws \Jyxo\Input\Exception No variable with the given name
 	 */
 	public function getValue(string $name)
 	{
@@ -337,11 +322,12 @@ class Fluent
 	 *
 	 * @param string $name Variable name
 	 * @param mixed $default Default value
-	 * @return \Jyxo\Input\Fluent
+	 * @return Fluent
 	 */
 	public function post(string $name, $default = null): self
 	{
 		$this->addToCheck($_POST, $name, $default);
+
 		return $this;
 	}
 
@@ -350,11 +336,12 @@ class Fluent
 	 *
 	 * @param string $name Variable name
 	 * @param mixed $default Default value
-	 * @return \Jyxo\Input\Fluent
+	 * @return Fluent
 	 */
 	public function query(string $name, $default = null): self
 	{
 		$this->addToCheck($_GET, $name, $default);
+
 		return $this;
 	}
 
@@ -363,11 +350,12 @@ class Fluent
 	 *
 	 * @param string $name Variable name
 	 * @param mixed $default Default value
-	 * @return \Jyxo\Input\Fluent
+	 * @return Fluent
 	 */
 	public function request(string $name, $default = null): self
 	{
 		$this->addToCheck($_REQUEST, $name, $default);
+
 		return $this;
 	}
 
@@ -376,9 +364,9 @@ class Fluent
 	 *
 	 * Requires \Jyxo\Input\Upload.
 	 *
-	 * @param string $index File index
 	 * @see \Jyxo\Input\Upload
-	 * @return \Jyxo\Input\Fluent
+	 * @param string $index File index
+	 * @return Fluent
 	 */
 	public function file(string $index): self
 	{
@@ -386,9 +374,37 @@ class Fluent
 		$file = new Upload($index);
 		$this
 			->check($file, $index)
-				->validate($validator)
-				->filter($validator);
+			->validate($validator)
+			->filter($validator);
+
 		return $this;
+	}
+
+	/**
+	 * Checks a chain.
+	 *
+	 * @param Chain $chain Validation chain
+	 * @param mixed $value Input value
+	 * @param mixed $default Default value to be used in case the validation fails
+	 * @param string $name Chain name to be used in the error array
+	 * @return bool
+	 */
+	private function checkChain(Chain $chain, &$value, $default, ?string $name = null): bool
+	{
+		$valid = true;
+
+		if ($chain->isValid($value)) {
+			$value = $chain->getValue();
+		} elseif ($default !== null) {
+			$value = $default;
+		} else {
+			$valid = false;
+			// If we have $name set, we want an associative array
+			$errors = empty($name) ? $chain->getErrors() : [$name => $chain->getErrors()];
+			$this->errors = array_merge($this->errors, $errors);
+		}
+
+		return $valid;
 	}
 
 	/**
@@ -398,9 +414,9 @@ class Fluent
 	 * @param string $name Variable name
 	 * @param mixed $default Default value
 	 */
-	private function addToCheck(array $global, string $name, $default = null)
+	private function addToCheck(array $global, string $name, $default = null): void
 	{
-		$var = isset($global[$name]) ? $global[$name] : $default;
+		$var = $global[$name] ?? $default;
 		$this->check($var, $name);
 	}
 
@@ -409,10 +425,10 @@ class Fluent
 	 *
 	 * @param string $offset Value name
 	 * @return mixed
-	 * @throws \Jyxo\Input\Exception No variable with the given name
 	 */
 	public function __get(string $offset)
 	{
 		return $this->getValue($offset);
 	}
+
 }

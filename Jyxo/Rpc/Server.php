@@ -13,17 +13,36 @@
 
 namespace Jyxo\Rpc;
 
+use InvalidArgumentException;
+use LogicException;
+use ReflectionClass;
+use ReflectionException;
+use ReflectionMethod;
+use function call_user_func;
+use function call_user_func_array;
+use function class_exists;
+use function date;
+use function explode;
+use function file_put_contents;
+use function function_exists;
+use function method_exists;
+use function print_r;
+use function sprintf;
+use function strpos;
+use function strtr;
+use function trim;
+use const FILE_APPEND;
+
 /**
  * Class for creating a RPC server.
  *
- * @category Jyxo
- * @package Jyxo\Rpc
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
 abstract class Server
 {
+
 	/**
 	 * Aliases of real functions.
 	 *
@@ -47,36 +66,35 @@ abstract class Server
 	private $logCallback;
 
 	/**
+	 * Processes a request and sends a RPC response.
+	 */
+	abstract public function process(): void;
+
+	/**
+	 * Actually registers a function to a server method.
+	 *
+	 * @param string $func Function name
+	 */
+	abstract protected function register(string $func): void;
+
+	/**
 	 * Creates a class instance.
 	 */
 	protected function __construct()
-	{}
-
-	/**
-	 * Destroys a class instance.
-	 */
-	public function __destruct()
-	{}
-
-	/**
-	 * Prevents from singleton cloning.
-	 *
-	 * @throws \LogicException When trying to clone instance
-	 */
-	public final function __clone()
 	{
-		throw new \LogicException(sprintf('Class %s can have only one instance.', get_class($this)));
+		// Nothing
 	}
 
 	/**
 	 * Returns class instance.
 	 *
-	 * @return \Jyxo\Rpc\Server
+	 * @return Server
 	 */
 	public static function getInstance(): self
 	{
 		static $instance;
-		if (null === $instance) {
+
+		if ($instance === null) {
 			$instance = new static();
 		}
 
@@ -84,20 +102,27 @@ abstract class Server
 	}
 
 	/**
+	 * Destroys a class instance.
+	 */
+	public function __destruct()
+	{
+		// Nothing
+	}
+
+	/**
 	 * Turns on logging.
 	 *
 	 * @param string $filename Log file path.
 	 * @param callback $callback Function to be called prior to logging a message.
-	 * @return \Jyxo\Rpc\Server
-	 * @throws \InvalidArgumentException If no file or an invalid callback was provided.
+	 * @return Server
 	 */
-	public function enableLogging(string $filename, callable $callback = null): self
+	public function enableLogging(string $filename, ?callable $callback = null): self
 	{
 		$filename = trim($filename);
 
 		// A log file has to be provided
 		if (empty($filename)) {
-			throw new \InvalidArgumentException('No log file was provided.');
+			throw new InvalidArgumentException('No log file was provided.');
 		}
 
 		$this->logFile = $filename;
@@ -110,17 +135,17 @@ abstract class Server
 	 * Registers class public methods.
 	 *
 	 * @param string $class Class name
-	 * @param boolean $useFullName Register with class name
-	 * @return \Jyxo\Rpc\Server
-	 * @throws \InvalidArgumentException If no such class exists
+	 * @param bool $useFullName Register with class name
+	 * @return Server
 	 */
 	public function registerClass(string $class, bool $useFullName = true): self
 	{
 		if (!class_exists($class)) {
-			throw new \InvalidArgumentException(sprintf('Class %s does not exist.', $class));
+			throw new InvalidArgumentException(sprintf('Class %s does not exist.', $class));
 		}
 
-		$reflection = new \ReflectionClass($class);
+		$reflection = new ReflectionClass($class);
+
 		foreach ($reflection->getMethods() as $method) {
 			// Only public methods
 			if ($method->isPublic()) {
@@ -145,27 +170,26 @@ abstract class Server
 	 *
 	 * @param string $class Class name
 	 * @param string $method Function name
-	 * @param boolean $useFullName Register with class name
-	 * @return \Jyxo\Rpc\Server
-	 * @throws \InvalidArgumentException If no such class exists or method is not public
+	 * @param bool $useFullName Register with class name
+	 * @return Server
 	 */
 	public function registerMethod(string $class, string $method, bool $useFullName = true): self
 	{
 		if (!class_exists($class)) {
-			throw new \InvalidArgumentException(sprintf('Třída %s neexistuje.', $class));
+			throw new InvalidArgumentException(sprintf('Třída %s neexistuje.', $class));
 		}
 
 		// If magic methods exist, always register
 		if ((!method_exists($class, '__call')) && (!method_exists($class, '__callStatic'))) {
 			try {
-				$reflection = new \ReflectionMethod($class, $method);
-			} catch (\ReflectionException $e) {
-				throw new \InvalidArgumentException(sprintf('Method %s::%s does not exist.', $class, $method));
+				$reflection = new ReflectionMethod($class, $method);
+			} catch (ReflectionException $e) {
+				throw new InvalidArgumentException(sprintf('Method %s::%s does not exist.', $class, $method));
 			}
 
 			// Only public methods
 			if (!$reflection->isPublic()) {
-				throw new \InvalidArgumentException(sprintf('Method %s::%s is not public.', $class, $method));
+				throw new InvalidArgumentException(sprintf('Method %s::%s is not public.', $class, $method));
 			}
 		}
 
@@ -186,31 +210,18 @@ abstract class Server
 	 * Registers given function.
 	 *
 	 * @param string $func Function name
-	 * @return \Jyxo\Rpc\Server
-	 * @throws \InvalidArgumentException If no such function exists
+	 * @return Server
 	 */
 	public function registerFunc(string $func): self
 	{
 		if (!function_exists($func)) {
-			throw new \InvalidArgumentException(sprintf('Function %s does not exist.', $func));
+			throw new InvalidArgumentException(sprintf('Function %s does not exist.', $func));
 		}
 
 		$this->register($func);
 
 		return $this;
 	}
-
-	/**
-	 * Actually registers a function to a server method.
-	 *
-	 * @param string $func Function name
-	 */
-	abstract protected function register(string $func);
-
-	/**
-	 * Processes a request and sends a RPC response.
-	 */
-	abstract public function process();
 
 	/**
 	 * Calls a server method with given parameters.
@@ -222,34 +233,24 @@ abstract class Server
 	protected function call(string $method, array $params)
 	{
 		$func = $method;
+
 		// If an alias was given, use the actual method
 		if (isset($this->aliases[$method])) {
 			$func = $this->aliases[$method];
 		}
 
 		// Class method
-		if (false !== strpos($func, '::')) {
-			list($className, $methodName) = explode('::', $func);
+		if (strpos($func, '::') !== false) {
+			[$className, $methodName] = explode('::', $func);
 
 			try {
 				// Method exists
-				$reflection = new \ReflectionMethod($className, $methodName);
-				if ($reflection->isStatic()) {
-					// Method is static
-					$callback = [$className, $methodName];
-				} else {
-					// Method is not static
-					$callback = [new $className(), $methodName];
-				}
-			} catch (\ReflectionException $e) {
+				$reflection = new ReflectionMethod($className, $methodName);
+
+				$callback = $reflection->isStatic() ? [$className, $methodName] : [new $className(), $methodName];
+			} catch (ReflectionException $e) {
 				// Method does not exist
-				if (method_exists($className, '__call')) {
-					// Is __call available
-					$callback = [new $className(), $methodName];
-				} else {
-					// Is __callStatic available
-					$callback = [$className, $methodName];
-				}
+				$callback = method_exists($className, '__call') ? [new $className(), $methodName] : [$className, $methodName];
 			}
 		} else {
 			// Simple function
@@ -271,21 +272,23 @@ abstract class Server
 	 * @param array $params Method parameters
 	 * @param mixed $result Function result
 	 */
-	private function log(string $method, array $params, $result)
+	private function log(string $method, array $params, $result): void
 	{
 		// Log only if a filename is set
 		if (!empty($this->logFile)) {
 			// If a callback function is defined, call it
 			if (!empty($this->logCallback)) {
-				list($method, $params, $result) = call_user_func($this->logCallback, $method, $params, $result);
+				[$method, $params, $result] = call_user_func($this->logCallback, $method, $params, $result);
 			}
 
 			// Method
 			$text = sprintf("Method: %s\n", $method);
+
 			// Parameters
 			foreach ($params as $paramName => $param) {
 				$text .= sprintf("Param %s: %s\n", $paramName, trim(print_r($param, true)));
 			}
+
 			// Result
 			$text .= sprintf("Result: %s\n", trim(print_r($result, true)));
 
@@ -293,10 +296,26 @@ abstract class Server
 			$text = strtr(trim($text), ["\n" => "\n\t"]);
 
 			// Time, ip address, hostname, uri
-			$text = sprintf("[%s] %s %s %s\n\t%s\n", date('Y-m-d H:i:s'), $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_HOST'], $_SERVER['REQUEST_URI'], $text);
+			$text = sprintf(
+				"[%s] %s %s %s\n\t%s\n",
+				date('Y-m-d H:i:s'),
+				$_SERVER['REMOTE_ADDR'],
+				$_SERVER['HTTP_HOST'],
+				$_SERVER['REQUEST_URI'],
+				$text
+			);
 
 			// Save into logfile
 			file_put_contents($this->logFile, $text, FILE_APPEND);
 		}
 	}
+
+	/**
+	 * Prevents from singleton cloning.
+	 */
+	final public function __clone()
+	{
+		throw new LogicException(sprintf('Class %s can have only one instance.', static::class));
+	}
+
 }

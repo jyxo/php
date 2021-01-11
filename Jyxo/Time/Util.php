@@ -13,17 +13,24 @@
 
 namespace Jyxo\Time;
 
+use function date;
+use function easter_days;
+use function in_array;
+use function min;
+use function mktime;
+use function strtotime;
+use function time;
+
 /**
  * Various utilities for working with date/time.
  *
- * @category Jyxo
- * @package Jyxo\Time
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
  */
 class Util
 {
+
 	/**
 	 * List of Czech public holidays.
 	 *
@@ -40,7 +47,7 @@ class Util
 		'17.11',
 		'24.12',
 		'25.12',
-		'26.12'
+		'26.12',
 	];
 
 	/**
@@ -49,10 +56,10 @@ class Util
 	 * If the current date is greater than the next month's number of days, returns the next month's last date.
 	 * This is different from strtotime('+1 month') behaviour, where August 31st returns October 1st.
 	 *
-	 * @param integer $now Current date/time
-	 * @return \Jyxo\Time\Time
+	 * @param int $now Current date/time
+	 * @return Time
 	 */
-	public static function nextMonth(\Jyxo\Time\Time $now = null): Time
+	public static function nextMonth(?Time $now = null): Time
 	{
 		$now = $now ? $now->unix : time();
 
@@ -63,16 +70,17 @@ class Util
 
 		// Create the date
 		$date = mktime((int) date('H', $now), (int) date('i', $now), (int) date('s', $now), $nextMonth, $day, $thisYear);
+
 		return new Time($date);
 	}
 
 	/**
 	 * Checks if the given date is a working day.
 	 *
-	 * @param \Jyxo\Time\Time $day Date to be checked
-	 * @return boolean
+	 * @param Time $day Date to be checked
+	 * @return bool
 	 */
-	public static function isWorkDay(\Jyxo\Time\Time $day): bool
+	public static function isWorkDay(Time $day): bool
 	{
 		$holidays = self::$holidays;
 
@@ -87,11 +95,12 @@ class Util
 		if ($day->format('N') > 5) {
 			// Saturday or Sunday
 			$isWorkDay = false;
-		} elseif (in_array($day->format('j.n'), $holidays)) {
+		} elseif (in_array($day->format('j.n'), $holidays, true)) {
 			// Public holiday, hurray!
 			$isWorkDay = false;
 		}
 
 		return $isWorkDay;
 	}
+
 }

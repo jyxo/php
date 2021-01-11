@@ -13,6 +13,8 @@
 
 namespace Jyxo\Mail\Email;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * \Jyxo\Mail\Email\Header class test.
  *
@@ -21,12 +23,13 @@ namespace Jyxo\Mail\Email;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class HeaderTest extends \PHPUnit_Framework_TestCase
+class HeaderTest extends TestCase
 {
+
 	/**
 	 * Runs the test.
 	 */
-	public function test()
+	public function test(): void
 	{
 		$name = 'Organization';
 		$value = 'Jyxo';
@@ -36,4 +39,5 @@ class HeaderTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($name, $header->getName());
 		$this->assertEquals($value, $header->getValue());
 	}
+
 }

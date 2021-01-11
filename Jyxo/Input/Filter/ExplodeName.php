@@ -13,18 +13,20 @@
 
 namespace Jyxo\Input\Filter;
 
+use function array_pop;
+use function explode;
+use function implode;
+
 /**
  * Filter for splitting a name into first and second name.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Filter
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
  */
-class ExplodeName extends \Jyxo\Input\Filter\AbstractFilter
+class ExplodeName extends AbstractFilter
 {
+
 	/**
 	 * Filters a value.
 	 *
@@ -40,8 +42,10 @@ class ExplodeName extends \Jyxo\Input\Filter\AbstractFilter
 
 		$in = [
 			'firstname' => $firstname,
-			'lastname' => $lastname
+			'lastname' => $lastname,
 		];
+
 		return $in;
 	}
+
 }

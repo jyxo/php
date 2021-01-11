@@ -16,23 +16,22 @@ namespace Jyxo\Input\Validator;
 /**
  * Validates if a value is not empty.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Pěček
  */
-class NotEmpty extends \Jyxo\Input\Validator\AbstractValidator
+class NotEmpty extends AbstractValidator
 {
+
 	/**
 	 * Validates a value.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isValid($value): bool
 	{
 		return !empty($value);
 	}
+
 }

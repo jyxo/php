@@ -13,23 +13,23 @@
 
 namespace Jyxo\Input\Validator;
 
+use function preg_match;
+
 /**
  * Validates a IPv6 address.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class IsIpV6 extends \Jyxo\Input\Validator\AbstractValidator
+class IsIpV6 extends AbstractValidator
 {
+
 	/**
 	 * Validates a value.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isValid($value): bool
 	{
@@ -46,10 +46,7 @@ class IsIpV6 extends \Jyxo\Input\Validator\AbstractValidator
 		$patternIpV6VariantCompressedHex4Dec = '(?:(?:(?:[0-9a-f]{1,4}(?::[0-9a-f]{1,4})*)?)::(?:(?:[0-9a-f]{1,4}:)*)' . $patternIpV4 . ')';
 		$patternIpV6 = '(?:' . $patternIpV6Variant8Hex . '|' . $patternIpV6VariantCompressedHex . '|' . $patternIpV6VariantHex4Dec . '|' . $patternIpV6VariantCompressedHex4Dec . ')';
 
-		if (!preg_match('~^' . $patternIpV6 . '$~', (string) $value)) {
-			return false;
-		}
-
-		return true;
+		return preg_match('~^' . $patternIpV6 . '$~', (string) $value) === 1;
 	}
+
 }

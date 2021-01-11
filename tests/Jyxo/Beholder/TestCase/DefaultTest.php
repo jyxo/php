@@ -13,6 +13,11 @@
 
 namespace Jyxo\Beholder\TestCase;
 
+use PHPUnit\Framework\TestCase;
+use function spl_autoload_functions;
+use function spl_autoload_register;
+use function spl_autoload_unregister;
+
 /**
  * Abstract base class for beholder tests.
  *
@@ -20,8 +25,9 @@ namespace Jyxo\Beholder\TestCase;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-abstract class DefaultTest extends \PHPUnit_Framework_TestCase
+abstract class DefaultTest extends TestCase
 {
+
 	/**
 	 * Autoload list.
 	 *
@@ -32,9 +38,10 @@ abstract class DefaultTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Turns autoloading off.
 	 */
-	protected function disableAutoload()
+	protected function disableAutoload(): void
 	{
 		$this->autoloadList = spl_autoload_functions();
+
 		foreach ($this->autoloadList as $function) {
 			spl_autoload_unregister($function);
 		}
@@ -43,11 +50,13 @@ abstract class DefaultTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Turns autoloading on.
 	 */
-	protected function enableAutoload()
+	protected function enableAutoload(): void
 	{
 		foreach ($this->autoloadList as $function) {
 			spl_autoload_register($function);
 		}
+
 		$this->autoloadList = [];
 	}
+
 }

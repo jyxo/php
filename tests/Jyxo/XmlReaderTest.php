@@ -13,6 +13,8 @@
 
 namespace Jyxo;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * Test for the \Jyxo\XmlReader class.
  *
@@ -21,12 +23,13 @@ namespace Jyxo;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class XmlReaderTest extends \PHPUnit_Framework_TestCase
+class XmlReaderTest extends TestCase
 {
+
 	/**
 	 * Xml processor.
 	 *
-	 * @var \Jyxo\XmlReader
+	 * @var XmlReader
 	 */
 	private $reader;
 
@@ -38,28 +41,11 @@ class XmlReaderTest extends \PHPUnit_Framework_TestCase
 	private $path;
 
 	/**
-	 * Prepares the testing environment.
-	 */
-	protected function setUp()
-	{
-		$this->reader = new XmlReader();
-		$this->path = DIR_FILES . '/xmlreader';
-	}
-
-	/**
-	 * Cleans up the testing environment.
-	 */
-	protected function tearDown()
-	{
-		$this->reader->close();
-	}
-
-	/**
 	 * Tests the getTextValue() method.
 	 *
 	 * @see \Jyxo\XmlReader::getTextValue()
 	 */
-	public function testGetTextValue()
+	public function testGetTextValue(): void
 	{
 		// In the form: tag (key), expected value (value)
 		$tests = [];
@@ -73,8 +59,9 @@ class XmlReaderTest extends \PHPUnit_Framework_TestCase
 
 		$this->reader->open($this->path . '/text.xml');
 		$this->reader->next('test');
+
 		while ($this->reader->read()) {
-			if ($this->reader->nodeType == \XMLReader::ELEMENT) {
+			if ($this->reader->nodeType === \XMLReader::ELEMENT) {
 				$this->assertEquals(
 					$tests[$this->reader->name],
 					$this->reader->getTextValue()
@@ -88,7 +75,7 @@ class XmlReaderTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\XmlReader::getContent()
 	 */
-	public function testGetContent()
+	public function testGetContent(): void
 	{
 		// In the form: tag (key), expected value (value)
 		$tests = [];
@@ -105,8 +92,9 @@ class XmlReaderTest extends \PHPUnit_Framework_TestCase
 
 		$this->reader->open($this->path . '/content.xml');
 		$this->reader->next('test');
+
 		while ($this->reader->read()) {
-			if ($this->reader->nodeType == \XMLReader::ELEMENT) {
+			if ($this->reader->nodeType === \XMLReader::ELEMENT) {
 				$this->assertEquals(
 					$tests[$this->reader->name],
 					$this->reader->getContent()
@@ -114,4 +102,22 @@ class XmlReaderTest extends \PHPUnit_Framework_TestCase
 			}
 		}
 	}
+
+	/**
+	 * Prepares the testing environment.
+	 */
+	protected function setUp(): void
+	{
+		$this->reader = new XmlReader();
+		$this->path = DIR_FILES . '/xmlreader';
+	}
+
+	/**
+	 * Cleans up the testing environment.
+	 */
+	protected function tearDown(): void
+	{
+		$this->reader->close();
+	}
+
 }

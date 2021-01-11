@@ -13,6 +13,9 @@
 
 namespace Jyxo\Spl;
 
+use PHPUnit\Framework\TestCase;
+use stdClass;
+
 /**
  * Test for class \Jyxo\Spl\ObjectCache.
  *
@@ -21,44 +24,25 @@ namespace Jyxo\Spl;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Pěček
  */
-class ObjectCacheTest extends \PHPUnit_Framework_TestCase
+class ObjectCacheTest extends TestCase
 {
 
 	/**
 	 * Cached object key.
-	 *
-	 * @var string
 	 */
-	const CACHE_KEY = 'myobject';
+	public const CACHE_KEY = 'myobject';
 
 	/**
 	 * Cache instance.
 	 *
-	 * @var \Jyxo\Spl\ObjectCache
+	 * @var ObjectCache
 	 */
 	private $cache = null;
-
-
-	/**
-	 * Prepares testing environment.
-	 */
-	protected function setUp()
-	{
-		$this->cache = ObjectCache::getInstance();
-	}
-
-	/**
-	 * Cleans up the environment after testing.
-	 */
-	protected function tearDown()
-	{
-		$this->cache = null;
-	}
 
 	/**
 	 * Tests loading an object that is not stored actually.
 	 */
-	public function testGetNull()
+	public function testGetNull(): void
 	{
 		$this->assertNull($this->cache->{self::CACHE_KEY});
 		$this->assertNull(ObjectCache::get(self::CACHE_KEY));
@@ -67,7 +51,7 @@ class ObjectCacheTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests loading data.
 	 */
-	public function testGetData()
+	public function testGetData(): void
 	{
 		$object = $this->saveObject();
 
@@ -80,7 +64,7 @@ class ObjectCacheTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests saving data.
 	 */
-	public function testSaveData()
+	public function testSaveData(): void
 	{
 		$object = $this->saveObject();
 		$this->assertSame($object, $this->cache->get(self::CACHE_KEY));
@@ -99,7 +83,7 @@ class ObjectCacheTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests isset().
 	 */
-	public function testIsset()
+	public function testIsset(): void
 	{
 		// Nothing is saved
 		$this->assertFalse(isset($this->cache->{self::CACHE_KEY}));
@@ -114,7 +98,7 @@ class ObjectCacheTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests unset().
 	 */
-	public function testUnset()
+	public function testUnset(): void
 	{
 		// Nothing is saved
 		$this->assertFalse(isset($this->cache->{self::CACHE_KEY}));
@@ -137,12 +121,12 @@ class ObjectCacheTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests cache iterator interface.
 	 */
-	public function testIterator()
+	public function testIterator(): void
 	{
 		$objects = [
-			'key1' => new \stdClass(),
-			'key2' => new \stdClass(),
-			'key3' => new \stdClass()
+			'key1' => new stdClass(),
+			'key2' => new stdClass(),
+			'key3' => new stdClass(),
 		];
 
 		// Put items into cache
@@ -158,17 +142,34 @@ class ObjectCacheTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Prepares testing environment.
+	 */
+	protected function setUp(): void
+	{
+		$this->cache = ObjectCache::getInstance();
+	}
+
+	/**
+	 * Cleans up the environment after testing.
+	 */
+	protected function tearDown(): void
+	{
+		$this->cache = null;
+	}
+
+	/**
 	 * Saves an object into cache.
 	 *
-	 * @return \stdClass
+	 * @return stdClass
 	 */
-	private function saveObject()
+	private function saveObject(): stdClass
 	{
-		$object = new \stdClass();
+		$object = new stdClass();
 		$object->question = 'The Answer to the Ultimate Question of Life, the Universe, and Everything.';
 		$object->answer = 42;
 		$this->cache->{self::CACHE_KEY} = $object;
 
 		return $object;
 	}
+
 }

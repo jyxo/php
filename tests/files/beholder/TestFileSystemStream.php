@@ -7,47 +7,26 @@
  */
 class TestFileSystemStream
 {
+
 	/**
 	 * No error.
-	 *
-	 * @var integer
 	 */
 	const ERROR_NONE = 0;
 
 	/**
 	 * Write error.
-	 *
-	 * @var integer
 	 */
 	const ERROR_WRITE = 1;
 
 	/**
 	 * Read error.
-	 *
-	 * @var integer
 	 */
 	const ERROR_READ = 2;
 
 	/**
 	 * Delete error.
-	 *
-	 * @var integer
 	 */
 	const ERROR_DELETE = 3;
-
-	/**
-	 * Expected error.
-	 *
-	 * @var integer
-	 */
-	private static $error = self::ERROR_NONE;
-
-	/**
-	 * Tested directory.
-	 *
-	 * @var string
-	 */
-	private static $dir = [];
 
 	/**
 	 * Path to the current file.
@@ -59,65 +38,55 @@ class TestFileSystemStream
 	/**
 	 * How much was already read.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $read = 0;
 
 	/**
-	 * Registers a protocol.
+	 * Expected error.
 	 *
-	 * @param string $protocol Protocol name
-	 * @return boolean
+	 * @var int
 	 */
-	public static function register($protocol)
-	{
-		return stream_wrapper_register((string) $protocol, __CLASS__);
-	}
+	private static $error = self::ERROR_NONE;
 
 	/**
-	 * Unregisters a protocol.
+	 * Tested directory.
 	 *
-	 * @param string $protocol Protocol name
-	 * @return boolean
+	 * @var string
 	 */
-	public static function unregister($protocol)
-	{
-		return stream_wrapper_unregister((string) $protocol);
-	}
-
-	/**
-	 * Sets error type.
-	 *
-	 * @param integer $error Error type
-	 */
-	public static function setError($error)
-	{
-		self::$error = (int) $error;
-	}
+	private static $dir = [];
 
 	/**
 	 * Opens a file.
 	 *
 	 * @param string $path File path
 	 * @param string $mode Open mode
-	 * @param integer $options Additional options
-	 * @param string $openedPath Opened file path
-	 * @return boolean
+	 * @param int $options Additional options
+	 * @param string|null $openedPath Opened file path
+	 * @return bool
 	 */
-	public function stream_open($path, $mode, $options, &$openedPath)
+	public function stream_open(string $path, string $mode, int $options, ?string &$openedPath): bool
 	{
 		$mode = trim($mode, 'tb');
+
 		switch ($mode) {
 			case 'r':
+
 			case 'r+':
+
 			case 'w':
+
 			case 'w+':
 				$this->path = $path;
+
 				if (!isset(self::$dir[$this->path])) {
 					self::$dir[$this->path] = '';
 				}
+
 				$this->read = 0;
+
 				return true;
+
 			default:
 				return false;
 		}
@@ -126,9 +95,9 @@ class TestFileSystemStream
 	/**
 	 * Closes a file.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
-	public function stream_close()
+	public function stream_close(): bool
 	{
 		$this->path = '';
 
@@ -138,12 +107,12 @@ class TestFileSystemStream
 	/**
 	 * Reads from a file.
 	 *
-	 * @param integer $length Read length
+	 * @param int $length Read length
 	 * @return string
 	 */
-	public function stream_read($length)
+	public function stream_read(int $length): string
 	{
-		if (self::ERROR_READ === self::$error) {
+		if (self::$error === self::ERROR_READ) {
 			return '';
 		}
 
@@ -151,18 +120,18 @@ class TestFileSystemStream
 
 		$this->read += $length;
 
-		return $data;
+		return $data ?: '';
 	}
 
 	/**
 	 * Writes into a file.
 	 *
 	 * @param string $data Data to be written
-	 * @return integer Number of bytes written
+	 * @return int Number of bytes written
 	 */
-	public function stream_write($data)
+	public function stream_write(string $data): int
 	{
-		if (self::ERROR_WRITE === self::$error) {
+		if (self::$error === self::ERROR_WRITE) {
 			return 0;
 		}
 
@@ -174,9 +143,9 @@ class TestFileSystemStream
 	/**
 	 * Returns if the pointer is at the end of the file.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
-	public function stream_eof()
+	public function stream_eof(): bool
 	{
 		return $this->read >= strlen(self::$dir[$this->path]);
 	}
@@ -186,7 +155,7 @@ class TestFileSystemStream
 	 *
 	 * @return array
 	 */
-	public function stream_stat()
+	public function stream_stat(): array
 	{
 		return [];
 	}
@@ -195,11 +164,11 @@ class TestFileSystemStream
 	 * Deletes a file.
 	 *
 	 * @param string $path File path
-	 * @return boolean
+	 * @return bool
 	 */
-	public function unlink($path)
+	public function unlink(string $path): bool
 	{
-		if (self::ERROR_DELETE === self::$error) {
+		if (self::$error === self::ERROR_DELETE) {
 			return false;
 		}
 
@@ -207,4 +176,37 @@ class TestFileSystemStream
 
 		return true;
 	}
+
+	/**
+	 * Registers a protocol.
+	 *
+	 * @param string $protocol Protocol name
+	 * @return bool
+	 */
+	public static function register(string $protocol): bool
+	{
+		return stream_wrapper_register((string) $protocol, self::class);
+	}
+
+	/**
+	 * Unregisters a protocol.
+	 *
+	 * @param string $protocol Protocol name
+	 * @return bool
+	 */
+	public static function unregister(string $protocol): bool
+	{
+		return stream_wrapper_unregister((string) $protocol);
+	}
+
+	/**
+	 * Sets error type.
+	 *
+	 * @param int $error Error type
+	 */
+	public static function setError(int $error): void
+	{
+		self::$error = (int) $error;
+	}
+
 }

@@ -13,52 +13,51 @@
 
 namespace Jyxo\Input;
 
+use Jyxo\Input\Chain\Conditional;
+use Jyxo\Input\Validator\ErrorMessage;
+use function array_merge;
+
 /**
  * Chain of filters a validators for a single variable.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Chain
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
  */
-class Chain implements \Jyxo\Input\ValidatorInterface
+class Chain implements ValidatorInterface
 {
+
 	/**
 	 * Filter identifier.
-	 *
-	 * @var string
 	 */
-	const FILTER = 'filter';
+	public const FILTER = 'filter';
 
 	/**
 	 * Validator identifier.
-	 *
-	 * @var string
 	 */
-	const VALIDATOR = 'validator';
+	public const VALIDATOR = 'validator';
 
 	/**
 	 * Array walk identifier.
-	 *
-	 * @var string
 	 */
-	const WALK = 'walk';
+	public const WALK = 'walk';
 
 	/**
 	 * Condition identifier.
-	 *
-	 * @var string
 	 */
-	const CONDITION = 'condition';
+	public const CONDITION = 'condition';
 
 	/**
 	 * Subchain closing identifier.
-	 *
-	 * @var string
 	 */
-	const CLOSE = 'close';
+	public const CLOSE = 'close';
+
+	/**
+	 * Actual variable value.
+	 *
+	 * @var mixed
+	 */
+	protected $value;
 
 	/**
 	 * Chain.
@@ -70,16 +69,9 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	/**
 	 * Parent chain reference.
 	 *
-	 * @var \Jyxo\Input\Chain
+	 * @var Chain
 	 */
 	private $parent = null;
-
-	/**
-	 * Actual variable value.
-	 *
-	 * @var mixed
-	 */
-	protected $value;
 
 	/**
 	 * Validation errors.
@@ -91,121 +83,76 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	/**
 	 * Adds a validator to the chain.
 	 *
-	 * @param \Jyxo\Input\ValidatorInterface $validator Validator
+	 * @param ValidatorInterface $validator Validator
 	 * @param string $errorMessage Validation error message
-	 * @return \Jyxo\Input\Chain
+	 * @return Chain
 	 */
-	public function addValidator(\Jyxo\Input\ValidatorInterface $validator, string $errorMessage = null)
+	public function addValidator(ValidatorInterface $validator, ?string $errorMessage = null): Chain
 	{
 		$this->chain[] = [self::VALIDATOR, $validator, $errorMessage];
+
 		return $this;
 	}
 
 	/**
 	 * Adds a filter to the chain.
 	 *
-	 * @param \Jyxo\Input\FilterInterface $filter Filter
-	 * @return \Jyxo\Input\Chain
+	 * @param FilterInterface $filter Filter
+	 * @return Chain
 	 */
-	public function addFilter(\Jyxo\Input\FilterInterface $filter): self
+	public function addFilter(FilterInterface $filter): self
 	{
 		$this->chain[] = [self::FILTER, $filter];
+
 		return $this;
 	}
 
 	/**
 	 * Adds a new subchain and returns its instance.
 	 *
-	 * @return \Jyxo\Input\Chain
+	 * @return Chain
 	 */
 	public function addWalk(): self
 	{
 		$chain = new self();
 		$chain->setParent($this);
 		$this->chain[] = [self::WALK, $chain];
+
 		return $chain;
 	}
 
 	/**
 	 * Adds a new conditional subchain and returns its instance.
 	 *
-	 * @param \Jyxo\Input\Chain\Conditional $chain
-	 * @return \Jyxo\Input\Chain\Conditional
+	 * @param Conditional $chain
+	 * @return Conditional
 	 */
-	public function addCondition(\Jyxo\Input\Chain\Conditional $chain): self
+	public function addCondition(Conditional $chain): self
 	{
 		$chain->setParent($this);
 		$this->chain[] = [self::CONDITION, $chain];
+
 		return $chain;
 	}
 
 	/**
 	 * In case of a subchain returns its parent, the chain itself otherwise.
 	 *
-	 * @return \Jyxo\Input\Chain
+	 * @return Chain
 	 */
 	public function close(): self
 	{
-		if (null === $this->getParent()) {
+		if ($this->getParent() === null) {
 			return $this;
 		}
+
 		return $this->getParent();
-	}
-
-	/**
-	 * Starts filtering and validation.
-	 *
-	 * @param mixed $value Input value
-	 * @return boolean
-	 */
-	private function run(&$value): bool
-	{
-		foreach ($this->chain as $item) {
-			if (self::FILTER === $item[0]) {
-				$filter = $item[1];
-				/* @var $filter \Jyxo\Input\FilterInterface */
-				$value = $filter->filter($value);
-			} elseif (self::VALIDATOR === $item[0]) {
-				$validator = $item[1];
-				/* @var $validator \Jyxo\Input\ValidatorInterface */
-				if (!$validator->isValid($value)) {
-					if ($validator instanceof \Jyxo\Input\Validator\ErrorMessage) {
-						$this->errors[] = $validator->getError();
-					} elseif (isset($item[2])) {
-						$this->errors[] = $item[2];
-					}
-					return false;
-				}
-			} elseif (self::CONDITION === $item[0]) {
-				$chain = $item[1];
-				/* @var $chain \Jyxo\Input\Chain\Conditional */
-				if ($chain->isValid($value)) {
-					$value = $chain->getValue();
-				} else {
-					$this->errors = array_merge($this->errors, $chain->getErrors());
-					return false;
-				}
-			} elseif (self::WALK === $item[0]) {
-				$chain = $item[1];
-				/* @var $chain \Jyxo\Input\Chain */
-				foreach ($value as &$sub) {
-					if ($chain->isValid($sub)) {
-						$sub = $chain->getValue($sub);
-					} else {
-						$this->errors = array_merge($this->errors, $chain->getErrors());
-						return false;
-					}
-				}
-			}
-		}
-
-		return true;
 	}
 
 	/**
 	 * Returns if the chain contains any rules.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isEmpty(): bool
 	{
@@ -216,13 +163,14 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	 * Returns if the value is valid.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isValid($value): bool
 	{
 		$success = $this->run($value);
 		// $value passed by reference
 		$this->value = $value;
+
 		return $success;
 	}
 
@@ -249,7 +197,7 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	/**
 	 * Returns the parent chain.
 	 *
-	 * @return \Jyxo\Input\Chain
+	 * @return Chain
 	 */
 	public function getParent(): self
 	{
@@ -259,12 +207,70 @@ class Chain implements \Jyxo\Input\ValidatorInterface
 	/**
 	 * Sets the parent chain.
 	 *
-	 * @param \Jyxo\Input\Chain $parent Parent chain
-	 * @return \Jyxo\Input\Chain
+	 * @param Chain $parent Parent chain
+	 * @return Chain
 	 */
-	public function setParent(\Jyxo\Input\Chain $parent): self
+	public function setParent(Chain $parent): self
 	{
 		$this->parent = $parent;
+
 		return $this;
 	}
+
+	/**
+	 * Starts filtering and validation.
+	 *
+	 * @param mixed $value Input value
+	 * @return bool
+	 */
+	private function run(&$value): bool
+	{
+		foreach ($this->chain as $item) {
+			if ($item[0] === self::FILTER) {
+				/** @var FilterInterface $filter */
+				$filter = $item[1];
+				$value = $filter->filter($value);
+			} elseif ($item[0] === self::VALIDATOR) {
+				/** @var ValidatorInterface $validator */
+				$validator = $item[1];
+
+				if (!$validator->isValid($value)) {
+					if ($validator instanceof ErrorMessage) {
+						$this->errors[] = $validator->getError();
+					} elseif (isset($item[2])) {
+						$this->errors[] = $item[2];
+					}
+
+					return false;
+				}
+			} elseif ($item[0] === self::CONDITION) {
+				/** @var Conditional $chain */
+				$chain = $item[1];
+
+				if (!$chain->isValid($value)) {
+					$this->errors = array_merge($this->errors, $chain->getErrors());
+
+					return false;
+				}
+
+				$value = $chain->getValue();
+			} elseif ($item[0] === self::WALK) {
+				/** @var Chain $chain */
+				$chain = $item[1];
+
+				foreach ($value as &$sub) {
+					if (!$chain->isValid($sub)) {
+						$this->errors = array_merge($this->errors, $chain->getErrors());
+
+						return false;
+					}
+
+					$sub = $chain->getValue($sub);
+				}
+			}
+		}
+
+		return true;
+	}
+
 }

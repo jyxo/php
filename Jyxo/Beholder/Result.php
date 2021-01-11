@@ -13,11 +13,12 @@
 
 namespace Jyxo\Beholder;
 
+use InvalidArgumentException;
+use function sprintf;
+
 /**
  * Test result.
  *
- * @category Jyxo
- * @package Jyxo\Beholder
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Matoušek
@@ -25,42 +26,26 @@ namespace Jyxo\Beholder;
  */
 class Result
 {
+
 	/**
 	 * Success.
-	 *
-	 * @var string
 	 */
-	const SUCCESS = 'success';
+	public const SUCCESS = 'success';
 
 	/**
 	 * Failure.
-	 *
-	 * @var string
 	 */
-	const FAILURE = 'failure';
+	public const FAILURE = 'failure';
 
 	/**
 	 * Not-applicable test.
-	 *
-	 * @var string
 	 */
-	const NOT_APPLICABLE = 'not-applicable';
-
-	/**
-	 * List of statuses.
-	 *
-	 * @var array
-	 */
-	private static $statusList = [
-		self::SUCCESS => 'OK',
-		self::FAILURE => 'FAILED',
-		self::NOT_APPLICABLE => 'NOT APPLICABLE'
-	];
+	public const NOT_APPLICABLE = 'not-applicable';
 
 	/**
 	 * Status.
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	private $status;
 
@@ -71,37 +56,48 @@ class Result
 	 */
 	private $description = '';
 
+	/**
+	 * List of statuses.
+	 *
+	 * @var array
+	 */
+	private static $statusList = [
+		self::SUCCESS => 'OK',
+		self::FAILURE => 'FAILED',
+		self::NOT_APPLICABLE => 'NOT APPLICABLE',
+	];
 
 	/**
 	 * Result constructor.
 	 *
 	 * @param string $status Result status
 	 * @param string $description Status description
-	 * @throws \InvalidArgumentException On an unknown status
 	 */
 	public function __construct(string $status, string $description = '')
 	{
 		// Checks status
 		if (!isset(self::$statusList[$status])) {
-			throw new \InvalidArgumentException(sprintf('Invalid status %s', $status));
+			throw new InvalidArgumentException(sprintf('Invalid status %s', $status));
 		}
+
 		$this->status = $status;
 
 		// Sets description
 		if (empty($description)) {
 			$description = self::$statusList[$status];
 		}
+
 		$this->description = $description;
 	}
 
 	/**
 	 * Returns if the test was successful.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isSuccess(): bool
 	{
-		return ($this->status !== self::FAILURE);
+		return $this->status !== self::FAILURE;
 	}
 
 	/**
@@ -133,4 +129,5 @@ class Result
 	{
 		return $this->description;
 	}
+
 }

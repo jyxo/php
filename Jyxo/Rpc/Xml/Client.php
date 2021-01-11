@@ -13,19 +13,22 @@
 
 namespace Jyxo\Rpc\Xml;
 
+use function is_array;
+use function preg_replace;
+use function xmlrpc_decode;
+use function xmlrpc_encode_request;
+
 /**
  * Class for sending requests using XML-RPC.
  * Requires xmlrpc and curl PHP extensions.
  *
- * @category Jyxo
- * @package Jyxo\Rpc
- * @subpackage Xml
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
 class Client extends \Jyxo\Rpc\Client
 {
+
 	/**
 	 * Creates a client instance and eventually sets server address.
 	 * Also defines default client settings.
@@ -41,7 +44,7 @@ class Client extends \Jyxo\Rpc\Client
 			'verbosity' => 'pretty',
 			'escaping' => ['markup'],
 			'version' => 'xmlrpc',
-			'encoding' => 'utf-8'
+			'encoding' => 'utf-8',
 		];
 	}
 
@@ -51,8 +54,6 @@ class Client extends \Jyxo\Rpc\Client
 	 * @param string $method Method name
 	 * @param array $params Method parameters
 	 * @return mixed
-	 * @throws \BadMethodCallException If no server address was provided
-	 * @throws \Jyxo\Rpc\Xml\Exception On error
 	 */
 	public function send(string $method, array $params)
 	{
@@ -77,10 +78,11 @@ class Client extends \Jyxo\Rpc\Client
 		$this->profileEnd('XML', $method, $params, $response);
 
 		// Error in response
-		if ((is_array($response)) && (isset($response['faultString']))) {
+		if (is_array($response) && (isset($response['faultString']))) {
 			throw new Exception(preg_replace('~\\s+~', ' ', $response['faultString']));
 		}
 
 		return $response;
 	}
+
 }

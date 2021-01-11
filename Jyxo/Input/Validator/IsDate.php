@@ -13,23 +13,24 @@
 
 namespace Jyxo\Input\Validator;
 
+use function checkdate;
+use function preg_match;
+
 /**
  * Validates if the given value is a valid date in the YYYY-MM-DD form.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Pěček
  */
-class IsDate extends \Jyxo\Input\Validator\AbstractValidator
+class IsDate extends AbstractValidator
 {
+
 	/**
 	 * Validates a value.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isValid($value): bool
 	{
@@ -40,13 +41,10 @@ class IsDate extends \Jyxo\Input\Validator\AbstractValidator
 			return false;
 		}
 
-		list(, $year, $month, $day) = $matches;
+		[, $year, $month, $day] = $matches;
 
 		// Date validity check
-		if (!checkdate((int) $month, (int) $day, (int) $year)) {
-			return false;
-		}
-
-		return true;
+		return checkdate((int) $month, (int) $day, (int) $year);
 	}
+
 }

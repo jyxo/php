@@ -13,18 +13,22 @@
 
 namespace Jyxo\Mail\Email;
 
+use InvalidArgumentException;
+use Jyxo\Input\Validator\IsEmail;
+use Jyxo\Spl\BaseObject;
+use function sprintf;
+use function trim;
+
 /**
  * Email address.
  *
- * @category Jyxo
- * @package Jyxo\Mail
- * @subpackage Email
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class Address extends \Jyxo\Spl\Object
+class Address extends BaseObject
 {
+
 	/**
 	 * Email address.
 	 *
@@ -44,7 +48,6 @@ class Address extends \Jyxo\Spl\Object
 	 *
 	 * @param string $email Email
 	 * @param string $name Name
-	 * @throws \InvalidArgumentException If an invalid email address was provided
 	 */
 	public function __construct(string $email, string $name = '')
 	{
@@ -66,16 +69,15 @@ class Address extends \Jyxo\Spl\Object
 	 * Sets email address.
 	 *
 	 * @param string $email Email address
-	 * @return \Jyxo\Mail\Email\Address
-	 * @throws \InvalidArgumentException If an invalid email address was provided
+	 * @return Address
 	 */
 	public function setEmail(string $email): self
 	{
 		$email = trim($email);
 
 		// Validity check
-		if (!\Jyxo\Input\Validator\IsEmail::validate($email)) {
-			throw new \InvalidArgumentException(sprintf('Invalid email address %s.', $email));
+		if (!IsEmail::validate($email)) {
+			throw new InvalidArgumentException(sprintf('Invalid email address %s.', $email));
 		}
 
 		$this->email = $email;
@@ -97,7 +99,7 @@ class Address extends \Jyxo\Spl\Object
 	 * Sets name.
 	 *
 	 * @param string $name Name
-	 * @return \Jyxo\Mail\Email\Address
+	 * @return Address
 	 */
 	public function setName(string $name): self
 	{
@@ -105,4 +107,5 @@ class Address extends \Jyxo\Spl\Object
 
 		return $this;
 	}
+
 }

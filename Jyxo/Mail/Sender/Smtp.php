@@ -13,25 +13,33 @@
 
 namespace Jyxo\Mail\Sender;
 
+use Jyxo\Mail\Sender;
+use Throwable;
+use function base64_encode;
+use function fclose;
+use function fgets;
+use function fsockopen;
+use function fwrite;
+use function is_resource;
+use function strtr;
+use function substr;
+use function trim;
+
 /**
  * Class for sending emails using a SMTP server.
  * Works in combination with \Jyxo\Mail\Sender.
  *
- * @category Jyxo
- * @package Jyxo\Mail
- * @subpackage Sender
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
 class Smtp
 {
+
 	/**
 	 * Line endings.
-	 *
-	 * @var string
 	 */
-	const LINE_END = "\r\n";
+	public const LINE_END = "\r\n";
 
 	/**
 	 * Established connection.
@@ -50,7 +58,7 @@ class Smtp
 	/**
 	 * SMTP port.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $port = 25;
 
@@ -72,9 +80,9 @@ class Smtp
 	 * Creates an instance.
 	 *
 	 * @param string $host Server hostname
-	 * @param integer $port Server port
+	 * @param int $port Server port
 	 * @param string $helo HELO value
-	 * @param integer $timeout Connection timeout
+	 * @param int $timeout Connection timeout
 	 */
 	public function __construct(string $host = 'localhost', int $port = 25, string $helo = 'localhost', int $timeout = 5)
 	{
@@ -97,13 +105,13 @@ class Smtp
 	/**
 	 * Connects to the SMTP server.
 	 *
-	 * @return \Jyxo\Mail\Sender\Smtp
-	 * @throws \Jyxo\Mail\Sender\SmtpException If a connection error occurs
+	 * @return Smtp
 	 */
 	public function connect(): self
 	{
 		$this->connection = fsockopen($this->host, $this->port, $errno, $errstr, $this->timeout);
-		if (false === $this->connection) {
+
+		if ($this->connection === false) {
 			throw new SmtpException('CONNECTION: ' . $errno . ' ' . $errstr);
 		}
 
@@ -119,7 +127,7 @@ class Smtp
 	/**
 	 * Disconnects from server.
 	 *
-	 * @return \Jyxo\Mail\Sender\Smtp
+	 * @return Smtp
 	 */
 	public function disconnect(): self
 	{
@@ -129,7 +137,7 @@ class Smtp
 				$this->writeData('QUIT');
 				fclose($this->connection);
 				$this->connection = null;
-			} catch (\Exception $e) {
+			} catch (Throwable $e) {
 				// Disconnecting; ignore possible exceptions
 			}
 		}
@@ -142,24 +150,28 @@ class Smtp
 	 *
 	 * @param string $user Username
 	 * @param string $password Password
-	 * @return \Jyxo\Mail\Sender\Smtp
-	 * @throws \Jyxo\Mail\Sender\SmtpException On authentication error
+	 * @return Smtp
 	 */
 	public function auth(string $user, string $password): self
 	{
 		$this->writeData('AUTH LOGIN');
 		$response = $this->readData();
-		if ('334' !== substr($response, 0, 3)) {
+
+		if (substr($response, 0, 3) !== '334') {
 			throw new SmtpException('AUTH: ' . $response);
 		}
+
 		$this->writeData(base64_encode($user));
 		$response = $this->readData();
-		if ('334' !== substr($response, 0, 3)) {
+
+		if (substr($response, 0, 3) !== '334') {
 			throw new SmtpException('AUTH: ' . $response);
 		}
+
 		$this->writeData(base64_encode($password));
 		$response = $this->readData();
-		if ('235' !== substr($response, 0, 3)) {
+
+		if (substr($response, 0, 3) !== '235') {
 			throw new SmtpException('AUTH: ' . $response);
 		}
 
@@ -170,7 +182,7 @@ class Smtp
 	 * Sets the sender.
 	 *
 	 * @param string $from Sender
-	 * @return \Jyxo\Mail\Sender\Smtp
+	 * @return Smtp
 	 */
 	public function from(string $from): self
 	{
@@ -183,7 +195,7 @@ class Smtp
 	 * Adds a recipient.
 	 *
 	 * @param string $recipient Recipient
-	 * @return \Jyxo\Mail\Sender\Smtp
+	 * @return Smtp
 	 */
 	public function recipient(string $recipient): self
 	{
@@ -197,15 +209,15 @@ class Smtp
 	 *
 	 * @param string $header Headers
 	 * @param string $body Body
-	 * @return \Jyxo\Mail\Sender\Smtp
-	 * @throws \Jyxo\Mail\Sender\SmtpException On data sending error
+	 * @return Smtp
 	 */
 	public function data(string $header, string $body): self
 	{
-		$lineEnds = [\Jyxo\Mail\Sender::LINE_END . '.' => self::LINE_END . '..', \Jyxo\Mail\Sender::LINE_END => self::LINE_END];
+		$lineEnds = [Sender::LINE_END . '.' => self::LINE_END . '..', Sender::LINE_END => self::LINE_END];
 		$header = strtr($header, $lineEnds);
 		$body = strtr($body, $lineEnds);
-		if ('.' == $body[0]) {
+
+		if ($body[0] === '.') {
 			$body = '.' . $body;
 		}
 
@@ -216,7 +228,8 @@ class Smtp
 		$this->writeData('.');
 
 		$response = $this->readData();
-		if ('250' !== substr($response, 0, 3)) {
+
+		if (substr($response, 0, 3) !== '250') {
 			throw new SmtpException('SEND: ' . $response);
 		}
 
@@ -226,7 +239,7 @@ class Smtp
 	/**
 	 * Resets previous commands.
 	 *
-	 * @return \Jyxo\Mail\Sender\Smtp
+	 * @return Smtp
 	 */
 	public function reset(): self
 	{
@@ -237,19 +250,21 @@ class Smtp
 
 	/**
 	 * Sends the EHLO/HELO command.
-	 *
-	 * @throws \Jyxo\Mail\Sender\SmtpException On error
 	 */
-	private function commandHelo()
+	private function commandHelo(): void
 	{
 		$this->writeData('EHLO ' . $this->helo);
 		$response = $this->readData();
-		if ('250' !== substr($response, 0, 3)) {
-			$this->writeData('HELO ' . $this->helo);
-			$response = $this->readData();
-			if ('250' !== substr($response, 0, 3)) {
-				throw new SmtpException('HELO: ' . $response);
-			}
+
+		if (substr($response, 0, 3) === '250') {
+			return;
+		}
+
+		$this->writeData('HELO ' . $this->helo);
+		$response = $this->readData();
+
+		if (substr($response, 0, 3) !== '250') {
+			throw new SmtpException('HELO: ' . $response);
 		}
 	}
 
@@ -257,13 +272,13 @@ class Smtp
 	 * Sends the MAIL FROM command.
 	 *
 	 * @param string $from
-	 * @throws \Jyxo\Mail\Sender\SmtpException On error
 	 */
-	private function commandMailFrom(string $from)
+	private function commandMailFrom(string $from): void
 	{
 		$this->writeData('MAIL FROM: <' . $from . '>');
 		$response = $this->readData();
-		if ('250' !== substr($response, 0, 3)) {
+
+		if (substr($response, 0, 3) !== '250') {
 			throw new SmtpException('MAIL FROM: ' . $response);
 		}
 	}
@@ -272,41 +287,39 @@ class Smtp
 	 * Sends the RCPT TO command.
 	 *
 	 * @param string $recipient
-	 * @throws \Jyxo\Mail\Sender\SmtpException On error
 	 */
-	private function commandRcptTo(string $recipient)
+	private function commandRcptTo(string $recipient): void
 	{
 		$this->writeData('RCPT TO: <' . $recipient . '>');
 		$response = $this->readData();
-		if ('250' !== substr($response, 0, 3)) {
+
+		if (substr($response, 0, 3) !== '250') {
 			throw new SmtpException('RCPT TO: ' . $response);
 		}
 	}
 
 	/**
 	 * Sends the DATA command.
-	 *
-	 * @throws \Jyxo\Mail\Sender\SmtpException On error
 	 */
-	private function commandData()
+	private function commandData(): void
 	{
 		$this->writeData('DATA');
 		$response = $this->readData();
-		if ('354' !== substr($response, 0, 3)) {
+
+		if (substr($response, 0, 3) !== '354') {
 			throw new SmtpException('DATA: ' . $response);
 		}
 	}
 
 	/**
 	 * Sends the RSET command.
-	 *
-	 * @throws \Jyxo\Mail\Sender\SmtpException On error
 	 */
-	private function commandRset()
+	private function commandRset(): void
 	{
 		$this->writeData('RSET');
 		$response = $this->readData();
-		if ('250' !== substr($response, 0, 3)) {
+
+		if (substr($response, 0, 3) !== '250') {
 			throw new SmtpException('RSET: ' . $response);
 		}
 	}
@@ -319,12 +332,15 @@ class Smtp
 	private function readData(): string
 	{
 		$data = '';
+
 		while ($line = fgets($this->connection)) {
 			$data .= $line;
-			if (' ' == substr($line, 3, 1)) {
+
+			if (substr($line, 3, 1) === ' ') {
 				break;
 			}
 		}
+
 		return $data;
 	}
 
@@ -332,12 +348,12 @@ class Smtp
 	 * Sends data to the server.
 	 *
 	 * @param string $data Data
-	 * @throws \Jyxo\Mail\Sender\SmtpException On error
 	 */
-	private function writeData(string $data)
+	private function writeData(string $data): void
 	{
 		if (!fwrite($this->connection, $data . self::LINE_END)) {
 			throw new SmtpException('Error while writing data.');
 		}
 	}
+
 }

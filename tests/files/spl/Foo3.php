@@ -37,13 +37,13 @@ class Foo3 implements Iterator
 	 */
 	public function current()
 	{
-		return isset($this->data[$this->pointer]) ? $this->data[$this->pointer] : null;
+		return $this->data[$this->pointer] ?? null;
 	}
 
 	/**
 	 * Advances the internal pointer.
 	 */
-	public function next()
+	public function next(): void
 	{
 		$this->pointer++;
 	}
@@ -51,7 +51,7 @@ class Foo3 implements Iterator
 	/**
 	 * Sets the internal pointer to 0.
 	 */
-	public function rewind()
+	public function rewind(): void
 	{
 		$this->pointer = 0;
 	}
@@ -59,9 +59,9 @@ class Foo3 implements Iterator
 	/**
 	 * Returns if the current pointer position is valid.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
-	public function valid()
+	public function valid(): bool
 	{
 		return isset($this->data[$this->pointer]);
 	}
@@ -69,9 +69,9 @@ class Foo3 implements Iterator
 	/**
 	 * Returns the current pointer value.
 	 *
-	 * @return integer
+	 * @return int
 	 */
-	public function key()
+	public function key(): int
 	{
 		return $this->pointer;
 	}

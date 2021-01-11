@@ -13,31 +13,27 @@
 
 namespace Jyxo\Mail\Email;
 
+use Jyxo\Spl\BaseObject;
+
 /**
  * Email attachment.
  *
- * @category Jyxo
- * @package Jyxo\Mail
- * @subpackage Email
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-abstract class Attachment extends \Jyxo\Spl\Object
+abstract class Attachment extends BaseObject
 {
+
 	/**
 	 * Ordinary attachment.
-	 *
-	 * @var string
 	 */
-	const DISPOSITION_ATTACHMENT = 'attachment';
+	public const DISPOSITION_ATTACHMENT = 'attachment';
 
 	/**
 	 * Inline attachment.
-	 *
-	 * @var string
 	 */
-	const DISPOSITION_INLINE = 'inline';
+	public const DISPOSITION_INLINE = 'inline';
 
 	/**
 	 * Type.
@@ -105,7 +101,7 @@ abstract class Attachment extends \Jyxo\Spl\Object
 	 * Sets contents.
 	 *
 	 * @param string $content Contents
-	 * @return \Jyxo\Mail\Email\Attachment
+	 * @return Attachment
 	 */
 	public function setContent(string $content): self
 	{
@@ -128,7 +124,7 @@ abstract class Attachment extends \Jyxo\Spl\Object
 	 * Sets name.
 	 *
 	 * @param string $name Name
-	 * @return \Jyxo\Mail\Email\Attachment
+	 * @return Attachment
 	 */
 	public function setName(string $name): self
 	{
@@ -161,7 +157,7 @@ abstract class Attachment extends \Jyxo\Spl\Object
 	 * Sets content mime-type.
 	 *
 	 * @param string $mimeType Mime-type
-	 * @return \Jyxo\Mail\Email\Attachment
+	 * @return Attachment
 	 */
 	public function setMimeType(string $mimeType): self
 	{
@@ -183,10 +179,11 @@ abstract class Attachment extends \Jyxo\Spl\Object
 	/**
 	 * Returns if the attachment is inline.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isInline(): bool
 	{
-		return self::DISPOSITION_INLINE === $this->disposition;
+		return $this->disposition === self::DISPOSITION_INLINE;
 	}
+
 }

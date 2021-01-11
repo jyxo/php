@@ -13,24 +13,27 @@
 
 namespace Jyxo\Mail\Email\Attachment;
 
+use InvalidArgumentException;
+use Jyxo\Mail\Email\Attachment;
+use Jyxo\Mail\Encoding;
+use function sprintf;
+
 /**
  * Inline mail attachment created from a string.
  *
- * @category Jyxo
- * @package Jyxo\Mail
- * @subpackage Email
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class InlineStringAttachment extends \Jyxo\Mail\Email\Attachment
+class InlineStringAttachment extends Attachment
 {
+
 	/**
 	 * Type.
 	 *
 	 * @var string
 	 */
-	protected $disposition = \Jyxo\Mail\Email\Attachment::DISPOSITION_INLINE;
+	protected $disposition = Attachment::DISPOSITION_INLINE;
 
 	/**
 	 * Creates an attachment.
@@ -41,7 +44,13 @@ class InlineStringAttachment extends \Jyxo\Mail\Email\Attachment
 	 * @param string $mimeType Attachment mime-type
 	 * @param string $encoding Source encoding
 	 */
-	public function __construct(string $content, string $name, string $cid, string $mimeType = 'application/octet-stream', string $encoding = '')
+	public function __construct(
+		string $content,
+		string $name,
+		string $cid,
+		string $mimeType = 'application/octet-stream',
+		string $encoding = ''
+	)
 	{
 		$this->setContent($content);
 		$this->setName($name);
@@ -54,7 +63,7 @@ class InlineStringAttachment extends \Jyxo\Mail\Email\Attachment
 	 * Sets Id.
 	 *
 	 * @param string $cid
-	 * @return \Jyxo\Mail\Email\Attachment\InlineStringAttachment
+	 * @return InlineStringAttachment
 	 */
 	public function setCid(string $cid): self
 	{
@@ -68,17 +77,17 @@ class InlineStringAttachment extends \Jyxo\Mail\Email\Attachment
 	 * If none is set, assume no encoding is used.
 	 *
 	 * @param string $encoding Encoding name
-	 * @return \Jyxo\Mail\Email\Attachment\InlineStringAttachment
-	 * @throws \InvalidArgumentException If an incompatible encoding was provided
+	 * @return InlineStringAttachment
 	 */
 	public function setEncoding(string $encoding): self
 	{
-		if ((!empty($encoding)) && (!\Jyxo\Mail\Encoding::isCompatible($encoding))) {
-			throw new \InvalidArgumentException(sprintf('Incompatible encoding %s', $encoding));
+		if (!empty($encoding) && (!Encoding::isCompatible($encoding))) {
+			throw new InvalidArgumentException(sprintf('Incompatible encoding %s', $encoding));
 		}
 
 		$this->encoding = $encoding;
 
 		return $this;
 	}
+
 }

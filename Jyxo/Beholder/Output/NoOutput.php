@@ -13,7 +13,7 @@
 
 namespace Jyxo\Beholder\Output;
 
-class NoOutput extends \Jyxo\Beholder\Output\Output
+class NoOutput extends Output
 {
 
 	public function getContentType(): string
@@ -25,4 +25,5 @@ class NoOutput extends \Jyxo\Beholder\Output\Output
 	{
 		return '';
 	}
+
 }

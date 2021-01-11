@@ -13,27 +13,31 @@
 
 namespace Jyxo\Rpc\Json;
 
+use function is_array;
+use function json_decode;
+use function json_encode;
+use function md5;
+use function preg_replace;
+use function rand;
+use function uniqid;
+
 /**
  * Class for sending requests using JSON-RPC.
  * Requires json and curl PHP extensions.
  *
- * @category Jyxo
- * @package Jyxo\Rpc
- * @subpackage Json
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Pěček
  */
 class Client extends \Jyxo\Rpc\Client
 {
+
 	/**
 	 * Sends a request and fetches server's response.
 	 *
 	 * @param string $method Method name
 	 * @param array $params Method parameters
 	 * @return mixed
-	 * @throws \BadMethodCallException If no server address was provided
-	 * @throws \Jyxo\Rpc\Json\Exception On error
 	 */
 	public function send(string $method, array $params)
 	{
@@ -49,7 +53,7 @@ class Client extends \Jyxo\Rpc\Client
 				[
 					'method' => $method,
 					'params' => $params,
-					'id' => $id
+					'id' => $id,
 				]
 			);
 
@@ -88,4 +92,5 @@ class Client extends \Jyxo\Rpc\Client
 
 		return $response['result'];
 	}
+
 }

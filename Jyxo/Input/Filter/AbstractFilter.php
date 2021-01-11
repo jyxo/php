@@ -13,36 +13,20 @@
 
 namespace Jyxo\Input\Filter;
 
+use Jyxo\Input\FilterInterface;
+use function array_map;
+use function is_array;
+
 /**
  * Parent class of all filters.
  * Allows multidimensional arrays filtering.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Filter
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-abstract class AbstractFilter implements \Jyxo\Input\FilterInterface
+abstract class AbstractFilter implements FilterInterface
 {
-	/**
-	 * Creates a filter instance.
-	 */
-	public function __construct()
-	{}
-
-	/**
-	 * Filters a value.
-	 *
-	 * @param mixed $value Input value
-	 * @return mixed
-	 */
-	public static function filtrate($value)
-	{
-		$filter = new static();
-		return $filter->filter($value);
-	}
 
 	/**
 	 * Actually filters a value.
@@ -63,6 +47,21 @@ abstract class AbstractFilter implements \Jyxo\Input\FilterInterface
 		if (is_array($in)) {
 			return array_map([$this, 'filter'], $in);
 		}
+
 		return $this->filterValue($in);
 	}
+
+	/**
+	 * Filters a value.
+	 *
+	 * @param mixed $value Input value
+	 * @return mixed
+	 */
+	public static function filtrate($value)
+	{
+		$filter = new static();
+
+		return $filter->filter($value);
+	}
+
 }

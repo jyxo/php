@@ -16,14 +16,11 @@ namespace Jyxo\Input\Validator;
 /**
  * Validates a value.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class Equals extends \Jyxo\Input\Validator\AbstractValidator
+class Equals extends AbstractValidator
 {
 
 	/**
@@ -32,7 +29,6 @@ class Equals extends \Jyxo\Input\Validator\AbstractValidator
 	 * @var mixed
 	 */
 	protected $expected;
-
 
 	/**
 	 * Constructor.
@@ -48,7 +44,7 @@ class Equals extends \Jyxo\Input\Validator\AbstractValidator
 	 * Sets the expected value.
 	 *
 	 * @param mixed $expected Expected value
-	 * @return \Jyxo\Input\Validator\Equals
+	 * @return Equals
 	 */
 	public function setExpected($expected): self
 	{
@@ -71,11 +67,11 @@ class Equals extends \Jyxo\Input\Validator\AbstractValidator
 	 * Validates a value.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isValid($value): bool
 	{
-		return $value == $this->expected;
+		return $value === $this->expected;
 	}
 
 }

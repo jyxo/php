@@ -13,18 +13,21 @@
 
 namespace Jyxo\Input;
 
+use Jyxo\Spl\ObjectCache;
+use function array_shift;
+use function serialize;
+use function ucfirst;
+
 /**
  * Class for easier one-line filtering.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Filter
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
  */
 class Filter
 {
+
 	/**
 	 * Static filtering.
 	 *
@@ -34,11 +37,17 @@ class Filter
 	 */
 	public static function __callStatic(string $method, array $params)
 	{
-		$factory = \Jyxo\Spl\ObjectCache::get(\Jyxo\Input\Factory::class) ?: \Jyxo\Spl\ObjectCache::set(\Jyxo\Input\Factory::class, new Factory());
+		$factory = ObjectCache::get(Factory::class) ?: ObjectCache::set(
+			Factory::class,
+			new Factory()
+		);
 		$value = array_shift($params);
 		$key = 'Jyxo\Input\Filter\\' . ucfirst($method) . ($params ? '/' . serialize($params) : '');
-		$filter = \Jyxo\Spl\ObjectCache::get($key) ?: \Jyxo\Spl\ObjectCache::set($key, $factory->getFilterByName($method, $params));
-		/* @var $filter \Jyxo\Input\FilterInterface */
+
+		/** @var FilterInterface $filter */
+		$filter = ObjectCache::get($key) ?: ObjectCache::set($key, $factory->getFilterByName($method, $params));
+
 		return $filter->filter($value);
 	}
+
 }

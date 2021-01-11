@@ -13,11 +13,13 @@
 
 namespace Jyxo;
 
+use function md5;
+use function microtime;
+use function rand;
+
 /**
  * Timer for debugging purposes. Allows measuring multiple events simultaneously.
  *
- * @category Jyxo
- * @package Jyxo\Timer
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Štěpán Svoboda
@@ -25,6 +27,7 @@ namespace Jyxo;
  */
 final class Timer
 {
+
 	/**
 	 * Array of start times.
 	 *
@@ -41,10 +44,13 @@ final class Timer
 	public static function start(string $name = ''): string
 	{
 		$start = microtime(true);
+
 		if (empty($name)) {
 			$name = md5($start . rand(0, 100));
 		}
+
 		self::$starts[$name] = $start;
+
 		return $name;
 	}
 
@@ -59,8 +65,10 @@ final class Timer
 		if (isset(self::$starts[$name])) {
 			$delta = microtime(true) - self::$starts[$name];
 			unset(self::$starts[$name]);
+
 			return $delta;
 		}
+
 		return 0.0;
 	}
 
@@ -76,6 +84,7 @@ final class Timer
 		$previousTime = $time;
 		$time = microtime(true);
 
-		return (0 === $previousTime) ? 0.0 : ($time - $previousTime);
+		return $previousTime === 0 ? 0.0 : $time - $previousTime;
 	}
+
 }

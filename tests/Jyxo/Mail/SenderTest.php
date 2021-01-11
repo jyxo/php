@@ -13,6 +13,21 @@
 
 namespace Jyxo\Mail;
 
+use InvalidArgumentException;
+use Jyxo\Html;
+use Jyxo\Mail\Sender\CreateException;
+use Jyxo\Mail\Sender\Result;
+use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\TestCase;
+use ReflectionClass;
+use Throwable;
+use function file_get_contents;
+use function preg_replace;
+use function sprintf;
+use function strtoupper;
+use function substr;
+use const PHP_OS;
+
 /**
  * \Jyxo\Mail\Sender class test.
  *
@@ -21,8 +36,9 @@ namespace Jyxo\Mail;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class SenderTest extends \PHPUnit_Framework_TestCase
+class SenderTest extends TestCase
 {
+
 	/**
 	 * FileAttachment path.
 	 *
@@ -38,18 +54,9 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 	private $content;
 
 	/**
-	 * Prepares the testing environment.
-	 */
-	protected function setUp()
-	{
-		$this->filePath = DIR_FILES . '/mail';
-		$this->content = file_get_contents($this->filePath . '/email.html');
-	}
-
-	/**
 	 * Tests sending using the mail() function.
 	 */
-	public function testSendMail()
+	public function testSendMail(): void
 	{
 		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 			$this->markTestSkipped('Skipped on Windows');
@@ -64,7 +71,7 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests sending using a SMTP server.
 	 */
-	public function testSendSmtp()
+	public function testSendSmtp(): void
 	{
 		// Skips the test if no smtp connection is set
 		if (empty($GLOBALS['smtp'])) {
@@ -81,7 +88,7 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests possible sending errors.
 	 */
-	public function testSendErrors()
+	public function testSendErrors(): void
 	{
 		$email = new Email();
 		$email->setBody(new Email\Body(''));
@@ -91,23 +98,23 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 		// Non-existent sending method
 		try {
 			$sender->send('dummy-mode');
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->fail(sprintf('Expected exception %s.', InvalidArgumentException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+			$this->assertInstanceOf(InvalidArgumentException::class, $e);
 		}
 
 		// Missing sender
 		try {
 			$sender->send(Sender::MODE_NONE);
-			$this->fail(sprintf('Expected exception %s.', \Jyxo\Mail\Sender\CreateException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->fail(sprintf('Expected exception %s.', CreateException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\Jyxo\Mail\Sender\CreateException::class, $e);
+			$this->assertInstanceOf(CreateException::class, $e);
 		}
 
 		$email->setFrom(new Email\Address('blog-noreply@blog.cz'));
@@ -115,12 +122,12 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 		// Missing recipients
 		try {
 			$sender->send(Sender::MODE_NONE);
-			$this->fail(sprintf('Expected exception %s.', \Jyxo\Mail\Sender\CreateException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->fail(sprintf('Expected exception %s.', CreateException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\Jyxo\Mail\Sender\CreateException::class, $e);
+			$this->assertInstanceOf(CreateException::class, $e);
 		}
 
 		$email->addTo(new Email\Address('test@blog.cz'));
@@ -128,19 +135,19 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 		// Empty body
 		try {
 			$sender->send(Sender::MODE_NONE);
-			$this->fail(sprintf('Expected exception %s.', \Jyxo\Mail\Sender\CreateException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->fail(sprintf('Expected exception %s.', CreateException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\Jyxo\Mail\Sender\CreateException::class, $e);
+			$this->assertInstanceOf(CreateException::class, $e);
 		}
 	}
 
 	/**
 	 * Tests a complete email message with all settings.
 	 */
-	public function testCompleteEmail()
+	public function testCompleteEmail(): void
 	{
 		// Email
 		$from = new Email\Address('blog-noreply@blog.cz', 'Blog.cz');
@@ -148,7 +155,10 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 		$email->setFrom($from)
 			->addReplyTo($from)
 			->setPriority(Email::PRIORITY_NORMAL)
-			->setInReplyTo('161024ac03484c10203285be576446f2@blog.cz', ['30d6c4933818e36fa46509ad24a91ea4@blog.cz', '8b30935de59b6c89e4fc1204d279a2af@blog.cz'])
+			->setInReplyTo(
+				'161024ac03484c10203285be576446f2@blog.cz',
+				['30d6c4933818e36fa46509ad24a91ea4@blog.cz', '8b30935de59b6c89e4fc1204d279a2af@blog.cz']
+			)
 			->setConfirmReadingTo($from)
 			->addHeader(new Email\Header('Organization', 'Blog.cz'))
 			->addTo(new Email\Address('test2@blog.cz'))
@@ -174,19 +184,21 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($hostname, $sender->getHostname());
 
 		// Encoding
-		$reflection = new \ReflectionClass(\Jyxo\Mail\Encoding::class);
+		$reflection = new ReflectionClass(Encoding::class);
+
 		foreach ($reflection->getConstants() as $encoding) {
 			$sender->setEncoding($encoding);
 			$this->assertEquals($encoding, $sender->getEncoding());
 		}
+
 		try {
 			$sender->setEncoding('dummy-encoding');
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->fail(sprintf('Expected exception %s.', InvalidArgumentException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+			$this->assertInstanceOf(InvalidArgumentException::class, $e);
 		}
 
 		// Email
@@ -203,7 +215,7 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests all email types (with attachments, without, ...).
 	 */
-	public function testAllTypes()
+	public function testAllTypes(): void
 	{
 		// Sender
 		$sender = new Sender();
@@ -217,7 +229,7 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 		$this->assertResult('sender-type-simple-html.eml', $result);
 
 		// Plaintext email without attachments
-		$email->setBody(new Email\Body(\Jyxo\Html::toText($this->content)));
+		$email->setBody(new Email\Body(Html::toText($this->content)));
 		$sender->setEmail($email);
 		$result = $sender->send(Sender::MODE_NONE);
 
@@ -227,14 +239,16 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 		$email = $this->getEmail()
 			->setBody(new Email\Body($this->content))
 			->addAttachment(new Email\Attachment\FileAttachment($this->filePath . '/logo.gif', 'logo.gif', 'image/gif'))
-			->addAttachment(new Email\Attachment\StringAttachment(file_get_contents($this->filePath . '/star.gif'), 'star.gif', 'image/gif'));
+			->addAttachment(
+				new Email\Attachment\StringAttachment(file_get_contents($this->filePath . '/star.gif'), 'star.gif', 'image/gif')
+			);
 		$sender->setEmail($email);
 		$result = $sender->send(Sender::MODE_NONE);
 
 		$this->assertResult('sender-type-attachment-html.eml', $result);
 
 		// Plaintext email with attachments
-		$email->setBody(new Email\Body(\Jyxo\Html::toText($this->content)));
+		$email->setBody(new Email\Body(Html::toText($this->content)));
 		$sender->setEmail($email);
 		$result = $sender->send(Sender::MODE_NONE);
 
@@ -242,7 +256,7 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 
 		// Email with an alternative content
 		$email = $this->getEmail()
-			->setBody(new Email\Body($this->content, \Jyxo\Html::toText($this->content)));
+			->setBody(new Email\Body($this->content, Html::toText($this->content)));
 		$sender->setEmail($email);
 		$result = $sender->send(Sender::MODE_NONE);
 
@@ -250,7 +264,14 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 
 		// Email with an alternative content and inline attachments
 		$email->addAttachment(new Email\Attachment\InlineFileAttachment($this->filePath . '/logo.gif', 'logo.gif', 'logo.gif', 'image/gif'))
-			->addAttachment(new Email\Attachment\InlineStringAttachment(file_get_contents($this->filePath . '/star.gif'), 'star.gif', 'star.gif', 'image/gif'));
+			->addAttachment(
+				new Email\Attachment\InlineStringAttachment(
+					file_get_contents($this->filePath . '/star.gif'),
+					'star.gif',
+					'star.gif',
+					'image/gif'
+				)
+			);
 		$sender->setEmail($email);
 		$result = $sender->send(Sender::MODE_NONE);
 
@@ -260,7 +281,7 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests creating an email with only Bcc recipients.
 	 */
-	public function testUndisclosedRecipients()
+	public function testUndisclosedRecipients(): void
 	{
 		$email = new Email();
 		$email->setSubject('Test')
@@ -276,17 +297,26 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Prepares the testing environment.
+	 */
+	protected function setUp(): void
+	{
+		$this->filePath = DIR_FILES . '/mail';
+		$this->content = file_get_contents($this->filePath . '/email.html');
+	}
+
+	/**
 	 * Creates a basic email.
 	 *
-	 * @return \Jyxo\Mail\Email
+	 * @return Email
 	 */
-	private function getEmail(): \Jyxo\Mail\Email
+	private function getEmail(): Email
 	{
 		$email = new Email();
 		$email->setSubject('Novinky září 2009 ... a kreslící soutěž')
 			->setFrom(new Email\Address('blog-noreply@blog.cz', 'Blog.cz'))
 			->addTo(new Email\Address('test@blog.cz', 'Test Test'))
-			->setBody(new Email\Body(\Jyxo\Html::toText($this->content)));
+			->setBody(new Email\Body(Html::toText($this->content)));
 
 		return $email;
 	}
@@ -295,9 +325,9 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 	 * Compares the actual and expected result.
 	 *
 	 * @param string $file FileAttachment with the expected result
-	 * @param \Jyxo\Mail\Sender\Result $result
+	 * @param Result $result
 	 */
-	private function assertResult(string $file, \Jyxo\Mail\Sender\Result $result)
+	private function assertResult(string $file, Result $result): void
 	{
 		$expected = file_get_contents($this->filePath . '/' . $file);
 
@@ -309,4 +339,5 @@ class SenderTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals($expected, $result->source, sprintf('Failed test for file %s.', $file));
 	}
+
 }

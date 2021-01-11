@@ -3,12 +3,16 @@
 /**
  * Testing validator with a prefix.
  */
+
 namespace SomeOtherPrefix\Some;
 
-class Validator implements \Jyxo\Input\ValidatorInterface
+use Jyxo\Input\ValidatorInterface;
+use function is_numeric;
+
+class Validator implements ValidatorInterface
 {
 
-	public function isValid($value)
+	public function isValid($value): bool
 	{
 		return is_numeric($value);
 	}

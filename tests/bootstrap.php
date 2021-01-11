@@ -15,15 +15,17 @@
 session_start();
 
 // Autoload
-spl_autoload_register(function($className) {
+spl_autoload_register(static function ($className): void {
 	if (strpos($className, 'Jyxo') !== 0) {
 		return;
 	}
 
 	$file = str_replace('\\', '/', $className) . '.php';
+
 	foreach ([realpath(__DIR__ . '/..'), __DIR__] as $dir) {
 		$filePath = $dir . '/' . $file;
-		if (false !== stream_resolve_include_path($filePath)) {
+
+		if (stream_resolve_include_path($filePath) !== false) {
 			require_once $filePath;
 		}
 	}

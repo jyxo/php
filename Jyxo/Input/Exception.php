@@ -16,11 +16,11 @@ namespace Jyxo\Input;
 /**
  * Basic validation exception.
  *
- * @category Jyxo
- * @package Jyxo\Input
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Pěček
  */
 class Exception extends \Jyxo\Exception
-{}
+{
+
+}

@@ -13,6 +13,9 @@
 
 namespace Jyxo;
 
+use PHPUnit\Framework\TestCase;
+use function file_get_contents;
+
 /**
  * Charset processing test.
  *
@@ -21,12 +24,13 @@ namespace Jyxo;
  * @author Jaroslav Hanslík
  * @author Ondřej Nešpor
  */
-class CharsetTest extends \PHPUnit_Framework_TestCase
+class CharsetTest extends TestCase
 {
+
 	/**
 	 * Tests detect function.
 	 */
-	public function testDetect()
+	public function testDetect(): void
 	{
 		$this->assertEquals('UTF-8', Charset::detect('žluťoučký kůň příšerně úpěl ďábelské ódy'));
 		$this->assertEquals('UTF-8', Charset::detect('Государственный гимн Российской Федерации'));
@@ -38,31 +42,65 @@ class CharsetTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests conversion functions.
 	 */
-	public function testConvert()
+	public function testConvert(): void
 	{
-		$this->assertRegExp('~^[a-z0-9]([a-z0-9\-]*[a-z0-9])?$~', Charset::utf2ident('žluťoučký kůň příšerně úpěl ďábelské ódy'));
-		$this->assertEquals('zlutoucky-kun-priserne-upel-dabelske-ody', Charset::utf2ident('?žluťoučký  +  kůň příšerně úpěl ďábelské ódy...'));
-		$this->assertEquals('zlutoucky kun priserne upel dabelske ody', Charset::utf2ascii('žluťoučký kůň příšerně úpěl ďábelské ódy'));
-		$this->assertEquals('zlutoucky kun priserne upel dabelske ody', Charset::win2ascii(file_get_contents(DIR_FILES . '/charset/cp1250.txt')));
-		$this->assertEquals('zlutoucky kun priserne upel dabelske ody', Charset::iso2ascii(file_get_contents(DIR_FILES . '/charset/iso-8859-2.txt')));
+		$this->assertMatchesRegularExpression(
+			'~^[a-z0-9]([a-z0-9\-]*[a-z0-9])?$~',
+			Charset::utf2ident('žluťoučký kůň příšerně úpěl ďábelské ódy')
+		);
+		$this->assertEquals(
+			'zlutoucky-kun-priserne-upel-dabelske-ody',
+			Charset::utf2ident('?žluťoučký  +  kůň příšerně úpěl ďábelské ódy...')
+		);
+		$this->assertEquals(
+			'zlutoucky kun priserne upel dabelske ody',
+			Charset::utf2ascii('žluťoučký kůň příšerně úpěl ďábelské ódy')
+		);
+		$this->assertEquals(
+			'zlutoucky kun priserne upel dabelske ody',
+			Charset::win2ascii(file_get_contents(DIR_FILES . '/charset/cp1250.txt'))
+		);
+		$this->assertEquals(
+			'zlutoucky kun priserne upel dabelske ody',
+			Charset::iso2ascii(file_get_contents(DIR_FILES . '/charset/iso-8859-2.txt'))
+		);
 		$this->assertEquals('Rossija', Charset::russian2ascii('Россия'));
-		$this->assertEquals('Gosudarstvennyj gimn Rossijskoj Federacii', Charset::russian2ascii('Государственный гимн Российской Федерации'));
+		$this->assertEquals(
+			'Gosudarstvennyj gimn Rossijskoj Federacii',
+			Charset::russian2ascii('Государственный гимн Российской Федерации')
+		);
 
-		$this->assertEquals('žluťoučký kůň příšerně úpěl ďábelské ódy', Charset::convert2utf('žluťoučký kůň příšerně úpěl ďábelské ódy'));
-		$this->assertEquals('Государственный гимн Российской Федерации', Charset::convert2utf('Государственный гимн Российской Федерации'));
-		$this->assertEquals('žluťoučký kůň příšerně úpěl ďábelské ódy', Charset::convert2utf(file_get_contents(DIR_FILES . '/charset/cp1250.txt'), 'windows-1250'));
-		$this->assertEquals('žluťoučký kůň příšerně úpěl ďábelské ódy', Charset::convert2utf(file_get_contents(DIR_FILES . '/charset/iso-8859-2.txt')));
+		$this->assertEquals(
+			'žluťoučký kůň příšerně úpěl ďábelské ódy',
+			Charset::convert2utf('žluťoučký kůň příšerně úpěl ďábelské ódy')
+		);
+		$this->assertEquals(
+			'Государственный гимн Российской Федерации',
+			Charset::convert2utf('Государственный гимн Российской Федерации')
+		);
+		$this->assertEquals(
+			'žluťoučký kůň příšerně úpěl ďábelské ódy',
+			Charset::convert2utf(file_get_contents(DIR_FILES . '/charset/cp1250.txt'), 'windows-1250')
+		);
+		$this->assertEquals(
+			'žluťoučký kůň příšerně úpěl ďábelské ódy',
+			Charset::convert2utf(file_get_contents(DIR_FILES . '/charset/iso-8859-2.txt'))
+		);
 	}
 
 	/**
 	 * Tests UTF-8 fixing.
 	 */
-	public function testFixUtf()
+	public function testFixUtf(): void
 	{
 		$this->assertEquals('žluťoučký kůň pěl ďábelské ódy', Charset::fixUtf('žluťoučký kůň pěl ďábelské ódy'));
-		$this->assertEquals('Государственный гимн Российской Федерации', Charset::fixUtf('Государственный гимн Российской Федерации'));
+		$this->assertEquals(
+			'Государственный гимн Российской Федерации',
+			Charset::fixUtf('Государственный гимн Российской Федерации')
+		);
 
 		$this->assertEquals('', Charset::fixUtf(file_get_contents(DIR_FILES . '/charset/cp1250.txt')));
 		$this->assertEquals('', Charset::fixUtf(file_get_contents(DIR_FILES . '/charset/iso-8859-2.txt')));
 	}
+
 }

@@ -13,28 +13,27 @@
 
 namespace Jyxo\Rpc\Json;
 
+use function file_get_contents;
+use function header;
+use function in_array;
+use function json_decode;
+use function json_encode;
+use function json_last_error;
+use function trim;
+use const JSON_ERROR_CTRL_CHAR;
+use const JSON_ERROR_DEPTH;
+use const JSON_ERROR_NONE;
+use const JSON_ERROR_SYNTAX;
+
 /**
  * Class for creating a JSON-RPC server.
  *
- * @category Jyxo
- * @package Jyxo\Rpc
- * @subpackage Json
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Pěček
  */
 class Server extends \Jyxo\Rpc\Server
 {
-	/**
-	 * Definition of error codes and appropriate error messages.
-	 *
-	 * @var array
-	 */
-	private static $jsonErrors = [
-		JSON_ERROR_DEPTH => 'Maximum stack depth exceeded.',
-		JSON_ERROR_CTRL_CHAR => 'Unexpected control character found.',
-		JSON_ERROR_SYNTAX => 'Syntax error, malformed JSON.'
-	];
 
 	/**
 	 * List of registered methods.
@@ -44,35 +43,42 @@ class Server extends \Jyxo\Rpc\Server
 	private $methods = [];
 
 	/**
-	 * Actually registers a function to a server method.
+	 * Definition of error codes and appropriate error messages.
 	 *
-	 * @param string $func Function definition
+	 * @var array
 	 */
-	protected function register(string $func)
-	{
-		$this->methods[] = $func;
-	}
+	private static $jsonErrors = [
+		JSON_ERROR_DEPTH => 'Maximum stack depth exceeded.',
+		JSON_ERROR_CTRL_CHAR => 'Unexpected control character found.',
+		JSON_ERROR_SYNTAX => 'Syntax error, malformed JSON.',
+	];
 
 	/**
 	 * Processes a request and sends a JSON-RPC response.
 	 */
-	public function process()
+	public function process(): void
 	{
 		$requestId = '';
+
 		try {
 			$data = file_get_contents('php://input');
 			$data = trim($data);
+
 			if (empty($data)) {
 				throw new Exception('No data received.', -32700);
 			}
+
 			$data = json_decode($data, true);
 
 			// Request decoding error
-			if ($data === null && ($faultCode = json_last_error()) != JSON_ERROR_NONE) {
-				throw new Exception(self::$jsonErrors[$faultCode], $faultCode);
+			if ($data === null) {
+				$faultCode = json_last_error();
+				if ($faultCode !== JSON_ERROR_NONE) {
+					throw new Exception(self::$jsonErrors[$faultCode], $faultCode);
+				}
 			}
 
-			$requestId = isset($data['id']) ? $data['id'] : '';
+			$requestId = $data['id'] ?? '';
 
 			// Parsing request data error
 			if (empty($data['method']) || !isset($data['id'])) {
@@ -80,7 +86,7 @@ class Server extends \Jyxo\Rpc\Server
 			}
 
 			// Non-existent method call
-			if (!in_array($data['method'], $this->methods)) {
+			if (!in_array($data['method'], $this->methods, true)) {
 				throw new Exception('Server error. Method not found.', -32601);
 			}
 
@@ -89,17 +95,28 @@ class Server extends \Jyxo\Rpc\Server
 			$response = $this->call($data['method'], $params);
 			$response = ['result' => $response, 'id' => $data['id']];
 
-		} catch (\Jyxo\Rpc\Json\Exception $e) {
+		} catch (Exception $e) {
 			$response = [
 				'error' => [
 					'message' => $e->getMessage(),
-					'code' => $e->getCode()
+					'code' => $e->getCode(),
 				],
-				'id' => $requestId
+				'id' => $requestId,
 			];
 		}
 
 		header('Content-Type: application/json; charset="utf-8"');
 		echo json_encode($response);
 	}
+
+	/**
+	 * Actually registers a function to a server method.
+	 *
+	 * @param string $func Function definition
+	 */
+	protected function register(string $func): void
+	{
+		$this->methods[] = $func;
+	}
+
 }

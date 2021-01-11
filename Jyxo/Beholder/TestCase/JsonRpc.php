@@ -13,18 +13,25 @@
 
 namespace Jyxo\Beholder\TestCase;
 
+use Jyxo\Beholder\Result;
+use Jyxo\Beholder\TestCase;
+use Jyxo\Rpc\Json\Client;
+use Throwable;
+use function class_exists;
+use function extension_loaded;
+use function sprintf;
+
 /**
  * Tests JSON-RPC server availability.
  *
- * @category Jyxo
- * @package Jyxo\Beholder
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Pěček
  * @author Jaroslav Hanslík
  */
-class JsonRpc extends \Jyxo\Beholder\TestCase
+class JsonRpc extends TestCase
 {
+
 	/**
 	 * JSON-RPC server URL.
 	 *
@@ -49,7 +56,7 @@ class JsonRpc extends \Jyxo\Beholder\TestCase
 	/**
 	 * Timeout.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $timeout;
 
@@ -60,7 +67,7 @@ class JsonRpc extends \Jyxo\Beholder\TestCase
 	 * @param string $url Server URL
 	 * @param string $method Tested method
 	 * @param array $params Method parameters
-	 * @param integer $timeout Timeout
+	 * @param int $timeout Timeout
 	 */
 	public function __construct(string $description, string $url, string $method, array $params, int $timeout = 2)
 	{
@@ -75,38 +82,42 @@ class JsonRpc extends \Jyxo\Beholder\TestCase
 	/**
 	 * Performs the test.
 	 *
-	 * @return \Jyxo\Beholder\Result
+	 * @return Result
 	 */
-	public function run(): \Jyxo\Beholder\Result
+	public function run(): Result
 	{
 		// The json extension is required
 		if (!extension_loaded('json')) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Extension json missing');
+			return new Result(Result::NOT_APPLICABLE, 'Extension json missing');
 		}
 
 		// The curl extension is required
 		if (!extension_loaded('curl')) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Extension curl missing');
+			return new Result(Result::NOT_APPLICABLE, 'Extension curl missing');
 		}
 
 		// The \Jyxo\Rpc\Json\Client class is required
-		if (!class_exists(\Jyxo\Rpc\Json\Client::class)) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, sprintf('Class %s missing', \Jyxo\Rpc\Json\Client::class));
+		if (!class_exists(Client::class)) {
+			return new Result(
+				Result::NOT_APPLICABLE,
+				sprintf('Class %s missing', Client::class)
+			);
 		}
 
 		// Creates a client
-		$rpc = new \Jyxo\Rpc\Json\Client();
+		$rpc = new Client();
 		$rpc->setUrl($this->url)
 			->setTimeout($this->timeout);
 
 		// Sends the request
 		try {
 			$rpc->send($this->method, $this->params);
-		} catch (\Exception $e) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, $this->url);
+		} catch (Throwable $e) {
+			return new Result(Result::FAILURE, $this->url);
 		}
 
 		// OK
-		return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::SUCCESS, $this->url);
+		return new Result(Result::SUCCESS, $this->url);
 	}
+
 }

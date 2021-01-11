@@ -16,9 +16,6 @@ namespace Jyxo\Input;
 /**
  * Interface defining basic validator methods.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Pěček
@@ -26,11 +23,13 @@ namespace Jyxo\Input;
  */
 interface ValidatorInterface
 {
+
 	/**
 	 * Validating method.
 	 *
 	 * @param mixed $value Input variable
-	 * @return boolean Returns true if validation passed, false otherwise.
+	 * @return bool Returns true if validation passed, false otherwise.
 	 */
-	public function isValid($value);
+	public function isValid($value): bool;
+
 }

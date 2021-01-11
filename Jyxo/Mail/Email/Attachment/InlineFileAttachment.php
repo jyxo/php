@@ -13,24 +13,25 @@
 
 namespace Jyxo\Mail\Email\Attachment;
 
+use Jyxo\Mail\Email\Attachment;
+use function file_get_contents;
+
 /**
  * Inline mail attachment created from a file.
  *
- * @category Jyxo
- * @package Jyxo\Mail
- * @subpackage Email
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class InlineFileAttachment extends \Jyxo\Mail\Email\Attachment
+class InlineFileAttachment extends Attachment
 {
+
 	/**
 	 * Type.
 	 *
 	 * @var string
 	 */
-	protected $disposition = \Jyxo\Mail\Email\Attachment::DISPOSITION_INLINE;
+	protected $disposition = Attachment::DISPOSITION_INLINE;
 
 	/**
 	 * Creates an attachment.
@@ -52,7 +53,7 @@ class InlineFileAttachment extends \Jyxo\Mail\Email\Attachment
 	 * Sets Id.
 	 *
 	 * @param string $cid Id
-	 * @return \Jyxo\Mail\Email\Attachment\FileAttachment
+	 * @return FileAttachment
 	 */
 	public function setCid(string $cid): self
 	{
@@ -60,4 +61,5 @@ class InlineFileAttachment extends \Jyxo\Mail\Email\Attachment
 
 		return $this;
 	}
+
 }

@@ -13,49 +13,59 @@
 
 namespace Jyxo;
 
+use InvalidArgumentException;
+use function dechex;
+use function floor;
+use function hexdec;
+use function is_array;
+use function is_int;
+use function is_string;
+use function ltrim;
+use function min;
+use function preg_match;
+use function sprintf;
+use function str_pad;
+use function strlen;
+use const STR_PAD_LEFT;
+
 /**
  * Class representing a RGB color.
  *
- * @category Jyxo
- * @package Jyxo\Color
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Roman Řáha
  */
 class Color
 {
+
 	/**
 	 * Minimal luminance.
-	 *
-	 * @var integer
 	 */
-	const LUM_MIN = 0x00;
+	public const LUM_MIN = 0x00;
 
 	/**
 	 * Maximal luminance.
-	 *
-	 * @var integer
 	 */
-	const LUM_MAX = 0xFF;
+	public const LUM_MAX = 0xFF;
 
 	/**
 	 * The red component of the color.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $red = self::LUM_MIN;
 
 	/**
 	 * The green component of the color.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $green = self::LUM_MIN;
 
 	/**
 	 * The blue component of the color.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $blue = self::LUM_MIN;
 
@@ -89,7 +99,7 @@ class Color
 	/**
 	 * Returns an inverse color.
 	 *
-	 * @return \Jyxo\Color
+	 * @return Color
 	 */
 	public function toInverse(): self
 	{
@@ -98,29 +108,21 @@ class Color
 		$negative->setRed(self::LUM_MAX - $this->red)
 			->setGreen(self::LUM_MAX - $this->green)
 			->setBlue(self::LUM_MAX - $this->blue);
+
 		return $negative;
 	}
 
 	/**
 	 * Returns the currect color converted to grayscale.
 	 *
-	 * @return \Jyxo\Color
+	 * @return Color
 	 */
 	public function toGrayScale(): self
 	{
 		$gray = new self();
 		$gray->setLuminance($this->getLuminance());
-		return $gray;
-	}
 
-	/**
-	 * Returns textual (#RRGGBB) representation of the current color.
-	 *
-	 * @return string
-	 */
-	public function __toString(): string
-	{
-		return '#' . $this->getHex();
+		return $gray;
 	}
 
 	/**
@@ -133,7 +135,7 @@ class Color
 		return [
 			$this->red,
 			$this->green,
-			$this->blue
+			$this->blue,
 		];
 	}
 
@@ -152,19 +154,20 @@ class Color
 	/**
 	 * Returns the current color in binary form 0 - black, 1 - white).
 	 *
-	 * @return integer
+	 * @return int
 	 */
 	public function getBinary(): int
 	{
 		// Black or white corresponds to the most significant bit value
 		$luminance = $this->getLuminance();
+
 		return $luminance >> 7;
 	}
 
 	/**
 	 * Returns the red component luminance.
 	 *
-	 * @return integer
+	 * @return int
 	 */
 	public function getRed(): int
 	{
@@ -174,19 +177,20 @@ class Color
 	/**
 	 * Sets the red component luminance.
 	 *
-	 * @param integer|string $red Component luminance
-	 * @return \Jyxo\Color
+	 * @param int|string $red Component luminance
+	 * @return Color
 	 */
 	public function setRed($red): self
 	{
 		$this->red = $this->toInt($red);
+
 		return $this;
 	}
 
 	/**
 	 * Returns the green component luminance.
 	 *
-	 * @return integer
+	 * @return int
 	 */
 	public function getGreen(): int
 	{
@@ -196,19 +200,20 @@ class Color
 	/**
 	 * Sets the green component luminance.
 	 *
-	 * @param integer|string $green Component luminance
-	 * @return \Jyxo\Color
+	 * @param int|string $green Component luminance
+	 * @return Color
 	 */
 	public function setGreen($green): self
 	{
 		$this->green = $this->toInt($green);
+
 		return $this;
 	}
 
 	/**
 	 * Returns the blue component luminance.
 	 *
-	 * @return integer
+	 * @return int
 	 */
 	public function getBlue(): int
 	{
@@ -218,31 +223,33 @@ class Color
 	/**
 	 * Sets the blue component luminance.
 	 *
-	 * @param integer|string $blue Component luminance
-	 * @return \Jyxo\Color
+	 * @param int|string $blue Component luminance
+	 * @return Color
 	 */
 	public function setBlue($blue): self
 	{
 		$this->blue = $this->toInt($blue);
+
 		return $this;
 	}
 
 	/**
 	 * Returns the color luminance according to the human perception.
 	 *
-	 * @return integer
+	 * @return int
 	 */
 	public function getLuminance(): int
 	{
 		$luminance = 0.11 * $this->red + 0.59 * $this->green + 0.3 * $this->blue;
-		return (integer) floor($luminance);
+
+		return (int) floor($luminance);
 	}
 
 	/**
 	 * Sets the color in grayscale according to the luminance value.
 	 *
-	 * @param integer|string $luminance Luminance
-	 * @return \Jyxo\Color
+	 * @param int|string $luminance Luminance
+	 * @return Color
 	 */
 	public function setLuminance($luminance): self
 	{
@@ -250,6 +257,7 @@ class Color
 		$this->red = $luminance;
 		$this->green = $luminance;
 		$this->blue = $luminance;
+
 		return $this;
 	}
 
@@ -257,25 +265,25 @@ class Color
 	 * Sets color components using a hexadecimal RRGGBB string.
 	 *
 	 * @param string $hex Color definition
-	 * @return \Jyxo\Color
-	 * @throws \InvalidArgumentException If an invalid hexadecimal definition was provided
+	 * @return Color
 	 */
 	private function initFromHex(string $hex): self
 	{
 		// Trim the hashmark if present
 		$hex = ltrim($hex, '#');
 
-		if (strlen($hex) == 3) {
+		if (strlen($hex) === 3) {
 			// RGB format support
-			$hex = $hex{0} . $hex{0} . $hex{1} . $hex{1} . $hex{2} . $hex{2};
+			$hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
 		}
 
 		if (!preg_match('~[a-f0-9]{6}~i', $hex)) {
 			// Invalid color definition
-			throw new \InvalidArgumentException(sprintf('"%s" in not a valid hexadecimal color definition', $hex));
+			throw new InvalidArgumentException(sprintf('"%s" in not a valid hexadecimal color definition', $hex));
 		}
 
 		$this->initFromInt(hexdec($hex));
+
 		return $this;
 	}
 
@@ -283,21 +291,22 @@ class Color
 	 * Sets color components from an array.
 	 *
 	 * @param array $rgb Color definition
-	 * @return \Jyxo\Color
+	 * @return Color
 	 */
 	private function initFromRgb(array $rgb): self
 	{
 		$this->setRed($rgb[0])
 			->setGreen($rgb[1])
 			->setBlue($rgb[2]);
+
 		return $this;
 	}
 
 	/**
 	 * Sets color components from an integer.
 	 *
-	 * @param integer $int Color definition
-	 * @return \Jyxo\Color
+	 * @param int $int Color definition
+	 * @return Color
 	 */
 	private function initFromInt(int $int): self
 	{
@@ -305,21 +314,34 @@ class Color
 		$this->red = self::LUM_MAX & ($int >> 16);
 		$this->green = self::LUM_MAX & ($int >> 8);
 		$this->blue = self::LUM_MAX & $int;
+
 		return $this;
 	}
 
 	/**
 	 * Returns the color luminance as a decimal integer.
 	 *
-	 * @param integer|string $value Luminance value
-	 * @return integer
+	 * @param int|string $value Luminance value
+	 * @return int
 	 */
 	private function toInt($value): int
 	{
 		if (is_string($value)) {
 			$value = hexdec($value);
 		}
+
 		// Luminance must not be greater than 0xFF
-		return min([(integer) $value, self::LUM_MAX]);
+		return min([(int) $value, self::LUM_MAX]);
 	}
+
+	/**
+	 * Returns textual (#RRGGBB) representation of the current color.
+	 *
+	 * @return string
+	 */
+	public function __toString(): string
+	{
+		return '#' . $this->getHex();
+	}
+
 }

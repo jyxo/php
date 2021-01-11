@@ -13,24 +13,31 @@
 
 namespace Jyxo\Input;
 
+use ReflectionClass;
+use function array_unshift;
+use function class_exists;
+use function count;
+use function reset;
+use function sprintf;
+use function ucfirst;
+
 /**
  * \Jyxo\Input objects factory.
  *
- * @category Jyxo
- * @package Jyxo\Input
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
  */
 class Factory
 {
+
 	/**
 	 * Filter class names prefix.
 	 *
 	 * @var string
 	 */
 	private static $filterPrefix = [
-		'\Jyxo\Input\Filter\\'
+		'\Jyxo\Input\Filter\\',
 	];
 
 	/**
@@ -39,26 +46,26 @@ class Factory
 	 * @var string
 	 */
 	private static $validatorPrefix = [
-		'\Jyxo\Input\Validator\\'
+		'\Jyxo\Input\Validator\\',
 	];
 
 	/**
 	 * Returns a particular validator by its name.
 	 *
-	 * @param string|\Jyxo\Input\ValidatorInterface $name Validator name
+	 * @param string|ValidatorInterface $name Validator name
 	 * @param mixed|array $param Validator constructor parameters. In case of a single parameter it can be its value, an array of values otherwise. NULL in case of no parameter.
-	 * @return \Jyxo\Input\ValidatorInterface
-	 * @throws \Jyxo\Input\Exception No validator of the given name could be found
+	 * @return ValidatorInterface
 	 */
-	public function getValidatorByName($name, $param = null): \Jyxo\Input\ValidatorInterface
+	public function getValidatorByName($name, $param = null): ValidatorInterface
 	{
-		if ($name instanceof \Jyxo\Input\ValidatorInterface) {
+		if ($name instanceof ValidatorInterface) {
 			return $name;
 		}
 
 		$params = (array) $param;
 
 		$className = $this->findClass($name, self::$validatorPrefix);
+
 		if (!$className) {
 			throw new Exception(sprintf('Could not found "%s" validator', $name));
 		}
@@ -69,77 +76,25 @@ class Factory
 	/**
 	 * Returns a particular filter by its name.
 	 *
-	 * @param string|\Jyxo\Input\FilterInterface $name Filter name
+	 * @param string|FilterInterface $name Filter name
 	 * @param mixed|array $param Filter constructor parameters. In case of a single parameter it can be its value, an array of values otherwise. NULL in case of no parameter.
-	 * @return \Jyxo\Input\FilterInterface
-	 * @throws \Jyxo\Input\Exception No filter of the given name could be found
+	 * @return FilterInterface
 	 */
-	public function getFilterByName($name, $param = null): \Jyxo\Input\FilterInterface
+	public function getFilterByName($name, $param = null): FilterInterface
 	{
-		if ($name instanceof \Jyxo\Input\FilterInterface) {
+		if ($name instanceof FilterInterface) {
 			return $name;
 		}
 
 		$params = (array) $param;
 
 		$className = $this->findClass($name, self::$filterPrefix);
+
 		if (!$className) {
 			throw new Exception(sprintf('Could not found "%s" filter', $name));
 		}
 
 		return $this->getClass($className, $params);
-	}
-
-	/**
-	 * Finds a class by its name and possible prefixes.
-	 *
-	 * Returns the first found or NULL if no corresponding class was found.
-	 *
-	 * @param string $name Class name
-	 * @param array $prefixes Class prefixes
-	 * @return string|null
-	 */
-	private function findClass(string $name, array $prefixes)
-	{
-		$className = null;
-		$name = ucfirst($name);
-		foreach ($prefixes as $prefix) {
-			$tempName = $prefix . $name;
-			if (class_exists($tempName)) {
-				$className = $tempName;
-				break;
-			}
-		}
-		return $className;
-	}
-
-	/**
-	 * Creates a class instance with an arbitrary number of parameters.
-	 *
-	 * @param string $className Class name
-	 * @param array $params Parameters array
-	 * @return object
-	 * @throws \ReflectionException An error occurred; the class was probably not found
-	 */
-	private function getClass(string $className, array $params)
-	{
-		$instance = null;
-		switch (count($params)) {
-			case 0:
-				$instance = new $className();
-				break;
-
-			case 1:
-				$instance = new $className(reset($params));
-				break;
-
-			default:
-				$reflection = new \ReflectionClass($className);
-				$instance = $reflection->newInstanceArgs($params);
-				break;
-		}
-
-		return $instance;
 	}
 
 	/**
@@ -149,7 +104,7 @@ class Factory
 	 *
 	 * @param string $prefix Validator class prefix
 	 */
-	public static function addValidatorPrefix(string $prefix)
+	public static function addValidatorPrefix(string $prefix): void
 	{
 		array_unshift(self::$validatorPrefix, $prefix);
 	}
@@ -161,8 +116,66 @@ class Factory
 	 *
 	 * @param string $prefix
 	 */
-	public static function addFilterPrefix(string $prefix)
+	public static function addFilterPrefix(string $prefix): void
 	{
 		array_unshift(self::$filterPrefix, $prefix);
 	}
+
+	/**
+	 * Finds a class by its name and possible prefixes.
+	 *
+	 * Returns the first found or NULL if no corresponding class was found.
+	 *
+	 * @param string $name Class name
+	 * @param array $prefixes Class prefixes
+	 * @return string|null
+	 */
+	private function findClass(string $name, array $prefixes): ?string
+	{
+		$className = null;
+		$name = ucfirst($name);
+
+		foreach ($prefixes as $prefix) {
+			$tempName = $prefix . $name;
+
+			if (class_exists($tempName)) {
+				$className = $tempName;
+
+				break;
+			}
+		}
+
+		return $className;
+	}
+
+	/**
+	 * Creates a class instance with an arbitrary number of parameters.
+	 *
+	 * @param string $className Class name
+	 * @param array $params Parameters array
+	 * @return object
+	 */
+	private function getClass(string $className, array $params)
+	{
+		$instance = null;
+
+		switch (count($params)) {
+			case 0:
+				$instance = new $className();
+
+				break;
+			case 1:
+				$instance = new $className(reset($params));
+
+				break;
+			default:
+				$reflection = new ReflectionClass($className);
+				$instance = $reflection->newInstanceArgs($params);
+
+				break;
+		}
+
+		return $instance;
+	}
+
 }

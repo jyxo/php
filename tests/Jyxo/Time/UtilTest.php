@@ -13,6 +13,8 @@
 
 namespace Jyxo\Time;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * Tests for the \Jyxo\Time\Util class.
  *
@@ -21,13 +23,13 @@ namespace Jyxo\Time;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Ondřej Nešpor
  */
-class UtilTest extends \PHPUnit_Framework_TestCase
+class UtilTest extends TestCase
 {
 
 	/**
 	 * Tests the isWorkingDay method.
 	 */
-	public function testIsWorkingDay()
+	public function testIsWorkingDay(): void
 	{
 		$free = [
 			'2010-01-01',
@@ -35,14 +37,14 @@ class UtilTest extends \PHPUnit_Framework_TestCase
 			'2010-12-24',
 			'2011-01-16',
 			'2011-04-25',
-			'2020-04-13'
+			'2020-04-13',
 		];
 
 		$working = [
 			'2010-12-31',
 			'2011-07-20',
 			'2010-11-11',
-			'2020-04-14'
+			'2020-04-14',
 		];
 
 		foreach ($free as $day) {
@@ -57,14 +59,14 @@ class UtilTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests the nextMonth() method.
 	 */
-	public function testNextMonth()
+	public function testNextMonth(): void
 	{
 		$dates = [
 			'2010-01-01' => '2010-02-01',
 			'2010-01-31' => '2010-02-28',
 			'2012-01-31' => '2012-02-29',
 			'2010-12-31' => '2011-01-31',
-			'2010-08-31' => '2010-09-30'
+			'2010-08-31' => '2010-09-30',
 		];
 
 		foreach ($dates as $current => $expected) {
@@ -73,7 +75,6 @@ class UtilTest extends \PHPUnit_Framework_TestCase
 
 			$this->assertEquals($expected . ' 00:00:00', $next->format('Y-m-d H:i:s'));
 		}
-
 	}
 
 }

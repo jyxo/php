@@ -13,17 +13,36 @@
 
 namespace Jyxo\Beholder\TestCase;
 
+use Jyxo\Beholder\Result;
+use Jyxo\Beholder\TestCase;
+use Jyxo\Webdav\Client;
+use Jyxo\Webdav\Exception;
+use Jyxo\Webdav\FileNotCreatedException;
+use Jyxo\Webdav\FileNotDeletedException;
+use Jyxo\Webdav\FileNotExistException;
+use function class_exists;
+use function filter_var;
+use function gethostbyaddr;
+use function md5;
+use function parse_url;
+use function preg_match;
+use function sprintf;
+use function strlen;
+use function time;
+use function trim;
+use function uniqid;
+use const FILTER_VALIDATE_IP;
+
 /**
  * Tests WebDAV availability.
  *
- * @category Jyxo
- * @package Jyxo\Beholder
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class Webdav extends \Jyxo\Beholder\TestCase
+class Webdav extends TestCase
 {
+
 	/**
 	 * Server hostname.
 	 *
@@ -65,35 +84,40 @@ class Webdav extends \Jyxo\Beholder\TestCase
 	/**
 	 * Performs the test.
 	 *
-	 * @return \Jyxo\Beholder\Result
+	 * @return Result
 	 */
-	public function run(): \Jyxo\Beholder\Result
+	public function run(): Result
 	{
 		// The \Jyxo\Webdav\Client class is required
-		if (!class_exists(\Jyxo\Webdav\Client::class)) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, sprintf('Class %s missing', \Jyxo\Webdav\Client::class));
+		if (!class_exists(Client::class)) {
+			return new Result(Result::NOT_APPLICABLE, sprintf('Class %s missing', Client::class));
 		}
 
 		$random = md5(uniqid((string) time(), true));
 		$dir = trim($this->dir, '/');
+
 		if (!empty($dir)) {
 			$dir = '/' . $dir;
 		}
+
 		$path = $dir . '/beholder-' . $random . '.txt';
 		$content = $random;
 
 		// Status label
 		$serverUrl = $this->server;
+
 		if (!preg_match('~^https?://~', $this->server)) {
 			$serverUrl = 'http://' . $serverUrl;
 		}
+
 		$parsed = parse_url($serverUrl);
 		$host = $parsed['host'];
 		$port = !empty($parsed['port']) ? $parsed['port'] : 80;
-		$description = (false !== filter_var($host, FILTER_VALIDATE_IP) ? gethostbyaddr($host) : $host) . ':' . $port . $dir;
+		$description = (filter_var($host, FILTER_VALIDATE_IP) !== false ? gethostbyaddr($host) : $host) . ':' . $port . $dir;
 
 		try {
-			$webdav = new \Jyxo\Webdav\Client([$serverUrl]);
+			$webdav = new Client([$serverUrl]);
+
 			foreach ($this->options as $name => $value) {
 				$webdav->setRequestOption($name, $value);
 			}
@@ -103,28 +127,30 @@ class Webdav extends \Jyxo\Beholder\TestCase
 
 			// Exists
 			if (!$webdav->exists($path)) {
-				return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Exists error %s', $description));
+				return new Result(Result::FAILURE, sprintf('Exists error %s', $description));
 			}
 
 			// Reading
 			$readContent = $webdav->get($path);
+
 			if (strlen($readContent) !== strlen($content)) {
-				return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Read error %s', $description));
+				return new Result(Result::FAILURE, sprintf('Read error %s', $description));
 			}
 
 			// Deleting
 			$webdav->unlink($path);
-		} catch (\Jyxo\Webdav\FileNotCreatedException $e) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Write error %s', $description));
-		} catch (\Jyxo\Webdav\FileNotExistException $e) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Read error %s', $description));
-		} catch (\Jyxo\Webdav\FileNotDeletedException $e) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Delete error %s', $description));
-		} catch (\Jyxo\Webdav\Exception $e) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Error %s', $description));
+		} catch (FileNotCreatedException $e) {
+			return new Result(Result::FAILURE, sprintf('Write error %s', $description));
+		} catch (FileNotExistException $e) {
+			return new Result(Result::FAILURE, sprintf('Read error %s', $description));
+		} catch (FileNotDeletedException $e) {
+			return new Result(Result::FAILURE, sprintf('Delete error %s', $description));
+		} catch (Exception $e) {
+			return new Result(Result::FAILURE, sprintf('Error %s', $description));
 		}
 
 		// OK
-		return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::SUCCESS, $description);
+		return new Result(Result::SUCCESS, $description);
 	}
+
 }

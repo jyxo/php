@@ -19,6 +19,16 @@ use Jyxo\Beholder\Output\NoOutput;
 use Jyxo\Beholder\Output\Output;
 use Jyxo\Beholder\Output\TextOutput;
 use Jyxo\Beholder\Result\TestSuiteResult;
+use Jyxo\Timer;
+use UnexpectedValueException;
+use function array_keys;
+use function array_multisort;
+use function explode;
+use function fnmatch;
+use function header;
+use function shuffle;
+use function sprintf;
+use const SORT_ASC;
 
 /**
  * Beholder test executor.
@@ -36,8 +46,6 @@ use Jyxo\Beholder\Result\TestSuiteResult;
  * $beholder->run();
  * </code>
  *
- * @category Jyxo
- * @package Jyxo\Beholder
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Matoušek
@@ -45,54 +53,41 @@ use Jyxo\Beholder\Result\TestSuiteResult;
  */
 class Executor
 {
+
 	/**
 	 * Plaintext output.
-	 *
-	 * @var string
 	 */
-	const OUTPUT_TEXT = 't';
+	public const OUTPUT_TEXT = 't';
 
 	/**
 	 * HTML output.
-	 *
-	 * @var string
 	 */
-	const OUTPUT_HTML = 'h';
+	public const OUTPUT_HTML = 'h';
 
 	/**
 	 * JSON output.
-	 *
-	 * @var string
 	 */
-	const OUTPUT_JSON = 'j';
+	public const OUTPUT_JSON = 'j';
 
 	/**
 	 * No output.
-	 *
-	 * @var string
 	 */
-	const OUTPUT_NOTHING = 'n';
+	public const OUTPUT_NOTHING = 'n';
 
 	/**
 	 * Output parameter.
-	 *
-	 * @var string
 	 */
-	const PARAM_OUTPUT = 'o';
+	public const PARAM_OUTPUT = 'o';
 
 	/**
 	 * Parameter for including tests.
-	 *
-	 * @var string
 	 */
-	const PARAM_INCLUDE = 't';
+	public const PARAM_INCLUDE = 't';
 
 	/**
 	 * Parameter for excluding tests.
-	 *
-	 * @var string
 	 */
-	const PARAM_EXCLUDE = 'nt';
+	public const PARAM_EXCLUDE = 'nt';
 
 	/**
 	 * Project name.
@@ -149,37 +144,50 @@ class Executor
 		$this->setParams($params);
 	}
 
-	public function setParams(array $params)
+	public function setParams(array $params): void
 	{
 		// Filters
 		if (!empty($params[self::PARAM_INCLUDE])) {
 			$this->includeFilter = (string) $params[self::PARAM_INCLUDE];
 		}
+
 		if (!empty($params[self::PARAM_EXCLUDE])) {
 			$this->excludeFilter = (string) $params[self::PARAM_EXCLUDE];
 		}
 
 		// Output type
-		if (!empty($params[self::PARAM_OUTPUT])) {
-			switch ($params[self::PARAM_OUTPUT]) {
-				// Nothing
-				case self::OUTPUT_NOTHING:
-					$this->output = self::OUTPUT_NOTHING;
-					break;
-				// Plaintext
-				case self::OUTPUT_TEXT:
-					$this->output = self::OUTPUT_TEXT;
-					break;
-				// JSON
-				case self::OUTPUT_JSON:
-					$this->output = self::OUTPUT_JSON;
-					break;
-				// HTML
-				case self::OUTPUT_HTML:
-				default:
-					$this->output = self::OUTPUT_HTML;
-					break;
-			}
+		if (empty($params[self::PARAM_OUTPUT])) {
+			return;
+		}
+
+		switch ($params[self::PARAM_OUTPUT]) {
+			// Nothing
+			case self::OUTPUT_NOTHING:
+				$this->output = self::OUTPUT_NOTHING;
+
+				break;
+
+			// Plaintext
+
+			case self::OUTPUT_TEXT:
+				$this->output = self::OUTPUT_TEXT;
+
+				break;
+
+			// JSON
+
+			case self::OUTPUT_JSON:
+				$this->output = self::OUTPUT_JSON;
+
+				break;
+
+			// HTML
+
+			case self::OUTPUT_HTML:
+			default:
+				$this->output = self::OUTPUT_HTML;
+
+				break;
 		}
 	}
 
@@ -187,10 +195,9 @@ class Executor
 	 * Performs chosen tests and outputs results according to the selected output type.
 	 *
 	 * @param bool $print
-	 *
-	 * @return \Jyxo\Beholder\Output\Output
+	 * @return Output
 	 */
-	public function run($print = true): Output
+	public function run(bool $print = true): Output
 	{
 		// Filters tests
 		foreach (array_keys($this->tests) as $ident) {
@@ -206,6 +213,7 @@ class Executor
 		// Performs tests and gathers results
 		$order = 1;
 		$allSucceeded = true;
+
 		foreach ($idents as $ident) {
 			// Runs a test
 			$data = $this->runTest($ident);
@@ -214,15 +222,18 @@ class Executor
 			$allSucceeded = $allSucceeded && $data['result']->isSuccess();
 
 			// Adds the text into the output
-			$data['order'] = $order++;
+			$order++;
+			$data['order'] = $order;
 			$this->testsData[] = $data;
 		}
 
 		// Sorts tests according to their identifiers
 		$idents = [];
+
 		foreach ($this->testsData as $key => $data) {
 			$idents[$key] = $data['ident'];
 		}
+
 		array_multisort($idents, SORT_ASC, $this->testsData);
 
 		// Outputs the header
@@ -239,19 +250,29 @@ class Executor
 			// No output
 			case self::OUTPUT_NOTHING:
 				$output = new NoOutput($result);
+
 				break;
+
 			// Plaintext
+
 			case self::OUTPUT_TEXT:
 				$output = new TextOutput($result);
+
 				break;
+
 			// JSON
+
 			case self::OUTPUT_JSON:
 				$output = new JsonOutput($result);
+
 				break;
+
 			// HTML
+
 			case self::OUTPUT_HTML:
 			default:
 				$output = new HtmlOutput($result);
+
 				break;
 		}
 
@@ -277,10 +298,10 @@ class Executor
 	 * Adds a test.
 	 *
 	 * @param string $ident Tests identifier
-	 * @param \Jyxo\Beholder\TestCase $test Test instance
-	 * @return \Jyxo\Beholder\Executor
+	 * @param TestCase $test Test instance
+	 * @return Executor
 	 */
-	public function addTest(string $ident, \Jyxo\Beholder\TestCase $test): self
+	public function addTest(string $ident, TestCase $test): self
 	{
 		$this->tests[$ident] = $test;
 
@@ -292,15 +313,17 @@ class Executor
 	 *
 	 * @param string $ident Test identifier
 	 * @return array
-	 * @throws \UnexpectedValueException If the test returned an unknown result value
 	 */
 	private function runTest(string $ident): array
 	{
 		// Runs the test
-		$timer = \Jyxo\Timer::start();
+		$timer = Timer::start();
 		$result = $this->tests[$ident]->run();
-		if (!($result instanceof \Jyxo\Beholder\Result)) {
-			throw new \UnexpectedValueException(sprintf('Result %s of the test %s is not a %s instance.', $result, $ident, \Jyxo\Beholder\Result::class));
+
+		if (!($result instanceof Result)) {
+			throw new UnexpectedValueException(
+				sprintf('Result %s of the test %s is not a %s instance.', $result, $ident, Result::class)
+			);
 		}
 
 		// Returns result data
@@ -308,7 +331,7 @@ class Executor
 			'ident' => $ident,
 			'test' => $this->tests[$ident],
 			'result' => $result,
-			'duration' => \Jyxo\Timer::stop($timer)
+			'duration' => Timer::stop($timer),
 		];
 	}
 
@@ -316,18 +339,20 @@ class Executor
 	 * Checks if the given test will be performed according to the current filter settings.
 	 *
 	 * @param string $ident Test identifier
-	 * @return boolean
+	 * @return bool
 	 */
 	private function includeTest(string $ident): bool
 	{
 		// If the test is not among the allowed ones, return false
 		$include = false;
+
 		foreach (explode(',', $this->includeFilter) as $pattern) {
 			if ($this->patternMatch($pattern, $ident)) {
 				// We cannot use "return true" because the test might be disabled later
 				$include = true;
 			}
 		}
+
 		if (!$include) {
 			return false;
 		}
@@ -348,7 +373,7 @@ class Executor
 	 *
 	 * @param string $pattern Pattern
 	 * @param string $string String to be matched
-	 * @return boolean
+	 * @return bool
 	 */
 	private function patternMatch(string $pattern, string $string): bool
 	{

@@ -13,6 +13,8 @@
 
 namespace Jyxo\Rpc\Xml;
 
+use Jyxo\Rpc\ServerTestCase;
+
 /**
  * Test for class \Jyxo\Rpc\Xml\Server.
  *
@@ -22,8 +24,9 @@ namespace Jyxo\Rpc\Xml;
  * @author Jan Pěček
  * @author Jaroslav Hanslík
  */
-class ServerTest extends \Jyxo\Rpc\ServerTestCase
+class ServerTest extends ServerTestCase
 {
+
 	/**
 	 * Returns server instance.
 	 *
@@ -43,4 +46,5 @@ class ServerTest extends \Jyxo\Rpc\ServerTestCase
 	{
 		return 'xml';
 	}
+
 }

@@ -5,6 +5,18 @@
  */
 class TestMathWithCall
 {
+
+	/**
+	 * Calculates absolute value.
+	 *
+	 * @param int $a Input number
+	 * @return int
+	 */
+	private function absolute(int $a): int
+	{
+		return abs($a);
+	}
+
 	/**
 	 * Calls using the magic method.
 	 *
@@ -12,19 +24,9 @@ class TestMathWithCall
 	 * @param array $args Method parameters
 	 * @return mixed
 	 */
-	public function __call($method, $args)
+	public function __call(string $method, array $args)
 	{
 		return call_user_func_array([$this, 'absolute'], $args);
 	}
 
-	/**
-	 * Calculates absolute value.
-	 *
-	 * @param integer $a Input number
-	 * @return integer
-	 */
-	private function absolute($a)
-	{
-		return abs($a);
-	}
 }

@@ -13,31 +13,32 @@
 
 namespace Jyxo\Input\Validator;
 
+use function preg_match;
+use function preg_replace;
+
 /**
  * Validates (Czech) Tax ID.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class IsTaxId extends \Jyxo\Input\Validator\AbstractValidator
+class IsTaxId extends AbstractValidator
 {
+
 	/**
 	 * Strict check.
 	 *
 	 * If turned on, validity of IČ/birth number is also performed. If not, only length is checked.
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	private $strict = true;
 
 	/**
 	 * Constructor.
 	 *
-	 * @param boolean $strict Turns strict checking on or off.
+	 * @param bool $strict Turns strict checking on or off.
 	 */
 	public function __construct(bool $strict = true)
 	{
@@ -48,7 +49,7 @@ class IsTaxId extends \Jyxo\Input\Validator\AbstractValidator
 	 * Validates a value.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isValid($value): bool
 	{
@@ -61,10 +62,12 @@ class IsTaxId extends \Jyxo\Input\Validator\AbstractValidator
 		}
 
 		$sub = '';
+
 		// New Tax ID format since 1st May 2004
 		if (preg_match('~^CZ(\\d{8,10})$~', $taxId, $matches)) {
 			$sub = $matches[1];
 		}
+
 		if (!empty($sub)) {
 			// Strict checking off - allows the so called "own numbers"
 			if (!$this->strict) {
@@ -84,4 +87,5 @@ class IsTaxId extends \Jyxo\Input\Validator\AbstractValidator
 
 		return false;
 	}
+
 }

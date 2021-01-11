@@ -13,17 +13,24 @@
 
 namespace Jyxo\Beholder\TestCase;
 
+use Jyxo\Beholder\Result;
+use Jyxo\Beholder\TestCase;
+use Throwable;
+use function class_exists;
+use function date;
+use function sprintf;
+use const DATE_RFC822;
+
 /**
  * Tests SMTP server availability.
  *
- * @category Jyxo
- * @package Jyxo\Beholder
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class Smtp extends \Jyxo\Beholder\TestCase
+class Smtp extends TestCase
 {
+
 	/**
 	 * Hostname.
 	 *
@@ -48,7 +55,7 @@ class Smtp extends \Jyxo\Beholder\TestCase
 	/**
 	 * Timeout.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $timeout;
 
@@ -59,7 +66,7 @@ class Smtp extends \Jyxo\Beholder\TestCase
 	 * @param string $host Hostname
 	 * @param string $to Recipient
 	 * @param string $from Sender
-	 * @param integer $timeout Timeout
+	 * @param int $timeout Timeout
 	 */
 	public function __construct(string $description, string $host, string $to, string $from, int $timeout = 2)
 	{
@@ -74,13 +81,16 @@ class Smtp extends \Jyxo\Beholder\TestCase
 	/**
 	 * Performs the test.
 	 *
-	 * @return \Jyxo\Beholder\Result
+	 * @return Result
 	 */
-	public function run(): \Jyxo\Beholder\Result
+	public function run(): Result
 	{
 		// The \Jyxo\Mail\Sender\Smtp class is required
 		if (!class_exists(\Jyxo\Mail\Sender\Smtp::class)) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, sprintf('Class %s missing', \Jyxo\Mail\Sender\Smtp::class));
+			return new Result(
+				Result::NOT_APPLICABLE,
+				sprintf('Class %s missing', \Jyxo\Mail\Sender\Smtp::class)
+			);
 		}
 
 		try {
@@ -95,12 +105,14 @@ class Smtp extends \Jyxo\Beholder\TestCase
 				->recipient($this->to)
 				->data($header, 'Beholder SMTP Test')
 				->disconnect();
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			$smtp->disconnect();
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Send error %s', $this->host));
+
+			return new Result(Result::FAILURE, sprintf('Send error %s', $this->host));
 		}
 
 		// OK
-		return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::SUCCESS, $this->host);
+		return new Result(Result::SUCCESS, $this->host);
 	}
+
 }

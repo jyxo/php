@@ -13,6 +13,17 @@
 
 namespace Jyxo;
 
+use InvalidArgumentException;
+use function array_combine;
+use function in_array;
+use function is_array;
+use function preg_match;
+use function preg_match_all;
+use function sprintf;
+use function strtolower;
+use function substr;
+use const PREG_PATTERN_ORDER;
+
 /**
  * Class for generating (x)HTML source code.
  * Allows creating HTML tags and its attributes.
@@ -30,8 +41,6 @@ namespace Jyxo;
  *
  * The render() method creates the HTML output.
  *
- * @category Jyxo
- * @package Jyxo\Html
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Roman Řáha
@@ -39,10 +48,11 @@ namespace Jyxo;
  */
 final class HtmlTag
 {
+
 	/**
 	 * Is XHTML output turned on?
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	private $xhtml = true;
 
@@ -56,7 +66,7 @@ final class HtmlTag
 	/**
 	 * Is the element self closing?
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	private $isEmptyElement = false;
 
@@ -84,22 +94,9 @@ final class HtmlTag
 	/**
 	 * Renders only the contents, not the opening and closing tag.
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
-	private $contentOnly = FALSE;
-
-	/**
-	 * List of element attributes.
-	 *
-	 * @var array
-	 */
-	private static $attrs = [
-		'accesskey' => true, 'action' => true, 'alt' => true, 'cellpadding' => true, 'cellspacing' => true, 'checked' => true, 'class' => true,
-		'cols' => true, 'disabled' => true, 'for' => true, 'href' => true, 'id' => true, 'label' => true, 'method' => true, 'name' => true, 'onblur' => true,
-		'onchange' => true, 'onclick' => true, 'onfocus' => true, 'onkeyup' => true, 'onsubmit' => true, 'readonly' => true, 'rel' => true,
-		'rows' => true, 'selected' => true, 'size' => true, 'src' => true, 'style' => true, 'tabindex' => true, 'title' => true, 'type' => true,
-		'value' => true, 'width' => true,
-	];
+	private $contentOnly = false;
 
 	/**
 	 * List of self closing elements.
@@ -107,7 +104,12 @@ final class HtmlTag
 	 * @var array
 	 */
 	private $emptyElements = [
-		'br' => true, 'hr' => true, 'img' => true, 'input' => true, 'meta' => true, 'link' => true
+		'br' => true,
+		'hr' => true,
+		'img' => true,
+		'input' => true,
+		'meta' => true,
+		'link' => true,
 	];
 
 	/**
@@ -117,7 +119,48 @@ final class HtmlTag
 	 */
 	private $requiredAttrs = [
 		'option' => 'value',
-		'optgroup' => 'label'
+		'optgroup' => 'label',
+	];
+
+	/**
+	 * List of element attributes.
+	 *
+	 * @var array
+	 */
+	private static $attrs = [
+		'accesskey' => true,
+		'action' => true,
+		'alt' => true,
+		'cellpadding' => true,
+		'cellspacing' => true,
+		'checked' => true,
+		'class' => true,
+		'cols' => true,
+		'disabled' => true,
+		'for' => true,
+		'href' => true,
+		'id' => true,
+		'label' => true,
+		'method' => true,
+		'name' => true,
+		'onblur' => true,
+		'onchange' => true,
+		'onclick' => true,
+		'onfocus' => true,
+		'onkeyup' => true,
+		'onsubmit' => true,
+		'readonly' => true,
+		'rel' => true,
+		'rows' => true,
+		'selected' => true,
+		'size' => true,
+		'src' => true,
+		'style' => true,
+		'tabindex' => true,
+		'title' => true,
+		'type' => true,
+		'value' => true,
+		'width' => true,
 	];
 
 	/**
@@ -136,7 +179,7 @@ final class HtmlTag
 	 * Creates an element instance.
 	 *
 	 * @param string $tag HTML element name
-	 * @return \Jyxo\HtmlTag
+	 * @return HtmlTag
 	 */
 	public static function create(string $tag): self
 	{
@@ -149,24 +192,26 @@ final class HtmlTag
 	 * Anything between those tags will be used as contents.
 	 *
 	 * @param string $html HTML source code
-	 * @return \Jyxo\HtmlTag
-	 * @throws \InvalidArgumentException If an invalid HTML source was given
+	 * @return HtmlTag
 	 */
 	public static function createFromSource(string $html): self
 	{
 		if (preg_match('~<(\\w+)(\\s[^>]*)+>(.*)((<[^>]+>)?[^>]*)$~', $html, $matches)) {
 			$tag = new self($matches[1]);
-			if ('' !== $matches[3]) {
-				// @todo Maybe some kind of recursion to create a tree of elements
+
+			if ($matches[3] !== '') {
 				$tag->setText($matches[3]);
 			}
+
 			if (preg_match_all('/(\\w+)\\s*=\\s*"([^"]+)"/', $matches[2], $submatches, PREG_PATTERN_ORDER)) {
 				$attrs = array_combine($submatches[1], $submatches[2]);
 				$tag->setAttributes($attrs);
 			}
+
 			return $tag;
 		}
-		throw new \InvalidArgumentException('Zadaný text neobsahuje validní html');
+
+		throw new InvalidArgumentException('Zadaný text neobsahuje validní html');
 	}
 
 	/**
@@ -176,23 +221,29 @@ final class HtmlTag
 	 */
 	public function open(): string
 	{
-		if (TRUE === $this->contentOnly) {
+		if ($this->contentOnly === true) {
 			return '';
 		}
+
 		$this->isEmptyElement = isset($this->emptyElements[$this->tag]);
 		$buff = '';
+
 		foreach ($this->attributes as $name => $value) {
 			if (isset(self::$attrs[$name])) {
 				if (($name === 'selected' || $name === 'checked' || $name === 'readonly' || $name === 'disabled') && $value) {
 					$value = $name;
 				}
+
 				$notEmpty = $value !== null && $value !== '' && $value !== false;
+
 				if ($this->isRequiredAttr($this->tag, $name) || $notEmpty) {
 					// For not empty attributes and the value attribute by the <option> tag
 					if (!isset($this->noEncode[$name])) {
 						$value = String::escape($value);
 					}
+
 					$attrString = sprintf(' %s="%s"', $name, $value);
+
 					if ($name === 'value') {
 						if ($this->tag === 'textarea') {
 							$buff .= '';
@@ -205,7 +256,9 @@ final class HtmlTag
 				}
 			}
 		}
+
 		$buff = '<' . $this->tag . $buff . ($this->xhtml ? $this->isEmptyElement ? ' />' : '>' : '>');
+
 		return $buff;
 	}
 
@@ -217,23 +270,27 @@ final class HtmlTag
 	public function content(): string
 	{
 		$buff = '';
+
 		if (!$this->isEmptyElement) {
 
 			$hasValue = isset($this->attributes['value']);
 			$hasText = isset($this->attributes['text']);
+
 			if ($hasValue || $hasText) {
 				$text = $hasText ? $this->attributes['text'] : $this->attributes['value'];
 				$noEncode = isset($this->noEncode['value']) || isset($this->noEncode['text']);
 				// <script> contents are not escaped
-				$noEncode = 'script' === $this->tag ? true : $noEncode;
+				$noEncode = $this->tag === 'script' ? true : $noEncode;
 				$buff .= $noEncode ? $text : String::escape($text);
 			}
 		}
+
 		if (!$this->isEmptyElement && !empty($this->children)) {
 			foreach ($this->children as $element) {
 				$buff .= $element->render();
 			}
 		}
+
 		return $buff;
 	}
 
@@ -244,16 +301,20 @@ final class HtmlTag
 	 */
 	public function close(): string
 	{
-		if (true === $this->contentOnly) {
+		if ($this->contentOnly === true) {
 			return '';
 		}
+
 		$close = '</' . $this->tag . '>';
+
 		if ($this->xhtml) {
 			$buff = !$this->isEmptyElement ? $close : '';
 		} else {
 			$buff = $close;
 		}
+
 		$buff .= "\n";
+
 		return $buff;
 	}
 
@@ -270,12 +331,13 @@ final class HtmlTag
 	/**
 	 * Adds a child element.
 	 *
-	 * @param \Jyxo\HtmlTag $element Child element to be added
-	 * @return \Jyxo\HtmlTag
+	 * @param HtmlTag $element Child element to be added
+	 * @return HtmlTag
 	 */
-	public function addChild(\Jyxo\HtmlTag $element): self
+	public function addChild(HtmlTag $element): self
 	{
 		$this->children[] = $element;
+
 		return $this;
 	}
 
@@ -283,13 +345,14 @@ final class HtmlTag
 	 * Adds multiple child elements.
 	 *
 	 * @param array $elements Array of child elements
-	 * @return \Jyxo\HtmlTag
+	 * @return HtmlTag
 	 */
 	public function addChildren(array $elements): self
 	{
 		foreach ($elements as $element) {
 			$this->addChild($element);
 		}
+
 		return $this;
 	}
 
@@ -297,13 +360,14 @@ final class HtmlTag
 	 * Imports attributes from the given array.
 	 *
 	 * @param array $attributes Associative array of attributes and their values
-	 * @return \Jyxo\HtmlTag
+	 * @return HtmlTag
 	 */
 	public function setAttributes(array $attributes): self
 	{
 		foreach ($attributes as $name => $value) {
 			$this->attributes[strtolower($name)] = $value;
 		}
+
 		return $this;
 	}
 
@@ -311,7 +375,7 @@ final class HtmlTag
 	 * Sets an attribute to not be espaced on output.
 	 *
 	 * @param string $attribute Attribute name
-	 * @return \Jyxo\HtmlTag
+	 * @return HtmlTag
 	 */
 	public function setNoEncode(string $attribute): self
 	{
@@ -323,13 +387,34 @@ final class HtmlTag
 	/**
 	 * Sets if only the contents should be rendered.
 	 *
-	 * @param boolean $contentOnly Should only the contents be rendered
-	 * @return \Jyxo\HtmlTag
+	 * @param bool $contentOnly Should only the contents be rendered
+	 * @return HtmlTag
 	 */
 	public function setContentOnly(bool $contentOnly): selfs
 	{
 		$this->contentOnly = $contentOnly;
+
 		return $this;
+	}
+
+	/**
+	 * Returns if the given attribute is mandatory.
+	 *
+	 * @param string $tag HTML tag name
+	 * @param string $attr Attribute name
+	 * @return bool
+	 */
+	private function isRequiredAttr(string $tag, string $attr): bool
+	{
+		if (isset($this->requiredAttrs[$tag])) {
+			if (is_array($this->requiredAttrs[$tag])) {
+				return in_array($attr, $this->requiredAttrs[$tag], true);
+			}
+
+			return $attr === $this->requiredAttrs[$tag];
+		}
+
+		return false;
 	}
 
 	/**
@@ -352,15 +437,18 @@ final class HtmlTag
 	public function __call(string $method, array $args)
 	{
 		$type = $method[0] === 's' ? 'set' : 'get';
+
 		if ($type === 'set') {
 			$this->attributes[strtolower(substr($method, 3))] = $args[0];
+
 			return $this;
-		} else {
-			if (isset($this->attributes[strtolower(substr($method, 3))])) {
-				return $this->attributes[strtolower(substr($method, 3))];
-			}
-			return '';
 		}
+
+		if (isset($this->attributes[strtolower(substr($method, 3))])) {
+			return $this->attributes[strtolower(substr($method, 3))];
+		}
+
+		return '';
 	}
 
 	/**
@@ -372,24 +460,7 @@ final class HtmlTag
 	public function __get(string $name)
 	{
 		// An empty attribute is always null
-		return isset($this->attributes[$name]) ? $this->attributes[$name] : null;
+		return $this->attributes[$name] ?? null;
 	}
 
-	/**
-	 * Returns if the given attribute is mandatory.
-	 *
-	 * @param string $tag HTML tag name
-	 * @param string $attr Attribute name
-	 * @return boolean
-	 */
-	private function isRequiredAttr(string $tag, string $attr): bool
-	{
-		if (isset($this->requiredAttrs[$tag])) {
-			if (is_array($this->requiredAttrs[$tag])) {
-				return in_array($attr, $this->requiredAttrs[$tag]);
-			}
-			return $attr == $this->requiredAttrs[$tag];
-		}
-		return false;
-	}
 }

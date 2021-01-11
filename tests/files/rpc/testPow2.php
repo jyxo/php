@@ -3,10 +3,10 @@
 /**
  * Calculates the square of a number.
  *
- * @param integer $base Base
- * @return integer
+ * @param int $base Base
+ * @return int
  */
-function testPow2($base)
+function testPow2(int $base): int
 {
 	return pow($base, 2);
 }

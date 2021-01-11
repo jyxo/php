@@ -13,6 +13,9 @@
 
 namespace Jyxo\Beholder\TestCase;
 
+use Jyxo\Beholder\Result;
+use PHPUnit\Framework\TestCase;
+
 /**
  * Tests the \Jyxo\Beholder\TestCase\PhpExtension class.
  *
@@ -21,27 +24,29 @@ namespace Jyxo\Beholder\TestCase;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class PhpExtensionTest extends \PHPUnit_Framework_TestCase
+class PhpExtensionTest extends TestCase
 {
+
 	/**
 	 * Tests some extensions missing.
 	 */
-	public function testMissing()
+	public function testMissing(): void
 	{
 		$test = new PhpExtension('Extensions', ['pcre', 'runkit', 'parsekit']);
 		$result = $test->run();
-		$this->assertEquals(\Jyxo\Beholder\Result::FAILURE, $result->getStatus());
+		$this->assertEquals(Result::FAILURE, $result->getStatus());
 		$this->assertEquals('Missing runkit, parsekit', $result->getDescription());
 	}
 
 	/**
 	 * Tests all requested extension present.
 	 */
-	public function testAvailable()
+	public function testAvailable(): void
 	{
 		$test = new PhpExtension('Extensions', ['pcre', 'spl', 'reflection']);
 		$result = $test->run();
-		$this->assertEquals(\Jyxo\Beholder\Result::SUCCESS, $result->getStatus());
+		$this->assertEquals(Result::SUCCESS, $result->getStatus());
 		$this->assertEquals('OK', $result->getDescription());
 	}
+
 }

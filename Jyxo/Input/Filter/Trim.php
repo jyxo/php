@@ -13,43 +13,51 @@
 
 namespace Jyxo\Input\Filter;
 
+use function array_filter;
+use function is_array;
+use function trim;
+
 /**
  * Filter for trimming whitespace.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Filter
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Pěček
  * @author Jaroslav Hanslík
  */
-class Trim extends \Jyxo\Input\Filter\AbstractFilter
+class Trim extends AbstractFilter
 {
+
 	/**
 	 * Filters a value.
 	 *
-	 * @param string $in
-	 * @return string
+	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint
+	 * @param mixed $in Object to be filtered
+	 * @return string This object instance
 	 */
-	protected function filterValue( $in)
+	public function filter($in)
 	{
-		return trim((string) $in);
+		$in = parent::filter($in);
+
+		// Removes empty values
+		if (is_array($in)) {
+			$in = array_filter($in);
+		}
+
+		return $in;
 	}
 
 	/**
 	 * Filters a value.
 	 *
-	 * @param mixed $in Object to be filtered
-	 * @return \Jyxo\Input\FilterInterface This object instance
+	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
+	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint
+	 * @param string $in
+	 * @return string
 	 */
-	public function filter($in)
+	protected function filterValue($in)
 	{
-		$in = parent::filter($in);
-		// Removes empty values
-		if (is_array($in)) {
-			$in = array_filter($in);
-		}
-		return $in;
+		return trim((string) $in);
 	}
+
 }

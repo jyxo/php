@@ -16,12 +16,11 @@ namespace Jyxo\Mail\Parser;
 /**
  * Exception used when the body cannot be decoded.
  *
- * @category Jyxo
- * @package Jyxo\Mail
- * @subpackage Parser
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class BodyNotDecodedException extends \Jyxo\Mail\Parser\Exception
-{}
+class BodyNotDecodedException extends Exception
+{
+
+}

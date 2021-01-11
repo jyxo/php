@@ -13,6 +13,13 @@
 
 namespace Jyxo\Beholder\TestCase;
 
+use Jyxo\Beholder\Result;
+use PHPUnit\Framework\TestCase;
+use function class_exists;
+use function explode;
+use function gethostbyaddr;
+use function sprintf;
+
 /**
  * Tests the \Jyxo\Beholder\TestCase\Memcached class.
  *
@@ -21,20 +28,13 @@ namespace Jyxo\Beholder\TestCase;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class MemcachedTest extends \PHPUnit_Framework_TestCase
+class MemcachedTest extends TestCase
 {
-
-	public function setUp()
-	{
-		if (!class_exists('Memcached')) {
-			$this->markTestSkipped('Memcached not set');
-		}
-	}
 
 	/**
 	 * Tests connection failure.
 	 */
-	public function testConnectionFailure()
+	public function testConnectionFailure(): void
 	{
 		if (!class_exists('Memcached')) {
 			$this->markTestSkipped('Memcached not set');
@@ -46,14 +46,14 @@ class MemcachedTest extends \PHPUnit_Framework_TestCase
 		$test = new Memcached('Memcached', $ip, $port);
 		// @ on purpose
 		$result = @$test->run();
-		$this->assertEquals(\Jyxo\Beholder\Result::FAILURE, $result->getStatus());
+		$this->assertEquals(Result::FAILURE, $result->getStatus());
 		$this->assertEquals(sprintf('Connection error %s:%s', gethostbyaddr($ip), $port), $result->getDescription());
 	}
 
 	/**
 	 * Tests working connection.
 	 */
-	public function testAllOk()
+	public function testAllOk(): void
 	{
 		// Skip the test if no memcache connection is defined
 		if (empty($GLOBALS['memcache'])) {
@@ -61,11 +61,19 @@ class MemcachedTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$servers = explode(',', $GLOBALS['memcache']);
-		list($ip, $port) = explode(':', $servers[0]);
+		[$ip, $port] = explode(':', $servers[0]);
 
 		$test = new Memcached('Memcached', $ip, $port);
 		$result = $test->run();
-		$this->assertEquals(\Jyxo\Beholder\Result::SUCCESS, $result->getStatus());
+		$this->assertEquals(Result::SUCCESS, $result->getStatus());
 		$this->assertEquals(sprintf('%s:%s', gethostbyaddr($ip), $port), $result->getDescription());
 	}
+
+	protected function setUp(): void
+	{
+		if (!class_exists('Memcached')) {
+			$this->markTestSkipped('Memcached not set');
+		}
+	}
+
 }

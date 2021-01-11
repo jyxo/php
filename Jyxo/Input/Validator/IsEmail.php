@@ -13,30 +13,30 @@
 
 namespace Jyxo\Input\Validator;
 
+use function preg_match;
+
 /**
  * Email address validation.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class IsEmail extends \Jyxo\Input\Validator\AbstractValidator
+class IsEmail extends AbstractValidator
 {
+
 	/**
 	 * Validates a value.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isValid($value): bool
 	{
-		if (!preg_match('~^[a-z0-9-!#\$%&\'*+/=?^_`{|}\~]+(?:[.][a-z0-9-!#\$%&\'*+/=?^_`{|}\~]+)*@(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?[.])+[a-z-]{2,24}$~iu', (string) $value)) {
-			return false;
-		}
-
-		return true;
+		return preg_match(
+			'~^[a-z0-9-!#\$%&\'*+/=?^_`{|}\~]+(?:[.][a-z0-9-!#\$%&\'*+/=?^_`{|}\~]+)*@(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?[.])+[a-z-]{2,24}$~iu',
+			(string) $value
+		) === 1;
 	}
+
 }

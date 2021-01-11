@@ -16,12 +16,11 @@ namespace Jyxo\Rpc\Json;
 /**
  * Exception for errors in JSON-RPC.
  *
- * @category Jyxo
- * @package Jyxo\Rpc
- * @subpackage Json
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Pěček
  */
 class Exception extends \Jyxo\Rpc\Exception
-{}
+{
+
+}

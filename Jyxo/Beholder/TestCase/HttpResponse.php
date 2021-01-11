@@ -13,6 +13,20 @@
 
 namespace Jyxo\Beholder\TestCase;
 
+use Exception;
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\RequestOptions;
+use Jyxo\Beholder\Result;
+use Jyxo\Beholder\TestCase;
+use Jyxo\StringUtil;
+use Throwable;
+use function class_exists;
+use function sprintf;
+use function strip_tags;
+use function strpos;
+use function trim;
+
 /**
  * Common HTTP response test.
  * Checks only availability in the default form, but can be easily extended with additional checks.
@@ -22,14 +36,13 @@ namespace Jyxo\Beholder\TestCase;
  * new \Jyxo\Beholder\TestCase\HttpResponse('Foo', 'http://example.com/', array('body' => '/this text must be in body/m'))
  * </code>
  *
- * @category Jyxo
- * @package Jyxo\Beholder
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Kaštánek
  */
-class HttpResponse extends \Jyxo\Beholder\TestCase
+class HttpResponse extends TestCase
 {
+
 	/**
 	 * Tested URL.
 	 *
@@ -62,39 +75,42 @@ class HttpResponse extends \Jyxo\Beholder\TestCase
 	/**
 	 * Performs the test.
 	 *
-	 * @return \Jyxo\Beholder\Result
+	 * @return Result
 	 */
-	public function run(): \Jyxo\Beholder\Result
+	public function run(): Result
 	{
 		// The \GuzzleHttp library is required
-		if (!class_exists(\GuzzleHttp\Client::class)) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Guzzle library missing');
+		if (!class_exists(Client::class)) {
+			return new Result(Result::NOT_APPLICABLE, 'Guzzle library missing');
 		}
 
 		try {
 
-			$httpClient = new \GuzzleHttp\Client();
-			$httpRequest = new \GuzzleHttp\Psr7\Request('GET', $this->url, ['User-Agent' => 'JyxoBeholder']);
+			$httpClient = new Client();
+			$httpRequest = new Request('GET', $this->url, ['User-Agent' => 'JyxoBeholder']);
 			$httpResponse = $httpClient->send($httpRequest, [
-				\GuzzleHttp\RequestOptions::CONNECT_TIMEOUT => 5,
-				\GuzzleHttp\RequestOptions::TIMEOUT => 10
+				RequestOptions::CONNECT_TIMEOUT => 5,
+				RequestOptions::TIMEOUT => 10,
 			]);
 
-			if (200 !== $httpResponse->getStatusCode()) {
-				throw new \Exception(sprintf('Http error: %s', $httpResponse->getReasonPhrase()));
+			if ($httpResponse->getStatusCode() !== 200) {
+				throw new Exception(sprintf('Http error: %s', $httpResponse->getReasonPhrase()));
 			}
+
 			if (isset($this->tests['body'])) {
 				$body = (string) $httpResponse->getBody();
+
 				if (strpos($body, $this->tests['body']) === false) {
 					$body = trim(strip_tags($body));
-					throw new \Exception(sprintf('Invalid body: %s', \Jyxo\StringUtil::cut($body, 128)));
+
+					throw new Exception(sprintf('Invalid body: %s', StringUtil::cut($body, 128)));
 				}
 			}
 
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::SUCCESS, $this->url);
-
-		} catch (\Exception $e) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, $e->getMessage());
+			return new Result(Result::SUCCESS, $this->url);
+		} catch (Throwable $e) {
+			return new Result(Result::FAILURE, $e->getMessage());
 		}
 	}
+
 }

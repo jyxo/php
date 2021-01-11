@@ -14,15 +14,14 @@
 namespace Jyxo\Beholder\Output;
 
 use Jyxo\Beholder\Executor;
+use function sprintf;
 
 /**
  * Beholder plain text output class
  *
- * @category Jyxo
- * @package Jyxo\Beholder
  * @author Matěj Humpál
  */
-class TextOutput extends \Jyxo\Beholder\Output\Output
+class TextOutput extends Output
 {
 
 	public function getContentType(): string
@@ -31,43 +30,10 @@ class TextOutput extends \Jyxo\Beholder\Output\Output
 		return 'text/html; charset=utf-8';
 	}
 
-	public function __toString(): string
-	{
-		$return = '';
-
-		$return .= '<pre>This is Beholder for project ' . $this->result->getProject() . "\n";
-		$return .= 'Tests included: ' . $this->result->getIncludeFilter() . "\n";
-		$return .= 'Tests excluded: ' . $this->result->getExcludeFilter() . "\n\n";
-		$return .= '<a href="?' . Executor::PARAM_INCLUDE . '=' . $this->result->getIncludeFilter()
-			. '&amp;' . Executor::PARAM_EXCLUDE . '=' . $this->result->getExcludeFilter()
-			. '&amp;' . Executor::PARAM_OUTPUT . '=' . Executor::OUTPUT_HTML . "\">Html version</a>\n\n";
-		$return .= '<a href="?' . Executor::PARAM_INCLUDE . '=' . $this->result->getIncludeFilter()
-			. '&amp;' . Executor::PARAM_EXCLUDE . '=' . $this->result->getExcludeFilter()
-			. '&amp;' . Executor::PARAM_OUTPUT . '=' . Executor::OUTPUT_JSON . "\">JSON version</a>\n\n";
-
-		$return .= sprintf("%-9s %10s   %-10s %-7s  %-35s    %s\n",
-			'Run Order', 'Duration', 'Ident', 'Status', 'Test Name', 'Description');
-		foreach ($this->testsData as $data) {
-			$return .= sprintf("%9d %9.2fs   %-10s %-7s  %-35s    %s\n",
-				$data['order'],
-				$data['duration'],
-				$data['ident'],
-				$data['result']->getStatusMessage(),
-				$data['test']->getDescription(),
-				$data['result']->getDescription());
-		}
-
-		if ($this->result->hasAllSucceeded()) {
-			$return .= "\nJust a little prayer so we know we are allright.\n\n";
-			$return .= $this->getPrayer();
-		}
-
-		return $return;
-	}
-
 	private function getPrayer(): string
 	{
 		$return = '';
+
 		for ($i = 0; $i < 5; $i++) {
 			$return .= 'Our Father in heaven,' . "\n";
 			$return .= 'hallowed be your name,' . "\n";
@@ -85,4 +51,41 @@ class TextOutput extends \Jyxo\Beholder\Output\Output
 
 		return $return;
 	}
+
+	public function __toString(): string
+	{
+		$return = '';
+
+		$return .= '<pre>This is Beholder for project ' . $this->result->getProject() . "\n";
+		$return .= 'Tests included: ' . $this->result->getIncludeFilter() . "\n";
+		$return .= 'Tests excluded: ' . $this->result->getExcludeFilter() . "\n\n";
+		$return .= '<a href="?' . Executor::PARAM_INCLUDE . '=' . $this->result->getIncludeFilter()
+			. '&amp;' . Executor::PARAM_EXCLUDE . '=' . $this->result->getExcludeFilter()
+			. '&amp;' . Executor::PARAM_OUTPUT . '=' . Executor::OUTPUT_HTML . "\">Html version</a>\n\n";
+		$return .= '<a href="?' . Executor::PARAM_INCLUDE . '=' . $this->result->getIncludeFilter()
+			. '&amp;' . Executor::PARAM_EXCLUDE . '=' . $this->result->getExcludeFilter()
+			. '&amp;' . Executor::PARAM_OUTPUT . '=' . Executor::OUTPUT_JSON . "\">JSON version</a>\n\n";
+
+		$return .= sprintf("%-9s %10s   %-10s %-7s  %-35s    %s\n", 'Run Order', 'Duration', 'Ident', 'Status', 'Test Name', 'Description');
+
+		foreach ($this->testsData as $data) {
+			$return .= sprintf(
+				"%9d %9.2fs   %-10s %-7s  %-35s    %s\n",
+				$data['order'],
+				$data['duration'],
+				$data['ident'],
+				$data['result']->getStatusMessage(),
+				$data['test']->getDescription(),
+				$data['result']->getDescription()
+			);
+		}
+
+		if ($this->result->hasAllSucceeded()) {
+			$return .= "\nJust a little prayer so we know we are allright.\n\n";
+			$return .= $this->getPrayer();
+		}
+
+		return $return;
+	}
+
 }

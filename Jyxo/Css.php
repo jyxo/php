@@ -13,25 +13,48 @@
 
 namespace Jyxo;
 
+use LogicException;
+use function array_diff;
+use function array_filter;
+use function array_flip;
+use function array_pop;
+use function array_search;
+use function array_values;
+use function count;
+use function end;
+use function explode;
+use function in_array;
+use function preg_match;
+use function preg_match_all;
+use function preg_replace;
+use function preg_replace_callback;
+use function preg_split;
+use function rtrim;
+use function sprintf;
+use function str_replace;
+use function strpos;
+use function strtolower;
+use function strtr;
+use function trim;
+use function uksort;
+use const PREG_SET_ORDER;
+
 /**
  * Class for working with CSS stylesheets.
  *
- * @category Jyxo
- * @package Jyxo\Css
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
 class Css
 {
+
 	/**
 	 * Constructor preventing from creating static class instances.
-	 *
-	 * @throws \LogicException When trying to create an instance
 	 */
-	public final function __construct()
+	final public function __construct()
 	{
-		throw new \LogicException(sprintf('Cannot create an instance of a static class %s.', get_class($this)));
+		throw new LogicException(sprintf('Cannot create an instance of a static class %s.', static::class));
 	}
 
 	/**
@@ -43,25 +66,25 @@ class Css
 	public static function repair(string $css): string
 	{
 		// Convert properties to lowercase
-		$css = preg_replace_callback('~((?:^|\{|;)\\s*)([\-a-z]+)(\\s*:)~i', function($matches) {
+		$css = preg_replace_callback('~((?:^|\{|;)\\s*)([\-a-z]+)(\\s*:)~i', static function ($matches) {
 			return $matches[1] . strtolower($matches[2]) . $matches[3];
 		}, $css);
 		// Convert rgb() and url() to lowercase
-		$css = preg_replace_callback('~(rgb|url)(?=\\s*\()~i', function($matches) {
+		$css = preg_replace_callback('~(rgb|url)(?=\\s*\()~i', static function ($matches) {
 			return strtolower($matches[1]);
 		}, $css);
 		// Remove properties without values
-		$css = preg_replace_callback('~\\s*[\-a-z]+\\s*:\\s*([;}]|$)~i', function($matches) {
-			return '}' === $matches[1] ? '}' : '';
+		$css = preg_replace_callback('~\\s*[\-a-z]+\\s*:\\s*([;}]|$)~i', static function ($matches) {
+			return $matches[1] === '}' ? '}' : '';
 		}, $css);
 		// Remove MS Office properties
 		$css = preg_replace('~\\s*mso-[\-a-z]+\\s*:[^;}]*;?~i', '', $css);
 		// Convert color definitions to lowercase
-		$css = preg_replace_callback('~(:[^:]*?)(#[abcdef0-9]{3,6})~i', function($matches) {
+		$css = preg_replace_callback('~(:[^:]*?)(#[abcdef0-9]{3,6})~i', static function ($matches) {
 			return $matches[1] . strtolower($matches[2]);
 		}, $css);
 		// Convert colors from RGB to HEX
-		$css = preg_replace_callback('~rgb\\s*\(\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*\)~', function($matches) {
+		$css = preg_replace_callback('~rgb\\s*\(\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*\)~', static function ($matches) {
 			return sprintf('#%02x%02x%02x', $matches[1], $matches[2], $matches[3]);
 		}, $css);
 
@@ -73,18 +96,19 @@ class Css
 	 *
 	 * @param string $css Stylesheet definition
 	 * @param array $properties Filtered properties
-	 * @param boolean $exclude If true, $properties will be removed from the stylesheet; if false, only $properties will be left
+	 * @param bool $exclude If true, $properties will be removed from the stylesheet; if false, only $properties will be left
 	 * @return string
 	 */
 	public static function filterProperties(string $css, array $properties, bool $exclude = true): string
 	{
 		$properties = array_flip($properties);
-		return preg_replace_callback('~\\s*([\-a-z]+)\\s*:[^;}]*;?~i', function($matches) use ($properties, $exclude) {
+
+		return preg_replace_callback('~\\s*([\-a-z]+)\\s*:[^;}]*;?~i', static function ($matches) use ($properties, $exclude) {
 			if ($exclude) {
 				return isset($properties[$matches[1]]) ? '' : $matches[0];
-			} else {
-				return isset($properties[$matches[1]]) ? $matches[0] : '';
 			}
+
+			return isset($properties[$matches[1]]) ? $matches[0] : '';
 		}, $css);
 	}
 
@@ -157,24 +181,29 @@ class Css
 		}
 
 		// Parse the HTML source
-		preg_match_all('~(?:<\\w+[^>]*(?:\\s*/)?>)|(?:</\\w+>)|(?:<!--)|(?:<!\[endif\]-->)|(?:<!\[CDATA\[.+?\]\]>)|(?:<!DOCTYPE[^>]+>)|(?:[^<]+)~s', $html, $matches);
+		preg_match_all(
+			'~(?:<\\w+[^>]*(?:\\s*/)?>)|(?:</\\w+>)|(?:<!--)|(?:<!\[endif\]-->)|(?:<!\[CDATA\[.+?\]\]>)|(?:<!DOCTYPE[^>]+>)|(?:[^<]+)~s',
+			$html,
+			$matches
+		);
 
 		$level = 0;
 		$path = [];
 		$nodeNo = 0;
 		$nodes = [];
+
 		foreach ($matches[0] as $match) {
-			if (0 === strpos($match, '</')) {
+			if (strpos($match, '</') === 0) {
 				$level--;
 				array_pop($path[$level]);
 				$nodes[$nodeNo] = [
 					'number' => $nodeNo,
 					'type' => 'closing-tag',
 					'content' => $match,
-					'level' => $level
+					'level' => $level,
 				];
-			} elseif ('<' === $match[0] && 0 !== strpos($match, '<!')) {
-				list($tag, $attributes) = preg_split('~(?:\\s+|/|$)~', trim($match, '<>'), 2);
+			} elseif ($match[0] === '<' && strpos($match, '<!') !== 0) {
+				[$tag, $attributes] = preg_split('~(?:\\s+|/|$)~', trim($match, '<>'), 2);
 				$tag = strtolower($tag);
 				$id = null;
 				$class = [];
@@ -190,6 +219,7 @@ class Css
 				$path[$level][] = $nodeNo;
 
 				$parent = null;
+
 				if ($level > 0) {
 					$parent = end($path[$level - 1]);
 					$nodes[$parent]['children'][] = $nodeNo;
@@ -208,110 +238,126 @@ class Css
 				];
 
 				static $emptyTags = ['br', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'param', 'area', 'command', 'col', 'base', 'keygen', 'wbr'];
+
 				if (!in_array($tag, $emptyTags, true)) {
 					$level++;
 				}
-
 			} else {
 				$nodes[$nodeNo] = [
 					'number' => $nodeNo,
 					'type' => 'other',
 					'content' => $match,
-					'level' => $level
+					'level' => $level,
 				];
 			}
 
 			$nodeNo++;
 		}
 
-		$checkIfNodeMatchesSelector = function (array $node, array $selector) use ($nodes): bool {
-			if ((null !== $selector['tag'] && $node['tag'] !== $selector['tag'])
-				|| (null !== $selector['id'] && $node['id'] !== $selector['id'])
-				|| count(array_diff($selector['class'], $node['class'])) > 0) {
+		$checkIfNodeMatchesSelector = static function (array $node, array $selector) use ($nodes): bool {
+			if (
+				(
+					$selector['tag'] !== null
+					&& $node['tag'] !== $selector['tag']
+				)
+				|| (
+					$selector['id'] !== null
+					&& $node['id'] !== $selector['id']
+				)
+				|| count(array_diff($selector['class'], $node['class'])) > 0
+			) {
 				return false;
 			}
 
-			if (0 === count($selector['pseudoClass'])) {
+			if (count($selector['pseudoClass']) === 0) {
 				return true;
-			} elseif (null === $node['parent']) {
+			}
+
+			if ($node['parent'] === null) {
 				return false;
 			}
 
 			$siblings = $nodes[$node['parent']]['children'];
 			$positionAmongSiblings = array_search($node['number'], $siblings, true);
-			if (false === $positionAmongSiblings) {
+
+			if ($positionAmongSiblings === false) {
 				return false;
 			}
 
-			$sameTypeSiblings = array_values(array_filter($siblings, function (int $siblingNo) use ($nodes, $node): bool {
+			$sameTypeSiblings = array_values(array_filter($siblings, static function (int $siblingNo) use ($nodes, $node): bool {
 				return $node['tag'] === $nodes[$siblingNo]['tag'];
 			}));
 			$positionAmongSameTypeSiblings = array_search($node['number'], $sameTypeSiblings, true);
 
 			// CSS is counting from one
 			$positionAmongSiblings++;
+
 			if ($positionAmongSameTypeSiblings !== false) {
 				$positionAmongSameTypeSiblings++;
 			}
 
 			foreach ($selector['pseudoClass'] as $pseudoClass) {
 				$match = false;
-				if ('first-child' === $pseudoClass) {
-					$match = 1 === $positionAmongSiblings;
-				} elseif ('first-of-type' === $pseudoClass) {
-					$match = 1 === $positionAmongSameTypeSiblings;
-				} elseif ('last-child' === $pseudoClass) {
+
+				if ($pseudoClass === 'first-child') {
+					$match = $positionAmongSiblings === 1;
+				} elseif ($pseudoClass === 'first-of-type') {
+					$match = $positionAmongSameTypeSiblings === 1;
+				} elseif ($pseudoClass === 'last-child') {
 					$match = count($siblings) === $positionAmongSiblings;
-				} elseif ('last-of-type' === $pseudoClass) {
+				} elseif ($pseudoClass === 'last-of-type') {
 					$match = count($sameTypeSiblings) === $positionAmongSameTypeSiblings;
 				} elseif (preg_match('~^nth-(child|of-type)\(([^\)]+)\)$~', $pseudoClass, $matches)) {
-					if ('child' === $matches[1]) {
+					if ($matches[1] === 'child') {
 						$position = $positionAmongSiblings;
 					} else {
-						if (false === $positionAmongSameTypeSiblings) {
+						if ($positionAmongSameTypeSiblings === false) {
 							return false;
 						}
+
 						$position = $positionAmongSameTypeSiblings;
 					}
+
 					$figure = $matches[2];
 
-					if ('odd' === $figure) {
-						$match = 1 === $position % 2;
-					} elseif ('even' === $figure) {
-						$match = 0 === $position % 2;
+					if ($figure === 'odd') {
+						$match = $position % 2 === 1;
+					} elseif ($figure === 'even') {
+						$match = $position % 2 === 0;
 					} elseif (preg_match('~^(\\d+)n(?:\+(\\d+))?$~', $figure, $figureMatches)
 							|| preg_match('~^\+?(\\d+)$~', $figure, $figureMatches)
 							|| preg_match('~^-(\\d+)n\+(\\d+)$~', $figure, $figureMatches)) {
 						$a = (int) $figureMatches[1];
 						$b = (int) ($figureMatches[2] ?? 0);
 						$difference = $b - $position;
-						$match = 0 === ($a === 0 ? $difference : $difference % $a);
+						$match = ($a === 0 ? $difference : $difference % $a) === 0;
 					}
 				} elseif (preg_match('~^nth-last-(child|of-type)\(([^\)]+)\)$~', $pseudoClass, $matches)) {
-					if ('child' === $matches[1]) {
+					if ($matches[1] === 'child') {
 						$position = $positionAmongSiblings;
 						$siblingsCount = count($siblings);
 					} else {
-						if (false === $positionAmongSameTypeSiblings) {
+						if ($positionAmongSameTypeSiblings === false) {
 							return false;
 						}
 
 						$position = $positionAmongSameTypeSiblings;
 						$siblingsCount = count($sameTypeSiblings);
 					}
+
 					$figure = $matches[2];
 
-					if ('even' === $figure) {
-						$match = (0 === $siblingsCount % 2 ? 1 : 0) === $position % 2;
-					} elseif ('odd' === $figure) {
-						$match = (0 === $siblingsCount % 2 ? 0 : 1) === $position % 2;
+					if ($figure === 'even') {
+						$match = ($siblingsCount % 2 === 0 ? 1 : 0) === $position % 2;
+					} elseif ($figure === 'odd') {
+						$match = ($siblingsCount % 2 === 0 ? 0 : 1) === $position % 2;
 					} elseif (preg_match('~^(\\d+)n(?:\+(\\d+))?$~', $figure, $figureMatches)
 							|| preg_match('~^\+?(\\d+)$~', $figure, $figureMatches)
 							|| preg_match('~^-(\\d+)n\+(\\d+)$~', $figure, $figureMatches)) {
 						$a = (int) $figureMatches[1];
 						$b = (int) ($figureMatches[2] ?? 0);
 						$difference = $siblingsCount + 1 - $position - $b;
-						$match = 0 === ($a === 0 ? $difference : $difference % $a);
+						$match = ($a === 0 ? $difference : $difference % $a) === 0;
 					}
 				}
 
@@ -324,23 +370,25 @@ class Css
 		};
 
 		$html = '';
+
 		foreach ($nodes as $nodeNo => $node) {
-			if ('opening-tag' === $node['type']) {
+			if ($node['type'] === 'opening-tag') {
 				$inlineStyles = [];
 				$styles = [];
 
-				$addStyle = function (string $rule, array $selectors = null) use (&$styles) {
-					list($property, $propertyValue) = explode(':', $rule, 2);
+				$addStyle = static function (string $rule, ?array $selectors = null) use (&$styles): void {
+					[$property, $propertyValue] = explode(':', $rule, 2);
 
 					$styles[$property][] = [
 						'value' => $propertyValue,
-						'selectors' => $selectors
+						'selectors' => $selectors,
 					];
 				};
 
 				if (preg_match('~\\s+style=((?:(["\'])([^\\2]+?)\\2)|(\\S+))~', $node['content'], $matches)) {
 					$styleContent = $matches[4] ?? $matches[3];
-					if ("'" === $matches[2]) {
+
+					if ($matches[2] === "'") {
 						$styleContent = strtr($styleContent, ['"' => "'", "\\'" => "'"]);
 					}
 
@@ -352,12 +400,13 @@ class Css
 					$selectorPartsCount = count($css['selector']);
 
 					// Selectors have to have equal or less parts than the HTML element nesting level
-					if ($selectorPartsCount > ($node['level'] + 1)) {
+					if ($selectorPartsCount > $node['level'] + 1) {
 						continue;
 					}
 
 					// The last selector part must correspond to the last processed tag
 					$lastSelector = end($css['selector']);
+
 					if (!$checkIfNodeMatchesSelector($node, $lastSelector)) {
 						continue;
 					}
@@ -376,7 +425,10 @@ class Css
 								$siblings = $nodes[$currentNode['parent']]['children'];
 								$positionAmongSiblings = array_search($currentNode['number'], $siblings, true);
 
-								if ($positionAmongSiblings !== 0 && $checkIfNodeMatchesSelector($nodes[$siblings[$positionAmongSiblings - 1]], $selector)) {
+								if (
+									$positionAmongSiblings !== 0
+									&& $checkIfNodeMatchesSelector($nodes[$siblings[$positionAmongSiblings - 1]], $selector)
+								) {
 									$currentNode = $nodes[$siblings[$positionAmongSiblings - 1]];
 									$previousSelector = $selector;
 
@@ -385,31 +437,31 @@ class Css
 							} else {
 								$startSearchLevel = $currentNode['level'] - 1;
 
-								if ($previousSelector['type'] === 'child') {
-									$endSearchLevel = $startSearchLevel;
-								} else {
-									$endSearchLevel = 0;
-								}
+								$endSearchLevel = $previousSelector['type'] === 'child' ? $startSearchLevel : 0;
 
 								for ($j = $startSearchLevel; $j >= $endSearchLevel; $j--) {
 									$currentNode = $nodes[$currentNode['parent']];
 
 									if ($checkIfNodeMatchesSelector($currentNode, $selector)) {
 										$previousSelector = $selector;
+
 										continue 2;
 									}
 								}
 							}
 
 							$selectorMatched = false;
+
 							break;
 						}
 					}
 
-					if ($selectorMatched) {
-						foreach (explode(';', $css['rules']) as $rule) {
-							$addStyle($rule, $css['selector']);
-						}
+					if (!$selectorMatched) {
+						continue;
+					}
+
+					foreach (explode(';', $css['rules']) as $rule) {
+						$addStyle($rule, $css['selector']);
 					}
 				}
 
@@ -423,37 +475,45 @@ class Css
 					$styleContent = '';
 
 					foreach ($styles as $property => $propertyData) {
-						uksort($propertyData, function (int $a, int $b) use ($propertyData): int {
-							$aHasImportant = false !== strpos($propertyData[$a]['value'], '!important');
-							$bHasImportant = false !== strpos($propertyData[$b]['value'], '!important');
+						uksort($propertyData, static function (int $a, int $b) use ($propertyData): int {
+							$aHasImportant = strpos($propertyData[$a]['value'], '!important') !== false;
+							$bHasImportant = strpos($propertyData[$b]['value'], '!important') !== false;
 
 							if ($aHasImportant && !$bHasImportant) {
 								return 1;
-							} elseif (!$aHasImportant && $bHasImportant) {
+							}
+
+							if (!$aHasImportant && $bHasImportant) {
 								return -1;
 							}
 
-							$aIsInline = null === $propertyData[$a]['selectors'];
-							$bIsInline = null === $propertyData[$b]['selectors'];
+							$aIsInline = $propertyData[$a]['selectors'] === null;
+							$bIsInline = $propertyData[$b]['selectors'] === null;
 
 							if ($aIsInline && !$bIsInline) {
 								return 1;
-							} elseif (!$aIsInline && $bIsInline) {
+							}
+
+							if (!$aIsInline && $bIsInline) {
 								return -1;
 							}
 
-							$priority = function (array $selectors): int {
+							$priority = static function (array $selectors): int {
 								$priority = 0;
+
 								foreach ($selectors as $selector) {
-									if (null !== $selector['id']) {
+									if ($selector['id'] !== null) {
 										$priority += 10000;
 									}
+
 									$classCount = count($selector['class']) + count($selector['pseudoClass']);
+
 									if ($classCount > 0) {
 										$priority += 100 * $classCount;
 									}
-									if (null !== $selector['tag']) {
-										$priority += 1;
+
+									if ($selector['tag'] !== null) {
+										$priority++;
 									}
 								}
 
@@ -463,27 +523,29 @@ class Css
 							$aPriority = $priority($propertyData[$a]['selectors']);
 							$bPriority = $priority($propertyData[$b]['selectors']);
 
-							if ($aPriority !== $bPriority) {
-								return $aPriority <=> $bPriority;
-							} else {
-								return $a <=> $b;
-							}
+							return $aPriority !== $bPriority ? $aPriority <=> $bPriority : $a <=> $b;
 						});
 
 						$styleContent .= sprintf('%s:%s;', $property, rtrim(end($propertyData)['value'], ';'));
 					}
 
 					$styleAttribute = sprintf('style="%s"', rtrim($styleContent, ';'));
-					$node['content'] = preg_replace_callback('~(?:(\\s+)style=(?:(?:(["\'])(?:[^\\2]+?)\\2)|(?:\\S+)))|(\\s*/?>$)~', function (array $matches) use ($styleAttribute) {
-						$before = $matches[1];
-						if (isset($matches[3])) {
-							$before = ' ';
-						}
+					$node['content'] = preg_replace_callback(
+						'~(?:(\\s+)style=(?:(?:(["\'])(?:[^\\2]+?)\\2)|(?:\\S+)))|(\\s*/?>$)~',
+						static function (array $matches) use ($styleAttribute) {
+							$before = $matches[1];
 
-						$after = $matches[3] ?? '';
+							if (isset($matches[3])) {
+								$before = ' ';
+							}
 
-						return $before . $styleAttribute . $after;
-					}, $node['content'], 1);
+							$after = $matches[3] ?? '';
+
+							return $before . $styleAttribute . $after;
+						},
+						$node['content'],
+						1
+					);
 				}
 			}
 
@@ -497,9 +559,9 @@ class Css
 	/**
 	 * Helper method for searching and parsing <style> definitions inside a HTML source.
 	 *
+	 * @see \Jyxo\Css::convertStyleToInline()
 	 * @param string $html Processed HTML source
 	 * @return array
-	 * @see \Jyxo\Css::convertStyleToInline()
 	 */
 	private static function parseStyle(string $html): array
 	{
@@ -512,6 +574,7 @@ class Css
 		}
 
 		$cssList = [];
+
 		foreach ($styles[1] as $style) {
 			// Remove CDATA and comments
 			$style = str_replace(['<![CDATA[', ']]>', '<!--', '-->'], '', $style);
@@ -536,7 +599,8 @@ class Css
 					continue;
 				}
 
-				list($selector, $rules) = explode('{', $definition);
+				[$selector, $rules] = explode('{', $definition);
+
 				foreach (explode(',', $selector) as $part) {
 					// Convert a:link to a
 					$part = str_replace(':link', '', $part);
@@ -553,39 +617,47 @@ class Css
 							switch ($match[2]) {
 								case '+':
 									$type = 'sibling';
+
 									break;
 								case '>':
 									$type = 'child';
+
 									break;
 								default:
 									$type = 'descendant';
+
 									break;
 							}
+
 							continue;
 						}
 
 						$selectorPart = $match[1];
 
-						if (false !== strpos($selectorPart, ':')) {
-							list($selectorPart, $pseudoClass) = explode(':', $selectorPart, 2);
+						if (strpos($selectorPart, ':') !== false) {
+							[$selectorPart, $pseudoClass] = explode(':', $selectorPart, 2);
 							// There can be multiple pseudo-classes
 							$pseudoClass = explode(':', $pseudoClass);
 						} else {
 							$pseudoClass = [];
 						}
-						if (false !== strpos($selectorPart, '.')) {
-							list($selectorPart, $class) = explode('.', $selectorPart, 2);
+
+						if (strpos($selectorPart, '.') !== false) {
+							[$selectorPart, $class] = explode('.', $selectorPart, 2);
 							// There can be multiple classes
 							$class = explode('.', $class);
 						} else {
 							$class = [];
 						}
-						if (false !== strpos($selectorPart, '#')) {
-							list($selectorPart, $id) = explode('#', $selectorPart, 2);
+
+						if (strpos($selectorPart, '#') !== false) {
+							[$selectorPart, $id] = explode('#', $selectorPart, 2);
 						} else {
 							$id = null;
 						}
+
 						$tag = strtolower(trim($selectorPart));
+
 						if ($tag === '') {
 							$tag = null;
 						}
@@ -601,7 +673,7 @@ class Css
 
 					$cssList[] = [
 						'selector' => $parsedSelector,
-						'rules' => $rules
+						'rules' => $rules,
 					];
 				}
 			}
@@ -609,4 +681,5 @@ class Css
 
 		return $cssList;
 	}
+
 }

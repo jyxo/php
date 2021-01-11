@@ -13,6 +13,8 @@
 
 namespace Jyxo\Beholder;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * Test for the \Jyxo\Beholder\TestCase class.
  *
@@ -21,14 +23,13 @@ namespace Jyxo\Beholder;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Pěček
  */
-class TestCaseTest extends \PHPUnit_Framework_TestCase
+class TestCaseTest extends TestCase
 {
+
 	/**
 	 * TestCase description.
-	 *
-	 * @var string
 	 */
-	const DESCRIPTION = 'TestCase description';
+	public const DESCRIPTION = 'TestCase description';
 
 	/**
 	 * Tested object.
@@ -38,9 +39,17 @@ class TestCaseTest extends \PHPUnit_Framework_TestCase
 	private $testcase;
 
 	/**
+	 * Tests getting testcase description.
+	 */
+	public function testGetDescription(): void
+	{
+		$this->assertEquals(self::DESCRIPTION, $this->testcase->getDescription());
+	}
+
+	/**
 	 * Prepares the testing environment.
 	 */
-	protected function setUp()
+	protected function setUp(): void
 	{
 		$this->testcase = $this->getMockForAbstractClass(\Jyxo\Beholder\TestCase::class, [self::DESCRIPTION]);
 	}
@@ -48,16 +57,9 @@ class TestCaseTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Cleans up the testing environment.
 	 */
-	protected function tearDown()
+	protected function tearDown(): void
 	{
 		$this->testcase = null;
 	}
 
-	/**
-	 * Tests getting testcase description.
-	 */
-	public function testGetDescription()
-	{
-		$this->assertEquals(self::DESCRIPTION, $this->testcase->getDescription());
-	}
 }

@@ -13,6 +13,18 @@
 
 namespace Jyxo\Rpc;
 
+use InvalidArgumentException;
+use LogicException;
+use PHPUnit\Framework\TestCase;
+use TestPhpInputStream;
+use function file_get_contents;
+use function ob_get_clean;
+use function ob_start;
+use function preg_replace;
+use function unlink;
+use function version_compare;
+use const PHP_VERSION;
+
 /**
  * Test for all \Jyxo\Rpc\Server child classes.
  *
@@ -23,36 +35,34 @@ namespace Jyxo\Rpc;
  * @author Jan Pěček
  * @author Jaroslav Hanslík
  */
-abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
+abstract class ServerTestCase extends TestCase
 {
+
 	/**
 	 * RPC server.
 	 *
-	 * @var \Jyxo\Rpc\Server
+	 * @var Server
 	 */
 	private $rpc = null;
 
 	/**
-	 * Sets the testing environment.
+	 * Returns server instance.
+	 *
+	 * @return Server
 	 */
-	protected function setUp()
-	{
-		// Server
-		$this->rpc = $this->getServerInstance();
-	}
+	abstract protected function getServerInstance(): Server;
 
 	/**
-	 * Cleans up the environment after testing.
+	 * Returns test files extension.
+	 *
+	 * @return string
 	 */
-	protected function tearDown()
-	{
-		$this->rpc = null;
-	}
+	abstract protected function getFileExtension(): string;
 
 	/**
 	 * Tests method call using the full name.
 	 */
-	public function testProcessMethodWithFullName()
+	public function testProcessMethodWithFullName(): void
 	{
 		require_once $this->getFilePath('TestMath.php');
 		$this->rpc->registerMethod('TestMath', 'sum');
@@ -63,7 +73,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests method call using the short name.
 	 */
-	public function testProcessMethodWithShortName()
+	public function testProcessMethodWithShortName(): void
 	{
 		require_once $this->getFilePath('TestMath.php');
 		$this->rpc->registerMethod('TestMath', 'sum', false);
@@ -74,7 +84,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests method call using a static method.
 	 */
-	public function testProcessStaticMethod()
+	public function testProcessStaticMethod(): void
 	{
 		require_once $this->getFilePath('TestMath.php');
 		$this->rpc->registerMethod('TestMath', 'max');
@@ -85,7 +95,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests method call using a __call magic function.
 	 */
-	public function testProcessMethodByCall()
+	public function testProcessMethodByCall(): void
 	{
 		require_once $this->getFilePath('TestMathWithCall.php');
 		$this->rpc->registerMethod('TestMathWithCall', 'abs');
@@ -96,7 +106,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests method call using a __callStatic magic function.
 	 */
-	public function testProcessMethodByCallStatic()
+	public function testProcessMethodByCallStatic(): void
 	{
 		// Skips this test if not running PHP 5.3+
 		if (version_compare(PHP_VERSION, '5.3.0', '<')) {
@@ -112,7 +122,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests calling a method registered using the whole class.
 	 */
-	public function testProcessMethodRegisteredByClass()
+	public function testProcessMethodRegisteredByClass(): void
 	{
 		require_once $this->getFilePath('TestMath.php');
 		$this->rpc->registerClass('TestMath', false);
@@ -124,7 +134,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests calling a non-existent method.
 	 */
-	public function testProcessNonExistingMethod()
+	public function testProcessNonExistingMethod(): void
 	{
 		require_once $this->getFilePath('TestMath.php');
 		$this->rpc->registerClass('TestMath');
@@ -135,16 +145,15 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests bad request (parse error)
 	 */
-	public function testParseError()
+	public function testParseError(): void
 	{
 		$this->checkServerOutput('parse-error');
 	}
 
-
 	/**
 	 * Tests calling a function registered as a method.
 	 */
-	public function testProcessFunction()
+	public function testProcessFunction(): void
 	{
 		require_once $this->getFilePath('testPow2.php');
 		$this->rpc->registerFunc('testPow2');
@@ -155,7 +164,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests logging.
 	 */
-	public function testLog()
+	public function testLog(): void
 	{
 		// Skips this test if no temporary directory is defined
 		if (empty($GLOBALS['tmp'])) {
@@ -166,7 +175,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 
 		require_once $this->getFilePath('TestMath.php');
 		$this->rpc->registerMethod('TestMath', 'sum');
-		$this->rpc->enableLogging($logFile, [__CLASS__, 'logCallback']);
+		$this->rpc->enableLogging($logFile, [self::class, 'logCallback']);
 
 		// Server output check
 		$this->checkServerOutput('sum');
@@ -182,65 +191,65 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests clone-preventing.
 	 */
-	public function testClone()
+	public function testClone(): void
 	{
-		$this->expectException(\LogicException::class);
+		$this->expectException(LogicException::class);
 		$clone = clone $this->rpc;
 	}
 
 	/**
 	 * Tests setting an empty log file.
 	 */
-	public function testEmptyLogFile()
+	public function testEmptyLogFile(): void
 	{
-		$this->expectException(\InvalidArgumentException::class);
+		$this->expectException(InvalidArgumentException::class);
 		$this->rpc->enableLogging('');
 	}
 
 	/**
 	 * Tests registering a non-existent function.
 	 */
-	public function testRegisterNonExistingFunction()
+	public function testRegisterNonExistingFunction(): void
 	{
-		$this->expectException(\InvalidArgumentException::class);
+		$this->expectException(InvalidArgumentException::class);
 		$this->rpc->registerFunc('dummy');
 	}
 
 	/**
 	 * Tests registering a non-existent method.
 	 */
-	public function testRegisterNonExistingMethod()
+	public function testRegisterNonExistingMethod(): void
 	{
 		require_once $this->getFilePath('TestMath.php');
-		$this->expectException(\InvalidArgumentException::class);
+		$this->expectException(InvalidArgumentException::class);
 		$this->rpc->registerMethod('TestMath', 'dummy');
 	}
 
 	/**
 	 * Tests registering a non-public method.
 	 */
-	public function testRegisterNonPublicMethod()
+	public function testRegisterNonPublicMethod(): void
 	{
 		require_once $this->getFilePath('TestMath.php');
-		$this->expectException(\InvalidArgumentException::class);
+		$this->expectException(InvalidArgumentException::class);
 		$this->rpc->registerMethod('TestMath', 'diff');
 	}
 
 	/**
 	 * Tests registering a method of a non-existent class.
 	 */
-	public function testRegisterMethodInNonExistingClass()
+	public function testRegisterMethodInNonExistingClass(): void
 	{
-		$this->expectException(\InvalidArgumentException::class);
+		$this->expectException(InvalidArgumentException::class);
 		$this->rpc->registerMethod('Dummy', 'dummy');
 	}
 
 	/**
 	 * Tests registering of a non-existent class.
 	 */
-	public function testRegisterNonExistingClass()
+	public function testRegisterNonExistingClass(): void
 	{
-		$this->expectException(\InvalidArgumentException::class);
+		$this->expectException(InvalidArgumentException::class);
 		$this->rpc->registerClass('Dummy');
 	}
 
@@ -252,9 +261,26 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	 * @param mixed $result Function result
 	 * @return array
 	 */
-	public static function logCallback($method, array $params, $result)
+	public static function logCallback(string $method, array $params, $result): array
 	{
 		return [$method, $params, 5];
+	}
+
+	/**
+	 * Sets the testing environment.
+	 */
+	protected function setUp(): void
+	{
+		// Server
+		$this->rpc = $this->getServerInstance();
+	}
+
+	/**
+	 * Cleans up the environment after testing.
+	 */
+	protected function tearDown(): void
+	{
+		$this->rpc = null;
 	}
 
 	/**
@@ -262,12 +288,12 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	 *
 	 * @param string $test
 	 */
-	private function checkServerOutput($test)
+	private function checkServerOutput(string $test): void
 	{
 		// Prepares the server
 		require_once $this->getFilePath('TestPhpInputStream.php');
-		\TestPhpInputStream::register();
-		\TestPhpInputStream::setContent(file_get_contents($this->getFilePath($test . '.' . $this->getFileExtension())));
+		TestPhpInputStream::register();
+		TestPhpInputStream::setContent(file_get_contents($this->getFilePath($test . '.' . $this->getFileExtension())));
 
 		// We need to capture the output
 		ob_start();
@@ -278,7 +304,7 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 		$this->assertStringEqualsFile($this->getFilePath($test . '-expected.' . $this->getFileExtension()), $output);
 
 		// Server cleanup
-		\TestPhpInputStream::unregister();
+		TestPhpInputStream::unregister();
 	}
 
 	/**
@@ -287,22 +313,9 @@ abstract class ServerTestCase extends \PHPUnit_Framework_TestCase
 	 * @param string $file Filename
 	 * @return string
 	 */
-	private function getFilePath($file)
+	private function getFilePath(string $file): string
 	{
 		return DIR_FILES . '/rpc/' . $file;
 	}
 
-	/**
-	 * Returns server instance.
-	 *
-	 * @return \Jyxo\Rpc\Server
-	 */
-	abstract protected function getServerInstance(): \Jyxo\Rpc\Server;
-
-	/**
-	 * Returns test files extension.
-	 *
-	 * @return string
-	 */
-	abstract protected function getFileExtension(): string;
 }

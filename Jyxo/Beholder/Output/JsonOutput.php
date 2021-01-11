@@ -14,15 +14,15 @@
 namespace Jyxo\Beholder\Output;
 
 use Jyxo\Beholder\Executor;
+use function json_encode;
+use function sprintf;
 
 /**
  * Beholder Json output class
  *
- * @category Jyxo
- * @package Jyxo\Beholder
  * @author Matěj Humpál
  */
-class JsonOutput extends \Jyxo\Beholder\Output\Output
+class JsonOutput extends Output
 {
 
 	public function getContentType(): string
@@ -37,7 +37,7 @@ class JsonOutput extends \Jyxo\Beholder\Output\Output
 		foreach ($this->result->getTestsData() as $data) {
 			$tests[] = [
 				'order' => $data['order'],
-				'duration' => sprintf("%.6f s", $data['duration']),
+				'duration' => sprintf('%.6f s', $data['duration']),
 				'ident' => $data['ident'],
 				'result' => $data['result']->getStatusMessage(),
 				'test_description' => $data['test']->getDescription(),
@@ -56,9 +56,10 @@ class JsonOutput extends \Jyxo\Beholder\Output\Output
 				'html' => '?' . Executor::PARAM_INCLUDE . '=' . $this->result->getIncludeFilter()
 					. '&amp;' . Executor::PARAM_EXCLUDE . '=' . $this->result->getExcludeFilter()
 					. '&amp;' . Executor::PARAM_OUTPUT . '=' . Executor::OUTPUT_HTML,
-			]
+			],
 		];
 
 		return json_encode($data);
 	}
+
 }

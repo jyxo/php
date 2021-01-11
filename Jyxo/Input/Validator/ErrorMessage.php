@@ -16,15 +16,13 @@ namespace Jyxo\Input\Validator;
 /**
  * Interface for classes implementing own error messages.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
  */
 interface ErrorMessage
 {
+
 	/**
 	 * Returns an error message in case of validation error,
 	 * an empty value otherwise (empty(getError()) = true).
@@ -32,4 +30,5 @@ interface ErrorMessage
 	 * @return string
 	 */
 	public function getError(): string;
+
 }

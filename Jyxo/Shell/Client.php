@@ -13,11 +13,25 @@
 
 namespace Jyxo\Shell;
 
+use function array_diff_key;
+use function array_fill_keys;
+use function array_key_exists;
+use function array_merge;
+use function explode;
+use function fclose;
+use function ini_get;
+use function is_resource;
+use function preg_replace;
+use function proc_close;
+use function proc_open;
+use function shell_exec;
+use function stream_get_contents;
+use function strlen;
+use function substr;
+
 /**
  * Class for executing external commands.
  *
- * @category Jyxo
- * @package Jyxo\Shell
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Ondřej Procházka
@@ -25,6 +39,7 @@ namespace Jyxo\Shell;
  */
 class Client
 {
+
 	/**
 	 * List of running processes.
 	 *
@@ -78,7 +93,7 @@ class Client
 	 *
 	 * Works only on Linux.
 	 *
-	 * @return \Jyxo\Shell\Client
+	 * @return Client
 	 */
 	public function loadProcessList(): self
 	{
@@ -103,7 +118,7 @@ class Client
 	 * Works only on Linux.
 	 *
 	 * @param string $name Process name
-	 * @return boolean
+	 * @return bool
 	 */
 	public function processExists(string $name): bool
 	{
@@ -116,7 +131,7 @@ class Client
 	 * Works only on Linux.
 	 *
 	 * @param string $name Process name
-	 * @return \Jyxo\Shell\Client
+	 * @return Client
 	 */
 	public function killProcess(string $name): self
 	{
@@ -131,7 +146,7 @@ class Client
 	 * Defaults to null.
 	 *
 	 * @param string $cwd Working directory
-	 * @return \Jyxo\Shell\Client
+	 * @return Client
 	 */
 	public function setCwd(string $cwd = ''): Client
 	{
@@ -144,7 +159,7 @@ class Client
 	 * Adds one or more environment properties.
 	 *
 	 * @param array $env Array of properties
-	 * @return \Jyxo\Shell\Client
+	 * @return Client
 	 */
 	public function setEnv(array $env): Client
 	{
@@ -156,7 +171,7 @@ class Client
 	/**
 	 * Removes environment properties.
 	 *
-	 * @return \Jyxo\Shell\Client
+	 * @return Client
 	 */
 	public function clearEnv(): Client
 	{
@@ -172,19 +187,19 @@ class Client
 	 * Throws an exception on status code != 0.
 	 *
 	 * @param string $cmd Command to execute
-	 * @param integer $status Status code
-	 * @return \Jyxo\Shell\Client
-	 * @throws \Jyxo\Shell\Exception On execution error
+	 * @param int $status Status code
+	 * @return Client
 	 */
-	public function exec(string $cmd, int &$status = null): Client
+	public function exec(string $cmd, ?int &$status = null): Client
 	{
 		static $descriptorSpec = [
 			0 => ['pipe', 'r'],
 			1 => ['pipe', 'w'],
-			2 => ['pipe', 'w']
+			2 => ['pipe', 'w'],
 		];
 
 		$env = $this->env;
+
 		if (ini_get('safe_mode')) {
 			// If the safe_mode is set on, we have to check which properties we are allowed to set.
 
@@ -202,7 +217,7 @@ class Client
 						break 2;
 					}
 
-					if (substr($name, 0, strlen($prefix)) == $prefix) {
+					if (substr($name, 0, strlen($prefix)) === $prefix) {
 						continue 2;
 					}
 				}
@@ -227,10 +242,7 @@ class Client
 		$status = proc_close($process);
 
 		if ($status !== 0) {
-			throw new Exception(
-				'Command ' . $cmd . ' returned code ' . $status
-					. '. Output: ' . $this->error
-			);
+			throw new Exception('Command ' . $cmd . ' returned code ' . $status . '. Output: ' . $this->error);
 		}
 
 		return $this;
@@ -255,4 +267,5 @@ class Client
 	{
 		return $this->error;
 	}
+
 }

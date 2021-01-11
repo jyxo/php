@@ -13,6 +13,10 @@
 
 namespace Jyxo\Mail\Email;
 
+use Jyxo\Html;
+use PHPUnit\Framework\TestCase;
+use function file_get_contents;
+
 /**
  * \Jyxo\Mail\Email\Body class test.
  *
@@ -21,15 +25,16 @@ namespace Jyxo\Mail\Email;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class BodyTest extends \PHPUnit_Framework_TestCase
+class BodyTest extends TestCase
 {
+
 	/**
 	 * Runs the test.
 	 */
-	public function test()
+	public function test(): void
 	{
 		$html = file_get_contents(DIR_FILES . '/mail/email.html');
-		$text = \Jyxo\Html::toText($html);
+		$text = Html::toText($html);
 
 		// HTML and plaintext given
 		$body = new Body($html, $text);
@@ -47,4 +52,5 @@ class BodyTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($text, $body->getMain());
 		$this->assertFalse($body->isHtml());
 	}
+
 }

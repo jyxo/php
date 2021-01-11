@@ -13,25 +13,53 @@
 
 namespace Jyxo;
 
+use LogicException;
+use function array_pop;
+use function array_push;
+use function count;
+use function end;
+use function html_entity_decode;
+use function htmlspecialchars;
+use function mb_strtoupper;
+use function mb_substr;
+use function nl2br;
+use function preg_match;
+use function preg_match_all;
+use function preg_replace;
+use function preg_replace_callback;
+use function sprintf;
+use function str_ireplace;
+use function str_repeat;
+use function str_replace;
+use function strip_tags;
+use function stripos;
+use function strlen;
+use function strtolower;
+use function strtr;
+use function substr;
+use function substr_count;
+use function tidy_repair_string;
+use function trim;
+use const ENT_QUOTES;
+
 /**
  * Functions for HTML processing.
  *
- * @category Jyxo
- * @package Jyxo\Html
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
 class Html
 {
+
 	/**
 	 * Constructor preventing from creating instances of a static class.
 	 *
-	 * @throws \LogicException If trying to create an instance
+	 * @throws LogicException If trying to create an instance
 	 */
-	public final function __construct()
+	final public function __construct()
 	{
-		throw new \LogicException(sprintf('Cannot create an instance of a static class %s.', get_class($this)));
+		throw new LogicException(sprintf('Cannot create an instance of a static class %s.', static::class));
 	}
 
 	/**
@@ -39,7 +67,7 @@ class Html
 	 * It is just an estimation.
 	 *
 	 * @param string $text Input text to be tested
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function is(string $text): bool
 	{
@@ -57,26 +85,42 @@ class Html
 	{
 		// HTML fixing
 		static $config = [
-			'newline' => 'LF',				// Uses LF line endings
-			'indent' => false,				// Removes indent
-			'output-xhtml' => true,			// Output will be in XHTML format
-			'output-bom' => false,			// No BOM
-			'doctype' => 'auto',			// Automatic doctype
+			// Uses LF line endings
+			'newline' => 'LF',
+			// Removes indent
+			'indent' => false,
+			// Output will be in XHTML format
+			'output-xhtml' => true,
+			// No BOM
+			'output-bom' => false,
+			// Automatic doctype
+			'doctype' => 'auto',
 			// 'clean' => true,				// Removes presentation tags (inline styles would be moved into <style> elements)
-			'bare' => true,					// Cleans MS HTML mess
-			'wrap' => 0,					// No wrapping
-			'wrap-sections' => false,		// No <![ ... ]> wrapping
+			// Cleans MS HTML mess
+			'bare' => true,
+			// No wrapping
+			'wrap' => 0,
+			// No <![ ... ]> wrapping
+			'wrap-sections' => false,
 			// 'quote-marks' => true,		// Replaces quotes with appropriate entities (causes problems with later regular expression processing)
 			// 'logical-emphasis' => true,	// Replaces all <i> and <b> tags with <em> and <strong> (styles cannot be parsed after)
-			'enclose-text' => true,			// Text inside <body> encapsulates with a <p> tag
-			'merge-divs' => false,			// Disables <div> merging
-			'merge-spans' => false,			// Disables <span> merging
+			// Text inside <body> encapsulates with a <p> tag
+			'enclose-text' => true,
+			// Disables <div> merging
+			'merge-divs' => false,
+			// Disables <span> merging
+			'merge-spans' => false,
 			// 'hide-comments' => true,		// Removes comments (it would remove conditional comments used when inserting Flash)
-			'force-output' => true,			// Makes output even on error
-			'show-errors' => 0,				// Don't show any errors
-			'show-warnings' => false,		// Don't show any warnings
-			'escape-cdata' => true,			// Makes an ordinary text from CDATA blocks
-			'preserve-entities' => true		// Preserves correctly formatted entities
+			// Makes output even on error
+			'force-output' => true,
+			// Don't show any errors
+			'show-errors' => 0,
+			// Don't show any warnings
+			'show-warnings' => false,
+			// Makes an ordinary text from CDATA blocks
+			'escape-cdata' => true,
+			// Preserves correctly formatted entities
+			'preserve-entities' => true,
 			// 'drop-proprietary-attributes' => true,	// Removes proprietary attributes (it would remove e.g. the background attribute)
 			// 'drop-font-tags' => true		// Removes <FONT> and <CENTER> tags
 		];
@@ -89,7 +133,7 @@ class Html
 		// Tidy adds one more line breaks inside <pre> elements
 		$html = preg_replace("~(<pre[^>]*>)\n~", '\\1', $html);
 		$html = preg_replace("~\n</pre>~", '</pre>', $html);
-		$html = preg_replace_callback('~(<pre[^>]*>)(.+?)(</pre>)~s', function($matches) {
+		$html = preg_replace_callback('~(<pre[^>]*>)(.+?)(</pre>)~s', static function ($matches) {
 			return $matches[1] . strtr(nl2br($matches[2]), ['\"' => '"']) . $matches[3];
 		}, $html);
 		// Strip line breaks
@@ -118,8 +162,21 @@ class Html
 	{
 		// Default set of tags
 		static $default = [
-			'frameset', 'frame', 'noframes', 'iframe', 'script', 'noscript', 'style', 'link',
-			'object', 'embed', 'form', 'input', 'select', 'textarea', 'button'
+			'frameset',
+			'frame',
+			'noframes',
+			'iframe',
+			'script',
+			'noscript',
+			'style',
+			'link',
+			'object',
+			'embed',
+			'form',
+			'input',
+			'select',
+			'textarea',
+			'button',
 		];
 
 		// If no tags are set, the default set will be used
@@ -134,6 +191,7 @@ class Html
 				case 'embed':
 					// Second variant is because of Tidy that processes <embed> this way
 					$pattern = ['~\s*<embed[^>]*>.*?</embed>~is', '~\s*<embed[^>]*>~is'];
+
 					break;
 				// Self closing tags
 				case 'link':
@@ -143,10 +201,12 @@ class Html
 				case 'img':
 				case 'input':
 					$pattern = ['~\s*<' . $tag . '[^>]*>~is'];
+
 					break;
 				// Pair tags
 				default:
 					$pattern = ['~\s*<' . $tag . '(?:\s+[^>]*)?>.*?</' . $tag . '>~is'];
+
 					break;
 			}
 
@@ -170,13 +230,13 @@ class Html
 			$html = '';
 			$level = 0;
 			foreach ($matches[0] as $htmlPart) {
-				if (0 === stripos($htmlPart, '<' . $tag)) {
+				if (stripos($htmlPart, '<' . $tag) === 0) {
 					$level++;
-					if (1 === $level) {
+					if ($level === 1) {
 						$html .= $htmlPart;
 					}
-				} elseif (0 === stripos($htmlPart, '</' . $tag)) {
-					if (1 === $level) {
+				} elseif (stripos($htmlPart, '</' . $tag) === 0) {
+					if ($level === 1) {
 						$html .= $htmlPart;
 					}
 					$level--;
@@ -230,6 +290,7 @@ class Html
 		while (preg_match('~<[a-z][a-z0-9]*[^>]*?\\s+on[a-z]+="[^"]*"~is', $html)) {
 			$html = preg_replace('~(<[a-z][a-z0-9]*[^>]*?)\\s+on[a-z]+="[^"]*"~is', '\\1', $html);
 		}
+
 		return $html;
 	}
 
@@ -250,7 +311,7 @@ class Html
 			'~(<[a-z][a-z0-9]*[^>]+style="[^"]*background\\s*[:])([\-a-z0-9#%\\s]*)url\([^)]+\)(;)?~is',
 			'~(<[a-z][a-z0-9]*[^>]+style="[^"]*)background-image\\s*[:]([\-a-z0-9#%\\s]*)url\([^)]+\)(;)?~is',
 			'~(<[a-z][a-z0-9]*[^>]+style="[^"]*list-style\\s*[:])([\-a-z0-9\\s]*)url\([^)]+\)(;)?~is',
-			'~(<[a-z][a-z0-9]*[^>]+style="[^"]*)list-style-image\\s*[:]([\-a-z0-9\\s]*)url\([^)]+\)(;)?~is'
+			'~(<[a-z][a-z0-9]*[^>]+style="[^"]*)list-style-image\\s*[:]([\-a-z0-9\\s]*)url\([^)]+\)(;)?~is',
 		];
 		// We use value about:blank for the <img> tag's src attribute, because removing the tag entirely could affect the page layout
 		static $remoteImagesReplacement = [
@@ -259,7 +320,7 @@ class Html
 			'\\1\\2\\3',
 			'\\1',
 			'\\1\\2\\3',
-			'\\1'
+			'\\1',
 		];
 
 		return preg_replace($remoteImages, $remoteImagesReplacement, $html);
@@ -276,8 +337,9 @@ class Html
 		static $dangerous = [
 			'~\\s+href="javascript[^"]*"~i',
 			'~\\s+src="javascript[^"]*"~i',
-			'~\\s+href="data:[^"]*"~i',	// See http://www.soom.cz/index.php?name=projects/testmail/main
-			'~\\s+src="data:[^"]*"~i'
+			// See http://www.soom.cz/index.php?name=projects/testmail/main
+			'~\\s+href="data:[^"]*"~i',
+			'~\\s+src="data:[^"]*"~i',
 		];
 
 		return preg_replace($dangerous, '', $html);
@@ -312,7 +374,7 @@ class Html
 	 * Converts text to HTML source code.
 	 *
 	 * @param string $text Input text
-	 * @param boolean $convertLinks Convert urls and emails to links
+	 * @param bool $convertLinks Convert urls and emails to links
 	 * @return string
 	 */
 	public static function fromText(string $text, bool $convertLinks = true): string
@@ -417,38 +479,45 @@ class Html
 		// ?query#hash
 		$patternUrl .= '(?:[?][\]\[\-\\w\\pL\\pN.,?!\~%#@&;:/\'\=+]*)?(?:#[\]\[\-\\w\\pL\\pN.,?!\~%@&;:/\'\=+]*)?';
 
-		return preg_replace_callback('~(^|[^\\pL\\pN])(?:(' . $patternEmail . ')|(' . $patternUrl . '))(?=$|\\W)~iu', function($matches) {
-			// Url
-			if (isset($matches[3])) {
-				$url = $matches[3];
-				// Remove special chars at the end
-				if (preg_match('~(([.,:;?!>)\]}]|(&gt;))+)$~i', $url, $matches2)) {
-					$punctuation = $matches2[1];
-					// strlen is necessary because of &gt;
-					$url = mb_substr($url, 0, -strlen($matches2[1]), 'utf-8');
-				} else {
-					$punctuation = '';
+		return preg_replace_callback(
+			'~(^|[^\\pL\\pN])(?:(' . $patternEmail . ')|(' . $patternUrl . '))(?=$|\\W)~iu',
+			static function ($matches) {
+				// Url
+				if (isset($matches[3])) {
+					$url = $matches[3];
+					// Remove special chars at the end
+					if (preg_match('~(([.,:;?!>)\]}]|(&gt;))+)$~i', $url, $matches2)) {
+						$punctuation = $matches2[1];
+						// strlen is necessary because of &gt;
+						$url = mb_substr($url, 0, -strlen($matches2[1]), 'utf-8');
+					} else {
+						$punctuation = '';
+					}
+
+					// Add missing http://
+					$linkUrl = !preg_match('~^(http|ftp)s?://~i', $url) ? 'http://' . $url : $url;
+
+					// Create a link
+					return $matches[1] . '<a href="' . $linkUrl . '">' . $url . '</a>' . $punctuation;
 				}
 
-				// Add missing http://
-				$linkUrl = !preg_match('~^(http|ftp)s?://~i', $url) ? 'http://' .  $url : $url;
+				// Emails
+				if (!isset($matches[2])) {
+					return;
+				}
 
-				// Create a link
-				return $matches[1] . '<a href="' . $linkUrl . '">' . $url . '</a>' . $punctuation;
-			}
-
-			// Emails
-			if (isset($matches[2])) {
 				$email = $matches[2];
-				if (false !== stripos($email, 'mailto:')) {
+				if (stripos($email, 'mailto:') !== false) {
 					$email = substr($matches[2], 7);
 					$protocol = 'mailto:';
 				} else {
 					$protocol = '';
 				}
+
 				return $matches[1] . '<a href="mailto:' . $email . '">' . $protocol . $email . '</a>';
-			}
-		}, $text);
+			},
+			$text
+		);
 	}
 
 	/**
@@ -466,7 +535,7 @@ class Html
 
 		// Re-format lines
 		// <pre>
-		$text = preg_replace_callback('~<pre[^>]*>(.+?)</pre>~is', function($matches) {
+		$text = preg_replace_callback('~<pre[^>]*>(.+?)</pre>~is', static function ($matches) {
 			// Line breaks are converted to <br />, that are removed later
 			return nl2br($matches[1]);
 		}, $text);
@@ -479,53 +548,79 @@ class Html
 
 		// Processing of most tags and entities
 		static $search = [
-			'~<h[3-6][^>]*>(.+?)</h[3-6]>~is',	// <h3> to <h6>
-			'~(<div[^>]*>)|(</div>)~i',			// <div> and </div>
-			'~(<p(?:\s+[^>]+)?>)|(</p>)~i',		// <p> and </p>
-			'~(<table[^>]*>)|(</table>)~i',		// <table> and </table>
-			'~</tr>*~i',						// </tr>
-			'~<td[^>]*>(.+?)</td>~is',			// <td> and </td>
+			// <h3> to <h6>
+			'~<h[3-6][^>]*>(.+?)</h[3-6]>~is',
+			// <div> and </div>
+			'~(<div[^>]*>)|(</div>)~i',
+			// <p> and </p>
+			'~(<p(?:\s+[^>]+)?>)|(</p>)~i',
+			// <table> and </table>
+			'~(<table[^>]*>)|(</table>)~i',
+			// </tr>
+			'~</tr>*~i',
+			// <td> and </td>
+			'~<td[^>]*>(.+?)</td>~is',
 			// '~(<code[^>]*>)|(</code>)~i', 	// <code> and </code>
-			'~(&hellip;)~i',					// Ellipsis
-			'~(&#8220;)|(&#8221;)~i',			// Quotes
-			'~(&apos;)~i',						// Apostrophe
-			'~(&copy;)|(&#169;)~i', 			// Copyright
-			'~&trade;~i', 						// Trademark
-			'~&reg;~i', 						// Registered trademark
-			'~(&mdash;)|(&ndash;)~i' 			// Dash and hyphen
+			// Ellipsis
+			'~(&hellip;)~i',
+			// Quotes
+			'~(&#8220;)|(&#8221;)~i',
+			// Apostrophe
+			'~(&apos;)~i',
+			// Copyright
+			'~(&copy;)|(&#169;)~i',
+			// Trademark
+			'~&trade;~i',
+			// Registered trademark
+			'~&reg;~i',
+			// Dash and hyphen
+			'~(&mdash;)|(&ndash;)~i',
 		];
 		static $replace = [
-			"\n\n\\1\n\n",	// <h3> to <h6>
-			"\n\n",			// <div> and </div>
-			"\n\n",			// <p> and </p>
-			"\n\n",			// <table> and </table>
-			"\n",			// </tr>
-			"\\1\t",		// <td> and </td>
+			// <h3> to <h6>
+			"\n\n\\1\n\n",
+			// <div> and </div>
+			"\n\n",
+			// <p> and </p>
+			"\n\n",
+			// <table> and </table>
+			"\n\n",
+			// </tr>
+			"\n",
+			// <td> and </td>
+			"\\1\t",
 			// "\n\n",		// <code> and </code>
-			'...',			// Ellipsis
-			'"',			// Quotes
-			'\'',			// Apostrophe
-			'(c)',			// Copyright
-			'(tm)',			// Trademark
-			'(R)',			// Registered trademark
-			'-'				// Dash and hyphen
+			// Ellipsis
+			'...',
+			// Quotes
+			'"',
+			// Apostrophe
+			'\'',
+			// Copyright
+			'(c)',
+			// Trademark
+			'(tm)',
+			// Registered trademark
+			'(R)',
+			// Dash and hyphen
+			'-',
 		];
 		$text = preg_replace($search, $replace, $text);
 
 		// <h1> and <h2>
-		$text = preg_replace_callback('~<h[12][^>]*>(.+?)</h[12]>~is', function($matches) {
+		$text = preg_replace_callback('~<h[12][^>]*>(.+?)</h[12]>~is', static function ($matches) {
 			return "\n\n\n" . mb_strtoupper($matches[1], 'utf-8') . "\n\n";
 		}, $text);
 		// <strong>
-		$text = preg_replace_callback('~<strong[^>]*>(.+?)</strong>~is', function($matches) {
+		$text = preg_replace_callback('~<strong[^>]*>(.+?)</strong>~is', static function ($matches) {
 			return mb_strtoupper($matches[1], 'utf-8');
 		}, $text);
 		// <hr />
-		$text = preg_replace_callback('~<hr[^>]*>~i', function($matches) {
+		$text = preg_replace_callback('~<hr[^>]*>~i', static function ($matches) {
 			return "\n" . str_repeat('-', 50) . "\n";
 		}, $text);
 		// <th>
-		$text = preg_replace_callback('~<th[^>]*>(.+?)</th>~is', function($matches) {
+		$text = preg_replace_callback('~<th[^>]*>(.+?)</th>~is', static function ($matches) {
 			return mb_strtoupper($matches[1], 'utf-8') . "\t";
 		}, $text);
 		// <a>
@@ -552,7 +647,7 @@ class Html
 
 		// Remove other entities (must not be performed before)
 		// After previous processing some entities are upper case, that is why we have to use strtolower
-		$text = preg_replace_callback('~(&#?[a-z0-9]+;)~i', function($matches) {
+		$text = preg_replace_callback('~(&#?[a-z0-9]+;)~i', static function ($matches) {
 			return html_entity_decode(strtolower($matches[1]), ENT_QUOTES, 'utf-8');
 		}, $text);
 
@@ -580,13 +675,13 @@ class Html
 	 */
 	private static function linkToText(string $text): string
 	{
-		return preg_replace_callback('~(<a\\s+[^>]*>)(.+?)</a>~is', function($matches) {
+		return preg_replace_callback('~(<a\\s+[^>]*>)(.+?)</a>~is', static function ($matches) {
 			$url = preg_match('~\\shref="([^"]+)"~i', $matches[1], $submatches) ? trim($submatches[1]) : '';
 			$content = $matches[2];
 			$clearContent = trim(strip_tags($content));
 
 			// Some urls have no real meaning
-			if ((empty($url)) || ('#' === $url[0]) || ('/?' === substr($url, 0, 2))) {
+			if (empty($url) || ($url[0] === '#') || (substr($url, 0, 2) === '/?')) {
 				return $content;
 			}
 
@@ -596,11 +691,7 @@ class Html
 			}
 
 			// If the link text and target are the same, use only one of them
-			if ($url === $clearContent) {
-				return '[textlink]' . $content . '[/textlink]';
-			} else {
-				return $content . ' [textlink]' . $url . '[/textlink]';
-			}
+			return $url === $clearContent ? '[textlink]' . $content . '[/textlink]' : $content . ' [textlink]' . $url . '[/textlink]';
 		}, $text);
 	}
 
@@ -622,32 +713,32 @@ class Html
 		$path = [];
 
 		foreach ($matches[0] as $textPart) {
-			if (0 === stripos($textPart, '<ol')) {
+			if (stripos($textPart, '<ol') === 0) {
 				array_push($path, 'ol');
 				$olLevel++;
 				$olLiCount[$olLevel] = 1;
 				$textPart = "\n\n";
-			} elseif ('</ol>' === strtolower($textPart)) {
+			} elseif (strtolower($textPart) === '</ol>') {
 				array_pop($path);
 				$olLevel--;
 				$textPart = "\n\n";
-			} elseif (0 === stripos($textPart, '<ul')) {
+			} elseif (stripos($textPart, '<ul') === 0) {
 				array_push($path, 'ul');
 				$ulLevel++;
 				$textPart = "\n\n";
-			} elseif ('</ul>' === strtolower($textPart)) {
+			} elseif (strtolower($textPart) === '</ul>') {
 				array_pop($path);
 				$ulLevel--;
 				$textPart = "\n\n";
-			} elseif (0 === stripos($textPart, '<li')) {
+			} elseif (stripos($textPart, '<li') === 0) {
 				$textPart = str_repeat("\t", $olLevel + $ulLevel);
-				if ('ul' === end($path)) {
+				if (end($path) === 'ul') {
 					$textPart .= $symbols[$ulLevel % 4] . ' ';
-				} elseif ('ol' === end($path)) {
+				} elseif (end($path) === 'ol') {
 					$textPart .= $olLiCount[$olLevel] . '. ';
 					$olLiCount[$olLevel]++;
 				}
-			} elseif ('</li>' === strtolower($textPart)) {
+			} elseif (strtolower($textPart) === '</li>') {
 				$textPart = "\n";
 			}
 
@@ -669,16 +760,30 @@ class Html
 			$text = '';
 			$offset = 0;
 			foreach ($matches[0] as $textPart) {
-				if (($currentOffset = substr_count(strtolower($textPart), '<blockquote')) > 0) {
+				$currentOffset = substr_count(strtolower($textPart), '<blockquote');
+				if ($currentOffset > 0) {
 					$offset += $currentOffset;
-					$textPart = ($offset == 1 ? "\n" : '');	// Adds a line to the beginning
-				} elseif (($currentOffset = substr_count(strtolower($textPart), '</blockquote>')) > 0) {
+					// Adds a line to the beginning
+					$text .= ($offset === 1 ? "\n" : '');
+					continue;
+				}
+
+				$currentOffset = substr_count(strtolower($textPart), '</blockquote>');
+				if ($currentOffset > 0) {
 					$offset -= $currentOffset;
-					$textPart = '';
-				} elseif ($offset > 0) {
-					$textPart = "\n" . str_repeat('>', $offset) . ' '	// Opening tag
-						. str_replace("\n", "\n" . str_repeat('>', $offset) . ' ', trim($textPart))	// Beginning of all lines
-						. "\n" . str_repeat('>', $offset);	// Closing tag
+					$text .= '';
+					continue;
+				}
+
+				if ($offset > 0) {
+					// Opening tag
+					$text .= "\n" . str_repeat('>', $offset) . ' '
+						// Beginning of all lines
+						. str_replace("\n", "\n" . str_repeat('>', $offset) . ' ', trim($textPart))
+						// Closing tag
+						. "\n" . str_repeat('>', $offset);
+
+					continue;
 				}
 
 				$text .= $textPart;
@@ -687,4 +792,5 @@ class Html
 
 		return $text;
 	}
+
 }

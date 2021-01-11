@@ -13,6 +13,12 @@
 
 namespace Jyxo\Mail\Email;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\TestCase;
+use Throwable;
+use function sprintf;
+
 /**
  * \Jyxo\Mail\Email\Address class test.
  *
@@ -21,12 +27,13 @@ namespace Jyxo\Mail\Email;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class AddressTest extends \PHPUnit_Framework_TestCase
+class AddressTest extends TestCase
 {
+
 	/**
 	 * Runs the test.
 	 */
-	public function test()
+	public function test(): void
 	{
 		$email = 'jyxo@jyxo.com';
 		$name = 'Jyxo';
@@ -49,12 +56,13 @@ class AddressTest extends \PHPUnit_Framework_TestCase
 		// Invalid email
 		try {
 			$address = new Address('žlutý kůň@jyxo.com', $name);
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->fail(sprintf('Expected exception %s.', InvalidArgumentException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+			$this->assertInstanceOf(InvalidArgumentException::class, $e);
 		}
 	}
+
 }

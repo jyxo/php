@@ -13,29 +13,30 @@
 
 namespace Jyxo\Input\Validator;
 
+use InvalidArgumentException;
+use function mb_strlen;
+
 /**
  * Validates string length to be lower than the given length.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Pěček
  */
-class StringLengthLessThan extends \Jyxo\Input\Validator\AbstractValidator
+class StringLengthLessThan extends AbstractValidator
 {
+
 	/**
 	 * Maximal string length.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	protected $max;
 
 	/**
 	 * Constructor.
 	 *
-	 * @param integer $max Maximal string length (value length must be lower)
+	 * @param int $max Maximal string length (value length must be lower)
 	 */
 	public function __construct(int $max)
 	{
@@ -45,14 +46,13 @@ class StringLengthLessThan extends \Jyxo\Input\Validator\AbstractValidator
 	/**
 	 * Sets the maximal string length.
 	 *
-	 * @param integer $max Maximal string length
-	 * @return \Jyxo\Input\Validator\StringLengthLessThan
-	 * @throws \InvalidArgumentException If the maximal length is negative or zero
+	 * @param int $max Maximal string length
+	 * @return StringLengthLessThan
 	 */
 	public function setMax(int $max): self
 	{
 		if ($max <= 0) {
-			throw new \InvalidArgumentException('Length of string must be greater than zero.');
+			throw new InvalidArgumentException('Length of string must be greater than zero.');
 		}
 
 		$this->max = $max;
@@ -63,7 +63,7 @@ class StringLengthLessThan extends \Jyxo\Input\Validator\AbstractValidator
 	/**
 	 * Returns the maximal string length.
 	 *
-	 * @return integer
+	 * @return int
 	 */
 	public function getMax(): int
 	{
@@ -74,10 +74,11 @@ class StringLengthLessThan extends \Jyxo\Input\Validator\AbstractValidator
 	 * Validates a value.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isValid($value): bool
 	{
 		return mb_strlen((string) $value, 'utf-8') < $this->getMax();
 	}
+
 }

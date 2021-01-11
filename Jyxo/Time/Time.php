@@ -13,6 +13,35 @@
 
 namespace Jyxo\Time;
 
+use DateTime;
+use DateTimeInterface;
+use DateTimeZone;
+use Exception;
+use InvalidArgumentException;
+use Serializable;
+use Throwable;
+use function _;
+use function array_combine;
+use function array_keys;
+use function call_user_func_array;
+use function count;
+use function date_default_timezone_get;
+use function explode;
+use function intval;
+use function is_numeric;
+use function is_object;
+use function is_string;
+use function mb_strtolower;
+use function ngettext;
+use function preg_match;
+use function preg_replace;
+use function round;
+use function sprintf;
+use function strpos;
+use function strtr;
+use function time;
+use function vsprintf;
+
 /**
  * Class for working with date and time.
  * Internally uses a \DateTime object.
@@ -20,8 +49,6 @@ namespace Jyxo\Time;
  *
  * Requires the Gettext PHP extension or any other implementation of the _(string) translation function.
  *
- * @category Jyxo
- * @package Jyxo\Time
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
@@ -30,117 +57,90 @@ namespace Jyxo\Time;
  * @author Martin Šamšula
  * @author Ondřej Nešpor
  */
-class Time implements \Serializable
+class Time implements Serializable
 {
+
 	/**
 	 * Second.
-	 *
-	 * @var string
 	 */
-	const SECOND = 'second';
+	public const SECOND = 'second';
 
 	/**
 	 * Minute.
-	 *
-	 * @var string
 	 */
-	const MINUTE = 'minute';
+	public const MINUTE = 'minute';
 
 	/**
 	 * Hour.
-	 *
-	 * @var string
 	 */
-	const HOUR = 'hour';
+	public const HOUR = 'hour';
 
 	/**
 	 * Day.
-	 *
-	 * @var string
 	 */
-	const DAY = 'day';
+	public const DAY = 'day';
 
 	/**
 	 * Week.
-	 *
-	 * @var string
 	 */
-	const WEEK = 'week';
+	public const WEEK = 'week';
 
 	/**
 	 * Month.
-	 *
-	 * @var string
 	 */
-	const MONTH = 'month';
+	public const MONTH = 'month';
 
 	/**
 	 * Year.
-	 *
-	 * @var string
 	 */
-	const YEAR = 'year';
+	public const YEAR = 'year';
 
 	/**
 	 * Number of seconds in a second.
-	 *
-	 * @var integer
 	 */
-	const INTERVAL_SECOND = 1;
+	public const INTERVAL_SECOND = 1;
 
 	/**
 	 * Number of seconds in a minute.
-	 *
-	 * @var integer
 	 */
-	const INTERVAL_MINUTE = 60;
+	public const INTERVAL_MINUTE = 60;
 
 	/**
 	 * Number of seconds in an hour.
-	 *
-	 * @var integer
 	 */
-	const INTERVAL_HOUR = 3600;
+	public const INTERVAL_HOUR = 3600;
 
 	/**
 	 * Number of seconds in a day.
-	 *
-	 * @var integer
 	 */
-	const INTERVAL_DAY = 86400;
+	public const INTERVAL_DAY = 86400;
 
 	/**
 	 * Number of seconds in a week.
-	 *
-	 * @var integer
 	 */
-	const INTERVAL_WEEK = 604800;
+	public const INTERVAL_WEEK = 604800;
 
 	/**
 	 * Number of seconds in a month.
-	 *
-	 * @var integer
 	 */
-	const INTERVAL_MONTH = 2592000;
+	public const INTERVAL_MONTH = 2592000;
 
 	/**
 	 * Number of seconds in a year.
-	 *
-	 * @var integer
 	 */
-	const INTERVAL_YEAR = 31536000;
+	public const INTERVAL_YEAR = 31536000;
 
 	/**
 	 * \DateTime instance.
 	 *
-	 * @var \DateTime
+	 * @var DateTime
 	 */
 	private $dateTime;
 
 	/**
 	 * \DateTimeZone instance of the original timezone.
 	 *
-	 * @var \DateTimeZone
+	 * @var DateTimeZone
 	 */
 	private $originalTimeZone;
 
@@ -149,66 +149,57 @@ class Time implements \Serializable
 	 *
 	 * Creates an instance and initializes the internal date/time representation.
 	 *
-	 * @param string|integer|\Jyxo\Time\Time|\DateTime $time Date/time definition
-	 * @param string|\DateTimeZone $timeZone Time zone definition
-	 * @throws \InvalidArgumentException If an incompatible date/time format or time zone definition was provided
+	 * @param string|int|Time|DateTime $time Date/time definition
+	 * @param string|DateTimeZone $timeZone Time zone definition
 	 */
 	public function __construct($time, $timeZone = null)
 	{
 		if (!is_object($time)) {
-			$timeZone = $this->createTimeZone($timeZone ? $timeZone : date_default_timezone_get());
+			$timeZone = $this->createTimeZone($timeZone ?: date_default_timezone_get());
 
 			if (is_numeric($time)) {
 				// Unix timestamp as an integer or string
-				$this->dateTime = new \DateTime('', $timeZone);
+				$this->dateTime = new DateTime('', $timeZone);
 				$this->dateTime->setTimestamp($time);
 			} elseif (is_string($time)) {
 				// Textual representation
 				try {
-					$this->dateTime = new \DateTime($time, $timeZone);
-				} catch (\Exception $e) {
-					throw new \InvalidArgumentException(sprintf('Provided textual date/time definition "%s" is invalid', $time), 0, $e);
+					$this->dateTime = new DateTime($time, $timeZone);
+				} catch (Throwable $e) {
+					throw new InvalidArgumentException(sprintf('Provided textual date/time definition "%s" is invalid', $time), 0, $e);
 				}
 			} else {
-				throw new \InvalidArgumentException(sprintf('Provided date/time must be a number, %s or %s instance or a parameter compatible with PHP function strtotime().', \Jyxo\Time\Time::class, \DateTimeInterface::class));
+				throw new InvalidArgumentException(
+					sprintf(
+						'Provided date/time must be a number, %s or %s instance or a parameter compatible with PHP function strtotime().',
+						self::class,
+						DateTimeInterface::class
+					)
+				);
 			}
 		} elseif ($time instanceof self) {
 			// \Jyxo\Time\Time
-			$this->dateTime = new \DateTime($time->format('Y-m-d H:i:s'), $time->getTimeZone());
+			$this->dateTime = new DateTime($time->format('Y-m-d H:i:s'), $time->getTimeZone());
+
 			if ($timeZone) {
 				$this->dateTime->setTimezone($this->createTimeZone($timeZone));
 			}
-		} elseif ($time instanceof \DateTime) {
+		} elseif ($time instanceof DateTime) {
 			// \DateTime
-			$this->dateTime = clone ($time);
+			$this->dateTime = clone $time;
+
 			if ($timeZone) {
 				$this->dateTime->setTimezone($this->createTimeZone($timeZone));
 			}
 		} else {
-			throw new \InvalidArgumentException(sprintf('Provided date/time must be a number, %s or %s instance or a parameter compatible with PHP function strtotime().', \Jyxo\Time\Time::class, \DateTimeInterface::class));
+			throw new InvalidArgumentException(
+				sprintf(
+					'Provided date/time must be a number, %s or %s instance or a parameter compatible with PHP function strtotime().',
+					self::class,
+					DateTimeInterface::class
+				)
+			);
 		}
-	}
-
-	/**
-	 * Creates a \DateTimeZone object from a time zone definition
-	 *
-	 * @param string|\DateTimeZone $definition Time zone definition
-	 * @return \DateTimeZone
-	 * @throws \InvalidArgumentException If an invalid time zone definition was provided
-	 */
-	protected function createTimeZone($definition): \DateTimeZone
-	{
-		if (is_string($definition)) {
-			try {
-				return new \DateTimeZone($definition);
-			} catch (\Exception $e) {
-				throw new \InvalidArgumentException(sprintf('Invalid timezone definition "%s"', $definition), 0, $e);
-			}
-		} elseif (!$definition instanceof \DateTimeZone) {
-			throw new \InvalidArgumentException('Invalid timezone definition');
-		}
-
-		return $definition;
 	}
 
 	/**
@@ -216,9 +207,9 @@ class Time implements \Serializable
 	 *
 	 * Useful for one-time usage.
 	 *
-	 * @param string|integer|\Jyxo\Time\Time|\DateTime $time Date/time definition
-	 * @param string|\DateTimeZone $timeZone Time zone definition
-	 * @return \Jyxo\Time\Time
+	 * @param string|int|Time|DateTime $time Date/time definition
+	 * @param string|DateTimeZone $timeZone Time zone definition
+	 * @return Time
 	 */
 	public static function get($time, $timeZone = null): self
 	{
@@ -228,7 +219,7 @@ class Time implements \Serializable
 	/**
 	 * Returns an instance with the current date/time.
 	 *
-	 * @return \Jyxo\Time\Time
+	 * @return Time
 	 */
 	public static function now(): self
 	{
@@ -240,85 +231,19 @@ class Time implements \Serializable
 	 *
 	 * @param string $format Date/time format
 	 * @param string $time Date/time definition
-	 * @return \Jyxo\Time\Time
+	 * @return Time
 	 */
 	public static function createFromFormat(string $format, string $time): self
 	{
-		return new self(\DateTime::createFromFormat($format, $time));
-	}
-
-	/**
-	 * Returns date/time in the requested format.
-	 *
-	 * @param string $name Format name
-	 * @return mixed
-	 * @throws \InvalidArgumentException If an unknown format is requested
-	 */
-	public function __get(string $name)
-	{
-		switch ($name) {
-			case 'sql':
-				return $this->dateTime->format(\DateTime::ISO8601);
-			case 'email':
-				return $this->dateTime->format(\DateTime::RFC822);
-			case 'web':
-				return $this->dateTime->format(\DateTime::W3C);
-			case 'cookie':
-				return $this->dateTime->format(\DateTime::COOKIE);
-			case 'rss':
-				return $this->dateTime->format(\DateTime::RSS);
-			case 'unix':
-				// Returns false if the stored date/time has no valid unix timestamp representation
-				return $this->dateTime->getTimestamp();
-			case 'http':
-				$this->setTemporaryTimeZone('GMT');
-				$result = $this->dateTime->format('D, d M Y H:i:s') . ' GMT';
-				$this->revertOriginalTimeZone();
-				return $result;
-			case 'extended':
-				return $this->formatExtended();
-			case 'interval':
-				return $this->formatAsInterval();
-			case 'full':
-				if ((int) $this->dateTime->diff(new \DateTime())->format('%y%m%d%h') > 0) {
-					// If the difference between now and the stored date/time if greater than one hour
-					return $this->formatExtended();
-				} else {
-					return $this->formatAsInterval();
-				}
-			default:
-				throw new \InvalidArgumentException(sprintf('Unknown format %s.', $name));
-		}
-	}
-
-	/**
-	 * Calls a method directly on the internal \DateTime object.
-	 *
-	 * @param string $method Method name
-	 * @param array $args Method arguments
-	 * @return mixed
-	 */
-	public function __call(string $method, array $args)
-	{
-		return call_user_func_array([$this->dateTime, $method], $args);
-	}
-
-	/**
-	 * Returns date/time in the unix timestamp format.
-	 *
-	 * @return string Returns empty string if the stored date/time has no valid UT representation
-	 */
-	public function __toString(): string
-	{
-		return (string) $this->dateTime->getTimestamp();
+		return new self(DateTime::createFromFormat($format, $time));
 	}
 
 	/**
 	 * Returns the actual time zone.
 	 *
-	 * @return \DateTimeZone
+	 * @return DateTimeZone
 	 */
-	public function getTimeZone(): \DateTimeZone
+	public function getTimeZone(): DateTimeZone
 	{
 		return $this->dateTime->getTimezone();
 	}
@@ -326,44 +251,12 @@ class Time implements \Serializable
 	/**
 	 * Sets a new time zone.
 	 *
-	 * @param string|\DateTimeZone $timeZone The new time zone
-	 * @return \Jyxo\Time\Time
+	 * @param string|DateTimeZone $timeZone The new time zone
+	 * @return Time
 	 */
 	public function setTimeZone($timeZone): self
 	{
 		$this->dateTime->setTimezone($this->createTimeZone($timeZone));
-		return $this;
-	}
-
-	/**
-	 * Sets a time zone temporarily.
-	 *
-	 * @param string|\DateTimeZone $timeZone Temporary time zone definition
-	 * @throws \InvalidArgumentException If an invalid time zone definition was provided
-	 */
-	protected function setTemporaryTimeZone($timeZone)
-	{
-		$this->originalTimeZone = $this->dateTime->getTimezone();
-		try {
-			$this->setTimeZone($this->createTimeZone($timeZone));
-		} catch (\InvalidArgumentException $e) {
-			$this->originalTimeZone = null;
-			throw $e;
-		}
-	}
-
-	/**
-	 * Reverts the original time zone.
-	 *
-	 * @return \Jyxo\Time\Time
-	 * @throws \InvalidArgumentException If there is no time zone to return to
-	 */
-	protected function revertOriginalTimeZone(): self
-	{
-		if (null !== $this->originalTimeZone) {
-			$this->dateTime->setTimezone($this->originalTimeZone);
-			$this->originalTimeZone = null;
-		}
 
 		return $this;
 	}
@@ -372,7 +265,7 @@ class Time implements \Serializable
 	 * Returns date/time in the given format with months and days translated.
 	 *
 	 * @param string $format Requested format
-	 * @param string|\DateTimeZone $timeZone Result time zone definition
+	 * @param string|DateTimeZone $timeZone Result time zone definition
 	 * @return string
 	 */
 	public function format(string $format, $timeZone = null): string
@@ -385,33 +278,70 @@ class Time implements \Serializable
 		// Translation required?
 		if (preg_match('~(?:^|[^\\\])[lDFM]~', $format)) {
 			static $days = [];
+
 			if (empty($days)) {
 				$days = [_('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'), _('Sunday')];
 			}
 
 			static $daysShort = [];
+
 			if (empty($daysShort)) {
 				$daysShort = [_('Mon'), _('Tue'), _('Wed'), _('Thu'), _('Fri'), _('Sat'), _('Sun')];
 			}
 
 			static $months = [];
+
 			if (empty($months)) {
 				$months = [
-					_('January'), _('February'), _('March'), _('April'), _('May'), _('June'), _('July'), _('August'),
-					_('September'), _('October'), _('November'), _('December')
+					_('January'),
+					_('February'),
+					_('March'),
+					_('April'),
+					_('May'),
+					_('June'),
+					_('July'),
+					_('August'),
+					_('September'),
+					_('October'),
+					_('November'),
+					_('December'),
 				];
 			}
+
 			static $monthsGen = [];
+
 			if (empty($monthsGen)) {
 				$monthsGen = [
-					_('January#~Genitive'), _('February#~Genitive'), _('March#~Genitive'), _('April#~Genitive'), _('May#~Genitive'),
-					_('June#~Genitive'), _('July#~Genitive'), _('August#~Genitive'), _('September#~Genitive'),
-					_('October#~Genitive'), _('November#~Genitive'), _('December#~Genitive')
+					_('January#~Genitive'),
+					_('February#~Genitive'),
+					_('March#~Genitive'),
+					_('April#~Genitive'),
+					_('May#~Genitive'),
+					_('June#~Genitive'),
+					_('July#~Genitive'),
+					_('August#~Genitive'),
+					_('September#~Genitive'),
+					_('October#~Genitive'),
+					_('November#~Genitive'),
+					_('December#~Genitive'),
 				];
 			}
+
 			static $monthsShort = [];
+
 			if (empty($monthsShort)) {
-				$monthsShort = [_('Jan'), _('Feb'), _('Mar'), _('Apr'), _('May#~Shortcut'), _('Jun'), _('Jul'), _('Aug'), _('Sep'), _('Oct'), _('Nov'), _('Dec')];
+				$monthsShort = [
+					_('Jan'),
+					_('Feb'),
+					_('Mar'),
+					_('Apr'),
+					_('May#~Shortcut'),
+					_('Jun'),
+					_('Jul'),
+					_('Aug'),
+					_('Sep'),
+					_('Oct'),
+					_('Nov'), _('Dec')];
 			}
 
 			// Replace certain identifiers with fake ones
@@ -427,7 +357,7 @@ class Time implements \Serializable
 			$month = $this->dateTime->format('n') - 1;
 
 			// If the month is not at the beginning, the genitive case and lowercase will be used
-			$monthName = 0 !== strpos($format, '<--->') ? mb_strtolower($monthsGen[$month], 'utf-8') : $months[$month];
+			$monthName = strpos($format, '<--->') !== 0 ? mb_strtolower($monthsGen[$month], 'utf-8') : $months[$month];
 
 			// Add translated days and months into the result
 			$result = strtr(
@@ -436,7 +366,7 @@ class Time implements \Serializable
 					'<===>' => $days[$day],
 					'<___>' => $daysShort[$day],
 					'<--->' => $monthName,
-					'<...>' => $monthsShort[$month]
+					'<...>' => $monthsShort[$month],
 				]
 			);
 		} else {
@@ -462,7 +392,7 @@ class Time implements \Serializable
 	 *
 	 * @param string $dateFormat Date format
 	 * @param string $timeFormat Time format
-	 * @param string|\DateTimeZone $timeZone Result time zone definition
+	 * @param string|DateTimeZone $timeZone Result time zone definition
 	 * @return string
 	 */
 	public function formatExtended(string $dateFormat = 'j. F Y', string $timeFormat = 'G:i', $timeZone = null): string
@@ -472,31 +402,33 @@ class Time implements \Serializable
 			$this->setTemporaryTimeZone($timeZone);
 		}
 
-		if (($this->dateTime < new \DateTime('midnight - 6 days', $this->dateTime->getTimezone())) || ($this->dateTime >= new \DateTime('midnight + 24 hours', $this->dateTime->getTimezone()))) {
+		if (
+			($this->dateTime < new DateTime('midnight - 6 days', $this->dateTime->getTimezone()))
+			|| ($this->dateTime >= new DateTime(
+				'midnight + 24 hours',
+				$this->dateTime->getTimezone()
+			))
+		) {
 			// Past and future dates
 			$date = $this->format($dateFormat);
-		} elseif ($this->dateTime >= new \DateTime('midnight', $this->dateTime->getTimezone())) {
+		} elseif ($this->dateTime >= new DateTime('midnight', $this->dateTime->getTimezone())) {
 			// Today
 			$date = _('Today');
-		} elseif ($this->dateTime >= new \DateTime('midnight - 24 hours', $this->dateTime->getTimezone())) {
+		} elseif ($this->dateTime >= new DateTime('midnight - 24 hours', $this->dateTime->getTimezone())) {
 			// Yesterday
 			$date = _('Yesterday');
 		} else {
 			// Last week
 			static $days = [];
+
 			if (empty($days)) {
 				$days = [_('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'), _('Sunday')];
 			}
+
 			$date = $days[$this->dateTime->format('N') - 1];
 		}
 
-		// If no time format is provided, only date will be returned
-		if (empty($timeFormat)) {
-			$result = $date;
-		} else {
-			// Returns date along with time
-			$result = $date . ' ' . _('at') . ' ' . $this->dateTime->format($timeFormat);
-		}
+		$result = empty($timeFormat) ? $date : $date . ' ' . _('at') . ' ' . $this->dateTime->format($timeFormat);
 
 		// If a custom result timezone was specified, revert the original one
 		if ($timeZone) {
@@ -518,8 +450,8 @@ class Time implements \Serializable
 	 * 1 month <= $t < 12 months
 	 * 1 year <= $t < n years
 	 *
-	 * @param boolean $useTense Defines if declension should be used
-	 * @param string|\DateTimeZone $timeZone Result time zone definition
+	 * @param bool $useTense Defines if declension should be used
+	 * @param string|DateTimeZone $timeZone Result time zone definition
 	 * @return string
 	 */
 	public function formatAsInterval(bool $useTense = true, $timeZone = null): string
@@ -531,14 +463,14 @@ class Time implements \Serializable
 			self::DAY => self::INTERVAL_DAY,
 			self::HOUR => self::INTERVAL_HOUR,
 			self::MINUTE => self::INTERVAL_MINUTE,
-			self::SECOND => self::INTERVAL_SECOND
+			self::SECOND => self::INTERVAL_SECOND,
 		];
 
 		// Comparison time zone
 		$timeZone = $timeZone ? $this->createTimeZone($timeZone) : $this->dateTime->getTimezone();
 
 		// Difference between the stored date/time and now
-		$differenceObject = $this->dateTime->diff(new \DateTime('', $timeZone));
+		$differenceObject = $this->dateTime->diff(new DateTime('', $timeZone));
 		$diffArray = array_combine(
 			array_keys($intervalList),
 			explode('-', $differenceObject->format('%y-%m-0-%d-%h-%i-%s'))
@@ -546,6 +478,7 @@ class Time implements \Serializable
 
 		// Compute the difference in seconds
 		$diff = 0;
+
 		foreach ($diffArray as $interval => $intervalCount) {
 			$diff += $intervalList[$interval] * $intervalCount;
 		}
@@ -559,15 +492,17 @@ class Time implements \Serializable
 		foreach ($intervalList as $interval => $seconds) {
 			if ($seconds <= $diff) {
 				$num = (int) round($diff / $seconds);
+
 				break;
 			}
 		}
 
 		// Past or future
-		$period = '+' === $differenceObject->format('%R') ? 'past' : 'future';
+		$period = $differenceObject->format('%R') === '+' ? 'past' : 'future';
 
 		// Dictionary - this part could be written shorter but this implementation is faster
 		$tense = $useTense ? $period : 'infinitive';
+
 		switch ($tense) {
 			// Past
 			case 'past':
@@ -588,6 +523,7 @@ class Time implements \Serializable
 					default:
 						return sprintf(ngettext('Second ago', '%s seconds ago', $num), $num);
 				}
+
 				break;
 
 			// Future
@@ -609,6 +545,7 @@ class Time implements \Serializable
 					default:
 						return sprintf(ngettext('In second', 'In %s seconds', $num), $num);
 				}
+
 				break;
 
 			// Infinitive
@@ -630,6 +567,7 @@ class Time implements \Serializable
 					default:
 						return sprintf(ngettext('Second', '%s seconds', $num), $num);
 				}
+
 				break;
 			default:
 				break;
@@ -639,8 +577,8 @@ class Time implements \Serializable
 	/**
 	 * Returns a new date/time object and adds with the given interval added.
 	 *
-	 * @param integer|string $interval Number of seconds or a string compatible with the strtotime() function
-	 * @return \Jyxo\Time\Time
+	 * @param int|string $interval Number of seconds or a string compatible with the strtotime() function
+	 * @return Time
 	 */
 	public function plus($interval): self
 	{
@@ -657,8 +595,8 @@ class Time implements \Serializable
 	/**
 	 * Returns a new date/time object and adds with the given interval subtracted.
 	 *
-	 * @param integer|string $interval Number of seconds or a string compatible with the strtotime() function
-	 * @return \Jyxo\Time\Time
+	 * @param int|string $interval Number of seconds or a string compatible with the strtotime() function
+	 * @return Time
 	 */
 	public function minus($interval): self
 	{
@@ -677,21 +615,22 @@ class Time implements \Serializable
 	 *
 	 * Compares the internal date/time with the current local time of the appropriate time zone.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasHappened(): bool
 	{
-		return '+' === $this->dateTime->diff(\DateTime::createFromFormat('U', (string) time(), $this->dateTime->getTimezone()))->format('%R');
+		return $this->dateTime->diff(DateTime::createFromFormat('U', (string) time(), $this->dateTime->getTimezone()))->format(
+			'%R'
+		) === '+';
 	}
 
 	/**
 	 * Returns a new instance with date/time truncated to the given unit.
 	 *
 	 * @param string $unit Unit to truncate the date/time to
-	 * @return \Jyxo\Time\Time
-	 * @throws \InvalidArgumentException If an invalid unit is provided
+	 * @return Time
 	 */
-	public function truncate($unit): self
+	public function truncate(string $unit): self
 	{
 		$dateTime = [
 			self::YEAR => 0,
@@ -699,30 +638,41 @@ class Time implements \Serializable
 			self::DAY => 1,
 			self::HOUR => 0,
 			self::MINUTE => 0,
-			self::SECOND => 0
+			self::SECOND => 0,
 		];
 
 		switch ((string) $unit) {
 			case self::SECOND:
 				$dateTime[self::SECOND] = $this->dateTime->format('s');
+
 				// Intentionally missing break
+
 			case self::MINUTE:
 				$dateTime[self::MINUTE] = $this->dateTime->format('i');
+
 				// Intentionally missing break
+
 			case self::HOUR:
 				$dateTime[self::HOUR] = $this->dateTime->format('H');
+
 				// Intentionally missing break
+
 			case self::DAY:
 				$dateTime[self::DAY] = $this->dateTime->format('d');
+
 				// Intentionally missing break
+
 			case self::MONTH:
 				$dateTime[self::MONTH] = $this->dateTime->format('m');
+
 				// Intentionally missing break
+
 			case self::YEAR:
 				$dateTime[self::YEAR] = $this->dateTime->format('Y');
+
 				break;
 			default:
-				throw new \InvalidArgumentException(sprintf('Time unit %s is not defined.', $unit));
+				throw new InvalidArgumentException(sprintf('Time unit %s is not defined.', $unit));
 		}
 
 		return new self(vsprintf('%s-%s-%sT%s:%s:%s', $dateTime), $this->dateTime->getTimezone());
@@ -741,33 +691,158 @@ class Time implements \Serializable
 	/**
 	 * Object deserialization.
 	 *
+	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param string $serialized Serialized data
-	 * @throws \InvalidArgumentException On deserialization error
 	 */
-	public function unserialize($serialized)
+	public function unserialize($serialized): void
 	{
 		try {
 			$data = explode(' ', $serialized);
-			if (count($data) != 3) {
-				throw new \Exception('Serialized data have to be in the "Y-m-d H:i:s TimeZone" format');
+
+			if (count($data) !== 3) {
+				throw new Exception('Serialized data have to be in the "Y-m-d H:i:s TimeZone" format');
 			}
 
 			if (preg_match('~([+-]\\d{2}):?([\\d]{2})~', $data[2], $matches)) {
 				// Timezone defined by an UTC offset
 
-				if ($matches[2] < 0 || $matches[2] > 59 || intval($matches[1] . $matches[2]) < -1200 || intval($matches[1] . $matches[2]) > 1200) {
+				if (
+					$matches[2] < 0
+					|| $matches[2] > 59
+					|| intval($matches[1] . $matches[2]) < -1200
+					|| intval($matches[1] . $matches[2]) > 1200
+				) {
 					// Invalid offset - minutes part is invalid or the whole offset is not <= 12:00 and >= -12:00
-					throw new \Exception(sprintf('Invalid time zone UTC offset definition: %s', $matches[0]));
+					throw new Exception(sprintf('Invalid time zone UTC offset definition: %s', $matches[0]));
 				}
 
 				$data[1] .= ' ' . $matches[1] . $matches[2];
-				$this->dateTime = new \DateTime($data[0] . ' ' . $data[1]);
+				$this->dateTime = new DateTime($data[0] . ' ' . $data[1]);
 			} else {
-				$this->dateTime = new \DateTime($data[0] . ' ' . $data[1], $this->createTimeZone($data[2]));
+				$this->dateTime = new DateTime($data[0] . ' ' . $data[1], $this->createTimeZone($data[2]));
 			}
-
-		} catch (\Exception $e) {
-			throw new \InvalidArgumentException('Deserialization error', 0, $e);
+		} catch (Throwable $e) {
+			throw new InvalidArgumentException('Deserialization error', 0, $e);
 		}
 	}
+
+	/**
+	 * Creates a \DateTimeZone object from a time zone definition
+	 *
+	 * @param string|DateTimeZone $definition Time zone definition
+	 * @return DateTimeZone
+	 */
+	protected function createTimeZone($definition): DateTimeZone
+	{
+		if (is_string($definition)) {
+			try {
+				return new DateTimeZone($definition);
+			} catch (Throwable $e) {
+				throw new InvalidArgumentException(sprintf('Invalid timezone definition "%s"', $definition), 0, $e);
+			}
+		} elseif (!$definition instanceof DateTimeZone) {
+			throw new InvalidArgumentException('Invalid timezone definition');
+		}
+
+		return $definition;
+	}
+
+	/**
+	 * Sets a time zone temporarily.
+	 *
+	 * @param string|DateTimeZone $timeZone Temporary time zone definition
+	 */
+	protected function setTemporaryTimeZone($timeZone): void
+	{
+		$this->originalTimeZone = $this->dateTime->getTimezone();
+
+		try {
+			$this->setTimeZone($this->createTimeZone($timeZone));
+		} catch (InvalidArgumentException $e) {
+			$this->originalTimeZone = null;
+
+			throw $e;
+		}
+	}
+
+	/**
+	 * Reverts the original time zone.
+	 *
+	 * @return Time
+	 */
+	protected function revertOriginalTimeZone(): self
+	{
+		if ($this->originalTimeZone !== null) {
+			$this->dateTime->setTimezone($this->originalTimeZone);
+			$this->originalTimeZone = null;
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Returns date/time in the requested format.
+	 *
+	 * @param string $name Format name
+	 * @return mixed
+	 */
+	public function __get(string $name)
+	{
+		switch ($name) {
+			case 'sql':
+				return $this->dateTime->format(DateTime::ISO8601);
+			case 'email':
+				return $this->dateTime->format(DateTime::RFC822);
+			case 'web':
+				return $this->dateTime->format(DateTime::W3C);
+			case 'cookie':
+				return $this->dateTime->format(DateTime::COOKIE);
+			case 'rss':
+				return $this->dateTime->format(DateTime::RSS);
+			case 'unix':
+				// Returns false if the stored date/time has no valid unix timestamp representation
+				return $this->dateTime->getTimestamp();
+			case 'http':
+				$this->setTemporaryTimeZone('GMT');
+				$result = $this->dateTime->format('D, d M Y H:i:s') . ' GMT';
+				$this->revertOriginalTimeZone();
+
+				return $result;
+			case 'extended':
+				return $this->formatExtended();
+			case 'interval':
+				return $this->formatAsInterval();
+			case 'full':
+				// If the difference between now and the stored date/time if greater than one hour
+				return (int) $this->dateTime->diff(new DateTime())->format('%y%m%d%h') > 0
+					? $this->formatExtended()
+					: $this->formatAsInterval();
+
+			default:
+				throw new InvalidArgumentException(sprintf('Unknown format %s.', $name));
+		}
+	}
+
+	/**
+	 * Calls a method directly on the internal \DateTime object.
+	 *
+	 * @param string $method Method name
+	 * @param array $args Method arguments
+	 * @return mixed
+	 */
+	public function __call(string $method, array $args)
+	{
+		return call_user_func_array([$this->dateTime, $method], $args);
+	}
+
+	/**
+	 * Returns date/time in the unix timestamp format.
+	 *
+	 * @return string Returns empty string if the stored date/time has no valid UT representation
+	 */
+	public function __toString(): string
+	{
+		return (string) $this->dateTime->getTimestamp();
+	}
+
 }

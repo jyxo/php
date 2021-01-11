@@ -13,6 +13,11 @@
 
 namespace Jyxo\Beholder\TestCase;
 
+use Jyxo\Beholder\Result;
+use PHPUnit\Framework\TestCase;
+use TestFileSystemStream;
+use function sprintf;
+
 /**
  * Test for the \Jyxo\Beholder\TestCase\FileSystem class.
  *
@@ -21,8 +26,9 @@ namespace Jyxo\Beholder\TestCase;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class FileSystemTest extends \PHPUnit_Framework_TestCase
+class FileSystemTest extends TestCase
 {
+
 	/**
 	 * Protocol name.
 	 *
@@ -38,72 +44,73 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
 	private $dir = 'test://';
 
 	/**
-	 * Prepares the testing environment..
-	 */
-	protected function setUp()
-	{
-		require_once DIR_FILES . '/beholder/TestFileSystemStream.php';
-		\TestFileSystemStream::register($this->protocol);
-	}
-
-	/**
-	 * Cleans up the testing environment.
-	 */
-	protected function tearDown()
-	{
-		\TestFileSystemStream::unregister($this->protocol);
-	}
-
-	/**
 	 * Tests write failure.
 	 */
-	public function testWriteFailure()
+	public function testWriteFailure(): void
 	{
-		\TestFileSystemStream::setError(\TestFileSystemStream::ERROR_WRITE);
+		TestFileSystemStream::setError(TestFileSystemStream::ERROR_WRITE);
 
 		$test = new FileSystem('FileSystem', $this->dir);
 		// @ on purpose
 		$result = @$test->run();
-		$this->assertEquals(\Jyxo\Beholder\Result::FAILURE, $result->getStatus());
+		$this->assertEquals(Result::FAILURE, $result->getStatus());
 		$this->assertEquals(sprintf('Write error %s', $this->dir), $result->getDescription());
 	}
 
 	/**
 	 * Tests read failure.
 	 */
-	public function testReadFailure()
+	public function testReadFailure(): void
 	{
-		\TestFileSystemStream::setError(\TestFileSystemStream::ERROR_READ);
+		TestFileSystemStream::setError(TestFileSystemStream::ERROR_READ);
 
 		$test = new FileSystem('FileSystem', $this->dir);
 		$result = $test->run();
-		$this->assertEquals(\Jyxo\Beholder\Result::FAILURE, $result->getStatus());
+		$this->assertEquals(Result::FAILURE, $result->getStatus());
 		$this->assertEquals(sprintf('Read error %s', $this->dir), $result->getDescription());
 	}
 
 	/**
 	 * Tests delete failure.
 	 */
-	public function testDeleteFailure()
+	public function testDeleteFailure(): void
 	{
-		\TestFileSystemStream::setError(\TestFileSystemStream::ERROR_DELETE);
+		TestFileSystemStream::setError(TestFileSystemStream::ERROR_DELETE);
 
 		$test = new FileSystem('FileSystem', $this->dir);
 		$result = $test->run();
-		$this->assertEquals(\Jyxo\Beholder\Result::FAILURE, $result->getStatus());
+		$this->assertEquals(Result::FAILURE, $result->getStatus());
 		$this->assertEquals(sprintf('Delete error %s', $this->dir), $result->getDescription());
 	}
 
 	/**
 	 * Tests all functions.
 	 */
-	public function testAllOk()
+	public function testAllOk(): void
 	{
-		\TestFileSystemStream::setError(\TestFileSystemStream::ERROR_NONE);
+		TestFileSystemStream::setError(TestFileSystemStream::ERROR_NONE);
 
 		$test = new FileSystem('FileSystem', $this->dir);
 		$result = $test->run();
-		$this->assertEquals(\Jyxo\Beholder\Result::SUCCESS, $result->getStatus());
+		$this->assertEquals(Result::SUCCESS, $result->getStatus());
 		$this->assertEquals($this->dir, $result->getDescription());
 	}
+
+	/**
+	 * Prepares the testing environment..
+	 */
+	protected function setUp(): void
+	{
+		require_once DIR_FILES . '/beholder/TestFileSystemStream.php';
+		TestFileSystemStream::register($this->protocol);
+	}
+
+	/**
+	 * Cleans up the testing environment.
+	 */
+	protected function tearDown(): void
+	{
+		TestFileSystemStream::unregister($this->protocol);
+	}
+
 }

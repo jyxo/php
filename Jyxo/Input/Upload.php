@@ -13,17 +13,20 @@
 
 namespace Jyxo\Input;
 
+use function move_uploaded_file;
+use function pathinfo;
+use const PATHINFO_EXTENSION;
+
 /**
  * Uploaded file.
  *
- * @category Jyxo
- * @package Jyxo\Input
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
  */
 class Upload
 {
+
 	/**
 	 * Index in $_FILES superglobal array.
 	 *
@@ -34,7 +37,7 @@ class Upload
 	/**
 	 * The file was successfully uploaded.
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	private $success = false;
 
@@ -51,12 +54,13 @@ class Upload
 	/**
 	 * Confirms that the file was successfully uploaded.
 	 *
-	 * @return \Jyxo\Input\Upload
+	 * @return Upload
 	 */
 	public function confirmUpload(): self
 	{
 		// Isset is just a simple check, it is not sufficient!
 		$this->success = isset($_FILES[$this->index]);
+
 		return $this;
 	}
 
@@ -65,7 +69,7 @@ class Upload
 	 *
 	 * @return string
 	 */
-	public function tmpName(): string
+	public function tmpName(): ?string
 	{
 		return isset($_FILES[$this->index]) ? $_FILES[$this->index]['tmp_name'] : null;
 	}
@@ -73,9 +77,9 @@ class Upload
 	/**
 	 * Returns upload error type.
 	 *
-	 * @return integer
+	 * @return int
 	 */
-	public function error(): int
+	public function error(): ?int
 	{
 		return isset($_FILES[$this->index]) ? $_FILES[$this->index]['error'] : null;
 	}
@@ -84,15 +88,49 @@ class Upload
 	 * Moves the uploaded file.
 	 *
 	 * @param string $destination File destination
-	 * @return boolean
+	 * @return bool
 	 */
 	public function move(string $destination): bool
 	{
 		$result = false;
+
 		if ($this->success) {
 			$result = move_uploaded_file($this->tmpName(), $destination);
 		}
+
 		return $result;
+	}
+
+	/**
+	 * Returns file extension.
+	 *
+	 * @return string|null
+	 */
+	public function extension(): ?string
+	{
+		$ext = null;
+
+		if ($this->success) {
+			$ext = pathinfo($_FILES[$this->index]['name'], PATHINFO_EXTENSION);
+		}
+
+		return $ext;
+	}
+
+	/**
+	 * Returns file name.
+	 *
+	 * @return string|null
+	 */
+	public function filename(): ?string
+	{
+		$filename = null;
+
+		if ($this->success) {
+			$filename = $_FILES[$this->index]['name'];
+		}
+
+		return $filename;
 	}
 
 	/**
@@ -105,31 +143,4 @@ class Upload
 		return $this->tmpName();
 	}
 
-	/**
-	 * Returns file extension.
-	 *
-	 * @return string|null
-	 */
-	public function extension()
-	{
-		$ext = null;
-		if ($this->success) {
-			$ext = pathinfo($_FILES[$this->index]['name'], PATHINFO_EXTENSION);
-		}
-		return $ext;
-	}
-
-	/**
-	 * Returns file name.
-	 *
-	 * @return string|null
-	 */
-	public function filename()
-	{
-		$filename = null;
-		if ($this->success) {
-			$filename = $_FILES[$this->index]['name'];
-		}
-		return $filename;
-	}
 }

@@ -16,12 +16,11 @@ namespace Jyxo\Mail\Sender;
 /**
  * Base exception used when using SMTP connection.
  *
- * @category Jyxo
- * @package Jyxo\Mail
- * @subpackage Sender
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class SmtpException extends \Jyxo\Mail\Sender\Exception
-{}
+class SmtpException extends Exception
+{
+
+}

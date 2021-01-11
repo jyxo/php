@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<phpunit
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+	bootstrap="tests/bootstrap.php"
+	colors="true"
+	backupGlobals="false"
+	backupStaticAttributes="false"
+	beStrictAboutChangesToGlobalState="true"
+	beStrictAboutOutputDuringTests="true"
+	beStrictAboutTestsThatDoNotTestAnything="true"
+	beStrictAboutTodoAnnotatedTests="true"
+	cacheResult="true"
+	cacheResultFile="temp/.phpunit.result.cache"
+	stopOnDefect="true"
+	executionOrder="defects"
+>
+	<testsuites>
+		<testsuite name="Jyxo PHP Library">
+			<directory suffix="Test.php">./tests/</directory>
+			<exclude>./tests/Jyxo/Time/TimeTest.php</exclude><!-- Buggy -->
+		</testsuite>
+	</testsuites>
+
+	<coverage processUncoveredFiles="true">
+		<include>
+			<directory suffix=".php">./Jyxo/</directory>
+		</include>
+		<report>
+			<clover outputFile="temp/coverage.xml"/>
+			<html outputDirectory="temp/coverage"/>
+			<text outputFile="php://stdout" showUncoveredFiles="true" showOnlySummary="true"/>
+		</report>
+	</coverage>
+</phpunit>

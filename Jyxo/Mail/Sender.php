@@ -13,82 +13,91 @@
 
 namespace Jyxo\Mail;
 
+use ArrayIterator;
+use InvalidArgumentException;
+use Jyxo\Mail\Email\Address;
+use Jyxo\Mail\Sender\RecipientUnknownException;
+use Jyxo\Mail\Sender\Result;
+use Jyxo\Mail\Sender\Smtp;
+use Jyxo\Mail\Sender\SmtpException;
+use Jyxo\StringUtil;
+use Jyxo\Time\Time;
+use function array_merge;
+use function class_exists;
+use function count;
+use function current;
+use function iconv;
+use function implode;
+use function in_array;
+use function mail;
+use function md5;
+use function next;
+use function preg_match;
+use function preg_match_all;
+use function preg_replace;
+use function sprintf;
+use function strlen;
+use function strtr;
+use function time;
+use function trim;
+use function uniqid;
+
 /**
  * Class for sending emails.
- * Based on PhpMailer class (C) Copyright 2001-2003  Brent R. Matzelle
+ * Based on PhpMailer class (C) Copyright 2001-2003 Brent R. Matzelle
  *
- * @category Jyxo
- * @package Jyxo\Mail
- * @subpackage Sender
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
 class Sender
 {
+
 	/**
 	 * Send using the internal mail() function.
-	 *
-	 * @var string
 	 */
-	const MODE_MAIL = 'mail';
+	public const MODE_MAIL = 'mail';
 
 	/**
 	 * Send using a SMTP server.
-	 *
-	 * @var string
 	 */
-	const MODE_SMTP = 'smtp';
+	public const MODE_SMTP = 'smtp';
 
 	/**
 	 * No sending.
 	 * Useful if we actually don't want to send the message but just generate it.
-	 *
-	 * @var string
 	 */
-	const MODE_NONE = 'none';
+	public const MODE_NONE = 'none';
 
 	/**
 	 * Maximum line length.
-	 *
-	 * @var integer
 	 */
-	const LINE_LENGTH = 74;
+	public const LINE_LENGTH = 74;
 
 	/**
 	 * Line ending.
-	 *
-	 * @var string
 	 */
-	const LINE_END = "\n";
+	public const LINE_END = "\n";
 
 	/**
 	 * Simple mail type.
-	 *
-	 * @var string
 	 */
-	const TYPE_SIMPLE = 'simple';
+	public const TYPE_SIMPLE = 'simple';
 
 	/**
 	 * Email with a HTML and plaintext part.
-	 *
-	 * @var string
 	 */
-	const TYPE_ALTERNATIVE = 'alternative';
+	public const TYPE_ALTERNATIVE = 'alternative';
 
 	/**
 	 * Email with a HTML and plaintext part and attachments.
-	 *
-	 * @var string
 	 */
-	const TYPE_ALTERNATIVE_ATTACHMENTS = 'alternative_attachments';
+	public const TYPE_ALTERNATIVE_ATTACHMENTS = 'alternative_attachments';
 
 	/**
 	 * Email with attachments.
-	 *
-	 * @var string
 	 */
-	const TYPE_ATTACHMENTS = 'attachments';
+	public const TYPE_ATTACHMENTS = 'attachments';
 
 	/**
 	 * Charset.
@@ -121,7 +130,7 @@ class Sender
 	/**
 	 * Email instance to be sent.
 	 *
-	 * @var \Jyxo\Mail\Email
+	 * @var Email
 	 */
 	private $email = null;
 
@@ -135,7 +144,7 @@ class Sender
 	/**
 	 * SMTP port.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $smtpPort = 25;
 
@@ -170,7 +179,7 @@ class Sender
 	/**
 	 * Sending result.
 	 *
-	 * @var \Jyxo\Mail\Sender\Result
+	 * @var Result
 	 */
 	private $result = null;
 
@@ -184,7 +193,7 @@ class Sender
 	/**
 	 * Sending mode.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $mode = self::MODE_MAIL;
 
@@ -223,7 +232,7 @@ class Sender
 	 * Sets charset.
 	 *
 	 * @param string $charset Final charset
-	 * @return \Jyxo\Mail\Sender
+	 * @return Sender
 	 */
 	public function setCharset(string $charset): self
 	{
@@ -240,7 +249,7 @@ class Sender
 	public function getHostname(): string
 	{
 		if (empty($this->hostname)) {
-			$this->hostname = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost';
+			$this->hostname = $_SERVER['HTTP_HOST'] ?? 'localhost';
 		}
 
 		return $this->hostname;
@@ -250,7 +259,7 @@ class Sender
 	 * Sets hostname.
 	 *
 	 * @param string $hostname Hostname
-	 * @return \Jyxo\Mail\Sender
+	 * @return Sender
 	 */
 	public function setHostname(string $hostname): self
 	{
@@ -273,7 +282,7 @@ class Sender
 	 * Sets X-Mailer header value.
 	 *
 	 * @param string $xmailer X-Mailer header value
-	 * @return \Jyxo\Mail\Sender
+	 * @return Sender
 	 */
 	public function setXmailer(string $xmailer): self
 	{
@@ -296,13 +305,12 @@ class Sender
 	 * Sets encoding.
 	 *
 	 * @param string $encoding Encoding
-	 * @return \Jyxo\Mail\Sender
-	 * @throws \InvalidArgumentException If an incompatible encoding was provided
+	 * @return Sender
 	 */
 	public function setEncoding(string $encoding): self
 	{
 		if (!Encoding::isCompatible($encoding)) {
-			throw new \InvalidArgumentException(sprintf('Incompatible encoding %s.', $encoding));
+			throw new InvalidArgumentException(sprintf('Incompatible encoding %s.', $encoding));
 		}
 
 		$this->encoding = $encoding;
@@ -313,9 +321,9 @@ class Sender
 	/**
 	 * Returns the email to be sent.
 	 *
-	 * @return \Jyxo\Mail\Email|null
+	 * @return Email|null
 	 */
-	public function getEmail()
+	public function getEmail(): ?Email
 	{
 		return $this->email;
 	}
@@ -323,10 +331,10 @@ class Sender
 	/**
 	 * Sets the email to be sent.
 	 *
-	 * @param \Jyxo\Mail\Email $email Email instance
-	 * @return \Jyxo\Mail\Sender
+	 * @param Email $email Email instance
+	 * @return Sender
 	 */
-	public function setEmail(\Jyxo\Mail\Email $email): self
+	public function setEmail(Email $email): self
 	{
 		$this->email = $email;
 
@@ -337,14 +345,21 @@ class Sender
 	 * Sets SMTP parameters.
 	 *
 	 * @param string $host Hostname
-	 * @param integer $port Port
+	 * @param int $port Port
 	 * @param string $helo HELO value
 	 * @param string $user Username
 	 * @param string $password Password
-	 * @param integer $timeout Connection timeout
-	 * @return \Jyxo\Mail\Sender
+	 * @param int $timeout Connection timeout
+	 * @return Sender
 	 */
-	public function setSmtp(string $host, int $port = 25, string $helo = '', string $user = '', string $password = '', int $timeout = 5): self
+	public function setSmtp(
+		string $host,
+		int $port = 25,
+		string $helo = '',
+		string $user = '',
+		string $password = '',
+		int $timeout = 5
+	): self
 	{
 		$this->smtpHost = $host;
 		$this->smtpPort = $port;
@@ -360,28 +375,28 @@ class Sender
 	 * Sends an email using the given mode.
 	 *
 	 * @param string $mode Sending mode
-	 * @return \Jyxo\Mail\Sender\Result
-	 * @throws \InvalidArgumentException If an unknown mode was requested
-	 * @throws \Jyxo\Mail\Sender\Exception On error
-	 * @throws \Jyxo\Mail\Sender\CreateException If a required setting is missing
+	 * @return Result
 	 */
-	public function send(string $mode): \Jyxo\Mail\Sender\Result
+	public function send(string $mode): Result
 	{
 		// Sending modes
 		static $modes = [
 			self::MODE_SMTP => true,
 			self::MODE_MAIL => true,
-			self::MODE_NONE => true
+			self::MODE_NONE => true,
 		];
+
 		if (!isset($modes[$mode])) {
-			throw new \InvalidArgumentException(sprintf('Unknown sending mode %s.', $mode));
+			throw new InvalidArgumentException(sprintf('Unknown sending mode %s.', $mode));
 		}
+
 		$this->mode = $mode;
 
 		// Check of required parameters
-		if (null === $this->email->from) {
+		if ($this->email->from === null) {
 			throw new Sender\CreateException('No sender was set.');
 		}
+
 		if ((count($this->email->to) + count($this->email->cc) + count($this->email->bcc)) < 1) {
 			throw new Sender\CreateException('No recipient was set.');
 		}
@@ -392,6 +407,7 @@ class Sender
 		// Creates an email
 		$this->create();
 		$body = trim($this->createdBody);
+
 		if (empty($body)) {
 			throw new Sender\CreateException('No body was created.');
 		}
@@ -400,12 +416,15 @@ class Sender
 		switch ($this->mode) {
 			case self::MODE_SMTP:
 				$this->sendBySmtp();
+
 				break;
 			case self::MODE_MAIL:
 				$this->sendByMail();
+
 				break;
 			case self::MODE_NONE:
 				// Break missing intentionally
+
 			default:
 				// No sending
 				break;
@@ -423,17 +442,17 @@ class Sender
 
 	/**
 	 * Sends an email using the mail() function.
-	 *
-	 * @throws \Jyxo\Mail\Sender\Exception On error
 	 */
-	private function sendByMail()
+	private function sendByMail(): void
 	{
 		$recipients = '';
-		$iterator = new \ArrayIterator($this->email->to);
+		$iterator = new ArrayIterator($this->email->to);
+
 		while ($iterator->valid()) {
 			$recipients .= $this->formatAddress($iterator->current());
 
 			$iterator->next();
+
 			if ($iterator->valid()) {
 				$recipients .= ', ';
 			}
@@ -448,18 +467,17 @@ class Sender
 
 	/**
 	 * Sends an email using a SMTP server.
-	 *
-	 * @throws \Jyxo\Mail\Sender\Exception On error
 	 */
-	private function sendBySmtp()
+	private function sendBySmtp(): void
 	{
-		if (!class_exists(\Jyxo\Mail\Sender\Smtp::class)) {
-			throw new Sender\Exception(sprintf('Could not sent the message. Required class %s is missing.', \Jyxo\Mail\Sender\Smtp::class));
+		if (!class_exists(Smtp::class)) {
+			throw new Sender\Exception(sprintf('Could not sent the message. Required class %s is missing.', Smtp::class));
 		}
 
 		try {
 			$smtp = new Sender\Smtp($this->smtpHost, $this->smtpPort, $this->smtpHelo, $this->smtpTimeout);
 			$smtp->connect();
+
 			if (!empty($this->smtpUser)) {
 				$smtp->auth($this->smtpUser, $this->smtpPsw);
 			}
@@ -469,13 +487,15 @@ class Sender
 
 			// Recipients
 			$unknownRecipients = [];
+
 			foreach (array_merge($this->email->to, $this->email->cc, $this->email->bcc) as $recipient) {
 				try {
 					$smtp->recipient($recipient->email);
-				} catch (\Jyxo\Mail\Sender\SmtpException $e) {
+				} catch (SmtpException $e) {
 					$unknownRecipients[] = $recipient->email;
 				}
 			}
+
 			if (!empty($unknownRecipients)) {
 				throw new Sender\RecipientUnknownException('Unknown email recipients.', 0, $unknownRecipients);
 			}
@@ -483,11 +503,13 @@ class Sender
 			// Data
 			$smtp->data($this->getHeader(), $this->createdBody);
 			$smtp->disconnect();
-		} catch (\Jyxo\Mail\Sender\RecipientUnknownException $e) {
+		} catch (RecipientUnknownException $e) {
 			$smtp->disconnect();
+
 			throw $e;
-		} catch (\Jyxo\Mail\Sender\SmtpException $e) {
+		} catch (SmtpException $e) {
 			$smtp->disconnect();
+
 			throw new Sender\Exception('Cannot send email: ' . $e->getMessage());
 		}
 	}
@@ -495,7 +517,7 @@ class Sender
 	/**
 	 * Creates an email.
 	 */
-	private function create()
+	private function create(): void
 	{
 		$uniqueId = md5(uniqid((string) time()));
 		$hostname = $this->clearHeaderValue($this->getHostname());
@@ -504,33 +526,21 @@ class Sender
 		$this->result->messageId = $uniqueId . '@' . $hostname;
 
 		// Sending time
-		$this->result->datetime = \Jyxo\Time\Time::now();
+		$this->result->datetime = Time::now();
 
 		// Parts boundaries
 		$this->boundary = [
 			1 => '====b1' . $uniqueId . '====' . $hostname . '====',
-			2 => '====b2' . $uniqueId . '====' . $hostname . '===='
+			2 => '====b2' . $uniqueId . '====' . $hostname . '====',
 		];
 
 		// Determine the message type
 		if (!empty($this->email->attachments)) {
 			// Are there any attachments?
-			if (!empty($this->email->body->alternative)) {
-				// There is an alternative content
-				$this->type = self::TYPE_ALTERNATIVE_ATTACHMENTS;
-			} else {
-				// No alternative content
-				$this->type = self::TYPE_ATTACHMENTS;
-			}
+			$this->type = !empty($this->email->body->alternative) ? self::TYPE_ALTERNATIVE_ATTACHMENTS : self::TYPE_ATTACHMENTS;
 		} else {
 			// No attachments
-			if (!empty($this->email->body->alternative)) {
-				// There is an alternative content
-				$this->type = self::TYPE_ALTERNATIVE;
-			} else {
-				// No alternative content
-				$this->type = self::TYPE_SIMPLE;
-			}
+			$this->type = !empty($this->email->body->alternative) ? self::TYPE_ALTERNATIVE : self::TYPE_SIMPLE;
 		}
 
 		// Creates header and body
@@ -541,7 +551,7 @@ class Sender
 	/**
 	 * Creates header.
 	 */
-	private function createHeader()
+	private function createHeader(): void
 	{
 		$this->addHeaderLine('Date', $this->result->datetime->email);
 		$this->addHeaderLine('Return-Path', '<' . $this->clearHeaderValue($this->email->from->email) . '>');
@@ -559,9 +569,11 @@ class Sender
 		if (!empty($this->email->cc)) {
 			$this->addHeaderLine('Cc', $this->formatAddressList($this->email->cc));
 		}
+
 		if (!empty($this->email->bcc)) {
 			$this->addHeaderLine('Bcc', $this->formatAddressList($this->email->bcc));
 		}
+
 		if (!empty($this->email->replyTo)) {
 			$this->addHeaderLine('Reply-To', $this->formatAddressList($this->email->replyTo));
 		}
@@ -579,11 +591,14 @@ class Sender
 		if (!empty($this->email->inReplyTo)) {
 			$this->addHeaderLine('In-Reply-To', '<' . $this->clearHeaderValue($this->email->inReplyTo) . '>');
 		}
+
 		if (!empty($this->email->references)) {
 			$references = $this->email->references;
+
 			foreach ($references as $key => $reference) {
 				$references[$key] = $this->clearHeaderValue($reference);
 			}
+
 			$this->addHeaderLine('References', '<' . implode('> <', $references) . '>');
 		}
 
@@ -595,26 +610,37 @@ class Sender
 
 		// Custom headers
 		foreach ($this->email->headers as $header) {
-			$this->addHeaderLine($this->changeCharset($this->clearHeaderValue($header->name)), $this->encodeHeader($this->clearHeaderValue($header->value)));
+			$this->addHeaderLine(
+				$this->changeCharset($this->clearHeaderValue($header->name)),
+				$this->encodeHeader($this->clearHeaderValue($header->value))
+			);
 		}
 
 		switch ($this->type) {
 			case self::TYPE_ATTACHMENTS:
 				// Break missing intentionally
+
 			case self::TYPE_ALTERNATIVE_ATTACHMENTS:
 				$subtype = $this->email->hasInlineAttachments() ? 'related' : 'mixed';
-				$this->addHeaderLine('Content-Type', 'multipart/' . $subtype . ';' . self::LINE_END . ' boundary="' . $this->boundary[1] . '"');
+				$this->addHeaderLine(
+					'Content-Type',
+					'multipart/' . $subtype . ';' . self::LINE_END . ' boundary="' . $this->boundary[1] . '"'
+				);
+
 				break;
 			case self::TYPE_ALTERNATIVE:
 				$this->addHeaderLine('Content-Type', 'multipart/alternative;' . self::LINE_END . ' boundary="' . $this->boundary[1] . '"');
+
 				break;
 			case self::TYPE_SIMPLE:
 				// Break missing intentionally
+
 			default:
 				$contentType = $this->email->body->isHtml() ? 'text/html' : 'text/plain';
 
 				$this->addHeaderLine('Content-Type', $contentType . '; charset="' . $this->clearHeaderValue($this->charset) . '"');
 				$this->addHeaderLine('Content-Transfer-Encoding', $this->encoding);
+
 				break;
 		}
 	}
@@ -622,37 +648,72 @@ class Sender
 	/**
 	 * Creates body.
 	 */
-	private function createBody()
+	private function createBody(): void
 	{
 		switch ($this->type) {
 			case self::TYPE_ATTACHMENTS:
 				$contentType = $this->email->body->isHtml() ? 'text/html' : 'text/plain';
 
-				$this->createdBody .= $this->getBoundaryStart($this->boundary[1], $contentType, $this->charset, $this->encoding) . self::LINE_END;
+				$this->createdBody .= $this->getBoundaryStart(
+					$this->boundary[1],
+					$contentType,
+					$this->charset,
+					$this->encoding
+				) . self::LINE_END;
 				$this->createdBody .= $this->encodeString($this->changeCharset($this->email->body->main), $this->encoding) . self::LINE_END;
 
 				$this->createdBody .= $this->attachAll();
+
 				break;
 			case self::TYPE_ALTERNATIVE_ATTACHMENTS:
 				$this->createdBody .= '--' . $this->boundary[1] . self::LINE_END;
 				$this->createdBody .= 'Content-Type: multipart/alternative;' . self::LINE_END . ' boundary="' . $this->boundary[2] . '"' . self::LINE_END . self::LINE_END;
-				$this->createdBody .= $this->getBoundaryStart($this->boundary[2], 'text/plain', $this->charset, $this->encoding) . self::LINE_END;
-				$this->createdBody .= $this->encodeString($this->changeCharset($this->email->body->alternative), $this->encoding) . self::LINE_END;
-				$this->createdBody .= $this->getBoundaryStart($this->boundary[2], 'text/html', $this->charset, $this->encoding) . self::LINE_END;
+				$this->createdBody .= $this->getBoundaryStart(
+					$this->boundary[2],
+					'text/plain',
+					$this->charset,
+					$this->encoding
+				) . self::LINE_END;
+				$this->createdBody .= $this->encodeString(
+					$this->changeCharset($this->email->body->alternative),
+					$this->encoding
+				) . self::LINE_END;
+				$this->createdBody .= $this->getBoundaryStart(
+					$this->boundary[2],
+					'text/html',
+					$this->charset,
+					$this->encoding
+				) . self::LINE_END;
 				$this->createdBody .= $this->encodeString($this->changeCharset($this->email->body->main), $this->encoding) . self::LINE_END;
 				$this->createdBody .= $this->getBoundaryEnd($this->boundary[2]) . self::LINE_END;
 
 				$this->createdBody .= $this->attachAll();
+
 				break;
 			case self::TYPE_ALTERNATIVE:
-				$this->createdBody .= $this->getBoundaryStart($this->boundary[1], 'text/plain', $this->charset, $this->encoding) . self::LINE_END;
-				$this->createdBody .= $this->encodeString($this->changeCharset($this->email->body->alternative), $this->encoding) . self::LINE_END;
-				$this->createdBody .= $this->getBoundaryStart($this->boundary[1], 'text/html', $this->charset, $this->encoding) . self::LINE_END;
+				$this->createdBody .= $this->getBoundaryStart(
+					$this->boundary[1],
+					'text/plain',
+					$this->charset,
+					$this->encoding
+				) . self::LINE_END;
+				$this->createdBody .= $this->encodeString(
+					$this->changeCharset($this->email->body->alternative),
+					$this->encoding
+				) . self::LINE_END;
+				$this->createdBody .= $this->getBoundaryStart(
+					$this->boundary[1],
+					'text/html',
+					$this->charset,
+					$this->encoding
+				) . self::LINE_END;
 				$this->createdBody .= $this->encodeString($this->changeCharset($this->email->body->main), $this->encoding) . self::LINE_END;
 				$this->createdBody .= $this->getBoundaryEnd($this->boundary[1]);
+
 				break;
 			case self::TYPE_SIMPLE:
 				// Break missing intentionally
+
 			default:
 				$this->createdBody = $this->encodeString($this->changeCharset($this->email->body->main), $this->encoding);
 				break;
@@ -674,7 +735,7 @@ class Sender
 
 			$mime[] = '--' . $this->boundary[1] . self::LINE_END;
 			$mime[] = 'Content-Type: ' . $this->clearHeaderValue($attachment->mimeType) . ';' . self::LINE_END;
-			$mime[] = ' name="' .  $this->encodeHeader($name) . '"' . self::LINE_END;
+			$mime[] = ' name="' . $this->encodeHeader($name) . '"' . self::LINE_END;
 			$mime[] = 'Content-Transfer-Encoding: ' . $encoding . self::LINE_END;
 
 			if ($attachment->isInline()) {
@@ -686,7 +747,7 @@ class Sender
 
 			// Just fix line endings in case of encoded attachments, encode otherwise
 			$mime[] = !empty($attachment->encoding)
-				? \Jyxo\StringUtil::fixLineEnding($attachment->content, self::LINE_END)
+				? StringUtil::fixLineEnding($attachment->content, self::LINE_END)
 				: $this->encodeString($attachment->content, $encoding);
 			$mime[] = self::LINE_END . self::LINE_END;
 		}
@@ -706,8 +767,9 @@ class Sender
 	private function getHeader(array $except = []): string
 	{
 		$header = '';
+
 		foreach ($this->createdHeader as $headerLine) {
-			if (!in_array($headerLine['name'], $except)) {
+			if (!in_array($headerLine['name'], $except, true)) {
 				$header .= $headerLine['name'] . ': ' . $headerLine['value'] . self::LINE_END;
 			}
 		}
@@ -718,16 +780,16 @@ class Sender
 	/**
 	 * Formats an email address.
 	 *
-	 * @param \Jyxo\Mail\Email\Address $address Address
+	 * @param Address $address Address
 	 * @return string
 	 */
-	private function formatAddress(\Jyxo\Mail\Email\Address $address): string
+	private function formatAddress(Address $address): string
 	{
 		$name = $this->changeCharset($this->clearHeaderValue($address->name));
 		$email = $this->clearHeaderValue($address->email);
 
 		// No name is set
-		if ((empty($name)) || ($name === $email)) {
+		if (empty($name) || ($name === $email)) {
 			return $email;
 		}
 
@@ -751,13 +813,15 @@ class Sender
 	private function formatAddressList(array $addressList): string
 	{
 		$formated = '';
+
 		while ($address = current($addressList)) {
 			$formated .= $this->formatAddress($address);
 
-			if (false !== next($addressList)) {
+			if (next($addressList) !== false) {
 				$formated .= ', ';
 			}
 		}
+
 		return $formated;
 	}
 
@@ -767,11 +831,11 @@ class Sender
 	 * @param string $name Header name
 	 * @param string $value Header value
 	 */
-	private function addHeaderLine(string $name, string $value)
+	private function addHeaderLine(string $name, string $value): void
 	{
 		$this->createdHeader[] = [
 			'name' => $name,
-			'value' => trim($value)
+			'value' => trim($value),
 		];
 	}
 
@@ -785,7 +849,8 @@ class Sender
 	{
 		// There might be dangerous characters in the string
 		$count = preg_match_all('~[^\040-\176]~', $string, $matches);
-		if (0 === $count) {
+
+		if ($count === 0) {
 			return $string;
 		}
 
@@ -808,7 +873,7 @@ class Sender
 	 *
 	 * @param string $string Input string
 	 * @param string $encoding Encoding
-	 * @param integer $lineLength Line length
+	 * @param int $lineLength Line length
 	 * @return string
 	 */
 	private function encodeString(string $string, string $encoding, int $lineLength = self::LINE_LENGTH): string
@@ -864,9 +929,10 @@ class Sender
 	 */
 	private function changeCharset(string $string): string
 	{
-		if ('utf-8' !== $this->charset) {
+		if ($this->charset !== 'utf-8') {
 			// Triggers a notice on an invalid character
 			$string = @iconv('utf-8', $this->charset . '//TRANSLIT', $string);
+
 			if ($string === false) {
 				$string = '';
 			}
@@ -874,4 +940,5 @@ class Sender
 
 		return $string;
 	}
+
 }

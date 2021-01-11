@@ -13,23 +13,25 @@
 
 namespace Jyxo\Input\Validator;
 
+use function is_array;
+use function is_numeric;
+use function is_object;
+
 /**
  * Validator checking if the input value is numeric.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Martin Šamšula
  */
-class IsNumeric extends \Jyxo\Input\Validator\AbstractValidator
+class IsNumeric extends AbstractValidator
 {
+
 	/**
 	 * Validates a value.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isValid($value): bool
 	{
@@ -37,10 +39,7 @@ class IsNumeric extends \Jyxo\Input\Validator\AbstractValidator
 			return false;
 		}
 
-		if (!is_numeric((string) $value)) {
-			return false;
-		}
-
-		return true;
+		return is_numeric((string) $value);
 	}
+
 }

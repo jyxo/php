@@ -16,36 +16,24 @@ namespace Jyxo\Beholder\Result;
 /**
  * Beholder test suite result value object
  *
- * @category Jyxo
- * @package Jyxo\Beholder
  * @author Matěj Humpál
  */
 class TestSuiteResult
 {
 
-	/**
-	 * @var string
-	 */
+	/** @var string */
 	private $project;
 
-	/**
-	 * @var bool
-	 */
+	/** @var bool */
 	private $allSucceeded;
 
-	/**
-	 * @var array
-	 */
+	/** @var array */
 	private $testsData;
 
-	/**
-	 * @var string
-	 */
+	/** @var string */
 	private $includeFilter;
 
-	/**
-	 * @var string
-	 */
+	/** @var string */
 	private $excludeFilter;
 
 	/**
@@ -64,17 +52,11 @@ class TestSuiteResult
 		$this->excludeFilter = $excludeFilter;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getProject(): string
 	{
 		return $this->project;
 	}
 
-	/**
-	 * @return bool
-	 */
 	public function hasAllSucceeded(): bool
 	{
 		return $this->allSucceeded;
@@ -88,17 +70,11 @@ class TestSuiteResult
 		return $this->testsData;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getIncludeFilter(): string
 	{
 		return $this->includeFilter;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getExcludeFilter(): string
 	{
 		return $this->excludeFilter;

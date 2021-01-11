@@ -13,35 +13,47 @@
 
 namespace Jyxo\Input;
 
+use Jyxo\Spl\ObjectCache;
+use Throwable;
+use function array_shift;
+use function serialize;
+use function ucfirst;
+
 /**
  * Class for easier one-line validation.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
  */
 class Validator
 {
+
 	/**
 	 * Static validation.
 	 *
 	 * @param string $method Validator name
 	 * @param array $params Parameters; the first value gets validated, the rest will be used as constructor parameters
-	 * @return boolean
+	 * @return bool
 	 */
-	public static function __callStatic(string $method, array $params)
+	public static function __callStatic(string $method, array $params): bool
 	{
 		try {
-			$factory = \Jyxo\Spl\ObjectCache::get(\Jyxo\Input\Factory::class) ?: \Jyxo\Spl\ObjectCache::set(\Jyxo\Input\Factory::class, new Factory());
+			$factory = ObjectCache::get(Factory::class) ?: ObjectCache::set(
+				Factory::class,
+				new Factory()
+			);
 			$value = array_shift($params);
 			$key = 'Jyxo\Input\Validator\\' . ucfirst($method) . ($params ? '/' . serialize($params) : '');
-			$validator = \Jyxo\Spl\ObjectCache::get($key) ?: \Jyxo\Spl\ObjectCache::set($key, $factory->getValidatorByName($method, $params));
-		} catch (\Exception $e) {
+			$validator = ObjectCache::get($key) ?: ObjectCache::set(
+				$key,
+				$factory->getValidatorByName($method, $params)
+			);
+		} catch (Throwable $e) {
 			$validator = $factory->getValidatorByName($method, $params);
 		}
+
 		return $validator->isValid($value);
 	}
+
 }

@@ -13,11 +13,11 @@
 
 namespace Jyxo\Webdav;
 
+use Monolog\Logger;
+
 /**
  * Bridge to a Monolog logger.
  *
- * @category Jyxo
- * @package Jyxo\Webdav
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Ondřej Nešpor
@@ -28,7 +28,7 @@ class MonologLogger implements LoggerInterface
 	/**
 	 * Monolog logger.
 	 *
-	 * @var \Monolog\Logger
+	 * @var Logger
 	 */
 	private $logger;
 
@@ -42,10 +42,10 @@ class MonologLogger implements LoggerInterface
 	/**
 	 * Creates the logger.
 	 *
-	 * @param \Monolog\Logger $logger Monolog logger
+	 * @param Logger $logger Monolog logger
 	 * @param int $level Message level
 	 */
-	public function __construct(\Monolog\Logger $logger, int $level)
+	public function __construct(Logger $logger, int $level)
 	{
 		$this->logger = $logger;
 		$this->level = $level;
@@ -56,7 +56,7 @@ class MonologLogger implements LoggerInterface
 	 *
 	 * @param string $message Message to be logged
 	 */
-	public function log(string $message)
+	public function log(string $message): void
 	{
 		$this->logger->addRecord($this->level, $message);
 	}

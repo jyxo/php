@@ -13,25 +13,26 @@
 
 namespace Jyxo\Input\Validator;
 
+use function preg_match;
+use function preg_replace;
+
 /**
  * Validates IČ (Czech company number).
  *
  * Taken from David Grudl's http://latrine.dgx.cz/jak-overit-platne-ic-a-rodne-cislo
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class IsCompanyId extends \Jyxo\Input\Validator\AbstractValidator
+class IsCompanyId extends AbstractValidator
 {
+
 	/**
 	 * Validates a value.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isValid($value): bool
 	{
@@ -45,25 +46,24 @@ class IsCompanyId extends \Jyxo\Input\Validator\AbstractValidator
 
 		// Checksum
 		$a = 0;
+
 		for ($i = 0; $i < 7; $i++) {
 			$a += $companyId[$i] * (8 - $i);
 		}
 
-		$a = $a % 11;
-		if (0 === $a) {
+		$a %= 11;
+
+		if ($a === 0) {
 			$c = 1;
-		} elseif (10 === $a) {
+		} elseif ($a === 10) {
 			$c = 1;
-		} elseif (1 === $a) {
+		} elseif ($a === 1) {
 			$c = 0;
 		} else {
 			$c = 11 - $a;
 		}
 
-		if ((int) $companyId[7] !== $c) {
-			return false;
-		}
-
-		return true;
+		return (int) $companyId[7] === $c;
 	}
+
 }

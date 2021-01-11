@@ -13,6 +13,15 @@
 
 namespace Jyxo\Mail;
 
+use InvalidArgumentException;
+use LogicException;
+use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\TestCase;
+use ReflectionClass;
+use Throwable;
+use function file_get_contents;
+use function sprintf;
+
 /**
  * \Jyxo\Mail\Encoding class test.
  *
@@ -21,8 +30,9 @@ namespace Jyxo\Mail;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class EncodingTest extends \PHPUnit_Framework_TestCase
+class EncodingTest extends TestCase
 {
+
 	/**
 	 * Files path.
 	 *
@@ -38,24 +48,13 @@ class EncodingTest extends \PHPUnit_Framework_TestCase
 	private $encodings = [];
 
 	/**
-	 * Prepares the testing environment.
-	 */
-	protected function setUp()
-	{
-		$this->filePath = DIR_FILES . '/mail';
-
-		$reflection = new \ReflectionClass(\Jyxo\Mail\Encoding::class);
-		$this->encodings = $reflection->getConstants();
-	}
-
-	/**
 	 * Tests the constructor.
 	 *
 	 * @see \Jyxo\Mail\Encoding::__construct()
 	 */
-	public function testConstruct()
+	public function testConstruct(): void
 	{
-		$this->expectException(\LogicException::class);
+		$this->expectException(LogicException::class);
 		$encoding = new Encoding();
 	}
 
@@ -64,7 +63,7 @@ class EncodingTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Mail\Encoding::isCompatible()
 	 */
-	public function testIsCompatible()
+	public function testIsCompatible(): void
 	{
 		// All defined encodings are compatible
 		foreach ($this->encodings as $encoding) {
@@ -80,9 +79,10 @@ class EncodingTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Mail\Encoding::encode()
 	 */
-	public function testEncode()
+	public function testEncode(): void
 	{
 		$data = file_get_contents($this->filePath . '/email.html');
+
 		foreach ($this->encodings as $encoding) {
 			$encoded = Encoding::encode($data, $encoding, 75, "\n");
 			$this->assertStringEqualsFile($this->filePath . '/encoding-' . $encoding . '.txt', $encoded);
@@ -90,12 +90,24 @@ class EncodingTest extends \PHPUnit_Framework_TestCase
 
 		try {
 			Encoding::encode('data', 'dummy-encoding', 75, "\n");
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->fail(sprintf('Expected exception %s.', InvalidArgumentException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+			$this->assertInstanceOf(InvalidArgumentException::class, $e);
 		}
 	}
+
+	/**
+	 * Prepares the testing environment.
+	 */
+	protected function setUp(): void
+	{
+		$this->filePath = DIR_FILES . '/mail';
+
+		$reflection = new ReflectionClass(Encoding::class);
+		$this->encodings = $reflection->getConstants();
+	}
+
 }

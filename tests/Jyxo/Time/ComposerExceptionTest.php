@@ -13,6 +13,9 @@
 
 namespace Jyxo\Time;
 
+use PHPUnit\Framework\TestCase;
+use ReflectionClass;
+
 /**
  * Test for the \Jyxo\Time\ComposerException class.
  *
@@ -21,15 +24,17 @@ namespace Jyxo\Time;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class ComposerExceptionTest extends \PHPUnit_Framework_TestCase
+class ComposerExceptionTest extends TestCase
 {
+
 	/**
 	 * The whole test.
 	 */
-	public function test()
+	public function test(): void
 	{
 		// All possible codes.
-		$reflection = new \ReflectionClass(\Jyxo\Time\ComposerException::class);
+		$reflection = new ReflectionClass(ComposerException::class);
+
 		foreach ($reflection->getConstants() as $code) {
 			$exception = new ComposerException('Test', $code);
 			$this->assertEquals($code, $exception->getCode());
@@ -39,4 +44,5 @@ class ComposerExceptionTest extends \PHPUnit_Framework_TestCase
 		$exception = new ComposerException('Test', 99);
 		$this->assertEquals(ComposerException::UNKNOWN, $exception->getCode());
 	}
+
 }

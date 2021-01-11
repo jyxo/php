@@ -16,9 +16,6 @@ namespace Jyxo\Input;
 /**
  * Interface defining basic filter methods.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Filter
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Pěček
@@ -35,4 +32,5 @@ interface FilterInterface
 	 * @return mixed
 	 */
 	public function filter($in);
+
 }

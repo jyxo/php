@@ -14,15 +14,14 @@
 namespace Jyxo\Beholder\Output;
 
 use Jyxo\Beholder\Executor;
+use function sprintf;
 
 /**
  * Beholder HTML output class
  *
- * @category Jyxo
- * @package Jyxo\Beholder
  * @author Matěj Humpál
  */
-class HtmlOutput extends \Jyxo\Beholder\Output\Output
+class HtmlOutput extends Output
 {
 
 	public function getContentType(): string
@@ -50,8 +49,10 @@ class HtmlOutput extends \Jyxo\Beholder\Output\Output
 		$return .= '<br>Tests excluded: ' . $this->result->getExcludeFilter() . "\n";
 		$return .= '</p>' . "\n";
 		$return .= '<table><tr><th>Run order</th><th>Duration</th><th>Ident</th><th>Status</th><th>Test name</th><th>Comment</th></tr>' . "\n";
+
 		foreach ($this->result->getTestsData() as $data) {
-			$return .= sprintf('
+			$return .= sprintf(
+				'
 				<tr>
 					<td>%d</td>
 					<td>%.2fs</td>
@@ -63,11 +64,13 @@ class HtmlOutput extends \Jyxo\Beholder\Output\Output
 				$data['order'],
 				$data['duration'],
 				$data['ident'],
-				$data['result']->isSuccess() ? 'green' : 'red; font-weight: bold;', $data['result']->getStatusMessage(),
+				$data['result']->isSuccess() ? 'green' : 'red; font-weight: bold;',
+				$data['result']->getStatusMessage(),
 				$data['test']->getDescription(),
 				$data['result']->getDescription()
 			);
 		}
+
 		$return .= '</table>
 			<h2>Parameters</h2>
 				<dl>
@@ -89,4 +92,5 @@ class HtmlOutput extends \Jyxo\Beholder\Output\Output
 
 		return $return;
 	}
+
 }

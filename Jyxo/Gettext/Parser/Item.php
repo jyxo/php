@@ -13,18 +13,19 @@
 
 namespace Jyxo\Gettext\Parser;
 
+use function explode;
+use function preg_match;
+
 /**
  * Container class for translation properties.
  *
- * @category Jyxo
- * @package Jyxo\Gettext
- * @subpackage Parser
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Matěj Humpál
  */
 class Item
 {
+
 	/**
 	 * Msgid.
 	 *
@@ -59,17 +60,16 @@ class Item
 	/**
 	 * Is msgid fuzzy?
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $fuzzy = false;
 
 	/**
 	 * Is msgid obsolete?
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $obsolete = false;
-
 
 	/**
 	 * Constructor.
@@ -77,7 +77,6 @@ class Item
 	 * Retrieves a fragment of the PO file and parses it.
 	 *
 	 * @param string $chunk Translation fragment
-	 * @throws \Jyxo\Gettext\Parser\Exception If msgid empty
 	 */
 	public function __construct(string $chunk)
 	{
@@ -90,55 +89,9 @@ class Item
 	}
 
 	/**
-	 * The actual parser.
-	 *
-	 * @param array $chunks Lines of the PO file fragment
-	 */
-	protected function parse(array $chunks)
-	{
-
-		foreach ($chunks as $chunk) {
-
-			if (preg_match('/^"(.*)"/', $chunk, $matches)) {
-				$this->{$lastChunkType} .= $matches[1];
-				continue;
-			}
-
-			if (preg_match('/^msgid "(.*)"/', $chunk, $matches)) {
-				$lastChunkType = 'msgid';
-				$this->msgid = $matches[1];
-			} elseif (preg_match('/^msgstr "(.*)"/', $chunk, $matches)) {
-				$lastChunkType = 'msgstr';
-				$this->msgstr = $matches[1];
-			} elseif (preg_match('/^#~ msgid "(.*)"/', $chunk, $matches)) {
-				$lastChunkType = 'msgid';
-				$this->obsolete = true;
-				$this->msgid = $matches[1];
-			} elseif (preg_match('/^#~ msgstr "(.*)"/', $chunk, $matches)) {
-				$lastChunkType = 'msgstr';
-				$this->obsolete = true;
-				$this->msgstr = $matches[1];
-			} elseif (preg_match('/^(#: .+)$/', $chunk, $matches)) {
-				$lastChunkType = 'location';
-				$this->location .= $matches[1];
-			} elseif (preg_match('/^#, fuzzy/', $chunk)) {
-				$lastChunkType = 'fuzzy';
-				$this->fuzzy = true;
-			} elseif (preg_match('/^msgid_plural "(.*)"/', $chunk, $matches)) {
-				$lastChunkType = 'plural';
-				$this->plural = $matches[1];
-				$this->msgstr = [];
-			} elseif (preg_match('/^msgstr\[([0-9])+\] "(.*)"/', $chunk, $matches)) {
-				$lastChunkType = 'msgstr';
-				$this->msgstr[$matches[1]] = $matches[2];
-			}
-		}
-	}
-
-	/**
 	 * Returns whether the msgid is fuzzy.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isFuzzy(): bool
 	{
@@ -148,7 +101,7 @@ class Item
 	/**
 	 * Returns whether the msgid is obsolete.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isObsolete(): bool
 	{
@@ -158,7 +111,7 @@ class Item
 	/**
 	 * Returns whether the msgid has plural forms.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasPlural(): bool
 	{
@@ -204,4 +157,50 @@ class Item
 	{
 		return $this->plural;
 	}
+
+	/**
+	 * The actual parser.
+	 *
+	 * @param array $chunks Lines of the PO file fragment
+	 */
+	protected function parse(array $chunks): void
+	{
+		foreach ($chunks as $chunk) {
+			if (preg_match('/^"(.*)"/', $chunk, $matches)) {
+				$this->{$lastChunkType} .= $matches[1];
+
+				continue;
+			}
+
+			if (preg_match('/^msgid "(.*)"/', $chunk, $matches)) {
+				$lastChunkType = 'msgid';
+				$this->msgid = $matches[1];
+			} elseif (preg_match('/^msgstr "(.*)"/', $chunk, $matches)) {
+				$lastChunkType = 'msgstr';
+				$this->msgstr = $matches[1];
+			} elseif (preg_match('/^#~ msgid "(.*)"/', $chunk, $matches)) {
+				$lastChunkType = 'msgid';
+				$this->obsolete = true;
+				$this->msgid = $matches[1];
+			} elseif (preg_match('/^#~ msgstr "(.*)"/', $chunk, $matches)) {
+				$lastChunkType = 'msgstr';
+				$this->obsolete = true;
+				$this->msgstr = $matches[1];
+			} elseif (preg_match('/^(#: .+)$/', $chunk, $matches)) {
+				$lastChunkType = 'location';
+				$this->location .= $matches[1];
+			} elseif (preg_match('/^#, fuzzy/', $chunk)) {
+				$lastChunkType = 'fuzzy';
+				$this->fuzzy = true;
+			} elseif (preg_match('/^msgid_plural "(.*)"/', $chunk, $matches)) {
+				$lastChunkType = 'plural';
+				$this->plural = $matches[1];
+				$this->msgstr = [];
+			} elseif (preg_match('/^msgstr\[([0-9])+\] "(.*)"/', $chunk, $matches)) {
+				$lastChunkType = 'msgstr';
+				$this->msgstr[$matches[1]] = $matches[2];
+			}
+		}
+	}
+
 }

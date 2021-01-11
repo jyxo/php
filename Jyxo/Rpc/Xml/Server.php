@@ -13,18 +13,24 @@
 
 namespace Jyxo\Rpc\Xml;
 
+use function file_get_contents;
+use function header;
+use function is_resource;
+use function xmlrpc_server_call_method;
+use function xmlrpc_server_create;
+use function xmlrpc_server_destroy;
+use function xmlrpc_server_register_method;
+
 /**
  * Class for creating a XML-RPC server.
  *
- * @category Jyxo
- * @package Jyxo\Rpc
- * @subpackage Xml
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
 class Server extends \Jyxo\Rpc\Server
 {
+
 	/**
 	 * Server instance.
 	 *
@@ -38,6 +44,7 @@ class Server extends \Jyxo\Rpc\Server
 	protected function __construct()
 	{
 		parent::__construct();
+
 		$this->server = xmlrpc_server_create();
 	}
 
@@ -47,9 +54,28 @@ class Server extends \Jyxo\Rpc\Server
 	public function __destruct()
 	{
 		parent::__destruct();
+
 		if (is_resource($this->server)) {
 			xmlrpc_server_destroy($this->server);
 		}
+	}
+
+	/**
+	 * Processes a request and sends a XML-RPC response.
+	 */
+	public function process(): void
+	{
+		$options = [
+			'output_type' => 'xml',
+			'verbosity' => 'pretty',
+			'escaping' => ['markup'],
+			'version' => 'xmlrpc',
+			'encoding' => 'utf-8',
+		];
+
+		$response = xmlrpc_server_call_method($this->server, file_get_contents('php://input'), null, $options);
+		header('Content-Type: text/xml; charset="utf-8"');
+		echo $response;
 	}
 
 	/**
@@ -57,26 +83,9 @@ class Server extends \Jyxo\Rpc\Server
 	 *
 	 * @param string $func Function definition
 	 */
-	protected function register(string $func)
+	protected function register(string $func): void
 	{
 		xmlrpc_server_register_method($this->server, $func, [$this, 'call']);
 	}
 
-	/**
-	 * Processes a request and sends a XML-RPC response.
-	 */
-	public function process()
-	{
-		$options = [
-			'output_type' => 'xml',
-			'verbosity' => 'pretty',
-			'escaping' => ['markup'],
-			'version' => 'xmlrpc',
-			'encoding' => 'utf-8'
-		];
-
-		$response = xmlrpc_server_call_method($this->server, file_get_contents('php://input'), null, $options);
-		header('Content-Type: text/xml; charset="utf-8"');
-		echo $response;
-	}
 }

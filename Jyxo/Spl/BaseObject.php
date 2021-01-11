@@ -13,25 +13,65 @@
 
 namespace Jyxo\Spl;
 
+use function array_flip;
+use function get_class_methods;
+use function preg_replace;
+use function ucfirst;
+
 /**
  * Default object class.
  *
- * @category Jyxo
- * @package Jyxo\Spl
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class Object implements \Jyxo\Spl\ArrayCopy
+class BaseObject implements ArrayCopy
 {
+
 	/**
 	 * Returns instance class name.
 	 *
 	 * @return string
 	 */
-	public final function getClass(): string
+	final public function getClass(): string
 	{
-		return get_class($this);
+		return static::class;
+	}
+
+	/**
+	 * Converts an object to an array
+	 *
+	 * @return array
+	 */
+	public function toArray(): array
+	{
+		$values = [];
+
+		foreach ((array) $this as $key => $value) {
+			// Private and protected properties have ugly array key prefixes which we remove
+			$key = preg_replace('~^.+\0~', '', $key);
+			$values[$key] = $value;
+		}
+
+		return $values;
+	}
+
+	/**
+	 * Returns if a class has the given method defined.
+	 *
+	 * @param string $class Class name
+	 * @param string $method Method name
+	 * @return bool
+	 */
+	private static function hasMethod(string $class, string $method): bool
+	{
+		static $cache;
+
+		if (!isset($cache[$class])) {
+			$cache[$class] = array_flip(get_class_methods($class));
+		}
+
+		return isset($cache[$class][$method]);
 	}
 
 	/**
@@ -42,7 +82,7 @@ class Object implements \Jyxo\Spl\ArrayCopy
 	 */
 	public function &__get(string $name)
 	{
-		$class = get_class($this);
+		$class = static::class;
 		$name = ucfirst($name);
 
 		// Return null if no getter is found
@@ -50,11 +90,14 @@ class Object implements \Jyxo\Spl\ArrayCopy
 
 		// Tests for possible getters
 		static $types = ['get', 'is'];
+
 		foreach ($types as $type) {
 			$getter = $type . $name;
+
 			if (self::hasMethod($class, $getter)) {
 				// It's necessary to save the value to a variable first because of using &
 				$value = $this->$getter();
+
 				break;
 			}
 		}
@@ -68,10 +111,11 @@ class Object implements \Jyxo\Spl\ArrayCopy
 	 * @param string $name Propety name
 	 * @param mixed $value Property value
 	 */
-	public function __set(string $name, $value)
+	public function __set(string $name, $value): void
 	{
 		$setter = 'set' . ucfirst($name);
-		if (self::hasMethod(get_class($this), $setter)) {
+
+		if (self::hasMethod(static::class, $setter)) {
 			$this->$setter($value);
 		}
 	}
@@ -80,55 +124,25 @@ class Object implements \Jyxo\Spl\ArrayCopy
 	 * Returns if property exists. Property exists if it has defined getter.
 	 *
 	 * @param string $name
-	 * @return boolean
+	 * @return bool
 	 */
 	public function __isset(string $name): bool
 	{
-		$class = get_class($this);
+		$class = static::class;
 		$name = ucfirst($name);
 
 		// Tests for possible getters
 		static $types = ['get', 'is'];
+
 		foreach ($types as $type) {
 			$getter = $type . $name;
+
 			if (self::hasMethod($class, $getter)) {
 				return true;
 			}
 		}
 
 		return false;
-	}
-
-	/**
-	 * Returns if a class has the given method defined.
-	 *
-	 * @param string $class Class name
-	 * @param string $method Method name
-	 * @return boolean
-	 */
-	private static function hasMethod(string $class, string $method): bool
-	{
-		static $cache;
-		if (!isset($cache[$class])) {
-			$cache[$class] = array_flip(get_class_methods($class));
-		}
-		return isset($cache[$class][$method]);
-	}
-
-	/**
-	 * Converts an object to an array
-	 *
-	 * @return array
-	 */
-	public function toArray(): array
-	{
-		$values = [];
-		foreach ((array) $this as $key => $value) {
-			// Private and protected properties have ugly array key prefixes which we remove
-			$key = preg_replace('~^.+\0~', '', $key);
-			$values[$key] = $value;
-		}
-		return $values;
 	}
 
 }

@@ -14,21 +14,23 @@
 namespace Jyxo\Gettext;
 
 use Jyxo\Gettext\Parser\Item;
+use PHPUnit\Framework\TestCase;
 
 /**
- * Test for class \Jyxo\Input\Factory
+ * Test for class \Jyxo\Gettext\Parser
  *
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Matěj Humpál
  */
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class ParserTest extends TestCase
 {
 
-	public function testParse()
+	public function testParse(): void
 	{
 		$po = new Parser(__DIR__ . '/../../files/gettext/patterns.cs.po');
 		$this->assertCount(300, $po);
+
 		foreach ($po as $item) {
 			$this->assertInstanceOf(Item::class, $item);
 		}

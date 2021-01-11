@@ -16,11 +16,11 @@ namespace Jyxo\Webdav;
 /**
  * The file cannot be copied.
  *
- * @category Jyxo
- * @package Jyxo\Webdav
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class FileNotCopiedException extends \Jyxo\Webdav\Exception
-{}
+class FileNotCopiedException extends Exception
+{
+
+}

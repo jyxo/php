@@ -13,18 +13,18 @@
 
 namespace Jyxo\Input\Filter;
 
+use function preg_match;
+
 /**
  * Filter for prepending "http://" if missing.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Filter
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class SanitizeUrl extends \Jyxo\Input\Filter\AbstractFilter
+class SanitizeUrl extends AbstractFilter
 {
+
 	/**
 	 * Filters a value.
 	 *
@@ -34,9 +34,10 @@ class SanitizeUrl extends \Jyxo\Input\Filter\AbstractFilter
 	protected function filterValue($in)
 	{
 		if (!preg_match('~^(?:http|ftp)s?://~i', (string) $in)) {
-			$in = 'http://' .  $in;
+			$in = 'http://' . $in;
 		}
 
 		return $in;
 	}
+
 }

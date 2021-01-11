@@ -13,24 +13,27 @@
 
 namespace Jyxo\Mail\Email\Attachment;
 
+use InvalidArgumentException;
+use Jyxo\Mail\Email\Attachment;
+use Jyxo\Mail\Encoding;
+use function sprintf;
+
 /**
  * Mail attachment created from a string.
  *
- * @category Jyxo
- * @package Jyxo\Mail
- * @subpackage Email
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class StringAttachment extends \Jyxo\Mail\Email\Attachment
+class StringAttachment extends Attachment
 {
+
 	/**
 	 * Type.
 	 *
 	 * @var string
 	 */
-	protected $disposition = \Jyxo\Mail\Email\Attachment::DISPOSITION_ATTACHMENT;
+	protected $disposition = Attachment::DISPOSITION_ATTACHMENT;
 
 	/**
 	 * Creates an attachment.
@@ -53,17 +56,17 @@ class StringAttachment extends \Jyxo\Mail\Email\Attachment
 	 * If none is set, assume no encoding is used.
 	 *
 	 * @param string $encoding Encoding name
-	 * @return \Jyxo\Mail\Email\Attachment\StringAttachment
-	 * @throws \InvalidArgumentException If an incompatible encoding was provided
+	 * @return StringAttachment
 	 */
 	public function setEncoding(string $encoding): self
 	{
-		if ((!empty($encoding)) && (!\Jyxo\Mail\Encoding::isCompatible($encoding))) {
-			throw new \InvalidArgumentException(sprintf('Incompatible encoding %s', $encoding));
+		if (!empty($encoding) && (!Encoding::isCompatible($encoding))) {
+			throw new InvalidArgumentException(sprintf('Incompatible encoding %s', $encoding));
 		}
 
 		$this->encoding = $encoding;
 
 		return $this;
 	}
+
 }

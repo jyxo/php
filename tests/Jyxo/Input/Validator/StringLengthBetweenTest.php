@@ -13,6 +13,11 @@
 
 namespace Jyxo\Input\Validator;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
+use function sprintf;
+use const PHP_INT_MAX;
+
 /**
  * Test of \Jyxo\Input\Validator\StringLengthBetween validator.
  *
@@ -20,12 +25,13 @@ namespace Jyxo\Input\Validator;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
  */
-class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
+class StringLengthBetweenTest extends TestCase
 {
+
 	/**
 	 * Tests right values.
 	 */
-	public function testValid()
+	public function testValid(): void
 	{
 		$testcases = [
 			['ano', 0, 3],
@@ -37,11 +43,11 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 			['Žluťoučký kůn pěl ďábelské ódy', 15, 45],
 			['Žluťoučký kůn pěl ďábelské ódy', 30, 60],
 			['瑞鶴', 1, 3],
-			['瑞鶴', 2, 2]
+			['瑞鶴', 2, 2],
 		];
 
 		foreach ($testcases as $testcase) {
-			list($str, $min, $max) = $testcase;
+			[$str, $min, $max] = $testcase;
 
 			$validator = new StringLengthBetween($min, $max);
 			$message = sprintf('Failed validation of "%s" in range(%d, %d)', $str, $min, $max);
@@ -52,7 +58,7 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests wrong values.
 	 */
-	public function testInvalid()
+	public function testInvalid(): void
 	{
 		$testcases = [
 			['ano', 4, 8],
@@ -63,11 +69,11 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 			['Žluťoučký kůn pěl ďábelské ódy', 31, 31],
 			['Žluťoučký kůn pěl ďábelské ódy', 31, 42],
 			['瑞鶴', 0, 1],
-			['瑞鶴', 3, 128]
+			['瑞鶴', 3, 128],
 		];
 
 		foreach ($testcases as $testcase) {
-			list($str, $min, $max) = $testcase;
+			[$str, $min, $max] = $testcase;
 
 			$validator = new StringLengthBetween($min, $max);
 			$message = sprintf('Passed validation of "%s" in range(%d, %d)', $str, $min, $max);
@@ -78,36 +84,36 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests setting an invalid lower bound.
 	 */
-	public function testInvalidMin()
+	public function testInvalidMin(): void
 	{
-		$this->expectException(\InvalidArgumentException::class);
+		$this->expectException(InvalidArgumentException::class);
 		$validator = new StringLengthBetween(-1, 5);
 	}
 
 	/**
 	 * Tests setting an invalid upper bound.
 	 */
-	public function testInvalidMax()
+	public function testInvalidMax(): void
 	{
-		$this->expectException(\InvalidArgumentException::class);
+		$this->expectException(InvalidArgumentException::class);
 		$validator = new StringLengthBetween(0, -6);
 	}
 
 	/**
 	 * Tests setting an invalid bounds combination.
 	 */
-	public function testInvalidMinMax()
+	public function testInvalidMinMax(): void
 	{
-		$this->expectException(\InvalidArgumentException::class);
+		$this->expectException(InvalidArgumentException::class);
 		$validator = new StringLengthBetween(12, 6);
 	}
 
 	/**
 	 * Tests setting an invalid lower bound using a setter.
 	 */
-	public function testInvalidSetMin()
+	public function testInvalidSetMin(): void
 	{
-		$this->expectException(\InvalidArgumentException::class);
+		$this->expectException(InvalidArgumentException::class);
 		$validator = new StringLengthBetween(2, 6);
 		$validator->setMin(12);
 	}
@@ -115,10 +121,11 @@ class StringLengthBetweenTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Tests setting an invalid upper bound using a setter.
 	 */
-	public function testInvalidSetMax()
+	public function testInvalidSetMax(): void
 	{
-		$this->expectException(\InvalidArgumentException::class);
+		$this->expectException(InvalidArgumentException::class);
 		$validator = new StringLengthBetween(12, 60);
 		$validator->setMax(4);
 	}
+
 }

@@ -13,6 +13,11 @@
 
 namespace Jyxo;
 
+use LogicException;
+use PHPUnit\Framework\TestCase;
+use function file_get_contents;
+use function sprintf;
+
 /**
  * Class \Jyxo\Html test.
  *
@@ -21,8 +26,9 @@ namespace Jyxo;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class HtmlTest extends \PHPUnit_Framework_TestCase
+class HtmlTest extends TestCase
 {
+
 	/**
 	 * Path to testing files.
 	 *
@@ -31,21 +37,13 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	private $filePath;
 
 	/**
-	 * Prepares the testing environment.
-	 */
-	protected function setUp()
-	{
-		$this->filePath = DIR_FILES . '/html';
-	}
-
-	/**
 	 * Tests the __construct() method.
 	 *
 	 * @see \Jyxo\Html::__construct()
 	 */
-	public function testConstruct()
+	public function testConstruct(): void
 	{
-		$this->expectException(\LogicException::class);
+		$this->expectException(LogicException::class);
 		$html = new Html();
 	}
 
@@ -54,7 +52,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Html::is()
 	 */
-	public function testIs()
+	public function testIs(): void
 	{
 		$this->assertTrue(Html::is('foo <b>bar</b>'));
 		$this->assertTrue(Html::is('<a href="http://jyxo.cz">boo</a>'));
@@ -69,7 +67,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Html::repair()
 	 */
-	public function testRepair()
+	public function testRepair(): void
 	{
 		$this->assertStringEqualsFile(
 			$this->filePath . '/repair-expected.html',
@@ -82,7 +80,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Html::removeTags()
 	 */
-	public function testRemoveTags()
+	public function testRemoveTags(): void
 	{
 		$this->assertStringEqualsFile(
 			$this->filePath . '/removetags-1-expected.html',
@@ -100,7 +98,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Html::removeInnerTags()
 	 */
-	public function testRemoveInnerTags()
+	public function testRemoveInnerTags(): void
 	{
 		$this->assertEquals(
 			"<i>slovo1</i>\nslovo2\n<i>slovo3slovo4slovo5</i>",
@@ -108,7 +106,10 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 		);
 		$this->assertEquals(
 			"<strong>slovo1</strong>\nslovo2\n<strong>slovo3slovo4slovoslovo5</strong>",
-			Html::removeInnerTags("<strong>slovo1</strong>\nslovo2\n<strong>slovo3<strong>slovo4</strong>slovo<strong>slovo5</strong></strong>", 'strong')
+			Html::removeInnerTags(
+				"<strong>slovo1</strong>\nslovo2\n<strong>slovo3<strong>slovo4</strong>slovo<strong>slovo5</strong></strong>",
+				'strong'
+			)
 		);
 		$this->assertEquals(
 			"<strong>slovo1</strong>\nslovo2\n<strong>slovo3<b>slovo4</b>slovo5</strong>",
@@ -125,7 +126,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Html::removeAttributes()
 	 */
-	public function testRemoveAttributes()
+	public function testRemoveAttributes(): void
 	{
 		$this->assertStringEqualsFile(
 			$this->filePath . '/removeattributes-1-expected.html',
@@ -143,7 +144,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Html::removeJavascriptEvents()
 	 */
-	public function testRemoveJavascriptEvents()
+	public function testRemoveJavascriptEvents(): void
 	{
 		$this->assertStringEqualsFile(
 			$this->filePath . '/removejavascriptevents-expected.html',
@@ -156,38 +157,38 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Html::removeRemoteImages()
 	 */
-	public function testRemoveRemoteImages()
+	public function testRemoveRemoteImages(): void
 	{
 		// In format (expected value, input value)
 		$tests = [
 			[
 				'<img  width="10"    SRC="about:blank"    />',
-				'<img  width="10"    SRC="http://domain.tld/picture.png"    />'
+				'<img  width="10"    SRC="http://domain.tld/picture.png"    />',
 			],
 			[
 				'<body  bgcolor="green"    BACKGROUND=""    >',
-				'<body  bgcolor="green"    BACKGROUND="http://domain.tld/picture.png"    >'
+				'<body  bgcolor="green"    BACKGROUND="http://domain.tld/picture.png"    >',
 			],
 			[
 				'<a  href="#"    style="font: sans-serif;   background  : center center ; color: green;"    >',
-				'<a  href="#"    style="font: sans-serif;   background  : center center url(\'https://domain.tld/picture.png\'); color: green;"    >'
+				'<a  href="#"    style="font: sans-serif;   background  : center center url(\'https://domain.tld/picture.png\'); color: green;"    >',
 			],
 			[
 				'<a  href="#"    style="font: sans-serif;    color: green;"    >',
-				'<a  href="#"    style="font: sans-serif;   background-image  : url(\'http://domain.tld/picture.png\'); color: green;"    >'
+				'<a  href="#"    style="font: sans-serif;   background-image  : url(\'http://domain.tld/picture.png\'); color: green;"    >',
 			],
 			[
 				'<li  href="#"    style="font: sans-serif;   list-style  : circle ; color: green;"    >',
-				'<li  href="#"    style="font: sans-serif;   list-style  : circle url(\'http://domain.tld/picture.png\'); color: green;"    >'
+				'<li  href="#"    style="font: sans-serif;   list-style  : circle url(\'http://domain.tld/picture.png\'); color: green;"    >',
 			],
 			[
 				'<li  href="#"    style="font: sans-serif;    color: green;"    >',
-				'<li  href="#"    style="font: sans-serif;   list-style-image  : url(\'http://domain.tld/picture.png\'); color: green;"    >'
+				'<li  href="#"    style="font: sans-serif;   list-style-image  : url(\'http://domain.tld/picture.png\'); color: green;"    >',
 			],
 			[
 				'<img src="data:" />',
-				'<img src="data:" />'
-			]
+				'<img src="data:" />',
+			],
 		];
 
 		foreach ($tests as $test) {
@@ -203,7 +204,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Html::removeDangerous()
 	 */
-	public function testRemoveDangerous()
+	public function testRemoveDangerous(): void
 	{
 		$this->assertStringEqualsFile(
 			$this->filePath . '/removedangerous-expected.html',
@@ -216,7 +217,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Html::getBody()
 	 */
-	public function testGetBody()
+	public function testGetBody(): void
 	{
 		$testCount = 2;
 
@@ -224,7 +225,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 			$this->assertStringEqualsFile(
 				$this->filePath . '/' . sprintf('getbody-%s-expected.html', $i),
 				Html::getBody(file_get_contents($this->filePath . '/' . sprintf('getbody-%s.html', $i))),
-				sprintf('Failed test %s for method %s::getBody().', $i, \Jyxo\Html::class)
+				sprintf('Failed test %s for method %s::getBody().', $i, Html::class)
 			);
 		}
 	}
@@ -234,7 +235,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Html::fromText()
 	 */
-	public function testFromText()
+	public function testFromText(): void
 	{
 		$testCount = 2;
 
@@ -242,7 +243,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 			$this->assertStringEqualsFile(
 				$this->filePath . '/' . sprintf('fromtext-%s-expected.html', $i),
 				Html::fromText(file_get_contents($this->filePath . '/' . sprintf('fromtext-%s.txt', $i))),
-				sprintf('Failed test %s for method %s::fromText().', $i, \Jyxo\Html::class)
+				sprintf('Failed test %s for method %s::fromText().', $i, Html::class)
 			);
 		}
 	}
@@ -252,7 +253,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Html::linkFromText()
 	 */
-	public function testLinkFromText()
+	public function testLinkFromText(): void
 	{
 		$this->assertStringEqualsFile(
 			$this->filePath . '/linkfromtext-expected.html',
@@ -265,7 +266,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Html::toText()
 	 */
-	public function testToText()
+	public function testToText(): void
 	{
 		$testCount = 7;
 
@@ -273,8 +274,17 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 			$this->assertStringEqualsFile(
 				$this->filePath . '/' . sprintf('totext-%s-expected.txt', $i),
 				Html::toText(file_get_contents($this->filePath . '/' . sprintf('totext-%s.html', $i))),
-				sprintf('Failed test %s for method %s::toText().', $i, \Jyxo\Html::class)
+				sprintf('Failed test %s for method %s::toText().', $i, Html::class)
 			);
 		}
 	}
+
+	/**
+	 * Prepares the testing environment.
+	 */
+	protected function setUp(): void
+	{
+		$this->filePath = DIR_FILES . '/html';
+	}
+
 }

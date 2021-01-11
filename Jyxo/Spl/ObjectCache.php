@@ -13,6 +13,9 @@
 
 namespace Jyxo\Spl;
 
+use ArrayIterator;
+use IteratorAggregate;
+
 /**
  * Simple object cache so we don't have to create them or write caching over again.
  *
@@ -22,14 +25,13 @@ namespace Jyxo\Spl;
  * return \Jyxo\Spl\ObjectCache::get($key) ?: \Jyxo\Spl\ObjectCache::set($key, new \User\Friends($this->context, $user));
  * </code>
  *
- * @category Jyxo
- * @package Jyxo\Spl
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
  */
-class ObjectCache implements \IteratorAggregate
+class ObjectCache implements IteratorAggregate
 {
+
 	/**
 	 * Object storage.
 	 *
@@ -40,15 +42,39 @@ class ObjectCache implements \IteratorAggregate
 	/**
 	 * Returns default storage for static access.
 	 *
-	 * @return \Jyxo\Spl\ObjectCache
+	 * @return ObjectCache
 	 */
 	public static function getInstance(): self
 	{
 		static $instance = null;
-		if (null === $instance) {
+
+		if ($instance === null) {
 			$instance = new self();
 		}
+
 		return $instance;
+	}
+
+	/**
+	 * Clear the whole storage.
+	 *
+	 * @return ObjectCache
+	 */
+	public function clear(): self
+	{
+		$this->storage = [];
+
+		return $this;
+	}
+
+	/**
+	 * Returns an iterator.
+	 *
+	 * @return ArrayIterator
+	 */
+	public function getIterator(): ArrayIterator
+	{
+		return new ArrayIterator($this->storage);
 	}
 
 	/**
@@ -57,20 +83,9 @@ class ObjectCache implements \IteratorAggregate
 	 * @param string $key Object key
 	 * @return object
 	 */
-	public static function get($key)
+	public static function get(string $key)
 	{
 		return self::getInstance()->$key;
-	}
-
-	/**
-	 * Clear the whole storage.
-	 *
-	 * @return \Jyxo\Spl\ObjectCache
-	 */
-	public function clear(): self
-	{
-		$this->storage = [];
-		return $this;
 	}
 
 	/**
@@ -80,9 +95,10 @@ class ObjectCache implements \IteratorAggregate
 	 * @param object $value Object
 	 * @return object saved object
 	 */
-	public static function set($key, $value)
+	public static function set(string $key, $value)
 	{
 		self::getInstance()->$key = $value;
+
 		return $value;
 	}
 
@@ -92,9 +108,9 @@ class ObjectCache implements \IteratorAggregate
 	 * @param string $key Object key
 	 * @return object
 	 */
-	public function __get($key)
+	public function __get(string $key)
 	{
-		return isset($this->storage[$key]) ? $this->storage[$key] : null;
+		return $this->storage[$key] ?? null;
 	}
 
 	/**
@@ -103,7 +119,7 @@ class ObjectCache implements \IteratorAggregate
 	 * @param string $key Object key
 	 * @param object $value Object
 	 */
-	public function __set($key, $value)
+	public function __set(string $key, $value): void
 	{
 		$this->storage[$key] = $value;
 	}
@@ -112,9 +128,9 @@ class ObjectCache implements \IteratorAggregate
 	 * Returns if there's an object with key $key in the storage.
 	 *
 	 * @param string $key Object key
-	 * @return boolean
+	 * @return bool
 	 */
-	public function __isset($key)
+	public function __isset(string $key): bool
 	{
 		return isset($this->storage[$key]);
 	}
@@ -124,18 +140,9 @@ class ObjectCache implements \IteratorAggregate
 	 *
 	 * @param mixed $key Object key
 	 */
-	public function __unset($key)
+	public function __unset($key): void
 	{
-		unset ($this->storage[$key]);
+		unset($this->storage[$key]);
 	}
 
-	/**
-	 * Returns an iterator.
-	 *
-	 * @return \ArrayIterator
-	 */
-	public function getIterator(): \ArrayIterator
-	{
-		return new \ArrayIterator($this->storage);
-	}
 }

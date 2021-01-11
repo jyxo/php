@@ -13,23 +13,25 @@
 
 namespace Jyxo\Input\Validator;
 
+use function is_array;
+use function is_object;
+use function preg_match;
+
 /**
  * Validator checking in the input value is an integer.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Pěček
  */
-class IsInt extends \Jyxo\Input\Validator\AbstractValidator
+class IsInt extends AbstractValidator
 {
+
 	/**
 	 * Validates a value.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isValid($value): bool
 	{
@@ -37,10 +39,7 @@ class IsInt extends \Jyxo\Input\Validator\AbstractValidator
 			return false;
 		}
 
-		if (!preg_match('~^\\d+$~', (string) $value)) {
-			return false;
-		}
-
-		return true;
+		return preg_match('~^\\d+$~', (string) $value) === 1;
 	}
+
 }

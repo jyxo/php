@@ -13,18 +13,19 @@
 
 namespace Jyxo\Mail\Sender;
 
+use Jyxo\Spl\BaseObject;
+use Jyxo\Time\Time;
+
 /**
  * Sending result.
  *
- * @category Jyxo
- * @package Jyxo\Mail
- * @subpackage Sender
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class Result extends \Jyxo\Spl\Object
+class Result extends BaseObject
 {
+
 	/**
 	 * Email Id.
 	 *
@@ -42,7 +43,7 @@ class Result extends \Jyxo\Spl\Object
 	/**
 	 * Sending time.
 	 *
-	 * @var \Jyxo\Time\Time
+	 * @var Time
 	 */
 	private $datetime = null;
 
@@ -51,7 +52,7 @@ class Result extends \Jyxo\Spl\Object
 	 *
 	 * @return string
 	 */
-	public function getMessageId()
+	public function getMessageId(): string
 	{
 		return $this->messageId;
 	}
@@ -60,7 +61,7 @@ class Result extends \Jyxo\Spl\Object
 	 * Sets email Id.
 	 *
 	 * @param string $messageId Email Id
-	 * @return \Jyxo\Mail\Sender\Result
+	 * @return Result
 	 */
 	public function setMessageId(string $messageId): self
 	{
@@ -83,7 +84,7 @@ class Result extends \Jyxo\Spl\Object
 	 * Sets email source.
 	 *
 	 * @param string $source
-	 * @return \Jyxo\Mail\Sender\Result
+	 * @return Result
 	 */
 	public function setSource(string $source): self
 	{
@@ -95,9 +96,9 @@ class Result extends \Jyxo\Spl\Object
 	/**
 	 * Returns sending time.
 	 *
-	 * @return \Jyxo\Time\Time
+	 * @return Time
 	 */
-	public function getDatetime(): \Jyxo\Time\Time
+	public function getDatetime(): Time
 	{
 		return $this->datetime;
 	}
@@ -105,13 +106,14 @@ class Result extends \Jyxo\Spl\Object
 	/**
 	 * Sets sending time.
 	 *
-	 * @param \Jyxo\Time\Time $datetime Sending time
-	 * @return \Jyxo\Mail\Sender\Result
+	 * @param Time $datetime Sending time
+	 * @return Result
 	 */
-	public function setDatetime(\Jyxo\Time\Time $datetime): self
+	public function setDatetime(Time $datetime): self
 	{
 		$this->datetime = $datetime;
 
 		return $this;
 	}
+
 }

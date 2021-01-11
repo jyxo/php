@@ -13,6 +13,16 @@
 
 namespace Jyxo\Mail\Email\Attachment;
 
+use InvalidArgumentException;
+use Jyxo\Mail\Email\Attachment;
+use Jyxo\Mail\Encoding;
+use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\TestCase;
+use ReflectionClass;
+use Throwable;
+use function file_get_contents;
+use function sprintf;
+
 /**
  * \Jyxo\Mail\Email\Attachment\InlineStringAttachment class test.
  *
@@ -21,12 +31,13 @@ namespace Jyxo\Mail\Email\Attachment;
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class InlineStringAttachmentTest extends \PHPUnit_Framework_TestCase
+class InlineStringAttachmentTest extends TestCase
 {
+
 	/**
 	 * Runs the test.
 	 */
-	public function test()
+	public function test(): void
 	{
 		$content = file_get_contents(DIR_FILES . '/mail/logo.gif');
 		$name = 'logo.gif';
@@ -37,13 +48,14 @@ class InlineStringAttachmentTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($content, $attachment->getContent());
 		$this->assertEquals($name, $attachment->getName());
 		$this->assertEquals($mimeType, $attachment->getMimeType());
-		$this->assertEquals(\Jyxo\Mail\Email\Attachment::DISPOSITION_INLINE, $attachment->getDisposition());
+		$this->assertEquals(Attachment::DISPOSITION_INLINE, $attachment->getDisposition());
 		$this->assertTrue($attachment->isInline());
 		$this->assertEquals($cid, $attachment->getCid());
 		$this->assertEquals('', $attachment->getEncoding());
 
 		// It is possible to set an encoding
-		$reflection = new \ReflectionClass(\Jyxo\Mail\Encoding::class);
+		$reflection = new ReflectionClass(Encoding::class);
+
 		foreach ($reflection->getConstants() as $encoding) {
 			$attachment->setEncoding($encoding);
 			$this->assertEquals($encoding, $attachment->getEncoding());
@@ -52,12 +64,13 @@ class InlineStringAttachmentTest extends \PHPUnit_Framework_TestCase
 		// Incompatible encoding
 		try {
 			$attachment->setEncoding('dummy-encoding');
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->fail(sprintf('Expected exception %s.', InvalidArgumentException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+			$this->assertInstanceOf(InvalidArgumentException::class, $e);
 		}
 	}
+
 }

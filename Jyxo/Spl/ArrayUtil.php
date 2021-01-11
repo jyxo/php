@@ -13,39 +13,43 @@
 
 namespace Jyxo\Spl;
 
+use Closure;
+use Traversable;
+
 /**
  * Utilities for working with arrays.
  *
- * @category Jyxo
- * @package Jyxo\Spl
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
  */
 class ArrayUtil
 {
+
 	/**
 	 * Creates an array containing item range. Similar to range() but with closures.
 	 * Params $low and $high are inclusive. If $low > $high, resulting array will be in descending order.
 	 *
 	 * @param mixed $low Minimal value
 	 * @param mixed $high Maximal value
-	 * @param \Closure $step Closure which creates next value from current
-	 * @param \Closure $compare comparing closure for detecting if we're at the end of the range (Optional)
+	 * @param Closure $step Closure which creates next value from current
+	 * @param Closure $compare comparing closure for detecting if we're at the end of the range (Optional)
 	 * @return array
 	 */
-	public static function range($low, $high, \Closure $step, \Closure $compare = null): array
+	public static function range($low, $high, Closure $step, ?Closure $compare = null): array
 	{
 		$data = [$low];
 		$stepDown = $low > $high;
-		$compare = $compare ?: function ($a, $b) use ($stepDown) {
+		$compare = $compare ?: static function ($a, $b) use ($stepDown) {
 			return $stepDown ? $a > $b : $a < $b;
 		};
 
 		$current = $low;
+
 		while ($compare($current, $high)) {
 			$data[] = $current = $step($current);
 		}
+
 		return $data;
 	}
 
@@ -62,17 +66,20 @@ class ArrayUtil
 	 * });
 	 * </code>
 	 *
-	 * @param \Traversable $traversable Iterator
-	 * @param \Closure $key Closure for generating keys
-	 * @param \Closure $value Closure for modifying data (Optional)
+	 * @param Traversable $traversable Iterator
+	 * @param Closure $key Closure for generating keys
+	 * @param Closure $value Closure for modifying data (Optional)
 	 * @return array
 	 */
-	public static function keymap(\Traversable $traversable, \Closure $key, \Closure $value = null): array
+	public static function keymap(Traversable $traversable, Closure $key, ?Closure $value = null): array
 	{
 		$data = [];
+
 		foreach ($traversable as $item) {
 			$data[$key($item)] = $value ? $value($item) : $item;
 		}
+
 		return $data;
 	}
+
 }

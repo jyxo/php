@@ -13,17 +13,28 @@
 
 namespace Jyxo\Beholder\TestCase;
 
+use Jyxo\Beholder\Result;
+use Jyxo\Beholder\TestCase;
+use function extension_loaded;
+use function mysqli_close;
+use function mysqli_free_result;
+use function mysqli_init;
+use function mysqli_options;
+use function mysqli_query;
+use function mysqli_real_connect;
+use function sprintf;
+use const MYSQLI_OPT_CONNECT_TIMEOUT;
+
 /**
  * Tests MySQL availability.
  *
- * @category Jyxo
- * @package Jyxo\Beholder
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class Mysql extends \Jyxo\Beholder\TestCase
+class Mysql extends TestCase
 {
+
 	/**
 	 * SQL query.
 	 *
@@ -62,14 +73,14 @@ class Mysql extends \Jyxo\Beholder\TestCase
 	/**
 	 * Port.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $port;
 
 	/**
 	 * Timeout.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $timeout;
 
@@ -82,10 +93,19 @@ class Mysql extends \Jyxo\Beholder\TestCase
 	 * @param string $host Hostname
 	 * @param string $user Username
 	 * @param string $password Password
-	 * @param integer $port Port
-	 * @param integer $timeout Timeout
+	 * @param int $port Port
+	 * @param int $timeout Timeout
 	 */
-	public function __construct(string $description, string $query, string $database, string $host = 'localhost', string $user = '', string $password = '', int $port = 3306, int $timeout = 2)
+	public function __construct(
+		string $description,
+		string $query,
+		string $database,
+		string $host = 'localhost',
+		string $user = '',
+		string $password = '',
+		int $port = 3306,
+		int $timeout = 2
+	)
 	{
 		parent::__construct($description);
 
@@ -101,13 +121,13 @@ class Mysql extends \Jyxo\Beholder\TestCase
 	/**
 	 * Performs the test.
 	 *
-	 * @return \Jyxo\Beholder\Result
+	 * @return Result
 	 */
-	public function run(): \Jyxo\Beholder\Result
+	public function run(): Result
 	{
 		// The mysqli extension is required
 		if (!extension_loaded('mysqli')) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::NOT_APPLICABLE, 'Extension \mysqli missing');
+			return new Result(Result::NOT_APPLICABLE, 'Extension \mysqli missing');
 		}
 
 		// Status label
@@ -115,26 +135,33 @@ class Mysql extends \Jyxo\Beholder\TestCase
 
 		// Connection
 		$db = mysqli_init();
+
 		if (!$db) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Connection error %s', $description));
+			return new Result(Result::FAILURE, sprintf('Connection error %s', $description));
 		}
-		if (false === mysqli_options($db, MYSQLI_OPT_CONNECT_TIMEOUT, $this->timeout)) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Connection error %s', $description));
+
+		if (mysqli_options($db, MYSQLI_OPT_CONNECT_TIMEOUT, $this->timeout) === false) {
+			return new Result(Result::FAILURE, sprintf('Connection error %s', $description));
 		}
-		if (false === mysqli_real_connect($db, $this->host, $this->user, $this->password, $this->database, $this->port)) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Connection error %s', $description));
+
+		if (mysqli_real_connect($db, $this->host, $this->user, $this->password, $this->database, $this->port) === false) {
+			return new Result(Result::FAILURE, sprintf('Connection error %s', $description));
 		}
 
 		// Query
 		$result = mysqli_query($db, $this->query);
-		if (false === $result) {
+
+		if ($result === false) {
 			mysqli_close($db);
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Query error %s', $description));
+
+			return new Result(Result::FAILURE, sprintf('Query error %s', $description));
 		}
+
 		mysqli_free_result($result);
 		mysqli_close($db);
 
 		// OK
-		return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::SUCCESS, $description);
+		return new Result(Result::SUCCESS, $description);
 	}
+
 }

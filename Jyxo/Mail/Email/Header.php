@@ -13,18 +13,18 @@
 
 namespace Jyxo\Mail\Email;
 
+use Jyxo\Spl\BaseObject;
+
 /**
  * Email header.
  *
- * @category Jyxo
- * @package Jyxo\Mail
- * @subpackage Email
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class Header extends \Jyxo\Spl\Object
+class Header extends BaseObject
 {
+
 	/**
 	 * Header name.
 	 *
@@ -65,7 +65,7 @@ class Header extends \Jyxo\Spl\Object
 	 * Sets header name.
 	 *
 	 * @param string $name Name
-	 * @return \Jyxo\Mail\Email\Header
+	 * @return Header
 	 */
 	public function setName(string $name): self
 	{
@@ -88,7 +88,7 @@ class Header extends \Jyxo\Spl\Object
 	 * Sets value.
 	 *
 	 * @param string $value Value
-	 * @return \Jyxo\Mail\Email\Header
+	 * @return Header
 	 */
 	public function setValue(string $value): self
 	{
@@ -96,4 +96,5 @@ class Header extends \Jyxo\Spl\Object
 
 		return $this;
 	}
+
 }

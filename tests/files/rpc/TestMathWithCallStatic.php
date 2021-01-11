@@ -5,6 +5,19 @@
  */
 class TestMathWithCallStatic
 {
+
+	/**
+	 * Substracts two numbers.
+	 *
+	 * @param int $a First number
+	 * @param int $b Second number
+	 * @return int
+	 */
+	private static function difference(int $a, int $b): int
+	{
+		return $a - $b;
+	}
+
 	/**
 	 * Calls using the magic method.
 	 *
@@ -12,20 +25,9 @@ class TestMathWithCallStatic
 	 * @param array $args Method parameters
 	 * @return mixed
 	 */
-	public static function __callStatic($method, $args)
+	public static function __callStatic(string $method, array $args)
 	{
-		return call_user_func_array([__CLASS__, 'difference'], $args);
+		return call_user_func_array([self::class, 'difference'], $args);
 	}
 
-	/**
-	 * Substracts two numbers.
-	 *
-	 * @param integer $a First number
-	 * @param integer $b Second number
-	 * @return integer
-	 */
-	private static function difference($a, $b)
-	{
-		return $a - $b;
-	}
 }

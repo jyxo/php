@@ -16,18 +16,18 @@ namespace Jyxo\Spl;
 /**
  * Object which can be converted to an array.
  *
- * @category Jyxo
- * @package Jyxo\Spl
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jakub Tománek
  */
 interface ArrayCopy
 {
+
 	/**
 	 * Converts an object to an array.
 	 *
 	 * @return array
 	 */
 	public function toArray(): array;
+
 }

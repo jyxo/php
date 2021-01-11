@@ -13,17 +13,27 @@
 
 namespace Jyxo\Beholder\TestCase;
 
+use Jyxo\Beholder\Result;
+use Jyxo\Beholder\TestCase;
+use function file_get_contents;
+use function file_put_contents;
+use function md5;
+use function sprintf;
+use function strlen;
+use function time;
+use function uniqid;
+use function unlink;
+
 /**
  * Filesystem access test.
  *
- * @category Jyxo
- * @package Jyxo\Beholder
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class FileSystem extends \Jyxo\Beholder\TestCase
+class FileSystem extends TestCase
 {
+
 	/**
 	 * Tested directory.
 	 *
@@ -47,9 +57,9 @@ class FileSystem extends \Jyxo\Beholder\TestCase
 	/**
 	 * Performs the test.
 	 *
-	 * @return \Jyxo\Beholder\Result
+	 * @return Result
 	 */
-	public function run(): \Jyxo\Beholder\Result
+	public function run(): Result
 	{
 		$random = md5(uniqid((string) time(), true));
 		$path = $this->dir . '/beholder-' . $random . '.txt';
@@ -57,21 +67,23 @@ class FileSystem extends \Jyxo\Beholder\TestCase
 
 		// Writing
 		if (!file_put_contents($path, $content)) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Write error %s', $this->dir));
+			return new Result(Result::FAILURE, sprintf('Write error %s', $this->dir));
 		}
 
 		// Reading
 		$readContent = file_get_contents($path);
+
 		if (strlen($readContent) !== strlen($content)) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Read error %s', $this->dir));
+			return new Result(Result::FAILURE, sprintf('Read error %s', $this->dir));
 		}
 
 		// Deleting
 		if (!@unlink($path)) {
-			return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::FAILURE, sprintf('Delete error %s', $this->dir));
+			return new Result(Result::FAILURE, sprintf('Delete error %s', $this->dir));
 		}
 
 		// OK
-		return new \Jyxo\Beholder\Result(\Jyxo\Beholder\Result::SUCCESS, $this->dir);
+		return new Result(Result::SUCCESS, $this->dir);
 	}
+
 }

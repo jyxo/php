@@ -13,6 +13,38 @@
 
 namespace Jyxo\Time;
 
+use DateTime;
+use DateTimeZone;
+use InvalidArgumentException;
+use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\ExpectationFailedException;
+use PHPUnit\Framework\TestCase;
+use stdClass;
+use Throwable;
+use function _;
+use function bind_textdomain_codeset;
+use function bindtextdomain;
+use function date;
+use function date_default_timezone_get;
+use function defined;
+use function gmdate;
+use function mb_strtolower;
+use function ngettext;
+use function ob_get_clean;
+use function ob_start;
+use function putenv;
+use function serialize;
+use function setlocale;
+use function sprintf;
+use function str_pad;
+use function strlen;
+use function strtotime;
+use function textdomain;
+use function time;
+use function ucfirst;
+use function unserialize;
+use const STR_PAD_LEFT;
+
 /**
  * Test for \Jyxo\Time\Time class.
  *
@@ -22,29 +54,15 @@ namespace Jyxo\Time;
  * @author Jaroslav Hanslík
  * @author Ondřej Nešpor
  */
-class TimeTest extends \PHPUnit_Framework_TestCase
+class TimeTest extends TestCase
 {
-	/**
-	 * Prepares the testing environment.
-	 */
-	protected function setUp()
-	{
-		bind_textdomain_codeset('messages', 'UTF-8');
-		bindtextdomain('messages', DIR_FILES . '/time');
-		textdomain('messages');
-		putenv('LANG=cs_CZ.UTF-8');
-		putenv('LANGUAGE=cs_CZ.UTF-8');
-		if (defined('LC_MESSAGES')) {
-			setlocale(LC_MESSAGES, 'cs_CZ.UTF-8');
-		}
-	}
 
 	/**
 	 * Tests the constructor.
 	 *
 	 * @see \Jyxo\Time\Time::__construct()
 	 */
-	public function testConstruct()
+	public function testConstruct(): void
 	{
 		// Unixtime
 		$now = time();
@@ -58,12 +76,12 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		// Invalid strtotime
 		try {
 			$time = new Time('abcde');
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->fail(sprintf('Expected exception %s.', InvalidArgumentException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+			$this->assertInstanceOf(InvalidArgumentException::class, $e);
 		}
 
 		// \Jyxo\Time\Time
@@ -74,7 +92,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(date('Y-m-d', $now), $time->format('Y-m-d'));
 
 		// \DateTime
-		$dateTime = \DateTime::createFromFormat('U', (string) $now);
+		$dateTime = DateTime::createFromFormat('U', (string) $now);
 
 		$time = new Time($dateTime);
 		$this->assertEquals($now, $time->format('U'));
@@ -85,42 +103,42 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		// Invalid parameter
 		try {
 			$time = new Time([]);
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->fail(sprintf('Expected exception %s.', InvalidArgumentException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+			$this->assertInstanceOf(InvalidArgumentException::class, $e);
 		}
 
 		try {
-			$time = new Time(new \stdClass());
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$time = new Time(new stdClass());
+			$this->fail(sprintf('Expected exception %s.', InvalidArgumentException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+			$this->assertInstanceOf(InvalidArgumentException::class, $e);
 		}
 
 		try {
-			$tmp = new Time($time, new \stdClass());
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$tmp = new Time($time, new stdClass());
+			$this->fail(sprintf('Expected exception %s.', InvalidArgumentException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+			$this->assertInstanceOf(InvalidArgumentException::class, $e);
 		}
 
 		try {
 			$tmp = new Time($dateTime, (object) ['foo' => 'bar']);
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->fail(sprintf('Expected exception %s.', InvalidArgumentException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+			$this->assertInstanceOf(InvalidArgumentException::class, $e);
 		}
 	}
 
@@ -129,7 +147,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Time\Time::get()
 	 */
-	public function testGet()
+	public function testGet(): void
 	{
 		// Unixtime
 		$now = time();
@@ -143,7 +161,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Time\Time::now()
 	 */
-	public function testNow()
+	public function testNow(): void
 	{
 		$this->assertEquals(new Time(time()), Time::now());
 		$this->assertNotEquals(new Time('+1 day'), Time::now());
@@ -154,12 +172,15 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Time\Time::createFromFormat()
 	 */
-	public function testCreateFromFormat()
+	public function testCreateFromFormat(): void
 	{
 		$this->assertEquals(Time::get('2009-12-01')->format('Ym'), Time::createFromFormat('ym', '0912')->format('Ym'));
 		$this->assertEquals(Time::get('2009-12-01')->format('Ymd'), Time::createFromFormat('ymd', '091201')->format('Ymd'));
 		$this->assertEquals(Time::get('2009-12-01')->format('Ymd'), Time::createFromFormat('Ymd', '20091201')->format('Ymd'));
-		$this->assertEquals(Time::get('2009-12-01 12:14:16')->format('Ymd His'), Time::createFromFormat('Y-m-d H:i:s', '2009-12-01 12:14:16')->format('Ymd His'));
+		$this->assertEquals(
+			Time::get('2009-12-01 12:14:16')->format('Ymd His'),
+			Time::createFromFormat('Y-m-d H:i:s', '2009-12-01 12:14:16')->format('Ymd His')
+		);
 	}
 
 	/**
@@ -167,10 +188,10 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Time\Time::__get()
 	 */
-	public function testMagicGet()
+	public function testMagicGet(): void
 	{
 		// Basic types
-		$timeZone = new \DateTimeZone('Etc/GMT-7');
+		$timeZone = new DateTimeZone('Etc/GMT-7');
 		$time = new Time('2009-10-10', $timeZone);
 
 		$this->assertEquals('2009-10-10T00:00:00+0700', $time->sql);
@@ -202,12 +223,12 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		// Unknown type
 		try {
 			$this->assertEquals('', $time->unknown);
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->fail(sprintf('Expected exception %s.', InvalidArgumentException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+			$this->assertInstanceOf(InvalidArgumentException::class, $e);
 		}
 	}
 
@@ -216,7 +237,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Time\Time::__call()
 	 */
-	public function testCall()
+	public function testCall(): void
 	{
 		$time = new Time('-10 days');
 		$this->assertEquals($time->unix, $time->getTimestamp());
@@ -230,7 +251,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Time\Time::__toString()
 	 */
-	public function testToString()
+	public function testToString(): void
 	{
 		ob_start();
 		echo Time::get('2002-02-02 02:02:02', 'UTC');
@@ -260,7 +281,8 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 
 		// Try unix timestamp in different timezones
 		$time = Time::get('2001-12-12 21:34:18', 'UTC');
-		$time2 = Time::get('2001-12-12 19:34:18', 'Etc/GMT+2'); // The time is set back 2 hours to get the same UTC time
+		// The time is set back 2 hours to get the same UTC time
+		$time2 = Time::get('2001-12-12 19:34:18', 'Etc/GMT+2');
 		$this->assertSame((string) $time, (string) $time2);
 
 		// Change one timezone and try again
@@ -273,7 +295,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Time\Time::format()
 	 */
-	public function testFormat()
+	public function testFormat(): void
 	{
 		// Time with no translation necessary
 		$this->assertEquals('121212', Time::get('2012-12-12T12:12:12+02:00')->format('ymd'));
@@ -281,6 +303,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		// Weekdays translation
 		$days = [_('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'), _('Sunday')];
 		$daysShort = [_('Mon'), _('Tue'), _('Wed'), _('Thu'), _('Fri'), _('Sat'), _('Sun')];
+
 		foreach ($days as $day => $name) {
 			$time = new Time('2009-10-' . ($day + 12));
 			$this->assertEquals($days[date('N', strtotime('2009-10-' . ($day + 12))) - 1], $time->format('l'));
@@ -289,15 +312,46 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 
 		// Months translation
 		$months = [
-			_('January'), _('February'), _('March'), _('April'), _('May'), _('June'), _('July'), _('August'),
-			_('September'), _('October'), _('November'), _('December')
+			_('January'),
+			_('February'),
+			_('March'),
+			_('April'),
+			_('May'),
+			_('June'),
+			_('July'),
+			_('August'),
+			_('September'),
+			_('October'),
+			_('November'),
+			_('December'),
 		];
 		$monthsGen = [
-			_('January#~Genitive'), _('February#~Genitive'), _('March#~Genitive'), _('April#~Genitive'), _('May#~Genitive'),
-			_('June#~Genitive'), _('July#~Genitive'), _('August#~Genitive'), _('September#~Genitive'),
-			_('October#~Genitive'), _('November#~Genitive'), _('December#~Genitive')
+			_('January#~Genitive'),
+			_('February#~Genitive'),
+			_('March#~Genitive'),
+			_('April#~Genitive'),
+			_('May#~Genitive'),
+			_('June#~Genitive'),
+			_('July#~Genitive'),
+			_('August#~Genitive'),
+			_('September#~Genitive'),
+			_('October#~Genitive'),
+			_('November#~Genitive'),
+			_('December#~Genitive'),
 		];
-		$monthsShort = [_('Jan'), _('Feb'), _('Mar'), _('Apr'), _('May#~Shortcut'), _('Jun'), _('Jul'), _('Aug'), _('Sep'), _('Oct'), _('Nov'), _('Dec')];
+		$monthsShort = [
+			_('Jan'),
+			_('Feb'),
+			_('Mar'),
+			_('Apr'),
+			_('May#~Shortcut'),
+			_('Jun'),
+			_('Jul'),
+			_('Aug'),
+			_('Sep'),
+			_('Oct'),
+			_('Nov'), _('Dec')];
+
 		foreach ($months as $month => $name) {
 			$time = new Time('2009-' . str_pad((string) ($month + 1), 2, '0', STR_PAD_LEFT) . '-01');
 			$this->assertEquals($name, $time->format('F'));
@@ -306,13 +360,16 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		}
 
 		// Full date/time
-		$this->assertEquals(sprintf('%s 10. %s 2012 10:11:12', $days[5], mb_strtolower($monthsGen[10]), 'utf-8'), Time::get('2012-11-10 10:11:12')->format('l j. F Y H:i:s'));
+		$this->assertEquals(
+			sprintf('%s 10. %s 2012 10:11:12', $days[5], mb_strtolower($monthsGen[10]), 'utf-8'),
+			Time::get('2012-11-10 10:11:12')->format('l j. F Y H:i:s')
+		);
 		$this->assertEquals(sprintf('%s 2012', $months[9]), Time::get('2012-10-10')->format('F Y'));
 		$this->assertEquals(sprintf('%s 2012', $monthsShort[8]), Time::get('2012-09-09')->format('M Y'));
 
 		// Time zone handling
 		$time1 = Time::now();
-		$timeZone = new \DateTimeZone($time1->getTimeZone()->getName() == 'Europe/Prague' ? 'UTC' : 'Europe/Prague');
+		$timeZone = new DateTimeZone($time1->getTimeZone()->getName() === 'Europe/Prague' ? 'UTC' : 'Europe/Prague');
 		$time2 = Time::now()->setTimeZone($timeZone);
 
 		// Date/times must not be the same (Prague is UTC+1/+2)
@@ -322,11 +379,11 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		$this->assertSame($time1->format('Y-m-d H:i:s'), $time2->format('Y-m-d H:i:s', $time1->getTimeZone()));
 
 		// Get the results in the same time zone (different for both instances)
-		$commonTimeZone = new \DateTimeZone(
-			$timeZone->getName() == 'Europe/Prague' ? (
-				$time1->getTimeZone()->getName() == 'Pacific/Honolulu' ? 'America/Havana' : 'Pacific/Honolulu'
+		$commonTimeZone = new DateTimeZone(
+			$timeZone->getName() === 'Europe/Prague' ? (
+				$time1->getTimeZone()->getName() === 'Pacific/Honolulu' ? 'America/Havana' : 'Pacific/Honolulu'
 			) : (
-				$time1->getTimeZone()->getName() == 'Europe/Prague' ? 'Pacific/Honolulu' : 'Europe/Prague'
+				$time1->getTimeZone()->getName() === 'Europe/Prague' ? 'Pacific/Honolulu' : 'Europe/Prague'
 			)
 		);
 
@@ -344,23 +401,23 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		// Invalid timezone - name
 		try {
 			$this->assertSame(null, $time->format('Y-m-d', 'Foo/Bar'));
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->fail(sprintf('Expected exception %s.', InvalidArgumentException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+			$this->assertInstanceOf(InvalidArgumentException::class, $e);
 		}
 
 		// Invalid timezone - object
 		try {
-			$this->assertSame(null, $time->format('Y-m-d', new \stdClass()));
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->assertSame(null, $time->format('Y-m-d', new stdClass()));
+			$this->fail(sprintf('Expected exception %s.', InvalidArgumentException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+			$this->assertInstanceOf(InvalidArgumentException::class, $e);
 		}
 	}
 
@@ -369,10 +426,13 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Time\Time::formatExtended()
 	 */
-	public function testFormatExtended()
+	public function testFormatExtended(): void
 	{
 		// No parameters provided
-		$this->assertEquals(sprintf('6. %s 2008 v 5:04', mb_strtolower(_('July#~Genitive'), 'utf-8'), _('at')), Time::get('2008-07-06 05:04:03')->formatExtended());
+		$this->assertEquals(
+			sprintf('6. %s 2008 v 5:04', mb_strtolower(_('July#~Genitive'), 'utf-8'), _('at')),
+			Time::get('2008-07-06 05:04:03')->formatExtended()
+		);
 		// Date format set
 		$this->assertEquals('08-07-06 v 5:04', Time::get('2008-07-06 05:04:03')->formatExtended('y-m-d'));
 		// Both the date and time format set
@@ -383,7 +443,10 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		// Today
 		$now = time();
 		$this->assertEquals(_('Today'), Time::get($now)->formatExtended('j. F Y', ''));
-		$this->assertEquals(_('Today') . ' ' . _('at') . ' ' . date('G:i', $now), Time::get($now, date_default_timezone_get())->formatExtended());
+		$this->assertEquals(
+			_('Today') . ' ' . _('at') . ' ' . date('G:i', $now),
+			Time::get($now, date_default_timezone_get())->formatExtended()
+		);
 
 		// Yesterday
 		$yesterday = strtotime('-1 day');
@@ -392,6 +455,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 
 		// Last week
 		$days = [_('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'), _('Sunday')];
+
 		for ($i = 2; $i < 7; $i++) {
 			$day = strtotime('-' . $i . ' days');
 			$this->assertEquals($days[date('N', $day) - 1], Time::get($day)->formatExtended('j. F Y', ''));
@@ -399,8 +463,14 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		}
 
 		// More than a week ago
-		$this->assertEquals(sprintf('1. %s 2003', mb_strtolower(_('February#~Genitive'), 'utf-8')), Time::get('2003-02-01 04:05:06')->formatExtended('j. F Y', ''));
-		$this->assertEquals(sprintf('1. %s 2003 %s 4:05', mb_strtolower(_('February#~Genitive'), 'utf-8'), _('at')), Time::get('2003-02-01 04:05:06')->formatExtended());
+		$this->assertEquals(
+			sprintf('1. %s 2003', mb_strtolower(_('February#~Genitive'), 'utf-8')),
+			Time::get('2003-02-01 04:05:06')->formatExtended('j. F Y', '')
+		);
+		$this->assertEquals(
+			sprintf('1. %s 2003 %s 4:05', mb_strtolower(_('February#~Genitive'), 'utf-8'), _('at')),
+			Time::get('2003-02-01 04:05:06')->formatExtended()
+		);
 
 		// Time zone handling
 		// Date line
@@ -415,8 +485,10 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		$time = new Time(gmdate('Y-m-d', $timestamp) . ' 00:00:00', 'UTC');
 
 		$day = $days[date('N', $timestamp) - 1];
-		$this->assertSame(sprintf('%s %s %s 05:00:00', $day, gmdate('Y-m-d', $timestamp), _('at')), $time->formatExtended('l Y-m-d', 'H:i:s', 'Etc/GMT-5'));
-
+		$this->assertSame(
+			sprintf('%s %s %s 05:00:00', $day, gmdate('Y-m-d', $timestamp), _('at')),
+			$time->formatExtended('l Y-m-d', 'H:i:s', 'Etc/GMT-5')
+		);
 	}
 
 	/**
@@ -424,21 +496,30 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Time\Time::formatAsInterval()
 	 */
-	public function testFormatAsInterval()
+	public function testFormatAsInterval(): void
 	{
 		// Now
 		$this->assertEquals(_('Now'), Time::now()->formatAsInterval());
 		$this->assertEquals(_('Now'), Time::get('-8 seconds')->formatAsInterval());
 		$this->assertEquals(_('Now'), Time::get('+8 seconds')->formatAsInterval());
-		$this->assertNotEquals(_('Now'), Time::get('-10 seconds')->formatAsInterval());
-		$this->assertNotEquals(_('Now'), Time::get('+10 seconds')->formatAsInterval());
+		$this->assertNotEquals(_('Now'), Time::get('-11 seconds')->formatAsInterval());
+		$this->assertNotEquals(_('Now'), Time::get('+11 seconds')->formatAsInterval());
 
 		// Most intervals
 		foreach (['minute', 'hour', 'day', 'year'] as $period) {
 			foreach ([1, 2] as $count) {
-				$this->assertEquals(sprintf(ngettext(sprintf('%s ago', ucfirst($period)), sprintf('%%s %ss ago', $period), $count), $count), Time::get(sprintf('-%s %s', $count, $period))->formatAsInterval());
-				$this->assertEquals(sprintf(ngettext(sprintf('%s', ucfirst($period)), sprintf('%%s %ss', $period), $count), $count), Time::get(sprintf('+%s %s', $count, $period))->formatAsInterval(false));
-				$this->assertEquals(sprintf(ngettext(sprintf('In %s', $period), sprintf('In %%s %ss', $period), $count), $count), Time::get(sprintf('+%s %s', $count, $period))->formatAsInterval());
+				$this->assertEquals(
+					sprintf(ngettext(sprintf('%s ago', ucfirst($period)), sprintf('%%s %ss ago', $period), $count), $count),
+					Time::get(sprintf('-%s %s', $count, $period))->formatAsInterval()
+				);
+				$this->assertEquals(
+					sprintf(ngettext(sprintf('%s', ucfirst($period)), sprintf('%%s %ss', $period), $count), $count),
+					Time::get(sprintf('+%s %s', $count, $period))->formatAsInterval(false)
+				);
+				$this->assertEquals(
+					sprintf(ngettext(sprintf('In %s', $period), sprintf('In %%s %ss', $period), $count), $count),
+					Time::get(sprintf('+%s %s', $count, $period))->formatAsInterval()
+				);
 			}
 		}
 
@@ -447,19 +528,21 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 			try {
 				$actual = Time::get(sprintf('-%s month', $count))->formatAsInterval();
 				$this->assertEquals(sprintf(ngettext('Month ago', '%s months ago', $count), $count), $actual);
-			} catch (\PHPUnit_Framework_ExpectationFailedException $e) {
+			} catch (ExpectationFailedException $e) {
 				$this->assertEquals(sprintf(ngettext('Week ago', '%s weeks ago', 4), 4), $actual);
 			}
+
 			try {
 				$actual = Time::get(sprintf('+%s month', $count))->formatAsInterval(false);
 				$this->assertEquals(sprintf(ngettext('Month', '%s months', $count), $count), $actual);
-			} catch (\PHPUnit_Framework_ExpectationFailedException $e) {
+			} catch (ExpectationFailedException $e) {
 				$this->assertEquals(sprintf(ngettext('Week', '%s weeks', 4), 4), $actual);
 			}
+
 			try {
 				$actual = Time::get(sprintf('+%s month', $count))->formatAsInterval();
 				$this->assertEquals(sprintf(ngettext('In month', 'In %s months', $count), $count), $actual);
-			} catch (\PHPUnit_Framework_ExpectationFailedException $e) {
+			} catch (ExpectationFailedException $e) {
 				$this->assertEquals(sprintf(ngettext('In week', 'In %s weeks', 4), 4), $actual);
 			}
 		}
@@ -468,19 +551,21 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 			try {
 				$actual = Time::get(sprintf('-%s week', $count))->formatAsInterval();
 				$this->assertEquals(sprintf(ngettext('Week ago', '%s weeks ago', $count), $count), $actual);
-			} catch (\PHPUnit_Framework_ExpectationFailedException $e) {
+			} catch (ExpectationFailedException $e) {
 				$this->assertEquals(sprintf(ngettext('Day ago', '%s days ago', 7), 7), $actual);
 			}
+
 			try {
 				$actual = Time::get(sprintf('+%s week', $count))->formatAsInterval(false);
 				$this->assertEquals(sprintf(ngettext('Week', '%s weeks', $count), $count), $actual);
-			} catch (\PHPUnit_Framework_ExpectationFailedException $e) {
+			} catch (ExpectationFailedException $e) {
 				$this->assertEquals(sprintf(ngettext('Day', '%s days', 7), 7), $actual);
 			}
+
 			try {
 				$actual = Time::get(sprintf('+%s week', $count))->formatAsInterval();
 				$this->assertEquals(sprintf(ngettext('In week', 'In %s weeks', $count), $count), $actual);
-			} catch (\PHPUnit_Framework_ExpectationFailedException $e) {
+			} catch (ExpectationFailedException $e) {
 				$this->assertEquals(sprintf(ngettext('In day', 'In %s days', 7), 7), $actual);
 			}
 		}
@@ -496,7 +581,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Time\Time::plus()
 	 */
-	public function testPlus()
+	public function testPlus(): void
 	{
 		// Provided as number of seconds
 		$time = Time::get('2005-04-05 00:00:00');
@@ -513,7 +598,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(Time::get('2008-04-05 00:00:00'), $time->plus('3 year'));
 
 		// Time zone settings
-		$timeZone = new \DateTimeZone($time->getTimeZone()->getName() == 'Europe/Prague' ? 'America/Santiago' : 'Europe/Prague');
+		$timeZone = new DateTimeZone($time->getTimeZone()->getName() === 'Europe/Prague' ? 'America/Santiago' : 'Europe/Prague');
 		$time->setTimeZone($timeZone);
 
 		$time2 = $time->plus(86400);
@@ -525,7 +610,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Time\Time::minus()
 	 */
-	public function testMinus()
+	public function testMinus(): void
 	{
 		// Provided as number of seconds
 		$time = Time::get('2005-05-05 00:00:00');
@@ -542,7 +627,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(Time::get('2002-05-05 00:00:00'), $time->minus('3 year'));
 
 		// Time zone settings
-		$timeZone = new \DateTimeZone($time->getTimeZone()->getName() == 'Europe/Prague' ? 'America/Santiago' : 'Europe/Prague');
+		$timeZone = new DateTimeZone($time->getTimeZone()->getName() === 'Europe/Prague' ? 'America/Santiago' : 'Europe/Prague');
 		$time->setTimeZone($timeZone);
 
 		$time2 = $time->minus(86400);
@@ -554,7 +639,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Time\Time::hasHappened()
 	 */
-	public function testHasHappened()
+	public function testHasHappened(): void
 	{
 		$this->assertTrue(Time::get('-1 day')->hasHappened());
 		$this->assertTrue(Time::get('-5 second')->hasHappened());
@@ -567,17 +652,17 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Time\Time::truncate()
 	 */
-	public function testTruncate()
+	public function testTruncate(): void
 	{
 		// Unknown unit
 		try {
 			$time = Time::now()->truncate('unknown');
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->fail(sprintf('Expected exception %s.', InvalidArgumentException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+			$this->assertInstanceOf(InvalidArgumentException::class, $e);
 		}
 
 		$tests = [
@@ -586,10 +671,11 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 			Time::HOUR => '2004-05-06 07:00:00',
 			Time::DAY => '2004-05-06 00:00:00',
 			Time::MONTH => '2004-05-01 00:00:00',
-			Time::YEAR => '2004-01-01 00:00:00'
+			Time::YEAR => '2004-01-01 00:00:00',
 		];
 
 		$time = new Time('2004-05-06 07:08:09');
+
 		foreach ($tests as $unit => $expected) {
 			$this->assertEquals(Time::get($expected), $time->truncate($unit));
 		}
@@ -600,7 +686,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Time\Time::getTimezone()
 	 */
-	public function testGetTimezone()
+	public function testGetTimezone(): void
 	{
 		// Explicit time zone definition
 		$time = Time::get(time(), 'UTC');
@@ -616,7 +702,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Time\Time::setTimezone()
 	 */
-	public function testSetTimeZone()
+	public function testSetTimeZone(): void
 	{
 		$time = Time::get(time(), 'UTC');
 		$this->assertNotSame('Europe/Prague', $time->getTimeZone()->getName());
@@ -624,19 +710,19 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		$time->setTimeZone('Europe/Prague');
 		$this->assertSame('Europe/Prague', $time->getTimeZone()->getName());
 
-		$timeZone = new \DateTimeZone('America/Santiago');
+		$timeZone = new DateTimeZone('America/Santiago');
 		$time->setTimeZone($timeZone);
 		$this->assertSame('America/Santiago', $time->getTimeZone()->getName());
 
 		// Invalid timezone
 		try {
 			$time->setTimeZone('Foo/Bar');
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->fail(sprintf('Expected exception %s.', InvalidArgumentException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+			$this->assertInstanceOf(InvalidArgumentException::class, $e);
 		}
 	}
 
@@ -645,14 +731,17 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Time\Time::serialize()
 	 */
-	public function testSerialize()
+	public function testSerialize(): void
 	{
 		$time = time();
-		$timeZone = new \DateTimeZone(date_default_timezone_get());
+		$timeZone = new DateTimeZone(date_default_timezone_get());
 		$timeInstance = new Time($time, $timeZone);
 
 		$this->assertSame(
-			'C:14:"Jyxo\Time\Time":' . (20 + strlen(date_default_timezone_get())) .':{' . date('Y-m-d H:i:s', $time) . ' ' . date_default_timezone_get() .'}',
+			'C:14:"Jyxo\Time\Time":' . (20 + strlen(date_default_timezone_get())) . ':{' . date(
+				'Y-m-d H:i:s',
+				$time
+			) . ' ' . date_default_timezone_get() . '}',
 			serialize($timeInstance)
 		);
 	}
@@ -662,7 +751,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @see \Jyxo\Time\Time::unserialize()
 	 */
-	public function testUnserialize()
+	public function testUnserialize(): void
 	{
 		$time = time();
 		$serialized = 'C:14:"Jyxo\Time\Time":33:{' . date('Y-m-d H:i:s', $time) . ' Europe/Prague}';
@@ -673,38 +762,41 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 
 		// Invalid serialized data
 		$serialized = 'C:14:"Jyxo\Time\Time":3:{foo}';
+
 		try {
 			$unserialized = @unserialize($serialized);
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->fail(sprintf('Expected exception %s.', InvalidArgumentException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+			$this->assertInstanceOf(InvalidArgumentException::class, $e);
 		}
 
 		// Invalid timezone
 		$serialized = 'C:14:"Jyxo\Time\Time":27:{2010-12-12 10:00:00 Foo/Bar}';
+
 		try {
 			$unserialized = @unserialize($serialized);
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->fail(sprintf('Expected exception %s.', InvalidArgumentException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+			$this->assertInstanceOf(InvalidArgumentException::class, $e);
 		}
 
 		// Invalid date/time definition
 		$serialized = 'C:14:"Jyxo\Time\Time":33:{2010-13-12 10:00:00 Europe/Prague}';
+
 		try {
 			$unserialized = @unserialize($serialized);
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->fail(sprintf('Expected exception %s.', InvalidArgumentException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+			$this->assertInstanceOf(InvalidArgumentException::class, $e);
 		}
 
 		// Offset time zone definition
@@ -718,29 +810,45 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 
 		// Invalid time zone offset
 		$serialized = 'C:14:"Jyxo\Time\Time":26:{' . date('Y-m-d H:i:s', $time) . ' +05:60}';
+
 		try {
 			$unserialized = @unserialize($serialized);
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->fail(sprintf('Expected exception %s.', InvalidArgumentException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+			$this->assertInstanceOf(InvalidArgumentException::class, $e);
 		}
 
 		// Invalid time zone offset
 		$serialized = 'C:14:"Jyxo\Time\Time":26:{' . date('Y-m-d H:i:s', $time) . ' -13:00}';
+
 		try {
 			$unserialized = @unserialize($serialized);
-			$this->fail(sprintf('Expected exception %s.', \InvalidArgumentException::class));
-		} catch (\PHPUnit_Framework_AssertionFailedError $e) {
+			$this->fail(sprintf('Expected exception %s.', InvalidArgumentException::class));
+		} catch (AssertionFailedError $e) {
 			throw $e;
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			// Correctly thrown exception
-			$this->assertInstanceOf(\InvalidArgumentException::class, $e);
+			$this->assertInstanceOf(InvalidArgumentException::class, $e);
 		}
+	}
 
+	/**
+	 * Prepares the testing environment.
+	 */
+	protected function setUp(): void
+	{
+		bind_textdomain_codeset('messages', 'UTF-8');
+		bindtextdomain('messages', DIR_FILES . '/time');
+		textdomain('messages');
+		putenv('LANG=cs_CZ.UTF-8');
+		putenv('LANGUAGE=cs_CZ.UTF-8');
 
+		if (defined('LC_MESSAGES')) {
+			setlocale(LC_MESSAGES, 'cs_CZ.UTF-8');
+		}
 	}
 
 }

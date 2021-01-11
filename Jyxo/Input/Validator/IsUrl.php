@@ -13,23 +13,23 @@
 
 namespace Jyxo\Input\Validator;
 
+use function preg_match;
+
 /**
  * Validates a URL.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class IsUrl extends \Jyxo\Input\Validator\AbstractValidator
+class IsUrl extends AbstractValidator
 {
+
 	/**
 	 * Validates a value.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isValid($value): bool
 	{
@@ -46,10 +46,7 @@ class IsUrl extends \Jyxo\Input\Validator\AbstractValidator
 		// ?query#hash
 		$patternUrl .= '(?:[?&][\]\[\-\\w\\pL\\pN.,?!\~%#@&;:/\'\=+]*)?(?:#[\]\[\-\\w\\pL\\pN.,?!\~%@&;:/\'\=+]*)?';
 
-		if (!preg_match('~^' . $patternUrl . '$~i', (string) $value)) {
-			return false;
-		}
-
-		return true;
+		return preg_match('~^' . $patternUrl . '$~i', (string) $value) === 1;
 	}
+
 }

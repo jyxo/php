@@ -13,19 +13,19 @@
 
 namespace Jyxo\Input\Filter;
 
+use function mb_strtolower;
+
 /**
  * Lowercase converting filter.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Filter
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jan Pěček
  * @author Jaroslav Hanslík
  */
-class LowerCase extends \Jyxo\Input\Filter\AbstractFilter
+class LowerCase extends AbstractFilter
 {
+
 	/**
 	 * Filters a value.
 	 *
@@ -36,4 +36,5 @@ class LowerCase extends \Jyxo\Input\Filter\AbstractFilter
 	{
 		return mb_strtolower((string) $in, 'utf-8');
 	}
+
 }

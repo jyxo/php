@@ -13,18 +13,19 @@
 
 namespace Jyxo\Mail\Email;
 
+use Jyxo\Html;
+use Jyxo\Spl\BaseObject;
+
 /**
  * Email body.
  *
- * @category Jyxo
- * @package Jyxo\Mail
- * @subpackage Email
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class Body extends \Jyxo\Spl\Object
+class Body extends BaseObject
 {
+
 	/**
 	 * Main body contents.
 	 *
@@ -54,11 +55,11 @@ class Body extends \Jyxo\Spl\Object
 	/**
 	 * Returns if the contents is in HTML format.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isHtml(): bool
 	{
-		return \Jyxo\Html::is($this->main);
+		return Html::is($this->main);
 	}
 
 	/**
@@ -75,7 +76,7 @@ class Body extends \Jyxo\Spl\Object
 	 * Sets main body contents.
 	 *
 	 * @param string $main Contents
-	 * @return \Jyxo\Mail\Email\Body
+	 * @return Body
 	 */
 	public function setMain(string $main): self
 	{
@@ -98,7 +99,7 @@ class Body extends \Jyxo\Spl\Object
 	 * Sets alternative body contents.
 	 *
 	 * @param string $alternative Contents
-	 * @return \Jyxo\Mail\Email\Body
+	 * @return Body
 	 */
 	public function setAlternative(string $alternative): self
 	{
@@ -106,4 +107,5 @@ class Body extends \Jyxo\Spl\Object
 
 		return $this;
 	}
+
 }

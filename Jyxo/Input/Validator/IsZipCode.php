@@ -13,30 +13,27 @@
 
 namespace Jyxo\Input\Validator;
 
+use function preg_match;
+
 /**
  * Validates a (Czech) ZIP code.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
-class IsZipCode extends \Jyxo\Input\Validator\AbstractValidator
+class IsZipCode extends AbstractValidator
 {
+
 	/**
 	 * Validates a value.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isValid($value): bool
 	{
-		if (!preg_match('~^\\d{3} ?\\d{2}$~', (string) $value)) {
-			return false;
-		}
-
-		return true;
+		return preg_match('~^\\d{3} ?\\d{2}$~', (string) $value) === 1;
 	}
+
 }

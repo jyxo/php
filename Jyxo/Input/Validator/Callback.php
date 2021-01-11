@@ -13,23 +13,26 @@
 
 namespace Jyxo\Input\Validator;
 
+use Closure;
+use function array_slice;
+use function array_unshift;
+use function call_user_func_array;
+use function func_get_args;
+
 /**
  * Validates a value using a custom callback or anonymous function.
  *
- * @category Jyxo
- * @package Jyxo\Input
- * @subpackage Validator
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Ondřej Nešpor
  */
-class Callback extends \Jyxo\Input\Validator\AbstractValidator
+class Callback extends AbstractValidator
 {
 
 	/**
 	 * Validation callback.
 	 *
-	 * @var string|array|\Closure
+	 * @var string|array|Closure
 	 */
 	private $callback;
 
@@ -58,8 +61,7 @@ class Callback extends \Jyxo\Input\Validator\AbstractValidator
 	 * Sets the validation callback.
 	 *
 	 * @param callable $callback Validation callback
-	 * @return \Jyxo\Input\Validator\Callback
-	 * @throws \Jyxo\Input\Validator\Exception On invalid callback definition
+	 * @return Callback
 	 */
 	public function setCallback(callable $callback): self
 	{
@@ -71,7 +73,7 @@ class Callback extends \Jyxo\Input\Validator\AbstractValidator
 	/**
 	 * Returns the validation callback.
 	 *
-	 * @return string|array|\Closure
+	 * @return string|array|Closure
 	 */
 	public function getCallback()
 	{
@@ -82,7 +84,7 @@ class Callback extends \Jyxo\Input\Validator\AbstractValidator
 	 * Sets additional validation callback parameters.
 	 *
 	 * @param array $params Parameters array
-	 * @return \Jyxo\Input\Validator\Callback
+	 * @return Callback
 	 */
 	public function setAdditionalParams(array $params = []): self
 	{
@@ -105,12 +107,13 @@ class Callback extends \Jyxo\Input\Validator\AbstractValidator
 	 * Validates a value.
 	 *
 	 * @param mixed $value Input value
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isValid($value): bool
 	{
 		$params = $this->additionalParams;
 		array_unshift($params, $value);
+
 		return call_user_func_array($this->callback, $params);
 	}
 

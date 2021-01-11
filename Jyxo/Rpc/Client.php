@@ -13,17 +13,38 @@
 
 namespace Jyxo\Rpc;
 
+use BadMethodCallException;
+use Jyxo\FirePhp;
+use Jyxo\Timer;
+use function count;
+use function curl_close;
+use function curl_errno;
+use function curl_error;
+use function curl_exec;
+use function curl_getinfo;
+use function curl_init;
+use function curl_setopt;
+use function sprintf;
+use function strlen;
+use function strtoupper;
+use const CURLINFO_HTTP_CODE;
+use const CURLOPT_CONNECTTIMEOUT;
+use const CURLOPT_HTTPHEADER;
+use const CURLOPT_POSTFIELDS;
+use const CURLOPT_RETURNTRANSFER;
+use const CURLOPT_TIMEOUT;
+use const CURLOPT_URL;
+
 /**
  * Abstract class for sending RPC requests.
  *
- * @category Jyxo
- * @package Jyxo\Rpc
  * @copyright Copyright (c) 2005-2011 Jyxo, s.r.o.
  * @license https://github.com/jyxo/php/blob/master/license.txt
  * @author Jaroslav Hanslík
  */
 abstract class Client
 {
+
 	/**
 	 * Server address.
 	 *
@@ -34,7 +55,7 @@ abstract class Client
 	/**
 	 * Time limit for communication with RPC server (seconds).
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	protected $timeout = 5;
 
@@ -62,9 +83,18 @@ abstract class Client
 	/**
 	 * Whether to use request profiler.
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	private $profiler = false;
+
+	/**
+	 * Sends a request and fetches a response from the server.
+	 *
+	 * @param string $method Method name
+	 * @param array $params Method parameters
+	 * @return mixed
+	 */
+	abstract public function send(string $method, array $params);
 
 	/**
 	 * Creates client instance and eventually sets server address.
@@ -82,7 +112,7 @@ abstract class Client
 	 * Sets server address.
 	 *
 	 * @param string $url Server address
-	 * @return \Jyxo\Rpc\Client
+	 * @return Client
 	 */
 	public function setUrl(string $url): self
 	{
@@ -94,8 +124,8 @@ abstract class Client
 	/**
 	 * Sets timeout.
 	 *
-	 * @param integer $timeout Call timeout
-	 * @return \Jyxo\Rpc\Client
+	 * @param int $timeout Call timeout
+	 * @return Client
 	 */
 	public function setTimeout(int $timeout): self
 	{
@@ -109,13 +139,14 @@ abstract class Client
 	 *
 	 * @param string $key Parameter name
 	 * @param mixed $value Parameter value
-	 * @return \Jyxo\Rpc\Client
+	 * @return Client
 	 */
 	public function setOption(string $key, $value): self
 	{
 		if (isset($this->options[$key])) {
 			$this->options[$key] = $value;
 		}
+
 		return $this;
 	}
 
@@ -130,6 +161,7 @@ abstract class Client
 		if (isset($this->options[$key])) {
 			return $this->options[$key];
 		}
+
 		return $this->options;
 	}
 
@@ -138,11 +170,12 @@ abstract class Client
 	 *
 	 * @param string $key Parameter name
 	 * @param mixed $value Parameter value
-	 * @return \Jyxo\Rpc\Client
+	 * @return Client
 	 */
 	public function setCurlOption(string $key, $value): self
 	{
 		$this->curlOptions[$key] = $value;
+
 		return $this;
 	}
 
@@ -157,41 +190,33 @@ abstract class Client
 		if (isset($this->curlOptions[$key])) {
 			return $this->curlOptions[$key];
 		}
+
 		return $this->curlOptions;
 	}
 
 	/**
 	 * Turns request profiler on.
 	 *
-	 * @return \Jyxo\Rpc\Client
+	 * @return Client
 	 */
 	public function enableProfiler(): self
 	{
 		$this->profiler = true;
+
 		return $this;
 	}
 
 	/**
 	 * Turns request profiler off.
 	 *
-	 * @return \Jyxo\Rpc\Client
+	 * @return Client
 	 */
 	public function disableProfiler(): self
 	{
 		$this->profiler = false;
+
 		return $this;
 	}
-
-	/**
-	 * Sends a request and fetches a response from the server.
-	 *
-	 * @param string $method Method name
-	 * @param array $params Method parameters
-	 * @return mixed
-	 * @throws \BadMethodCallException If no server address was provided
-	 * @throws \Jyxo\Rpc\Exception On error
-	 */
-	abstract public function send(string $method, array $params);
 
 	/**
 	 * Processes request data and fetches response.
@@ -199,20 +224,18 @@ abstract class Client
 	 * @param string $contentType Request content-type
 	 * @param string $data Request data
 	 * @return string
-	 * @throws \BadMethodCallException If no server address was provided
-	 * @throws \Jyxo\Rpc\Exception On error
 	 */
 	protected function process(string $contentType, string $data): string
 	{
 		// Server address must be defined
 		if (empty($this->url)) {
-			throw new \BadMethodCallException('No server address was provided.');
+			throw new BadMethodCallException('No server address was provided.');
 		}
 
 		// Headers
 		$headers = [
 			'Content-Type: ' . $contentType,
-			'Content-Length: ' . strlen($data)
+			'Content-Length: ' . strlen($data),
 		];
 
 		$defaultCurlOptions = [
@@ -228,6 +251,7 @@ abstract class Client
 
 		// Open a HTTP channel
 		$channel = curl_init();
+
 		foreach ($curlOptions as $key => $value) {
 			curl_setopt($channel, $key, $value);
 		}
@@ -236,7 +260,7 @@ abstract class Client
 		$response = curl_exec($channel);
 
 		// Error sending the request
-		if (0 !== curl_errno($channel)) {
+		if (curl_errno($channel) !== 0) {
 			$error = curl_error($channel);
 			curl_close($channel);
 
@@ -245,6 +269,7 @@ abstract class Client
 
 		// Wrong code
 		$code = curl_getinfo($channel, CURLINFO_HTTP_CODE);
+
 		if ($code >= 300) {
 			$error = sprintf('Response error from %s, code %d.', $this->url, $code);
 			curl_close($channel);
@@ -262,13 +287,13 @@ abstract class Client
 	/**
 	 * Starts profiling.
 	 *
-	 * @return \Jyxo\Rpc\Client
+	 * @return Client
 	 */
 	protected function profileStart(): self
 	{
 		// Set start time
 		if ($this->profiler) {
-			$this->timer = \Jyxo\Timer::start();
+			$this->timer = Timer::start();
 		}
 
 		return $this;
@@ -281,7 +306,7 @@ abstract class Client
 	 * @param string $method Method name
 	 * @param array $params Method parameters
 	 * @param mixed $response Server response
-	 * @return \Jyxo\Rpc\Client
+	 * @return Client
 	 */
 	protected function profileEnd(string $type, string $method, array $params, $response): self
 	{
@@ -291,13 +316,13 @@ abstract class Client
 			static $requests = [];
 
 			// Get elapsed time
-			$time = \Jyxo\Timer::stop($this->timer);
+			$time = Timer::stop($this->timer);
 
 			$totalTime += $time;
 			$requests[] = [strtoupper($type), (string) $method, $params, $response, sprintf('%0.3f', $time * 1000)];
 
 			// Send to FirePHP
-			\Jyxo\FirePhp::table(
+			FirePhp::table(
 				sprintf('Jyxo RPC Profiler (%d requests took %0.3f ms)', count($requests), sprintf('%0.3f', $totalTime * 1000)),
 				['Type', 'Method', 'Request', 'Response', 'Time'],
 				$requests,
@@ -307,4 +332,5 @@ abstract class Client
 
 		return $this;
 	}
+
 }
