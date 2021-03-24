@@ -210,6 +210,10 @@ class Parser
 			$headerInfo = imap_rfc822_parse_headers($rawHeaders);
 		}
 
+		if ($headerInfo === false) {
+			return [];
+		}
+
 		// Adds a header that the IMAP extension does not support
 		if (preg_match("~Disposition-Notification-To:(.+?)(?=\r?\n(?:\\S|\r?\n))~is", $rawHeaders, $matches)) {
 			$addressList = imap_rfc822_parse_adrlist($matches[1], '');
