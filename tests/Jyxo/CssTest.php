@@ -17,6 +17,7 @@ use LogicException;
 use PHPUnit\Framework\TestCase;
 use function file_get_contents;
 use function sprintf;
+use function str_replace;
 
 /**
  * Test for the \Jyxo\Css class.
@@ -170,7 +171,7 @@ class CssTest extends TestCase
 	 */
 	public function testConvertStyleToInline(): void
 	{
-		$testCount = 10;
+		$testCount = 12;
 
 		for ($i = 1; $i <= $testCount; $i++) {
 			$this->assertStringEqualsFile(
@@ -178,6 +179,17 @@ class CssTest extends TestCase
 				Css::convertStyleToInline(file_get_contents($this->filePath . '/' . sprintf('convertstyle-%s.html', $i))),
 				sprintf('Failed test %s for method %s::convertStyleToInline().', $i, Css::class)
 			);
+		}
+	}
+
+	public function testConvertStyleToInlineWithoutStylesPreservesNamespacedTags(): void
+	{
+		$html = file_get_contents($this->filePath . '/convertstyle-11.html');
+
+		foreach (['', '<style type="text/css"></style>'] as $stylesheet) {
+			$htmlWithoutStyles = str_replace('<style type="text/css">p { color: red; }</style>', $stylesheet, $html);
+
+			$this->assertSame($htmlWithoutStyles, Css::convertStyleToInline($htmlWithoutStyles));
 		}
 	}
 

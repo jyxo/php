@@ -1,0 +1,21 @@
+<html>
+<head>
+	<style type="text/css">
+		.content > p {color: red;}
+		.content > p + p {font-weight: bold;}
+		.content p span {text-decoration: underline;}
+	</style>
+</head>
+<body>
+	<div class="content">
+		<xml xmlns:x="urn:example:settings">
+			<x:settings>
+				<x:value>96</x:value>
+			</x:settings>
+		</xml>
+		<p style="color:red">First <span style="text-decoration:underline">inline</span></p>
+		<p style="color:blue;font-weight:bold">Second</p>
+	</div>
+	<p>Outside</p>
+</body>
+</html>
