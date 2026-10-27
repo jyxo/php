@@ -99,8 +99,8 @@ class CharsetTest extends TestCase
 			Charset::fixUtf('Государственный гимн Российской Федерации')
 		);
 
-		$this->assertEquals('', Charset::fixUtf(file_get_contents(DIR_FILES . '/charset/cp1250.txt')));
-		$this->assertEquals('', Charset::fixUtf(file_get_contents(DIR_FILES . '/charset/iso-8859-2.txt')));
+		$this->assertEquals('luouk k pern pl belsk dy', Charset::fixUtf(file_get_contents(DIR_FILES . '/charset/cp1250.txt')));
+		$this->assertEquals('luouk k pern pl belsk dy', Charset::fixUtf(file_get_contents(DIR_FILES . '/charset/iso-8859-2.txt')));
 	}
 
 }
