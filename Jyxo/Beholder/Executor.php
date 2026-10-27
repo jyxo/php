@@ -211,7 +211,7 @@ class Executor
 		shuffle($idents);
 
 		// Performs tests and gathers results
-		$order = 1;
+		$order = 0;
 		$allSucceeded = true;
 
 		foreach ($idents as $ident) {
